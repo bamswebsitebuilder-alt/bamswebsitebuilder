@@ -65,23 +65,22 @@
             </div>
         </div>
 
-        <form class="contact-form">
+      <form class="contact-form" action="https://formsubmit.co/bamswebsitebuilder@gmail.com" method="POST">
 
-            <input type="text" placeholder="Full Name" required>
+    <input type="hidden" name="_subject" value="New Website Inquiry">
+    <input type="hidden" name="_captcha" value="false">
 
-            <input type="email" placeholder="Email Address" required>
+    <input type="text" name="fullname" placeholder="Full Name" required>
+    <input type="email" name="email" placeholder="Email Address" required>
+    <input type="tel" name="phone" placeholder="Phone Number">
+    <input type="text" name="business" placeholder="Business Name">
+    <textarea name="message" placeholder="Tell us about your project..." required></textarea>
 
-            <input type="tel" placeholder="Phone Number">
+    <button type="submit" class="btn">
+        Submit
+    </button>
 
-            <input type="text" placeholder="Business Name">
-
-            <textarea placeholder="Tell us about your project..." rows="6" required></textarea>
-
-            <button type="submit" class="btn">
-                Submit
-            </button>
-
-        </form>
+</form>
 
     </div>
 
