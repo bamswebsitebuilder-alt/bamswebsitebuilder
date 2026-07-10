@@ -16,7 +16,10 @@
 
     <title>Contact | BAM's Website Builder</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
 
     <link
         rel="icon"
@@ -29,7 +32,7 @@
 
     <!-- HEADER -->
 
-    <header>
+    <header class="site-header">
 
         <a
             href="index.html"
@@ -70,73 +73,43 @@
 
     <main>
 
-        <!-- HERO SECTION -->
+        <section class="contact-section">
 
-        <section class="hero contact-hero">
-
-            <img
-                src="images/logo-dark.jpg"
-                alt=""
-                class="hero-logo-bg"
-            >
-
-            <div class="hero-content">
-
-                <h4>CONTACT US</h4>
-
-                <h1>
-                    Let's Build
-                    <br>
-                    Your Website
-                </h1>
-
-                <p>
-                    Tell us about your business and what kind of website
-                    you need.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- CONTACT SECTION -->
-
-        <section class="contact-area">
-
-            <div class="contact-box">
+            <div class="contact-container">
 
                 <!-- CONTACT INFORMATION -->
 
-                <div class="contact-info">
+                <div class="contact-information">
 
-                    <h2>Get a Free Quote</h2>
+                    <h4>CONTACT US</h4>
+
+                    <h1>
+                        Let's Build
+                        <br>
+                        Your Website
+                    </h1>
 
                     <p>
-                        Fill out the form and we’ll get back to you as soon
-                        as possible.
+                        Tell us about your business and the type of website
+                        you need. Complete the form to receive a free quote.
                     </p>
 
-                    <div class="contact-detail">
+                    <div class="contact-details">
 
-                        <strong>Email:</strong>
+                        <p>
+                            <strong>Email:</strong>
+                            <br>
 
-                        <a
-                            href="mailto:bamswebsitebuilder@gmail.com"
-                            class="contact-email"
-                        >
-                            bamswebsitebuilder@gmail.com
-                        </a>
+                            <a href="mailto:bamswebsitebuilder@gmail.com">
+                                bamswebsitebuilder@gmail.com
+                            </a>
+                        </p>
 
-                    </div>
-
-                    <div class="contact-detail">
-
-                        <strong>Response Time:</strong>
-
-                        <span>
+                        <p>
+                            <strong>Response Time:</strong>
+                            <br>
                             Usually within 72 hours
-                        </span>
+                        </p>
 
                     </div>
 
@@ -174,124 +147,146 @@
 
                     <!-- FULL NAME -->
 
-                    <label for="fullname">
-                        Full Name
-                    </label>
+                    <div class="form-group">
 
-                    <input
-                        type="text"
-                        id="fullname"
-                        name="fullname"
-                        placeholder="Enter your full name"
-                        autocomplete="name"
-                        required
-                    >
+                        <label for="fullname">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="fullname"
+                            name="fullname"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            required
+                        >
+
+                    </div>
 
 
                     <!-- EMAIL ADDRESS -->
 
-                    <label for="email">
-                        Email Address
-                    </label>
+                    <div class="form-group">
 
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Enter your email address"
-                        autocomplete="email"
-                        required
-                    >
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email address"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
 
 
                     <!-- PHONE NUMBER -->
 
-                    <label for="phone">
-                        Phone Number
-                    </label>
+                    <div class="form-group">
 
-                    <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        placeholder="Enter your phone number"
-                        autocomplete="tel"
-                    >
+                        <label for="phone">
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="Enter your phone number"
+                            autocomplete="tel"
+                        >
+
+                    </div>
 
 
                     <!-- BUSINESS NAME -->
 
-                    <label for="business">
-                        Business Name
-                    </label>
+                    <div class="form-group">
 
-                    <input
-                        type="text"
-                        id="business"
-                        name="business"
-                        placeholder="Enter your business name"
-                        autocomplete="organization"
-                    >
+                        <label for="business">
+                            Business Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="business"
+                            name="business"
+                            placeholder="Enter your business name"
+                            autocomplete="organization"
+                        >
+
+                    </div>
 
 
                     <!-- WEBSITE PACKAGE -->
 
-                    <label for="package">
-                        Website Package
-                    </label>
+                    <div class="form-group">
 
-                    <select
-                        id="package"
-                        name="package"
-                        required
-                    >
+                        <label for="package">
+                            Website Package
+                        </label>
 
-                        <option value="" selected disabled>
-                            Select a package
-                        </option>
+                        <select
+                            id="package"
+                            name="package"
+                            required
+                        >
 
-                        <option value="Starter Website">
-                            Starter Website
-                        </option>
+                            <option
+                                value=""
+                                selected
+                                disabled
+                            >
+                                Select a package
+                            </option>
 
-                        <option value="Business Website">
-                            Business Website
-                        </option>
+                            <option value="Starter Website">
+                                Starter Website
+                            </option>
 
-                        <option value="Premium Website">
-                            Premium Website
-                        </option>
+                            <option value="Business Website">
+                                Business Website
+                            </option>
 
-                        <option value="Not Sure">
-                            Not Sure
-                        </option>
+                            <option value="Premium Website">
+                                Premium Website
+                            </option>
 
-                    </select>
+                            <option value="Not Sure">
+                                Not Sure
+                            </option>
+
+                        </select>
+
+                    </div>
 
 
                     <!-- PROJECT DETAILS -->
 
-                    <label
-                        for="message"
-                        class="full-width-label"
-                    >
-                        Project Details
-                    </label>
+                    <div class="form-group">
 
-                    <textarea
-                        id="message"
-                        name="message"
-                        placeholder="Tell us about your business and the website you need..."
-                        required
-                    ></textarea>
+                        <label for="message">
+                            Project Details
+                        </label>
+
+                        <textarea
+                            id="message"
+                            name="message"
+                            placeholder="Tell us about your business and the website you need..."
+                            required
+                        ></textarea>
+
+                    </div>
 
 
                     <!-- SUBMIT BUTTON -->
 
-                    <button
-                        type="submit"
-                        class="btn"
-                    >
+                    <button type="submit">
                         Send Message
                     </button>
 
@@ -312,14 +307,9 @@
             &copy; 2026 BAM's Website Builder™. All Rights Reserved.
         </p>
 
-        <p>
-            <a
-                href="mailto:bamswebsitebuilder@gmail.com"
-                class="footer-email"
-            >
-                bamswebsitebuilder@gmail.com
-            </a>
-        </p>
+        <a href="mailto:bamswebsitebuilder@gmail.com">
+            bamswebsitebuilder@gmail.com
+        </a>
 
     </footer>
 
