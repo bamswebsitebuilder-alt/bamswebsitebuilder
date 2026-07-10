@@ -78,7 +78,6 @@ nav {
 
 nav a {
     position: relative;
-
     padding: 31px 0;
 
     color: #ffffff;
@@ -277,7 +276,6 @@ nav a.active::after {
 .section-heading {
     max-width: 800px;
     margin: 0 auto 55px;
-
     text-align: center;
 }
 
@@ -639,7 +637,6 @@ nav a.active::after {
 .pricing-heading {
     max-width: 850px;
     margin: 0 auto 65px;
-
     text-align: center;
 }
 
@@ -913,233 +910,6 @@ nav a.active::after {
 
 
 /* ==========================
-   FOOTER
-========================== */
-
-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 25px;
-
-    padding: 30px 8%;
-
-    color: #999999;
-    background: #080808;
-
-    border-top: 1px solid rgba(255, 215, 0, 0.15);
-
-    font-size: 14px;
-}
-
-footer a {
-    color: #ffd700;
-    font-weight: 700;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
-}
-
-
-/* ==========================
-   TABLET RESPONSIVE
-========================== */
-
-@media (max-width: 1000px) {
-
-    header,
-    .site-header {
-        padding: 0 5%;
-    }
-
-    nav {
-        gap: 20px;
-    }
-
-    .services-grid,
-    .portfolio-grid,
-    .pricing-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .contact-container {
-        grid-template-columns: 1fr;
-    }
-
-    .featured-card {
-        transform: none;
-    }
-
-    .featured-card:hover {
-        transform: translateY(-10px);
-    }
-}
-
-
-/* ==========================
-   MOBILE RESPONSIVE
-========================== */
-
-@media (max-width: 760px) {
-
-    header,
-    .site-header {
-        position: relative;
-
-        flex-direction: column;
-
-        min-height: auto;
-        padding: 22px 20px;
-    }
-
-    .logo {
-        margin-bottom: 15px;
-        font-size: 21px;
-    }
-
-    nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 5px 20px;
-    }
-
-    nav a {
-        padding: 9px 0;
-        font-size: 14px;
-    }
-
-    nav a::after {
-        bottom: 2px;
-    }
-
-    .hero {
-        min-height: auto;
-        padding: 90px 24px;
-        text-align: center;
-    }
-
-    .hero-content {
-        margin: 0 auto;
-    }
-
-    .hero-content h4 {
-        font-size: 13px;
-        letter-spacing: 3px;
-    }
-
-    .hero-content h1 {
-        font-size: clamp(43px, 13vw, 64px);
-    }
-
-    .hero-content p {
-        font-size: 17px;
-    }
-
-    .hero-buttons {
-        justify-content: center;
-    }
-
-    .hero-logo-bg {
-        right: 50%;
-        width: 80vw;
-        transform: translate(50%, -50%);
-    }
-
-    .services-section,
-    .portfolio-section,
-    .contact-section,
-    .pricing-section {
-        padding: 80px 20px 70px;
-    }
-
-    .services-grid,
-    .portfolio-grid,
-    .pricing-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .featured-card {
-        order: -1;
-    }
-
-    .pricing-heading {
-        margin-bottom: 45px;
-    }
-
-    .price-card {
-        min-height: auto;
-    }
-
-    .card-top h2 {
-        font-size: 30px;
-    }
-
-    .price {
-        font-size: 60px;
-    }
-
-    .contact-form {
-        padding: 28px 22px;
-    }
-
-    footer {
-        flex-direction: column;
-        text-align: center;
-    }
-}
-
-
-/* ==========================
-   SMALL MOBILE DEVICES
-========================== */
-
-@media (max-width: 430px) {
-
-    .logo {
-        font-size: 19px;
-    }
-
-    nav {
-        gap: 4px 14px;
-    }
-
-    nav a {
-        font-size: 13px;
-    }
-
-    .hero {
-        padding: 75px 18px;
-    }
-
-    .hero-content h1 {
-        letter-spacing: -1px;
-    }
-
-    .primary-button,
-    .secondary-button,
-    .btn {
-        width: 100%;
-    }
-
-    .section-label {
-        font-size: 12px;
-        letter-spacing: 3px;
-    }
-
-    .price-button {
-        width: calc(100% - 40px);
-        margin-right: 20px;
-        margin-left: 20px;
-    }
-
-    .feature-list {
-        padding: 0 25px;
-    }
-}
-
-/* ==========================
    ADDITIONAL SERVICES
 ========================== */
 
@@ -1164,7 +934,6 @@ footer a:hover {
 .additional-services-heading {
     max-width: 760px;
     margin: 0 auto 40px;
-
     text-align: center;
 }
 
@@ -1266,23 +1035,204 @@ footer a:hover {
 
 
 /* ==========================
-   ADDITIONAL SERVICES TABLET
+   FOOTER
 ========================== */
 
-@media (max-width: 1000px) {
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
 
-    .additional-services {
-        padding: 45px 35px;
-    }
+    padding: 30px 8%;
 
+    color: #999999;
+    background: #080808;
+
+    border-top: 1px solid rgba(255, 215, 0, 0.15);
+
+    font-size: 14px;
+}
+
+footer a {
+    color: #ffd700;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
 }
 
 
 /* ==========================
-   ADDITIONAL SERVICES MOBILE
+   TABLET RESPONSIVE
+========================== */
+
+@media (max-width: 1000px) {
+
+    header,
+    .site-header {
+        padding: 0 5%;
+    }
+
+    nav {
+        gap: 20px;
+    }
+
+    .services-grid,
+    .portfolio-grid,
+    .pricing-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+
+    .featured-card {
+        transform: none;
+    }
+
+    .featured-card:hover {
+        transform: translateY(-10px);
+    }
+
+    .additional-services {
+        padding: 45px 35px;
+    }
+}
+
+
+/* ==========================
+   MOBILE RESPONSIVE
 ========================== */
 
 @media (max-width: 760px) {
+
+    header,
+    .site-header {
+        position: relative;
+
+        flex-direction: column;
+
+        min-height: auto;
+        padding: 22px 20px;
+    }
+
+    .logo {
+        margin-bottom: 15px;
+        font-size: 21px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px 20px;
+    }
+
+    nav a {
+        padding: 9px 0;
+        font-size: 14px;
+    }
+
+    nav a::after {
+        bottom: 2px;
+    }
+
+    .hero {
+        min-height: auto;
+        padding: 90px 24px;
+        text-align: center;
+    }
+
+    .hero-content {
+        margin: 0 auto;
+    }
+
+    .hero-content h4 {
+        font-size: 13px;
+        letter-spacing: 3px;
+    }
+
+    .hero-content h1 {
+        font-size: clamp(43px, 13vw, 64px);
+    }
+
+    .hero-content p {
+        font-size: 17px;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-logo-bg {
+        right: 50%;
+        width: 80vw;
+        transform: translate(50%, -50%);
+    }
+
+    .services-section,
+    .portfolio-section,
+    .contact-section,
+    .pricing-section {
+        padding: 80px 20px 70px;
+    }
+
+    .services-grid,
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Pricing packages on mobile:
+       Starter, Business, Premium */
+
+    .pricing-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .pricing-grid .price-card:nth-child(1) {
+        order: 1;
+    }
+
+    .pricing-grid .price-card:nth-child(2) {
+        order: 2;
+    }
+
+    .pricing-grid .price-card:nth-child(3) {
+        order: 3;
+    }
+
+    .pricing-grid .price-card {
+        width: 100%;
+        min-height: auto;
+        transform: none;
+    }
+
+    .pricing-grid .price-card:hover,
+    .pricing-grid .featured-card,
+    .pricing-grid .featured-card:hover {
+        transform: none;
+    }
+
+    .pricing-heading {
+        margin-bottom: 45px;
+    }
+
+    .card-top h2 {
+        font-size: 30px;
+    }
+
+    .price {
+        font-size: 60px;
+    }
+
+    .contact-form {
+        padding: 28px 22px;
+    }
 
     .additional-services {
         margin-top: 65px;
@@ -1322,14 +1272,59 @@ footer a:hover {
         width: 100%;
     }
 
+    footer {
+        flex-direction: column;
+        text-align: center;
+    }
 }
 
 
 /* ==========================
-   ADDITIONAL SERVICES SMALL MOBILE
+   SMALL MOBILE DEVICES
 ========================== */
 
 @media (max-width: 430px) {
+
+    .logo {
+        font-size: 19px;
+    }
+
+    nav {
+        gap: 4px 14px;
+    }
+
+    nav a {
+        font-size: 13px;
+    }
+
+    .hero {
+        padding: 75px 18px;
+    }
+
+    .hero-content h1 {
+        letter-spacing: -1px;
+    }
+
+    .primary-button,
+    .secondary-button,
+    .btn {
+        width: 100%;
+    }
+
+    .section-label {
+        font-size: 12px;
+        letter-spacing: 3px;
+    }
+
+    .price-button {
+        width: calc(100% - 40px);
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+
+    .feature-list {
+        padding: 0 25px;
+    }
 
     .additional-services {
         padding: 32px 15px;
@@ -1347,34 +1342,4 @@ footer a:hover {
     .service-row strong {
         font-size: 15px;
     }
-
-/* ==========================
-   MOBILE PACKAGE ORDER
-========================== */
-
-@media (max-width: 768px){
-
-    .pricing-grid{
-        display:flex;
-        flex-direction:column;
-    }
-
-    .pricing-card:nth-child(1){
-        order:1; /* Starter */
-    }
-
-    .pricing-card:nth-child(2){
-        order:2; /* Business */
-    }
-
-    .pricing-card:nth-child(3){
-        order:3; /* Premium */
-    }
-
-    .pricing-card{
-        width:100%;
-        transform:none;
-    }
-}
-
 }
