@@ -11,7 +11,7 @@
 
     <meta
         name="description"
-        content="Contact BAM's Website Builder for a free professional website design quote."
+        content="Contact BAM's Website Builder for a free website design quote."
     >
 
     <title>Contact | BAM's Website Builder</title>
@@ -30,9 +30,7 @@
 
 <body>
 
-    <!-- =========================
-         HEADER
-    ========================== -->
+    <!-- HEADER -->
 
     <header class="site-header">
 
@@ -46,17 +44,11 @@
 
         <nav aria-label="Main navigation">
 
-            <a href="index.html">
-                Home
-            </a>
+            <a href="index.html">Home</a>
 
-            <a href="services.html">
-                Services
-            </a>
+            <a href="services.html">Services</a>
 
-            <a href="prices.html">
-                Prices
-            </a>
+            <a href="prices.html">Prices</a>
 
             <a
                 href="contact.html"
@@ -71,9 +63,7 @@
     </header>
 
 
-    <!-- =========================
-         MAIN CONTENT
-    ========================== -->
+    <!-- CONTACT -->
 
     <main>
 
@@ -81,13 +71,9 @@
 
             <div class="contact-container">
 
-                <!-- CONTACT INFORMATION -->
-
                 <div class="contact-information">
 
-                    <h4>
-                        CONTACT US
-                    </h4>
+                    <h4>CONTACT US</h4>
 
                     <h1>
                         Let's Build
@@ -96,21 +82,13 @@
                     </h1>
 
                     <p>
-                        Tell us about your business and the type of website
-                        you need. Complete the form below to receive a free
-                        website design quote.
+                        Tell us about your business and what kind of website
+                        you need. Fill out the form below to receive a free
+                        quote.
                     </p>
 
                     <div class="contact-details">
 
-                        <p>
-                            <strong>Email:</strong>
-                            <br>
-
-                            <a href="mailto:bamswebsitebuilder@gmail.com">
-                                bamswebsitebuilder@gmail.com
-                            </a>
-                        </p>
 
                         <p>
                             <strong>Response Time:</strong>
@@ -123,9 +101,7 @@
                 </div>
 
 
-                <!-- =========================
-                     CONTACT FORM
-                ========================== -->
+                <!-- CONTACT FORM -->
 
                 <form
                     class="contact-form"
@@ -133,70 +109,32 @@
                     method="POST"
                 >
 
-                    <!-- FORMSUBMIT SETTINGS -->
-
                     <input
                         type="hidden"
                         name="_subject"
-                        value="New Website Inquiry | BAM's Website Builder"
-                    >
-
-                    <input
-                        type="hidden"
-                        name="_next"
-                        value="https://bamswebsitebuilder.com/thank-you.html"
-                    >
-
-                    <input
-                        type="hidden"
-                        name="_template"
-                        value="table"
-                    >
-
-                    <input
-                        type="hidden"
-                        name="_autoresponse"
-                        value="Thank you for contacting BAM's Website Builder. We received your website inquiry and will respond within 72 hours."
+                        value="New Website Inquiry"
                     >
 
                     <input
                         type="hidden"
                         name="_captcha"
-                        value="true"
+                        value="false"
                     >
-
-                    <!-- HONEYPOT SPAM PROTECTION -->
-
-                    <input
-                        type="text"
-                        name="_honey"
-                        tabindex="-1"
-                        autocomplete="off"
-                        style="display: none;"
-                    >
-
-
-                    <!-- FULL NAME -->
 
                     <div class="form-group">
 
-                        <label for="fullname">
+                        <label for="name">
                             Full Name
                         </label>
 
                         <input
                             type="text"
-                            id="fullname"
-                            name="Full Name"
-                            placeholder="Enter your full name"
-                            autocomplete="name"
+                            id="name"
+                            name="Name"
                             required
                         >
 
                     </div>
-
-
-                    <!-- EMAIL ADDRESS -->
 
                     <div class="form-group">
 
@@ -207,36 +145,11 @@
                         <input
                             type="email"
                             id="email"
-                            name="email"
-                            placeholder="Enter your email address"
-                            autocomplete="email"
+                            name="Email"
                             required
                         >
 
                     </div>
-
-
-                    <!-- PHONE NUMBER -->
-
-                    <div class="form-group">
-
-                        <label for="phone">
-                            Phone Number
-                        </label>
-
-                        <input
-                            type="tel"
-                            id="phone"
-                            name="Phone Number"
-                            placeholder="Example: 727-555-1234"
-                            autocomplete="tel"
-                            inputmode="tel"
-                        >
-
-                    </div>
-
-
-                    <!-- BUSINESS NAME -->
 
                     <div class="form-group">
 
@@ -248,14 +161,9 @@
                             type="text"
                             id="business"
                             name="Business Name"
-                            placeholder="Enter your business name"
-                            autocomplete="organization"
                         >
 
                     </div>
-
-
-                    <!-- WEBSITE PACKAGE -->
 
                     <div class="form-group">
 
@@ -265,40 +173,21 @@
 
                         <select
                             id="package"
-                            name="Website Package"
+                            name="Package"
                             required
                         >
 
-                            <option
-                                value=""
-                                selected
-                                disabled
-                            >
-                                Select a package
-                            </option>
+                            <option value="">Select a package</option>
 
-                            <option value="Starter Website">
-                                Starter Website
-                            </option>
+                            <option>Starter Website</option>
 
-                            <option value="Business Website">
-                                Business Website
-                            </option>
+                            <option>Business Website</option>
 
-                            <option value="Premium Website">
-                                Premium Website
-                            </option>
-
-                            <option value="Not Sure">
-                                Not Sure
-                            </option>
+                            <option>Premium Website</option>
 
                         </select>
 
                     </div>
-
-
-                    <!-- PROJECT DETAILS -->
 
                     <div class="form-group">
 
@@ -308,16 +197,12 @@
 
                         <textarea
                             id="message"
-                            name="Project Details"
-                            rows="7"
-                            placeholder="Tell us about your business and the website you need..."
+                            name="Message"
+                            rows="6"
                             required
                         ></textarea>
 
                     </div>
-
-
-                    <!-- SUBMIT BUTTON -->
 
                     <button type="submit">
                         Send Message
@@ -332,9 +217,7 @@
     </main>
 
 
-    <!-- =========================
-         FOOTER
-    ========================== -->
+    <!-- FOOTER -->
 
     <footer>
 
