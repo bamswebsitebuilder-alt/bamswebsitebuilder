@@ -66,9 +66,11 @@
     </header>
 
 
-    <!-- HERO SECTION -->
+    <!-- MAIN CONTENT -->
 
     <main>
+
+        <!-- HERO SECTION -->
 
         <section class="hero contact-hero">
 
@@ -104,22 +106,30 @@
 
             <div class="contact-box">
 
+                <!-- CONTACT INFORMATION -->
+
                 <div class="contact-info">
 
                     <h2>Get a Free Quote</h2>
 
                     <p>
-                        Fill out the form and we’ll get back to you as
-                        soon as possible.
+                        Fill out the form and we’ll get back to you as soon
+                        as possible.
                     </p>
 
                     <div class="contact-detail">
-    <strong>Email:</strong>
 
-    <a href="mailto:bamswebsitebuilder@gmail.com">
-        bamswebsitebuilder@gmail.com
-    </a>
-</div>
+                        <strong>Email:</strong>
+
+                        <a
+                            href="mailto:bamswebsitebuilder@gmail.com"
+                            class="contact-email"
+                        >
+                            bamswebsitebuilder@gmail.com
+                        </a>
+
+                    </div>
+
                     <div class="contact-detail">
 
                         <strong>Response Time:</strong>
@@ -141,6 +151,8 @@
                     method="POST"
                 >
 
+                    <!-- FORMSUBMIT SETTINGS -->
+
                     <input
                         type="hidden"
                         name="_subject"
@@ -159,6 +171,9 @@
                         value="table"
                     >
 
+
+                    <!-- FULL NAME -->
+
                     <label for="fullname">
                         Full Name
                     </label>
@@ -167,10 +182,13 @@
                         type="text"
                         id="fullname"
                         name="fullname"
-                        placeholder="Full Name"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
                         required
                     >
 
+
+                    <!-- EMAIL ADDRESS -->
 
                     <label for="email">
                         Email Address
@@ -180,10 +198,13 @@
                         type="email"
                         id="email"
                         name="email"
-                        placeholder="Email Address"
+                        placeholder="Enter your email address"
+                        autocomplete="email"
                         required
                     >
 
+
+                    <!-- PHONE NUMBER -->
 
                     <label for="phone">
                         Phone Number
@@ -193,9 +214,12 @@
                         type="tel"
                         id="phone"
                         name="phone"
-                        placeholder="Phone Number"
+                        placeholder="Enter your phone number"
+                        autocomplete="tel"
                     >
 
+
+                    <!-- BUSINESS NAME -->
 
                     <label for="business">
                         Business Name
@@ -205,9 +229,12 @@
                         type="text"
                         id="business"
                         name="business"
-                        placeholder="Business Name"
+                        placeholder="Enter your business name"
+                        autocomplete="organization"
                     >
 
+
+                    <!-- WEBSITE PACKAGE -->
 
                     <label for="package">
                         Website Package
@@ -216,9 +243,10 @@
                     <select
                         id="package"
                         name="package"
+                        required
                     >
 
-                        <option value="">
+                        <option value="" selected disabled>
                             Select a package
                         </option>
 
@@ -241,17 +269,24 @@
                     </select>
 
 
-                    <label for="message">
+                    <!-- PROJECT DETAILS -->
+
+                    <label
+                        for="message"
+                        class="full-width-label"
+                    >
                         Project Details
                     </label>
 
                     <textarea
                         id="message"
                         name="message"
-                        placeholder="Tell us about your project..."
+                        placeholder="Tell us about your business and the website you need..."
                         required
                     ></textarea>
 
+
+                    <!-- SUBMIT BUTTON -->
 
                     <button
                         type="submit"
@@ -274,11 +309,14 @@
     <footer>
 
         <p>
-            © 2026 BAM's Website Builder™. All Rights Reserved.
+            &copy; 2026 BAM's Website Builder™. All Rights Reserved.
         </p>
 
         <p>
-            <a href="mailto:bamswebsitebuilder@gmail.com">
+            <a
+                href="mailto:bamswebsitebuilder@gmail.com"
+                class="footer-email"
+            >
                 bamswebsitebuilder@gmail.com
             </a>
         </p>
