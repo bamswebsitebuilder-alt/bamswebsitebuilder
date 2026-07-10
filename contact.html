@@ -11,7 +11,7 @@
 
     <meta
         name="description"
-        content="Contact BAM's Website Builder for a free website design quote."
+        content="Contact BAM's Website Builder for a free professional website design quote."
     >
 
     <title>Contact | BAM's Website Builder</title>
@@ -30,7 +30,9 @@
 
 <body>
 
-    <!-- HEADER -->
+    <!-- =========================
+         HEADER
+    ========================== -->
 
     <header class="site-header">
 
@@ -69,7 +71,9 @@
     </header>
 
 
-    <!-- MAIN CONTENT -->
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
 
     <main>
 
@@ -81,7 +85,9 @@
 
                 <div class="contact-information">
 
-                    <h4>CONTACT US</h4>
+                    <h4>
+                        CONTACT US
+                    </h4>
 
                     <h1>
                         Let's Build
@@ -91,12 +97,21 @@
 
                     <p>
                         Tell us about your business and the type of website
-                        you need. Complete the form to receive a free quote.
+                        you need. Complete the form below to receive a free
+                        website design quote.
                     </p>
 
                     <div class="contact-details">
 
-                      
+                        <p>
+                            <strong>Email:</strong>
+                            <br>
+
+                            <a href="mailto:bamswebsitebuilder@gmail.com">
+                                bamswebsitebuilder@gmail.com
+                            </a>
+                        </p>
+
                         <p>
                             <strong>Response Time:</strong>
                             <br>
@@ -108,7 +123,9 @@
                 </div>
 
 
-                <!-- CONTACT FORM -->
+                <!-- =========================
+                     CONTACT FORM
+                ========================== -->
 
                 <form
                     class="contact-form"
@@ -121,19 +138,41 @@
                     <input
                         type="hidden"
                         name="_subject"
-                        value="New Website Inquiry"
+                        value="New Website Inquiry | BAM's Website Builder"
                     >
 
                     <input
                         type="hidden"
-                        name="_captcha"
-                        value="false"
+                        name="_next"
+                        value="https://bamswebsitebuilder.com/thank-you.html"
                     >
 
                     <input
                         type="hidden"
                         name="_template"
                         value="table"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="_autoresponse"
+                        value="Thank you for contacting BAM's Website Builder. We received your website inquiry and will respond within 72 hours."
+                    >
+
+                    <input
+                        type="hidden"
+                        name="_captcha"
+                        value="true"
+                    >
+
+                    <!-- HONEYPOT SPAM PROTECTION -->
+
+                    <input
+                        type="text"
+                        name="_honey"
+                        tabindex="-1"
+                        autocomplete="off"
+                        style="display: none;"
                     >
 
 
@@ -148,7 +187,7 @@
                         <input
                             type="text"
                             id="fullname"
-                            name="fullname"
+                            name="Full Name"
                             placeholder="Enter your full name"
                             autocomplete="name"
                             required
@@ -188,9 +227,10 @@
                         <input
                             type="tel"
                             id="phone"
-                            name="phone"
-                            placeholder="Enter your phone number"
+                            name="Phone Number"
+                            placeholder="Example: 727-555-1234"
                             autocomplete="tel"
+                            inputmode="tel"
                         >
 
                     </div>
@@ -207,7 +247,7 @@
                         <input
                             type="text"
                             id="business"
-                            name="business"
+                            name="Business Name"
                             placeholder="Enter your business name"
                             autocomplete="organization"
                         >
@@ -225,7 +265,7 @@
 
                         <select
                             id="package"
-                            name="package"
+                            name="Website Package"
                             required
                         >
 
@@ -268,7 +308,8 @@
 
                         <textarea
                             id="message"
-                            name="message"
+                            name="Project Details"
+                            rows="7"
                             placeholder="Tell us about your business and the website you need..."
                             required
                         ></textarea>
@@ -291,7 +332,9 @@
     </main>
 
 
-    <!-- FOOTER -->
+    <!-- =========================
+         FOOTER
+    ========================== -->
 
     <footer>
 
