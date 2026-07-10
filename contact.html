@@ -1,96 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Contact BAM's Website Builder for a free website design quote."
+    >
+
     <title>Contact | BAM's Website Builder</title>
 
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/jpeg" href="images/icon-dark.jpg">
+
+    <link
+        rel="icon"
+        type="image/jpeg"
+        href="images/icon-dark.jpg"
+    >
 </head>
 
 <body>
 
-<header>
-    <a href="index.html" class="logo"></a>
+    <!-- HEADER -->
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="prices.html">Prices</a>
-        <a href="contact.html">Contact</a>
-    </nav>
-</header>
+    <header>
 
-<section class="hero contact-hero">
+        <a
+            href="index.html"
+            class="logo"
+            aria-label="BAM's Website Builder home"
+        >
+            BAM's Website Builder
+        </a>
 
-    <img src="images/logo-dark.jpg" alt="BAM's Website Builder Logo" class="hero-logo-bg">
+        <nav aria-label="Main navigation">
 
-    <div class="hero-content">
-        <h4>CONTACT US</h4>
+            <a href="index.html">
+                Home
+            </a>
 
-        <h1>
-            Let's Build<br>
-            Your Website
-        </h1>
+            <a href="services.html">
+                Services
+            </a>
+
+            <a href="prices.html">
+                Prices
+            </a>
+
+            <a
+                href="contact.html"
+                class="active"
+                aria-current="page"
+            >
+                Contact
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- HERO SECTION -->
+
+    <main>
+
+        <section class="hero contact-hero">
+
+            <img
+                src="images/logo-dark.jpg"
+                alt=""
+                class="hero-logo-bg"
+            >
+
+            <div class="hero-content">
+
+                <h4>CONTACT US</h4>
+
+                <h1>
+                    Let's Build
+                    <br>
+                    Your Website
+                </h1>
+
+                <p>
+                    Tell us about your business and what kind of website
+                    you need.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTACT SECTION -->
+
+        <section class="contact-area">
+
+            <div class="contact-box">
+
+                <div class="contact-info">
+
+                    <h2>Get a Free Quote</h2>
+
+                    <p>
+                        Fill out the form and we’ll get back to you as
+                        soon as possible.
+                    </p>
+
+                    <div class="contact-detail">
+
+                        <strong>Email:</strong>
+
+                        <a href="mailto:bamswebsitebuilder@gmail.com">
+                            bamswebsitebuilder@gmail.com
+                        </a>
+
+                    </div>
+
+                    <div class="contact-detail">
+
+                        <strong>Response Time:</strong>
+
+                        <span>
+                            Usually within 72 hours
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONTACT FORM -->
+
+                <form
+                    class="contact-form"
+                    action="https://formsubmit.co/bamswebsitebuilder@gmail.com"
+                    method="POST"
+                >
+
+                    <input
+                        type="hidden"
+                        name="_subject"
+                        value="New Website Inquiry"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="_captcha"
+                        value="false"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="_template"
+                        value="table"
+                    >
+
+                    <label for="fullname">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="fullname"
+                        name="fullname"
+                        placeholder="Full Name"
+                        required
+                    >
+
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Email Address"
+                        required
+                    >
+
+
+                    <label for="phone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="Phone Number"
+                    >
+
+
+                    <label for="business">
+                        Business Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="business"
+                        name="business"
+                        placeholder="Business Name"
+                    >
+
+
+                    <label for="package">
+                        Website Package
+                    </label>
+
+                    <select
+                        id="package"
+                        name="package"
+                    >
+
+                        <option value="">
+                            Select a package
+                        </option>
+
+                        <option value="Starter Website">
+                            Starter Website
+                        </option>
+
+                        <option value="Business Website">
+                            Business Website
+                        </option>
+
+                        <option value="Premium Website">
+                            Premium Website
+                        </option>
+
+                        <option value="Not Sure">
+                            Not Sure
+                        </option>
+
+                    </select>
+
+
+                    <label for="message">
+                        Project Details
+                    </label>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        placeholder="Tell us about your project..."
+                        required
+                    ></textarea>
+
+
+                    <button
+                        type="submit"
+                        class="btn"
+                    >
+                        Send Message
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
 
         <p>
-            Tell us about your business and what kind of website you need.
+            © 2026 BAM's Website Builder™. All Rights Reserved.
         </p>
-    </div>
 
-</section>
+        <p>
+            <a href="mailto:bamswebsitebuilder@gmail.com">
+                bamswebsitebuilder@gmail.com
+            </a>
+        </p>
 
-<section class="contact-area">
-
-    <div class="contact-box">
-
-        <div class="contact-info">
-            <h2>Get A Free Quote</h2>
-
-            <p>
-                Fill out the form and we’ll get back to you as soon as possible.
-            </p>
-
-            <div class="contact-detail">
-                <strong>Email:</strong>
-                <a href="mailto:bamswebsitebuilder@gmail.com">
-					bamswebsitebuilder@gmail.com
-					</a>
-            </div>
-
-            <div class="contact-detail">
-                <strong>Response Time:</strong>
-                <span>Usually within 72 hours</span>
-            </div>
-        </div>
-
-      <form class="contact-form" action="https://formsubmit.co/bamswebsitebuilder@gmail.com" method="POST">
-
-    <input type="hidden" name="_subject" value="New Website Inquiry">
-    <input type="hidden" name="_captcha" value="false">
-
-    <input type="text" name="fullname" placeholder="Full Name" required>
-    <input type="email" name="email" placeholder="Email Address" required>
-    <input type="tel" name="phone" placeholder="Phone Number">
-    <input type="text" name="business" placeholder="Business Name">
-    <textarea name="message" placeholder="Tell us about your project..." required></textarea>
-
-    <a href="mailto:bamswebsitebuilder@gmail.com" class="btn">
-    Email Us
-</a>
-
-<input type="submit" value="Submit Test">
-
-</form>
-
-    </div>
-
-</section>
-
-<footer>
-    <p>© 2026 BAM's Website Builder™. All Rights Reserved.</p>
-</footer>
+    </footer>
 
 </body>
+
 </html>
