@@ -30,7 +30,9 @@
 
 <body>
 
-    <!-- HEADER -->
+    <!-- =========================
+         HEADER
+    ========================== -->
 
     <header class="site-header">
 
@@ -44,11 +46,17 @@
 
         <nav aria-label="Main navigation">
 
-            <a href="index.html">Home</a>
+            <a href="index.html">
+                Home
+            </a>
 
-            <a href="services.html">Services</a>
+            <a href="services.html">
+                Services
+            </a>
 
-            <a href="prices.html">Prices</a>
+            <a href="prices.html">
+                Prices
+            </a>
 
             <a
                 href="contact.html"
@@ -63,7 +71,9 @@
     </header>
 
 
-    <!-- CONTACT -->
+    <!-- =========================
+         MAIN CONTACT SECTION
+    ========================== -->
 
     <main>
 
@@ -71,9 +81,14 @@
 
             <div class="contact-container">
 
+
+                <!-- CONTACT INFORMATION -->
+
                 <div class="contact-information">
 
-                    <h4>CONTACT US</h4>
+                    <h4>
+                        CONTACT US
+                    </h4>
 
                     <h1>
                         Let's Build
@@ -89,7 +104,6 @@
 
                     <div class="contact-details">
 
-
                         <p>
                             <strong>Response Time:</strong>
                             <br>
@@ -101,13 +115,17 @@
                 </div>
 
 
-                <!-- CONTACT FORM -->
+                <!-- =========================
+                     CONTACT FORM
+                ========================== -->
 
                 <form
                     class="contact-form"
                     action="https://formsubmit.co/bamswebsitebuilder@gmail.com"
                     method="POST"
                 >
+
+                    <!-- FORM SETTINGS -->
 
                     <input
                         type="hidden"
@@ -121,6 +139,9 @@
                         value="false"
                     >
 
+
+                    <!-- FULL NAME -->
+
                     <div class="form-group">
 
                         <label for="name">
@@ -131,10 +152,14 @@
                             type="text"
                             id="name"
                             name="Name"
+                            autocomplete="name"
                             required
                         >
 
                     </div>
+
+
+                    <!-- EMAIL ADDRESS -->
 
                     <div class="form-group">
 
@@ -146,10 +171,14 @@
                             type="email"
                             id="email"
                             name="Email"
+                            autocomplete="email"
                             required
                         >
 
                     </div>
+
+
+                    <!-- BUSINESS NAME -->
 
                     <div class="form-group">
 
@@ -161,9 +190,13 @@
                             type="text"
                             id="business"
                             name="Business Name"
+                            autocomplete="organization"
                         >
 
                     </div>
+
+
+                    <!-- WEBSITE PACKAGE -->
 
                     <div class="form-group">
 
@@ -173,21 +206,216 @@
 
                         <select
                             id="package"
-                            name="Package"
+                            name="Website Package"
                             required
                         >
 
-                            <option value="">Select a package</option>
+                            <option
+                                value=""
+                                disabled
+                                selected
+                            >
+                                Select a package
+                            </option>
 
-                            <option>Starter Website</option>
+                            <option value="Starter Website">
+                                Starter Website
+                            </option>
 
-                            <option>Business Website</option>
+                            <option value="Business Website">
+                                Business Website
+                            </option>
 
-                            <option>Premium Website</option>
+                            <option value="Premium Website">
+                                Premium Website
+                            </option>
 
                         </select>
 
                     </div>
+
+
+                    <!-- WEBSITE TYPE -->
+
+                    <div class="form-group">
+
+                        <label for="website-type">
+                            Website Type
+                        </label>
+
+                        <select
+                            id="website-type"
+                            name="Website Type"
+                            required
+                        >
+
+                            <option
+                                value=""
+                                disabled
+                                selected
+                            >
+                                Select a website type
+                            </option>
+
+                            <option value="Business Website">
+                                Business Website
+                            </option>
+
+                            <option value="Restaurant Website">
+                                Restaurant Website
+                            </option>
+
+                            <option value="E-Commerce Store">
+                                E-Commerce Store
+                            </option>
+
+                            <option value="Portfolio Website">
+                                Portfolio Website
+                            </option>
+
+                            <option value="Author or Book Website">
+                                Author or Book Website
+                            </option>
+
+                            <option value="Real Estate Website">
+                                Real Estate Website
+                            </option>
+
+                            <option value="Construction Website">
+                                Construction Website
+                            </option>
+
+                            <option value="Fitness Website">
+                                Fitness Website
+                            </option>
+
+                            <option value="Medical Website">
+                                Medical Website
+                            </option>
+
+                            <option value="Church Website">
+                                Church Website
+                            </option>
+
+                            <option value="Nonprofit Website">
+                                Nonprofit Website
+                            </option>
+
+                            <option value="Personal Website">
+                                Personal Website
+                            </option>
+
+                            <option value="Landing Page">
+                                Landing Page
+                            </option>
+
+                            <option value="Blog">
+                                Blog
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- ADDITIONAL SERVICE -->
+
+                    <div class="form-group">
+
+                        <label for="additional-service">
+                            Additional Service
+                        </label>
+
+                        <select
+                            id="additional-service"
+                            name="Additional Service"
+                        >
+
+                            <option
+                                value=""
+                                selected
+                            >
+                                Select an additional service
+                            </option>
+
+                            <option value="No Additional Service">
+                                No Additional Service
+                            </option>
+
+                            <option value="Additional Website Page">
+                                Additional Website Page
+                            </option>
+
+                            <option value="Contact Form">
+                                Contact Form
+                            </option>
+
+                            <option value="Photo Gallery">
+                                Photo Gallery
+                            </option>
+
+                            <option value="Blog Setup">
+                                Blog Setup
+                            </option>
+
+                            <option value="Online Store Setup">
+                                Online Store Setup
+                            </option>
+
+                            <option value="Booking or Appointment System">
+                                Booking or Appointment System
+                            </option>
+
+                            <option value="Google Maps Integration">
+                                Google Maps Integration
+                            </option>
+
+                            <option value="Google Business Profile Setup">
+                                Google Business Profile Setup
+                            </option>
+
+                            <option value="Search Engine Optimization">
+                                Search Engine Optimization
+                            </option>
+
+                            <option value="Social Media Integration">
+                                Social Media Integration
+                            </option>
+
+                            <option value="Logo Design">
+                                Logo Design
+                            </option>
+
+                            <option value="Domain Connection">
+                                Domain Connection
+                            </option>
+
+                            <option value="Website Hosting Setup">
+                                Website Hosting Setup
+                            </option>
+
+                            <option value="Website Maintenance">
+                                Website Maintenance
+                            </option>
+
+                            <option value="Website Redesign">
+                                Website Redesign
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- PROJECT DETAILS -->
 
                     <div class="form-group">
 
@@ -197,12 +425,16 @@
 
                         <textarea
                             id="message"
-                            name="Message"
+                            name="Project Details"
                             rows="6"
+                            placeholder="Tell us about your business, the pages you need, your preferred design style, and any special features."
                             required
                         ></textarea>
 
                     </div>
+
+
+                    <!-- SUBMIT BUTTON -->
 
                     <button type="submit">
                         Send Message
@@ -217,7 +449,9 @@
     </main>
 
 
-    <!-- FOOTER -->
+    <!-- =========================
+         FOOTER
+    ========================== -->
 
     <footer>
 
