@@ -49,7 +49,8 @@ nav a{
     font-weight:bold;
 }
 
-nav a:hover{
+nav a:hover,
+nav a.active{
     color:#FFD700;
 }
 
@@ -119,6 +120,7 @@ nav a:hover{
     text-decoration:none;
     font-weight:bold;
     border:2px solid #FFD700;
+    transition:.3s;
 }
 
 .btn{
@@ -138,7 +140,7 @@ nav a:hover{
     border-color:#fff;
 }
 
-/* ABOUT / SECTIONS */
+/* ABOUT */
 
 .about{
     padding:90px 8%;
@@ -211,6 +213,23 @@ nav a:hover{
     margin-bottom:6px;
 }
 
+/* CONTACT EMAIL LINK */
+
+.contact-detail a{
+    color:#ffffff;
+    text-decoration:none;
+    font-weight:500;
+    transition:color .3s ease;
+}
+
+.contact-detail a:hover{
+    color:#FFD700;
+}
+
+.contact-detail a:visited{
+    color:#ffffff;
+}
+
 .contact-form{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -218,7 +237,8 @@ nav a:hover{
 }
 
 .contact-form input,
-.contact-form textarea{
+.contact-form textarea,
+.contact-form select{
     width:100%;
     padding:17px 18px;
     background:#0d0d0d;
@@ -230,7 +250,8 @@ nav a:hover{
 }
 
 .contact-form input:focus,
-.contact-form textarea:focus{
+.contact-form textarea:focus,
+.contact-form select:focus{
     border-color:#FFD700;
 }
 
@@ -248,6 +269,103 @@ nav a:hover{
     cursor:pointer;
 }
 
+/* PORTFOLIO */
+
+.portfolio{
+    padding:100px 8%;
+    background:#111;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:70px;
+}
+
+.section-title h2{
+    font-size:48px;
+    margin-bottom:15px;
+}
+
+.section-title p{
+    color:#cfcfcf;
+    max-width:700px;
+    margin:auto;
+    line-height:1.8;
+}
+
+.portfolio-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:35px;
+}
+
+.portfolio-card{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:20px;
+    overflow:hidden;
+    transition:.35s;
+}
+
+.portfolio-card:hover{
+    transform:translateY(-10px);
+    border-color:#FFD700;
+    box-shadow:0 0 30px rgba(255,215,0,.15);
+}
+
+.portfolio-image{
+    height:220px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    font-size:26px;
+    font-weight:bold;
+    color:#FFD700;
+    padding:20px;
+}
+
+.restaurant{
+    background:linear-gradient(135deg,#1d1d1d,#3b3b3b);
+}
+
+.gym{
+    background:linear-gradient(135deg,#101010,#262626);
+}
+
+.barber{
+    background:linear-gradient(135deg,#202020,#444);
+}
+
+.cleaning{
+    background:linear-gradient(135deg,#2a2a2a,#4d4d4d);
+}
+
+.auto{
+    background:linear-gradient(135deg,#181818,#3c3c3c);
+}
+
+.realestate{
+    background:linear-gradient(135deg,#111,#555);
+}
+
+.portfolio-card h3{
+    padding:25px 25px 10px;
+    font-size:28px;
+}
+
+.portfolio-card p{
+    padding:0 25px;
+    color:#d6d6d6;
+    line-height:1.8;
+    margin-bottom:25px;
+}
+
+.portfolio-card .btn{
+    margin:0 25px 25px;
+    display:inline-block;
+}
+
 /* FOOTER */
 
 footer{
@@ -261,9 +379,19 @@ footer p{
     margin:6px 0;
 }
 
+footer a{
+    color:#fff;
+    text-decoration:none;
+}
+
+footer a:hover{
+    color:#FFD700;
+}
+
 /* MOBILE */
 
 @media(max-width:900px){
+
     header{
         position:relative;
         flex-direction:column;
@@ -308,5 +436,16 @@ footer p{
     .contact-form textarea,
     .contact-form button{
         grid-column:1;
+    }
+}
+
+@media(max-width:768px){
+
+    .section-title h2{
+        font-size:36px;
+    }
+
+    .portfolio{
+        padding:80px 6%;
     }
 }
