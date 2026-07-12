@@ -78,6 +78,7 @@ nav {
 
 nav a {
     position: relative;
+
     padding: 31px 0;
 
     color: #ffffff;
@@ -276,6 +277,7 @@ nav a.active::after {
 .section-heading {
     max-width: 800px;
     margin: 0 auto 55px;
+
     text-align: center;
 }
 
@@ -398,11 +400,16 @@ nav a.active::after {
    PORTFOLIO PAGE
 ========================== */
 
-.portfolio-section {
+.portfolio-page {
     min-height: 100vh;
     padding: 150px 8% 90px;
 
     background:
+        radial-gradient(
+            circle at top right,
+            rgba(255, 215, 0, 0.08),
+            transparent 32%
+        ),
         linear-gradient(
             135deg,
             #080808,
@@ -410,54 +417,163 @@ nav a.active::after {
         );
 }
 
+.portfolio-header {
+    max-width: 780px;
+    margin: 0 auto 55px;
+
+    text-align: center;
+}
+
+.portfolio-header h4 {
+    margin-bottom: 14px;
+
+    color: #ffd700;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 4px;
+}
+
+.portfolio-header h1 {
+    margin-bottom: 18px;
+
+    color: #ffffff;
+    font-size: clamp(42px, 6vw, 68px);
+    line-height: 1.08;
+}
+
+.portfolio-header p {
+    color: #c7c7c7;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 28px;
+    grid-template-columns: minmax(280px, 900px);
+    justify-content: center;
+    gap: 30px;
 
     max-width: 1250px;
     margin: 0 auto;
 }
 
 .portfolio-card {
+    display: grid;
+    grid-template-columns: 340px minmax(0, 1fr);
+
     overflow: hidden;
 
-    background: #171717;
-    border: 1px solid rgba(255, 215, 0, 0.2);
-    border-radius: 18px;
+    background:
+        linear-gradient(
+            145deg,
+            #191919,
+            #101010
+        );
 
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 215, 0, 0.22);
+    border-radius: 22px;
+
+    box-shadow: 0 22px 55px rgba(0, 0, 0, 0.45);
 
     transition:
         transform 0.3s ease,
-        border-color 0.3s ease;
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
 .portfolio-card:hover {
     transform: translateY(-8px);
     border-color: #ffd700;
+    box-shadow: 0 28px 60px rgba(255, 215, 0, 0.12);
 }
 
-.portfolio-card img {
+.portfolio-image-wrapper {
+    min-height: 500px;
+    overflow: hidden;
+    background: #080808;
+}
+
+.portfolio-image {
     width: 100%;
-    height: 240px;
+    height: 100%;
+
     object-fit: cover;
+    object-position: center top;
+
+    transition: transform 0.4s ease;
+}
+
+.portfolio-card:hover .portfolio-image {
+    transform: scale(1.04);
 }
 
 .portfolio-card-content {
-    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 50px;
 }
 
-.portfolio-card h3 {
-    margin-bottom: 10px;
+.portfolio-category {
+    display: inline-block;
+
+    margin-bottom: 14px;
 
     color: #ffd700;
-    font-size: 23px;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.portfolio-card h2 {
+    margin-bottom: 18px;
+
+    color: #ffffff;
+    font-size: clamp(34px, 5vw, 48px);
+    line-height: 1.1;
 }
 
 .portfolio-card p {
+    max-width: 500px;
+    margin-bottom: 30px;
+
     color: #c7c7c7;
-    line-height: 1.65;
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+.portfolio-button {
+    align-self: flex-start;
+    display: inline-block;
+
+    padding: 15px 28px;
+
+    color: #111111;
+    background: #ffd700;
+
+    border: 2px solid #ffd700;
+    border-radius: 8px;
+
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-align: center;
+    text-decoration: none;
+
+    transition:
+        color 0.3s ease,
+        background 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.portfolio-button:hover {
+    color: #ffd700;
+    background: transparent;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 215, 0, 0.15);
 }
 
 
@@ -468,14 +584,9 @@ nav a.active::after {
 .contact-section {
     min-height: 100vh;
     padding: 150px 8% 90px;
-
     background:
-        radial-gradient(
-            circle at 80% 20%,
-            rgba(255, 215, 0, 0.1),
-            transparent 30%
-        ),
-        #0d0d0d;
+        radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.10), transparent 30%),
+        linear-gradient(135deg, #080808, #111111);
 }
 
 .contact-container {
@@ -483,29 +594,27 @@ nav a.active::after {
     grid-template-columns: 0.9fr 1.1fr;
     gap: 60px;
     align-items: start;
-
     max-width: 1150px;
     margin: 0 auto;
 }
 
 .contact-information h4 {
     margin-bottom: 15px;
-
     color: #ffd700;
     font-size: 14px;
+    font-weight: 900;
     letter-spacing: 4px;
 }
 
 .contact-information h1 {
     margin-bottom: 22px;
-
+    color: #ffffff;
     font-size: clamp(42px, 6vw, 68px);
     line-height: 1.08;
 }
 
-.contact-information p {
+.contact-information > p {
     margin-bottom: 28px;
-
     color: #c8c8c8;
     font-size: 17px;
     line-height: 1.8;
@@ -517,10 +626,24 @@ nav a.active::after {
     gap: 15px;
 }
 
+.contact-details p {
+    margin: 0;
+    padding: 18px 20px;
+    color: #c8c8c8;
+    background: #151515;
+    border: 1px solid rgba(255, 215, 0, 0.18);
+    border-radius: 12px;
+}
+
+.contact-details strong {
+    color: #ffffff;
+}
+
 .contact-details a {
     color: #ffd700;
     font-weight: 700;
     text-decoration: none;
+    overflow-wrap: anywhere;
 }
 
 .contact-details a:hover {
@@ -529,16 +652,9 @@ nav a.active::after {
 
 .contact-form {
     padding: 38px;
-
-    background: linear-gradient(
-        145deg,
-        #191919,
-        #101010
-    );
-
+    background: linear-gradient(145deg, #191919, #101010);
     border: 1px solid rgba(255, 215, 0, 0.22);
     border-radius: 20px;
-
     box-shadow: 0 24px 55px rgba(0, 0, 0, 0.45);
 }
 
@@ -548,9 +664,7 @@ nav a.active::after {
 
 .form-group label {
     display: block;
-
     margin-bottom: 8px;
-
     color: #ffffff;
     font-size: 14px;
     font-weight: 700;
@@ -561,24 +675,34 @@ nav a.active::after {
 .form-group textarea {
     width: 100%;
     padding: 14px 15px;
-
     color: #ffffff;
     background: #0d0d0d;
-
     border: 1px solid #383838;
     border-radius: 8px;
     outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
 
-    transition:
-        border-color 0.3s ease,
-        box-shadow 0.3s ease;
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #777777;
+}
+
+.form-group select {
+    cursor: pointer;
+}
+
+.form-group select option {
+    color: #ffffff;
+    background: #111111;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
+    background: #111111;
     border-color: #ffd700;
-    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.10);
 }
 
 .form-group textarea {
@@ -589,26 +713,28 @@ nav a.active::after {
 .contact-form button {
     width: 100%;
     padding: 15px;
-
     color: #111111;
     background: #ffd700;
-
     border: 2px solid #ffd700;
     border-radius: 8px;
-
     font-weight: 900;
     cursor: pointer;
-
-    transition:
-        color 0.3s ease,
-        background 0.3s ease,
-        transform 0.3s ease;
+    transition: color 0.3s ease, background 0.3s ease, transform 0.3s ease;
 }
 
 .contact-form button:hover {
     color: #ffd700;
     background: transparent;
     transform: translateY(-2px);
+}
+
+.hidden-field {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
 
@@ -637,6 +763,7 @@ nav a.active::after {
 .pricing-heading {
     max-width: 850px;
     margin: 0 auto 65px;
+
     text-align: center;
 }
 
@@ -910,6 +1037,319 @@ nav a.active::after {
 
 
 /* ==========================
+   FOOTER
+========================== */
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+
+    padding: 30px 8%;
+
+    color: #999999;
+    background: #080808;
+
+    border-top: 1px solid rgba(255, 215, 0, 0.15);
+
+    font-size: 14px;
+}
+
+footer a {
+    color: #ffd700;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+
+/* ==========================
+   TABLET RESPONSIVE
+========================== */
+
+@media (max-width: 1000px) {
+
+    header,
+    .site-header {
+        padding: 0 5%;
+    }
+
+    nav {
+        gap: 20px;
+    }
+
+    .services-grid,
+    .pricing-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .portfolio-card {
+        grid-template-columns: 300px minmax(0, 1fr);
+    }
+
+    .portfolio-card-content {
+        padding: 40px;
+    }
+
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 45px;
+    }
+
+    .featured-card {
+        transform: none;
+    }
+
+    .featured-card:hover {
+        transform: translateY(-10px);
+    }
+}
+
+
+/* ==========================
+   MOBILE RESPONSIVE
+========================== */
+
+@media (max-width: 760px) {
+
+    header,
+    .site-header {
+        position: relative;
+
+        flex-direction: column;
+
+        min-height: auto;
+        padding: 22px 20px;
+    }
+
+    .logo {
+        margin-bottom: 15px;
+        font-size: 21px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px 20px;
+    }
+
+    nav a {
+        padding: 9px 0;
+        font-size: 14px;
+    }
+
+    nav a::after {
+        bottom: 2px;
+    }
+
+    .hero {
+        min-height: auto;
+        padding: 90px 24px;
+        text-align: center;
+    }
+
+    .hero-content {
+        margin: 0 auto;
+    }
+
+    .hero-content h4 {
+        font-size: 13px;
+        letter-spacing: 3px;
+    }
+
+    .hero-content h1 {
+        font-size: clamp(43px, 13vw, 64px);
+    }
+
+    .hero-content p {
+        font-size: 17px;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-logo-bg {
+        right: 50%;
+        width: 80vw;
+        transform: translate(50%, -50%);
+    }
+
+    .services-section,
+    .portfolio-page,
+    .contact-section,
+    .pricing-section {
+        padding: 80px 20px 70px;
+    }
+
+    .services-grid,
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio-header {
+        margin-bottom: 40px;
+    }
+
+    .portfolio-header h1 {
+        font-size: clamp(40px, 12vw, 58px);
+    }
+
+    .portfolio-header p {
+        font-size: 16px;
+    }
+
+    .portfolio-card {
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio-image-wrapper {
+        min-height: auto;
+        max-height: 580px;
+    }
+
+    .portfolio-image {
+        aspect-ratio: 2 / 3;
+    }
+
+    .portfolio-card-content {
+        padding: 32px 25px 38px;
+        text-align: center;
+    }
+
+    .portfolio-card p {
+        margin-right: auto;
+        margin-left: auto;
+        font-size: 16px;
+    }
+
+    .portfolio-button {
+        align-self: center;
+        width: 100%;
+        max-width: 290px;
+    }
+
+    .featured-card {
+        order: -1;
+    }
+
+    .pricing-heading {
+        margin-bottom: 45px;
+    }
+
+    .price-card {
+        min-height: auto;
+    }
+
+    .card-top h2 {
+        font-size: 30px;
+    }
+
+    .price {
+        font-size: 60px;
+    }
+
+    .contact-information {
+        text-align: center;
+    }
+
+    .contact-information > p {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .contact-details {
+        max-width: 520px;
+        margin: 0 auto;
+        text-align: left;
+    }
+
+    .contact-form {
+        padding: 28px 22px;
+    }
+
+    footer {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+
+/* ==========================
+   SMALL MOBILE DEVICES
+========================== */
+
+@media (max-width: 430px) {
+
+    .logo {
+        font-size: 19px;
+    }
+
+    nav {
+        gap: 4px 14px;
+    }
+
+    nav a {
+        font-size: 13px;
+    }
+
+    .hero {
+        padding: 75px 18px;
+    }
+
+    .hero-content h1 {
+        letter-spacing: -1px;
+    }
+
+    .primary-button,
+    .secondary-button,
+    .btn {
+        width: 100%;
+    }
+
+    .section-label {
+        font-size: 12px;
+        letter-spacing: 3px;
+    }
+
+    .price-button {
+        width: calc(100% - 40px);
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+
+    .feature-list {
+        padding: 0 25px;
+    }
+
+    .portfolio-page {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .portfolio-header h4 {
+        font-size: 12px;
+        letter-spacing: 3px;
+    }
+
+    .portfolio-card {
+        border-radius: 16px;
+    }
+
+    .portfolio-card-content {
+        padding: 28px 20px 32px;
+    }
+
+    .portfolio-card h2 {
+        font-size: 32px;
+    }
+}
+
+/* ==========================
    ADDITIONAL SERVICES
 ========================== */
 
@@ -934,6 +1374,7 @@ nav a.active::after {
 .additional-services-heading {
     max-width: 760px;
     margin: 0 auto 40px;
+
     text-align: center;
 }
 
@@ -1035,204 +1476,23 @@ nav a.active::after {
 
 
 /* ==========================
-   FOOTER
-========================== */
-
-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 25px;
-
-    padding: 30px 8%;
-
-    color: #999999;
-    background: #080808;
-
-    border-top: 1px solid rgba(255, 215, 0, 0.15);
-
-    font-size: 14px;
-}
-
-footer a {
-    color: #ffd700;
-    font-weight: 700;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
-}
-
-
-/* ==========================
-   TABLET RESPONSIVE
+   ADDITIONAL SERVICES TABLET
 ========================== */
 
 @media (max-width: 1000px) {
 
-    header,
-    .site-header {
-        padding: 0 5%;
-    }
-
-    nav {
-        gap: 20px;
-    }
-
-    .services-grid,
-    .portfolio-grid,
-    .pricing-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .contact-container {
-        grid-template-columns: 1fr;
-    }
-
-    .featured-card {
-        transform: none;
-    }
-
-    .featured-card:hover {
-        transform: translateY(-10px);
-    }
-
     .additional-services {
         padding: 45px 35px;
     }
+
 }
 
 
 /* ==========================
-   MOBILE RESPONSIVE
+   ADDITIONAL SERVICES MOBILE
 ========================== */
 
 @media (max-width: 760px) {
-
-    header,
-    .site-header {
-        position: relative;
-
-        flex-direction: column;
-
-        min-height: auto;
-        padding: 22px 20px;
-    }
-
-    .logo {
-        margin-bottom: 15px;
-        font-size: 21px;
-    }
-
-    nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 5px 20px;
-    }
-
-    nav a {
-        padding: 9px 0;
-        font-size: 14px;
-    }
-
-    nav a::after {
-        bottom: 2px;
-    }
-
-    .hero {
-        min-height: auto;
-        padding: 90px 24px;
-        text-align: center;
-    }
-
-    .hero-content {
-        margin: 0 auto;
-    }
-
-    .hero-content h4 {
-        font-size: 13px;
-        letter-spacing: 3px;
-    }
-
-    .hero-content h1 {
-        font-size: clamp(43px, 13vw, 64px);
-    }
-
-    .hero-content p {
-        font-size: 17px;
-    }
-
-    .hero-buttons {
-        justify-content: center;
-    }
-
-    .hero-logo-bg {
-        right: 50%;
-        width: 80vw;
-        transform: translate(50%, -50%);
-    }
-
-    .services-section,
-    .portfolio-section,
-    .contact-section,
-    .pricing-section {
-        padding: 80px 20px 70px;
-    }
-
-    .services-grid,
-    .portfolio-grid {
-        grid-template-columns: 1fr;
-    }
-
-    /* Pricing packages on mobile:
-       Starter, Business, Premium */
-
-    .pricing-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-    }
-
-    .pricing-grid .price-card:nth-child(1) {
-        order: 1;
-    }
-
-    .pricing-grid .price-card:nth-child(2) {
-        order: 2;
-    }
-
-    .pricing-grid .price-card:nth-child(3) {
-        order: 3;
-    }
-
-    .pricing-grid .price-card {
-        width: 100%;
-        min-height: auto;
-        transform: none;
-    }
-
-    .pricing-grid .price-card:hover,
-    .pricing-grid .featured-card,
-    .pricing-grid .featured-card:hover {
-        transform: none;
-    }
-
-    .pricing-heading {
-        margin-bottom: 45px;
-    }
-
-    .card-top h2 {
-        font-size: 30px;
-    }
-
-    .price {
-        font-size: 60px;
-    }
-
-    .contact-form {
-        padding: 28px 22px;
-    }
 
     .additional-services {
         margin-top: 65px;
@@ -1272,59 +1532,14 @@ footer a:hover {
         width: 100%;
     }
 
-    footer {
-        flex-direction: column;
-        text-align: center;
-    }
 }
 
 
 /* ==========================
-   SMALL MOBILE DEVICES
+   ADDITIONAL SERVICES SMALL MOBILE
 ========================== */
 
 @media (max-width: 430px) {
-
-    .logo {
-        font-size: 19px;
-    }
-
-    nav {
-        gap: 4px 14px;
-    }
-
-    nav a {
-        font-size: 13px;
-    }
-
-    .hero {
-        padding: 75px 18px;
-    }
-
-    .hero-content h1 {
-        letter-spacing: -1px;
-    }
-
-    .primary-button,
-    .secondary-button,
-    .btn {
-        width: 100%;
-    }
-
-    .section-label {
-        font-size: 12px;
-        letter-spacing: 3px;
-    }
-
-    .price-button {
-        width: calc(100% - 40px);
-        margin-right: 20px;
-        margin-left: 20px;
-    }
-
-    .feature-list {
-        padding: 0 25px;
-    }
 
     .additional-services {
         padding: 32px 15px;
@@ -1342,4 +1557,5 @@ footer a:hover {
     .service-row strong {
         font-size: 15px;
     }
+
 }
