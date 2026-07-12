@@ -158,14 +158,28 @@ nav a.active::after {
 .hero-logo-bg {
     position: absolute;
     top: 50%;
-    right: 5%;
+    right: 6%;
+    z-index: 1;
 
-    width: min(500px, 42vw);
+    width: min(46vw, 620px);
+    max-height: 75vh;
 
-    opacity: 0.08;
+    object-fit: contain;
+    object-position: center;
+
+    opacity: 0.10;
     transform: translateY(-50%);
+    mix-blend-mode: screen;
+
+    filter:
+        saturate(1.1)
+        contrast(1.05)
+        drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+
     pointer-events: none;
+    user-select: none;
 }
+
 
 .hero-content {
     position: relative;
@@ -1847,4 +1861,45 @@ footer a:hover {
         aspect-ratio: 3 / 4;
         border-radius: 10px;
     }
+}
+
+
+/* =========================================================
+   FINAL HERO LOGO POSITION FIX
+   Keeps the desktop logo large, faded, and behind the hero.
+========================================================= */
+
+@media (min-width: 761px) {
+    .hero-logo-bg {
+        top: 50%;
+        right: 6%;
+        left: auto;
+
+        width: min(46vw, 620px);
+        max-height: 75vh;
+
+        opacity: 0.10;
+        transform: translateY(-50%);
+        object-fit: contain;
+        object-position: center;
+        mix-blend-mode: screen;
+    }
+}
+
+
+/* Desktop center / Mobile order fix */
+.pricing-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:35px;
+    align-items:stretch;
+}
+.price-card{display:flex;flex-direction:column;}
+.featured-card{transform:scale(1.05);z-index:2;}
+
+@media (max-width:1000px){
+ .pricing-grid{grid-template-columns:1fr;}
+ .starter-card{order:1;}
+ .featured-card{order:2;transform:none;}
+ .premium-card{order:3;}
 }
