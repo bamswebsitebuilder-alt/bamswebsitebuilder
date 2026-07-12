@@ -1559,3 +1559,409 @@ footer a:hover {
     }
 
 }
+
+/* =========================================================
+   UPDATED PORTFOLIO + BLEND LAB GALLERY
+   Keep this section at the very bottom of the stylesheet.
+========================================================= */
+
+.portfolio-page {
+    min-height: 100vh;
+    padding: 150px 8% 90px;
+    background:
+        radial-gradient(circle at top right, rgba(255, 215, 0, 0.08), transparent 32%),
+        linear-gradient(135deg, #080808, #121212);
+}
+
+.portfolio-header {
+    max-width: 780px;
+    margin: 0 auto 60px;
+    text-align: center;
+}
+
+.portfolio-header h4 {
+    margin-bottom: 15px;
+    color: #ffd700;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 4px;
+}
+
+.portfolio-header h1 {
+    margin-bottom: 18px;
+    color: #ffffff;
+    font-size: clamp(42px, 6vw, 68px);
+    line-height: 1.08;
+}
+
+.portfolio-header p {
+    color: #c7c7c7;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.portfolio-card {
+    display: grid;
+    grid-template-columns: minmax(340px, 420px) minmax(0, 1fr);
+    overflow: hidden;
+    background: linear-gradient(145deg, #191919, #101010);
+    border: 1px solid rgba(255, 215, 0, 0.22);
+    border-radius: 22px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+    transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.portfolio-card:hover {
+    transform: translateY(-8px);
+    border-color: #ffd700;
+    box-shadow: 0 28px 60px rgba(255, 215, 0, 0.12);
+}
+
+.portfolio-image-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+    padding: 22px;
+    overflow: hidden;
+    background: #080808;
+}
+
+.portfolio-image {
+    width: 100%;
+    height: 100%;
+    max-height: 560px;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 10px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+    transition: transform 0.4s ease;
+}
+
+.portfolio-card:hover .portfolio-image {
+    transform: scale(1.035);
+}
+
+/* Blend Lab image gallery */
+.portfolio-image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    align-content: start;
+    padding: 18px;
+    background: #080808;
+}
+
+.portfolio-image-grid img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+    transition:
+        transform 0.3s ease,
+        filter 0.3s ease;
+}
+
+.portfolio-image-grid img:hover {
+    position: relative;
+    z-index: 2;
+    transform: scale(1.04);
+    filter: brightness(1.05);
+}
+
+.portfolio-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+    padding: 50px;
+}
+
+.portfolio-category {
+    display: inline-block;
+    margin-bottom: 15px;
+    color: #ffd700;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.portfolio-card h2 {
+    margin-bottom: 20px;
+    color: #ffffff;
+    font-size: clamp(34px, 5vw, 48px);
+    line-height: 1.1;
+}
+
+.portfolio-card p {
+    max-width: 560px;
+    margin-bottom: 25px;
+    color: #c7c7c7;
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+.portfolio-features {
+    margin: 0 0 30px;
+    padding: 0;
+    list-style: none;
+}
+
+.portfolio-features li {
+    position: relative;
+    margin-bottom: 12px;
+    padding-left: 24px;
+    color: #d8d8d8;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.portfolio-features li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #ffd700;
+    font-weight: 900;
+}
+
+.portfolio-button {
+    align-self: flex-start;
+    display: inline-block;
+    padding: 15px 28px;
+    color: #111111;
+    background: #ffd700;
+    border: 2px solid #ffd700;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-align: center;
+    text-decoration: none;
+    transition:
+        color 0.3s ease,
+        background 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.portfolio-button:hover {
+    color: #ffd700;
+    background: transparent;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 215, 0, 0.15);
+}
+
+@media (max-width: 1000px) {
+    .portfolio-card {
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio-image-wrapper {
+        min-height: auto;
+    }
+
+    .portfolio-image {
+        width: auto;
+        max-width: 360px;
+        height: auto;
+        max-height: 560px;
+    }
+
+    .portfolio-card-content {
+        padding: 40px;
+    }
+}
+
+@media (max-width: 760px) {
+    .portfolio-page {
+        padding: 80px 20px 70px;
+    }
+
+    .portfolio-header {
+        margin-bottom: 40px;
+    }
+
+    .portfolio-header h1 {
+        font-size: clamp(40px, 12vw, 58px);
+    }
+
+    .portfolio-header p {
+        font-size: 16px;
+    }
+
+    .portfolio-grid {
+        gap: 30px;
+    }
+
+    .portfolio-card-content {
+        padding: 32px 25px 38px;
+        text-align: center;
+    }
+
+    .portfolio-card p {
+        margin-right: auto;
+        margin-left: auto;
+        font-size: 16px;
+    }
+
+    .portfolio-features {
+        width: fit-content;
+        margin-right: auto;
+        margin-left: auto;
+        text-align: left;
+    }
+
+    .portfolio-button {
+        align-self: center;
+        width: 100%;
+        max-width: 290px;
+    }
+
+    .portfolio-image-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 430px) {
+    .portfolio-page {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .portfolio-header h4 {
+        font-size: 12px;
+        letter-spacing: 3px;
+    }
+
+    .portfolio-card {
+        border-radius: 16px;
+    }
+
+    .portfolio-card-content {
+        padding: 28px 20px 32px;
+    }
+
+    .portfolio-card h2 {
+        font-size: 32px;
+    }
+
+    .portfolio-image-wrapper {
+        padding: 15px;
+    }
+
+    .portfolio-image-grid {
+        gap: 5px;
+        padding: 10px;
+    }
+}
+
+/* =========================================================
+   BLEND LAB GALLERY — MOBILE IMAGE FIX
+   Keep this section at the very bottom of the stylesheet.
+========================================================= */
+
+.gallery {
+    width: 100%;
+    overflow: visible;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.gallery-grid img {
+    display: block;
+    width: 100%;
+    height: 360px;
+    min-width: 0;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 14px;
+}
+
+/* Tablet */
+@media (max-width: 1000px) {
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+    }
+
+    .gallery-grid img {
+        height: 340px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 760px) {
+
+    .gallery {
+        padding-right: 16px;
+        padding-left: 16px;
+        overflow: visible;
+    }
+
+    .gallery-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px;
+        width: 100%;
+        overflow: visible;
+    }
+
+    .gallery-grid img {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 3 / 4;
+        max-width: none;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 10px;
+    }
+}
+
+/* Small phones */
+@media (max-width: 430px) {
+
+    .gallery {
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr !important;
+        gap: 14px;
+    }
+
+    .gallery-grid img {
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 3 / 4;
+        border-radius: 10px;
+    }
+}
