@@ -1898,8 +1898,22 @@ footer a:hover {
 .featured-card{transform:scale(1.05);z-index:2;}
 
 @media (max-width:1000px){
- .pricing-grid{grid-template-columns:1fr;}
- .starter-card{order:1;}
- .featured-card{order:2;transform:none;}
- .premium-card{order:3;}
+    .pricing-grid{
+        display:flex;
+        flex-direction:column;
+    }
+
+    .price-card:nth-child(1){
+        order:1;
+    }
+
+    .price-card:nth-child(2),
+    .featured-card{
+        order:2;
+        transform:none;
+    }
+
+    .price-card:nth-child(3){
+        order:3;
+    }
 }
