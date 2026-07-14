@@ -962,7 +962,6 @@ nav a.active::after {
 .pricing-heading {
     max-width: 850px;
     margin: 0 auto 65px;
-
     text-align: center;
 }
 
@@ -1451,97 +1450,6 @@ nav a.active::after {
     font-weight: 700;
 }
 
-.review-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 28px;
-
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.review-card {
-    display: flex;
-    flex-direction: column;
-
-    min-height: 330px;
-    padding: 32px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #191919,
-            #0f0f0f
-        );
-
-    border: 1px solid rgba(255, 215, 0, 0.22);
-    border-radius: 18px;
-
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
-
-    transition:
-        transform 0.3s ease,
-        border-color 0.3s ease,
-        box-shadow 0.3s ease;
-}
-
-.review-card:hover {
-    transform: translateY(-7px);
-    border-color: #ffd700;
-    box-shadow: 0 26px 50px rgba(255, 215, 0, 0.1);
-}
-
-.review-stars {
-    margin-bottom: 20px;
-
-    color: #ffd700;
-    font-size: 21px;
-    letter-spacing: 4px;
-}
-
-.review-card h2 {
-    margin-bottom: 14px;
-
-    color: #ffffff;
-    font-size: 24px;
-}
-
-.review-card p {
-    flex-grow: 1;
-
-    color: #c8c8c8;
-    font-size: 16px;
-    line-height: 1.75;
-}
-
-.review-card footer {
-    display: block;
-
-    margin-top: 24px;
-    padding: 0;
-
-    color: #9d9d9d;
-    background: transparent;
-    border: 0;
-
-    font-size: 14px;
-}
-
-.review-card footer strong {
-    display: block;
-    margin-bottom: 4px;
-
-    color: #ffffff;
-}
-
-.review-placeholder {
-    border-style: dashed;
-}
-
-.review-placeholder .review-stars {
-    opacity: 0.75;
-}
-
 .review-cta {
     max-width: 1000px;
     margin: 65px auto 0;
@@ -1591,7 +1499,7 @@ nav a.active::after {
 
 
 /* ==========================
-   AUTOMATIC GOOGLE REVIEWS
+   SOCIABLEKIT GOOGLE REVIEWS
 ========================== */
 
 .google-reviews-section {
@@ -1616,7 +1524,6 @@ nav a.active::after {
 .google-reviews-section .reviews-header {
     max-width: 800px;
     margin: 0 auto 28px;
-
     text-align: center;
 }
 
@@ -1649,13 +1556,23 @@ nav a.active::after {
 
 .google-reviews-widget {
     width: 100%;
-    min-height: 0;
     overflow: hidden;
+
+    background: transparent;
+
+    border-radius: 16px;
 }
 
-.google-reviews-section [class*="elfsight-app-"] {
+.google-reviews-widget iframe {
+    display: block;
+
     width: 100%;
-    min-height: 0;
+    height: 700px;
+
+    background: transparent;
+
+    border: 0;
+    border-radius: 16px;
 }
 
 
@@ -1804,8 +1721,7 @@ footer a:hover {
         padding: 45px 35px;
     }
 
-    .review-summary,
-    .review-grid {
+    .review-summary {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
@@ -1815,6 +1731,10 @@ footer a:hover {
 
     .google-reviews-section {
         padding: 35px 25px;
+    }
+
+    .google-reviews-widget iframe {
+        height: 720px;
     }
 
     .gallery-grid {
@@ -1867,7 +1787,6 @@ footer a:hover {
     .hero {
         min-height: auto;
         padding: 90px 24px;
-
         text-align: center;
     }
 
@@ -2070,17 +1989,12 @@ footer a:hover {
         font-size: 16px;
     }
 
-    .review-summary,
-    .review-grid {
+    .review-summary {
         grid-template-columns: 1fr;
     }
 
     .review-summary-card:last-child {
         grid-column: auto;
-    }
-
-    .review-card {
-        min-height: auto;
     }
 
     .review-cta {
@@ -2107,9 +2021,13 @@ footer a:hover {
         line-height: 1.65;
     }
 
-    .google-reviews-widget,
-    .google-reviews-section [class*="elfsight-app-"] {
-        min-height: 0;
+    .google-reviews-widget {
+        border-radius: 12px;
+    }
+
+    .google-reviews-widget iframe {
+        height: 800px;
+        border-radius: 12px;
     }
 
     .gallery {
@@ -2243,10 +2161,6 @@ footer a:hover {
         font-size: 15px;
     }
 
-    .review-card {
-        padding: 27px 22px;
-    }
-
     .review-cta {
         padding: 32px 20px;
     }
@@ -2268,6 +2182,10 @@ footer a:hover {
     .google-reviews-section .section-label {
         font-size: 12px;
         letter-spacing: 3px;
+    }
+
+    .google-reviews-widget iframe {
+        height: 850px;
     }
 
     .gallery {
