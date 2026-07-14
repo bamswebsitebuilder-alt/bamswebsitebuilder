@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -11,7 +12,7 @@
 
     <meta
         name="description"
-        content="Read client feedback and leave a Google review for BAM's Website Builder."
+        content="Read customer reviews and leave a Google review for BAM's Website Builder."
     >
 
     <title>Reviews | BAM's Website Builder</title>
@@ -26,13 +27,12 @@
         type="image/jpeg"
         href="images/icon-dark.jpg"
     >
+
 </head>
 
 <body>
 
-    <!-- =========================
-         HEADER
-    ========================== -->
+    <!-- HEADER -->
 
     <header class="site-header">
 
@@ -78,10 +78,7 @@
 
     </header>
 
-
-    <!-- =========================
-         REVIEWS PAGE
-    ========================== -->
+    <!-- MAIN REVIEWS PAGE -->
 
     <main class="reviews-page">
 
@@ -102,17 +99,13 @@
             </h1>
 
             <p>
-                BAM's Website Builder focuses on professional design,
-                clear communication, mobile-friendly layouts, and websites
-                built around each client's unique business goals.
+                Read real Google reviews from customers who have worked with
+                BAM's Website Builder.
             </p>
 
         </section>
 
-
-        <!-- =========================
-             SERVICE COMMITMENTS
-        ========================== -->
+        <!-- SERVICE COMMITMENTS -->
 
         <section
             class="review-summary"
@@ -157,122 +150,43 @@
 
         </section>
 
-
-        <!-- =========================
-             REVIEW CARDS
-        ========================== -->
+        <!-- AUTOMATIC GOOGLE REVIEWS -->
 
         <section
-            class="review-grid"
-            aria-label="Client reviews"
+            class="google-reviews-section"
+            aria-labelledby="google-reviews-title"
         >
 
-            <article class="review-card review-placeholder">
+            <div class="reviews-header">
 
-                <div
-                    class="review-stars"
-                    aria-label="Five-star review"
-                >
-                    ★★★★★
-                </div>
+                <p class="section-label">
+                    GOOGLE REVIEWS
+                </p>
 
-                <h2>
-                    Your Review Could Be Here
+                <h2 id="google-reviews-title">
+                    What Our Customers Say
                 </h2>
 
                 <p>
-                    Completed a project with BAM's Website Builder?
-                    Share your experience to help another business owner
-                    feel confident about starting their website.
+                    Customer reviews below are automatically updated from
+                    our Google Business Profile.
                 </p>
 
-                <footer>
+            </div>
 
-                    <strong>
-                        Verified clients only
-                    </strong>
+            <!--
+                Replace YOUR-WIDGET-ID with the widget ID
+                provided by Elfsight.
+            -->
 
-                    <span>
-                        Real customer feedback will be displayed here.
-                    </span>
-
-                </footer>
-
-            </article>
-
-
-            <article class="review-card review-placeholder">
-
-                <div
-                    class="review-stars"
-                    aria-label="Five-star review"
-                >
-                    ★★★★★
-                </div>
-
-                <h2>
-                    Honest Client Feedback
-                </h2>
-
-                <p>
-                    This page is reserved for genuine feedback from clients
-                    who have completed a website project with our business.
-                </p>
-
-                <footer>
-
-                    <strong>
-                        Trust matters
-                    </strong>
-
-                    <span>
-                        Reviews will only be added with client permission.
-                    </span>
-
-                </footer>
-
-            </article>
-
-
-            <article class="review-card review-placeholder">
-
-                <div
-                    class="review-stars"
-                    aria-label="Five-star review"
-                >
-                    ★★★★★
-                </div>
-
-                <h2>
-                    Building a Strong Reputation
-                </h2>
-
-                <p>
-                    Every website is an opportunity to provide excellent
-                    service, deliver professional work, and earn a client's
-                    recommendation.
-                </p>
-
-                <footer>
-
-                    <strong>
-                        BAM's Website Builder
-                    </strong>
-
-                    <span>
-                        Building trust one project at a time.
-                    </span>
-
-                </footer>
-
-            </article>
+            <div
+                class="elfsight-app-YOUR-WIDGET-ID"
+                data-elfsight-app-lazy
+            ></div>
 
         </section>
 
-
-        <!-- =========================
-             REVIEW CALL TO ACTION
-        ========================== -->
+        <!-- REVIEW CALL TO ACTION -->
 
         <section
             class="review-cta"
@@ -314,10 +228,7 @@
 
     </main>
 
-
-    <!-- =========================
-         FOOTER
-    ========================== -->
+    <!-- FOOTER -->
 
     <footer>
 
@@ -325,8 +236,14 @@
             © 2026 BAM's Website Builder. All rights reserved.
         </p>
 
-       
     </footer>
+
+    <!-- ELFSIGHT GOOGLE REVIEWS SCRIPT -->
+
+    <script
+        src="https://static.elfsight.com/platform/platform.js"
+        async
+    ></script>
 
 </body>
 
