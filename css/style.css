@@ -2229,4 +2229,143 @@ footer a:hover {
         width: 100%;
         min-width: 0;
     }
+    
+    /* =========================================================
+   AUTOMATIC GOOGLE REVIEWS WIDGET
+   Keep this section at the bottom of style.css.
+========================================================= */
+
+.google-reviews-section {
+    width: 100%;
+    max-width: 1200px;
+    margin: 65px auto 0;
+    padding: 45px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25, 25, 25, 0.98),
+            rgba(12, 12, 12, 0.98)
+        );
+
+    border: 1px solid rgba(255, 215, 0, 0.22);
+    border-radius: 20px;
+
+    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.42);
+}
+
+.google-reviews-section .reviews-header {
+    max-width: 800px;
+    margin: 0 auto 38px;
+    text-align: center;
+}
+
+.google-reviews-section .section-label {
+    margin-bottom: 14px;
+
+    color: #ffd700;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.google-reviews-section h2 {
+    margin-bottom: 18px;
+
+    color: #ffffff;
+    font-size: clamp(34px, 5vw, 52px);
+    line-height: 1.1;
+}
+
+.google-reviews-section .reviews-header p:last-child {
+    max-width: 700px;
+    margin: 0 auto;
+
+    color: #c7c7c7;
+    font-size: 17px;
+    line-height: 1.75;
+}
+
+/* The Elfsight widget container */
+
+.google-reviews-widget {
+    width: 100%;
+    min-height: 280px;
+}
+
+/* Supports the Elfsight class before the widget loads */
+
+.google-reviews-section [class*="elfsight-app-"] {
+    width: 100%;
+    min-height: 280px;
+}
+
+
+/* ==========================
+   GOOGLE REVIEWS TABLET
+========================== */
+
+@media (max-width: 1000px) {
+
+    .google-reviews-section {
+        padding: 40px 30px;
+    }
+
+}
+
+
+/* ==========================
+   GOOGLE REVIEWS MOBILE
+========================== */
+
+@media (max-width: 760px) {
+
+    .google-reviews-section {
+        margin-top: 45px;
+        padding: 35px 20px;
+        border-radius: 16px;
+    }
+
+    .google-reviews-section .reviews-header {
+        margin-bottom: 30px;
+    }
+
+    .google-reviews-section h2 {
+        font-size: 36px;
+    }
+
+    .google-reviews-section .reviews-header p:last-child {
+        font-size: 15px;
+    }
+
+    .google-reviews-widget,
+    .google-reviews-section [class*="elfsight-app-"] {
+        min-height: 240px;
+    }
+
+}
+
+
+/* ==========================
+   GOOGLE REVIEWS SMALL MOBILE
+========================== */
+
+@media (max-width: 430px) {
+
+    .google-reviews-section {
+        padding: 30px 15px;
+    }
+
+    .google-reviews-section h2 {
+        font-size: 31px;
+    }
+
+    .google-reviews-section .section-label {
+        font-size: 12px;
+        letter-spacing: 3px;
+    }
+
+}
+
 }
