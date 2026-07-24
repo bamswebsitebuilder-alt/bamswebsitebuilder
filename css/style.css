@@ -2238,3 +2238,41 @@ footer a:hover {
         border-radius: 10px;
     }
 }
+
+/* ==========================
+   LANGUAGE SWITCHER
+========================== */
+
+.language-switcher {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 20px;
+    white-space: nowrap;
+}
+
+.language-switcher a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+.language-switcher a:hover,
+.language-switcher .active-language {
+    color: #ffd700;
+}
+
+.language-switcher span {
+    color: #777777;
+}
+
+@media (max-width: 760px) {
+    .language-switcher {
+        justify-content: center;
+        width: 100%;
+        margin-top: 15px;
+        margin-left: 0;
+    }
+}
