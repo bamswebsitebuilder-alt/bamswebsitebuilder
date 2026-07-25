@@ -1710,3 +1710,110 @@ select:focus-visible {
         font-size: 14px;
     }
 }
+
+
+/* =========================================================
+   FINAL HEADER + HERO CORRECTION
+   Prevents hidden mobile content from appearing in desktop
+   navigation and prevents the hero from overflowing.
+========================================================= */
+
+@media (min-width: 821px) {
+    .nav-drawer-top,
+    .drawer-language,
+    .drawer-cta,
+    .drawer-contact,
+    .menu-button,
+    .drawer-close,
+    .nav-overlay {
+        display: none !important;
+    }
+
+    .site-header {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .site-header > .logo {
+        flex: 0 0 auto;
+    }
+
+    .site-header .main-nav {
+        display: flex !important;
+        flex: 1 1 auto;
+        min-width: 0;
+        position: static;
+        width: auto;
+        height: auto;
+        padding: 0;
+        overflow: visible;
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        transform: none;
+        visibility: visible;
+    }
+
+    .site-header .nav-links {
+        display: flex;
+        flex: 1 1 auto;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(12px, 1.4vw, 25px);
+        min-width: 0;
+    }
+
+    .site-header .nav-links a {
+        font-size: clamp(12px, 1vw, 15px);
+    }
+
+    .header-button {
+        flex: 0 0 auto;
+        white-space: nowrap;
+    }
+
+    .language-switcher {
+        flex: 0 0 auto;
+        margin-left: 0;
+        white-space: nowrap;
+    }
+
+    .hero {
+        min-width: 0;
+    }
+
+    .hero-content {
+        min-width: 0;
+        max-width: min(720px, 58vw);
+    }
+
+    .hero h1 {
+        overflow-wrap: anywhere;
+    }
+}
+
+@media (min-width: 821px) and (max-width: 1180px) {
+    .site-header {
+        padding-inline: 4%;
+    }
+
+    .header-button {
+        display: none !important;
+    }
+
+    .site-header .nav-links {
+        justify-content: flex-end;
+    }
+
+    .hero-content {
+        max-width: 60vw;
+    }
+}
+
+@media (max-width: 820px) {
+    .hero-content {
+        max-width: 100%;
+    }
+}
