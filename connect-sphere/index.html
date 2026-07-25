@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ConnectSphere social media platform portfolio concept.">
+  <title>ConnectSphere — Connect. Share. Discover.</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home">
+      <img src="images/connectsphere-logo.png" alt="ConnectSphere logo">
+      <div class="brand-name">Connect<span>Sphere</span></div>
+    </a>
+    <label class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input type="search" placeholder="Search ConnectSphere" aria-label="Search ConnectSphere">
+    </label>
+    <div class="top-actions">
+      <button class="icon-btn" aria-label="Messages">✉<span class="badge">3</span></button>
+      <button class="icon-btn" aria-label="Notifications">♢<span class="badge">6</span></button>
+      <a class="icon-btn" href="es/index.html" aria-label="Español">🌐</a>
+      <button class="avatar-btn" aria-label="Profile">BM</button>
+      <button class="icon-btn mobile-menu-btn" aria-label="Menu">☰</button>
+    </div>
+  </header>
+
+  <div class="drawer-overlay"></div>
+
+  <div class="page-shell">
+    <aside class="left-sidebar">
+      <section class="profile-mini card">
+        <div class="cover-mini"></div>
+        <div class="avatar-large">BM</div>
+        <h2>Braion Moreland</h2>
+        <p>@braionm</p>
+        <div class="stats">
+          <div><strong>218</strong><span>Friends</span></div>
+          <div><strong>1.4K</strong><span>Followers</span></div>
+          <div><strong>95</strong><span>Posts</span></div>
+        </div>
+      </section>
+      <nav class="nav-card card">
+        <a class="side-link active" href="#home"><span>⌂</span><span>Home</span></a>
+        <a class="side-link" href="#explore"><span>◈</span><span>Explore</span></a>
+        <a class="side-link" href="#messages"><span>✉</span><span>Messages</span></a>
+        <a class="side-link" href="#notifications"><span>♢</span><span>Notifications</span></a>
+        <a class="side-link" href="#friends"><span>♧</span><span>Friends</span></a>
+        <a class="side-link" href="#communities"><span>◎</span><span>Communities</span></a>
+        <a class="side-link" href="#saved"><span>▣</span><span>Saved</span></a>
+        <a class="side-link" href="#settings"><span>⚙</span><span>Settings</span></a>
+        <a class="side-link" href="es/index.html"><span>🌐</span><span>Español</span></a>
+      </nav>
+    </aside>
+
+    <main class="main-feed" id="home">
+      <section class="welcome card">
+        <h1>Welcome back, Braion 👋</h1>
+        <p>See what your community is sharing today. <strong class="gradient-text">Connect. Share. Discover.</strong></p>
+      </section>
+
+      <section class="stories" aria-label="Stories">
+        <article class="story"><div class="story-ring"><div class="story-avatar">BM</div></div><p>Your story</p></article><article class="story"><div class="story-ring"><div class="story-avatar">AM</div></div><p>Alicia</p></article><article class="story"><div class="story-ring"><div class="story-avatar">JT</div></div><p>Jordan</p></article><article class="story"><div class="story-ring"><div class="story-avatar">SL</div></div><p>Sofia</p></article><article class="story"><div class="story-ring"><div class="story-avatar">MK</div></div><p>Marcus</p></article><article class="story"><div class="story-ring"><div class="story-avatar">NV</div></div><p>Nia</p></article>
+      </section>
+
+      <form class="composer card">
+        <div class="composer-top">
+          <div class="composer-avatar">BM</div>
+          <textarea id="postText" placeholder="What’s happening in your sphere?" aria-label="What’s happening in your sphere?"></textarea>
+        </div>
+        <div class="composer-actions">
+          <div class="quick-actions">
+            <button class="quick-btn" type="button">📷 Photo</button>
+            <button class="quick-btn" type="button">🎥 Video</button>
+            <button class="quick-btn" type="button">😊 Feeling</button>
+          </div>
+          <button class="post-btn" type="submit">Post</button>
+        </div>
+      </form>
+
+      <section id="feed">
+        <article class="post card">
+          <div class="post-head">
+            <div class="user-row">
+              <div class="post-avatar">AM</div>
+              <div><h3>Alicia Monroe</h3><p>2h · Clearwater, FL</p></div>
+            </div>
+            <button class="more-btn" aria-label="More">•••</button>
+          </div>
+          <p class="post-copy">Just launched my new creative workspace. Big things coming this summer! ✨</p>
+          <img class="post-media" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=80" alt="Modern creative workspace">
+          <div class="post-meta">
+            <span class="like-count" data-count="128" data-label="likes">128 likes</span>
+            <span>24 comments</span>
+          </div>
+          <div class="post-actions">
+            <button class="action-btn like-btn" data-like-text="Like" data-liked-text="Liked">♡ Like</button>
+            <button class="action-btn comment-btn">💬 Comment</button>
+            <button class="action-btn">↗ Share</button>
+          </div>
+          <div class="comments"><div class="comment-box"><input type="text" placeholder="Write a comment…"></div></div>
+        </article>
+
+        <article class="post card">
+          <div class="post-head">
+            <div class="user-row">
+              <div class="post-avatar">JT</div>
+              <div><h3>Jordan Taylor</h3><p>5h · Public</p></div>
+            </div>
+            <button class="more-btn" aria-label="More">•••</button>
+          </div>
+          <p class="post-copy">A strong community is built one real connection at a time. Who inspired you this week?</p>
+          <div class="post-meta">
+            <span class="like-count" data-count="76" data-label="likes">76 likes</span>
+            <span>11 comments</span>
+          </div>
+          <div class="post-actions">
+            <button class="action-btn like-btn" data-like-text="Like" data-liked-text="Liked">♡ Like</button>
+            <button class="action-btn comment-btn">💬 Comment</button>
+            <button class="action-btn">↗ Share</button>
+          </div>
+          <div class="comments"><div class="comment-box"><input type="text" placeholder="Write a comment…"></div></div>
+        </article>
+      </section>
+    </main>
+
+    <aside class="right-sidebar">
+      <section class="right-card card">
+        <div class="card-title"><h3>Trending now</h3><a href="#">See all</a></div>
+        <div class="trend"><small>Technology · Trending</small><strong>#ConnectSphere</strong><span>18.4K posts</span></div>
+        <div class="trend"><small>Business · Trending</small><strong>#SmallBusiness</strong><span>9,824 posts</span></div>
+        <div class="trend"><small>Design · Trending</small><strong>#WebDesign</strong><span>7,510 posts</span></div>
+      </section>
+      <section class="right-card card">
+        <div class="card-title"><h3>People you may know</h3><a href="#">See all</a></div>
+        <div class="person"><div class="person-avatar">SL</div><div class="person-info"><strong>Sofia Lane</strong><span>@sofialane</span></div><button class="follow-btn" data-follow="Follow" data-following="Following">Follow</button></div><div class="person"><div class="person-avatar">MK</div><div class="person-info"><strong>Marcus King</strong><span>@marcusking</span></div><button class="follow-btn" data-follow="Follow" data-following="Following">Follow</button></div><div class="person"><div class="person-avatar">NV</div><div class="person-info"><strong>Nia Valdez</strong><span>@niavaldez</span></div><button class="follow-btn" data-follow="Follow" data-following="Following">Follow</button></div>
+      </section>
+    </aside>
+  </div>
+
+  <nav class="mobile-nav">
+    <a class="active" href="#home"><span>⌂</span><span>Home</span></a>
+    <a href="#explore"><span>◈</span><span>Explore</span></a>
+    <a href="#messages"><span>✉</span><span>Messages</span></a>
+    <a href="#notifications"><span>♢</span><span>Notifications</span></a>
+    <a href="#friends"><span>♧</span><span>Friends</span></a>
+  </nav>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
