@@ -8,34 +8,41 @@
 <title>Prices | BAM's Website Builder</title>
 <link href="css/style.css" rel="stylesheet"/>
 <link href="images/icon-dark.jpg" rel="icon" type="image/jpeg"/>
-</head>
+<link href="css/navigation.css" rel="stylesheet"/></head>
 <body>
 <!-- HEADER -->
-<header class="site-header">
-<a aria-label="BAM's Website Builder home" class="logo" href="index.html">
-            BAM's Website Builder
-        </a>
-<nav aria-label="Main navigation">
-<a href="index.html">
-                Home
-            </a>
-<a href="services.html">
-                Services
-            </a>
-<a aria-current="page" class="active" href="prices.html">
-                Prices
-            </a>
-<a href="portfolio.html">
-                Portfolio
-            </a>
-<a href="reviews.html">
-                Reviews
-            </a>
-<a href="contact.html">
-                Contact
-            </a>
-</nav>
-<div aria-label="Language selector" class="language-switcher"><a href="prices.html">English</a><span>|</span><a aria-current="page" class="active-language" href="es/prices.html">Español</a></div></header>
+<!-- SHARED STICKY NAVIGATION -->
+<header class="site-header" id="site-header">
+<div class="header-container">
+<a aria-label="BAM's Website Builder home" class="site-brand" href="index.html">
+<span class="brand-text"><strong>BAM'S</strong><small>WEBSITE BUILDER</small></span>
+</a>
+<nav aria-label="Main navigation" class="desktop-navigation"><a data-page="index" href="index.html">Home</a>
+<a data-page="services" href="services.html">Services</a>
+<a aria-current="page" class="active" data-page="prices" href="prices.html">Prices</a>
+<a data-page="portfolio" href="portfolio.html">Portfolio</a>
+<a data-page="reviews" href="reviews.html">Reviews</a>
+<a data-page="contact" href="contact.html">Contact</a></nav>
+<div class="desktop-language"><a class="language-active" href="prices.html">English</a><span aria-hidden="true">|</span><a href="es/prices.html">Español</a></div>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open navigation menu" class="menu-toggle" id="menu-toggle" type="button"><span></span><span></span><span></span></button>
+</div>
+</header>
+<div class="menu-overlay" id="menu-overlay"></div>
+<aside aria-hidden="true" aria-label="Mobile navigation" class="mobile-menu" id="mobile-menu">
+<div class="mobile-menu-header">
+<a class="mobile-menu-brand" href="index.html"><span><strong>BAM'S</strong><small>WEBSITE BUILDER</small></span></a>
+<button aria-label="Close navigation menu" class="mobile-menu-close" id="mobile-menu-close" type="button"><span></span><span></span></button>
+</div>
+<nav class="mobile-navigation"><a data-page="index" href="index.html"><span aria-hidden="true" class="mobile-link-icon">⌂</span><span>Home</span></a>
+<a data-page="services" href="services.html"><span aria-hidden="true" class="mobile-link-icon">◆</span><span>Services</span></a>
+<a aria-current="page" class="active" data-page="prices" href="prices.html"><span aria-hidden="true" class="mobile-link-icon">$</span><span>Prices</span></a>
+<a data-page="portfolio" href="portfolio.html"><span aria-hidden="true" class="mobile-link-icon">▣</span><span>Portfolio</span></a>
+<a data-page="reviews" href="reviews.html"><span aria-hidden="true" class="mobile-link-icon">★</span><span>Reviews</span></a>
+<a data-page="contact" href="contact.html"><span aria-hidden="true" class="mobile-link-icon">✉</span><span>Contact</span></a></nav>
+<div class="mobile-language-section"><p>Language</p><div class="mobile-language-links"><a class="language-active" href="prices.html">English</a><a href="es/prices.html">Español</a></div></div>
+<div class="mobile-menu-cta"><a href="contact.html">Get a Free Quote</a></div>
+<div class="mobile-menu-contact"><a href="tel:+17274178762">727-417-8762</a><a href="mailto:bamswebsitebuilder@gmail.com">bamswebsitebuilder@gmail.com</a></div>
+</aside>
 <!-- MAIN CONTENT -->
 <main>
 <section class="pricing-section">
@@ -368,5 +375,5 @@
             bamswebsitebuilder@gmail.com
         </a>
 </footer>
-</body>
+<script src="js/navigation.js"></script></body>
 </html>

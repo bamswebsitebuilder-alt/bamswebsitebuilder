@@ -900,3 +900,128 @@ select:focus-visible {
         animation-iteration-count: 1 !important;
     }
 }
+
+/* ==========================
+   MOBILE HAMBURGER NAVIGATION
+========================== */
+
+.menu-button {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 46px;
+    height: 46px;
+    padding: 0;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.menu-button span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    margin: 0 auto;
+    background: #d72631;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.menu-button.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.menu-button.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-button.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 760px) {
+    .site-header {
+        position: fixed;
+        flex-direction: row;
+        min-height: 76px;
+        padding: 0 5%;
+    }
+
+    .menu-button {
+        display: flex;
+        margin-left: auto;
+    }
+
+    .main-nav {
+        position: fixed;
+        top: 76px;
+        right: 0;
+        bottom: 0;
+        z-index: 999;
+
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 0;
+
+        width: min(84vw, 340px);
+        padding: 24px;
+
+        background: rgba(8, 8, 8, 0.99);
+        border-left: 1px solid rgba(215, 38, 49, 0.25);
+        box-shadow: -18px 0 40px rgba(0, 0, 0, 0.45);
+
+        transform: translateX(105%);
+        visibility: hidden;
+        transition: transform 0.3s ease, visibility 0.3s ease;
+    }
+
+    .main-nav.open {
+        transform: translateX(0);
+        visibility: visible;
+    }
+
+    .main-nav a {
+        width: 100%;
+        padding: 15px 4px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        font-size: 14px;
+    }
+
+    .main-nav a:not(.header-button)::after {
+        display: none;
+    }
+
+    .header-button {
+        margin-top: 16px;
+    }
+
+    .language-switcher {
+        position: fixed;
+        right: 24px;
+        bottom: 24px;
+        z-index: 1001;
+
+        opacity: 0;
+        pointer-events: none;
+        transform: translateX(20px);
+
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    body.menu-open .language-switcher {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(0);
+    }
+
+    body.menu-open {
+        overflow: hidden;
+    }
+
+    .hero {
+        padding-top: 120px;
+    }
+}

@@ -7,49 +7,39 @@
 <title>Inicio | BAM's Website Builder</title>
 <link href="../css/style.css" rel="stylesheet"/>
 <link href="../images/icon-dark.jpg" rel="icon" type="image/jpeg"/>
-</head>
+<link href="../css/navigation.css" rel="stylesheet"/></head>
 <body>
-<!-- HEADER -->
-<header class="site-header">
-<a aria-label="Inicio de BAM's Website Builder" class="logo" href="index.html">
-            BAM's Website Builder
-        </a>
-<nav aria-label="Navegación principal">
-<a aria-current="page" class="active" href="index.html">
-                Inicio
-            </a>
-<a href="services.html">
-                Servicios
-            </a>
-<a href="prices.html">
-                Precios
-            </a>
-<a href="portfolio.html">
-                Portafolio
-            </a>
-<a href="reviews.html">
-                Reseñas
-            </a>
-<a href="contact.html">
-                Contacto
-            </a>
+<!-- NAVEGACIÓN FIJA COMPARTIDA -->
+<header class="site-header" id="site-header">
+<div class="header-container">
+<a aria-label="Inicio de BAM's Website Builder" class="site-brand" href="index.html">
+<span class="brand-text"><strong>BAM'S</strong><small>WEBSITE BUILDER</small></span>
+</a>
+<nav aria-label="Navegación principal" class="desktop-navigation">
+<a aria-current="page" class="active" data-page="index" href="index.html">Inicio</a><a data-page="services" href="services.html">Servicios</a><a data-page="prices" href="prices.html">Precios</a><a data-page="portfolio" href="portfolio.html">Portafolio</a><a data-page="reviews" href="reviews.html">Reseñas</a><a data-page="contact" href="contact.html">Contacto</a>
 </nav>
-
-<div aria-label="Selector de idioma" class="language-switcher">
-    <a href="/">English</a>
-
-    <span aria-hidden="true">|</span>
-
-    <a
-        aria-current="page"
-        class="active-language"
-        href="/es/"
-    >
-        Español
-    </a>
+<div class="desktop-language">
+<a href="../index.html">English</a><span aria-hidden="true">|</span><a class="language-active" href="index.html">Español</a>
 </div>
-
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menú de navegación" class="menu-toggle" id="menu-toggle" type="button"><span></span><span></span><span></span></button>
+</div>
 </header>
+<div class="menu-overlay" id="menu-overlay"></div>
+<aside aria-hidden="true" aria-label="Navegación móvil" class="mobile-menu" id="mobile-menu">
+<div class="mobile-menu-header">
+<a class="mobile-menu-brand" href="index.html"><span><strong>BAM'S</strong><small>WEBSITE BUILDER</small></span></a>
+<button aria-label="Cerrar menú de navegación" class="mobile-menu-close" id="mobile-menu-close" type="button"><span></span><span></span></button>
+</div>
+<nav class="mobile-navigation">
+<a aria-current="page" class="active" data-page="index" href="index.html"><span aria-hidden="true" class="mobile-link-icon">⌂</span><span>Inicio</span></a><a data-page="services" href="services.html"><span aria-hidden="true" class="mobile-link-icon">◆</span><span>Servicios</span></a><a data-page="prices" href="prices.html"><span aria-hidden="true" class="mobile-link-icon">$</span><span>Precios</span></a><a data-page="portfolio" href="portfolio.html"><span aria-hidden="true" class="mobile-link-icon">▣</span><span>Portafolio</span></a><a data-page="reviews" href="reviews.html"><span aria-hidden="true" class="mobile-link-icon">★</span><span>Reseñas</span></a><a data-page="contact" href="contact.html"><span aria-hidden="true" class="mobile-link-icon">✉</span><span>Contacto</span></a>
+</nav>
+<div class="mobile-language-section"><p>Idioma</p><div class="mobile-language-links"><a href="../index.html">English</a><a class="language-active" href="index.html">Español</a></div></div>
+<div class="mobile-menu-cta"><a href="contact.html">Solicitar Cotización Gratis</a></div>
+<div class="mobile-menu-contact"><a href="tel:+17274178762">727-417-8762</a><a href="mailto:bamswebsitebuilder@gmail.com">bamswebsitebuilder@gmail.com</a></div>
+</aside>
+
+<!-- HEADER -->
+
 <!-- HERO -->
 <section class="hero">
 <img alt="Logotipo de BAM's Website Builder" class="hero-logo-bg" src="../images/logo-dark.jpg"/>
@@ -91,5 +81,5 @@
             © 2026 BAM's Website Builder™. Todos los derechos reservados.
         </p>
 </footer>
-</body>
+<script src="../js/navigation.js"></script></body>
 </html>
