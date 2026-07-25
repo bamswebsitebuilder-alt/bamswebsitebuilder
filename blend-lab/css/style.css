@@ -1127,3 +1127,586 @@ select:focus-visible {
         animation-iteration-count: 1 !important;
     }
 }
+/* =========================================================
+   FINAL HTML/CSS COMPATIBILITY AND RESPONSIVE FIXES
+   These rules connect every class used by both language pages.
+========================================================= */
+
+.skip-link {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 5000;
+    padding: 10px 14px;
+    color: #050505;
+    background: var(--gold-bright);
+    border-radius: 4px;
+    transform: translateY(-150%);
+    transition: transform 0.2s ease;
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
+.logo-crown {
+    margin-right: 8px;
+    color: var(--gold-bright) !important;
+}
+
+.site-header.scrolled {
+    background: rgba(5, 5, 5, 0.99);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.header-button {
+    flex: 0 0 auto;
+    min-width: 155px;
+    padding: 12px 18px;
+    font-size: 13px;
+}
+
+.hero-logo-bg {
+    position: absolute;
+    right: 4%;
+    bottom: -5%;
+    z-index: -2;
+    width: min(46vw, 650px);
+    max-height: 85%;
+    object-fit: contain;
+    opacity: 0.16;
+    filter: grayscale(1) sepia(1) saturate(1.4);
+    pointer-events: none;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(90deg, rgba(0,0,0,.2), transparent 65%);
+    pointer-events: none;
+}
+
+.hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+    max-width: 620px;
+    margin-top: 42px;
+}
+
+.hero-stats > div {
+    padding: 16px 14px;
+    background: rgba(255,255,255,.035);
+    border: 1px solid rgba(212,175,55,.2);
+    border-radius: 7px;
+}
+
+.hero-stats strong,
+.hero-stats span {
+    display: block;
+}
+
+.hero-stats strong {
+    color: var(--gold-bright);
+    font-size: 24px;
+    line-height: 1.1;
+}
+
+.hero-stats span {
+    margin-top: 5px;
+    color: #bdbdbd;
+    font-size: 12px;
+}
+
+.featured-service {
+    position: relative;
+    border-color: rgba(212,175,55,.5);
+}
+
+.service-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 5px 9px;
+    color: #050505;
+    background: var(--gold);
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.service-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin: 24px 0 18px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.service-duration {
+    color: #a9a9a9;
+    font-size: 13px;
+}
+
+.service-price {
+    color: var(--gold-bright);
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.service-book-button {
+    width: 100%;
+    min-width: 0;
+    padding: 12px 15px;
+}
+
+.experience-card {
+    position: absolute;
+    right: -28px;
+    bottom: 28px;
+    display: grid;
+    width: 145px;
+    min-height: 130px;
+    place-content: center;
+    padding: 18px;
+    color: #050505;
+    background: var(--gold);
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 18px 35px rgba(0,0,0,.45);
+}
+
+.experience-card strong {
+    font-size: 44px;
+    line-height: 1;
+}
+
+.experience-card span {
+    margin-top: 6px;
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.about-list {
+    display: grid;
+    gap: 10px;
+    margin: 5px 0 30px;
+    list-style: none;
+}
+
+.about-list li {
+    position: relative;
+    padding-left: 28px;
+    color: #e2e2e2;
+}
+
+.about-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--gold-bright);
+    font-weight: 900;
+}
+
+.barber-info > span {
+    display: block;
+    margin-bottom: 16px;
+    color: var(--gold-bright);
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.gallery-item {
+    padding: 0;
+    background: transparent;
+    border: 0;
+}
+
+.booking-details {
+    display: grid;
+    gap: 15px;
+    margin-top: 32px;
+}
+
+.booking-details > div {
+    display: grid;
+    gap: 3px;
+    padding: 18px;
+    background: rgba(255,255,255,.035);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 7px 7px 0;
+}
+
+.booking-details strong {
+    margin-bottom: 5px;
+    color: var(--gold-bright);
+}
+
+.booking-details span,
+.booking-details a {
+    color: #c7c7c7;
+}
+
+.form-heading {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+.form-heading > span {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    color: #050505;
+    background: var(--gold);
+    border-radius: 50%;
+    font-weight: 900;
+}
+
+.form-heading small {
+    color: var(--gold-bright);
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.form-heading h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 25px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-button {
+    width: 100%;
+    border: 0;
+}
+
+.contact-banner-inner {
+    max-width: 850px;
+    margin: auto;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr repeat(3, minmax(0, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: auto;
+    text-align: left;
+}
+
+.footer-grid > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.footer-grid h3 {
+    margin-bottom: 8px;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.footer-grid a:hover {
+    color: var(--gold-bright);
+}
+
+.footer-logo {
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 30px auto 0;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255,255,255,.08);
+    font-size: 13px;
+}
+
+.drawer-cta,
+.drawer-contact {
+    display: none;
+}
+
+/* Keep the desktop header compact enough for common laptop widths. */
+@media (min-width: 821px) and (max-width: 1180px) {
+    .site-header {
+        gap: 16px;
+        padding-inline: 4%;
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .main-nav .nav-links a {
+        font-size: 13px;
+    }
+
+    .header-button {
+        display: none;
+    }
+}
+
+/* Phone and tablet layout */
+@media (max-width: 820px) {
+    section,
+    .section {
+        padding: 78px 6%;
+    }
+
+    .site-header {
+        min-height: var(--header-height);
+    }
+
+    .header-button {
+        display: none;
+    }
+
+    .main-nav {
+        max-width: 100%;
+    }
+
+    .drawer-language {
+        display: block;
+        width: 100%;
+        margin-top: 24px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(244,207,84,.18);
+    }
+
+    .drawer-language > p {
+        margin-bottom: 12px;
+        color: #979797;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+    }
+
+    .drawer-language-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0,1fr));
+        gap: 10px;
+    }
+
+    .drawer-language-buttons a {
+        display: grid;
+        min-height: 50px;
+        place-items: center;
+        padding: 10px;
+        border: 1px solid rgba(255,255,255,.2);
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: 800;
+    }
+
+    .drawer-language-buttons a.active-language {
+        color: #050505;
+        background: var(--gold);
+        border-color: var(--gold);
+    }
+
+    .drawer-cta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 56px;
+        margin-top: 20px;
+        padding: 13px;
+        color: #050505;
+        background: var(--gold);
+        border-radius: 5px;
+        font-weight: 900;
+        text-align: center;
+    }
+
+    .drawer-contact {
+        display: grid;
+        gap: 3px;
+        margin-top: 18px;
+        color: #969696;
+        font-size: 13px;
+    }
+
+    .drawer-contact a {
+        color: var(--gold-bright);
+        font-weight: 800;
+    }
+
+    .hero {
+        min-height: auto;
+        padding: 120px 6% 78px;
+        text-align: center;
+        background-position: 62% center;
+    }
+
+    .hero-content {
+        margin: auto;
+    }
+
+    .hero-logo-bg {
+        right: 50%;
+        bottom: 0;
+        width: min(90vw, 500px);
+        transform: translateX(50%);
+        opacity: .1;
+    }
+
+    .hero-description {
+        margin-inline: auto;
+        font-size: 16px;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-stats {
+        margin-inline: auto;
+    }
+
+    .service-grid,
+    .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .about,
+    .booking,
+    .barber-card {
+        grid-template-columns: 1fr;
+    }
+
+    .about {
+        gap: 55px;
+    }
+
+    .about-image img {
+        min-height: 400px;
+    }
+
+    .experience-card {
+        right: 15px;
+        bottom: -25px;
+    }
+
+    .barber-card {
+        gap: 30px;
+        padding: 25px;
+        text-align: left;
+    }
+
+    .barber-card img {
+        min-height: 330px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .gallery-item,
+    .gallery-item img {
+        min-height: 270px;
+    }
+
+    .footer-grid {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+    }
+}
+
+@media (max-width: 560px) {
+    section,
+    .section {
+        padding: 68px 5%;
+    }
+
+    .hero {
+        padding: 112px 5% 70px;
+    }
+
+    .hero h1 {
+        font-size: clamp(42px, 13vw, 58px);
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .hero-buttons a {
+        width: 100%;
+    }
+
+    .hero-stats {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .service-grid,
+    .services-grid,
+    .gallery-grid,
+    .form-grid,
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .service-card {
+        padding: 27px 23px;
+    }
+
+    .gallery-item,
+    .gallery-item img {
+        min-height: 330px;
+    }
+
+    .booking-form {
+        padding: 24px 19px;
+    }
+
+    .full-width {
+        grid-column: auto;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: left;
+    }
+
+    .main-nav {
+        width: 94vw;
+        padding: 24px 19px 34px;
+    }
+
+    .main-nav .nav-links a {
+        grid-template-columns: 52px 1fr;
+        min-height: 64px;
+        font-size: 14px;
+    }
+}
