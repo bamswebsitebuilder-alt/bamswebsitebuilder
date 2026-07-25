@@ -21,9 +21,16 @@
          HEADER
     ========================== -->
     <header class="site-header">
-        <a class="author-logo" href="#home">
+        <a href="#home" class="author-logo" aria-label="Inicio de Kade Mercer">
             KADE <span>MERCER</span>
         </a>
+
+        <div class="desktop-language-switcher" aria-label="Selección de idioma">
+            <a href="/kade-mercer/">English</a>
+            <span aria-hidden="true">|</span>
+            <a href="/kade-mercer/es/" class="active-language" aria-current="page">Español</a>
+        </div>
+
         <button
             class="menu-button"
             type="button"
@@ -31,29 +38,37 @@
             aria-controls="main-navigation"
             aria-label="Abrir navegación"
         >
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </button>
 
-
         <nav class="main-nav" id="main-navigation" aria-label="Navegación principal">
-            <a href="#home">Inicio</a>
-            <a href="#books">Libros</a>
-            <a href="#about">Sobre el Autor</a>
-            <a class="header-button" href="#featured">Libro Destacado</a>
+            <div class="mobile-menu-top">
+                <a href="#home" class="mobile-menu-logo">KADE <span>MERCER</span></a>
+                <button class="menu-close" type="button" aria-label="Cerrar navegación">×</button>
+            </div>
+
+            <div class="mobile-menu-divider"></div>
+
+            <div class="nav-links">
+                <a href="#home"><span class="nav-icon">⌂</span><span>Inicio</span></a>
+                <a href="#books"><span class="nav-icon">▣</span><span>Libros</span></a>
+                <a href="#featured"><span class="nav-icon">★</span><span>Libro Destacado</span></a>
+                <a href="#about"><span class="nav-icon">●</span><span>Sobre el Autor</span></a>
+            </div>
+
+            <div class="mobile-language-block">
+                <p>IDIOMA</p>
+                <div class="mobile-language-buttons">
+                    <a href="/kade-mercer/">English</a>
+                    <a href="/kade-mercer/es/" class="active-language" aria-current="page">Español</a>
+                </div>
+            </div>
+
+            <a href="#books" class="mobile-menu-cta">EXPLORAR LOS LIBROS</a>
+            <p class="mobile-menu-note">Novelas de suspenso de Kade Mercer</p>
         </nav>
 
-        <div class="language-switcher">
-    <a href="/kade-mercer/">
-        English
-    </a>
-    <span aria-hidden="true">|</span>
-    <a href="/kade-mercer/es/" class="active-language" aria-current="page">
-        Español
-    </a>
-</div>
-
+        <button class="menu-overlay" type="button" aria-label="Cerrar navegación" tabindex="-1"></button>
     </header>
 
 
