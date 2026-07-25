@@ -1576,9 +1576,10 @@ select:focus-visible {
     .hero-logo-bg {
         right: 50%;
         bottom: 0;
-        width: min(90vw, 500px);
+        width: min(65vw, 280px);
         transform: translateX(50%);
-        opacity: .1;
+        bottom: 20px;
+        opacity: .08;
     }
 
     .hero-description {
@@ -1610,7 +1611,9 @@ select:focus-visible {
     }
 
     .about-image img {
-        min-height: 400px;
+        min-height: 260px;
+        max-height: 260px;
+        object-fit: cover;
     }
 
     .experience-card {
@@ -1625,7 +1628,10 @@ select:focus-visible {
     }
 
     .barber-card img {
-        min-height: 330px;
+        min-height: 220px;
+        max-height: 220px;
+        object-fit: cover;
+        border-radius: 10px;
     }
 
     .gallery-grid {
@@ -1634,7 +1640,8 @@ select:focus-visible {
 
     .gallery-item,
     .gallery-item img {
-        min-height: 270px;
+        min-height: 180px;
+        max-height: 180px;
     }
 
     .footer-grid {
@@ -1683,7 +1690,8 @@ select:focus-visible {
 
     .gallery-item,
     .gallery-item img {
-        min-height: 330px;
+        min-height: 160px;
+        max-height: 160px;
     }
 
     .booking-form {
