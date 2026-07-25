@@ -731,159 +731,6 @@ select:focus-visible {
 
 
 /* ==========================
-   MOBILE
-========================== */
-
-@media (max-width: 760px) {
-    html {
-        scroll-padding-top: 20px;
-    }
-
-    .site-header {
-        position: relative;
-
-        flex-direction: column;
-        gap: 18px;
-
-        padding: 22px 5%;
-    }
-
-    .main-nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px 20px;
-    }
-
-    .main-nav a {
-        font-size: 14px;
-    }
-
-    .header-button {
-        display: inline-flex;
-    }
-
-    .hero {
-        min-height: auto;
-        padding: 90px 6%;
-
-        background-position: 65% center;
-        text-align: center;
-    }
-
-    .hero-content {
-        margin: auto;
-    }
-
-    .hero-label {
-        font-size: 12px;
-        letter-spacing: 2.5px;
-    }
-
-    .hero h1 {
-        letter-spacing: -1px;
-    }
-
-    .hero-description {
-        margin-right: auto;
-        margin-left: auto;
-        font-size: 17px;
-    }
-
-    .hero-buttons {
-        justify-content: center;
-    }
-
-    section {
-        padding: 80px 6%;
-    }
-
-    .books-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .book-cover {
-        min-height: 420px;
-    }
-
-    .book-cover img {
-        max-width: 270px;
-    }
-
-    .featured-book,
-    .author-section {
-        gap: 45px;
-    }
-
-    .newsletter-form {
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .newsletter-form input,
-    .newsletter-form button {
-        width: 100%;
-        border-radius: 5px;
-    }
-}
-
-
-/* ==========================
-   SMALL MOBILE
-========================== */
-
-@media (max-width: 480px) {
-    .author-logo {
-        font-size: 24px;
-    }
-
-    .main-nav {
-        gap: 12px 16px;
-    }
-
-    .main-nav a {
-        font-size: 13px;
-    }
-
-    .hero {
-        padding: 75px 5%;
-    }
-
-    .hero h1 {
-        font-size: 46px;
-    }
-
-    .primary-button,
-    .secondary-button {
-        width: 100%;
-    }
-
-    section {
-        padding: 70px 5%;
-    }
-
-    .book-cover {
-        min-height: 380px;
-        padding: 24px;
-    }
-
-    .book-cover img {
-        height: auto;
-    }
-
-    .book-info {
-        padding: 24px;
-    }
-
-    .featured-content h2,
-    .author-content h2,
-    .newsletter h2,
-    .section-heading h2 {
-        overflow-wrap: anywhere;
-    }
-}
-
-
-/* ==========================
    REDUCED MOTION
 ========================== */
 
@@ -953,6 +800,7 @@ select:focus-visible {
         top: 0;
         left: 0;
         z-index: 1200;
+        isolation: isolate;
         flex-direction: row;
         min-height: 76px;
         padding: 0 5%;
@@ -986,6 +834,7 @@ select:focus-visible {
         transition: transform 0.25s ease, opacity 0.25s ease;
     }
 
+    .menu-button.active { opacity: 0; pointer-events: none; }
     .menu-button.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .menu-button.active span:nth-child(2) { opacity: 0; }
     .menu-button.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -1020,9 +869,14 @@ select:focus-visible {
         z-index: 1100;
         display: block;
         width: min(91vw, 390px);
+        height: 100vh;
+        height: 100dvh;
         max-height: 100dvh;
         padding: 30px 24px 38px;
+        overflow-x: hidden;
         overflow-y: auto;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
         background:
             radial-gradient(circle at 100% 0, rgba(183, 25, 34, 0.12), transparent 34%),
             #0b0b0b;
@@ -1175,7 +1029,7 @@ select:focus-visible {
         line-height: 1.6;
     }
 
-    body.menu-open { overflow: hidden; }
+    body.menu-open { overflow: hidden; touch-action: none; }
     .hero { padding-top: 122px; }
 }
 
@@ -1183,4 +1037,10 @@ select:focus-visible {
     .main-nav { width: 94vw; padding-right: 19px; padding-left: 19px; }
     .main-nav .nav-links a { grid-template-columns: 56px 1fr; font-size: 15px; }
     .mobile-menu-logo { font-size: 22px; }
+}
+
+
+@media (max-width: 480px) {
+    .mobile-language-buttons { grid-template-columns: 1fr 1fr; }
+    .mobile-language-buttons a { min-width: 0; font-size: 14px; }
 }
