@@ -967,3 +967,230 @@
         margin: 4px 0 0;
     }
 }
+
+/* =========================================================
+   FIREBASE FILE UPLOADS
+========================================================= */
+
+.portal-upload-box {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 14px;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 22px;
+    background: #0d0d0d;
+    border: 1px dashed rgba(255, 215, 0, 0.35);
+    border-radius: 12px;
+}
+
+.portal-file-picker {
+    display: flex;
+    align-items: center;
+    min-height: 50px;
+    padding: 13px 16px;
+    color: #d9d9d9;
+    background: #080808;
+    border: 1px solid #383838;
+    border-radius: 9px;
+    font-weight: 700;
+    cursor: pointer;
+    overflow: hidden;
+    transition:
+        border-color 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.portal-file-picker:hover,
+.portal-file-picker:focus-within {
+    background: #101010;
+    border-color: var(--portal-gold);
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.08);
+}
+
+#selected-file-name {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#portal-file-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#upload-file-button:disabled {
+    color: #777777;
+    background: #222222;
+    border-color: #3a3a3a;
+    cursor: not-allowed;
+    transform: none;
+    opacity: 0.75;
+}
+
+#upload-file-button:disabled:hover {
+    color: #777777;
+    background: #222222;
+    transform: none;
+}
+
+#upload-progress {
+    grid-column: 1 / -1;
+    width: 100%;
+    height: 13px;
+    overflow: hidden;
+    appearance: none;
+    border: 0;
+    border-radius: 999px;
+    background: #080808;
+}
+
+#upload-progress::-webkit-progress-bar {
+    background: #080808;
+    border: 1px solid #2d2d2d;
+    border-radius: 999px;
+}
+
+#upload-progress::-webkit-progress-value {
+    background: linear-gradient(
+        90deg,
+        var(--portal-gold-dark),
+        var(--portal-gold)
+    );
+    border-radius: 999px;
+}
+
+#upload-progress::-moz-progress-bar {
+    background: linear-gradient(
+        90deg,
+        var(--portal-gold-dark),
+        var(--portal-gold)
+    );
+    border-radius: 999px;
+}
+
+.portal-upload-box small {
+    grid-column: 1 / -1;
+    color: var(--portal-muted);
+    font-size: 0.8rem;
+}
+
+.portal-file-status {
+    grid-column: 1 / -1;
+    margin: 0;
+    padding: 11px 13px;
+    color: #ffd1d1;
+    background: rgba(255, 80, 80, 0.08);
+    border: 1px solid rgba(255, 100, 100, 0.25);
+    border-radius: 8px;
+    line-height: 1.5;
+}
+
+.portal-file-status.success-alert {
+    color: #ccffda;
+    background: rgba(80, 200, 120, 0.08);
+    border-color: rgba(80, 200, 120, 0.25);
+}
+
+#client-file-list {
+    display: grid;
+    gap: 12px;
+}
+
+.portal-file-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 18px;
+    align-items: center;
+    padding: 16px;
+    background: #0d0d0d;
+    border: 1px solid #292929;
+    border-radius: 10px;
+    transition:
+        border-color 0.25s ease,
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+.portal-file-item:hover {
+    background: #111111;
+    border-color: rgba(255, 215, 0, 0.3);
+    transform: translateY(-1px);
+}
+
+.portal-file-info {
+    min-width: 0;
+}
+
+.portal-file-name {
+    display: block;
+    overflow: hidden;
+    color: #ffffff;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.portal-file-details {
+    display: block;
+    margin-top: 5px;
+    color: var(--portal-muted);
+    font-size: 0.82rem;
+}
+
+.portal-file-item .portal-secondary-button {
+    min-height: 42px;
+    padding: 9px 16px;
+    white-space: nowrap;
+}
+
+/* =========================================================
+   FILE UPLOAD RESPONSIVE STYLES
+========================================================= */
+
+@media (max-width: 780px) {
+    .portal-upload-box {
+        grid-template-columns: 1fr;
+        padding: 18px;
+    }
+
+    .portal-file-picker,
+    #upload-file-button {
+        width: 100%;
+    }
+
+    #upload-progress,
+    .portal-upload-box small,
+    .portal-file-status {
+        grid-column: 1;
+    }
+
+    .portal-file-item {
+        grid-template-columns: 1fr;
+    }
+
+    .portal-file-item .portal-secondary-button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 520px) {
+    .portal-upload-box {
+        padding: 15px;
+    }
+
+    .portal-file-picker {
+        min-height: 48px;
+        padding: 12px 13px;
+    }
+
+    .portal-file-item {
+        padding: 14px;
+    }
+}

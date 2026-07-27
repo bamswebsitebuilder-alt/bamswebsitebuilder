@@ -7,7 +7,7 @@
 <meta content="Panel de proyectos para clientes de BAM's Website Builder." name="description"/>
 <title>Portal del cliente | BAM's Website Builder</title>
 <link href="../css/style.css?v=71" rel="stylesheet"/>
-<link href="../css/portal.css?v=71" rel="stylesheet"/><link href="portal-empty-state.css?v=73" rel="stylesheet"/>
+<link href="../css/portal.css?v=80" rel="stylesheet"/><link href="../css/portal-empty-state.css?v=80" rel="stylesheet"/>
 <link href="../images/icon-dark.jpg" rel="icon" type="image/jpeg"/></head>
 <body class="client-portal-page" data-auth-protected="true"><header class="site-header" id="site-header">
 <div class="header-container">
@@ -63,13 +63,13 @@
 <section class="portal-topbar">
 <div>
 <p class="portal-eyebrow">PORTAL DEL CLIENTE</p>
-<h1 id="portal-welcome">Cargando tu cuenta...</h1>
-<p>Here is the latest information about your website project.</p>
+<h1 id="portal-welcome">Portal del cliente</h1>
+<p>Aquí encontrarás la información más reciente sobre tu proyecto de sitio web.</p>
 </div>
 <div class="portal-user">
-<div class="portal-avatar" id="portal-avatar">?</div>
+<div class="portal-avatar" id="portal-avatar">C</div>
 <div>
-<strong id="portal-user-name">Cargando...</strong>
+<strong id="portal-user-name">Cuenta del cliente</strong>
 <span id="portal-user-email"></span>
 </div>
 <a class="portal-logout" href="#" id="portal-logout">Cerrar sesión</a>
@@ -93,8 +93,8 @@
 <p class="card-kicker">BIENVENIDO A TU PORTAL</p>
 <h2>Todavía no se ha asignado ningún proyecto</h2>
 <p>
-    Your account is ready. When BAM's Website Builder assigns a project,
-    your progress, files, invoices, and messages will appear here.
+    Tu cuenta está lista. Cuando BAM's Website Builder asigne un proyecto,
+    aquí aparecerán el progreso, los archivos, las facturas y los mensajes.
   </p>
 <div class="portal-actions">
 <a class="portal-primary-button" href="../contact.html">Contactar soporte</a>
@@ -109,10 +109,57 @@
 </article>
 </section>
 <section class="portal-panel" id="files">
-<article class="portal-card portal-empty-state">
+<article class="portal-card">
+<div class="card-heading">
+<div>
 <p class="card-kicker">ARCHIVOS DEL PROYECTO</p>
-<h2>No hay archivos disponibles</h2>
-<p>Los archivos compartidos con tu cuenta aparecerán aquí.</p>
+<h2>Sube tus archivos</h2>
+<p>Sube logotipos, fotos, archivos PDF, documentos y otros materiales necesarios para tu proyecto de sitio web.</p>
+</div>
+</div>
+
+<div class="portal-upload-box">
+<label class="portal-file-picker" for="portal-file-input">
+<span id="selected-file-name">Elegir archivo</span>
+</label>
+
+<input
+id="portal-file-input"
+type="file"
+accept=".jpg,.jpeg,.png,.webp,.gif,.pdf,.doc,.docx,.txt,.zip"
+/>
+
+<button
+class="portal-primary-button"
+id="upload-file-button"
+type="button"
+disabled
+>
+Subir archivo
+</button>
+
+<progress
+id="upload-progress"
+max="100"
+value="0"
+hidden
+></progress>
+
+<p
+class="portal-file-status"
+id="upload-status"
+role="status"
+hidden
+></p>
+
+<small>Tamaño máximo por archivo: 15 MB.</small>
+</div>
+
+<h3 class="section-subtitle">Tus archivos subidos</h3>
+
+<div class="file-list" id="client-file-list">
+<p class="portal-file-status">Buscando archivos subidos...</p>
+</div>
 </article>
 </section>
 <section class="portal-panel" id="invoices">
@@ -152,7 +199,7 @@
 </div>
 <div class="form-group">
 <label for="account-email">Correo electrónico</label>
-<input id="account-email" name="email" type="email" value=""/>
+<input id="account-email" name="email" type="email" value="" readonly/>
 </div>
 <div class="form-group">
 <label for="account-business">Nombre del negocio</label>
@@ -174,10 +221,10 @@
 </section>
 </main>
 <footer>
-<p>© 2026 BAM's Website Builder. All rights reserved.</p>
+<p>© 2026 BAM's Website Builder. Todos los derechos reservados.</p>
 <p><a href="../contact.html">Contactar soporte</a></p>
 </footer>
 <script src="../js/navigation.js?v=71"></script>
-<script src="../js/portal.js?v=73"></script>
-<script src="../js/portal-auth-es.js?v=74" type="module"></script></body>
+<script src="../js/portal.js?v=80"></script>
+<script src="../js/portal-auth-es.js?v=80" type="module"></script></body>
 </html>
