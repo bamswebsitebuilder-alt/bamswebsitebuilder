@@ -62,6 +62,16 @@ const notificationStatus = document.getElementById("notification-status");
 const enableBrowserNotificationsButton =
   document.getElementById("enable-browser-notifications");
 
+if (sidebarOverlay) {
+  sidebarOverlay.hidden = true;
+}
+
+if (adminSidebar && window.innerWidth <= 760) {
+  adminSidebar.classList.remove("open");
+  adminSidebar.setAttribute("aria-hidden", "true");
+}
+
+
 let currentAdmin = null;
 let clientRecords = [];
 let invoiceRecords = [];

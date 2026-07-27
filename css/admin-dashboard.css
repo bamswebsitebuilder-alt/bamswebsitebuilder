@@ -549,3 +549,21 @@ progress {
     width: 100%;
   }
 }
+
+
+/* MOBILE OVERLAY VISIBILITY FIX */
+.admin-sidebar-overlay[hidden] {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+@media (max-width: 760px) {
+  .admin-sidebar-overlay:not([hidden]) {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
