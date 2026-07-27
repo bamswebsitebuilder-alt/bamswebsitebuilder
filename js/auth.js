@@ -11,6 +11,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
 import {
   doc,
+  getDoc,
   serverTimestamp,
   setDoc
 } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
@@ -81,13 +82,20 @@ if (loginForm) {
         rememberInput?.checked ? browserLocalPersistence : browserSessionPersistence
       );
 
-      await signInWithEmailAndPassword(
+      const credential = await signInWithEmailAndPassword(
         auth,
         emailInput.value.trim(),
         passwordInput.value
       );
 
-      window.location.replace("client-portal.html");
+      const userDoc = await getDoc(doc(db, "users", credential.user.uid));
+      const role = userDoc.data()?.role;
+
+      if (role === "admin") {
+        window.location.replace("admin-dashboard.html");
+      } else {
+        window.location.replace("client-portal.html");
+      }
     } catch (error) {
       setAlert(alert, friendlyAuthError(error));
       setBusy(submit, false, "");

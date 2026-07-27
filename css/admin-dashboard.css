@@ -372,3 +372,180 @@ progress {
     grid-template-columns: 1fr;
   }
 }
+
+
+.admin-menu-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--admin-border);
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.admin-menu-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  margin: 4px auto;
+  background: white;
+}
+
+.admin-header-link {
+  color: var(--admin-gold-light);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.admin-nav-count {
+  min-width: 22px;
+  height: 22px;
+  margin-left: auto;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--admin-gold);
+  color: #111;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.admin-list-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.admin-small-button {
+  border: 1px solid var(--admin-border);
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: transparent;
+  color: white;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.admin-small-button:hover {
+  background: rgba(212, 166, 55, 0.12);
+}
+
+.admin-small-button.success {
+  border-color: rgba(142, 226, 160, 0.45);
+  color: var(--admin-success);
+}
+
+.admin-notification-item.unread {
+  border-color: rgba(212, 166, 55, 0.45);
+  background: rgba(212, 166, 55, 0.07);
+}
+
+.admin-notification-time {
+  color: var(--admin-muted);
+  font-size: 0.8rem;
+}
+
+.admin-sidebar-overlay {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .admin-header {
+    min-height: 70px;
+    padding: 12px 16px;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .admin-menu-toggle {
+    display: block;
+    flex: 0 0 auto;
+  }
+
+  .admin-brand {
+    flex: 1;
+  }
+
+  .admin-header-actions {
+    width: auto;
+    margin-left: auto;
+    gap: 8px;
+  }
+
+  .admin-header-actions .admin-header-link,
+  #admin-email {
+    display: none;
+  }
+
+  .admin-header-actions button {
+    padding: 9px 12px;
+  }
+
+  .admin-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 60;
+    width: min(82vw, 300px);
+    height: 100dvh;
+    padding-top: 90px;
+    border-right: 1px solid var(--admin-border);
+    border-bottom: 0;
+    overflow-y: auto;
+    transform: translateX(-105%);
+    transition: transform 0.25s ease;
+  }
+
+  .admin-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .admin-sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: block;
+    background: rgba(0, 0, 0, 0.68);
+  }
+
+  .admin-nav {
+    display: grid;
+    min-width: 0;
+  }
+
+  .admin-nav-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .admin-content {
+    padding: 22px 16px 40px;
+  }
+
+  .admin-card-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-action-row,
+  .admin-form-actions,
+  .admin-list-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .admin-primary-button,
+  .admin-secondary-button,
+  .admin-small-button {
+    width: 100%;
+  }
+}

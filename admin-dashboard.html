@@ -7,13 +7,23 @@
   <title>Admin Dashboard | BAM's Website Builder</title>
 
   <link rel="stylesheet" href="css/style.css?v=71">
-  <link rel="stylesheet" href="css/admin-dashboard.css?v=1">
+  <link rel="stylesheet" href="css/admin-dashboard.css?v=2">
   <link rel="icon" href="images/icon-dark.jpg" type="image/jpeg">
 </head>
 
 <body class="admin-dashboard-page" data-auth-protected="true">
 
   <header class="admin-header">
+    <button
+      id="admin-menu-toggle"
+      class="admin-menu-toggle"
+      type="button"
+      aria-label="Open admin menu"
+      aria-controls="admin-sidebar"
+      aria-expanded="false"
+    >
+      <span></span><span></span><span></span>
+    </button>
     <a class="admin-brand" href="index.html">
       <strong>BAM'S</strong>
       <span>WEBSITE BUILDER</span>
@@ -28,7 +38,8 @@
   </header>
 
   <main class="admin-shell">
-    <aside class="admin-sidebar">
+    <div id="admin-sidebar-overlay" class="admin-sidebar-overlay" hidden></div>
+    <aside class="admin-sidebar" id="admin-sidebar" aria-hidden="false">
       <p class="admin-sidebar-label">ADMIN</p>
 
       <nav class="admin-nav" aria-label="Admin dashboard sections">
@@ -46,6 +57,11 @@
 
         <button class="admin-nav-button" data-panel="files" type="button">
           Client Files
+        </button>
+
+        <button class="admin-nav-button" data-panel="notifications" type="button">
+          Notifications
+          <span id="notification-count" class="admin-nav-count" hidden>0</span>
         </button>
       </nav>
     </aside>
@@ -294,9 +310,40 @@
         </article>
       </section>
 
+      <section class="admin-panel" id="notifications">
+        <div class="admin-page-heading">
+          <div>
+            <p class="admin-kicker">ACTIVITY CENTER</p>
+            <h1>Notifications</h1>
+            <p>Review recent client registrations and invoice activity.</p>
+          </div>
+        </div>
+
+        <article class="admin-card">
+          <div class="admin-card-heading">
+            <div>
+              <p class="admin-kicker">RECENT ACTIVITY</p>
+              <h2>Business notifications</h2>
+            </div>
+
+            <button id="enable-browser-notifications" class="admin-secondary-button" type="button">
+              Enable Phone Notifications
+            </button>
+          </div>
+
+          <p id="notification-status" class="admin-status">
+            Notifications appear here while the dashboard is open.
+          </p>
+
+          <div id="notification-list" class="admin-list">
+            <p class="admin-status">Loading activity...</p>
+          </div>
+        </article>
+      </section>
+
     </section>
   </main>
 
-  <script type="module" src="js/admin-dashboard.js?v=1"></script>
+  <script type="module" src="js/admin-dashboard.js?v=2"></script>
 </body>
 </html>

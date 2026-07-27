@@ -16,7 +16,8 @@ import {
   query,
   serverTimestamp,
   setDoc,
-  Timestamp
+  Timestamp,
+  updateDoc
 } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
 import {
@@ -51,9 +52,22 @@ const statUnpaid = document.getElementById("stat-unpaid");
 const statPaid = document.getElementById("stat-paid");
 const statBalance = document.getElementById("stat-balance");
 
+const menuToggle = document.getElementById("admin-menu-toggle");
+const adminSidebar = document.getElementById("admin-sidebar");
+const sidebarOverlay = document.getElementById("admin-sidebar-overlay");
+
+const notificationList = document.getElementById("notification-list");
+const notificationCount = document.getElementById("notification-count");
+const notificationStatus = document.getElementById("notification-status");
+const enableBrowserNotificationsButton =
+  document.getElementById("enable-browser-notifications");
+
 let currentAdmin = null;
 let clientRecords = [];
 let invoiceRecords = [];
+let activityRecords = [];
+let firstClientSnapshotLoaded = false;
+let firstInvoiceSnapshotLoaded = false;
 
 const showStatus = (element, message, type = "") => {
   if (!element) return;
@@ -93,6 +107,42 @@ const formatDate = (value) => {
   });
 };
 
+
+const closeMobileMenu = () => {
+  if (!adminSidebar || !sidebarOverlay || !menuToggle) return;
+  adminSidebar.classList.remove("open");
+  adminSidebar.setAttribute("aria-hidden", "true");
+  sidebarOverlay.hidden = true;
+  menuToggle.setAttribute("aria-expanded", "false");
+};
+
+const openMobileMenu = () => {
+  if (!adminSidebar || !sidebarOverlay || !menuToggle) return;
+  adminSidebar.classList.add("open");
+  adminSidebar.setAttribute("aria-hidden", "false");
+  sidebarOverlay.hidden = false;
+  menuToggle.setAttribute("aria-expanded", "true");
+};
+
+menuToggle?.addEventListener("click", () => {
+  if (adminSidebar?.classList.contains("open")) {
+    closeMobileMenu();
+  } else {
+    openMobileMenu();
+  }
+});
+
+sidebarOverlay?.addEventListener("click", closeMobileMenu);
+
+window.addEventListener("resize", () => {
+  if (window.innerWidth > 760) {
+    adminSidebar?.classList.remove("open");
+    adminSidebar?.setAttribute("aria-hidden", "false");
+    if (sidebarOverlay) sidebarOverlay.hidden = true;
+    menuToggle?.setAttribute("aria-expanded", "false");
+  }
+});
+
 const setActivePanel = (panelId) => {
   panels.forEach((panel) => {
     panel.classList.toggle("active", panel.id === panelId);
@@ -109,6 +159,12 @@ const setActivePanel = (panelId) => {
 navButtons.forEach((button) => {
   button.addEventListener("click", () => {
     setActivePanel(button.dataset.panel);
+
+    if (button.dataset.panel === "notifications") {
+      markNotificationsSeen();
+    }
+
+    if (window.innerWidth <= 760) closeMobileMenu();
   });
 });
 
@@ -210,16 +266,54 @@ const renderInvoices = () => {
 
     info.append(title, meta);
 
+    const actions = document.createElement("div");
+    actions.className = "admin-list-actions";
+
     const badge = document.createElement("span");
     badge.className =
       `admin-badge ${invoice.status === "paid" ? "paid" : ""}`;
     badge.textContent = invoice.status || "unpaid";
 
-    item.append(info, badge);
+    const toggleButton = document.createElement("button");
+    toggleButton.type = "button";
+    toggleButton.className =
+      `admin-small-button ${invoice.status === "paid" ? "" : "success"}`;
+    toggleButton.textContent =
+      invoice.status === "paid" ? "Mark Unpaid" : "Mark Paid";
+
+    toggleButton.addEventListener("click", async () => {
+      const nextStatus =
+        invoice.status === "paid" ? "unpaid" : "paid";
+
+      toggleButton.disabled = true;
+      toggleButton.textContent = "Updating...";
+
+      try {
+        await updateDoc(
+          doc(db, "users", invoice.userId, "invoices", invoice.id),
+          {
+            status: nextStatus,
+            updatedAt: serverTimestamp(),
+            paidAt:
+              nextStatus === "paid"
+                ? serverTimestamp()
+                : null,
+            updatedBy: currentAdmin.uid
+          }
+        );
+      } catch (error) {
+        console.error("Invoice status update failed:", error);
+        alert("The invoice status could not be updated.");
+      } finally {
+        toggleButton.disabled = false;
+      }
+    });
+
+    actions.append(badge, toggleButton);
+    item.append(info, actions);
     invoiceList.appendChild(item);
   });
 };
-
 const updateStats = () => {
   const unpaid = invoiceRecords.filter(
     (invoice) => invoice.status !== "paid"
@@ -239,6 +333,135 @@ const updateStats = () => {
   statPaid.textContent = String(paid.length);
   statBalance.textContent = formatCurrency(outstanding);
 };
+
+
+const timestampToMillis = (value) => {
+  if (!value) return 0;
+  if (typeof value?.toMillis === "function") return value.toMillis();
+  const parsed = new Date(value).getTime();
+  return Number.isNaN(parsed) ? 0 : parsed;
+};
+
+const notifyDevice = (title, body) => {
+  if (
+    "Notification" in window &&
+    Notification.permission === "granted" &&
+    document.visibilityState !== "visible"
+  ) {
+    new Notification(title, { body });
+  }
+};
+
+const rebuildActivity = () => {
+  const clientActivity = clientRecords.map((client) => ({
+    id: `client-${client.id}`,
+    type: "client",
+    title: "New client account",
+    detail:
+      client.fullName ||
+      client.email ||
+      "A client account was created.",
+    createdAt: client.createdAt,
+    time: timestampToMillis(client.createdAt)
+  }));
+
+  const invoiceActivity = invoiceRecords.map((invoice) => ({
+    id: `invoice-${invoice.userId}-${invoice.id}-${invoice.status}`,
+    type: "invoice",
+    title:
+      invoice.status === "paid"
+        ? "Invoice marked paid"
+        : "Invoice created",
+    detail:
+      `${invoice.invoiceNumber || "Invoice"} — ${formatCurrency(invoice.amount)}`,
+    createdAt: invoice.updatedAt || invoice.createdAt,
+    time: timestampToMillis(invoice.updatedAt || invoice.createdAt)
+  }));
+
+  activityRecords = [...clientActivity, ...invoiceActivity]
+    .sort((a, b) => b.time - a.time)
+    .slice(0, 30);
+
+  renderActivity();
+};
+
+const renderActivity = () => {
+  if (!notificationList) return;
+
+  notificationList.replaceChildren();
+
+  if (activityRecords.length === 0) {
+    notificationList.innerHTML =
+      '<p class="admin-status">No recent activity yet.</p>';
+    if (notificationCount) notificationCount.hidden = true;
+    return;
+  }
+
+  const lastSeen =
+    Number(localStorage.getItem("bamAdminNotificationsSeenAt")) || 0;
+
+  const unread = activityRecords.filter(
+    (activity) => activity.time > lastSeen
+  ).length;
+
+  if (notificationCount) {
+    notificationCount.textContent = String(unread);
+    notificationCount.hidden = unread === 0;
+  }
+
+  activityRecords.forEach((activity) => {
+    const item = document.createElement("div");
+    item.className =
+      `admin-list-item admin-notification-item ${
+        activity.time > lastSeen ? "unread" : ""
+      }`;
+
+    const info = document.createElement("div");
+    info.className = "admin-list-info";
+
+    const title = document.createElement("strong");
+    title.textContent = activity.title;
+
+    const detail = document.createElement("div");
+    detail.className = "admin-list-meta";
+    detail.textContent = activity.detail;
+
+    const time = document.createElement("div");
+    time.className = "admin-notification-time";
+    time.textContent =
+      activity.createdAt
+        ? formatDate(activity.createdAt)
+        : "Recent activity";
+
+    info.append(title, detail, time);
+    item.append(info);
+    notificationList.appendChild(item);
+  });
+};
+
+const markNotificationsSeen = () => {
+  localStorage.setItem(
+    "bamAdminNotificationsSeenAt",
+    String(Date.now())
+  );
+
+  renderActivity();
+};
+
+enableBrowserNotificationsButton?.addEventListener("click", async () => {
+  if (!("Notification" in window)) {
+    notificationStatus.textContent =
+      "This browser does not support device notifications.";
+    return;
+  }
+
+  const permission = await Notification.requestPermission();
+
+  notificationStatus.textContent =
+    permission === "granted"
+      ? "Phone/browser notifications are enabled while this dashboard is open."
+      : "Notification permission was not granted.";
+});
 
 const watchClients = () => {
   const clientsQuery = query(
@@ -260,6 +483,40 @@ const watchClients = () => {
       buildClientOptions();
       renderInvoices();
       updateStats();
+      rebuildActivity();
+
+      if (firstInvoiceSnapshotLoaded) {
+        snapshot.docChanges().forEach((change) => {
+          if (change.type === "modified") {
+            const data = change.doc.data();
+            if (data.status === "paid") {
+              notifyDevice(
+                "Invoice paid",
+                `${data.invoiceNumber || "Invoice"} was marked paid.`
+              );
+            }
+          }
+        });
+      }
+
+      firstInvoiceSnapshotLoaded = true;
+      rebuildActivity();
+
+      if (firstClientSnapshotLoaded) {
+        snapshot.docChanges().forEach((change) => {
+          if (change.type === "added") {
+            const data = change.doc.data();
+            if (data.role !== "admin") {
+              notifyDevice(
+                "New client registered",
+                data.fullName || data.email || "A new client joined."
+              );
+            }
+          }
+        });
+      }
+
+      firstClientSnapshotLoaded = true;
     },
     (error) => {
       console.error("Unable to load clients:", error);
