@@ -7,7 +7,8 @@
 <meta content="Panel de proyectos para clientes de BAM's Website Builder." name="description"/>
 <title>Portal del cliente | BAM's Website Builder</title>
 <link href="../css/style.css?v=71" rel="stylesheet"/>
-<link href="../css/portal.css?v=80" rel="stylesheet"/><link href="../css/portal-empty-state.css?v=80" rel="stylesheet"/>
+<link href="../css/portal.css?v=81" rel="stylesheet"/>
+<link href="../css/portal-empty-state.css?v=81" rel="stylesheet"/>
 <link href="../images/icon-dark.jpg" rel="icon" type="image/jpeg"/></head>
 <body class="client-portal-page" data-auth-protected="true"><header class="site-header" id="site-header">
 <div class="header-container">
@@ -21,15 +22,15 @@
 <a data-page="index" href="../index.html">Inicio</a><a data-page="services" href="../services.html">Servicios</a><a data-page="prices" href="../prices.html">Precios</a><a data-page="portfolio" href="../portfolio.html">Portafolio</a><a data-page="reviews" href="../reviews.html">Reseñas</a><a data-page="contact" href="../contact.html">Contacto</a><a aria-current="page" class="active" data-page="login" href="login.html">Acceso de clientes</a>
 </nav>
 <div class="desktop-language">
-<a class="" href="../client-portal.html">Inglés</a>
+<a href="../client-portal.html">Inglés</a>
 <span aria-hidden="true">|</span>
 <a class="language-active" href="client-portal.html">Español</a>
 </div>
-<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open navigation menu" class="menu-toggle" id="menu-toggle" type="button">
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menú de navegación" class="menu-toggle" id="menu-toggle" type="button">
 <span></span><span></span><span></span>
 </button>
 </div>
-</header><div class="menu-overlay" id="menu-overlay"></div><aside aria-hidden="true" aria-label="Mobile navigation" class="mobile-menu" id="mobile-menu">
+</header><div class="menu-overlay" id="menu-overlay"></div><aside aria-hidden="true" aria-label="Navegación móvil" class="mobile-menu" id="mobile-menu">
 <div class="mobile-menu-header">
 <a class="mobile-menu-brand" href="../index.html">
 <span>
@@ -37,7 +38,7 @@
 <small>WEBSITE BUILDER</small>
 </span>
 </a>
-<button aria-label="Close navigation menu" class="mobile-menu-close" id="mobile-menu-close" type="button">
+<button aria-label="Cerrar menú de navegación" class="mobile-menu-close" id="mobile-menu-close" type="button">
 <span></span><span></span>
 </button>
 </div>
@@ -47,7 +48,7 @@
 <div class="mobile-language-section">
 <p>Idioma</p>
 <div class="mobile-language-links">
-<a class="" href="../client-portal.html">Inglés</a>
+<a href="../client-portal.html">Inglés</a>
 <a class="language-active" href="client-portal.html">Español</a>
 </div>
 </div>
@@ -77,7 +78,7 @@
 </section>
 <section class="portal-layout">
 <aside class="portal-sidebar">
-<nav aria-label="Client portal sections" class="portal-nav">
+<nav aria-label="Secciones del portal del cliente" class="portal-nav">
 <button class="portal-nav-link active" data-panel="dashboard" type="button">Panel</button>
 <button class="portal-nav-link" data-panel="project" type="button">Mi proyecto</button>
 <button class="portal-nav-link" data-panel="files" type="button">Archivos</button>
@@ -92,10 +93,7 @@
 <article class="portal-card portal-empty-state">
 <p class="card-kicker">BIENVENIDO A TU PORTAL</p>
 <h2>Todavía no se ha asignado ningún proyecto</h2>
-<p>
-    Tu cuenta está lista. Cuando BAM's Website Builder asigne un proyecto,
-    aquí aparecerán el progreso, los archivos, las facturas y los mensajes.
-  </p>
+<p>Tu cuenta está lista. Cuando BAM's Website Builder asigne un proyecto, aquí aparecerán el progreso, los archivos, las facturas y los mensajes.</p>
 <div class="portal-actions">
 <a class="portal-primary-button" href="../contact.html">Contactar soporte</a>
 </div>
@@ -110,53 +108,22 @@
 </section>
 <section class="portal-panel" id="files">
 <article class="portal-card">
-<div class="card-heading">
-<div>
+<div class="card-heading"><div>
 <p class="card-kicker">ARCHIVOS DEL PROYECTO</p>
 <h2>Sube tus archivos</h2>
 <p>Sube logotipos, fotos, archivos PDF, documentos y otros materiales necesarios para tu proyecto de sitio web.</p>
-</div>
-</div>
-
+</div></div>
 <div class="portal-upload-box">
 <label class="portal-file-picker" for="portal-file-input">
 <span id="selected-file-name">Elegir archivo</span>
 </label>
-
-<input
-id="portal-file-input"
-type="file"
-accept=".jpg,.jpeg,.png,.webp,.gif,.pdf,.doc,.docx,.txt,.zip"
-/>
-
-<button
-class="portal-primary-button"
-id="upload-file-button"
-type="button"
-disabled
->
-Subir archivo
-</button>
-
-<progress
-id="upload-progress"
-max="100"
-value="0"
-hidden
-></progress>
-
-<p
-class="portal-file-status"
-id="upload-status"
-role="status"
-hidden
-></p>
-
+<input id="portal-file-input" type="file" accept=".jpg,.jpeg,.png,.webp,.gif,.pdf,.doc,.docx,.txt,.zip"/>
+<button class="portal-primary-button" id="upload-file-button" type="button" disabled>Subir archivo</button>
+<progress id="upload-progress" max="100" value="0" hidden></progress>
+<p class="portal-file-status" id="upload-status" role="status" hidden></p>
 <small>Tamaño máximo por archivo: 15 MB.</small>
 </div>
-
 <h3 class="section-subtitle">Tus archivos subidos</h3>
-
 <div class="file-list" id="client-file-list">
 <p class="portal-file-status">Buscando archivos subidos...</p>
 </div>
@@ -185,12 +152,10 @@ hidden
 </section>
 <section class="portal-panel" id="account">
 <article class="portal-card">
-<div class="card-heading">
-<div>
+<div class="card-heading"><div>
 <p class="card-kicker">CONFIGURACIÓN DE LA CUENTA</p>
 <h2>Información del perfil</h2>
-</div>
-</div>
+</div></div>
 <form class="portal-form" id="account-form">
 <div class="portal-form-grid">
 <div class="form-group">
@@ -211,7 +176,8 @@ hidden
 </div>
 </div>
 <div class="portal-actions">
-<p class="form-alert" hidden="" id="account-alert" role="status"></p><button class="portal-primary-button" type="submit">Guardar cambios</button>
+<p class="form-alert" hidden id="account-alert" role="status"></p>
+<button class="portal-primary-button" type="submit">Guardar cambios</button>
 <a class="portal-secondary-button" href="forgot-password.html">Cambiar contraseña</a>
 </div>
 </form>
@@ -225,6 +191,7 @@ hidden
 <p><a href="../contact.html">Contactar soporte</a></p>
 </footer>
 <script src="../js/navigation.js?v=71"></script>
-<script src="../js/portal.js?v=80"></script>
-<script src="../js/portal-auth-es.js?v=80" type="module"></script></body>
+<script src="../js/portal.js?v=81"></script>
+<script type="module" src="../js/portal-auth-es.js?v=81"></script>
+</body>
 </html>
