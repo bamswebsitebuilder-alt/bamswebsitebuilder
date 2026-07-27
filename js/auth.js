@@ -8,12 +8,12 @@ import {
   setPersistence,
   signInWithEmailAndPassword,
   updateProfile
-} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
 import {
   doc,
   serverTimestamp,
   setDoc
-} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
 const setAlert = (element, message, isSuccess = false) => {
   if (!element) return;

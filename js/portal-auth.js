@@ -3,13 +3,13 @@ import {
   onAuthStateChanged,
   signOut,
   updateProfile
-} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
 import {
   doc,
   getDoc,
   serverTimestamp,
   setDoc
-} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
 const welcome = document.getElementById("portal-welcome");
 const userName = document.getElementById("portal-user-name");
@@ -77,7 +77,22 @@ onAuthStateChanged(auth, async (user) => {
   }
 
   currentUser = user;
-  await loadProfile(user);
+
+  try {
+    await loadProfile(user);
+  } catch (error) {
+    console.error("Portal account loading failed:", error);
+
+    const fallbackName =
+      user.displayName ||
+      user.email?.split("@")[0] ||
+      "Client";
+
+    welcome.textContent = `Welcome back, ${fallbackName.split(" ")[0]}`;
+    userName.textContent = fallbackName;
+    userEmail.textContent = user.email || "";
+    avatar.textContent = fallbackName.charAt(0).toUpperCase();
+  }
 });
 
 logout?.addEventListener("click", async (event) => {
