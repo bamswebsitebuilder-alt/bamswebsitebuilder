@@ -3,7 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="BAM's Website Builder administration dashboard.">
+  <meta
+    name="description"
+    content="BAM's Website Builder administration dashboard."
+  >
+
   <title>Admin Dashboard | BAM's Website Builder</title>
 
   <link rel="stylesheet" href="css/style.css?v=71">
@@ -22,62 +26,118 @@
       aria-controls="admin-sidebar"
       aria-expanded="false"
     >
-      <span></span><span></span><span></span>
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
+
     <a class="admin-brand" href="index.html">
       <strong>BAM'S</strong>
       <span>WEBSITE BUILDER</span>
     </a>
 
     <div class="admin-header-actions">
-      <a class="admin-header-link" href="index.html">Website Home</a>
-      <a class="admin-header-link" href="client-portal.html">Client Portal</a>
+      <a class="admin-header-link" href="index.html">
+        Website Home
+      </a>
+
+      <a class="admin-header-link" href="client-portal.html">
+        Client Portal
+      </a>
+
       <span id="admin-email">Checking account...</span>
-      <button id="admin-logout" type="button">Log Out</button>
+
+      <button id="admin-logout" type="button">
+        Log Out
+      </button>
     </div>
   </header>
 
   <main class="admin-shell">
-    <div id="admin-sidebar-overlay" class="admin-sidebar-overlay" hidden></div>
-    <aside class="admin-sidebar" id="admin-sidebar" aria-hidden="false">
+
+    <div
+      id="admin-sidebar-overlay"
+      class="admin-sidebar-overlay"
+      hidden
+    ></div>
+
+    <aside
+      class="admin-sidebar"
+      id="admin-sidebar"
+      aria-hidden="false"
+    >
       <p class="admin-sidebar-label">ADMIN</p>
 
       <nav class="admin-nav" aria-label="Admin dashboard sections">
-        <button class="admin-nav-button active" data-panel="overview" type="button">
+
+        <button
+          class="admin-nav-button active"
+          data-panel="overview"
+          type="button"
+        >
           Overview
         </button>
 
-        <button class="admin-nav-button" data-panel="clients" type="button">
+        <button
+          class="admin-nav-button"
+          data-panel="clients"
+          type="button"
+        >
           Clients
         </button>
 
-        <button class="admin-nav-button" data-panel="invoices" type="button">
+        <button
+          class="admin-nav-button"
+          data-panel="invoices"
+          type="button"
+        >
           Invoices
         </button>
 
-        <button class="admin-nav-button" data-panel="files" type="button">
+        <button
+          class="admin-nav-button"
+          data-panel="files"
+          type="button"
+        >
           Client Files
         </button>
 
-        <button class="admin-nav-button" data-panel="notifications" type="button">
+        <button
+          class="admin-nav-button"
+          data-panel="notifications"
+          type="button"
+        >
           Notifications
-          <span id="notification-count" class="admin-nav-count" hidden>0</span>
+
+          <span
+            id="notification-count"
+            class="admin-nav-count"
+            hidden
+          >
+            0
+          </span>
         </button>
+
       </nav>
     </aside>
 
     <section class="admin-content">
 
+      <!-- OVERVIEW PANEL -->
       <section class="admin-panel active" id="overview">
+
         <div class="admin-page-heading">
           <div>
             <p class="admin-kicker">BUSINESS OVERVIEW</p>
             <h1>Admin Dashboard</h1>
-            <p>Manage clients, invoices, and project files.</p>
+            <p>
+              Manage clients, PayPal invoices, and project files.
+            </p>
           </div>
         </div>
 
         <div class="admin-stat-grid">
+
           <article class="admin-stat-card">
             <span>Total clients</span>
             <strong id="stat-clients">0</strong>
@@ -97,9 +157,11 @@
             <span>Outstanding balance</span>
             <strong id="stat-balance">$0.00</strong>
           </article>
+
         </div>
 
         <article class="admin-card">
+
           <div class="admin-card-heading">
             <div>
               <p class="admin-kicker">QUICK ACTIONS</p>
@@ -108,22 +170,40 @@
           </div>
 
           <div class="admin-action-row">
-            <button class="admin-primary-button" data-open-panel="clients" type="button">
+
+            <button
+              class="admin-primary-button"
+              data-open-panel="clients"
+              type="button"
+            >
               Add a Client
             </button>
 
-            <button class="admin-secondary-button" data-open-panel="invoices" type="button">
-              Create an Invoice
+            <button
+              class="admin-secondary-button"
+              data-open-panel="invoices"
+              type="button"
+            >
+              Add a PayPal Invoice
             </button>
 
-            <button class="admin-secondary-button" data-open-panel="files" type="button">
+            <button
+              class="admin-secondary-button"
+              data-open-panel="files"
+              type="button"
+            >
               Upload Client File
             </button>
+
           </div>
+
         </article>
+
       </section>
 
+      <!-- CLIENTS PANEL -->
       <section class="admin-panel" id="clients">
+
         <div class="admin-page-heading">
           <div>
             <p class="admin-kicker">CLIENT MANAGEMENT</p>
@@ -133,6 +213,7 @@
         </div>
 
         <article class="admin-card">
+
           <div class="admin-card-heading">
             <div>
               <p class="admin-kicker">ADD CLIENT</p>
@@ -141,42 +222,101 @@
           </div>
 
           <form id="client-form" class="admin-form">
+
             <div class="admin-form-grid">
+
               <div class="admin-field">
-                <label for="client-uid">Firebase UID</label>
-                <input id="client-uid" required>
-                <small>Copy this from Firebase Authentication.</small>
+                <label for="client-uid">
+                  Firebase UID
+                </label>
+
+                <input
+                  id="client-uid"
+                  type="text"
+                  autocomplete="off"
+                  required
+                >
+
+                <small>
+                  Copy this from Firebase Authentication.
+                </small>
               </div>
 
               <div class="admin-field">
-                <label for="client-name">Full name</label>
-                <input id="client-name" required>
+                <label for="client-name">
+                  Full name
+                </label>
+
+                <input
+                  id="client-name"
+                  type="text"
+                  autocomplete="name"
+                  required
+                >
               </div>
 
               <div class="admin-field">
-                <label for="client-email">Email</label>
-                <input id="client-email" type="email" required>
+                <label for="client-email">
+                  Email
+                </label>
+
+                <input
+                  id="client-email"
+                  type="email"
+                  autocomplete="email"
+                  required
+                >
               </div>
 
               <div class="admin-field">
-                <label for="client-business">Business name</label>
-                <input id="client-business">
+                <label for="client-business">
+                  Business name
+                </label>
+
+                <input
+                  id="client-business"
+                  type="text"
+                  autocomplete="organization"
+                >
               </div>
 
               <div class="admin-field">
-                <label for="client-phone">Phone</label>
-                <input id="client-phone" type="tel">
+                <label for="client-phone">
+                  Phone
+                </label>
+
+                <input
+                  id="client-phone"
+                  type="tel"
+                  autocomplete="tel"
+                >
               </div>
+
             </div>
 
             <div class="admin-form-actions">
-              <p id="client-form-status" class="admin-status" hidden></p>
-              <button class="admin-primary-button" type="submit">Save Client</button>
+
+              <p
+                id="client-form-status"
+                class="admin-status"
+                hidden
+              ></p>
+
+              <button
+                class="admin-primary-button"
+                type="submit"
+              >
+                Save Client
+              </button>
+
             </div>
+
           </form>
+
         </article>
 
         <article class="admin-card">
+
           <div class="admin-card-heading">
             <div>
               <p class="admin-kicker">CLIENT LIST</p>
@@ -185,71 +325,153 @@
           </div>
 
           <div id="client-list" class="admin-list">
-            <p class="admin-status">Loading clients...</p>
+            <p class="admin-status">
+              Loading clients...
+            </p>
           </div>
+
         </article>
+
       </section>
 
+      <!-- INVOICES PANEL -->
       <section class="admin-panel" id="invoices">
+
         <div class="admin-page-heading">
           <div>
             <p class="admin-kicker">BILLING</p>
-            <h1>Invoices</h1>
-            <p>Create invoices that appear in each client's portal.</p>
+            <h1>PayPal Invoices</h1>
+            <p>
+              Add PayPal invoices that appear in each client's portal.
+            </p>
           </div>
         </div>
 
         <article class="admin-card">
+
           <div class="admin-card-heading">
             <div>
-              <p class="admin-kicker">CREATE INVOICE</p>
-              <h2>Invoice details</h2>
+              <p class="admin-kicker">ADD INVOICE</p>
+              <h2>PayPal invoice details</h2>
             </div>
           </div>
 
           <form id="invoice-form" class="admin-form">
+
             <div class="admin-form-grid">
+
               <div class="admin-field">
-                <label for="invoice-client">Client</label>
+                <label for="invoice-client">
+                  Client
+                </label>
+
                 <select id="invoice-client" required>
-                  <option value="">Choose a client</option>
+                  <option value="">
+                    Choose a client
+                  </option>
                 </select>
               </div>
 
               <div class="admin-field">
-                <label for="invoice-number">Invoice number</label>
-                <input id="invoice-number" placeholder="#1001" required>
+                <label for="invoice-number">
+                  Invoice number
+                </label>
+
+                <input
+                  id="invoice-number"
+                  type="text"
+                  placeholder="#1001"
+                  autocomplete="off"
+                  required
+                >
               </div>
 
               <div class="admin-field">
-                <label for="invoice-amount">Amount</label>
-                <input id="invoice-amount" type="number" min="0.01" step="0.01" required>
+                <label for="invoice-amount">
+                  Amount
+                </label>
+
+                <input
+                  id="invoice-amount"
+                  type="number"
+                  min="0.01"
+                  step="0.01"
+                  inputmode="decimal"
+                  placeholder="535.00"
+                  required
+                >
               </div>
 
               <div class="admin-field">
-                <label for="invoice-due-date">Due date</label>
-                <input id="invoice-due-date" type="date" required>
+                <label for="invoice-due-date">
+                  Due date
+                </label>
+
+                <input
+                  id="invoice-due-date"
+                  type="date"
+                  required
+                >
               </div>
 
               <div class="admin-field admin-field-full">
-                <label for="invoice-description">Description</label>
-                <textarea id="invoice-description" rows="4" required></textarea>
+                <label for="invoice-description">
+                  Description
+                </label>
+
+                <textarea
+                  id="invoice-description"
+                  rows="4"
+                  placeholder="Describe the service or work included in this invoice."
+                  required
+                ></textarea>
               </div>
 
               <div class="admin-field admin-field-full">
-                <label for="invoice-pdf-url">Invoice PDF URL (optional)</label>
-                <input id="invoice-pdf-url" type="url" placeholder="https://...">
+                <label for="invoice-pdf-url">
+                  PayPal Invoice Link
+                </label>
+
+                <input
+                  id="invoice-pdf-url"
+                  type="url"
+                  inputmode="url"
+                  autocomplete="url"
+                  placeholder="Paste the PayPal invoice link here"
+                >
+
+                <small>
+                  Open the invoice in PayPal, copy its shareable link,
+                  and paste it here. Keep this field ID unchanged so
+                  your current JavaScript continues to work.
+                </small>
               </div>
+
             </div>
 
             <div class="admin-form-actions">
-              <p id="invoice-form-status" class="admin-status" hidden></p>
-              <button class="admin-primary-button" type="submit">Create Invoice</button>
+
+              <p
+                id="invoice-form-status"
+                class="admin-status"
+                hidden
+              ></p>
+
+              <button
+                class="admin-primary-button"
+                type="submit"
+              >
+                Add PayPal Invoice
+              </button>
+
             </div>
+
           </form>
+
         </article>
 
         <article class="admin-card">
+
           <div class="admin-card-heading">
             <div>
               <p class="admin-kicker">INVOICE LIST</p>
@@ -258,21 +480,30 @@
           </div>
 
           <div id="invoice-list" class="admin-list">
-            <p class="admin-status">Loading invoices...</p>
+            <p class="admin-status">
+              Loading invoices...
+            </p>
           </div>
+
         </article>
+
       </section>
 
+      <!-- CLIENT FILES PANEL -->
       <section class="admin-panel" id="files">
+
         <div class="admin-page-heading">
           <div>
             <p class="admin-kicker">PROJECT FILES</p>
             <h1>Client Files</h1>
-            <p>Upload files directly into a client's portal.</p>
+            <p>
+              Upload files directly into a client's portal.
+            </p>
           </div>
         </div>
 
         <article class="admin-card">
+
           <div class="admin-card-heading">
             <div>
               <p class="admin-kicker">UPLOAD FILE</p>
@@ -281,16 +512,26 @@
           </div>
 
           <form id="admin-file-form" class="admin-form">
+
             <div class="admin-form-grid">
+
               <div class="admin-field">
-                <label for="file-client">Client</label>
+                <label for="file-client">
+                  Client
+                </label>
+
                 <select id="file-client" required>
-                  <option value="">Choose a client</option>
+                  <option value="">
+                    Choose a client
+                  </option>
                 </select>
               </div>
 
               <div class="admin-field">
-                <label for="admin-file-input">File</label>
+                <label for="admin-file-input">
+                  File
+                </label>
+
                 <input
                   id="admin-file-input"
                   type="file"
@@ -298,52 +539,96 @@
                   required
                 >
               </div>
+
             </div>
 
-            <progress id="admin-upload-progress" max="100" value="0" hidden></progress>
+            <progress
+              id="admin-upload-progress"
+              max="100"
+              value="0"
+              hidden
+            ></progress>
 
             <div class="admin-form-actions">
-              <p id="file-form-status" class="admin-status" hidden></p>
-              <button class="admin-primary-button" type="submit">Upload File</button>
+
+              <p
+                id="file-form-status"
+                class="admin-status"
+                hidden
+              ></p>
+
+              <button
+                class="admin-primary-button"
+                type="submit"
+              >
+                Upload File
+              </button>
+
             </div>
+
           </form>
+
         </article>
+
       </section>
 
+      <!-- NOTIFICATIONS PANEL -->
       <section class="admin-panel" id="notifications">
+
         <div class="admin-page-heading">
           <div>
             <p class="admin-kicker">ACTIVITY CENTER</p>
             <h1>Notifications</h1>
-            <p>Review recent client registrations and invoice activity.</p>
+            <p>
+              Review recent client registrations and invoice activity.
+            </p>
           </div>
         </div>
 
         <article class="admin-card">
+
           <div class="admin-card-heading">
+
             <div>
               <p class="admin-kicker">RECENT ACTIVITY</p>
               <h2>Business notifications</h2>
             </div>
 
-            <button id="enable-browser-notifications" class="admin-secondary-button" type="button">
+            <button
+              id="enable-browser-notifications"
+              class="admin-secondary-button"
+              type="button"
+            >
               Enable Phone Notifications
             </button>
+
           </div>
 
-          <p id="notification-status" class="admin-status">
+          <p
+            id="notification-status"
+            class="admin-status"
+          >
             Notifications appear here while the dashboard is open.
           </p>
 
           <div id="notification-list" class="admin-list">
-            <p class="admin-status">Loading activity...</p>
+            <p class="admin-status">
+              Loading activity...
+            </p>
           </div>
+
         </article>
+
       </section>
 
     </section>
+
   </main>
 
-  <script type="module" src="js/admin-dashboard.js?v=3"></script>
+  <script
+    type="module"
+    src="js/admin-dashboard.js?v=3"
+  ></script>
+
 </body>
 </html>
