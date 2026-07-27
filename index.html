@@ -5,8 +5,82 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>BAM's Website Builder</title>
-<link href="css/style.css?v=71" rel="stylesheet"/>
+<link href="css/style.css?v=72" rel="stylesheet"/>
 <link href="images/icon-dark.jpg" rel="icon" type="image/jpeg"/>
+
+<style>
+/* BAM'S HOMEPAGE EXPANSION */
+.home-section{padding:clamp(64px,8vw,110px) clamp(20px,5vw,72px);background:#090909;color:#f8f8f8}
+.home-section-alt{background:#0f0f0f}
+.home-container{width:min(1180px,100%);margin:0 auto}
+.home-eyebrow{margin:0 0 12px;color:#f0c45a;font-size:.78rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.home-title{margin:0;font-size:clamp(2rem,5vw,3.5rem);line-height:1.08}
+.home-intro{max-width:760px;margin:18px auto 0;color:#b8b8b8;font-size:1.04rem;line-height:1.8}
+.home-center{text-align:center}
+.home-grid{display:grid;gap:20px}
+.home-grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.home-grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.home-card{padding:28px;border:1px solid rgba(212,166,55,.24);border-radius:20px;background:linear-gradient(145deg,#111,#171717);box-shadow:0 16px 50px rgba(0,0,0,.22)}
+.home-card h3{margin:16px 0 10px;font-size:1.2rem}
+.home-card p{margin:0;color:#aaa;line-height:1.7}
+.home-icon{width:48px;height:48px;display:grid;place-items:center;border:1px solid rgba(212,166,55,.38);border-radius:14px;background:rgba(212,166,55,.1);color:#f0c45a;font-size:1.35rem;font-weight:900}
+.home-link{display:inline-flex;margin-top:18px;color:#f0c45a;text-decoration:none;font-weight:800}
+.home-link:hover{text-decoration:underline}
+.hero-trust{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:10px;margin-top:24px}
+.hero-trust span{padding:9px 12px;border:1px solid rgba(212,166,55,.28);border-radius:999px;background:rgba(0,0,0,.35);color:#eee;font-size:.82rem}
+.home-section-heading{margin-bottom:38px}
+.services-home .home-card{height:100%}
+.portfolio-preview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.portfolio-home-card{overflow:hidden;padding:0}
+.portfolio-home-visual{min-height:200px;display:grid;place-items:center;background:radial-gradient(circle at top right,rgba(240,196,90,.22),transparent 45%),linear-gradient(135deg,#171717,#080808);border-bottom:1px solid rgba(212,166,55,.22);font-size:3rem;font-weight:900;color:#f0c45a}
+.portfolio-home-content{padding:26px}
+.portfolio-type{color:#f0c45a;font-size:.76rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
+.process-grid{counter-reset:step;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.process-card{position:relative;padding:30px 24px 26px}
+.process-number{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:#d4a637;color:#111;font-weight:900}
+.stats-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;border:1px solid rgba(212,166,55,.25);border-radius:20px;overflow:hidden;background:rgba(212,166,55,.25)}
+.stat-block{padding:28px 18px;text-align:center;background:#111}
+.stat-block strong{display:block;color:#f0c45a;font-size:clamp(1.7rem,4vw,2.5rem)}
+.stat-block span{display:block;margin-top:8px;color:#aaa;font-size:.9rem}
+.review-callout{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
+.review-panel{padding:34px;border:1px solid rgba(212,166,55,.25);border-radius:22px;background:linear-gradient(145deg,#111,#171717)}
+.review-stars{color:#f0c45a;font-size:1.5rem;letter-spacing:.15em}
+.review-panel p{color:#b8b8b8;line-height:1.8}
+.home-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.home-button,.home-button-secondary{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 20px;border-radius:10px;text-decoration:none;font-weight:900}
+.home-button{background:#d4a637;color:#111}
+.home-button-secondary{border:1px solid rgba(212,166,55,.35);color:#fff}
+.faq-list{display:grid;gap:12px;max-width:900px;margin:0 auto}
+.faq-list details{border:1px solid rgba(212,166,55,.22);border-radius:14px;background:#111;padding:0 20px}
+.faq-list summary{cursor:pointer;list-style:none;padding:20px 36px 20px 0;font-weight:800;position:relative}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary::after{content:"+";position:absolute;right:0;top:16px;color:#f0c45a;font-size:1.5rem}
+.faq-list details[open] summary::after{content:"−"}
+.faq-list details p{margin:0;padding:0 0 20px;color:#aaa;line-height:1.75}
+.final-cta{padding:clamp(70px,10vw,130px) clamp(20px,5vw,72px);text-align:center;background:radial-gradient(circle at center,rgba(212,166,55,.18),transparent 58%),#080808;color:white;border-top:1px solid rgba(212,166,55,.2)}
+.final-cta p{max-width:700px;margin:18px auto 0;color:#b8b8b8;line-height:1.8}
+.home-footer{background:#050505;color:#aaa;border-top:1px solid rgba(212,166,55,.2)}
+.footer-grid{width:min(1180px,100%);margin:auto;padding:54px clamp(20px,5vw,72px) 34px;display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:34px}
+.footer-grid h3,.footer-grid h4{margin:0 0 16px;color:#fff}
+.footer-grid h3{color:#f0c45a;letter-spacing:.08em}
+.footer-grid p{line-height:1.7}
+.footer-links{display:grid;gap:10px}
+.footer-links a{color:#aaa;text-decoration:none}
+.footer-links a:hover{color:#f0c45a}
+.footer-bottom{padding:20px;border-top:1px solid rgba(255,255,255,.08);text-align:center;font-size:.88rem}
+@media(max-width:980px){
+  .home-grid-4,.process-grid,.stats-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .home-grid-3,.portfolio-preview{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .review-callout,.footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:650px){
+  .home-grid-3,.home-grid-4,.portfolio-preview,.process-grid,.stats-strip,.review-callout,.footer-grid{grid-template-columns:1fr}
+  .hero-trust{justify-content:center}
+  .home-actions{flex-direction:column}
+  .home-button,.home-button-secondary{width:100%}
+}
+</style>
+
 </head>
 <body><header class="site-header" id="site-header">
 <div class="header-container">
@@ -86,27 +160,191 @@
                     Get A Free Quote
                 </a>
 </div>
+<div class="hero-trust" aria-label="Website benefits">
+<span>★ 5-Star Service</span>
+<span>✓ Mobile-Friendly</span>
+<span>✓ SEO Ready</span>
+<span>✓ Free Quotes</span>
+</div>
 </div>
 </section>
+
 <!-- ABOUT -->
-<section class="content-section">
-<div class="section-heading">
-<h2>
-                Websites Built for Small Businesses
-            </h2>
-<p>
-                BAM's Website Builder creates clean, modern, and mobile-friendly
-                websites for businesses that want to look professional online.
-            </p>
-</div>
+<section class="home-section">
+  <div class="home-container home-center">
+    <p class="home-eyebrow">BUILT FOR SMALL BUSINESSES</p>
+    <h2 class="home-title">Websites That Look Professional and Work Hard</h2>
+    <p class="home-intro">BAM's Website Builder creates custom, responsive websites that help small businesses build trust, explain their services, attract customers, and grow online.</p>
+  </div>
 </section>
-<!-- FOOTER -->
-<footer>
-<p>
-            © 2026 BAM's Website Builder. All Rights Reserved.
-        </p>
+
+<!-- WHY CHOOSE US -->
+<section class="home-section home-section-alt">
+  <div class="home-container">
+    <div class="home-section-heading home-center">
+      <p class="home-eyebrow">WHY CHOOSE BAM'S</p>
+      <h2 class="home-title">Everything Your Business Website Needs</h2>
+    </div>
+    <div class="home-grid home-grid-4">
+      <article class="home-card"><div class="home-icon">✦</div><h3>Custom Design</h3><p>Your website is designed around your brand, goals, services, and customers—not copied from a generic template.</p></article>
+      <article class="home-card"><div class="home-icon">▣</div><h3>Mobile Friendly</h3><p>Every page is built to look clean and function properly on phones, tablets, laptops, and desktops.</p></article>
+      <article class="home-card"><div class="home-icon">⚡</div><h3>Fast Performance</h3><p>Clean code, optimized images, and thoughtful layouts help visitors browse your website without unnecessary delays.</p></article>
+      <article class="home-card"><div class="home-icon">⌕</div><h3>SEO Ready</h3><p>Pages include search-friendly structure, titles, descriptions, and content that helps customers discover your business.</p></article>
+      <article class="home-card"><div class="home-icon">$</div><h3>Affordable Options</h3><p>Professional website services with clear pricing and options designed for growing small businesses.</p></article>
+      <article class="home-card"><div class="home-icon">↻</div><h3>Ongoing Maintenance</h3><p>Keep your website current with content updates, improvements, troubleshooting, and continued support.</p></article>
+      <article class="home-card"><div class="home-icon">✉</div><h3>Personal Support</h3><p>Work directly with someone who listens to your ideas and keeps you informed throughout the project.</p></article>
+      <article class="home-card"><div class="home-icon">✓</div><h3>Business Focused</h3><p>Every design decision is made to help visitors understand your business and take the next step.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="home-section services-home">
+  <div class="home-container">
+    <div class="home-section-heading home-center">
+      <p class="home-eyebrow">FEATURED SERVICES</p>
+      <h2 class="home-title">Solutions for Your Online Presence</h2>
+      <p class="home-intro">Choose the services your business needs now and add more as you grow.</p>
+    </div>
+    <div class="home-grid home-grid-3">
+      <article class="home-card"><div class="home-icon">◫</div><h3>Website Design</h3><p>Professional business websites created to present your company clearly and turn visitors into leads.</p><a class="home-link" href="services.html">Learn More →</a></article>
+      <article class="home-card"><div class="home-icon">↻</div><h3>Website Maintenance</h3><p>Content updates, fixes, improvements, and support that keep your website working properly.</p><a class="home-link" href="services.html">Learn More →</a></article>
+      <article class="home-card"><div class="home-icon">⌕</div><h3>SEO Optimization</h3><p>Search-friendly pages and content that improve how your business appears online.</p><a class="home-link" href="services.html">Learn More →</a></article>
+      <article class="home-card"><div class="home-icon">G</div><h3>Google Business Support</h3><p>Help strengthening your local online presence and making it easier for customers to find you.</p><a class="home-link" href="services.html">Learn More →</a></article>
+      <article class="home-card"><div class="home-icon">@</div><h3>Business Email</h3><p>A professional email setup that makes your business communication look more credible.</p><a class="home-link" href="services.html">Learn More →</a></article>
+      <article class="home-card"><div class="home-icon">→</div><h3>Client Portal</h3><p>A secure space where clients can review projects, files, updates, and invoices.</p><a class="home-link" href="contact.html">Ask About This →</a></article>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="home-section home-section-alt">
+  <div class="home-container">
+    <div class="home-section-heading home-center">
+      <p class="home-eyebrow">FEATURED WORK</p>
+      <h2 class="home-title">A Preview of Recent Projects</h2>
+    </div>
+    <div class="portfolio-preview">
+      <article class="home-card portfolio-home-card">
+        <div class="portfolio-home-visual">CS</div>
+        <div class="portfolio-home-content"><span class="portfolio-type">Social Media Platform</span><h3>ConnectSphere</h3><p>A responsive platform with profiles, messaging, notifications, and an interactive social feed.</p><a class="home-link" href="portfolio.html">View Project →</a></div>
+      </article>
+      <article class="home-card portfolio-home-card">
+        <div class="portfolio-home-visual">KM</div>
+        <div class="portfolio-home-content"><span class="portfolio-type">Author Website</span><h3>Kade Mercer</h3><p>A polished author website featuring books, biography information, releases, and reader resources.</p><a class="home-link" href="portfolio.html">View Project →</a></div>
+      </article>
+      <article class="home-card portfolio-home-card">
+        <div class="portfolio-home-visual">G3</div>
+        <div class="portfolio-home-content"><span class="portfolio-type">Barber Website</span><h3>G3 Blend Lab</h3><p>A black-and-gold barber website with services, pricing, a haircut gallery, and online booking.</p><a class="home-link" href="portfolio.html">View Project →</a></div>
+      </article>
+    </div>
+    <div class="home-actions" style="justify-content:center"><a class="home-button-secondary" href="portfolio.html">Explore the Full Portfolio</a></div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="home-section">
+  <div class="home-container">
+    <div class="home-section-heading home-center">
+      <p class="home-eyebrow">HOW IT WORKS</p>
+      <h2 class="home-title">A Simple Four-Step Process</h2>
+    </div>
+    <div class="process-grid">
+      <article class="home-card process-card"><div class="process-number">1</div><h3>Free Consultation</h3><p>Tell us about your business, goals, preferred style, pages, and website features.</p></article>
+      <article class="home-card process-card"><div class="process-number">2</div><h3>Design & Build</h3><p>Your website is planned, designed, and developed around your business requirements.</p></article>
+      <article class="home-card process-card"><div class="process-number">3</div><h3>Review & Revisions</h3><p>Review your website and request reasonable changes before the final launch.</p></article>
+      <article class="home-card process-card"><div class="process-number">4</div><h3>Launch & Support</h3><p>Your website goes live, and continued maintenance can be added when needed.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="home-section home-section-alt">
+  <div class="home-container">
+    <div class="stats-strip">
+      <div class="stat-block"><strong>100%</strong><span>Custom Website Designs</span></div>
+      <div class="stat-block"><strong>All</strong><span>Major Screen Sizes Supported</span></div>
+      <div class="stat-block"><strong>2</strong><span>Language Options Available</span></div>
+      <div class="stat-block"><strong>1-on-1</strong><span>Personal Project Support</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="home-section">
+  <div class="home-container review-callout">
+    <div>
+      <p class="home-eyebrow">CUSTOMER REVIEWS</p>
+      <h2 class="home-title">See What Customers Are Saying</h2>
+      <p class="home-intro" style="margin-left:0">Read verified Google reviews from customers who have worked with BAM's Website Builder, then request a free quote when you're ready to begin.</p>
+      <div class="home-actions">
+        <a class="home-button" href="reviews.html">Read Verified Reviews</a>
+        <a class="home-button-secondary" href="contact.html">Request a Free Quote</a>
+      </div>
+    </div>
+    <div class="review-panel">
+      <div class="review-stars" aria-label="Five stars">★★★★★</div>
+      <h3>Professional Service for Growing Businesses</h3>
+      <p>Custom websites, mobile-responsive design, clear communication, and ongoing support—all focused on helping your business build a stronger online presence.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="home-section home-section-alt">
+  <div class="home-container">
+    <div class="home-section-heading home-center">
+      <p class="home-eyebrow">FREQUENTLY ASKED QUESTIONS</p>
+      <h2 class="home-title">Questions Before Getting Started?</h2>
+    </div>
+    <div class="faq-list">
+      <details><summary>How long does it take to build a website?</summary><p>The timeline depends on the number of pages, requested features, content readiness, and revision needs. You will receive an estimated timeline after discussing your project.</p></details>
+      <details><summary>Will my website work on phones?</summary><p>Yes. Every website is designed to adjust for smartphones, tablets, laptops, and desktop screens.</p></details>
+      <details><summary>Can you redesign my existing website?</summary><p>Yes. Existing websites can be refreshed with a more modern layout, improved mobile experience, clearer content, and updated branding.</p></details>
+      <details><summary>Do you provide website maintenance?</summary><p>Yes. Maintenance options can include content changes, fixes, updates, improvements, and general website support.</p></details>
+      <details><summary>Can I request additional features later?</summary><p>Yes. Your website can continue growing with your business through new pages, forms, client tools, booking features, and other upgrades.</p></details>
+      <details><summary>How do I receive an exact quote?</summary><p>Use the contact page to describe your business and the website you need. You will receive a quote based on the size and requirements of your project.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="home-container">
+    <p class="home-eyebrow">READY TO GET STARTED?</p>
+    <h2 class="home-title">Let's Build a Website That Helps Your Business Grow</h2>
+    <p>Tell us about your business, your goals, and the kind of website you need. Your consultation and initial quote are free.</p>
+    <div class="home-actions" style="justify-content:center">
+      <a class="home-button" href="contact.html">Get Your Free Quote</a>
+      <a class="home-button-secondary" href="prices.html">View Pricing</a>
+    </div>
+  </div>
+</section>
+
+<!-- EXPANDED FOOTER -->
+<footer class="home-footer">
+  <div class="footer-grid">
+    <div>
+      <h3>BAM'S WEBSITE BUILDER</h3>
+      <p>Professional, responsive websites built to help small businesses strengthen their online presence and attract more customers.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <div class="footer-links"><a href="services.html">Services</a><a href="prices.html">Prices</a><a href="portfolio.html">Portfolio</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a></div>
+    </div>
+    <div>
+      <h4>Client Access</h4>
+      <div class="footer-links"><a href="login.html">Client Login</a><a href="register.html">Create Account</a><a href="forgot-password.html">Forgot Password</a></div>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <div class="footer-links"><a href="tel:+17274178762">727-417-8762</a><a href="mailto:bamswebsitebuilder@gmail.com">bamswebsitebuilder@gmail.com</a><a href="contact.html">Request a Quote</a><a href="es/index.html">Español</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 BAM's Website Builder. All Rights Reserved.</div>
 </footer>
-<script src="js/navigation.js?v=71"></script>
+
+<script src="js/navigation.js?v=72"></script>
 <!-- Start of LiveChat (www.livechat.com) code -->
 <script>
     window.__lc = window.__lc || {};
@@ -117,5 +355,5 @@
 </script>
 <noscript><a href="https://www.livechat.com/chat-with/19864799/" rel="nofollow">Chat with us</a>, powered by <a href="https://www.livechat.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a></noscript>
 <!-- End of LiveChat code -->
-<script type="module" src="js/admin-link.js?v=1"></script></body>
+<script type="module" src="js/admin-link.js?v=2"></script></body>
 </html>
