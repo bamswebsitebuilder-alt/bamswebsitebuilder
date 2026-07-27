@@ -1,183 +1,765 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="BAM's Website Builder client project dashboard." name="description"/>
-<title>Client Portal | BAM's Website Builder</title>
-<link href="css/style.css?v=71" rel="stylesheet"/>
-<link href="css/portal.css?v=71" rel="stylesheet"/><link href="portal-empty-state.css?v=73" rel="stylesheet"/>
-<link href="images/icon-dark.jpg" rel="icon" type="image/jpeg"/></head>
-<body class="client-portal-page" data-auth-protected="true"><header class="site-header" id="site-header">
-<div class="header-container">
-<a aria-label="BAM's Website Builder home" class="site-brand" href="index.html">
-<span class="brand-text">
-<strong>BAM'S</strong>
-<small>WEBSITE BUILDER</small>
-</span>
-</a>
-<nav aria-label="Main navigation" class="desktop-navigation">
-<a data-page="index" href="index.html">Home</a><a data-page="services" href="services.html">Services</a><a data-page="prices" href="prices.html">Prices</a><a data-page="portfolio" href="portfolio.html">Portfolio</a><a data-page="reviews" href="reviews.html">Reviews</a><a data-page="contact" href="contact.html">Contact</a><a aria-current="page" class="active" data-page="login" href="login.html">Client Login</a>
-</nav>
-<div class="desktop-language">
-<a class="language-active" href="client-portal.html">English</a>
-<span aria-hidden="true">|</span>
-<a href="es/client-portal.html">Español</a>
-</div>
-<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open navigation menu" class="menu-toggle" id="menu-toggle" type="button">
-<span></span><span></span><span></span>
-</button>
-</div>
-</header><div class="menu-overlay" id="menu-overlay"></div><aside aria-hidden="true" aria-label="Mobile navigation" class="mobile-menu" id="mobile-menu">
-<div class="mobile-menu-header">
-<a class="mobile-menu-brand" href="index.html">
-<span>
-<strong>BAM'S</strong>
-<small>WEBSITE BUILDER</small>
-</span>
-</a>
-<button aria-label="Close navigation menu" class="mobile-menu-close" id="mobile-menu-close" type="button">
-<span></span><span></span>
-</button>
-</div>
-<nav class="mobile-navigation">
-<a data-page="index" href="index.html"><span aria-hidden="true" class="mobile-link-icon">⌂</span><span>Home</span></a><a data-page="services" href="services.html"><span aria-hidden="true" class="mobile-link-icon">◆</span><span>Services</span></a><a data-page="prices" href="prices.html"><span aria-hidden="true" class="mobile-link-icon">$</span><span>Prices</span></a><a data-page="portfolio" href="portfolio.html"><span aria-hidden="true" class="mobile-link-icon">▣</span><span>Portfolio</span></a><a data-page="reviews" href="reviews.html"><span aria-hidden="true" class="mobile-link-icon">★</span><span>Reviews</span></a><a data-page="contact" href="contact.html"><span aria-hidden="true" class="mobile-link-icon">✉</span><span>Contact</span></a><a aria-current="page" class="active" data-page="login" href="login.html"><span aria-hidden="true" class="mobile-link-icon">→</span><span>Client Login</span></a>
-</nav>
-<div class="mobile-language-section">
-<p>Language</p>
-<div class="mobile-language-links">
-<a class="language-active" href="client-portal.html">English</a>
-<a href="es/client-portal.html">Español</a>
-</div>
-</div>
-<div class="mobile-menu-cta">
-<a href="contact.html">Get a Free Quote</a>
-</div>
-<div class="mobile-menu-contact">
-<a href="tel:+17274178762">727-417-8762</a>
-<a href="mailto:bamswebsitebuilder@gmail.com">bamswebsitebuilder@gmail.com</a>
-</div>
-</aside>
-<main class="portal-page">
-<section class="portal-topbar">
-<div>
-<p class="portal-eyebrow">CLIENT PORTAL</p>
-<h1 id="portal-welcome">Loading your account...</h1>
-<p>Here is the latest information about your website project.</p>
-</div>
-<div class="portal-user">
-<div class="portal-avatar" id="portal-avatar">?</div>
-<div>
-<strong id="portal-user-name">Loading...</strong>
-<span id="portal-user-email"></span>
-</div>
-<a class="portal-logout" href="#" id="portal-logout">Log Out</a>
-</div>
-</section>
-<section class="portal-layout">
-<aside class="portal-sidebar">
-<nav aria-label="Client portal sections" class="portal-nav">
-<button class="portal-nav-link active" data-panel="dashboard" type="button">Dashboard</button>
-<button class="portal-nav-link" data-panel="project" type="button">My Project</button>
-<button class="portal-nav-link" data-panel="files" type="button">Files</button>
-<button class="portal-nav-link" data-panel="invoices" type="button">Invoices</button>
-<button class="portal-nav-link" data-panel="messages" type="button">Messages</button>
-<button class="portal-nav-link" data-panel="support" type="button">Support</button>
-<button class="portal-nav-link" data-panel="account" type="button">Account</button>
-</nav>
-</aside>
-<div class="portal-content">
-<section class="portal-panel active" id="dashboard">
-<article class="portal-card portal-empty-state">
-<p class="card-kicker">WELCOME TO YOUR PORTAL</p>
-<h2>No project has been assigned yet</h2>
-<p>
-    Your account is ready. When BAM's Website Builder assigns a project,
-    your progress, files, invoices, and messages will appear here.
-  </p>
-<div class="portal-actions">
-<a class="portal-primary-button" href="contact.html">Contact Support</a>
-</div>
-</article>
-</section>
-<section class="portal-panel" id="project">
-<article class="portal-card portal-empty-state">
-<p class="card-kicker">MY PROJECT</p>
-<h2>No project assigned</h2>
-<p>Your project details and timeline will appear here after a project is assigned.</p>
-</article>
-</section>
-<section class="portal-panel" id="files">
-<article class="portal-card portal-empty-state">
-<p class="card-kicker">PROJECT FILES</p>
-<h2>No files available</h2>
-<p>Files shared with your account will appear here.</p>
-</article>
-</section>
-<section class="portal-panel" id="invoices">
-<article class="portal-card portal-empty-state">
-<p class="card-kicker">BILLING</p>
-<h2>No invoices available</h2>
-<p>Invoices assigned to your account will appear here.</p>
-</article>
-</section>
-<section class="portal-panel" id="messages">
-<article class="portal-card portal-empty-state">
-<p class="card-kicker">COMMUNICATION</p>
-<h2>No messages yet</h2>
-<p>Messages from BAM's Website Builder will appear here.</p>
-</article>
-</section>
-<section class="portal-panel" id="support">
-<article class="portal-card portal-empty-state">
-<p class="card-kicker">HELP CENTER</p>
-<h2>No support requests</h2>
-<p>You do not have any open support requests.</p>
-</article>
-</section>
-<section class="portal-panel" id="account">
-<article class="portal-card">
-<div class="card-heading">
-<div>
-<p class="card-kicker">ACCOUNT SETTINGS</p>
-<h2>Profile information</h2>
-</div>
-</div>
-<form class="portal-form" id="account-form">
-<div class="portal-form-grid">
-<div class="form-group">
-<label for="account-name">Full name</label>
-<input id="account-name" name="name" type="text" value=""/>
-</div>
-<div class="form-group">
-<label for="account-email">Email address</label>
-<input id="account-email" name="email" type="email" value=""/>
-</div>
-<div class="form-group">
-<label for="account-business">Business name</label>
-<input id="account-business" name="business" type="text" value=""/>
-</div>
-<div class="form-group">
-<label for="account-phone">Phone number</label>
-<input id="account-phone" name="phone" type="tel" value=""/>
-</div>
-</div>
-<div class="portal-actions">
-<p class="form-alert" hidden="" id="account-alert" role="status"></p><button class="portal-primary-button" type="submit">Save Changes</button>
-<a class="portal-secondary-button" href="forgot-password.html">Change Password</a>
-</div>
-</form>
-</article>
-</section>
-</div>
-</section>
-</main>
-<footer>
-<p>© 2026 BAM's Website Builder. All rights reserved.</p>
-<p><a href="contact.html">Contact Support</a></p>
-</footer>
-<script src="js/navigation.js?v=71"></script>
-<script src="js/portal.js?v=73"></script>
-<script src="js/portal-auth.js?v=73" type="module"></script></body>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="description"
+    content="BAM's Website Builder client project dashboard."
+  >
+
+  <title>Client Portal | BAM's Website Builder</title>
+
+  <link rel="stylesheet" href="css/style.css?v=71">
+  <link rel="stylesheet" href="css/portal.css?v=71">
+  <link rel="stylesheet" href="portal-empty-state.css?v=80">
+
+  <link
+    rel="icon"
+    href="images/icon-dark.jpg"
+    type="image/jpeg"
+  >
+</head>
+
+<body
+  class="client-portal-page"
+  data-auth-protected="true"
+>
+
+  <!-- MAIN HEADER -->
+  <header class="site-header" id="site-header">
+    <div class="header-container">
+
+      <a
+        class="site-brand"
+        href="index.html"
+        aria-label="BAM's Website Builder home"
+      >
+        <span class="brand-text">
+          <strong>BAM'S</strong>
+          <small>WEBSITE BUILDER</small>
+        </span>
+      </a>
+
+      <nav
+        class="desktop-navigation"
+        aria-label="Main navigation"
+      >
+        <a data-page="index" href="index.html">
+          Home
+        </a>
+
+        <a data-page="services" href="services.html">
+          Services
+        </a>
+
+        <a data-page="prices" href="prices.html">
+          Prices
+        </a>
+
+        <a data-page="portfolio" href="portfolio.html">
+          Portfolio
+        </a>
+
+        <a data-page="reviews" href="reviews.html">
+          Reviews
+        </a>
+
+        <a data-page="contact" href="contact.html">
+          Contact
+        </a>
+
+        <a
+          class="active"
+          data-page="login"
+          href="login.html"
+          aria-current="page"
+        >
+          Client Login
+        </a>
+      </nav>
+
+      <div class="desktop-language">
+        <a
+          class="language-active"
+          href="client-portal.html"
+        >
+          English
+        </a>
+
+        <span aria-hidden="true">|</span>
+
+        <a href="es/client-portal.html">
+          Español
+        </a>
+      </div>
+
+      <button
+        class="menu-toggle"
+        id="menu-toggle"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- MOBILE MENU OVERLAY -->
+  <div
+    class="menu-overlay"
+    id="menu-overlay"
+  ></div>
+
+  <!-- MOBILE MENU -->
+  <aside
+    class="mobile-menu"
+    id="mobile-menu"
+    aria-label="Mobile navigation"
+    aria-hidden="true"
+  >
+
+    <div class="mobile-menu-header">
+
+      <a
+        class="mobile-menu-brand"
+        href="index.html"
+      >
+        <span>
+          <strong>BAM'S</strong>
+          <small>WEBSITE BUILDER</small>
+        </span>
+      </a>
+
+      <button
+        class="mobile-menu-close"
+        id="mobile-menu-close"
+        type="button"
+        aria-label="Close navigation menu"
+      >
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+
+    <nav class="mobile-navigation">
+
+      <a data-page="index" href="index.html">
+        <span
+          class="mobile-link-icon"
+          aria-hidden="true"
+        >
+          ⌂
+        </span>
+
+        <span>Home</span>
+      </a>
+
+      <a data-page="services" href="services.html">
+        <span
+          class="mobile-link-icon"
+          aria-hidden="true"
+        >
+          ◆
+        </span>
+
+        <span>Services</span>
+      </a>
+
+      <a data-page="prices" href="prices.html">
+        <span
+          class="mobile-link-icon"
+          aria-hidden="true"
+        >
+          $
+        </span>
+
+        <span>Prices</span>
+      </a>
+
+      <a data-page="portfolio" href="portfolio.html">
+        <span
+          class="mobile-link-icon"
+          aria-hidden="true"
+        >
+          ▣
+        </span>
+
+        <span>Portfolio</span>
+      </a>
+
+      <a data-page="reviews" href="reviews.html">
+        <span
+          class="mobile-link-icon"
+          aria-hidden="true"
+        >
+          ★
+        </span>
+
+        <span>Reviews</span>
+      </a>
+
+      <a data-page="contact" href="contact.html">
+        <span
+          class="mobile-link-icon"
+          aria-hidden="true"
+        >
+          ✉
+        </span>
+
+        <span>Contact</span>
+      </a>
+
+      <a
+        class="active"
+        data-page="login"
+        href="login.html"
+        aria-current="page"
+      >
+        <span
+          class="mobile-link-icon"
+          aria-hidden="true"
+        >
+          →
+        </span>
+
+        <span>Client Login</span>
+      </a>
+
+    </nav>
+
+    <div class="mobile-language-section">
+      <p>Language</p>
+
+      <div class="mobile-language-links">
+        <a
+          class="language-active"
+          href="client-portal.html"
+        >
+          English
+        </a>
+
+        <a href="es/client-portal.html">
+          Español
+        </a>
+      </div>
+    </div>
+
+    <div class="mobile-menu-cta">
+      <a href="contact.html">
+        Get a Free Quote
+      </a>
+    </div>
+
+    <div class="mobile-menu-contact">
+      <a href="tel:+17274178762">
+        727-417-8762
+      </a>
+
+      <a href="mailto:bamswebsitebuilder@gmail.com">
+        bamswebsitebuilder@gmail.com
+      </a>
+    </div>
+
+  </aside>
+
+  <!-- CLIENT PORTAL -->
+  <main class="portal-page">
+
+    <!-- ACCOUNT HEADER -->
+    <section class="portal-topbar">
+
+      <div>
+        <p class="portal-eyebrow">
+          CLIENT PORTAL
+        </p>
+
+        <h1 id="portal-welcome">
+          Client Portal
+        </h1>
+
+        <p>
+          Here is the latest information about your website project.
+        </p>
+      </div>
+
+      <div class="portal-user">
+
+        <div
+          class="portal-avatar"
+          id="portal-avatar"
+        >
+          C
+        </div>
+
+        <div>
+          <strong id="portal-user-name">
+            Client Account
+          </strong>
+
+          <span id="portal-user-email"></span>
+        </div>
+
+        <a
+          class="portal-logout"
+          id="portal-logout"
+          href="#"
+        >
+          Log Out
+        </a>
+
+      </div>
+
+    </section>
+
+    <section class="portal-layout">
+
+      <!-- PORTAL NAVIGATION -->
+      <aside class="portal-sidebar">
+
+        <nav
+          class="portal-nav"
+          aria-label="Client portal sections"
+        >
+
+          <button
+            class="portal-nav-link active"
+            data-panel="dashboard"
+            type="button"
+          >
+            Dashboard
+          </button>
+
+          <button
+            class="portal-nav-link"
+            data-panel="project"
+            type="button"
+          >
+            My Project
+          </button>
+
+          <button
+            class="portal-nav-link"
+            data-panel="files"
+            type="button"
+          >
+            Files
+          </button>
+
+          <button
+            class="portal-nav-link"
+            data-panel="invoices"
+            type="button"
+          >
+            Invoices
+          </button>
+
+          <button
+            class="portal-nav-link"
+            data-panel="messages"
+            type="button"
+          >
+            Messages
+          </button>
+
+          <button
+            class="portal-nav-link"
+            data-panel="support"
+            type="button"
+          >
+            Support
+          </button>
+
+          <button
+            class="portal-nav-link"
+            data-panel="account"
+            type="button"
+          >
+            Account
+          </button>
+
+        </nav>
+
+      </aside>
+
+      <!-- PORTAL CONTENT -->
+      <div class="portal-content">
+
+        <!-- DASHBOARD -->
+        <section
+          class="portal-panel active"
+          id="dashboard"
+        >
+
+          <article class="portal-card portal-empty-state">
+
+            <p class="card-kicker">
+              WELCOME TO YOUR PORTAL
+            </p>
+
+            <h2>
+              No project has been assigned yet
+            </h2>
+
+            <p>
+              Your account is ready. When BAM's Website Builder
+              assigns a project, your progress, files, invoices,
+              and messages will appear here.
+            </p>
+
+            <div class="portal-actions">
+              <a
+                class="portal-primary-button"
+                href="contact.html"
+              >
+                Contact Support
+              </a>
+            </div>
+
+          </article>
+
+        </section>
+
+        <!-- PROJECT -->
+        <section
+          class="portal-panel"
+          id="project"
+        >
+
+          <article class="portal-card portal-empty-state">
+
+            <p class="card-kicker">
+              MY PROJECT
+            </p>
+
+            <h2>
+              No project assigned
+            </h2>
+
+            <p>
+              Your project details and timeline will appear here
+              after a project is assigned.
+            </p>
+
+          </article>
+
+        </section>
+
+        <!-- FILE UPLOADS -->
+        <section
+          class="portal-panel"
+          id="files"
+        >
+
+          <article class="portal-card">
+
+            <div class="card-heading">
+              <div>
+
+                <p class="card-kicker">
+                  PROJECT FILES
+                </p>
+
+                <h2>
+                  Upload your files
+                </h2>
+
+                <p>
+                  Upload logos, photos, PDFs, documents,
+                  and other materials needed for your website project.
+                </p>
+
+              </div>
+            </div>
+
+            <div class="portal-upload-box">
+
+              <label
+                class="portal-file-picker"
+                for="portal-file-input"
+              >
+                <span id="selected-file-name">
+                  Choose File
+                </span>
+              </label>
+
+              <input
+                id="portal-file-input"
+                type="file"
+                accept=".jpg,.jpeg,.png,.webp,.gif,.pdf,.doc,.docx,.txt,.zip"
+              >
+
+              <button
+                class="portal-primary-button"
+                id="upload-file-button"
+                type="button"
+                disabled
+              >
+                Upload File
+              </button>
+
+              <progress
+                id="upload-progress"
+                max="100"
+                value="0"
+                hidden
+              ></progress>
+
+              <p
+                class="portal-file-status"
+                id="upload-status"
+                role="status"
+                hidden
+              ></p>
+
+              <small>
+                Maximum file size: 15 MB.
+              </small>
+
+            </div>
+
+            <h3 class="section-subtitle">
+              Your uploaded files
+            </h3>
+
+            <div
+              class="file-list"
+              id="client-file-list"
+            >
+              <p class="portal-file-status">
+                Checking for uploaded files...
+              </p>
+            </div>
+
+          </article>
+
+        </section>
+
+        <!-- INVOICES -->
+        <section
+          class="portal-panel"
+          id="invoices"
+        >
+
+          <article class="portal-card portal-empty-state">
+
+            <p class="card-kicker">
+              BILLING
+            </p>
+
+            <h2>
+              No invoices available
+            </h2>
+
+            <p>
+              Invoices assigned to your account will appear here.
+            </p>
+
+          </article>
+
+        </section>
+
+        <!-- MESSAGES -->
+        <section
+          class="portal-panel"
+          id="messages"
+        >
+
+          <article class="portal-card portal-empty-state">
+
+            <p class="card-kicker">
+              COMMUNICATION
+            </p>
+
+            <h2>
+              No messages yet
+            </h2>
+
+            <p>
+              Messages from BAM's Website Builder will appear here.
+            </p>
+
+          </article>
+
+        </section>
+
+        <!-- SUPPORT -->
+        <section
+          class="portal-panel"
+          id="support"
+        >
+
+          <article class="portal-card portal-empty-state">
+
+            <p class="card-kicker">
+              HELP CENTER
+            </p>
+
+            <h2>
+              No support requests
+            </h2>
+
+            <p>
+              You do not have any open support requests.
+            </p>
+
+          </article>
+
+        </section>
+
+        <!-- ACCOUNT -->
+        <section
+          class="portal-panel"
+          id="account"
+        >
+
+          <article class="portal-card">
+
+            <div class="card-heading">
+              <div>
+
+                <p class="card-kicker">
+                  ACCOUNT SETTINGS
+                </p>
+
+                <h2>
+                  Profile information
+                </h2>
+
+              </div>
+            </div>
+
+            <form
+              class="portal-form"
+              id="account-form"
+            >
+
+              <div class="portal-form-grid">
+
+                <div class="form-group">
+                  <label for="account-name">
+                    Full name
+                  </label>
+
+                  <input
+                    id="account-name"
+                    name="name"
+                    type="text"
+                    value=""
+                  >
+                </div>
+
+                <div class="form-group">
+                  <label for="account-email">
+                    Email address
+                  </label>
+
+                  <input
+                    id="account-email"
+                    name="email"
+                    type="email"
+                    value=""
+                    readonly
+                  >
+                </div>
+
+                <div class="form-group">
+                  <label for="account-business">
+                    Business name
+                  </label>
+
+                  <input
+                    id="account-business"
+                    name="business"
+                    type="text"
+                    value=""
+                  >
+                </div>
+
+                <div class="form-group">
+                  <label for="account-phone">
+                    Phone number
+                  </label>
+
+                  <input
+                    id="account-phone"
+                    name="phone"
+                    type="tel"
+                    value=""
+                  >
+                </div>
+
+              </div>
+
+              <div class="portal-actions">
+
+                <p
+                  class="form-alert"
+                  id="account-alert"
+                  role="status"
+                  hidden
+                ></p>
+
+                <button
+                  class="portal-primary-button"
+                  type="submit"
+                >
+                  Save Changes
+                </button>
+
+                <a
+                  class="portal-secondary-button"
+                  href="forgot-password.html"
+                >
+                  Change Password
+                </a>
+
+              </div>
+
+            </form>
+
+          </article>
+
+        </section>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      © 2026 BAM's Website Builder. All rights reserved.
+    </p>
+
+    <p>
+      <a href="contact.html">
+        Contact Support
+      </a>
+    </p>
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script src="js/navigation.js?v=71"></script>
+  <script src="js/portal.js?v=80"></script>
+
+  <script
+    type="module"
+    src="js/portal-auth.js?v=80"
+  ></script>
+
+</body>
 </html>
