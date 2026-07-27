@@ -1,69 +1,1520 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Inicio | BAM's Website Builder</title>
-<link href="../css/style.css?v=70" rel="stylesheet"/>
+<title>BAM's Website Builder</title>
+
+<link href="../css/style.css?v=72" rel="stylesheet"/>
 <link href="../images/icon-dark.jpg" rel="icon" type="image/jpeg"/>
+
+<style>
+/* EXPANSIÓN DE LA PÁGINA DE INICIO DE BAM'S */
+
+.home-section {
+    padding: clamp(64px, 8vw, 110px) clamp(20px, 5vw, 72px);
+    background: #090909;
+    color: #f8f8f8;
+}
+
+.home-section-alt {
+    background: #0f0f0f;
+}
+
+.home-container {
+    width: min(1180px, 100%);
+    margin: 0 auto;
+}
+
+.home-eyebrow {
+    margin: 0 0 12px;
+    color: #f0c45a;
+    font-size: .78rem;
+    font-weight: 800;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+}
+
+.home-title {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.08;
+}
+
+.home-intro {
+    max-width: 760px;
+    margin: 18px auto 0;
+    color: #b8b8b8;
+    font-size: 1.04rem;
+    line-height: 1.8;
+}
+
+.home-center {
+    text-align: center;
+}
+
+.home-grid {
+    display: grid;
+    gap: 20px;
+}
+
+.home-grid-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.home-grid-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.home-card {
+    padding: 28px;
+    border: 1px solid rgba(212, 166, 55, .24);
+    border-radius: 20px;
+    background: linear-gradient(145deg, #111, #171717);
+    box-shadow: 0 16px 50px rgba(0, 0, 0, .22);
+}
+
+.home-card h3 {
+    margin: 16px 0 10px;
+    font-size: 1.2rem;
+}
+
+.home-card p {
+    margin: 0;
+    color: #aaa;
+    line-height: 1.7;
+}
+
+.home-icon {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(212, 166, 55, .38);
+    border-radius: 14px;
+    background: rgba(212, 166, 55, .1);
+    color: #f0c45a;
+    font-size: 1.35rem;
+    font-weight: 900;
+}
+
+.home-link {
+    display: inline-flex;
+    margin-top: 18px;
+    color: #f0c45a;
+    text-decoration: none;
+    font-weight: 800;
+}
+
+.home-link:hover {
+    text-decoration: underline;
+}
+
+.hero-trust {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.hero-trust span {
+    padding: 9px 12px;
+    border: 1px solid rgba(212, 166, 55, .28);
+    border-radius: 999px;
+    background: rgba(0, 0, 0, .35);
+    color: #eee;
+    font-size: .82rem;
+}
+
+.home-section-heading {
+    margin-bottom: 38px;
+}
+
+.services-home .home-card {
+    height: 100%;
+}
+
+.portfolio-preview {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.portfolio-home-card {
+    overflow: hidden;
+    padding: 0;
+}
+
+.portfolio-home-visual {
+    min-height: 200px;
+    display: grid;
+    place-items: center;
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(240, 196, 90, .22),
+            transparent 45%
+        ),
+        linear-gradient(135deg, #171717, #080808);
+    border-bottom: 1px solid rgba(212, 166, 55, .22);
+    font-size: 3rem;
+    font-weight: 900;
+    color: #f0c45a;
+}
+
+.portfolio-home-content {
+    padding: 26px;
+}
+
+.portfolio-type {
+    color: #f0c45a;
+    font-size: .76rem;
+    font-weight: 900;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+}
+
+.process-grid {
+    counter-reset: step;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.process-card {
+    position: relative;
+    padding: 30px 24px 26px;
+}
+
+.process-number {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #d4a637;
+    color: #111;
+    font-weight: 900;
+}
+
+.stats-strip {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px;
+    border: 1px solid rgba(212, 166, 55, .25);
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(212, 166, 55, .25);
+}
+
+.stat-block {
+    padding: 28px 18px;
+    text-align: center;
+    background: #111;
+}
+
+.stat-block strong {
+    display: block;
+    color: #f0c45a;
+    font-size: clamp(1.7rem, 4vw, 2.5rem);
+}
+
+.stat-block span {
+    display: block;
+    margin-top: 8px;
+    color: #aaa;
+    font-size: .9rem;
+}
+
+.review-callout {
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap: 24px;
+    align-items: center;
+}
+
+.review-panel {
+    padding: 34px;
+    border: 1px solid rgba(212, 166, 55, .25);
+    border-radius: 22px;
+    background: linear-gradient(145deg, #111, #171717);
+}
+
+.review-stars {
+    color: #f0c45a;
+    font-size: 1.5rem;
+    letter-spacing: .15em;
+}
+
+.review-panel p {
+    color: #b8b8b8;
+    line-height: 1.8;
+}
+
+.home-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.home-button,
+.home-button-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 900;
+}
+
+.home-button {
+    background: #d4a637;
+    color: #111;
+}
+
+.home-button-secondary {
+    border: 1px solid rgba(212, 166, 55, .35);
+    color: #fff;
+}
+
+.faq-list {
+    display: grid;
+    gap: 12px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.faq-list details {
+    border: 1px solid rgba(212, 166, 55, .22);
+    border-radius: 14px;
+    background: #111;
+    padding: 0 20px;
+}
+
+.faq-list summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 20px 36px 20px 0;
+    font-weight: 800;
+    position: relative;
+}
+
+.faq-list summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-list summary::after {
+    content: "+";
+    position: absolute;
+    right: 0;
+    top: 16px;
+    color: #f0c45a;
+    font-size: 1.5rem;
+}
+
+.faq-list details[open] summary::after {
+    content: "−";
+}
+
+.faq-list details p {
+    margin: 0;
+    padding: 0 0 20px;
+    color: #aaa;
+    line-height: 1.75;
+}
+
+.final-cta {
+    padding:
+        clamp(70px, 10vw, 130px)
+        clamp(20px, 5vw, 72px);
+    text-align: center;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(212, 166, 55, .18),
+            transparent 58%
+        ),
+        #080808;
+    color: white;
+    border-top: 1px solid rgba(212, 166, 55, .2);
+}
+
+.final-cta p {
+    max-width: 700px;
+    margin: 18px auto 0;
+    color: #b8b8b8;
+    line-height: 1.8;
+}
+
+.home-footer {
+    background: #050505;
+    color: #aaa;
+    border-top: 1px solid rgba(212, 166, 55, .2);
+}
+
+.footer-grid {
+    width: min(1180px, 100%);
+    margin: auto;
+    padding:
+        54px
+        clamp(20px, 5vw, 72px)
+        34px;
+    display: grid;
+    grid-template-columns: 1.4fr repeat(3, 1fr);
+    gap: 34px;
+}
+
+.footer-grid h3,
+.footer-grid h4 {
+    margin: 0 0 16px;
+    color: #fff;
+}
+
+.footer-grid h3 {
+    color: #f0c45a;
+    letter-spacing: .08em;
+}
+
+.footer-grid p {
+    line-height: 1.7;
+}
+
+.footer-links {
+    display: grid;
+    gap: 10px;
+}
+
+.footer-links a {
+    color: #aaa;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: #f0c45a;
+}
+
+.footer-bottom {
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, .08);
+    text-align: center;
+    font-size: .88rem;
+}
+
+@media (max-width: 980px) {
+    .home-grid-4,
+    .process-grid,
+    .stats-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .home-grid-3,
+    .portfolio-preview {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .review-callout,
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 650px) {
+    .home-grid-3,
+    .home-grid-4,
+    .portfolio-preview,
+    .process-grid,
+    .stats-strip,
+    .review-callout,
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-trust {
+        justify-content: center;
+    }
+
+    .home-actions {
+        flex-direction: column;
+    }
+
+    .home-button,
+    .home-button-secondary {
+        width: 100%;
+    }
+}
+</style>
 </head>
+
 <body>
-<!-- NAVEGACIÓN FIJA COMPARTIDA -->
-<header class="site-header" id="site-header"><div class="header-container"><a aria-label="Inicio de BAM's Website Builder" class="site-brand" href="index.html"><span class="brand-text"><strong>BAM'S</strong><small>WEBSITE BUILDER</small></span></a><nav aria-label="Navegación principal" class="desktop-navigation"><a aria-current="page" class="active" data-page="index" href="index.html">Inicio</a><a data-page="services" href="services.html">Servicios</a><a data-page="prices" href="prices.html">Precios</a><a data-page="portfolio" href="portfolio.html">Portafolio</a><a data-page="reviews" href="reviews.html">Reseñas</a><a data-page="contact" href="contact.html">Contacto</a></nav><div class="desktop-language"><a href="../index.html">English</a><span aria-hidden="true">|</span><a class="language-active" href="index.html">Español</a></div><button aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menú de navegación" class="menu-toggle" id="menu-toggle" type="button"><span></span><span></span><span></span></button></div></header>
+
+<!-- NAVEGACIÓN -->
+<header class="site-header" id="site-header">
+<div class="header-container">
+
+<a
+    aria-label="Inicio de BAM's Website Builder"
+    class="site-brand"
+    href="index.html"
+>
+<span class="brand-text">
+<strong>BAM'S</strong>
+<small>WEBSITE BUILDER</small>
+</span>
+</a>
+
+<nav
+    aria-label="Navegación principal"
+    class="desktop-navigation"
+>
+<a
+    aria-current="page"
+    class="active"
+    data-page="index"
+    href="index.html"
+>
+Inicio
+</a>
+
+<a data-page="services" href="services.html">
+Servicios
+</a>
+
+<a data-page="prices" href="prices.html">
+Precios
+</a>
+
+<a data-page="portfolio" href="portfolio.html">
+Portafolio
+</a>
+
+<a data-page="reviews" href="reviews.html">
+Reseñas
+</a>
+
+<a data-page="contact" href="contact.html">
+Contacto
+</a>
+
+<a data-page="login" href="login.html">
+Acceso de Clientes
+</a>
+
+<a
+    data-admin-link
+    href="../admin-dashboard.html"
+    hidden
+>
+Panel de Administración
+</a>
+</nav>
+
+<div class="desktop-language">
+<a href="../index.html">English</a>
+<span aria-hidden="true">|</span>
+<a class="language-active" href="index.html">
+Español
+</a>
+</div>
+
+<button
+    aria-controls="mobile-menu"
+    aria-expanded="false"
+    aria-label="Abrir menú de navegación"
+    class="menu-toggle"
+    id="menu-toggle"
+    type="button"
+>
+<span></span>
+<span></span>
+<span></span>
+</button>
+
+</div>
+</header>
+
 <div class="menu-overlay" id="menu-overlay"></div>
-<aside aria-hidden="true" aria-label="Navegación móvil" class="mobile-menu" id="mobile-menu"><div class="mobile-menu-header"><a class="mobile-menu-brand" href="index.html"><span><strong>BAM'S</strong><small>WEBSITE BUILDER</small></span></a><button aria-label="Cerrar menú de navegación" class="mobile-menu-close" id="mobile-menu-close" type="button"><span></span><span></span></button></div><nav class="mobile-navigation"><a aria-current="page" class="active" data-page="index" href="index.html"><span aria-hidden="true" class="mobile-link-icon">⌂</span><span>Inicio</span></a><a data-page="services" href="services.html"><span aria-hidden="true" class="mobile-link-icon">◆</span><span>Servicios</span></a><a data-page="prices" href="prices.html"><span aria-hidden="true" class="mobile-link-icon">$</span><span>Precios</span></a><a data-page="portfolio" href="portfolio.html"><span aria-hidden="true" class="mobile-link-icon">▣</span><span>Portafolio</span></a><a data-page="reviews" href="reviews.html"><span aria-hidden="true" class="mobile-link-icon">★</span><span>Reseñas</span></a><a data-page="contact" href="contact.html"><span aria-hidden="true" class="mobile-link-icon">✉</span><span>Contacto</span></a></nav><div class="mobile-language-section"><p>Idioma</p><div class="mobile-language-links"><a href="../index.html">English</a><a class="language-active" href="index.html">Español</a></div></div><div class="mobile-menu-cta"><a href="contact.html">Solicitar Cotización Gratis</a></div><div class="mobile-menu-contact"><a href="tel:+17274178762">727-417-8762</a><a href="mailto:bamswebsitebuilder@gmail.com">bamswebsitebuilder@gmail.com</a></div></aside>
-<!-- HEADER -->
+
+<!-- MENÚ MÓVIL -->
+<aside
+    aria-hidden="true"
+    aria-label="Navegación móvil"
+    class="mobile-menu"
+    id="mobile-menu"
+>
+
+<div class="mobile-menu-header">
+
+<a class="mobile-menu-brand" href="index.html">
+<span>
+<strong>BAM'S</strong>
+<small>WEBSITE BUILDER</small>
+</span>
+</a>
+
+<button
+    aria-label="Cerrar menú de navegación"
+    class="mobile-menu-close"
+    id="mobile-menu-close"
+    type="button"
+>
+<span></span>
+<span></span>
+</button>
+
+</div>
+
+<nav class="mobile-navigation">
+
+<a
+    aria-current="page"
+    class="active"
+    data-page="index"
+    href="index.html"
+>
+<span aria-hidden="true" class="mobile-link-icon">
+⌂
+</span>
+<span>Inicio</span>
+</a>
+
+<a data-page="services" href="services.html">
+<span aria-hidden="true" class="mobile-link-icon">
+◆
+</span>
+<span>Servicios</span>
+</a>
+
+<a data-page="prices" href="prices.html">
+<span aria-hidden="true" class="mobile-link-icon">
+$
+</span>
+<span>Precios</span>
+</a>
+
+<a data-page="portfolio" href="portfolio.html">
+<span aria-hidden="true" class="mobile-link-icon">
+▣
+</span>
+<span>Portafolio</span>
+</a>
+
+<a data-page="reviews" href="reviews.html">
+<span aria-hidden="true" class="mobile-link-icon">
+★
+</span>
+<span>Reseñas</span>
+</a>
+
+<a data-page="contact" href="contact.html">
+<span aria-hidden="true" class="mobile-link-icon">
+✉
+</span>
+<span>Contacto</span>
+</a>
+
+<a data-page="login" href="login.html">
+<span aria-hidden="true" class="mobile-link-icon">
+→
+</span>
+<span>Acceso de Clientes</span>
+</a>
+
+<a
+    data-admin-link
+    href="../admin-dashboard.html"
+    hidden
+>
+<span aria-hidden="true" class="mobile-link-icon">
+⚙
+</span>
+<span>Panel de Administración</span>
+</a>
+
+</nav>
+
+<div class="mobile-language-section">
+<p>Idioma</p>
+
+<div class="mobile-language-links">
+<a href="../index.html">English</a>
+<a class="language-active" href="index.html">
+Español
+</a>
+</div>
+</div>
+
+<div class="mobile-menu-cta">
+<a href="contact.html">
+Solicitar una Cotización Gratis
+</a>
+</div>
+
+<div class="mobile-menu-contact">
+<a href="tel:+17274178762">
+727-417-8762
+</a>
+
+<a href="mailto:bamswebsitebuilder@gmail.com">
+bamswebsitebuilder@gmail.com
+</a>
+</div>
+
+</aside>
+
 <!-- HERO -->
 <section class="hero">
-<img alt="Logotipo de BAM's Website Builder" class="hero-logo-bg" src="../images/logo-dark.jpg"/>
+
+<img
+    alt="Logotipo de BAM's Website Builder"
+    class="hero-logo-bg"
+    src="../images/logo-dark.jpg"
+/>
+
 <div class="hero-content">
-<h4>
-                DISEÑO WEB PROFESIONAL
-            </h4>
+
+<h4>DISEÑO WEB PROFESIONAL</h4>
+
 <h1>
-                Un Mejor Sitio Web para<br/>
-                tu Negocio
-            </h1>
+Un Mejor Sitio Web para<br/>
+Tu Negocio
+</h1>
+
 <p>
-                Creamos sitios web adaptables que ayudan a tu negocio a crecer, atraer clientes y destacar frente a la competencia.
-            </p>
+Creamos sitios web adaptables que ayudan a tu negocio
+a crecer, atraer clientes y destacar frente a la competencia.
+</p>
+
 <div class="hero-buttons">
+
 <a class="btn" href="services.html">
-                    Ver Servicios
-                </a>
+Ver Servicios
+</a>
+
 <a class="secondary-button" href="contact.html">
-                    Solicitar una Cotización Gratis
-                </a>
+Solicitar una Cotización Gratis
+</a>
+
+</div>
+
+<div
+    class="hero-trust"
+    aria-label="Beneficios del sitio web"
+>
+<span>★ Servicio de 5 Estrellas</span>
+<span>✓ Compatible con Móviles</span>
+<span>✓ Preparado para SEO</span>
+<span>✓ Cotizaciones Gratis</span>
+</div>
+
+</div>
+</section>
+
+<!-- ACERCA DE -->
+<section class="home-section">
+
+<div class="home-container home-center">
+
+<p class="home-eyebrow">
+CREADO PARA PEQUEÑAS EMPRESAS
+</p>
+
+<h2 class="home-title">
+Sitios Web Profesionales que Trabajan por tu Negocio
+</h2>
+
+<p class="home-intro">
+BAM's Website Builder crea sitios web personalizados
+y adaptables que ayudan a las pequeñas empresas a
+generar confianza, explicar sus servicios, atraer
+clientes y crecer en línea.
+</p>
+
+</div>
+</section>
+
+<!-- POR QUÉ ELEGIRNOS -->
+<section class="home-section home-section-alt">
+
+<div class="home-container">
+
+<div class="home-section-heading home-center">
+
+<p class="home-eyebrow">
+POR QUÉ ELEGIR BAM'S
+</p>
+
+<h2 class="home-title">
+Todo lo que el Sitio Web de tu Negocio Necesita
+</h2>
+
+</div>
+
+<div class="home-grid home-grid-4">
+
+<article class="home-card">
+<div class="home-icon">✦</div>
+<h3>Diseño Personalizado</h3>
+<p>
+Tu sitio web se diseña alrededor de tu marca,
+objetivos, servicios y clientes, no copiando
+una plantilla genérica.
+</p>
+</article>
+
+<article class="home-card">
+<div class="home-icon">▣</div>
+<h3>Compatible con Móviles</h3>
+<p>
+Cada página está diseñada para verse limpia y
+funcionar correctamente en teléfonos, tabletas,
+computadoras portátiles y computadoras de escritorio.
+</p>
+</article>
+
+<article class="home-card">
+<div class="home-icon">⚡</div>
+<h3>Rendimiento Rápido</h3>
+<p>
+Código limpio, imágenes optimizadas y diseños bien
+planificados ayudan a los visitantes a navegar sin
+retrasos innecesarios.
+</p>
+</article>
+
+<article class="home-card">
+<div class="home-icon">⌕</div>
+<h3>Preparado para SEO</h3>
+<p>
+Las páginas incluyen una estructura, títulos,
+descripciones y contenido optimizados para ayudar
+a los clientes a encontrar tu negocio.
+</p>
+</article>
+
+<article class="home-card">
+<div class="home-icon">$</div>
+<h3>Opciones Accesibles</h3>
+<p>
+Servicios profesionales de sitios web con precios
+claros y opciones diseñadas para pequeñas empresas
+en crecimiento.
+</p>
+</article>
+
+<article class="home-card">
+<div class="home-icon">↻</div>
+<h3>Mantenimiento Continuo</h3>
+<p>
+Mantén tu sitio web actualizado con cambios de
+contenido, mejoras, solución de problemas y soporte
+continuo.
+</p>
+</article>
+
+<article class="home-card">
+<div class="home-icon">✉</div>
+<h3>Soporte Personal</h3>
+<p>
+Trabaja directamente con alguien que escucha tus
+ideas y te mantiene informado durante todo el proyecto.
+</p>
+</article>
+
+<article class="home-card">
+<div class="home-icon">✓</div>
+<h3>Enfocado en tu Negocio</h3>
+<p>
+Cada decisión de diseño se toma para ayudar a los
+visitantes a entender tu negocio y dar el siguiente paso.
+</p>
+</article>
+
 </div>
 </div>
 </section>
-<!-- ABOUT -->
-<section class="content-section">
-<div class="section-heading">
-<h2>
-                Sitios Web Diseñados para Pequeñas Empresas
-            </h2>
+
+<!-- SERVICIOS -->
+<section class="home-section services-home">
+
+<div class="home-container">
+
+<div class="home-section-heading home-center">
+
+<p class="home-eyebrow">
+SERVICIOS DESTACADOS
+</p>
+
+<h2 class="home-title">
+Soluciones para tu Presencia en Línea
+</h2>
+
+<p class="home-intro">
+Elige los servicios que tu negocio necesita ahora
+y agrega más a medida que crece.
+</p>
+
+</div>
+
+<div class="home-grid home-grid-3">
+
+<article class="home-card">
+<div class="home-icon">◫</div>
+<h3>Diseño de Sitios Web</h3>
 <p>
-                BAM's Website Builder crea sitios web modernos, profesionales y adaptables a dispositivos móviles para empresas que desean destacar en línea.
-            </p>
+Sitios web profesionales creados para presentar
+claramente tu empresa y convertir visitantes en
+clientes potenciales.
+</p>
+<a class="home-link" href="services.html">
+Más Información →
+</a>
+</article>
+
+<article class="home-card">
+<div class="home-icon">↻</div>
+<h3>Mantenimiento de Sitios Web</h3>
+<p>
+Actualizaciones de contenido, correcciones,
+mejoras y soporte para mantener tu sitio web
+funcionando correctamente.
+</p>
+<a class="home-link" href="services.html">
+Más Información →
+</a>
+</article>
+
+<article class="home-card">
+<div class="home-icon">⌕</div>
+<h3>Optimización SEO</h3>
+<p>
+Páginas y contenido optimizados para mejorar
+la manera en que tu negocio aparece en los
+resultados de búsqueda.
+</p>
+<a class="home-link" href="services.html">
+Más Información →
+</a>
+</article>
+
+<article class="home-card">
+<div class="home-icon">G</div>
+<h3>Soporte para Google Business</h3>
+<p>
+Ayuda para fortalecer tu presencia local en línea
+y facilitar que los clientes encuentren tu negocio.
+</p>
+<a class="home-link" href="services.html">
+Más Información →
+</a>
+</article>
+
+<article class="home-card">
+<div class="home-icon">@</div>
+<h3>Correo Electrónico Empresarial</h3>
+<p>
+Configuración de correo profesional para que las
+comunicaciones de tu negocio se vean más confiables.
+</p>
+<a class="home-link" href="services.html">
+Más Información →
+</a>
+</article>
+
+<article class="home-card">
+<div class="home-icon">→</div>
+<h3>Portal de Clientes</h3>
+<p>
+Un espacio seguro donde los clientes pueden revisar
+proyectos, archivos, actualizaciones y facturas.
+</p>
+<a class="home-link" href="contact.html">
+Preguntar sobre Esto →
+</a>
+</article>
+
+</div>
 </div>
 </section>
-<!-- FOOTER -->
-<footer>
+
+<!-- PORTAFOLIO -->
+<section class="home-section home-section-alt">
+
+<div class="home-container">
+
+<div class="home-section-heading home-center">
+
+<p class="home-eyebrow">
+TRABAJOS DESTACADOS
+</p>
+
+<h2 class="home-title">
+Una Vista Previa de Proyectos Recientes
+</h2>
+
+</div>
+
+<div class="portfolio-preview">
+
+<article class="home-card portfolio-home-card">
+
+<div class="portfolio-home-visual">
+CS
+</div>
+
+<div class="portfolio-home-content">
+
+<span class="portfolio-type">
+Plataforma de Redes Sociales
+</span>
+
+<h3>ConnectSphere</h3>
+
 <p>
-            © 2026 BAM's Website Builder™. Todos los derechos reservados.
-        </p>
+Una plataforma adaptable con perfiles, mensajes,
+notificaciones y un canal social interactivo.
+</p>
+
+<a class="home-link" href="portfolio.html">
+Ver Proyecto →
+</a>
+
+</div>
+</article>
+
+<article class="home-card portfolio-home-card">
+
+<div class="portfolio-home-visual">
+KM
+</div>
+
+<div class="portfolio-home-content">
+
+<span class="portfolio-type">
+Sitio Web de Autor
+</span>
+
+<h3>Kade Mercer</h3>
+
+<p>
+Un sitio web profesional para autor que presenta
+libros, biografía, lanzamientos y recursos para lectores.
+</p>
+
+<a class="home-link" href="portfolio.html">
+Ver Proyecto →
+</a>
+
+</div>
+</article>
+
+<article class="home-card portfolio-home-card">
+
+<div class="portfolio-home-visual">
+G3
+</div>
+
+<div class="portfolio-home-content">
+
+<span class="portfolio-type">
+Sitio Web de Barbería
+</span>
+
+<h3>G3 Blend Lab</h3>
+
+<p>
+Un sitio web negro y dorado para barbería con
+servicios, precios, galería de cortes y reservas en línea.
+</p>
+
+<a class="home-link" href="portfolio.html">
+Ver Proyecto →
+</a>
+
+</div>
+</article>
+
+</div>
+
+<div
+    class="home-actions"
+    style="justify-content: center;"
+>
+<a class="home-button-secondary" href="portfolio.html">
+Explorar el Portafolio Completo
+</a>
+</div>
+
+</div>
+</section>
+
+<!-- PROCESO -->
+<section class="home-section">
+
+<div class="home-container">
+
+<div class="home-section-heading home-center">
+
+<p class="home-eyebrow">
+CÓMO FUNCIONA
+</p>
+
+<h2 class="home-title">
+Un Proceso Sencillo de Cuatro Pasos
+</h2>
+
+</div>
+
+<div class="process-grid">
+
+<article class="home-card process-card">
+<div class="process-number">1</div>
+<h3>Consulta Gratis</h3>
+<p>
+Cuéntanos sobre tu negocio, objetivos, estilo preferido,
+páginas y funciones que necesitas.
+</p>
+</article>
+
+<article class="home-card process-card">
+<div class="process-number">2</div>
+<h3>Diseño y Desarrollo</h3>
+<p>
+Tu sitio web se planifica, diseña y desarrolla de acuerdo
+con las necesidades de tu negocio.
+</p>
+</article>
+
+<article class="home-card process-card">
+<div class="process-number">3</div>
+<h3>Revisión y Cambios</h3>
+<p>
+Revisa tu sitio web y solicita cambios razonables antes
+del lanzamiento final.
+</p>
+</article>
+
+<article class="home-card process-card">
+<div class="process-number">4</div>
+<h3>Lanzamiento y Soporte</h3>
+<p>
+Tu sitio web se publica y puedes agregar mantenimiento
+continuo cuando lo necesites.
+</p>
+</article>
+
+</div>
+</div>
+</section>
+
+<!-- ESTADÍSTICAS -->
+<section class="home-section home-section-alt">
+
+<div class="home-container">
+
+<div class="stats-strip">
+
+<div class="stat-block">
+<strong>100%</strong>
+<span>Diseños de Sitios Web Personalizados</span>
+</div>
+
+<div class="stat-block">
+<strong>Todos</strong>
+<span>Los Tamaños de Pantalla Principales</span>
+</div>
+
+<div class="stat-block">
+<strong>2</strong>
+<span>Opciones de Idioma Disponibles</span>
+</div>
+
+<div class="stat-block">
+<strong>1 a 1</strong>
+<span>Soporte Personal para tu Proyecto</span>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- RESEÑAS -->
+<section class="home-section">
+
+<div class="home-container review-callout">
+
+<div>
+
+<p class="home-eyebrow">
+RESEÑAS DE CLIENTES
+</p>
+
+<h2 class="home-title">
+Descubre lo que Dicen Nuestros Clientes
+</h2>
+
+<p
+    class="home-intro"
+    style="margin-left: 0;"
+>
+Lee reseñas verificadas de Google de clientes que han
+trabajado con BAM's Website Builder y solicita una
+cotización gratis cuando estés listo para comenzar.
+</p>
+
+<div class="home-actions">
+
+<a class="home-button" href="reviews.html">
+Leer Reseñas Verificadas
+</a>
+
+<a class="home-button-secondary" href="contact.html">
+Solicitar una Cotización Gratis
+</a>
+
+</div>
+</div>
+
+<div class="review-panel">
+
+<div
+    class="review-stars"
+    aria-label="Cinco estrellas"
+>
+★★★★★
+</div>
+
+<h3>
+Servicio Profesional para Negocios en Crecimiento
+</h3>
+
+<p>
+Sitios web personalizados, diseño adaptable a dispositivos
+móviles, comunicación clara y soporte continuo, todo enfocado
+en ayudar a tu negocio a fortalecer su presencia en línea.
+</p>
+
+</div>
+</div>
+</section>
+
+<!-- PREGUNTAS FRECUENTES -->
+<section class="home-section home-section-alt">
+
+<div class="home-container">
+
+<div class="home-section-heading home-center">
+
+<p class="home-eyebrow">
+PREGUNTAS FRECUENTES
+</p>
+
+<h2 class="home-title">
+¿Tienes Preguntas Antes de Comenzar?
+</h2>
+
+</div>
+
+<div class="faq-list">
+
+<details>
+<summary>
+¿Cuánto tiempo se tarda en crear un sitio web?
+</summary>
+<p>
+El tiempo depende del número de páginas, las funciones
+solicitadas, la disponibilidad del contenido y los cambios
+necesarios. Recibirás un tiempo estimado después de conversar
+sobre tu proyecto.
+</p>
+</details>
+
+<details>
+<summary>
+¿Mi sitio web funcionará en teléfonos?
+</summary>
+<p>
+Sí. Cada sitio web está diseñado para adaptarse a teléfonos
+inteligentes, tabletas, computadoras portátiles y pantallas
+de escritorio.
+</p>
+</details>
+
+<details>
+<summary>
+¿Pueden rediseñar mi sitio web actual?
+</summary>
+<p>
+Sí. Los sitios web existentes pueden actualizarse con un
+diseño más moderno, una mejor experiencia móvil, contenido
+más claro y una imagen de marca renovada.
+</p>
+</details>
+
+<details>
+<summary>
+¿Ofrecen mantenimiento de sitios web?
+</summary>
+<p>
+Sí. Las opciones de mantenimiento pueden incluir cambios de
+contenido, correcciones, actualizaciones, mejoras y soporte
+general.
+</p>
+</details>
+
+<details>
+<summary>
+¿Puedo solicitar funciones adicionales más adelante?
+</summary>
+<p>
+Sí. Tu sitio web puede seguir creciendo con tu negocio
+mediante nuevas páginas, formularios, herramientas para
+clientes, sistemas de reservas y otras mejoras.
+</p>
+</details>
+
+<details>
+<summary>
+¿Cómo recibo una cotización exacta?
+</summary>
+<p>
+Usa la página de contacto para describir tu negocio y el
+sitio web que necesitas. Recibirás una cotización basada
+en el tamaño y los requisitos de tu proyecto.
+</p>
+</details>
+
+</div>
+</div>
+</section>
+
+<!-- LLAMADO FINAL -->
+<section class="final-cta">
+
+<div class="home-container">
+
+<p class="home-eyebrow">
+¿LISTO PARA COMENZAR?
+</p>
+
+<h2 class="home-title">
+Creemos un Sitio Web que Ayude a tu Negocio a Crecer
+</h2>
+
+<p>
+Cuéntanos sobre tu negocio, tus objetivos y el tipo de sitio
+web que necesitas. La consulta y la cotización inicial son gratis.
+</p>
+
+<div
+    class="home-actions"
+    style="justify-content: center;"
+>
+
+<a class="home-button" href="contact.html">
+Obtén tu Cotización Gratis
+</a>
+
+<a class="home-button-secondary" href="prices.html">
+Ver Precios
+</a>
+
+</div>
+</div>
+</section>
+
+<!-- PIE DE PÁGINA -->
+<footer class="home-footer">
+
+<div class="footer-grid">
+
+<div>
+
+<h3>BAM'S WEBSITE BUILDER</h3>
+
+<p>
+Sitios web profesionales y adaptables creados para ayudar
+a las pequeñas empresas a fortalecer su presencia en línea
+y atraer más clientes.
+</p>
+
+</div>
+
+<div>
+
+<h4>Enlaces Rápidos</h4>
+
+<div class="footer-links">
+
+<a href="services.html">
+Servicios
+</a>
+
+<a href="prices.html">
+Precios
+</a>
+
+<a href="portfolio.html">
+Portafolio
+</a>
+
+<a href="reviews.html">
+Reseñas
+</a>
+
+<a href="contact.html">
+Contacto
+</a>
+
+</div>
+</div>
+
+<div>
+
+<h4>Acceso de Clientes</h4>
+
+<div class="footer-links">
+
+<a href="login.html">
+Iniciar Sesión
+</a>
+
+<a href="register.html">
+Crear una Cuenta
+</a>
+
+<a href="forgot-password.html">
+Olvidé mi Contraseña
+</a>
+
+</div>
+</div>
+
+<div>
+
+<h4>Contacto</h4>
+
+<div class="footer-links">
+
+<a href="tel:+17274178762">
+727-417-8762
+</a>
+
+<a href="mailto:bamswebsitebuilder@gmail.com">
+bamswebsitebuilder@gmail.com
+</a>
+
+<a href="contact.html">
+Solicitar una Cotización
+</a>
+
+<a href="../index.html">
+English
+</a>
+
+</div>
+</div>
+
+</div>
+
+<div class="footer-bottom">
+© 2026 BAM's Website Builder. Todos los Derechos Reservados.
+</div>
+
 </footer>
-<script src="../js/navigation.js?v=70"></script><!-- Start of LiveChat (www.livechat.com) code -->
+
+<script src="../js/navigation.js?v=72"></script>
+
+<!-- Start of LiveChat code -->
 <script>
-window.__lc=window.__lc||{};
-window.__lc.license=19864799;
-window.__lc.integration_name="manual_onboarding";
-window.__lc.product_name="livechat";
-;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},get:function(){if(!e._h)throw new Error("[LiveChatWidget] You can't use getters before load.");return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},init:function(){var n=t.createElement("script");n.async=!0;n.type="text/javascript";n.src="https://cdn.livechatinc.com/tracking.js";t.head.appendChild(n)}};!n.__lc.asyncInit&&e.init(),n.LiveChatWidget=n.LiveChatWidget||e}(window,document,[].slice))
+window.__lc = window.__lc || {};
+window.__lc.license = 19864799;
+window.__lc.integration_name = "manual_onboarding";
+window.__lc.product_name = "livechat";
+
+;(function(n, t, c) {
+    function i(n) {
+        return e._h
+            ? e._h.apply(null, n)
+            : e._q.push(n);
+    }
+
+    var e = {
+        _q: [],
+        _h: null,
+        _v: "2.0",
+
+        on: function() {
+            i(["on", c.call(arguments)]);
+        },
+
+        once: function() {
+            i(["once", c.call(arguments)]);
+        },
+
+        off: function() {
+            i(["off", c.call(arguments)]);
+        },
+
+        get: function() {
+            if (!e._h) {
+                throw new Error(
+                    "[LiveChatWidget] You can't use getters before load."
+                );
+            }
+
+            return i(["get", c.call(arguments)]);
+        },
+
+        call: function() {
+            i(["call", c.call(arguments)]);
+        },
+
+        init: function() {
+            var n = t.createElement("script");
+
+            n.async = true;
+            n.type = "text/javascript";
+            n.src = "https://cdn.livechatinc.com/tracking.js";
+
+            t.head.appendChild(n);
+        }
+    };
+
+    if (!n.__lc.asyncInit) {
+        e.init();
+    }
+
+    n.LiveChatWidget = n.LiveChatWidget || e;
+
+}(window, document, [].slice));
 </script>
-<noscript><a href="https://www.livechat.com/chat-with/19864799/" rel="nofollow">Chat with us</a></noscript>
+
+<noscript>
+<a
+    href="https://www.livechat.com/chat-with/19864799/"
+    rel="nofollow"
+>
+Chatea con nosotros
+</a>,
+con tecnología de
+<a
+    href="https://www.livechat.com/?welcome"
+    rel="noopener nofollow"
+    target="_blank"
+>
+LiveChat
+</a>
+</noscript>
 <!-- End of LiveChat code -->
+
+<script
+    type="module"
+    src="../js/admin-link.js?v=2"
+></script>
+
 </body>
 </html>
