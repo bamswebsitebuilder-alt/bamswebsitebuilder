@@ -32,46 +32,81 @@ import {
 const adminEmail = document.getElementById("admin-email");
 const logoutButton = document.getElementById("admin-logout");
 
-const navButtons = [...document.querySelectorAll(".admin-nav-button")];
-const panels = [...document.querySelectorAll(".admin-panel")];
-const quickButtons = [...document.querySelectorAll("[data-open-panel]")];
+const navButtons = [
+  ...document.querySelectorAll(".admin-nav-button")
+];
+
+const panels = [
+  ...document.querySelectorAll(".admin-panel")
+];
+
+const quickButtons = [
+  ...document.querySelectorAll("[data-open-panel]")
+];
 
 const clientForm = document.getElementById("client-form");
-const clientFormStatus = document.getElementById("client-form-status");
+const clientFormStatus = document.getElementById(
+  "client-form-status"
+);
 const clientList = document.getElementById("client-list");
 
 const invoiceForm = document.getElementById("invoice-form");
-const invoiceFormStatus = document.getElementById("invoice-form-status");
+const invoiceFormStatus = document.getElementById(
+  "invoice-form-status"
+);
 const invoiceList = document.getElementById("invoice-list");
 
-const adminFileForm = document.getElementById("admin-file-form");
-const fileFormStatus = document.getElementById("file-form-status");
-const uploadProgress = document.getElementById("admin-upload-progress");
+const adminFileForm = document.getElementById(
+  "admin-file-form"
+);
+const fileFormStatus = document.getElementById(
+  "file-form-status"
+);
+const uploadProgress = document.getElementById(
+  "admin-upload-progress"
+);
 
-const invoiceClientSelect = document.getElementById("invoice-client");
-const fileClientSelect = document.getElementById("file-client");
+const invoiceClientSelect = document.getElementById(
+  "invoice-client"
+);
+
+const fileClientSelect = document.getElementById(
+  "file-client"
+);
 
 const statClients = document.getElementById("stat-clients");
 const statUnpaid = document.getElementById("stat-unpaid");
 const statPaid = document.getElementById("stat-paid");
 const statBalance = document.getElementById("stat-balance");
 
-const menuToggle = document.getElementById("admin-menu-toggle");
-const adminSidebar = document.getElementById("admin-sidebar");
+const menuToggle = document.getElementById(
+  "admin-menu-toggle"
+);
+
+const adminSidebar = document.getElementById(
+  "admin-sidebar"
+);
+
 const sidebarOverlay = document.getElementById(
   "admin-sidebar-overlay"
 );
 
-const notificationList = document.getElementById("notification-list");
+const notificationList = document.getElementById(
+  "notification-list"
+);
+
 const notificationCount = document.getElementById(
   "notification-count"
 );
+
 const notificationStatus = document.getElementById(
   "notification-status"
 );
 
 const enableBrowserNotificationsButton =
-  document.getElementById("enable-browser-notifications");
+  document.getElementById(
+    "enable-browser-notifications"
+  );
 
 /* =========================================================
    INITIAL PAGE STATE
@@ -81,12 +116,19 @@ if (sidebarOverlay) {
   sidebarOverlay.hidden = true;
 }
 
-if (adminSidebar && window.innerWidth <= 760) {
+if (
+  adminSidebar &&
+  window.innerWidth <= 760
+) {
   adminSidebar.classList.remove("open");
-  adminSidebar.setAttribute("aria-hidden", "true");
+  adminSidebar.setAttribute(
+    "aria-hidden",
+    "true"
+  );
 }
 
 let currentAdmin = null;
+
 let clientRecords = [];
 let invoiceRecords = [];
 let activityRecords = [];
@@ -98,16 +140,25 @@ let firstInvoiceSnapshotLoaded = false;
    HELPER FUNCTIONS
 ========================================================= */
 
-const showStatus = (element, message, type = "") => {
-  if (!element) return;
+const showStatus = (
+  element,
+  message,
+  type = ""
+) => {
+  if (!element) {
+    return;
+  }
 
   element.hidden = false;
   element.textContent = message;
-  element.className = `admin-status ${type}`.trim();
+  element.className =
+    `admin-status ${type}`.trim();
 };
 
 const hideStatus = (element) => {
-  if (!element) return;
+  if (!element) {
+    return;
+  }
 
   element.hidden = true;
   element.textContent = "";
@@ -115,14 +166,19 @@ const hideStatus = (element) => {
 };
 
 const formatCurrency = (amount) => {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD"
-  }).format(Number(amount) || 0);
+  return new Intl.NumberFormat(
+    "en-US",
+    {
+      style: "currency",
+      currency: "USD"
+    }
+  ).format(Number(amount) || 0);
 };
 
 const formatDate = (value) => {
-  if (!value) return "";
+  if (!value) {
+    return "";
+  }
 
   const date =
     typeof value?.toDate === "function"
@@ -133,32 +189,47 @@ const formatDate = (value) => {
     return "";
   }
 
-  return date.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric"
-  });
+  return date.toLocaleDateString(
+    "en-US",
+    {
+      year: "numeric",
+      month: "short",
+      day: "numeric"
+    }
+  );
 };
 
 const timestampToMillis = (value) => {
-  if (!value) return 0;
+  if (!value) {
+    return 0;
+  }
 
-  if (typeof value?.toMillis === "function") {
+  if (
+    typeof value?.toMillis === "function"
+  ) {
     return value.toMillis();
   }
 
-  const parsed = new Date(value).getTime();
+  const parsed =
+    new Date(value).getTime();
 
-  return Number.isNaN(parsed) ? 0 : parsed;
+  return Number.isNaN(parsed)
+    ? 0
+    : parsed;
 };
 
 const isValidWebAddress = (value) => {
-  if (!value) return true;
+  if (!value) {
+    return true;
+  }
 
   try {
     const parsedUrl = new URL(value);
 
-    return ["http:", "https:"].includes(parsedUrl.protocol);
+    return [
+      "http:",
+      "https:"
+    ].includes(parsedUrl.protocol);
   } catch {
     return false;
   }
@@ -169,55 +240,102 @@ const isValidWebAddress = (value) => {
 ========================================================= */
 
 const closeMobileMenu = () => {
-  if (!adminSidebar || !sidebarOverlay || !menuToggle) {
+  if (
+    !adminSidebar ||
+    !sidebarOverlay ||
+    !menuToggle
+  ) {
     return;
   }
 
   adminSidebar.classList.remove("open");
-  adminSidebar.setAttribute("aria-hidden", "true");
+
+  adminSidebar.setAttribute(
+    "aria-hidden",
+    "true"
+  );
 
   sidebarOverlay.hidden = true;
 
-  menuToggle.setAttribute("aria-expanded", "false");
+  menuToggle.setAttribute(
+    "aria-expanded",
+    "false"
+  );
 };
 
 const openMobileMenu = () => {
-  if (!adminSidebar || !sidebarOverlay || !menuToggle) {
+  if (
+    !adminSidebar ||
+    !sidebarOverlay ||
+    !menuToggle
+  ) {
     return;
   }
 
   adminSidebar.classList.add("open");
-  adminSidebar.setAttribute("aria-hidden", "false");
+
+  adminSidebar.setAttribute(
+    "aria-hidden",
+    "false"
+  );
 
   sidebarOverlay.hidden = false;
 
-  menuToggle.setAttribute("aria-expanded", "true");
+  menuToggle.setAttribute(
+    "aria-expanded",
+    "true"
+  );
 };
 
-menuToggle?.addEventListener("click", () => {
-  if (adminSidebar?.classList.contains("open")) {
-    closeMobileMenu();
-  } else {
-    openMobileMenu();
-  }
-});
-
-sidebarOverlay?.addEventListener("click", closeMobileMenu);
-
-window.addEventListener("resize", () => {
-  if (window.innerWidth > 760) {
-    adminSidebar?.classList.remove("open");
-    adminSidebar?.setAttribute("aria-hidden", "false");
-
-    if (sidebarOverlay) {
-      sidebarOverlay.hidden = true;
+menuToggle?.addEventListener(
+  "click",
+  () => {
+    if (
+      adminSidebar?.classList.contains(
+        "open"
+      )
+    ) {
+      closeMobileMenu();
+    } else {
+      openMobileMenu();
     }
-
-    menuToggle?.setAttribute("aria-expanded", "false");
-  } else {
-    adminSidebar?.setAttribute("aria-hidden", "true");
   }
-});
+);
+
+sidebarOverlay?.addEventListener(
+  "click",
+  closeMobileMenu
+);
+
+window.addEventListener(
+  "resize",
+  () => {
+    if (window.innerWidth > 760) {
+      adminSidebar?.classList.remove(
+        "open"
+      );
+
+      adminSidebar?.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+      if (sidebarOverlay) {
+        sidebarOverlay.hidden = true;
+      }
+
+      menuToggle?.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+    } else {
+      adminSidebar?.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+    }
+  }
+);
 
 /* =========================================================
    DASHBOARD PANELS
@@ -225,7 +343,10 @@ window.addEventListener("resize", () => {
 
 const setActivePanel = (panelId) => {
   panels.forEach((panel) => {
-    panel.classList.toggle("active", panel.id === panelId);
+    panel.classList.toggle(
+      "active",
+      panel.id === panelId
+    );
   });
 
   navButtons.forEach((button) => {
@@ -237,25 +358,38 @@ const setActivePanel = (panelId) => {
 };
 
 navButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const panelId = button.dataset.panel;
+  button.addEventListener(
+    "click",
+    () => {
+      const panelId =
+        button.dataset.panel;
 
-    setActivePanel(panelId);
+      setActivePanel(panelId);
 
-    if (panelId === "notifications") {
-      markNotificationsSeen();
+      if (
+        panelId === "notifications"
+      ) {
+        markNotificationsSeen();
+      }
+
+      if (
+        window.innerWidth <= 760
+      ) {
+        closeMobileMenu();
+      }
     }
-
-    if (window.innerWidth <= 760) {
-      closeMobileMenu();
-    }
-  });
+  );
 });
 
 quickButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    setActivePanel(button.dataset.openPanel);
-  });
+  button.addEventListener(
+    "click",
+    () => {
+      setActivePanel(
+        button.dataset.openPanel
+      );
+    }
+  );
 });
 
 /* =========================================================
@@ -263,7 +397,10 @@ quickButtons.forEach((button) => {
 ========================================================= */
 
 const buildClientOptions = () => {
-  if (!invoiceClientSelect || !fileClientSelect) {
+  if (
+    !invoiceClientSelect ||
+    !fileClientSelect
+  ) {
     return;
   }
 
@@ -276,12 +413,19 @@ const buildClientOptions = () => {
         client.email ||
         client.id;
 
-      return `<option value="${client.id}">${label}</option>`;
+      return `
+        <option value="${client.id}">
+          ${label}
+        </option>
+      `;
     })
   ].join("");
 
-  invoiceClientSelect.innerHTML = options;
-  fileClientSelect.innerHTML = options;
+  invoiceClientSelect.innerHTML =
+    options;
+
+  fileClientSelect.innerHTML =
+    options;
 };
 
 /* =========================================================
@@ -289,7 +433,9 @@ const buildClientOptions = () => {
 ========================================================= */
 
 const renderClients = () => {
-  if (!clientList) return;
+  if (!clientList) {
+    return;
+  }
 
   clientList.replaceChildren();
 
@@ -301,21 +447,31 @@ const renderClients = () => {
   }
 
   clientRecords.forEach((client) => {
-    const item = document.createElement("div");
-    item.className = "admin-list-item";
+    const item =
+      document.createElement("div");
 
-    const info = document.createElement("div");
-    info.className = "admin-list-info";
+    item.className =
+      "admin-list-item";
 
-    const title = document.createElement("strong");
+    const info =
+      document.createElement("div");
+
+    info.className =
+      "admin-list-info";
+
+    const title =
+      document.createElement("strong");
 
     title.textContent =
       client.fullName ||
       client.email ||
       "Client";
 
-    const meta = document.createElement("div");
-    meta.className = "admin-list-meta";
+    const meta =
+      document.createElement("div");
+
+    meta.className =
+      "admin-list-meta";
 
     meta.textContent = [
       client.email,
@@ -325,13 +481,25 @@ const renderClients = () => {
       .filter(Boolean)
       .join(" • ");
 
-    info.append(title, meta);
+    info.append(
+      title,
+      meta
+    );
 
-    const badge = document.createElement("span");
-    badge.className = "admin-badge";
-    badge.textContent = client.role || "client";
+    const badge =
+      document.createElement("span");
 
-    item.append(info, badge);
+    badge.className =
+      "admin-badge";
+
+    badge.textContent =
+      client.role || "client";
+
+    item.append(
+      info,
+      badge
+    );
+
     clientList.appendChild(item);
   });
 };
@@ -341,7 +509,9 @@ const renderClients = () => {
 ========================================================= */
 
 const renderInvoices = () => {
-  if (!invoiceList) return;
+  if (!invoiceList) {
+    return;
+  }
 
   invoiceList.replaceChildren();
 
@@ -353,24 +523,36 @@ const renderInvoices = () => {
   }
 
   invoiceRecords.forEach((invoice) => {
-    const item = document.createElement("div");
-    item.className = "admin-list-item";
+    const item =
+      document.createElement("div");
 
-    const info = document.createElement("div");
-    info.className = "admin-list-info";
+    item.className =
+      "admin-list-item";
 
-    const title = document.createElement("strong");
+    const info =
+      document.createElement("div");
+
+    info.className =
+      "admin-list-info";
+
+    const title =
+      document.createElement("strong");
 
     title.textContent =
       `${invoice.invoiceNumber || "Invoice"} — ` +
       formatCurrency(invoice.amount);
 
-    const client = clientRecords.find(
-      (record) => record.id === invoice.userId
-    );
+    const client =
+      clientRecords.find(
+        (record) =>
+          record.id === invoice.userId
+      );
 
-    const meta = document.createElement("div");
-    meta.className = "admin-list-meta";
+    const meta =
+      document.createElement("div");
+
+    meta.className =
+      "admin-list-meta";
 
     meta.textContent = [
       client?.fullName ||
@@ -380,22 +562,33 @@ const renderInvoices = () => {
       invoice.description,
 
       invoice.dueDate
-        ? `Due ${formatDate(invoice.dueDate)}`
+        ? `Due ${formatDate(
+            invoice.dueDate
+          )}`
         : ""
     ]
       .filter(Boolean)
       .join(" • ");
 
-    info.append(title, meta);
+    info.append(
+      title,
+      meta
+    );
 
-    const actions = document.createElement("div");
-    actions.className = "admin-list-actions";
+    const actions =
+      document.createElement("div");
 
-    const badge = document.createElement("span");
+    actions.className =
+      "admin-list-actions";
+
+    const badge =
+      document.createElement("span");
 
     badge.className =
       `admin-badge ${
-        invoice.status === "paid" ? "paid" : ""
+        invoice.status === "paid"
+          ? "paid"
+          : ""
       }`;
 
     badge.textContent =
@@ -403,13 +596,16 @@ const renderInvoices = () => {
         ? "paid"
         : "unpaid";
 
-    const toggleButton = document.createElement("button");
+    const toggleButton =
+      document.createElement("button");
 
     toggleButton.type = "button";
 
     toggleButton.className =
       `admin-small-button ${
-        invoice.status === "paid" ? "" : "success"
+        invoice.status === "paid"
+          ? ""
+          : "success"
       }`;
 
     toggleButton.textContent =
@@ -417,69 +613,96 @@ const renderInvoices = () => {
         ? "Mark Unpaid"
         : "Mark Paid";
 
-    toggleButton.addEventListener("click", async () => {
-      const nextStatus =
-        invoice.status === "paid"
-          ? "unpaid"
-          : "paid";
+    toggleButton.addEventListener(
+      "click",
+      async () => {
+        const nextStatus =
+          invoice.status === "paid"
+            ? "unpaid"
+            : "paid";
 
-      toggleButton.disabled = true;
-      toggleButton.textContent = "Updating...";
+        toggleButton.disabled = true;
 
-      try {
-        await updateDoc(
-          doc(
-            db,
-            "users",
-            invoice.userId,
-            "invoices",
-            invoice.id
-          ),
-          {
-            status: nextStatus,
-            updatedAt: serverTimestamp(),
+        toggleButton.textContent =
+          "Updating...";
 
-            paidAt:
-              nextStatus === "paid"
-                ? serverTimestamp()
-                : null,
+        try {
+          await updateDoc(
+            doc(
+              db,
+              "users",
+              invoice.userId,
+              "invoices",
+              invoice.id
+            ),
+            {
+              status: nextStatus,
 
-            updatedBy: currentAdmin?.uid || ""
-          }
-        );
-      } catch (error) {
-        console.error(
-          "Invoice status update failed:",
-          error
-        );
+              updatedAt:
+                serverTimestamp(),
 
-        alert(
-          "The invoice status could not be updated."
-        );
-      } finally {
-        toggleButton.disabled = false;
+              paidAt:
+                nextStatus === "paid"
+                  ? serverTimestamp()
+                  : null,
+
+              updatedBy:
+                currentAdmin?.uid || ""
+            }
+          );
+        } catch (error) {
+          console.error(
+            "Invoice status update failed:",
+            error
+          );
+
+          alert(
+            "The invoice status could not be updated."
+          );
+        } finally {
+          toggleButton.disabled =
+            false;
+        }
       }
-    });
+    );
 
-    actions.append(badge, toggleButton);
+    actions.append(
+      badge,
+      toggleButton
+    );
 
-    /*
-      This button opens the PayPal invoice that was
-      saved in the invoice-pdf-url field.
-    */
-    if (invoice.pdfUrl) {
-      const paypalButton = document.createElement("a");
+    if (
+      invoice.pdfUrl &&
+      isValidWebAddress(invoice.pdfUrl)
+    ) {
+      const paypalButton =
+        document.createElement("a");
 
-      paypalButton.href = invoice.pdfUrl;
-      paypalButton.target = "_blank";
-      paypalButton.rel = "noopener noreferrer";
-      paypalButton.className = "admin-small-button";
-      paypalButton.textContent = "Open PayPal Invoice";
+      paypalButton.href =
+        invoice.pdfUrl;
 
-      actions.appendChild(paypalButton);
+      paypalButton.target =
+        "_blank";
+
+      paypalButton.rel =
+        "noopener noreferrer";
+
+      paypalButton.className =
+        "admin-small-button";
+
+      paypalButton.textContent =
+        "Open PayPal Invoice";
+
+      actions.appendChild(
+        paypalButton
+      );
     }
 
-    item.append(info, actions);
+    item.append(
+      info,
+      actions
+    );
+
     invoiceList.appendChild(item);
   });
 };
@@ -489,19 +712,25 @@ const renderInvoices = () => {
 ========================================================= */
 
 const updateStats = () => {
-  const unpaid = invoiceRecords.filter(
-    (invoice) => invoice.status !== "paid"
-  );
+  const unpaid =
+    invoiceRecords.filter(
+      (invoice) =>
+        invoice.status !== "paid"
+    );
 
-  const paid = invoiceRecords.filter(
-    (invoice) => invoice.status === "paid"
-  );
+  const paid =
+    invoiceRecords.filter(
+      (invoice) =>
+        invoice.status === "paid"
+    );
 
-  const outstanding = unpaid.reduce(
-    (total, invoice) =>
-      total + (Number(invoice.amount) || 0),
-    0
-  );
+  const outstanding =
+    unpaid.reduce(
+      (total, invoice) =>
+        total +
+        (Number(invoice.amount) || 0),
+      0
+    );
 
   if (statClients) {
     statClients.textContent =
@@ -528,69 +757,92 @@ const updateStats = () => {
    NOTIFICATIONS
 ========================================================= */
 
-const notifyDevice = (title, body) => {
+const notifyDevice = (
+  title,
+  body
+) => {
   if (
     "Notification" in window &&
-    Notification.permission === "granted" &&
-    document.visibilityState !== "visible"
+    Notification.permission ===
+      "granted" &&
+    document.visibilityState !==
+      "visible"
   ) {
-    new Notification(title, { body });
+    new Notification(
+      title,
+      { body }
+    );
   }
 };
 
 const rebuildActivity = () => {
-  const clientActivity = clientRecords.map((client) => ({
-    id: `client-${client.id}`,
-    type: "client",
-    title: "New client account",
+  const clientActivity =
+    clientRecords.map((client) => ({
+      id: `client-${client.id}`,
 
-    detail:
-      client.fullName ||
-      client.email ||
-      "A client account was created.",
+      type: "client",
 
-    createdAt: client.createdAt,
-    time: timestampToMillis(client.createdAt)
-  }));
+      title: "New client account",
 
-  const invoiceActivity = invoiceRecords.map((invoice) => ({
-    id:
-      `invoice-${invoice.userId}-` +
-      `${invoice.id}-${invoice.status}`,
+      detail:
+        client.fullName ||
+        client.email ||
+        "A client account was created.",
 
-    type: "invoice",
+      createdAt:
+        client.createdAt,
 
-    title:
-      invoice.status === "paid"
-        ? "Invoice marked paid"
-        : "PayPal invoice added",
+      time:
+        timestampToMillis(
+          client.createdAt
+        )
+    }));
 
-    detail:
-      `${invoice.invoiceNumber || "Invoice"} — ` +
-      formatCurrency(invoice.amount),
+  const invoiceActivity =
+    invoiceRecords.map((invoice) => ({
+      id:
+        `invoice-${invoice.userId}-` +
+        `${invoice.id}-${invoice.status}`,
 
-    createdAt:
-      invoice.updatedAt ||
-      invoice.createdAt,
+      type: "invoice",
 
-    time: timestampToMillis(
-      invoice.updatedAt ||
-      invoice.createdAt
-    )
-  }));
+      title:
+        invoice.status === "paid"
+          ? "Invoice marked paid"
+          : "PayPal invoice added",
+
+      detail:
+        `${invoice.invoiceNumber || "Invoice"} — ` +
+        formatCurrency(invoice.amount),
+
+      createdAt:
+        invoice.updatedAt ||
+        invoice.createdAt,
+
+      time:
+        timestampToMillis(
+          invoice.updatedAt ||
+          invoice.createdAt
+        )
+    }));
 
   activityRecords = [
     ...clientActivity,
     ...invoiceActivity
   ]
-    .sort((a, b) => b.time - a.time)
+    .sort(
+      (first, second) =>
+        second.time - first.time
+    )
     .slice(0, 30);
 
   renderActivity();
 };
 
 const renderActivity = () => {
-  if (!notificationList) return;
+  if (!notificationList) {
+    return;
+  }
 
   notificationList.replaceChildren();
 
@@ -599,7 +851,8 @@ const renderActivity = () => {
       '<p class="admin-status">No recent activity yet.</p>';
 
     if (notificationCount) {
-      notificationCount.hidden = true;
+      notificationCount.hidden =
+        true;
     }
 
     return;
@@ -612,9 +865,11 @@ const renderActivity = () => {
       )
     ) || 0;
 
-  const unread = activityRecords.filter(
-    (activity) => activity.time > lastSeen
-  ).length;
+  const unread =
+    activityRecords.filter(
+      (activity) =>
+        activity.time > lastSeen
+    ).length;
 
   if (notificationCount) {
     notificationCount.textContent =
@@ -625,7 +880,8 @@ const renderActivity = () => {
   }
 
   activityRecords.forEach((activity) => {
-    const item = document.createElement("div");
+    const item =
+      document.createElement("div");
 
     item.className =
       `admin-list-item admin-notification-item ${
@@ -634,28 +890,51 @@ const renderActivity = () => {
           : ""
       }`;
 
-    const info = document.createElement("div");
-    info.className = "admin-list-info";
+    const info =
+      document.createElement("div");
 
-    const title = document.createElement("strong");
-    title.textContent = activity.title;
+    info.className =
+      "admin-list-info";
 
-    const detail = document.createElement("div");
-    detail.className = "admin-list-meta";
-    detail.textContent = activity.detail;
+    const title =
+      document.createElement("strong");
 
-    const time = document.createElement("div");
-    time.className = "admin-notification-time";
+    title.textContent =
+      activity.title;
+
+    const detail =
+      document.createElement("div");
+
+    detail.className =
+      "admin-list-meta";
+
+    detail.textContent =
+      activity.detail;
+
+    const time =
+      document.createElement("div");
+
+    time.className =
+      "admin-notification-time";
 
     time.textContent =
       activity.createdAt
-        ? formatDate(activity.createdAt)
+        ? formatDate(
+            activity.createdAt
+          )
         : "Recent activity";
 
-    info.append(title, detail, time);
+    info.append(
+      title,
+      detail,
+      time
+    );
+
     item.append(info);
 
-    notificationList.appendChild(item);
+    notificationList.appendChild(
+      item
+    );
   });
 };
 
@@ -671,9 +950,13 @@ const markNotificationsSeen = () => {
 enableBrowserNotificationsButton?.addEventListener(
   "click",
   async () => {
-    if (!notificationStatus) return;
+    if (!notificationStatus) {
+      return;
+    }
 
-    if (!("Notification" in window)) {
+    if (
+      !("Notification" in window)
+    ) {
       notificationStatus.textContent =
         "This browser does not support device notifications.";
 
@@ -695,23 +978,26 @@ enableBrowserNotificationsButton?.addEventListener(
 ========================================================= */
 
 const watchClients = () => {
-  const clientsQuery = query(
-    collection(db, "users"),
-    orderBy("fullName")
-  );
+  const clientsQuery =
+    query(
+      collection(db, "users"),
+      orderBy("fullName")
+    );
 
   return onSnapshot(
     clientsQuery,
 
     (snapshot) => {
-      clientRecords = snapshot.docs
-        .map((item) => ({
-          id: item.id,
-          ...item.data()
-        }))
-        .filter(
-          (record) => record.role !== "admin"
-        );
+      clientRecords =
+        snapshot.docs
+          .map((item) => ({
+            id: item.id,
+            ...item.data()
+          }))
+          .filter(
+            (record) =>
+              record.role !== "admin"
+          );
 
       renderClients();
       buildClientOptions();
@@ -719,24 +1005,39 @@ const watchClients = () => {
       updateStats();
       rebuildActivity();
 
-      if (firstClientSnapshotLoaded) {
-        snapshot.docChanges().forEach((change) => {
-          if (change.type !== "added") return;
+      if (
+        firstClientSnapshotLoaded
+      ) {
+        snapshot
+          .docChanges()
+          .forEach((change) => {
+            if (
+              change.type !== "added"
+            ) {
+              return;
+            }
 
-          const data = change.doc.data();
+            const data =
+              change.doc.data();
 
-          if (data.role === "admin") return;
+            if (
+              data.role === "admin"
+            ) {
+              return;
+            }
 
-          notifyDevice(
-            "New client registered",
-            data.fullName ||
-              data.email ||
-              "A new client joined."
-          );
-        });
+            notifyDevice(
+              "New client registered",
+
+              data.fullName ||
+                data.email ||
+                "A new client joined."
+            );
+          });
       }
 
-      firstClientSnapshotLoaded = true;
+      firstClientSnapshotLoaded =
+        true;
     },
 
     (error) => {
@@ -747,7 +1048,12 @@ const watchClients = () => {
 
       if (clientList) {
         clientList.innerHTML =
-          '<p class="admin-status error">Clients could not be loaded.</p>';
+          `<p class="admin-status error">
+            Clients could not be loaded: ${
+              error.message ||
+              "Unknown Firestore error"
+            }
+          </p>`;
       }
     }
   );
@@ -758,50 +1064,106 @@ const watchClients = () => {
 ========================================================= */
 
 const watchInvoices = () => {
-  const invoicesQuery = query(
-    collectionGroup(db, "invoices"),
-    orderBy("createdAt", "desc")
-  );
+  /*
+    Read all invoice documents from:
+
+    users/{clientUID}/invoices/{invoiceID}
+
+    The records are sorted in JavaScript instead of
+    using orderBy inside the collection-group query.
+    This prevents a missing Firestore index from keeping
+    saved invoices from appearing in the admin list.
+  */
+
+  const invoicesQuery =
+    collectionGroup(
+      db,
+      "invoices"
+    );
 
   return onSnapshot(
     invoicesQuery,
 
     (snapshot) => {
-      invoiceRecords = snapshot.docs.map(
-        (item) => {
-          const userId =
-            item.ref.parent.parent?.id || "";
+      invoiceRecords =
+        snapshot.docs
+          .map(
+            (invoiceDocument) => {
+              const userDocument =
+                invoiceDocument.ref
+                  .parent
+                  .parent;
 
-          return {
-            id: item.id,
-            userId,
-            ...item.data()
-          };
-        }
-      );
+              return {
+                id:
+                  invoiceDocument.id,
+
+                userId:
+                  userDocument?.id || "",
+
+                ...invoiceDocument.data()
+              };
+            }
+          )
+          .sort(
+            (
+              firstInvoice,
+              secondInvoice
+            ) => {
+              const firstCreatedTime =
+                timestampToMillis(
+                  firstInvoice.createdAt
+                );
+
+              const secondCreatedTime =
+                timestampToMillis(
+                  secondInvoice.createdAt
+                );
+
+              return (
+                secondCreatedTime -
+                firstCreatedTime
+              );
+            }
+          );
 
       renderInvoices();
       updateStats();
       rebuildActivity();
 
-      if (firstInvoiceSnapshotLoaded) {
-        snapshot.docChanges().forEach((change) => {
-          if (change.type !== "modified") {
-            return;
-          }
+      if (
+        firstInvoiceSnapshotLoaded
+      ) {
+        snapshot
+          .docChanges()
+          .forEach((change) => {
+            if (
+              change.type !==
+              "modified"
+            ) {
+              return;
+            }
 
-          const data = change.doc.data();
+            const data =
+              change.doc.data();
 
-          if (data.status === "paid") {
-            notifyDevice(
-              "Invoice paid",
-              `${data.invoiceNumber || "Invoice"} was marked paid.`
-            );
-          }
-        });
+            if (
+              data.status === "paid"
+            ) {
+              notifyDevice(
+                "Invoice paid",
+
+                `${
+                  data.invoiceNumber ||
+                  "Invoice"
+                } was marked paid.`
+              );
+            }
+          });
       }
 
-      firstInvoiceSnapshotLoaded = true;
+      firstInvoiceSnapshotLoaded =
+        true;
     },
 
     (error) => {
@@ -812,7 +1174,12 @@ const watchInvoices = () => {
 
       if (invoiceList) {
         invoiceList.innerHTML =
-          '<p class="admin-status error">Invoices could not be loaded.</p>';
+          `<p class="admin-status error">
+            Invoices could not be loaded: ${
+              error.message ||
+              "Unknown Firestore error"
+            }
+          </p>`;
       }
     }
   );
@@ -826,37 +1193,56 @@ clientForm?.addEventListener(
   "submit",
   async (event) => {
     event.preventDefault();
-    hideStatus(clientFormStatus);
+
+    hideStatus(
+      clientFormStatus
+    );
 
     const uid =
       document
-        .getElementById("client-uid")
+        .getElementById(
+          "client-uid"
+        )
         ?.value.trim() || "";
 
     const fullName =
       document
-        .getElementById("client-name")
+        .getElementById(
+          "client-name"
+        )
         ?.value.trim() || "";
 
     const email =
       document
-        .getElementById("client-email")
+        .getElementById(
+          "client-email"
+        )
         ?.value.trim() || "";
 
     const businessName =
       document
-        .getElementById("client-business")
+        .getElementById(
+          "client-business"
+        )
         ?.value.trim() || "";
 
     const phone =
       document
-        .getElementById("client-phone")
+        .getElementById(
+          "client-phone"
+        )
         ?.value.trim() || "";
 
-    if (!uid || !fullName || !email) {
+    if (
+      !uid ||
+      !fullName ||
+      !email
+    ) {
       showStatus(
         clientFormStatus,
+
         "Enter the client's Firebase UID, name, and email.",
+
         "error"
       );
 
@@ -865,10 +1251,16 @@ clientForm?.addEventListener(
 
     try {
       const clientReference =
-        doc(db, "users", uid);
+        doc(
+          db,
+          "users",
+          uid
+        );
 
       const existingClient =
-        await getDoc(clientReference);
+        await getDoc(
+          clientReference
+        );
 
       const clientData = {
         uid,
@@ -877,10 +1269,13 @@ clientForm?.addEventListener(
         businessName,
         phone,
         role: "client",
-        updatedAt: serverTimestamp()
+        updatedAt:
+          serverTimestamp()
       };
 
-      if (!existingClient.exists()) {
+      if (
+        !existingClient.exists()
+      ) {
         clientData.createdAt =
           serverTimestamp();
       }
@@ -888,14 +1283,18 @@ clientForm?.addEventListener(
       await setDoc(
         clientReference,
         clientData,
-        { merge: true }
+        {
+          merge: true
+        }
       );
 
       clientForm.reset();
 
       showStatus(
         clientFormStatus,
+
         "Client profile saved successfully.",
+
         "success"
       );
     } catch (error) {
@@ -906,7 +1305,9 @@ clientForm?.addEventListener(
 
       showStatus(
         clientFormStatus,
+
         "The client could not be saved.",
+
         "error"
       );
     }
@@ -921,43 +1322,56 @@ invoiceForm?.addEventListener(
   "submit",
   async (event) => {
     event.preventDefault();
-    hideStatus(invoiceFormStatus);
+
+    hideStatus(
+      invoiceFormStatus
+    );
 
     const userId =
       invoiceClientSelect?.value || "";
 
     const invoiceNumber =
       document
-        .getElementById("invoice-number")
+        .getElementById(
+          "invoice-number"
+        )
         ?.value.trim() || "";
 
     const amount =
       Number(
         document
-          .getElementById("invoice-amount")
+          .getElementById(
+            "invoice-amount"
+          )
           ?.value
       );
 
     const dueDateValue =
       document
-        .getElementById("invoice-due-date")
+        .getElementById(
+          "invoice-due-date"
+        )
         ?.value || "";
 
     const description =
       document
-        .getElementById("invoice-description")
+        .getElementById(
+          "invoice-description"
+        )
         ?.value.trim() || "";
 
     /*
-      This ID remains invoice-pdf-url so the new HTML
-      remains compatible with the existing dashboard.
+      This remains invoice-pdf-url so it matches
+      the current admin-dashboard.html.
 
-      The value stored in pdfUrl is now the PayPal
+      The value stored as pdfUrl is the PayPal
       invoice link.
     */
     const pdfUrl =
       document
-        .getElementById("invoice-pdf-url")
+        .getElementById(
+          "invoice-pdf-url"
+        )
         ?.value.trim() || "";
 
     if (!userId) {
@@ -1013,7 +1427,10 @@ invoiceForm?.addEventListener(
       return;
     }
 
-    if (pdfUrl && !isValidWebAddress(pdfUrl)) {
+    if (
+      pdfUrl &&
+      !isValidWebAddress(pdfUrl)
+    ) {
       showStatus(
         invoiceFormStatus,
         "Please enter a valid PayPal invoice link.",
@@ -1033,27 +1450,36 @@ invoiceForm?.addEventListener(
         ),
         {
           invoiceNumber,
+
           amount,
+
           currency: "USD",
 
-          dueDate: Timestamp.fromDate(
-            new Date(
-              `${dueDateValue}T12:00:00`
-            )
-          ),
+          dueDate:
+            Timestamp.fromDate(
+              new Date(
+                `${dueDateValue}T12:00:00`
+              )
+            ),
 
           description,
 
           /*
-            pdfUrl contains the client's PayPal
-            invoice/payment link.
+            pdfUrl stores the PayPal invoice
+            or payment link.
           */
           pdfUrl,
 
           status: "unpaid",
-          createdAt: serverTimestamp(),
-          updatedAt: serverTimestamp(),
-          createdBy: currentAdmin?.uid || ""
+
+          createdAt:
+            serverTimestamp(),
+
+          updatedAt:
+            serverTimestamp(),
+
+          createdBy:
+            currentAdmin?.uid || ""
         }
       );
 
@@ -1061,7 +1487,9 @@ invoiceForm?.addEventListener(
 
       showStatus(
         invoiceFormStatus,
+
         "PayPal invoice added to the client's portal successfully.",
+
         "success"
       );
     } catch (error) {
@@ -1072,7 +1500,12 @@ invoiceForm?.addEventListener(
 
       showStatus(
         invoiceFormStatus,
-        "The PayPal invoice could not be added.",
+
+        `The PayPal invoice could not be added: ${
+          error.message ||
+          "Unknown Firestore error"
+        }`,
+
         "error"
       );
     }
@@ -1087,7 +1520,10 @@ adminFileForm?.addEventListener(
   "submit",
   (event) => {
     event.preventDefault();
-    hideStatus(fileFormStatus);
+
+    hideStatus(
+      fileFormStatus
+    );
 
     const userId =
       fileClientSelect?.value || "";
@@ -1100,39 +1536,55 @@ adminFileForm?.addEventListener(
     const file =
       fileInput?.files?.[0];
 
-    if (!userId || !file) {
+    if (
+      !userId ||
+      !file
+    ) {
       showStatus(
         fileFormStatus,
+
         "Choose a client and a file.",
+
         "error"
       );
 
       return;
     }
 
-    if (file.size > 15 * 1024 * 1024) {
+    if (
+      file.size >
+      15 * 1024 * 1024
+    ) {
       showStatus(
         fileFormStatus,
+
         "The file must be 15 MB or smaller.",
+
         "error"
       );
 
       return;
     }
 
-    const cleanName = file.name
-      .trim()
-      .replace(/\s+/g, "-")
-      .replace(
-        /[^a-zA-Z0-9._-]/g,
-        ""
-      );
+    const cleanName =
+      file.name
+        .trim()
+        .replace(
+          /\s+/g,
+          "-"
+        )
+        .replace(
+          /[^a-zA-Z0-9._-]/g,
+          ""
+        );
 
-    const storageReference = ref(
-      storage,
-      `users/${userId}/uploads/` +
-        `${Date.now()}-${cleanName}`
-    );
+    const storageReference =
+      ref(
+        storage,
+
+        `users/${userId}/uploads/` +
+          `${Date.now()}-${cleanName}`
+      );
 
     const uploadTask =
       uploadBytesResumable(
@@ -1144,24 +1596,33 @@ adminFileForm?.addEventListener(
             "application/octet-stream",
 
           customMetadata: {
-            originalName: file.name,
+            originalName:
+              file.name,
+
             uploadedBy:
               currentAdmin?.uid || "",
-            uploadedFor: userId
+
+            uploadedFor:
+              userId
           }
         }
       );
 
     if (uploadProgress) {
-      uploadProgress.hidden = false;
-      uploadProgress.value = 0;
+      uploadProgress.hidden =
+        false;
+
+      uploadProgress.value =
+        0;
     }
 
     uploadTask.on(
       "state_changed",
 
       (snapshot) => {
-        if (!uploadProgress) return;
+        if (!uploadProgress) {
+          return;
+        }
 
         uploadProgress.value =
           Math.round(
@@ -1179,12 +1640,15 @@ adminFileForm?.addEventListener(
         );
 
         if (uploadProgress) {
-          uploadProgress.hidden = true;
+          uploadProgress.hidden =
+            true;
         }
 
         showStatus(
           fileFormStatus,
+
           "The file could not be uploaded.",
+
           "error"
         );
       },
@@ -1193,13 +1657,18 @@ adminFileForm?.addEventListener(
         adminFileForm.reset();
 
         if (uploadProgress) {
-          uploadProgress.hidden = true;
-          uploadProgress.value = 0;
+          uploadProgress.hidden =
+            true;
+
+          uploadProgress.value =
+            0;
         }
 
         showStatus(
           fileFormStatus,
+
           "File uploaded to the client's portal.",
+
           "success"
         );
       }
@@ -1253,7 +1722,11 @@ onAuthStateChanged(
     try {
       const snapshot =
         await getDoc(
-          doc(db, "users", user.uid)
+          doc(
+            db,
+            "users",
+            user.uid
+          )
         );
 
       const profile =
@@ -1261,7 +1734,9 @@ onAuthStateChanged(
           ? snapshot.data()
           : {};
 
-      if (profile.role !== "admin") {
+      if (
+        profile.role !== "admin"
+      ) {
         window.location.replace(
           "client-portal.html"
         );
