@@ -25,6 +25,10 @@ import {
   uploadBytesResumable
 } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-storage.js";
 
+/* =========================================================
+   PAGE ELEMENTS
+========================================================= */
+
 const adminEmail = document.getElementById("admin-email");
 const logoutButton = document.getElementById("admin-logout");
 
@@ -54,13 +58,24 @@ const statBalance = document.getElementById("stat-balance");
 
 const menuToggle = document.getElementById("admin-menu-toggle");
 const adminSidebar = document.getElementById("admin-sidebar");
-const sidebarOverlay = document.getElementById("admin-sidebar-overlay");
+const sidebarOverlay = document.getElementById(
+  "admin-sidebar-overlay"
+);
 
 const notificationList = document.getElementById("notification-list");
-const notificationCount = document.getElementById("notification-count");
-const notificationStatus = document.getElementById("notification-status");
+const notificationCount = document.getElementById(
+  "notification-count"
+);
+const notificationStatus = document.getElementById(
+  "notification-status"
+);
+
 const enableBrowserNotificationsButton =
   document.getElementById("enable-browser-notifications");
+
+/* =========================================================
+   INITIAL PAGE STATE
+========================================================= */
 
 if (sidebarOverlay) {
   sidebarOverlay.hidden = true;
@@ -71,16 +86,21 @@ if (adminSidebar && window.innerWidth <= 760) {
   adminSidebar.setAttribute("aria-hidden", "true");
 }
 
-
 let currentAdmin = null;
 let clientRecords = [];
 let invoiceRecords = [];
 let activityRecords = [];
+
 let firstClientSnapshotLoaded = false;
 let firstInvoiceSnapshotLoaded = false;
 
+/* =========================================================
+   HELPER FUNCTIONS
+========================================================= */
+
 const showStatus = (element, message, type = "") => {
   if (!element) return;
+
   element.hidden = false;
   element.textContent = message;
   element.className = `admin-status ${type}`.trim();
@@ -88,6 +108,7 @@ const showStatus = (element, message, type = "") => {
 
 const hideStatus = (element) => {
   if (!element) return;
+
   element.hidden = true;
   element.textContent = "";
   element.className = "admin-status";
@@ -108,7 +129,9 @@ const formatDate = (value) => {
       ? value.toDate()
       : new Date(value);
 
-  if (Number.isNaN(date.getTime())) return "";
+  if (Number.isNaN(date.getTime())) {
+    return "";
+  }
 
   return date.toLocaleDateString("en-US", {
     year: "numeric",
@@ -117,20 +140,57 @@ const formatDate = (value) => {
   });
 };
 
+const timestampToMillis = (value) => {
+  if (!value) return 0;
+
+  if (typeof value?.toMillis === "function") {
+    return value.toMillis();
+  }
+
+  const parsed = new Date(value).getTime();
+
+  return Number.isNaN(parsed) ? 0 : parsed;
+};
+
+const isValidWebAddress = (value) => {
+  if (!value) return true;
+
+  try {
+    const parsedUrl = new URL(value);
+
+    return ["http:", "https:"].includes(parsedUrl.protocol);
+  } catch {
+    return false;
+  }
+};
+
+/* =========================================================
+   MOBILE ADMIN MENU
+========================================================= */
 
 const closeMobileMenu = () => {
-  if (!adminSidebar || !sidebarOverlay || !menuToggle) return;
+  if (!adminSidebar || !sidebarOverlay || !menuToggle) {
+    return;
+  }
+
   adminSidebar.classList.remove("open");
   adminSidebar.setAttribute("aria-hidden", "true");
+
   sidebarOverlay.hidden = true;
+
   menuToggle.setAttribute("aria-expanded", "false");
 };
 
 const openMobileMenu = () => {
-  if (!adminSidebar || !sidebarOverlay || !menuToggle) return;
+  if (!adminSidebar || !sidebarOverlay || !menuToggle) {
+    return;
+  }
+
   adminSidebar.classList.add("open");
   adminSidebar.setAttribute("aria-hidden", "false");
+
   sidebarOverlay.hidden = false;
+
   menuToggle.setAttribute("aria-expanded", "true");
 };
 
@@ -148,10 +208,20 @@ window.addEventListener("resize", () => {
   if (window.innerWidth > 760) {
     adminSidebar?.classList.remove("open");
     adminSidebar?.setAttribute("aria-hidden", "false");
-    if (sidebarOverlay) sidebarOverlay.hidden = true;
+
+    if (sidebarOverlay) {
+      sidebarOverlay.hidden = true;
+    }
+
     menuToggle?.setAttribute("aria-expanded", "false");
+  } else {
+    adminSidebar?.setAttribute("aria-hidden", "true");
   }
 });
+
+/* =========================================================
+   DASHBOARD PANELS
+========================================================= */
 
 const setActivePanel = (panelId) => {
   panels.forEach((panel) => {
@@ -168,13 +238,17 @@ const setActivePanel = (panelId) => {
 
 navButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    setActivePanel(button.dataset.panel);
+    const panelId = button.dataset.panel;
 
-    if (button.dataset.panel === "notifications") {
+    setActivePanel(panelId);
+
+    if (panelId === "notifications") {
       markNotificationsSeen();
     }
 
-    if (window.innerWidth <= 760) closeMobileMenu();
+    if (window.innerWidth <= 760) {
+      closeMobileMenu();
+    }
   });
 });
 
@@ -184,9 +258,18 @@ quickButtons.forEach((button) => {
   });
 });
 
+/* =========================================================
+   CLIENT OPTIONS
+========================================================= */
+
 const buildClientOptions = () => {
+  if (!invoiceClientSelect || !fileClientSelect) {
+    return;
+  }
+
   const options = [
     '<option value="">Choose a client</option>',
+
     ...clientRecords.map((client) => {
       const label =
         client.fullName ||
@@ -201,12 +284,19 @@ const buildClientOptions = () => {
   fileClientSelect.innerHTML = options;
 };
 
+/* =========================================================
+   RENDER CLIENTS
+========================================================= */
+
 const renderClients = () => {
+  if (!clientList) return;
+
   clientList.replaceChildren();
 
   if (clientRecords.length === 0) {
     clientList.innerHTML =
       '<p class="admin-status">No clients have been added yet.</p>';
+
     return;
   }
 
@@ -218,6 +308,7 @@ const renderClients = () => {
     info.className = "admin-list-info";
 
     const title = document.createElement("strong");
+
     title.textContent =
       client.fullName ||
       client.email ||
@@ -225,11 +316,14 @@ const renderClients = () => {
 
     const meta = document.createElement("div");
     meta.className = "admin-list-meta";
+
     meta.textContent = [
       client.email,
       client.businessName,
       `UID: ${client.id}`
-    ].filter(Boolean).join(" • ");
+    ]
+      .filter(Boolean)
+      .join(" • ");
 
     info.append(title, meta);
 
@@ -242,12 +336,19 @@ const renderClients = () => {
   });
 };
 
+/* =========================================================
+   RENDER INVOICES
+========================================================= */
+
 const renderInvoices = () => {
+  if (!invoiceList) return;
+
   invoiceList.replaceChildren();
 
   if (invoiceRecords.length === 0) {
     invoiceList.innerHTML =
       '<p class="admin-status">No invoices have been created yet.</p>';
+
     return;
   }
 
@@ -259,8 +360,10 @@ const renderInvoices = () => {
     info.className = "admin-list-info";
 
     const title = document.createElement("strong");
+
     title.textContent =
-      `${invoice.invoiceNumber || "Invoice"} — ${formatCurrency(invoice.amount)}`;
+      `${invoice.invoiceNumber || "Invoice"} — ` +
+      formatCurrency(invoice.amount);
 
     const client = clientRecords.find(
       (record) => record.id === invoice.userId
@@ -268,11 +371,20 @@ const renderInvoices = () => {
 
     const meta = document.createElement("div");
     meta.className = "admin-list-meta";
+
     meta.textContent = [
-      client?.fullName || client?.email || invoice.userId,
+      client?.fullName ||
+        client?.email ||
+        invoice.userId,
+
       invoice.description,
-      invoice.dueDate ? `Due ${formatDate(invoice.dueDate)}` : ""
-    ].filter(Boolean).join(" • ");
+
+      invoice.dueDate
+        ? `Due ${formatDate(invoice.dueDate)}`
+        : ""
+    ]
+      .filter(Boolean)
+      .join(" • ");
 
     info.append(title, meta);
 
@@ -280,50 +392,102 @@ const renderInvoices = () => {
     actions.className = "admin-list-actions";
 
     const badge = document.createElement("span");
+
     badge.className =
-      `admin-badge ${invoice.status === "paid" ? "paid" : ""}`;
-    badge.textContent = invoice.status || "unpaid";
+      `admin-badge ${
+        invoice.status === "paid" ? "paid" : ""
+      }`;
+
+    badge.textContent =
+      invoice.status === "paid"
+        ? "paid"
+        : "unpaid";
 
     const toggleButton = document.createElement("button");
+
     toggleButton.type = "button";
+
     toggleButton.className =
-      `admin-small-button ${invoice.status === "paid" ? "" : "success"}`;
+      `admin-small-button ${
+        invoice.status === "paid" ? "" : "success"
+      }`;
+
     toggleButton.textContent =
-      invoice.status === "paid" ? "Mark Unpaid" : "Mark Paid";
+      invoice.status === "paid"
+        ? "Mark Unpaid"
+        : "Mark Paid";
 
     toggleButton.addEventListener("click", async () => {
       const nextStatus =
-        invoice.status === "paid" ? "unpaid" : "paid";
+        invoice.status === "paid"
+          ? "unpaid"
+          : "paid";
 
       toggleButton.disabled = true;
       toggleButton.textContent = "Updating...";
 
       try {
         await updateDoc(
-          doc(db, "users", invoice.userId, "invoices", invoice.id),
+          doc(
+            db,
+            "users",
+            invoice.userId,
+            "invoices",
+            invoice.id
+          ),
           {
             status: nextStatus,
             updatedAt: serverTimestamp(),
+
             paidAt:
               nextStatus === "paid"
                 ? serverTimestamp()
                 : null,
-            updatedBy: currentAdmin.uid
+
+            updatedBy: currentAdmin?.uid || ""
           }
         );
       } catch (error) {
-        console.error("Invoice status update failed:", error);
-        alert("The invoice status could not be updated.");
+        console.error(
+          "Invoice status update failed:",
+          error
+        );
+
+        alert(
+          "The invoice status could not be updated."
+        );
       } finally {
         toggleButton.disabled = false;
       }
     });
 
     actions.append(badge, toggleButton);
+
+    /*
+      This button opens the PayPal invoice that was
+      saved in the invoice-pdf-url field.
+    */
+    if (invoice.pdfUrl) {
+      const paypalButton = document.createElement("a");
+
+      paypalButton.href = invoice.pdfUrl;
+      paypalButton.target = "_blank";
+      paypalButton.rel = "noopener noreferrer";
+      paypalButton.className = "admin-small-button";
+      paypalButton.textContent = "Open PayPal Invoice";
+
+      actions.appendChild(paypalButton);
+    }
+
     item.append(info, actions);
     invoiceList.appendChild(item);
   });
 };
+
+/* =========================================================
+   DASHBOARD STATISTICS
+========================================================= */
+
 const updateStats = () => {
   const unpaid = invoiceRecords.filter(
     (invoice) => invoice.status !== "paid"
@@ -334,23 +498,35 @@ const updateStats = () => {
   );
 
   const outstanding = unpaid.reduce(
-    (total, invoice) => total + (Number(invoice.amount) || 0),
+    (total, invoice) =>
+      total + (Number(invoice.amount) || 0),
     0
   );
 
-  statClients.textContent = String(clientRecords.length);
-  statUnpaid.textContent = String(unpaid.length);
-  statPaid.textContent = String(paid.length);
-  statBalance.textContent = formatCurrency(outstanding);
+  if (statClients) {
+    statClients.textContent =
+      String(clientRecords.length);
+  }
+
+  if (statUnpaid) {
+    statUnpaid.textContent =
+      String(unpaid.length);
+  }
+
+  if (statPaid) {
+    statPaid.textContent =
+      String(paid.length);
+  }
+
+  if (statBalance) {
+    statBalance.textContent =
+      formatCurrency(outstanding);
+  }
 };
 
-
-const timestampToMillis = (value) => {
-  if (!value) return 0;
-  if (typeof value?.toMillis === "function") return value.toMillis();
-  const parsed = new Date(value).getTime();
-  return Number.isNaN(parsed) ? 0 : parsed;
-};
+/* =========================================================
+   NOTIFICATIONS
+========================================================= */
 
 const notifyDevice = (title, body) => {
   if (
@@ -367,28 +543,46 @@ const rebuildActivity = () => {
     id: `client-${client.id}`,
     type: "client",
     title: "New client account",
+
     detail:
       client.fullName ||
       client.email ||
       "A client account was created.",
+
     createdAt: client.createdAt,
     time: timestampToMillis(client.createdAt)
   }));
 
   const invoiceActivity = invoiceRecords.map((invoice) => ({
-    id: `invoice-${invoice.userId}-${invoice.id}-${invoice.status}`,
+    id:
+      `invoice-${invoice.userId}-` +
+      `${invoice.id}-${invoice.status}`,
+
     type: "invoice",
+
     title:
       invoice.status === "paid"
         ? "Invoice marked paid"
-        : "Invoice created",
+        : "PayPal invoice added",
+
     detail:
-      `${invoice.invoiceNumber || "Invoice"} — ${formatCurrency(invoice.amount)}`,
-    createdAt: invoice.updatedAt || invoice.createdAt,
-    time: timestampToMillis(invoice.updatedAt || invoice.createdAt)
+      `${invoice.invoiceNumber || "Invoice"} — ` +
+      formatCurrency(invoice.amount),
+
+    createdAt:
+      invoice.updatedAt ||
+      invoice.createdAt,
+
+    time: timestampToMillis(
+      invoice.updatedAt ||
+      invoice.createdAt
+    )
   }));
 
-  activityRecords = [...clientActivity, ...invoiceActivity]
+  activityRecords = [
+    ...clientActivity,
+    ...invoiceActivity
+  ]
     .sort((a, b) => b.time - a.time)
     .slice(0, 30);
 
@@ -403,27 +597,41 @@ const renderActivity = () => {
   if (activityRecords.length === 0) {
     notificationList.innerHTML =
       '<p class="admin-status">No recent activity yet.</p>';
-    if (notificationCount) notificationCount.hidden = true;
+
+    if (notificationCount) {
+      notificationCount.hidden = true;
+    }
+
     return;
   }
 
   const lastSeen =
-    Number(localStorage.getItem("bamAdminNotificationsSeenAt")) || 0;
+    Number(
+      localStorage.getItem(
+        "bamAdminNotificationsSeenAt"
+      )
+    ) || 0;
 
   const unread = activityRecords.filter(
     (activity) => activity.time > lastSeen
   ).length;
 
   if (notificationCount) {
-    notificationCount.textContent = String(unread);
-    notificationCount.hidden = unread === 0;
+    notificationCount.textContent =
+      String(unread);
+
+    notificationCount.hidden =
+      unread === 0;
   }
 
   activityRecords.forEach((activity) => {
     const item = document.createElement("div");
+
     item.className =
       `admin-list-item admin-notification-item ${
-        activity.time > lastSeen ? "unread" : ""
+        activity.time > lastSeen
+          ? "unread"
+          : ""
       }`;
 
     const info = document.createElement("div");
@@ -438,6 +646,7 @@ const renderActivity = () => {
 
     const time = document.createElement("div");
     time.className = "admin-notification-time";
+
     time.textContent =
       activity.createdAt
         ? formatDate(activity.createdAt)
@@ -445,6 +654,7 @@ const renderActivity = () => {
 
     info.append(title, detail, time);
     item.append(info);
+
     notificationList.appendChild(item);
   });
 };
@@ -458,20 +668,31 @@ const markNotificationsSeen = () => {
   renderActivity();
 };
 
-enableBrowserNotificationsButton?.addEventListener("click", async () => {
-  if (!("Notification" in window)) {
+enableBrowserNotificationsButton?.addEventListener(
+  "click",
+  async () => {
+    if (!notificationStatus) return;
+
+    if (!("Notification" in window)) {
+      notificationStatus.textContent =
+        "This browser does not support device notifications.";
+
+      return;
+    }
+
+    const permission =
+      await Notification.requestPermission();
+
     notificationStatus.textContent =
-      "This browser does not support device notifications.";
-    return;
+      permission === "granted"
+        ? "Phone/browser notifications are enabled while this dashboard is open."
+        : "Notification permission was not granted.";
   }
+);
 
-  const permission = await Notification.requestPermission();
-
-  notificationStatus.textContent =
-    permission === "granted"
-      ? "Phone/browser notifications are enabled while this dashboard is open."
-      : "Notification permission was not granted.";
-});
+/* =========================================================
+   WATCH CLIENT RECORDS
+========================================================= */
 
 const watchClients = () => {
   const clientsQuery = query(
@@ -481,13 +702,16 @@ const watchClients = () => {
 
   return onSnapshot(
     clientsQuery,
+
     (snapshot) => {
       clientRecords = snapshot.docs
         .map((item) => ({
           id: item.id,
           ...item.data()
         }))
-        .filter((record) => record.role !== "admin");
+        .filter(
+          (record) => record.role !== "admin"
+        );
 
       renderClients();
       buildClientOptions();
@@ -495,46 +719,43 @@ const watchClients = () => {
       updateStats();
       rebuildActivity();
 
-      if (firstInvoiceSnapshotLoaded) {
-        snapshot.docChanges().forEach((change) => {
-          if (change.type === "modified") {
-            const data = change.doc.data();
-            if (data.status === "paid") {
-              notifyDevice(
-                "Invoice paid",
-                `${data.invoiceNumber || "Invoice"} was marked paid.`
-              );
-            }
-          }
-        });
-      }
-
-      firstInvoiceSnapshotLoaded = true;
-      rebuildActivity();
-
       if (firstClientSnapshotLoaded) {
         snapshot.docChanges().forEach((change) => {
-          if (change.type === "added") {
-            const data = change.doc.data();
-            if (data.role !== "admin") {
-              notifyDevice(
-                "New client registered",
-                data.fullName || data.email || "A new client joined."
-              );
-            }
-          }
+          if (change.type !== "added") return;
+
+          const data = change.doc.data();
+
+          if (data.role === "admin") return;
+
+          notifyDevice(
+            "New client registered",
+            data.fullName ||
+              data.email ||
+              "A new client joined."
+          );
         });
       }
 
       firstClientSnapshotLoaded = true;
     },
+
     (error) => {
-      console.error("Unable to load clients:", error);
-      clientList.innerHTML =
-        '<p class="admin-status error">Clients could not be loaded.</p>';
+      console.error(
+        "Unable to load clients:",
+        error
+      );
+
+      if (clientList) {
+        clientList.innerHTML =
+          '<p class="admin-status error">Clients could not be loaded.</p>';
+      }
     }
   );
 };
+
+/* =========================================================
+   WATCH INVOICE RECORDS
+========================================================= */
 
 const watchInvoices = () => {
   const invoicesQuery = query(
@@ -544,234 +765,529 @@ const watchInvoices = () => {
 
   return onSnapshot(
     invoicesQuery,
-    (snapshot) => {
-      invoiceRecords = snapshot.docs.map((item) => {
-        const userId = item.ref.parent.parent?.id || "";
 
-        return {
-          id: item.id,
-          userId,
-          ...item.data()
-        };
-      });
+    (snapshot) => {
+      invoiceRecords = snapshot.docs.map(
+        (item) => {
+          const userId =
+            item.ref.parent.parent?.id || "";
+
+          return {
+            id: item.id,
+            userId,
+            ...item.data()
+          };
+        }
+      );
 
       renderInvoices();
       updateStats();
+      rebuildActivity();
+
+      if (firstInvoiceSnapshotLoaded) {
+        snapshot.docChanges().forEach((change) => {
+          if (change.type !== "modified") {
+            return;
+          }
+
+          const data = change.doc.data();
+
+          if (data.status === "paid") {
+            notifyDevice(
+              "Invoice paid",
+              `${data.invoiceNumber || "Invoice"} was marked paid.`
+            );
+          }
+        });
+      }
+
+      firstInvoiceSnapshotLoaded = true;
     },
+
     (error) => {
-      console.error("Unable to load invoices:", error);
-      invoiceList.innerHTML =
-        '<p class="admin-status error">Invoices could not be loaded.</p>';
+      console.error(
+        "Unable to load invoices:",
+        error
+      );
+
+      if (invoiceList) {
+        invoiceList.innerHTML =
+          '<p class="admin-status error">Invoices could not be loaded.</p>';
+      }
     }
   );
 };
 
-clientForm?.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  hideStatus(clientFormStatus);
+/* =========================================================
+   SAVE CLIENT
+========================================================= */
 
-  const uid = document.getElementById("client-uid").value.trim();
-  const fullName = document.getElementById("client-name").value.trim();
-  const email = document.getElementById("client-email").value.trim();
-  const businessName = document.getElementById("client-business").value.trim();
-  const phone = document.getElementById("client-phone").value.trim();
+clientForm?.addEventListener(
+  "submit",
+  async (event) => {
+    event.preventDefault();
+    hideStatus(clientFormStatus);
 
-  try {
-    await setDoc(
-      doc(db, "users", uid),
-      {
+    const uid =
+      document
+        .getElementById("client-uid")
+        ?.value.trim() || "";
+
+    const fullName =
+      document
+        .getElementById("client-name")
+        ?.value.trim() || "";
+
+    const email =
+      document
+        .getElementById("client-email")
+        ?.value.trim() || "";
+
+    const businessName =
+      document
+        .getElementById("client-business")
+        ?.value.trim() || "";
+
+    const phone =
+      document
+        .getElementById("client-phone")
+        ?.value.trim() || "";
+
+    if (!uid || !fullName || !email) {
+      showStatus(
+        clientFormStatus,
+        "Enter the client's Firebase UID, name, and email.",
+        "error"
+      );
+
+      return;
+    }
+
+    try {
+      const clientReference =
+        doc(db, "users", uid);
+
+      const existingClient =
+        await getDoc(clientReference);
+
+      const clientData = {
         uid,
         fullName,
         email,
         businessName,
         phone,
         role: "client",
-        updatedAt: serverTimestamp(),
-        createdAt: serverTimestamp()
-      },
-      { merge: true }
-    );
+        updatedAt: serverTimestamp()
+      };
 
-    clientForm.reset();
-    showStatus(
-      clientFormStatus,
-      "Client profile saved successfully.",
-      "success"
-    );
-  } catch (error) {
-    console.error("Client save failed:", error);
-    showStatus(
-      clientFormStatus,
-      "The client could not be saved.",
-      "error"
-    );
-  }
-});
-
-invoiceForm?.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  hideStatus(invoiceFormStatus);
-
-  const userId = invoiceClientSelect.value;
-  const invoiceNumber =
-    document.getElementById("invoice-number").value.trim();
-
-  const amount =
-    Number(document.getElementById("invoice-amount").value);
-
-  const dueDateValue =
-    document.getElementById("invoice-due-date").value;
-
-  const description =
-    document.getElementById("invoice-description").value.trim();
-
-  const pdfUrl =
-    document.getElementById("invoice-pdf-url").value.trim();
-
-  try {
-    await addDoc(
-      collection(db, "users", userId, "invoices"),
-      {
-        invoiceNumber,
-        amount,
-        currency: "USD",
-        dueDate: Timestamp.fromDate(
-          new Date(`${dueDateValue}T12:00:00`)
-        ),
-        description,
-        pdfUrl,
-        status: "unpaid",
-        createdAt: serverTimestamp(),
-        updatedAt: serverTimestamp(),
-        createdBy: currentAdmin.uid
+      if (!existingClient.exists()) {
+        clientData.createdAt =
+          serverTimestamp();
       }
-    );
 
-    invoiceForm.reset();
-    showStatus(
-      invoiceFormStatus,
-      "Invoice created successfully.",
-      "success"
-    );
-  } catch (error) {
-    console.error("Invoice creation failed:", error);
-    showStatus(
-      invoiceFormStatus,
-      "The invoice could not be created.",
-      "error"
-    );
-  }
-});
-
-adminFileForm?.addEventListener("submit", (event) => {
-  event.preventDefault();
-  hideStatus(fileFormStatus);
-
-  const userId = fileClientSelect.value;
-  const fileInput = document.getElementById("admin-file-input");
-  const file = fileInput.files?.[0];
-
-  if (!userId || !file) {
-    showStatus(
-      fileFormStatus,
-      "Choose a client and a file.",
-      "error"
-    );
-    return;
-  }
-
-  if (file.size > 15 * 1024 * 1024) {
-    showStatus(
-      fileFormStatus,
-      "The file must be 15 MB or smaller.",
-      "error"
-    );
-    return;
-  }
-
-  const cleanName = file.name
-    .trim()
-    .replace(/\s+/g, "-")
-    .replace(/[^a-zA-Z0-9._-]/g, "");
-
-  const storageRef = ref(
-    storage,
-    `users/${userId}/uploads/${Date.now()}-${cleanName}`
-  );
-
-  const uploadTask = uploadBytesResumable(
-    storageRef,
-    file,
-    {
-      contentType: file.type || "application/octet-stream",
-      customMetadata: {
-        originalName: file.name,
-        uploadedBy: currentAdmin.uid,
-        uploadedFor: userId
-      }
-    }
-  );
-
-  uploadProgress.hidden = false;
-  uploadProgress.value = 0;
-
-  uploadTask.on(
-    "state_changed",
-    (snapshot) => {
-      uploadProgress.value = Math.round(
-        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      await setDoc(
+        clientReference,
+        clientData,
+        { merge: true }
       );
-    },
-    (error) => {
-      console.error("Admin upload failed:", error);
-      uploadProgress.hidden = true;
+
+      clientForm.reset();
+
       showStatus(
-        fileFormStatus,
-        "The file could not be uploaded.",
-        "error"
-      );
-    },
-    () => {
-      adminFileForm.reset();
-      uploadProgress.hidden = true;
-      showStatus(
-        fileFormStatus,
-        "File uploaded to the client's portal.",
+        clientFormStatus,
+        "Client profile saved successfully.",
         "success"
       );
+    } catch (error) {
+      console.error(
+        "Client save failed:",
+        error
+      );
+
+      showStatus(
+        clientFormStatus,
+        "The client could not be saved.",
+        "error"
+      );
     }
-  );
-});
-
-logoutButton?.addEventListener("click", async () => {
-  await signOut(auth);
-  window.location.replace("login.html");
-});
-
-onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    window.location.replace(
-      `login.html?next=${encodeURIComponent("admin-dashboard.html")}`
-    );
-    return;
   }
+);
 
-  try {
-    const snapshot = await getDoc(doc(db, "users", user.uid));
-    const profile = snapshot.exists() ? snapshot.data() : {};
+/* =========================================================
+   ADD PAYPAL INVOICE
+========================================================= */
 
-    if (profile.role !== "admin") {
-      window.location.replace("client-portal.html");
+invoiceForm?.addEventListener(
+  "submit",
+  async (event) => {
+    event.preventDefault();
+    hideStatus(invoiceFormStatus);
+
+    const userId =
+      invoiceClientSelect?.value || "";
+
+    const invoiceNumber =
+      document
+        .getElementById("invoice-number")
+        ?.value.trim() || "";
+
+    const amount =
+      Number(
+        document
+          .getElementById("invoice-amount")
+          ?.value
+      );
+
+    const dueDateValue =
+      document
+        .getElementById("invoice-due-date")
+        ?.value || "";
+
+    const description =
+      document
+        .getElementById("invoice-description")
+        ?.value.trim() || "";
+
+    /*
+      This ID remains invoice-pdf-url so the new HTML
+      remains compatible with the existing dashboard.
+
+      The value stored in pdfUrl is now the PayPal
+      invoice link.
+    */
+    const pdfUrl =
+      document
+        .getElementById("invoice-pdf-url")
+        ?.value.trim() || "";
+
+    if (!userId) {
+      showStatus(
+        invoiceFormStatus,
+        "Please choose a client.",
+        "error"
+      );
+
       return;
     }
 
-    currentAdmin = user;
-    adminEmail.textContent = user.email || "Administrator";
+    if (!invoiceNumber) {
+      showStatus(
+        invoiceFormStatus,
+        "Please enter an invoice number.",
+        "error"
+      );
 
-    watchClients();
-    watchInvoices();
-  } catch (error) {
-    console.error("Admin verification failed:", error);
-    window.location.replace("client-portal.html");
+      return;
+    }
+
+    if (
+      !Number.isFinite(amount) ||
+      amount <= 0
+    ) {
+      showStatus(
+        invoiceFormStatus,
+        "Please enter a valid invoice amount.",
+        "error"
+      );
+
+      return;
+    }
+
+    if (!dueDateValue) {
+      showStatus(
+        invoiceFormStatus,
+        "Please choose an invoice due date.",
+        "error"
+      );
+
+      return;
+    }
+
+    if (!description) {
+      showStatus(
+        invoiceFormStatus,
+        "Please enter an invoice description.",
+        "error"
+      );
+
+      return;
+    }
+
+    if (pdfUrl && !isValidWebAddress(pdfUrl)) {
+      showStatus(
+        invoiceFormStatus,
+        "Please enter a valid PayPal invoice link.",
+        "error"
+      );
+
+      return;
+    }
+
+    try {
+      await addDoc(
+        collection(
+          db,
+          "users",
+          userId,
+          "invoices"
+        ),
+        {
+          invoiceNumber,
+          amount,
+          currency: "USD",
+
+          dueDate: Timestamp.fromDate(
+            new Date(
+              `${dueDateValue}T12:00:00`
+            )
+          ),
+
+          description,
+
+          /*
+            pdfUrl contains the client's PayPal
+            invoice/payment link.
+          */
+          pdfUrl,
+
+          status: "unpaid",
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp(),
+          createdBy: currentAdmin?.uid || ""
+        }
+      );
+
+      invoiceForm.reset();
+
+      showStatus(
+        invoiceFormStatus,
+        "PayPal invoice added to the client's portal successfully.",
+        "success"
+      );
+    } catch (error) {
+      console.error(
+        "Invoice creation failed:",
+        error
+      );
+
+      showStatus(
+        invoiceFormStatus,
+        "The PayPal invoice could not be added.",
+        "error"
+      );
+    }
   }
-});
+);
+
+/* =========================================================
+   UPLOAD CLIENT FILE
+========================================================= */
+
+adminFileForm?.addEventListener(
+  "submit",
+  (event) => {
+    event.preventDefault();
+    hideStatus(fileFormStatus);
+
+    const userId =
+      fileClientSelect?.value || "";
+
+    const fileInput =
+      document.getElementById(
+        "admin-file-input"
+      );
+
+    const file =
+      fileInput?.files?.[0];
+
+    if (!userId || !file) {
+      showStatus(
+        fileFormStatus,
+        "Choose a client and a file.",
+        "error"
+      );
+
+      return;
+    }
+
+    if (file.size > 15 * 1024 * 1024) {
+      showStatus(
+        fileFormStatus,
+        "The file must be 15 MB or smaller.",
+        "error"
+      );
+
+      return;
+    }
+
+    const cleanName = file.name
+      .trim()
+      .replace(/\s+/g, "-")
+      .replace(
+        /[^a-zA-Z0-9._-]/g,
+        ""
+      );
+
+    const storageReference = ref(
+      storage,
+      `users/${userId}/uploads/` +
+        `${Date.now()}-${cleanName}`
+    );
+
+    const uploadTask =
+      uploadBytesResumable(
+        storageReference,
+        file,
+        {
+          contentType:
+            file.type ||
+            "application/octet-stream",
+
+          customMetadata: {
+            originalName: file.name,
+            uploadedBy:
+              currentAdmin?.uid || "",
+            uploadedFor: userId
+          }
+        }
+      );
+
+    if (uploadProgress) {
+      uploadProgress.hidden = false;
+      uploadProgress.value = 0;
+    }
+
+    uploadTask.on(
+      "state_changed",
+
+      (snapshot) => {
+        if (!uploadProgress) return;
+
+        uploadProgress.value =
+          Math.round(
+            (
+              snapshot.bytesTransferred /
+              snapshot.totalBytes
+            ) * 100
+          );
+      },
+
+      (error) => {
+        console.error(
+          "Admin upload failed:",
+          error
+        );
+
+        if (uploadProgress) {
+          uploadProgress.hidden = true;
+        }
+
+        showStatus(
+          fileFormStatus,
+          "The file could not be uploaded.",
+          "error"
+        );
+      },
+
+      () => {
+        adminFileForm.reset();
+
+        if (uploadProgress) {
+          uploadProgress.hidden = true;
+          uploadProgress.value = 0;
+        }
+
+        showStatus(
+          fileFormStatus,
+          "File uploaded to the client's portal.",
+          "success"
+        );
+      }
+    );
+  }
+);
+
+/* =========================================================
+   LOG OUT
+========================================================= */
+
+logoutButton?.addEventListener(
+  "click",
+  async () => {
+    try {
+      await signOut(auth);
+
+      window.location.replace(
+        "login.html"
+      );
+    } catch (error) {
+      console.error(
+        "Logout failed:",
+        error
+      );
+
+      alert(
+        "You could not be logged out. Please try again."
+      );
+    }
+  }
+);
+
+/* =========================================================
+   ADMIN AUTHENTICATION
+========================================================= */
+
+onAuthStateChanged(
+  auth,
+  async (user) => {
+    if (!user) {
+      window.location.replace(
+        `login.html?next=${encodeURIComponent(
+          "admin-dashboard.html"
+        )}`
+      );
+
+      return;
+    }
+
+    try {
+      const snapshot =
+        await getDoc(
+          doc(db, "users", user.uid)
+        );
+
+      const profile =
+        snapshot.exists()
+          ? snapshot.data()
+          : {};
+
+      if (profile.role !== "admin") {
+        window.location.replace(
+          "client-portal.html"
+        );
+
+        return;
+      }
+
+      currentAdmin = user;
+
+      if (adminEmail) {
+        adminEmail.textContent =
+          user.email ||
+          "Administrator";
+      }
+
+      watchClients();
+      watchInvoices();
+    } catch (error) {
+      console.error(
+        "Admin verification failed:",
+        error
+      );
+
+      window.location.replace(
+        "client-portal.html"
+      );
+    }
+  }
+);
