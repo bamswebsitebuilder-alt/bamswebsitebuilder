@@ -87,9 +87,7 @@ let stopInvoiceListener = null;
 ========================================================= */
 
 const showAccountStatus = (message, success = false) => {
-  if (!accountAlert) {
-    return;
-  }
+  if (!accountAlert) return;
 
   accountAlert.hidden = false;
   accountAlert.textContent = message;
@@ -101,9 +99,7 @@ const showAccountStatus = (message, success = false) => {
 ========================================================= */
 
 const showUploadStatus = (message, success = false) => {
-  if (!uploadStatus) {
-    return;
-  }
+  if (!uploadStatus) return;
 
   uploadStatus.hidden = false;
   uploadStatus.textContent = message;
@@ -111,9 +107,7 @@ const showUploadStatus = (message, success = false) => {
 };
 
 const clearUploadStatus = () => {
-  if (!uploadStatus) {
-    return;
-  }
+  if (!uploadStatus) return;
 
   uploadStatus.hidden = true;
   uploadStatus.textContent = "";
@@ -121,17 +115,12 @@ const clearUploadStatus = () => {
 };
 
 /* =========================================================
-   GENERAL HELPERS
+   HELPERS
 ========================================================= */
 
 const getFileExtension = (fileName) => {
   const parts = fileName.toLowerCase().split(".");
-
-  if (parts.length < 2) {
-    return "";
-  }
-
-  return parts.pop();
+  return parts.length < 2 ? "" : parts.pop();
 };
 
 const sanitizeFileName = (fileName) => {
@@ -156,13 +145,13 @@ const formatFileSize = (bytes) => {
 
   const size = bytes / Math.pow(1024, unitIndex);
 
-  return `${size.toFixed(unitIndex === 0 ? 0 : 1)} ${units[unitIndex]}`;
+  return `${size.toFixed(unitIndex === 0 ? 0 : 1)} ${
+    units[unitIndex]
+  }`;
 };
 
 const formatUploadDate = (dateValue) => {
-  if (!dateValue) {
-    return "";
-  }
+  if (!dateValue) return "";
 
   const date = new Date(dateValue);
 
@@ -185,9 +174,7 @@ const formatCurrency = (amount, currency = "USD") => {
 };
 
 const formatInvoiceDate = (value) => {
-  if (!value) {
-    return "";
-  }
+  if (!value) return "";
 
   const date =
     typeof value?.toDate === "function"
@@ -206,9 +193,7 @@ const formatInvoiceDate = (value) => {
 };
 
 const isSafePaymentLink = (value) => {
-  if (!value) {
-    return false;
-  }
+  if (!value) return false;
 
   try {
     const parsedUrl = new URL(value);
@@ -346,14 +331,13 @@ const createInvoiceEmptyState = (
   title = "No invoices available",
   message = "Invoices assigned to your account will appear here."
 ) => {
-  if (!invoicesPanel) {
-    return;
-  }
+  if (!invoicesPanel) return;
 
   invoicesPanel.replaceChildren();
 
   const card = document.createElement("article");
-  card.className = "portal-card portal-empty-state";
+  card.className =
+    "portal-card portal-empty-state";
 
   const kicker = document.createElement("p");
   kicker.className = "card-kicker";
@@ -365,7 +349,12 @@ const createInvoiceEmptyState = (
   const paragraph = document.createElement("p");
   paragraph.textContent = message;
 
-  card.append(kicker, heading, paragraph);
+  card.append(
+    kicker,
+    heading,
+    paragraph
+  );
+
   invoicesPanel.appendChild(card);
 };
 
@@ -395,55 +384,93 @@ const createInvoiceCard = (invoice) => {
   const isPaid = status === "paid";
 
   const card = document.createElement("article");
-  card.className = "portal-card portal-invoice-card";
+  card.className =
+    "portal-card portal-invoice-card";
 
-  const headingSection = document.createElement("div");
-  headingSection.className = "card-heading";
+  const headingSection =
+    document.createElement("div");
 
-  const headingInformation = document.createElement("div");
+  headingSection.className =
+    "card-heading";
 
-  const kicker = document.createElement("p");
+  const headingInformation =
+    document.createElement("div");
+
+  const kicker =
+    document.createElement("p");
+
   kicker.className = "card-kicker";
   kicker.textContent = "PAYPAL INVOICE";
 
-  const title = document.createElement("h2");
+  const title =
+    document.createElement("h2");
+
   title.textContent =
-    invoice.invoiceNumber || "Invoice";
+    invoice.invoiceNumber ||
+    "Invoice";
 
-  headingInformation.append(kicker, title);
+  headingInformation.append(
+    kicker,
+    title
+  );
 
-  const statusBadge = createInvoiceBadge(status);
+  const statusBadge =
+    createInvoiceBadge(status);
 
   headingSection.append(
     headingInformation,
     statusBadge
   );
 
-  const details = document.createElement("div");
-  details.className = "portal-invoice-details";
+  const details =
+    document.createElement("div");
 
-  const amountBlock = document.createElement("div");
-  amountBlock.className = "portal-invoice-detail";
+  details.className =
+    "portal-invoice-details";
 
-  const amountLabel = document.createElement("span");
+  const amountBlock =
+    document.createElement("div");
+
+  amountBlock.className =
+    "portal-invoice-detail";
+
+  const amountLabel =
+    document.createElement("span");
+
   amountLabel.textContent =
-    isPaid ? "Amount Paid" : "Amount Due";
+    isPaid
+      ? "Amount Paid"
+      : "Amount Due";
 
-  const amountValue = document.createElement("strong");
-  amountValue.textContent = formatCurrency(
-    invoice.amount,
-    invoice.currency
+  const amountValue =
+    document.createElement("strong");
+
+  amountValue.textContent =
+    formatCurrency(
+      invoice.amount,
+      invoice.currency
+    );
+
+  amountBlock.append(
+    amountLabel,
+    amountValue
   );
 
-  amountBlock.append(amountLabel, amountValue);
+  const dueDateBlock =
+    document.createElement("div");
 
-  const dueDateBlock = document.createElement("div");
-  dueDateBlock.className = "portal-invoice-detail";
+  dueDateBlock.className =
+    "portal-invoice-detail";
 
-  const dueDateLabel = document.createElement("span");
-  dueDateLabel.textContent = "Due Date";
+  const dueDateLabel =
+    document.createElement("span");
 
-  const dueDateValue = document.createElement("strong");
+  dueDateLabel.textContent =
+    "Due Date";
+
+  const dueDateValue =
+    document.createElement("strong");
+
   dueDateValue.textContent =
     formatInvoiceDate(invoice.dueDate) ||
     "No due date";
@@ -464,30 +491,44 @@ const createInvoiceCard = (invoice) => {
   );
 
   if (invoice.description) {
-    const description = document.createElement("p");
-    description.className = "portal-invoice-description";
-    description.textContent = invoice.description;
+    const description =
+      document.createElement("p");
+
+    description.className =
+      "portal-invoice-description";
+
+    description.textContent =
+      invoice.description;
 
     card.appendChild(description);
   }
 
-  const actions = document.createElement("div");
-  actions.className = "portal-actions";
+  const actions =
+    document.createElement("div");
+
+  actions.className =
+    "portal-actions";
 
   if (
     invoice.pdfUrl &&
     isSafePaymentLink(invoice.pdfUrl)
   ) {
-    const paymentLink = document.createElement("a");
+    const paymentLink =
+      document.createElement("a");
 
     paymentLink.className =
       isPaid
         ? "portal-secondary-button"
         : "portal-primary-button";
 
-    paymentLink.href = invoice.pdfUrl;
-    paymentLink.target = "_blank";
-    paymentLink.rel = "noopener noreferrer";
+    paymentLink.href =
+      invoice.pdfUrl;
+
+    paymentLink.target =
+      "_blank";
+
+    paymentLink.rel =
+      "noopener noreferrer";
 
     paymentLink.textContent =
       isPaid
@@ -505,12 +546,18 @@ const createInvoiceCard = (invoice) => {
     unavailableMessage.textContent =
       "A payment link has not been added to this invoice yet.";
 
-    actions.appendChild(unavailableMessage);
+    actions.appendChild(
+      unavailableMessage
+    );
   }
 
   if (isPaid) {
-    const paidMessage = document.createElement("p");
-    paidMessage.className = "portal-file-status";
+    const paidMessage =
+      document.createElement("p");
+
+    paidMessage.className =
+      "portal-file-status";
+
     paidMessage.textContent =
       "This invoice has been marked as paid.";
 
@@ -523,9 +570,7 @@ const createInvoiceCard = (invoice) => {
 };
 
 const renderInvoices = (invoiceRecords) => {
-  if (!invoicesPanel) {
-    return;
-  }
+  if (!invoicesPanel) return;
 
   if (!invoiceRecords.length) {
     createInvoiceEmptyState();
@@ -534,54 +579,66 @@ const renderInvoices = (invoiceRecords) => {
 
   invoicesPanel.replaceChildren();
 
-  const summaryCard = document.createElement("article");
-  summaryCard.className = "portal-card";
+  const summaryCard =
+    document.createElement("article");
 
-  const summaryHeading = document.createElement("div");
-  summaryHeading.className = "card-heading";
+  summaryCard.className =
+    "portal-card";
 
-  const summaryText = document.createElement("div");
+  const summaryKicker =
+    document.createElement("p");
 
-  const summaryKicker = document.createElement("p");
-  summaryKicker.className = "card-kicker";
-  summaryKicker.textContent = "BILLING";
+  summaryKicker.className =
+    "card-kicker";
 
-  const summaryTitle = document.createElement("h2");
-  summaryTitle.textContent = "Your Invoices";
+  summaryKicker.textContent =
+    "BILLING";
 
-  const unpaidInvoices = invoiceRecords.filter(
-    (invoice) =>
-      String(invoice.status || "unpaid").toLowerCase() !== "paid"
-  );
+  const summaryTitle =
+    document.createElement("h2");
+
+  summaryTitle.textContent =
+    "Your Invoices";
+
+  const unpaidInvoices =
+    invoiceRecords.filter(
+      (invoice) =>
+        String(
+          invoice.status || "unpaid"
+        ).toLowerCase() !== "paid"
+    );
 
   const outstandingBalance =
     unpaidInvoices.reduce(
       (total, invoice) =>
-        total + (Number(invoice.amount) || 0),
+        total +
+        (Number(invoice.amount) || 0),
       0
     );
 
-  const summaryParagraph = document.createElement("p");
+  const summaryParagraph =
+    document.createElement("p");
 
   summaryParagraph.textContent =
     unpaidInvoices.length > 0
       ? `${unpaidInvoices.length} unpaid invoice${
-          unpaidInvoices.length === 1 ? "" : "s"
+          unpaidInvoices.length === 1
+            ? ""
+            : "s"
         } with an outstanding balance of ${formatCurrency(
           outstandingBalance
         )}.`
       : "All invoices are currently paid.";
 
-  summaryText.append(
+  summaryCard.append(
     summaryKicker,
     summaryTitle,
     summaryParagraph
   );
 
-  summaryHeading.appendChild(summaryText);
-  summaryCard.appendChild(summaryHeading);
-
-  invoicesPanel.appendChild(summaryCard);
+  invoicesPanel.appendChild(
+    summaryCard
+  );
 
   invoiceRecords.forEach((invoice) => {
     invoicesPanel.appendChild(
@@ -591,11 +648,12 @@ const renderInvoices = (invoiceRecords) => {
 };
 
 const watchClientInvoices = (user) => {
-  if (!invoicesPanel) {
-    return;
-  }
+  if (!invoicesPanel) return;
 
-  if (typeof stopInvoiceListener === "function") {
+  if (
+    typeof stopInvoiceListener ===
+    "function"
+  ) {
     stopInvoiceListener();
   }
 
@@ -604,43 +662,50 @@ const watchClientInvoices = (user) => {
     "Please wait while your billing information is loaded."
   );
 
-  const invoicesReference = collection(
-    db,
-    "users",
-    user.uid,
-    "invoices"
-  );
+  const invoicesReference =
+    collection(
+      db,
+      "users",
+      user.uid,
+      "invoices"
+    );
 
-  const invoicesQuery = query(
-    invoicesReference,
-    orderBy("createdAt", "desc")
-  );
+  const invoicesQuery =
+    query(
+      invoicesReference,
+      orderBy("createdAt", "desc")
+    );
 
-  stopInvoiceListener = onSnapshot(
-    invoicesQuery,
+  stopInvoiceListener =
+    onSnapshot(
+      invoicesQuery,
 
-    (snapshot) => {
-      const invoiceRecords =
-        snapshot.docs.map((invoiceDocument) => ({
-          id: invoiceDocument.id,
-          ...invoiceDocument.data()
-        }));
+      (snapshot) => {
+        const invoiceRecords =
+          snapshot.docs.map(
+            (invoiceDocument) => ({
+              id: invoiceDocument.id,
+              ...invoiceDocument.data()
+            })
+          );
 
-      renderInvoices(invoiceRecords);
-    },
+        renderInvoices(
+          invoiceRecords
+        );
+      },
 
-    (error) => {
-      console.error(
-        "Unable to load client invoices:",
-        error
-      );
+      (error) => {
+        console.error(
+          "Unable to load client invoices:",
+          error
+        );
 
-      createInvoiceEmptyState(
-        "Invoices could not be loaded",
-        "Please refresh the page or contact BAM's Website Builder for assistance."
-      );
-    }
-  );
+        createInvoiceEmptyState(
+          "Invoices could not be loaded",
+          "Please refresh the page or contact BAM's Website Builder for assistance."
+        );
+      }
+    );
 };
 
 /* =========================================================
@@ -648,17 +713,22 @@ const watchClientInvoices = (user) => {
 ========================================================= */
 
 const showFileListMessage = (message) => {
-  if (!clientFileList) {
-    return;
-  }
+  if (!clientFileList) return;
 
   clientFileList.replaceChildren();
 
-  const paragraph = document.createElement("p");
-  paragraph.className = "portal-file-status";
-  paragraph.textContent = message;
+  const paragraph =
+    document.createElement("p");
 
-  clientFileList.appendChild(paragraph);
+  paragraph.className =
+    "portal-file-status";
+
+  paragraph.textContent =
+    message;
+
+  clientFileList.appendChild(
+    paragraph
+  );
 };
 
 const createFileItem = ({
@@ -667,18 +737,32 @@ const createFileItem = ({
   size,
   uploadedDate
 }) => {
-  const item = document.createElement("div");
-  item.className = "portal-file-item";
+  const item =
+    document.createElement("div");
 
-  const information = document.createElement("div");
-  information.className = "portal-file-info";
+  item.className =
+    "portal-file-item";
 
-  const fileName = document.createElement("strong");
-  fileName.className = "portal-file-name";
-  fileName.textContent = name;
+  const information =
+    document.createElement("div");
 
-  const details = document.createElement("span");
-  details.className = "portal-file-details";
+  information.className =
+    "portal-file-info";
+
+  const fileName =
+    document.createElement("strong");
+
+  fileName.className =
+    "portal-file-name";
+
+  fileName.textContent =
+    name;
+
+  const details =
+    document.createElement("span");
+
+  details.className =
+    "portal-file-details";
 
   const detailParts = [];
 
@@ -690,43 +774,67 @@ const createFileItem = ({
     detailParts.push(uploadedDate);
   }
 
-  details.textContent = detailParts.join(" • ");
+  details.textContent =
+    detailParts.join(" • ");
 
-  const downloadLink = document.createElement("a");
-  downloadLink.className = "portal-secondary-button";
-  downloadLink.href = url;
-  downloadLink.target = "_blank";
-  downloadLink.rel = "noopener noreferrer";
-  downloadLink.textContent = "View File";
+  const downloadLink =
+    document.createElement("a");
 
-  information.appendChild(fileName);
+  downloadLink.className =
+    "portal-secondary-button";
+
+  downloadLink.href =
+    url;
+
+  downloadLink.target =
+    "_blank";
+
+  downloadLink.rel =
+    "noopener noreferrer";
+
+  downloadLink.textContent =
+    "View File";
+
+  information.appendChild(
+    fileName
+  );
 
   if (details.textContent) {
-    information.appendChild(details);
+    information.appendChild(
+      details
+    );
   }
 
-  item.appendChild(information);
-  item.appendChild(downloadLink);
+  item.append(
+    information,
+    downloadLink
+  );
 
   return item;
 };
 
 const loadClientFiles = async (user) => {
-  if (!clientFileList) {
-    return;
-  }
+  if (!clientFileList) return;
 
-  showFileListMessage("Checking for uploaded files...");
+  showFileListMessage(
+    "Checking for uploaded files..."
+  );
 
   try {
-    const uploadsFolder = ref(
-      storage,
-      `users/${user.uid}/uploads`
-    );
+    const uploadsFolder =
+      ref(
+        storage,
+        `users/${user.uid}/uploads`
+      );
 
-    const result = await listAll(uploadsFolder);
+    const result =
+      await listAll(
+        uploadsFolder
+      );
 
-    if (result.items.length === 0) {
+    if (
+      result.items.length === 0
+    ) {
       showFileListMessage(
         "You have not uploaded any files yet."
       );
@@ -734,50 +842,78 @@ const loadClientFiles = async (user) => {
       return;
     }
 
-    const fileRecords = await Promise.all(
-      result.items.map(async (fileReference) => {
-        try {
-          const [url, metadata] = await Promise.all([
-            getDownloadURL(fileReference),
-            getMetadata(fileReference)
-          ]);
+    const fileRecords =
+      await Promise.all(
+        result.items.map(
+          async (fileReference) => {
+            try {
+              const [url, metadata] =
+                await Promise.all([
+                  getDownloadURL(
+                    fileReference
+                  ),
 
-          return {
-            name:
-              metadata.customMetadata?.originalName ||
-              metadata.name ||
-              fileReference.name,
+                  getMetadata(
+                    fileReference
+                  )
+                ]);
 
-            url,
+              return {
+                name:
+                  metadata
+                    .customMetadata
+                    ?.originalName ||
+                  metadata.name ||
+                  fileReference.name,
 
-            size:
-              formatFileSize(metadata.size),
+                url,
 
-            uploadedDate:
-              formatUploadDate(metadata.timeCreated),
+                size:
+                  formatFileSize(
+                    metadata.size
+                  ),
 
-            timestamp:
-              new Date(metadata.timeCreated).getTime() || 0
-          };
-        } catch (error) {
-          console.error(
-            "Unable to load file:",
-            fileReference.fullPath,
-            error
-          );
+                uploadedDate:
+                  formatUploadDate(
+                    metadata.timeCreated
+                  ),
 
-          return null;
-        }
-      })
-    );
+                timestamp:
+                  new Date(
+                    metadata.timeCreated
+                  ).getTime() || 0
+              };
+            } catch (error) {
+              console.error(
+                "Unable to load file:",
+                fileReference.fullPath,
+                error
+              );
 
-    const validFiles = fileRecords
-      .filter(Boolean)
-      .sort((firstFile, secondFile) => {
-        return secondFile.timestamp - firstFile.timestamp;
-      });
+              return null;
+            }
+          }
+        )
+      );
 
-    if (validFiles.length === 0) {
+    const validFiles =
+      fileRecords
+        .filter(Boolean)
+        .sort(
+          (
+            firstFile,
+            secondFile
+          ) => {
+            return (
+              secondFile.timestamp -
+              firstFile.timestamp
+            );
+          }
+        );
+
+    if (
+      validFiles.length === 0
+    ) {
       showFileListMessage(
         "Your uploaded files could not be displayed."
       );
@@ -787,23 +923,31 @@ const loadClientFiles = async (user) => {
 
     clientFileList.replaceChildren();
 
-    validFiles.forEach((fileRecord) => {
-      clientFileList.appendChild(
-        createFileItem(fileRecord)
-      );
-    });
+    validFiles.forEach(
+      (fileRecord) => {
+        clientFileList.appendChild(
+          createFileItem(
+            fileRecord
+          )
+        );
+      }
+    );
   } catch (error) {
     console.error(
       "Unable to list client files:",
       error
     );
 
-    if (error.code === "storage/unauthorized") {
+    if (
+      error.code ===
+      "storage/unauthorized"
+    ) {
       showFileListMessage(
         "You do not have permission to view these files."
       );
     } else if (
-      error.code === "storage/object-not-found"
+      error.code ===
+      "storage/object-not-found"
     ) {
       showFileListMessage(
         "You have not uploaded any files yet."
@@ -820,232 +964,276 @@ const loadClientFiles = async (user) => {
    FILE SELECTION
 ========================================================= */
 
-fileInput?.addEventListener("change", () => {
-  clearUploadStatus();
+fileInput?.addEventListener(
+  "change",
+  () => {
+    clearUploadStatus();
 
-  selectedFile =
-    fileInput.files?.[0] || null;
+    selectedFile =
+      fileInput.files?.[0] ||
+      null;
 
-  if (!selectedFile) {
+    if (!selectedFile) {
+      if (selectedFileName) {
+        selectedFileName.textContent =
+          "Choose File";
+      }
+
+      if (uploadButton) {
+        uploadButton.disabled =
+          true;
+      }
+
+      return;
+    }
+
+    const validation =
+      validateFile(
+        selectedFile
+      );
+
+    if (!validation.valid) {
+      showUploadStatus(
+        validation.message
+      );
+
+      if (selectedFileName) {
+        selectedFileName.textContent =
+          "Choose File";
+      }
+
+      if (uploadButton) {
+        uploadButton.disabled =
+          true;
+      }
+
+      fileInput.value = "";
+      selectedFile = null;
+
+      return;
+    }
+
     if (selectedFileName) {
       selectedFileName.textContent =
-        "Choose File";
+        selectedFile.name;
     }
 
     if (uploadButton) {
-      uploadButton.disabled = true;
+      uploadButton.disabled =
+        false;
     }
-
-    return;
   }
-
-  const validation =
-    validateFile(selectedFile);
-
-  if (!validation.valid) {
-    showUploadStatus(validation.message);
-
-    if (selectedFileName) {
-      selectedFileName.textContent =
-        "Choose File";
-    }
-
-    if (uploadButton) {
-      uploadButton.disabled = true;
-    }
-
-    fileInput.value = "";
-    selectedFile = null;
-
-    return;
-  }
-
-  if (selectedFileName) {
-    selectedFileName.textContent =
-      selectedFile.name;
-  }
-
-  if (uploadButton) {
-    uploadButton.disabled = false;
-  }
-});
+);
 
 /* =========================================================
    FILE UPLOAD
 ========================================================= */
 
-uploadButton?.addEventListener("click", () => {
-  if (!currentUser) {
-    showUploadStatus(
-      "You must be signed in before uploading a file."
-    );
-
-    return;
-  }
-
-  const validation =
-    validateFile(selectedFile);
-
-  if (!validation.valid) {
-    showUploadStatus(validation.message);
-    return;
-  }
-
-  clearUploadStatus();
-
-  uploadButton.disabled = true;
-  uploadButton.textContent = "Uploading...";
-
-  if (uploadProgress) {
-    uploadProgress.hidden = false;
-    uploadProgress.value = 0;
-  }
-
-  const cleanFileName =
-    sanitizeFileName(selectedFile.name) ||
-    "client-file";
-
-  const storageFileName =
-    `${Date.now()}-${cleanFileName}`;
-
-  const fileReference = ref(
-    storage,
-    `users/${currentUser.uid}/uploads/${storageFileName}`
-  );
-
-  const metadata = {
-    contentType:
-      selectedFile.type ||
-      "application/octet-stream",
-
-    customMetadata: {
-      originalName: selectedFile.name,
-      uploadedBy: currentUser.uid
-    }
-  };
-
-  const uploadTask = uploadBytesResumable(
-    fileReference,
-    selectedFile,
-    metadata
-  );
-
-  uploadTask.on(
-    "state_changed",
-
-    (snapshot) => {
-      const percentage =
-        snapshot.totalBytes > 0
-          ? Math.round(
-              (
-                snapshot.bytesTransferred /
-                snapshot.totalBytes
-              ) * 100
-            )
-          : 0;
-
-      if (uploadProgress) {
-        uploadProgress.value =
-          percentage;
-      }
-
+uploadButton?.addEventListener(
+  "click",
+  () => {
+    if (!currentUser) {
       showUploadStatus(
-        `Uploading file: ${percentage}%`
-      );
-    },
-
-    (error) => {
-      console.error(
-        "File upload failed:",
-        error
+        "You must be signed in before uploading a file."
       );
 
-      if (
-        error.code ===
-        "storage/unauthorized"
-      ) {
-        showUploadStatus(
-          "You do not have permission to upload this file."
-        );
-      } else if (
-        error.code ===
-        "storage/canceled"
-      ) {
-        showUploadStatus(
-          "The file upload was canceled."
-        );
-      } else if (
-        error.code ===
-        "storage/retry-limit-exceeded"
-      ) {
-        showUploadStatus(
-          "The upload took too long. Please check your internet connection and try again."
-        );
-      } else {
-        showUploadStatus(
-          "Your file could not be uploaded. Please try again."
-        );
+      return;
+    }
+
+    const validation =
+      validateFile(
+        selectedFile
+      );
+
+    if (!validation.valid) {
+      showUploadStatus(
+        validation.message
+      );
+
+      return;
+    }
+
+    clearUploadStatus();
+
+    uploadButton.disabled =
+      true;
+
+    uploadButton.textContent =
+      "Uploading...";
+
+    if (uploadProgress) {
+      uploadProgress.hidden =
+        false;
+
+      uploadProgress.value =
+        0;
+    }
+
+    const cleanFileName =
+      sanitizeFileName(
+        selectedFile.name
+      ) || "client-file";
+
+    const storageFileName =
+      `${Date.now()}-${cleanFileName}`;
+
+    const fileReference =
+      ref(
+        storage,
+        `users/${currentUser.uid}/uploads/${storageFileName}`
+      );
+
+    const metadata = {
+      contentType:
+        selectedFile.type ||
+        "application/octet-stream",
+
+      customMetadata: {
+        originalName:
+          selectedFile.name,
+
+        uploadedBy:
+          currentUser.uid
       }
+    };
 
-      if (uploadButton) {
-        uploadButton.disabled = false;
-        uploadButton.textContent =
-          "Upload File";
-      }
+    const uploadTask =
+      uploadBytesResumable(
+        fileReference,
+        selectedFile,
+        metadata
+      );
 
-      if (uploadProgress) {
-        uploadProgress.hidden = true;
-        uploadProgress.value = 0;
-      }
-    },
+    uploadTask.on(
+      "state_changed",
 
-    async () => {
-      try {
-        await getDownloadURL(
-          uploadTask.snapshot.ref
-        );
+      (snapshot) => {
+        const percentage =
+          snapshot.totalBytes > 0
+            ? Math.round(
+                (
+                  snapshot.bytesTransferred /
+                  snapshot.totalBytes
+                ) * 100
+              )
+            : 0;
 
-        showUploadStatus(
-          "Your file was uploaded successfully.",
-          true
-        );
-
-        if (fileInput) {
-          fileInput.value = "";
+        if (uploadProgress) {
+          uploadProgress.value =
+            percentage;
         }
 
-        if (selectedFileName) {
-          selectedFileName.textContent =
-            "Choose File";
-        }
+        showUploadStatus(
+          `Uploading file: ${percentage}%`
+        );
+      },
 
-        selectedFile = null;
-
-        await loadClientFiles(currentUser);
-      } catch (error) {
+      (error) => {
         console.error(
-          "Unable to finish file upload:",
+          "File upload failed:",
           error
         );
 
-        showUploadStatus(
-          "The file uploaded, but it could not be added to the file list. Refresh the page."
-        );
-      } finally {
+        if (
+          error.code ===
+          "storage/unauthorized"
+        ) {
+          showUploadStatus(
+            "You do not have permission to upload this file."
+          );
+        } else if (
+          error.code ===
+          "storage/canceled"
+        ) {
+          showUploadStatus(
+            "The file upload was canceled."
+          );
+        } else if (
+          error.code ===
+          "storage/retry-limit-exceeded"
+        ) {
+          showUploadStatus(
+            "The upload took too long. Please check your internet connection and try again."
+          );
+        } else {
+          showUploadStatus(
+            "Your file could not be uploaded. Please try again."
+          );
+        }
+
         if (uploadButton) {
-          uploadButton.disabled = true;
+          uploadButton.disabled =
+            false;
+
           uploadButton.textContent =
             "Upload File";
         }
 
         if (uploadProgress) {
-          uploadProgress.hidden = true;
-          uploadProgress.value = 0;
+          uploadProgress.hidden =
+            true;
+
+          uploadProgress.value =
+            0;
+        }
+      },
+
+      async () => {
+        try {
+          await getDownloadURL(
+            uploadTask.snapshot.ref
+          );
+
+          showUploadStatus(
+            "Your file was uploaded successfully.",
+            true
+          );
+
+          if (fileInput) {
+            fileInput.value =
+              "";
+          }
+
+          if (selectedFileName) {
+            selectedFileName.textContent =
+              "Choose File";
+          }
+
+          selectedFile = null;
+
+          await loadClientFiles(
+            currentUser
+          );
+        } catch (error) {
+          console.error(
+            "Unable to finish file upload:",
+            error
+          );
+
+          showUploadStatus(
+            "The file uploaded, but it could not be added to the file list. Refresh the page."
+          );
+        } finally {
+          if (uploadButton) {
+            uploadButton.disabled =
+              true;
+
+            uploadButton.textContent =
+              "Upload File";
+          }
+
+          if (uploadProgress) {
+            uploadProgress.hidden =
+              true;
+
+            uploadProgress.value =
+              0;
+          }
         }
       }
-    }
-  );
-});
+    );
+  }
+);
 
 /* =========================================================
    AUTHENTICATION STATE
@@ -1063,9 +1251,10 @@ onAuthStateChanged(
         stopInvoiceListener = null;
       }
 
-      const next = encodeURIComponent(
-        "client-portal.html"
-      );
+      const next =
+        encodeURIComponent(
+          "client-portal.html"
+        );
 
       window.location.replace(
         `login.html?next=${next}`
@@ -1115,6 +1304,7 @@ onAuthStateChanged(
     }
 
     watchClientInvoices(user);
+
     await loadClientFiles(user);
   }
 );
@@ -1134,7 +1324,8 @@ logout?.addEventListener(
         "function"
       ) {
         stopInvoiceListener();
-        stopInvoiceListener = null;
+        stopInvoiceListener =
+          null;
       }
 
       await signOut(auth);
@@ -1169,13 +1360,16 @@ accountForm?.addEventListener(
     }
 
     const fullName =
-      accountName?.value.trim() || "";
+      accountName?.value.trim() ||
+      "";
 
     const businessName =
-      accountBusiness?.value.trim() || "";
+      accountBusiness?.value.trim() ||
+      "";
 
     const phone =
-      accountPhone?.value.trim() || "";
+      accountPhone?.value.trim() ||
+      "";
 
     const submitButton =
       accountForm.querySelector(
@@ -1188,24 +1382,29 @@ accountForm?.addEventListener(
       );
 
       accountName?.focus();
+
       return;
     }
 
     if (submitButton) {
-      submitButton.disabled = true;
+      submitButton.disabled =
+        true;
+
       submitButton.textContent =
         "Saving...";
     }
 
     if (accountAlert) {
-      accountAlert.hidden = true;
+      accountAlert.hidden =
+        true;
     }
 
     try {
       await updateProfile(
         currentUser,
         {
-          displayName: fullName
+          displayName:
+            fullName
         }
       );
 
@@ -1213,7 +1412,8 @@ accountForm?.addEventListener(
         fullName.split(/\s+/);
 
       const firstName =
-        nameParts.shift() || "";
+        nameParts.shift() ||
+        "";
 
       const lastName =
         nameParts.join(" ");
@@ -1225,15 +1425,26 @@ accountForm?.addEventListener(
           currentUser.uid
         ),
         {
-          uid: currentUser.uid,
+          uid:
+            currentUser.uid,
+
           firstName,
+
           lastName,
+
           fullName,
+
           businessName,
+
           phone,
+
           email:
-            currentUser.email || "",
-          role: "client",
+            currentUser.email ||
+            "",
+
+          role:
+            "client",
+
           updatedAt:
             serverTimestamp()
         },
@@ -1250,7 +1461,8 @@ accountForm?.addEventListener(
       if (welcome) {
         welcome.textContent =
           `Welcome back, ${
-            firstName || "Client"
+            firstName ||
+            "Client"
           }`;
       }
 
@@ -1276,7 +1488,9 @@ accountForm?.addEventListener(
       );
     } finally {
       if (submitButton) {
-        submitButton.disabled = false;
+        submitButton.disabled =
+          false;
+
         submitButton.textContent =
           "Save Changes";
       }
