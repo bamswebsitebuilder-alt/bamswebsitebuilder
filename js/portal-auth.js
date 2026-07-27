@@ -7,8 +7,12 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
 
 import {
+  collection,
   doc,
   getDoc,
+  onSnapshot,
+  orderBy,
+  query,
   serverTimestamp,
   setDoc
 } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
@@ -50,6 +54,12 @@ const uploadStatus = document.getElementById("upload-status");
 const clientFileList = document.getElementById("client-file-list");
 
 /* =========================================================
+   INVOICE ELEMENTS
+========================================================= */
+
+const invoicesPanel = document.getElementById("invoices");
+
+/* =========================================================
    SETTINGS
 ========================================================= */
 
@@ -70,6 +80,7 @@ const allowedExtensions = [
 
 let currentUser = null;
 let selectedFile = null;
+let stopInvoiceListener = null;
 
 /* =========================================================
    ACCOUNT STATUS
@@ -110,7 +121,7 @@ const clearUploadStatus = () => {
 };
 
 /* =========================================================
-   HELPERS
+   GENERAL HELPERS
 ========================================================= */
 
 const getFileExtension = (fileName) => {
@@ -137,6 +148,7 @@ const formatFileSize = (bytes) => {
   }
 
   const units = ["B", "KB", "MB", "GB"];
+
   const unitIndex = Math.min(
     Math.floor(Math.log(bytes) / Math.log(1024)),
     units.length - 1
@@ -163,6 +175,51 @@ const formatUploadDate = (dateValue) => {
     month: "short",
     day: "numeric"
   });
+};
+
+const formatCurrency = (amount, currency = "USD") => {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: currency || "USD"
+  }).format(Number(amount) || 0);
+};
+
+const formatInvoiceDate = (value) => {
+  if (!value) {
+    return "";
+  }
+
+  const date =
+    typeof value?.toDate === "function"
+      ? value.toDate()
+      : new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return "";
+  }
+
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
+};
+
+const isSafePaymentLink = (value) => {
+  if (!value) {
+    return false;
+  }
+
+  try {
+    const parsedUrl = new URL(value);
+
+    return (
+      parsedUrl.protocol === "https:" ||
+      parsedUrl.protocol === "http:"
+    );
+  } catch {
+    return false;
+  }
 };
 
 const validateFile = (file) => {
@@ -282,6 +339,311 @@ const loadProfile = async (user) => {
 };
 
 /* =========================================================
+   INVOICE DISPLAY
+========================================================= */
+
+const createInvoiceEmptyState = (
+  title = "No invoices available",
+  message = "Invoices assigned to your account will appear here."
+) => {
+  if (!invoicesPanel) {
+    return;
+  }
+
+  invoicesPanel.replaceChildren();
+
+  const card = document.createElement("article");
+  card.className = "portal-card portal-empty-state";
+
+  const kicker = document.createElement("p");
+  kicker.className = "card-kicker";
+  kicker.textContent = "BILLING";
+
+  const heading = document.createElement("h2");
+  heading.textContent = title;
+
+  const paragraph = document.createElement("p");
+  paragraph.textContent = message;
+
+  card.append(kicker, heading, paragraph);
+  invoicesPanel.appendChild(card);
+};
+
+const createInvoiceBadge = (status) => {
+  const normalizedStatus =
+    String(status || "unpaid").toLowerCase();
+
+  const badge = document.createElement("span");
+
+  badge.className =
+    normalizedStatus === "paid"
+      ? "portal-invoice-status paid"
+      : "portal-invoice-status unpaid";
+
+  badge.textContent =
+    normalizedStatus === "paid"
+      ? "Paid"
+      : "Payment Due";
+
+  return badge;
+};
+
+const createInvoiceCard = (invoice) => {
+  const status =
+    String(invoice.status || "unpaid").toLowerCase();
+
+  const isPaid = status === "paid";
+
+  const card = document.createElement("article");
+  card.className = "portal-card portal-invoice-card";
+
+  const headingSection = document.createElement("div");
+  headingSection.className = "card-heading";
+
+  const headingInformation = document.createElement("div");
+
+  const kicker = document.createElement("p");
+  kicker.className = "card-kicker";
+  kicker.textContent = "PAYPAL INVOICE";
+
+  const title = document.createElement("h2");
+  title.textContent =
+    invoice.invoiceNumber || "Invoice";
+
+  headingInformation.append(kicker, title);
+
+  const statusBadge = createInvoiceBadge(status);
+
+  headingSection.append(
+    headingInformation,
+    statusBadge
+  );
+
+  const details = document.createElement("div");
+  details.className = "portal-invoice-details";
+
+  const amountBlock = document.createElement("div");
+  amountBlock.className = "portal-invoice-detail";
+
+  const amountLabel = document.createElement("span");
+  amountLabel.textContent =
+    isPaid ? "Amount Paid" : "Amount Due";
+
+  const amountValue = document.createElement("strong");
+  amountValue.textContent = formatCurrency(
+    invoice.amount,
+    invoice.currency
+  );
+
+  amountBlock.append(amountLabel, amountValue);
+
+  const dueDateBlock = document.createElement("div");
+  dueDateBlock.className = "portal-invoice-detail";
+
+  const dueDateLabel = document.createElement("span");
+  dueDateLabel.textContent = "Due Date";
+
+  const dueDateValue = document.createElement("strong");
+  dueDateValue.textContent =
+    formatInvoiceDate(invoice.dueDate) ||
+    "No due date";
+
+  dueDateBlock.append(
+    dueDateLabel,
+    dueDateValue
+  );
+
+  details.append(
+    amountBlock,
+    dueDateBlock
+  );
+
+  card.append(
+    headingSection,
+    details
+  );
+
+  if (invoice.description) {
+    const description = document.createElement("p");
+    description.className = "portal-invoice-description";
+    description.textContent = invoice.description;
+
+    card.appendChild(description);
+  }
+
+  const actions = document.createElement("div");
+  actions.className = "portal-actions";
+
+  if (
+    invoice.pdfUrl &&
+    isSafePaymentLink(invoice.pdfUrl)
+  ) {
+    const paymentLink = document.createElement("a");
+
+    paymentLink.className =
+      isPaid
+        ? "portal-secondary-button"
+        : "portal-primary-button";
+
+    paymentLink.href = invoice.pdfUrl;
+    paymentLink.target = "_blank";
+    paymentLink.rel = "noopener noreferrer";
+
+    paymentLink.textContent =
+      isPaid
+        ? "View PayPal Invoice"
+        : "View & Pay with PayPal";
+
+    actions.appendChild(paymentLink);
+  } else if (!isPaid) {
+    const unavailableMessage =
+      document.createElement("p");
+
+    unavailableMessage.className =
+      "portal-file-status";
+
+    unavailableMessage.textContent =
+      "A payment link has not been added to this invoice yet.";
+
+    actions.appendChild(unavailableMessage);
+  }
+
+  if (isPaid) {
+    const paidMessage = document.createElement("p");
+    paidMessage.className = "portal-file-status";
+    paidMessage.textContent =
+      "This invoice has been marked as paid.";
+
+    actions.appendChild(paidMessage);
+  }
+
+  card.appendChild(actions);
+
+  return card;
+};
+
+const renderInvoices = (invoiceRecords) => {
+  if (!invoicesPanel) {
+    return;
+  }
+
+  if (!invoiceRecords.length) {
+    createInvoiceEmptyState();
+    return;
+  }
+
+  invoicesPanel.replaceChildren();
+
+  const summaryCard = document.createElement("article");
+  summaryCard.className = "portal-card";
+
+  const summaryHeading = document.createElement("div");
+  summaryHeading.className = "card-heading";
+
+  const summaryText = document.createElement("div");
+
+  const summaryKicker = document.createElement("p");
+  summaryKicker.className = "card-kicker";
+  summaryKicker.textContent = "BILLING";
+
+  const summaryTitle = document.createElement("h2");
+  summaryTitle.textContent = "Your Invoices";
+
+  const unpaidInvoices = invoiceRecords.filter(
+    (invoice) =>
+      String(invoice.status || "unpaid").toLowerCase() !== "paid"
+  );
+
+  const outstandingBalance =
+    unpaidInvoices.reduce(
+      (total, invoice) =>
+        total + (Number(invoice.amount) || 0),
+      0
+    );
+
+  const summaryParagraph = document.createElement("p");
+
+  summaryParagraph.textContent =
+    unpaidInvoices.length > 0
+      ? `${unpaidInvoices.length} unpaid invoice${
+          unpaidInvoices.length === 1 ? "" : "s"
+        } with an outstanding balance of ${formatCurrency(
+          outstandingBalance
+        )}.`
+      : "All invoices are currently paid.";
+
+  summaryText.append(
+    summaryKicker,
+    summaryTitle,
+    summaryParagraph
+  );
+
+  summaryHeading.appendChild(summaryText);
+  summaryCard.appendChild(summaryHeading);
+
+  invoicesPanel.appendChild(summaryCard);
+
+  invoiceRecords.forEach((invoice) => {
+    invoicesPanel.appendChild(
+      createInvoiceCard(invoice)
+    );
+  });
+};
+
+const watchClientInvoices = (user) => {
+  if (!invoicesPanel) {
+    return;
+  }
+
+  if (typeof stopInvoiceListener === "function") {
+    stopInvoiceListener();
+  }
+
+  createInvoiceEmptyState(
+    "Loading invoices...",
+    "Please wait while your billing information is loaded."
+  );
+
+  const invoicesReference = collection(
+    db,
+    "users",
+    user.uid,
+    "invoices"
+  );
+
+  const invoicesQuery = query(
+    invoicesReference,
+    orderBy("createdAt", "desc")
+  );
+
+  stopInvoiceListener = onSnapshot(
+    invoicesQuery,
+
+    (snapshot) => {
+      const invoiceRecords =
+        snapshot.docs.map((invoiceDocument) => ({
+          id: invoiceDocument.id,
+          ...invoiceDocument.data()
+        }));
+
+      renderInvoices(invoiceRecords);
+    },
+
+    (error) => {
+      console.error(
+        "Unable to load client invoices:",
+        error
+      );
+
+      createInvoiceEmptyState(
+        "Invoices could not be loaded",
+        "Please refresh the page or contact BAM's Website Builder for assistance."
+      );
+    }
+  );
+};
+
+/* =========================================================
    FILE LIST
 ========================================================= */
 
@@ -385,11 +747,15 @@ const loadClientFiles = async (user) => {
               metadata.customMetadata?.originalName ||
               metadata.name ||
               fileReference.name,
+
             url,
-            size: formatFileSize(metadata.size),
-            uploadedDate: formatUploadDate(
-              metadata.timeCreated
-            ),
+
+            size:
+              formatFileSize(metadata.size),
+
+            uploadedDate:
+              formatUploadDate(metadata.timeCreated),
+
             timestamp:
               new Date(metadata.timeCreated).getTime() || 0
           };
@@ -427,7 +793,10 @@ const loadClientFiles = async (user) => {
       );
     });
   } catch (error) {
-    console.error("Unable to list client files:", error);
+    console.error(
+      "Unable to list client files:",
+      error
+    );
 
     if (error.code === "storage/unauthorized") {
       showFileListMessage(
@@ -454,11 +823,13 @@ const loadClientFiles = async (user) => {
 fileInput?.addEventListener("change", () => {
   clearUploadStatus();
 
-  selectedFile = fileInput.files?.[0] || null;
+  selectedFile =
+    fileInput.files?.[0] || null;
 
   if (!selectedFile) {
     if (selectedFileName) {
-      selectedFileName.textContent = "Choose File";
+      selectedFileName.textContent =
+        "Choose File";
     }
 
     if (uploadButton) {
@@ -468,13 +839,15 @@ fileInput?.addEventListener("change", () => {
     return;
   }
 
-  const validation = validateFile(selectedFile);
+  const validation =
+    validateFile(selectedFile);
 
   if (!validation.valid) {
     showUploadStatus(validation.message);
 
     if (selectedFileName) {
-      selectedFileName.textContent = "Choose File";
+      selectedFileName.textContent =
+        "Choose File";
     }
 
     if (uploadButton) {
@@ -488,7 +861,8 @@ fileInput?.addEventListener("change", () => {
   }
 
   if (selectedFileName) {
-    selectedFileName.textContent = selectedFile.name;
+    selectedFileName.textContent =
+      selectedFile.name;
   }
 
   if (uploadButton) {
@@ -509,7 +883,8 @@ uploadButton?.addEventListener("click", () => {
     return;
   }
 
-  const validation = validateFile(selectedFile);
+  const validation =
+    validateFile(selectedFile);
 
   if (!validation.valid) {
     showUploadStatus(validation.message);
@@ -527,7 +902,8 @@ uploadButton?.addEventListener("click", () => {
   }
 
   const cleanFileName =
-    sanitizeFileName(selectedFile.name) || "client-file";
+    sanitizeFileName(selectedFile.name) ||
+    "client-file";
 
   const storageFileName =
     `${Date.now()}-${cleanFileName}`;
@@ -561,14 +937,16 @@ uploadButton?.addEventListener("click", () => {
       const percentage =
         snapshot.totalBytes > 0
           ? Math.round(
-              (snapshot.bytesTransferred /
-                snapshot.totalBytes) *
-                100
+              (
+                snapshot.bytesTransferred /
+                snapshot.totalBytes
+              ) * 100
             )
           : 0;
 
       if (uploadProgress) {
-        uploadProgress.value = percentage;
+        uploadProgress.value =
+          percentage;
       }
 
       showUploadStatus(
@@ -577,20 +955,28 @@ uploadButton?.addEventListener("click", () => {
     },
 
     (error) => {
-      console.error("File upload failed:", error);
+      console.error(
+        "File upload failed:",
+        error
+      );
 
-      if (error.code === "storage/unauthorized") {
+      if (
+        error.code ===
+        "storage/unauthorized"
+      ) {
         showUploadStatus(
           "You do not have permission to upload this file."
         );
       } else if (
-        error.code === "storage/canceled"
+        error.code ===
+        "storage/canceled"
       ) {
         showUploadStatus(
           "The file upload was canceled."
         );
       } else if (
-        error.code === "storage/retry-limit-exceeded"
+        error.code ===
+        "storage/retry-limit-exceeded"
       ) {
         showUploadStatus(
           "The upload took too long. Please check your internet connection and try again."
@@ -603,7 +989,8 @@ uploadButton?.addEventListener("click", () => {
 
       if (uploadButton) {
         uploadButton.disabled = false;
-        uploadButton.textContent = "Upload File";
+        uploadButton.textContent =
+          "Upload File";
       }
 
       if (uploadProgress) {
@@ -628,7 +1015,8 @@ uploadButton?.addEventListener("click", () => {
         }
 
         if (selectedFileName) {
-          selectedFileName.textContent = "Choose File";
+          selectedFileName.textContent =
+            "Choose File";
         }
 
         selectedFile = null;
@@ -646,7 +1034,8 @@ uploadButton?.addEventListener("click", () => {
       } finally {
         if (uploadButton) {
           uploadButton.disabled = true;
-          uploadButton.textContent = "Upload File";
+          uploadButton.textContent =
+            "Upload File";
         }
 
         if (uploadProgress) {
@@ -662,71 +1051,105 @@ uploadButton?.addEventListener("click", () => {
    AUTHENTICATION STATE
 ========================================================= */
 
-onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    const next = encodeURIComponent(
-      "client-portal.html"
-    );
+onAuthStateChanged(
+  auth,
+  async (user) => {
+    if (!user) {
+      if (
+        typeof stopInvoiceListener ===
+        "function"
+      ) {
+        stopInvoiceListener();
+        stopInvoiceListener = null;
+      }
 
-    window.location.replace(
-      `login.html?next=${next}`
-    );
+      const next = encodeURIComponent(
+        "client-portal.html"
+      );
 
-    return;
+      window.location.replace(
+        `login.html?next=${next}`
+      );
+
+      return;
+    }
+
+    currentUser = user;
+
+    try {
+      await loadProfile(user);
+    } catch (error) {
+      console.error(
+        "Portal account loading failed:",
+        error
+      );
+
+      const fallbackName =
+        user.displayName ||
+        user.email?.split("@")[0] ||
+        "Client";
+
+      if (welcome) {
+        welcome.textContent =
+          `Welcome back, ${
+            fallbackName.split(" ")[0]
+          }`;
+      }
+
+      if (userName) {
+        userName.textContent =
+          fallbackName;
+      }
+
+      if (userEmail) {
+        userEmail.textContent =
+          user.email || "";
+      }
+
+      if (avatar) {
+        avatar.textContent =
+          fallbackName
+            .charAt(0)
+            .toUpperCase();
+      }
+    }
+
+    watchClientInvoices(user);
+    await loadClientFiles(user);
   }
-
-  currentUser = user;
-
-  try {
-    await loadProfile(user);
-  } catch (error) {
-    console.error(
-      "Portal account loading failed:",
-      error
-    );
-
-    const fallbackName =
-      user.displayName ||
-      user.email?.split("@")[0] ||
-      "Client";
-
-    if (welcome) {
-      welcome.textContent =
-        `Welcome back, ${fallbackName.split(" ")[0]}`;
-    }
-
-    if (userName) {
-      userName.textContent = fallbackName;
-    }
-
-    if (userEmail) {
-      userEmail.textContent =
-        user.email || "";
-    }
-
-    if (avatar) {
-      avatar.textContent =
-        fallbackName.charAt(0).toUpperCase();
-    }
-  }
-
-  await loadClientFiles(user);
-});
+);
 
 /* =========================================================
    LOGOUT
 ========================================================= */
 
-logout?.addEventListener("click", async (event) => {
-  event.preventDefault();
+logout?.addEventListener(
+  "click",
+  async (event) => {
+    event.preventDefault();
 
-  try {
-    await signOut(auth);
-    window.location.replace("login.html");
-  } catch (error) {
-    console.error("Logout failed:", error);
+    try {
+      if (
+        typeof stopInvoiceListener ===
+        "function"
+      ) {
+        stopInvoiceListener();
+        stopInvoiceListener = null;
+      }
+
+      await signOut(auth);
+
+      window.location.replace(
+        "login.html"
+      );
+    } catch (error) {
+      console.error(
+        "Logout failed:",
+        error
+      );
+    }
   }
-});
+);
 
 /* =========================================================
    ACCOUNT PROFILE UPDATE
@@ -770,7 +1193,8 @@ accountForm?.addEventListener(
 
     if (submitButton) {
       submitButton.disabled = true;
-      submitButton.textContent = "Saving...";
+      submitButton.textContent =
+        "Saving...";
     }
 
     if (accountAlert) {
@@ -778,9 +1202,12 @@ accountForm?.addEventListener(
     }
 
     try {
-      await updateProfile(currentUser, {
-        displayName: fullName
-      });
+      await updateProfile(
+        currentUser,
+        {
+          displayName: fullName
+        }
+      );
 
       const nameParts =
         fullName.split(/\s+/);
@@ -792,7 +1219,11 @@ accountForm?.addEventListener(
         nameParts.join(" ");
 
       await setDoc(
-        doc(db, "users", currentUser.uid),
+        doc(
+          db,
+          "users",
+          currentUser.uid
+        ),
         {
           uid: currentUser.uid,
           firstName,
@@ -800,9 +1231,11 @@ accountForm?.addEventListener(
           fullName,
           businessName,
           phone,
-          email: currentUser.email || "",
+          email:
+            currentUser.email || "",
           role: "client",
-          updatedAt: serverTimestamp()
+          updatedAt:
+            serverTimestamp()
         },
         {
           merge: true
@@ -810,17 +1243,22 @@ accountForm?.addEventListener(
       );
 
       if (userName) {
-        userName.textContent = fullName;
+        userName.textContent =
+          fullName;
       }
 
       if (welcome) {
         welcome.textContent =
-          `Welcome back, ${firstName || "Client"}`;
+          `Welcome back, ${
+            firstName || "Client"
+          }`;
       }
 
       if (avatar) {
         avatar.textContent =
-          fullName.charAt(0).toUpperCase();
+          fullName
+            .charAt(0)
+            .toUpperCase();
       }
 
       showAccountStatus(
