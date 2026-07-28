@@ -1,5 +1,9 @@
 document.documentElement.style.visibility = "hidden";
 
+/* =========================================================
+   FIREBASE IMPORTS
+========================================================= */
+
 import { auth, db, storage } from "./firebase-config.js";
 
 import {
@@ -13,8 +17,6 @@ import {
   doc,
   getDoc,
   onSnapshot,
-  orderBy,
-  query,
   serverTimestamp,
   setDoc,
   Timestamp,
@@ -26,84 +28,137 @@ import {
   uploadBytesResumable
 } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-storage.js";
 
+
+/* =========================================================
+   PAGE ELEMENTS
+========================================================= */
+
 const adminEmail = document.getElementById("admin-email");
 const logoutButton = document.getElementById("admin-logout");
 
-const navButtons = [...document.querySelectorAll(".admin-nav-button")];
-const panels = [...document.querySelectorAll(".admin-panel")];
-const quickButtons = [...document.querySelectorAll("[data-open-panel]")];
+const menuButton = document.getElementById("admin-menu-toggle");
+const sidebar = document.getElementById("admin-sidebar");
+const sidebarOverlay = document.getElementById(
+  "admin-sidebar-overlay"
+);
+
+const navigationButtons = [
+  ...document.querySelectorAll(".admin-nav-button")
+];
+
+const panels = [
+  ...document.querySelectorAll(".admin-panel")
+];
+
+const quickActionButtons = [
+  ...document.querySelectorAll("[data-open-panel]")
+];
 
 const clientForm = document.getElementById("client-form");
-const clientFormStatus = document.getElementById("client-form-status");
+const clientFormStatus =
+  document.getElementById("client-form-status");
 const clientList = document.getElementById("client-list");
 
 const projectForm = document.getElementById("project-form");
-const projectFormStatus = document.getElementById("project-form-status");
+const projectFormStatus =
+  document.getElementById("project-form-status");
 const projectList = document.getElementById("project-list");
-const projectClientSelect = document.getElementById("project-client");
-const projectProgress = document.getElementById("project-progress");
-const projectProgressValue = document.getElementById("project-progress-value");
+
+const projectClientSelect =
+  document.getElementById("project-client");
+
+const projectProgress =
+  document.getElementById("project-progress");
+
+const projectProgressValue =
+  document.getElementById("project-progress-value");
 
 const invoiceForm = document.getElementById("invoice-form");
-const invoiceFormStatus = document.getElementById("invoice-form-status");
+const invoiceFormStatus =
+  document.getElementById("invoice-form-status");
 const invoiceList = document.getElementById("invoice-list");
 
-const adminFileForm = document.getElementById("admin-file-form");
-const fileFormStatus = document.getElementById("file-form-status");
-const uploadProgress = document.getElementById("admin-upload-progress");
+const invoiceClientSelect =
+  document.getElementById("invoice-client");
 
-const invoiceClientSelect = document.getElementById("invoice-client");
-const fileClientSelect = document.getElementById("file-client");
+const fileForm = document.getElementById("admin-file-form");
+const fileFormStatus =
+  document.getElementById("file-form-status");
+
+const fileClientSelect =
+  document.getElementById("file-client");
+
+const fileUploadProgress =
+  document.getElementById("admin-upload-progress");
+
+const notificationList =
+  document.getElementById("notification-list");
+
+const notificationCount =
+  document.getElementById("notification-count");
+
+const notificationStatus =
+  document.getElementById("notification-status");
+
+const enableNotificationsButton =
+  document.getElementById("enable-browser-notifications");
 
 const statClients = document.getElementById("stat-clients");
 const statUnpaid = document.getElementById("stat-unpaid");
 const statPaid = document.getElementById("stat-paid");
 const statBalance = document.getElementById("stat-balance");
 
-const menuToggle = document.getElementById("admin-menu-toggle");
-const adminSidebar = document.getElementById("admin-sidebar");
-const sidebarOverlay = document.getElementById("admin-sidebar-overlay");
 
-const notificationList = document.getElementById("notification-list");
-const notificationCount = document.getElementById("notification-count");
-const notificationStatus = document.getElementById("notification-status");
-const enableBrowserNotificationsButton =
-  document.getElementById("enable-browser-notifications");
-
-if (sidebarOverlay) {
-  sidebarOverlay.hidden = true;
-}
-
-if (adminSidebar && window.innerWidth <= 760) {
-  adminSidebar.classList.remove("open");
-  adminSidebar.setAttribute("aria-hidden", "true");
-}
-
+/* =========================================================
+   DASHBOARD STATE
+========================================================= */
 
 let currentAdmin = null;
+
 let clientRecords = [];
-let invoiceRecords = [];
 let projectRecords = [];
-let projectUnsubscribers = [];
+let invoiceRecords = [];
+
+let projectListeners = [];
+let invoiceListeners = [];
+
 const projectsByClient = new Map();
-let activityRecords = [];
-let firstClientSnapshotLoaded = false;
-let firstInvoiceSnapshotLoaded = false;
-let invoiceUnsubscribers = [];
 const invoicesByClient = new Map();
 
+let firstClientSnapshotLoaded = false;
+
+
+/* =========================================================
+   GENERAL HELPERS
+========================================================= */
+
 const showStatus = (element, message, type = "") => {
-  if (!element) return;
+  if (!element) {
+    return;
+  }
+
   element.hidden = false;
   element.textContent = message;
   element.className = `admin-status ${type}`.trim();
 };
 
 const hideStatus = (element) => {
-  if (!element) return;
+  if (!element) {
+    return;
+  }
+
   element.hidden = true;
   element.textContent = "";
   element.className = "admin-status";
+};
+
+const escapeHtml = (value) => {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 };
 
 const formatCurrency = (amount) => {
@@ -114,14 +169,18 @@ const formatCurrency = (amount) => {
 };
 
 const formatDate = (value) => {
-  if (!value) return "";
+  if (!value) {
+    return "";
+  }
 
   const date =
     typeof value?.toDate === "function"
       ? value.toDate()
       : new Date(value);
 
-  if (Number.isNaN(date.getTime())) return "";
+  if (Number.isNaN(date.getTime())) {
+    return "";
+  }
 
   return date.toLocaleDateString("en-US", {
     year: "numeric",
@@ -130,128 +189,257 @@ const formatDate = (value) => {
   });
 };
 
+const toDateInputValue = (value) => {
+  if (!value) {
+    return "";
+  }
 
-const isMobileScreen = () => window.innerWidth <= 760;
+  const date =
+    typeof value?.toDate === "function"
+      ? value.toDate()
+      : new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return "";
+  }
+
+  return date.toISOString().slice(0, 10);
+};
+
+const linesToArray = (value) => {
+  return String(value || "")
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+};
+
+const getTimestampNumber = (value) => {
+  if (typeof value?.toMillis === "function") {
+    return value.toMillis();
+  }
+
+  const date = new Date(value || 0);
+  return Number.isNaN(date.getTime()) ? 0 : date.getTime();
+};
+
+const getClientLabel = (client) => {
+  return (
+    client?.fullName ||
+    client?.email ||
+    client?.businessName ||
+    client?.id ||
+    "Client"
+  );
+};
+
+
+/* =========================================================
+   MOBILE HAMBURGER MENU
+========================================================= */
+
+const isMobileScreen = () => {
+  return window.innerWidth <= 760;
+};
+
+const openMobileMenu = () => {
+  if (!menuButton || !sidebar || !sidebarOverlay) {
+    return;
+  }
+
+  if (!isMobileScreen()) {
+    return;
+  }
+
+  sidebar.classList.add("open");
+  sidebar.setAttribute("aria-hidden", "false");
+
+  sidebarOverlay.hidden = false;
+
+  menuButton.setAttribute("aria-expanded", "true");
+  menuButton.setAttribute("aria-label", "Close admin menu");
+
+  document.body.classList.add("admin-menu-open");
+};
 
 const closeMobileMenu = () => {
-  if (!adminSidebar || !sidebarOverlay || !menuToggle) return;
+  if (!menuButton || !sidebar || !sidebarOverlay) {
+    return;
+  }
 
-  adminSidebar.classList.remove("open");
-  adminSidebar.setAttribute(
+  sidebar.classList.remove("open");
+
+  sidebar.setAttribute(
     "aria-hidden",
     isMobileScreen() ? "true" : "false"
   );
 
   sidebarOverlay.hidden = true;
-  menuToggle.setAttribute("aria-expanded", "false");
-  menuToggle.setAttribute("aria-label", "Open admin menu");
+
+  menuButton.setAttribute("aria-expanded", "false");
+  menuButton.setAttribute("aria-label", "Open admin menu");
+
   document.body.classList.remove("admin-menu-open");
 };
 
-const openMobileMenu = () => {
-  if (!adminSidebar || !sidebarOverlay || !menuToggle) return;
-  if (!isMobileScreen()) return;
-
-  adminSidebar.classList.add("open");
-  adminSidebar.setAttribute("aria-hidden", "false");
-  sidebarOverlay.hidden = false;
-  menuToggle.setAttribute("aria-expanded", "true");
-  menuToggle.setAttribute("aria-label", "Close admin menu");
-  document.body.classList.add("admin-menu-open");
-};
-
-menuToggle?.addEventListener("click", (event) => {
+const toggleMobileMenu = (event) => {
   event.preventDefault();
   event.stopPropagation();
 
-  if (adminSidebar?.classList.contains("open")) {
+  if (sidebar?.classList.contains("open")) {
     closeMobileMenu();
   } else {
     openMobileMenu();
   }
-});
+};
+
+menuButton?.addEventListener("click", toggleMobileMenu);
 
 sidebarOverlay?.addEventListener("click", closeMobileMenu);
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && adminSidebar?.classList.contains("open")) {
+  if (
+    event.key === "Escape" &&
+    sidebar?.classList.contains("open")
+  ) {
     closeMobileMenu();
   }
 });
 
 window.addEventListener("resize", () => {
-  if (!adminSidebar || !sidebarOverlay || !menuToggle) return;
+  if (!sidebar || !sidebarOverlay || !menuButton) {
+    return;
+  }
 
   if (isMobileScreen()) {
-    if (!adminSidebar.classList.contains("open")) {
-      adminSidebar.setAttribute("aria-hidden", "true");
+    if (!sidebar.classList.contains("open")) {
+      sidebar.setAttribute("aria-hidden", "true");
       sidebarOverlay.hidden = true;
     }
   } else {
-    adminSidebar.classList.remove("open");
-    adminSidebar.setAttribute("aria-hidden", "false");
+    sidebar.classList.remove("open");
+    sidebar.setAttribute("aria-hidden", "false");
+
     sidebarOverlay.hidden = true;
-    menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.setAttribute("aria-label", "Open admin menu");
+
+    menuButton.setAttribute("aria-expanded", "false");
     document.body.classList.remove("admin-menu-open");
   }
 });
 
+if (sidebarOverlay) {
+  sidebarOverlay.hidden = true;
+}
+
+if (sidebar) {
+  sidebar.setAttribute(
+    "aria-hidden",
+    isMobileScreen() ? "true" : "false"
+  );
+}
+
+
+/* =========================================================
+   PANEL NAVIGATION
+========================================================= */
+
 const setActivePanel = (panelId) => {
   panels.forEach((panel) => {
-    panel.classList.toggle("active", panel.id === panelId);
+    panel.classList.toggle(
+      "active",
+      panel.id === panelId
+    );
   });
 
-  navButtons.forEach((button) => {
+  navigationButtons.forEach((button) => {
     button.classList.toggle(
       "active",
       button.dataset.panel === panelId
     );
   });
+
+  if (panelId === "notifications") {
+    markNotificationsSeen();
+  }
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 };
 
-navButtons.forEach((button) => {
+navigationButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    setActivePanel(button.dataset.panel);
+    const panelId = button.dataset.panel;
 
-    if (button.dataset.panel === "notifications") {
-      markNotificationsSeen();
+    if (panelId) {
+      setActivePanel(panelId);
     }
 
-    if (window.innerWidth <= 760) closeMobileMenu();
+    if (isMobileScreen()) {
+      closeMobileMenu();
+    }
   });
 });
 
-quickButtons.forEach((button) => {
+quickActionButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    setActivePanel(button.dataset.openPanel);
+    const panelId = button.dataset.openPanel;
+
+    if (panelId) {
+      setActivePanel(panelId);
+    }
   });
 });
+
+
+/* =========================================================
+   CLIENT DROPDOWN OPTIONS
+========================================================= */
 
 const buildClientOptions = () => {
   const options = [
     '<option value="">Choose a client</option>',
     ...clientRecords.map((client) => {
-      const label =
-        client.fullName ||
-        client.email ||
-        client.id;
-
-      return `<option value="${client.id}">${label}</option>`;
+      return `
+        <option value="${escapeHtml(client.id)}">
+          ${escapeHtml(getClientLabel(client))}
+        </option>
+      `;
     })
   ].join("");
 
-  invoiceClientSelect.innerHTML = options;
-  fileClientSelect.innerHTML = options;
-  if (projectClientSelect) projectClientSelect.innerHTML = options;
+  if (projectClientSelect) {
+    projectClientSelect.innerHTML = options;
+  }
+
+  if (invoiceClientSelect) {
+    invoiceClientSelect.innerHTML = options;
+  }
+
+  if (fileClientSelect) {
+    fileClientSelect.innerHTML = options;
+  }
 };
 
+
+/* =========================================================
+   CLIENT LIST
+========================================================= */
+
 const renderClients = () => {
+  if (!clientList) {
+    return;
+  }
+
   clientList.replaceChildren();
 
   if (clientRecords.length === 0) {
-    clientList.innerHTML =
-      '<p class="admin-status">No clients have been added yet.</p>';
+    clientList.innerHTML = `
+      <p class="admin-status">
+        No client accounts were found.
+      </p>
+    `;
+
     return;
   }
 
@@ -259,395 +447,446 @@ const renderClients = () => {
     const item = document.createElement("div");
     item.className = "admin-list-item";
 
-    const info = document.createElement("div");
-    info.className = "admin-list-info";
+    const information = document.createElement("div");
+    information.className = "admin-list-info";
 
     const title = document.createElement("strong");
-    title.textContent =
-      client.fullName ||
-      client.email ||
-      "Client";
+    title.textContent = getClientLabel(client);
 
-    const meta = document.createElement("div");
-    meta.className = "admin-list-meta";
-    meta.textContent = [
+    const details = document.createElement("div");
+    details.className = "admin-list-meta";
+
+    details.textContent = [
       client.email,
       client.businessName,
+      client.phone,
       `UID: ${client.id}`
-    ].filter(Boolean).join(" • ");
-
-    info.append(title, meta);
+    ]
+      .filter(Boolean)
+      .join(" • ");
 
     const badge = document.createElement("span");
     badge.className = "admin-badge";
-    badge.textContent = client.role || "client";
+    badge.textContent = "client";
 
-    item.append(info, badge);
+    information.append(title, details);
+    item.append(information, badge);
+
     clientList.appendChild(item);
   });
 };
 
 
-const linesToArray = (value) => String(value || "")
-  .split(/\r?\n/)
-  .map((item) => item.trim())
-  .filter(Boolean);
-
-const dateInputValue = (value) => {
-  if (!value) return "";
-  const date = typeof value?.toDate === "function" ? value.toDate() : new Date(value);
-  if (Number.isNaN(date.getTime())) return "";
-  return date.toISOString().slice(0, 10);
-};
+/* =========================================================
+   PROJECT LIST
+========================================================= */
 
 const renderProjects = () => {
-  if (!projectList) return;
-  projectList.replaceChildren();
-  if (!projectRecords.length) {
-    projectList.innerHTML = '<p class="admin-status">No projects have been assigned yet.</p>';
+  if (!projectList) {
     return;
   }
+
+  projectList.replaceChildren();
+
+  if (projectRecords.length === 0) {
+    projectList.innerHTML = `
+      <p class="admin-status">
+        No projects have been assigned yet.
+      </p>
+    `;
+
+    return;
+  }
+
   projectRecords.forEach((project) => {
-    const client = clientRecords.find((item) => item.id === project.userId);
+    const client = clientRecords.find(
+      (record) => record.id === project.userId
+    );
+
+    const progress = Math.max(
+      0,
+      Math.min(100, Number(project.progress) || 0)
+    );
+
     const item = document.createElement("div");
     item.className = "admin-list-item";
-    const info = document.createElement("div");
-    info.className = "admin-list-info";
+
+    const information = document.createElement("div");
+    information.className = "admin-list-info";
+
     const title = document.createElement("strong");
-    title.textContent = project.title || "Website Project";
-    const meta = document.createElement("div");
-    meta.className = "admin-list-meta";
-    meta.textContent = [client?.fullName || client?.email || project.userId, project.stage, project.status].filter(Boolean).join(" • ");
+    title.textContent =
+      project.title || "Website Project";
+
+    const details = document.createElement("div");
+    details.className = "admin-list-meta";
+
+    details.textContent = [
+      getClientLabel(client),
+      project.stage,
+      project.status
+    ]
+      .filter(Boolean)
+      .join(" • ");
+
     const date = document.createElement("div");
     date.className = "admin-project-date";
-    date.textContent = project.estimatedCompletion ? `Estimated completion: ${formatDate(project.estimatedCompletion)}` : "No completion date set";
-    info.append(title, meta, date);
+
+    date.textContent = project.estimatedCompletion
+      ? `Estimated completion: ${
+          formatDate(project.estimatedCompletion)
+        }`
+      : "No estimated completion date";
+
+    information.append(title, details, date);
+
     const actions = document.createElement("div");
-    actions.className = "admin-list-actions admin-project-progress";
-    const percent = document.createElement("strong");
-    percent.textContent = `${Math.max(0, Math.min(100, Number(project.progress) || 0))}%`;
-    const track = document.createElement("div");
-    track.className = "admin-progress-track";
-    const fill = document.createElement("div");
-    fill.className = "admin-progress-fill";
-    fill.style.width = `${Math.max(0, Math.min(100, Number(project.progress) || 0))}%`;
-    track.appendChild(fill);
-    const edit = document.createElement("button");
-    edit.type = "button";
-    edit.className = "admin-small-button";
-    edit.textContent = "Edit Project";
-    edit.addEventListener("click", () => {
+    actions.className =
+      "admin-list-actions admin-project-progress";
+
+    const percentage = document.createElement("strong");
+    percentage.textContent = `${progress}%`;
+
+    const progressTrack = document.createElement("div");
+    progressTrack.className = "admin-progress-track";
+
+    const progressFill = document.createElement("div");
+    progressFill.className = "admin-progress-fill";
+    progressFill.style.width = `${progress}%`;
+
+    progressTrack.appendChild(progressFill);
+
+    const editButton = document.createElement("button");
+    editButton.type = "button";
+    editButton.className = "admin-small-button";
+    editButton.textContent = "Edit Project";
+
+    editButton.addEventListener("click", () => {
       setActivePanel("projects");
-      projectClientSelect.value = project.userId;
-      document.getElementById("project-title").value = project.title || "";
-      document.getElementById("project-stage").value = project.stage || "Planning";
-      document.getElementById("project-status").value = project.status || "In Progress";
-      projectProgress.value = String(Number(project.progress) || 0);
-      projectProgressValue.textContent = `${projectProgress.value}%`;
-      document.getElementById("project-start-date").value = dateInputValue(project.startDate);
-      document.getElementById("project-due-date").value = dateInputValue(project.estimatedCompletion);
-      document.getElementById("project-update").value = project.currentUpdate || "";
-      document.getElementById("project-completed").value = (project.completedTasks || []).join("\n");
-      document.getElementById("project-upcoming").value = (project.upcomingTasks || []).join("\n");
-      document.getElementById("project-live-url").value = project.liveUrl || "";
-      projectForm.scrollIntoView({behavior:"smooth", block:"start"});
+
+      projectClientSelect.value = project.userId || "";
+
+      document.getElementById("project-title").value =
+        project.title || "";
+
+      document.getElementById("project-stage").value =
+        project.stage || "Planning";
+
+      document.getElementById("project-status").value =
+        project.status || "In Progress";
+
+      projectProgress.value = progress;
+      projectProgressValue.textContent = `${progress}%`;
+
+      document.getElementById("project-start-date").value =
+        toDateInputValue(project.startDate);
+
+      document.getElementById("project-due-date").value =
+        toDateInputValue(project.estimatedCompletion);
+
+      document.getElementById("project-update").value =
+        project.currentUpdate || "";
+
+      document.getElementById("project-completed").value =
+        Array.isArray(project.completedTasks)
+          ? project.completedTasks.join("\n")
+          : "";
+
+      document.getElementById("project-upcoming").value =
+        Array.isArray(project.upcomingTasks)
+          ? project.upcomingTasks.join("\n")
+          : "";
+
+      document.getElementById("project-live-url").value =
+        project.liveUrl || "";
     });
-    actions.append(percent, track, edit);
-    item.append(info, actions);
+
+    actions.append(
+      percentage,
+      progressTrack,
+      editButton
+    );
+
+    item.append(information, actions);
     projectList.appendChild(item);
   });
 };
 
-const stopProjectWatchers = () => {
-  projectUnsubscribers.forEach((unsubscribe) => unsubscribe());
-  projectUnsubscribers = [];
-  projectsByClient.clear();
-};
 
-const publishProjects = () => {
-  projectRecords = [...projectsByClient.values()].filter(Boolean).sort((a,b) => timestampToMillis(b.updatedAt) - timestampToMillis(a.updatedAt));
-  renderProjects();
-};
-
-const watchProjects = () => {
-  stopProjectWatchers();
-  if (!clientRecords.length) { projectRecords = []; renderProjects(); return; }
-  clientRecords.forEach((client) => {
-    const unsubscribe = onSnapshot(
-      doc(db, "users", client.id, "projects", "website"),
-      (snapshot) => {
-        projectsByClient.set(client.id, snapshot.exists() ? { id: snapshot.id, userId: client.id, ...snapshot.data() } : null);
-        publishProjects();
-      },
-      (error) => {
-        console.error(`Unable to load project for ${client.id}:`, error);
-        projectsByClient.set(client.id, null);
-        publishProjects();
-      }
-    );
-    projectUnsubscribers.push(unsubscribe);
-  });
-};
-
-projectProgress?.addEventListener("input", () => {
-  if (projectProgressValue) projectProgressValue.textContent = `${projectProgress.value}%`;
-});
-
-projectClientSelect?.addEventListener("change", () => {
-  const project = projectRecords.find((item) => item.userId === projectClientSelect.value);
-  if (!project) return;
-  document.getElementById("project-title").value = project.title || "";
-  document.getElementById("project-stage").value = project.stage || "Planning";
-  document.getElementById("project-status").value = project.status || "In Progress";
-  projectProgress.value = String(Number(project.progress) || 0);
-  projectProgressValue.textContent = `${projectProgress.value}%`;
-  document.getElementById("project-start-date").value = dateInputValue(project.startDate);
-  document.getElementById("project-due-date").value = dateInputValue(project.estimatedCompletion);
-  document.getElementById("project-update").value = project.currentUpdate || "";
-  document.getElementById("project-completed").value = (project.completedTasks || []).join("\n");
-  document.getElementById("project-upcoming").value = (project.upcomingTasks || []).join("\n");
-  document.getElementById("project-live-url").value = project.liveUrl || "";
-});
-
-projectForm?.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  hideStatus(projectFormStatus);
-  const userId = projectClientSelect.value;
-  if (!userId || !currentAdmin) return;
-  const start = document.getElementById("project-start-date").value;
-  const due = document.getElementById("project-due-date").value;
-  const submit = projectForm.querySelector('button[type="submit"]');
-  submit.disabled = true;
-  submit.textContent = "Saving...";
-  try {
-    await setDoc(doc(db, "users", userId, "projects", "website"), {
-      title: document.getElementById("project-title").value.trim(),
-      stage: document.getElementById("project-stage").value,
-      status: document.getElementById("project-status").value,
-      progress: Math.max(0, Math.min(100, Number(projectProgress.value) || 0)),
-      startDate: start ? Timestamp.fromDate(new Date(`${start}T12:00:00`)) : null,
-      estimatedCompletion: due ? Timestamp.fromDate(new Date(`${due}T12:00:00`)) : null,
-      currentUpdate: document.getElementById("project-update").value.trim(),
-      completedTasks: linesToArray(document.getElementById("project-completed").value),
-      upcomingTasks: linesToArray(document.getElementById("project-upcoming").value),
-      liveUrl: document.getElementById("project-live-url").value.trim(),
-      updatedAt: serverTimestamp(),
-      updatedBy: currentAdmin.uid,
-      createdAt: projectsByClient.get(userId)?.createdAt || serverTimestamp()
-    }, { merge: true });
-    showStatus(projectFormStatus, "Project update published to the client's portal.", "success");
-  } catch (error) {
-    console.error("Project save failed:", error);
-    showStatus(projectFormStatus, "The project could not be saved. Check your Firestore rules.", "error");
-  } finally {
-    submit.disabled = false;
-    submit.textContent = "Save Project Update";
-  }
-});
+/* =========================================================
+   INVOICE LIST
+========================================================= */
 
 const renderInvoices = () => {
+  if (!invoiceList) {
+    return;
+  }
+
   invoiceList.replaceChildren();
 
   if (invoiceRecords.length === 0) {
-    invoiceList.innerHTML =
-      '<p class="admin-status">No invoices have been created yet.</p>';
+    invoiceList.innerHTML = `
+      <p class="admin-status">
+        No invoices have been created yet.
+      </p>
+    `;
+
     return;
   }
 
   invoiceRecords.forEach((invoice) => {
-    const item = document.createElement("div");
-    item.className = "admin-list-item";
-
-    const info = document.createElement("div");
-    info.className = "admin-list-info";
-
-    const title = document.createElement("strong");
-    title.textContent =
-      `${invoice.invoiceNumber || "Invoice"} — ${formatCurrency(invoice.amount)}`;
-
     const client = clientRecords.find(
       (record) => record.id === invoice.userId
     );
 
-    const meta = document.createElement("div");
-    meta.className = "admin-list-meta";
-    meta.textContent = [
-      client?.fullName || client?.email || invoice.userId,
-      invoice.description,
-      invoice.dueDate ? `Due ${formatDate(invoice.dueDate)}` : ""
-    ].filter(Boolean).join(" • ");
+    const item = document.createElement("div");
+    item.className = "admin-list-item";
 
-    info.append(title, meta);
+    const information = document.createElement("div");
+    information.className = "admin-list-info";
+
+    const title = document.createElement("strong");
+    title.textContent =
+      invoice.invoiceNumber || "Invoice";
+
+    const details = document.createElement("div");
+    details.className = "admin-list-meta";
+
+    details.textContent = [
+      getClientLabel(client),
+      formatCurrency(invoice.amount),
+      invoice.dueDate
+        ? `Due ${formatDate(invoice.dueDate)}`
+        : ""
+    ]
+      .filter(Boolean)
+      .join(" • ");
+
+    information.append(title, details);
 
     const actions = document.createElement("div");
     actions.className = "admin-list-actions";
 
-    const badge = document.createElement("span");
-    badge.className =
-      `admin-badge ${invoice.status === "paid" ? "paid" : ""}`;
-    badge.textContent = invoice.status || "unpaid";
+    const statusBadge = document.createElement("span");
+    statusBadge.className =
+      `admin-badge ${
+        invoice.status === "paid" ? "paid" : ""
+      }`;
 
-    const toggleButton = document.createElement("button");
-    toggleButton.type = "button";
-    toggleButton.className =
-      `admin-small-button ${invoice.status === "paid" ? "" : "success"}`;
-    toggleButton.textContent =
-      invoice.status === "paid" ? "Mark Unpaid" : "Mark Paid";
+    statusBadge.textContent =
+      invoice.status || "unpaid";
 
-    toggleButton.addEventListener("click", async () => {
-      const nextStatus =
-        invoice.status === "paid" ? "unpaid" : "paid";
+    const statusButton = document.createElement("button");
+    statusButton.type = "button";
+    statusButton.className = "admin-small-button";
 
-      toggleButton.disabled = true;
-      toggleButton.textContent = "Updating...";
+    statusButton.textContent =
+      invoice.status === "paid"
+        ? "Mark Unpaid"
+        : "Mark Paid";
 
+    statusButton.addEventListener("click", async () => {
       try {
+        const nextStatus =
+          invoice.status === "paid"
+            ? "unpaid"
+            : "paid";
+
         await updateDoc(
-          doc(db, "users", invoice.userId, "invoices", invoice.id),
+          doc(
+            db,
+            "users",
+            invoice.userId,
+            "invoices",
+            invoice.id
+          ),
           {
             status: nextStatus,
-            updatedAt: serverTimestamp(),
-            paidAt:
-              nextStatus === "paid"
-                ? serverTimestamp()
-                : null,
-            updatedBy: currentAdmin.uid
+            updatedAt: serverTimestamp()
           }
         );
       } catch (error) {
-        console.error("Invoice status update failed:", error);
-        alert("The invoice status could not be updated.");
-      } finally {
-        toggleButton.disabled = false;
+        console.error(
+          "Unable to update invoice:",
+          error
+        );
       }
     });
 
-    actions.append(badge, toggleButton);
-    item.append(info, actions);
+    actions.append(statusBadge, statusButton);
+
+    item.append(information, actions);
     invoiceList.appendChild(item);
   });
 };
+
+
+/* =========================================================
+   STAT CARDS
+========================================================= */
+
 const updateStats = () => {
-  const unpaid = invoiceRecords.filter(
+  const unpaidInvoices = invoiceRecords.filter(
     (invoice) => invoice.status !== "paid"
   );
 
-  const paid = invoiceRecords.filter(
+  const paidInvoices = invoiceRecords.filter(
     (invoice) => invoice.status === "paid"
   );
 
-  const outstanding = unpaid.reduce(
-    (total, invoice) => total + (Number(invoice.amount) || 0),
+  const outstandingBalance = unpaidInvoices.reduce(
+    (total, invoice) => {
+      return total + (Number(invoice.amount) || 0);
+    },
     0
   );
 
-  statClients.textContent = String(clientRecords.length);
-  statUnpaid.textContent = String(unpaid.length);
-  statPaid.textContent = String(paid.length);
-  statBalance.textContent = formatCurrency(outstanding);
-};
+  if (statClients) {
+    statClients.textContent = String(clientRecords.length);
+  }
 
+  if (statUnpaid) {
+    statUnpaid.textContent = String(unpaidInvoices.length);
+  }
 
-const timestampToMillis = (value) => {
-  if (!value) return 0;
-  if (typeof value?.toMillis === "function") return value.toMillis();
-  const parsed = new Date(value).getTime();
-  return Number.isNaN(parsed) ? 0 : parsed;
-};
+  if (statPaid) {
+    statPaid.textContent = String(paidInvoices.length);
+  }
 
-const notifyDevice = (title, body) => {
-  if (
-    "Notification" in window &&
-    Notification.permission === "granted" &&
-    document.visibilityState !== "visible"
-  ) {
-    new Notification(title, { body });
+  if (statBalance) {
+    statBalance.textContent =
+      formatCurrency(outstandingBalance);
   }
 };
 
-const rebuildActivity = () => {
-  const clientActivity = clientRecords.map((client) => ({
-    id: `client-${client.id}`,
-    type: "client",
-    title: "New client account",
-    detail:
-      client.fullName ||
-      client.email ||
-      "A client account was created.",
-    createdAt: client.createdAt,
-    time: timestampToMillis(client.createdAt)
-  }));
 
-  const invoiceActivity = invoiceRecords.map((invoice) => ({
-    id: `invoice-${invoice.userId}-${invoice.id}-${invoice.status}`,
-    type: "invoice",
-    title:
-      invoice.status === "paid"
-        ? "Invoice marked paid"
-        : "Invoice created",
-    detail:
-      `${invoice.invoiceNumber || "Invoice"} — ${formatCurrency(invoice.amount)}`,
-    createdAt: invoice.updatedAt || invoice.createdAt,
-    time: timestampToMillis(invoice.updatedAt || invoice.createdAt)
-  }));
+/* =========================================================
+   NOTIFICATIONS
+========================================================= */
 
-  activityRecords = [...clientActivity, ...invoiceActivity]
-    .sort((a, b) => b.time - a.time)
-    .slice(0, 30);
-
-  renderActivity();
+const getLastNotificationSeenTime = () => {
+  return Number(
+    localStorage.getItem(
+      "bamAdminNotificationsSeenAt"
+    )
+  ) || 0;
 };
 
-const renderActivity = () => {
-  if (!notificationList) return;
+const buildActivityRecords = () => {
+  const activities = [];
 
-  notificationList.replaceChildren();
+  clientRecords.forEach((client) => {
+    activities.push({
+      title: "Client account",
+      detail: `${getClientLabel(client)} is registered.`,
+      createdAt: client.createdAt,
+      time: getTimestampNumber(client.createdAt)
+    });
+  });
 
-  if (activityRecords.length === 0) {
-    notificationList.innerHTML =
-      '<p class="admin-status">No recent activity yet.</p>';
-    if (notificationCount) notificationCount.hidden = true;
+  projectRecords.forEach((project) => {
+    const client = clientRecords.find(
+      (record) => record.id === project.userId
+    );
+
+    activities.push({
+      title: "Project update",
+      detail:
+        `${project.title || "Website Project"} for ` +
+        `${getClientLabel(client)} is ${project.progress || 0}% complete.`,
+      createdAt: project.updatedAt || project.createdAt,
+      time: getTimestampNumber(
+        project.updatedAt || project.createdAt
+      )
+    });
+  });
+
+  invoiceRecords.forEach((invoice) => {
+    const client = clientRecords.find(
+      (record) => record.id === invoice.userId
+    );
+
+    activities.push({
+      title:
+        invoice.status === "paid"
+          ? "Invoice paid"
+          : "Invoice created",
+      detail:
+        `${invoice.invoiceNumber || "Invoice"} for ` +
+        `${getClientLabel(client)} — ` +
+        `${formatCurrency(invoice.amount)}.`,
+      createdAt: invoice.updatedAt || invoice.createdAt,
+      time: getTimestampNumber(
+        invoice.updatedAt || invoice.createdAt
+      )
+    });
+  });
+
+  return activities.sort(
+    (first, second) => second.time - first.time
+  );
+};
+
+const renderNotifications = () => {
+  if (!notificationList) {
     return;
   }
 
-  const lastSeen =
-    Number(localStorage.getItem("bamAdminNotificationsSeenAt")) || 0;
+  const activities = buildActivityRecords();
+  const lastSeen = getLastNotificationSeenTime();
 
-  const unread = activityRecords.filter(
+  const unreadCount = activities.filter(
     (activity) => activity.time > lastSeen
   ).length;
 
   if (notificationCount) {
-    notificationCount.textContent = String(unread);
-    notificationCount.hidden = unread === 0;
+    notificationCount.textContent =
+      String(unreadCount);
+
+    notificationCount.hidden =
+      unreadCount === 0;
   }
 
-  activityRecords.forEach((activity) => {
+  notificationList.replaceChildren();
+
+  if (activities.length === 0) {
+    notificationList.innerHTML = `
+      <p class="admin-status">
+        There is no recent activity.
+      </p>
+    `;
+
+    return;
+  }
+
+  activities.forEach((activity) => {
     const item = document.createElement("div");
+
     item.className =
       `admin-list-item admin-notification-item ${
         activity.time > lastSeen ? "unread" : ""
       }`;
 
-    const info = document.createElement("div");
-    info.className = "admin-list-info";
+    const information = document.createElement("div");
+    information.className = "admin-list-info";
 
     const title = document.createElement("strong");
     title.textContent = activity.title;
 
-    const detail = document.createElement("div");
-    detail.className = "admin-list-meta";
-    detail.textContent = activity.detail;
+    const details = document.createElement("div");
+    details.className = "admin-list-meta";
+    details.textContent = activity.detail;
 
-    const time = document.createElement("div");
-    time.className = "admin-notification-time";
-    time.textContent =
-      activity.createdAt
-        ? formatDate(activity.createdAt)
-        : "Recent activity";
+    const date = document.createElement("div");
+    date.className = "admin-notification-time";
 
-    info.append(title, detail, time);
-    item.append(info);
+    date.textContent = activity.createdAt
+      ? formatDate(activity.createdAt)
+      : "Recent activity";
+
+    information.append(title, details, date);
+    item.appendChild(information);
+
     notificationList.appendChild(item);
   });
 };
@@ -658,124 +897,168 @@ const markNotificationsSeen = () => {
     String(Date.now())
   );
 
-  renderActivity();
+  renderNotifications();
 };
 
-enableBrowserNotificationsButton?.addEventListener("click", async () => {
-  if (!("Notification" in window)) {
-    notificationStatus.textContent =
-      "This browser does not support device notifications.";
+const sendDeviceNotification = (
+  title,
+  message
+) => {
+  if (
+    !("Notification" in window) ||
+    Notification.permission !== "granted"
+  ) {
     return;
   }
 
-  const permission = await Notification.requestPermission();
-
-  notificationStatus.textContent =
-    permission === "granted"
-      ? "Phone/browser notifications are enabled while this dashboard is open."
-      : "Notification permission was not granted.";
-});
-
-const watchClients = () => {
-  const clientsQuery = collection(db, "users");
-
-  return onSnapshot(
-    clientsQuery,
-    (snapshot) => {
-      clientRecords = snapshot.docs
-        .map((item) => ({
-          id: item.id,
-          ...item.data()
-        }))
-        .filter(
-          (record) =>
-            String(record.role || "").trim().toLowerCase() === "client"
-        )
-        .sort((firstClient, secondClient) => {
-          const firstLabel =
-            firstClient.fullName ||
-            firstClient.email ||
-            firstClient.id;
-
-          const secondLabel =
-            secondClient.fullName ||
-            secondClient.email ||
-            secondClient.id;
-
-          return firstLabel.localeCompare(secondLabel);
-        });
-
-      renderClients();
-      buildClientOptions();
-      watchInvoices();
-      watchProjects();
-      renderInvoices();
-      updateStats();
-      rebuildActivity();
-
-      if (firstInvoiceSnapshotLoaded) {
-        snapshot.docChanges().forEach((change) => {
-          if (change.type === "modified") {
-            const data = change.doc.data();
-            if (data.status === "paid") {
-              notifyDevice(
-                "Invoice paid",
-                `${data.invoiceNumber || "Invoice"} was marked paid.`
-              );
-            }
-          }
-        });
-      }
-
-      firstInvoiceSnapshotLoaded = true;
-      rebuildActivity();
-
-      if (firstClientSnapshotLoaded) {
-        snapshot.docChanges().forEach((change) => {
-          if (change.type === "added") {
-            const data = change.doc.data();
-            if (data.role !== "admin") {
-              notifyDevice(
-                "New client registered",
-                data.fullName || data.email || "A new client joined."
-              );
-            }
-          }
-        });
-      }
-
-      firstClientSnapshotLoaded = true;
-    },
-    (error) => {
-      console.error("Unable to load clients:", error);
-      clientList.innerHTML =
-        '<p class="admin-status error">Clients could not be loaded.</p>';
-    }
-  );
+  new Notification(title, {
+    body: message,
+    icon: "images/icon-dark.jpg"
+  });
 };
 
-const stopInvoiceWatchers = () => {
-  invoiceUnsubscribers.forEach((unsubscribe) => unsubscribe());
-  invoiceUnsubscribers = [];
+enableNotificationsButton?.addEventListener(
+  "click",
+  async () => {
+    if (!("Notification" in window)) {
+      if (notificationStatus) {
+        notificationStatus.textContent =
+          "This browser does not support notifications.";
+      }
+
+      return;
+    }
+
+    try {
+      const permission =
+        await Notification.requestPermission();
+
+      if (notificationStatus) {
+        notificationStatus.textContent =
+          permission === "granted"
+            ? "Browser notifications are enabled."
+            : "Notification permission was not granted.";
+      }
+    } catch (error) {
+      console.error(
+        "Notification permission failed:",
+        error
+      );
+    }
+  }
+);
+
+
+/* =========================================================
+   PROJECT FIRESTORE LISTENERS
+========================================================= */
+
+const stopProjectListeners = () => {
+  projectListeners.forEach((unsubscribe) => {
+    unsubscribe();
+  });
+
+  projectListeners = [];
+  projectsByClient.clear();
+};
+
+const publishProjects = () => {
+  projectRecords = [
+    ...projectsByClient.values()
+  ]
+    .filter(Boolean)
+    .sort((first, second) => {
+      return (
+        getTimestampNumber(second.updatedAt) -
+        getTimestampNumber(first.updatedAt)
+      );
+    });
+
+  renderProjects();
+  renderNotifications();
+};
+
+const watchProjects = () => {
+  stopProjectListeners();
+
+  if (clientRecords.length === 0) {
+    projectRecords = [];
+    publishProjects();
+    return;
+  }
+
+  clientRecords.forEach((client) => {
+    const projectReference = doc(
+      db,
+      "users",
+      client.id,
+      "projects",
+      "current"
+    );
+
+    const unsubscribe = onSnapshot(
+      projectReference,
+      (snapshot) => {
+        if (snapshot.exists()) {
+          projectsByClient.set(client.id, {
+            id: snapshot.id,
+            userId: client.id,
+            ...snapshot.data()
+          });
+        } else {
+          projectsByClient.delete(client.id);
+        }
+
+        publishProjects();
+      },
+      (error) => {
+        console.error(
+          `Unable to load project for ${client.id}:`,
+          error
+        );
+
+        projectsByClient.delete(client.id);
+        publishProjects();
+      }
+    );
+
+    projectListeners.push(unsubscribe);
+  });
+};
+
+
+/* =========================================================
+   INVOICE FIRESTORE LISTENERS
+========================================================= */
+
+const stopInvoiceListeners = () => {
+  invoiceListeners.forEach((unsubscribe) => {
+    unsubscribe();
+  });
+
+  invoiceListeners = [];
   invoicesByClient.clear();
 };
 
 const publishInvoices = () => {
-  invoiceRecords = [...invoicesByClient.values()]
+  invoiceRecords = [
+    ...invoicesByClient.values()
+  ]
     .flat()
-    .sort((a, b) => {
-      const aTime = typeof a.createdAt?.toMillis === "function" ? a.createdAt.toMillis() : 0;
-      const bTime = typeof b.createdAt?.toMillis === "function" ? b.createdAt.toMillis() : 0;
-      return bTime - aTime;
+    .sort((first, second) => {
+      return (
+        getTimestampNumber(second.createdAt) -
+        getTimestampNumber(first.createdAt)
+      );
     });
 
   renderInvoices();
   updateStats();
-  rebuildActivity();
+  renderNotifications();
 };
 
 const watchInvoices = () => {
-  stopInvoiceWatchers();
+  stopInvoiceListeners();
 
   if (clientRecords.length === 0) {
     invoiceRecords = [];
@@ -784,241 +1067,681 @@ const watchInvoices = () => {
   }
 
   clientRecords.forEach((client) => {
-    const invoicesQuery = query(
-      collection(db, "users", client.id, "invoices"),
-      orderBy("createdAt", "desc")
+    const invoiceCollection = collection(
+      db,
+      "users",
+      client.id,
+      "invoices"
     );
 
     const unsubscribe = onSnapshot(
-      invoicesQuery,
+      invoiceCollection,
       (snapshot) => {
-        invoicesByClient.set(
-          client.id,
-          snapshot.docs.map((item) => ({
-            id: item.id,
+        const records = snapshot.docs.map(
+          (invoiceDocument) => ({
+            id: invoiceDocument.id,
             userId: client.id,
-            ...item.data()
-          }))
+            ...invoiceDocument.data()
+          })
         );
+
+        invoicesByClient.set(client.id, records);
         publishInvoices();
       },
       (error) => {
-        console.error(`Unable to load invoices for ${client.id}:`, error);
+        console.error(
+          `Unable to load invoices for ${client.id}:`,
+          error
+        );
+
         invoicesByClient.set(client.id, []);
         publishInvoices();
       }
     );
 
-    invoiceUnsubscribers.push(unsubscribe);
+    invoiceListeners.push(unsubscribe);
   });
 };
 
-clientForm?.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  hideStatus(clientFormStatus);
 
-  const uid = document.getElementById("client-uid").value.trim();
-  const fullName = document.getElementById("client-name").value.trim();
-  const email = document.getElementById("client-email").value.trim();
-  const businessName = document.getElementById("client-business").value.trim();
-  const phone = document.getElementById("client-phone").value.trim();
+/* =========================================================
+   CLIENT FIRESTORE LISTENER
+========================================================= */
 
-  try {
-    await setDoc(
-      doc(db, "users", uid),
-      {
-        uid,
-        fullName,
-        email,
-        businessName,
-        phone,
-        role: "client",
-        updatedAt: serverTimestamp(),
-        createdAt: serverTimestamp()
-      },
-      { merge: true }
-    );
+const watchClients = () => {
+  const clientsCollection =
+    collection(db, "users");
 
-    clientForm.reset();
-    showStatus(
-      clientFormStatus,
-      "Client profile saved successfully.",
-      "success"
-    );
-  } catch (error) {
-    console.error("Client save failed:", error);
-    showStatus(
-      clientFormStatus,
-      "The client could not be saved.",
-      "error"
-    );
-  }
-});
+  return onSnapshot(
+    clientsCollection,
 
-invoiceForm?.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  hideStatus(invoiceFormStatus);
+    (snapshot) => {
+      const previousClientIds =
+        new Set(clientRecords.map((client) => client.id));
 
-  const userId = invoiceClientSelect.value;
-  const invoiceNumber =
-    document.getElementById("invoice-number").value.trim();
+      clientRecords = snapshot.docs
+        .map((clientDocument) => ({
+          id: clientDocument.id,
+          ...clientDocument.data()
+        }))
+        .filter((record) => {
+          return (
+            String(record.role || "")
+              .trim()
+              .toLowerCase() === "client"
+          );
+        })
+        .sort((firstClient, secondClient) => {
+          return getClientLabel(firstClient)
+            .localeCompare(
+              getClientLabel(secondClient)
+            );
+        });
 
-  const amount =
-    Number(document.getElementById("invoice-amount").value);
+      renderClients();
+      buildClientOptions();
+      updateStats();
 
-  const dueDateValue =
-    document.getElementById("invoice-due-date").value;
+      watchProjects();
+      watchInvoices();
 
-  const description =
-    document.getElementById("invoice-description").value.trim();
-
-  const pdfUrl =
-    document.getElementById("invoice-pdf-url").value.trim();
-
-  try {
-    await addDoc(
-      collection(db, "users", userId, "invoices"),
-      {
-        invoiceNumber,
-        amount,
-        currency: "USD",
-        dueDate: Timestamp.fromDate(
-          new Date(`${dueDateValue}T12:00:00`)
-        ),
-        description,
-        pdfUrl,
-        status: "unpaid",
-        createdAt: serverTimestamp(),
-        updatedAt: serverTimestamp(),
-        createdBy: currentAdmin.uid
+      if (firstClientSnapshotLoaded) {
+        clientRecords.forEach((client) => {
+          if (!previousClientIds.has(client.id)) {
+            sendDeviceNotification(
+              "New client registered",
+              `${getClientLabel(client)} joined your portal.`
+            );
+          }
+        });
       }
-    );
 
-    invoiceForm.reset();
-    showStatus(
-      invoiceFormStatus,
-      "Invoice created successfully.",
-      "success"
-    );
-  } catch (error) {
-    console.error("Invoice creation failed:", error);
-    showStatus(
-      invoiceFormStatus,
-      "The invoice could not be created.",
-      "error"
-    );
-  }
-});
+      firstClientSnapshotLoaded = true;
 
-adminFileForm?.addEventListener("submit", (event) => {
-  event.preventDefault();
-  hideStatus(fileFormStatus);
+      renderNotifications();
+    },
 
-  const userId = fileClientSelect.value;
-  const fileInput = document.getElementById("admin-file-input");
-  const file = fileInput.files?.[0];
+    (error) => {
+      console.error(
+        "Unable to load clients:",
+        error
+      );
 
-  if (!userId || !file) {
-    showStatus(
-      fileFormStatus,
-      "Choose a client and a file.",
-      "error"
-    );
-    return;
-  }
-
-  if (file.size > 15 * 1024 * 1024) {
-    showStatus(
-      fileFormStatus,
-      "The file must be 15 MB or smaller.",
-      "error"
-    );
-    return;
-  }
-
-  const cleanName = file.name
-    .trim()
-    .replace(/\s+/g, "-")
-    .replace(/[^a-zA-Z0-9._-]/g, "");
-
-  const storageRef = ref(
-    storage,
-    `users/${userId}/uploads/${Date.now()}-${cleanName}`
-  );
-
-  const uploadTask = uploadBytesResumable(
-    storageRef,
-    file,
-    {
-      contentType: file.type || "application/octet-stream",
-      customMetadata: {
-        originalName: file.name,
-        uploadedBy: currentAdmin.uid,
-        uploadedFor: userId
+      if (clientList) {
+        clientList.innerHTML = `
+          <p class="admin-status error">
+            Clients could not be loaded.
+            <br><br>
+            ${escapeHtml(error.message)}
+          </p>
+        `;
       }
     }
   );
+};
 
-  uploadProgress.hidden = false;
-  uploadProgress.value = 0;
 
-  uploadTask.on(
-    "state_changed",
-    (snapshot) => {
-      uploadProgress.value = Math.round(
-        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-      );
-    },
-    (error) => {
-      console.error("Admin upload failed:", error);
-      uploadProgress.hidden = true;
+/* =========================================================
+   PROJECT PROGRESS SLIDER
+========================================================= */
+
+projectProgress?.addEventListener("input", () => {
+  if (projectProgressValue) {
+    projectProgressValue.textContent =
+      `${projectProgress.value}%`;
+  }
+});
+
+
+/* =========================================================
+   SAVE CLIENT
+========================================================= */
+
+clientForm?.addEventListener(
+  "submit",
+  async (event) => {
+    event.preventDefault();
+    hideStatus(clientFormStatus);
+
+    const uid =
+      document.getElementById("client-uid")
+        .value.trim();
+
+    const fullName =
+      document.getElementById("client-name")
+        .value.trim();
+
+    const email =
+      document.getElementById("client-email")
+        .value.trim();
+
+    const businessName =
+      document.getElementById("client-business")
+        .value.trim();
+
+    const phone =
+      document.getElementById("client-phone")
+        .value.trim();
+
+    if (!uid || !fullName || !email) {
       showStatus(
-        fileFormStatus,
-        "The file could not be uploaded.",
+        clientFormStatus,
+        "Enter the Firebase UID, name, and email.",
         "error"
       );
-    },
-    () => {
-      adminFileForm.reset();
-      uploadProgress.hidden = true;
-      showStatus(
-        fileFormStatus,
-        "File uploaded to the client's portal.",
-        "success"
-      );
-    }
-  );
-});
 
-logoutButton?.addEventListener("click", async () => {
-  await signOut(auth);
-  window.location.replace("login.html");
-});
-
-onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    window.location.replace(
-      `login.html?next=${encodeURIComponent("admin-dashboard.html")}`
-    );
-    return;
-  }
-
-  try {
-    const snapshot = await getDoc(doc(db, "users", user.uid));
-    const profile = snapshot.exists() ? snapshot.data() : {};
-
-    if (String(profile.role || "").trim().toLowerCase() !== "admin") {
-      window.location.replace("client-portal.html");
       return;
     }
 
-    currentAdmin = user;
-    document.documentElement.style.visibility = "visible";
-    adminEmail.textContent = user.email || "Administrator";
+    try {
+      const existingProfile = await getDoc(
+        doc(db, "users", uid)
+      );
 
-    watchClients();
-  } catch (error) {
-    console.error("Admin verification failed:", error);
-    window.location.replace("client-portal.html");
+      await setDoc(
+        doc(db, "users", uid),
+        {
+          uid,
+          fullName,
+          email,
+          businessName,
+          phone,
+          role: "client",
+          updatedAt: serverTimestamp(),
+          ...(
+            existingProfile.exists()
+              ? {}
+              : { createdAt: serverTimestamp() }
+          )
+        },
+        {
+          merge: true
+        }
+      );
+
+      clientForm.reset();
+
+      showStatus(
+        clientFormStatus,
+        "Client profile saved successfully.",
+        "success"
+      );
+    } catch (error) {
+      console.error(
+        "Client save failed:",
+        error
+      );
+
+      showStatus(
+        clientFormStatus,
+        error.message ||
+          "The client could not be saved.",
+        "error"
+      );
+    }
   }
-});
+);
+
+
+/* =========================================================
+   SAVE PROJECT
+========================================================= */
+
+projectForm?.addEventListener(
+  "submit",
+  async (event) => {
+    event.preventDefault();
+    hideStatus(projectFormStatus);
+
+    const userId = projectClientSelect.value;
+
+    const title =
+      document.getElementById("project-title")
+        .value.trim();
+
+    const stage =
+      document.getElementById("project-stage")
+        .value;
+
+    const status =
+      document.getElementById("project-status")
+        .value;
+
+    const progress =
+      Math.max(
+        0,
+        Math.min(
+          100,
+          Number(projectProgress.value) || 0
+        )
+      );
+
+    const startDateValue =
+      document.getElementById("project-start-date")
+        .value;
+
+    const dueDateValue =
+      document.getElementById("project-due-date")
+        .value;
+
+    const currentUpdate =
+      document.getElementById("project-update")
+        .value.trim();
+
+    const completedTasks =
+      linesToArray(
+        document.getElementById("project-completed")
+          .value
+      );
+
+    const upcomingTasks =
+      linesToArray(
+        document.getElementById("project-upcoming")
+          .value
+      );
+
+    const liveUrl =
+      document.getElementById("project-live-url")
+        .value.trim();
+
+    if (!userId || !title) {
+      showStatus(
+        projectFormStatus,
+        "Choose a client and enter the project name.",
+        "error"
+      );
+
+      return;
+    }
+
+    const projectReference = doc(
+      db,
+      "users",
+      userId,
+      "projects",
+      "current"
+    );
+
+    try {
+      const existingProject =
+        await getDoc(projectReference);
+
+      const projectData = {
+        title,
+        stage,
+        status,
+        progress,
+        currentUpdate,
+        completedTasks,
+        upcomingTasks,
+        liveUrl,
+        updatedAt: serverTimestamp(),
+        updatedBy: currentAdmin.uid
+      };
+
+      if (startDateValue) {
+        projectData.startDate =
+          Timestamp.fromDate(
+            new Date(`${startDateValue}T12:00:00`)
+          );
+      }
+
+      if (dueDateValue) {
+        projectData.estimatedCompletion =
+          Timestamp.fromDate(
+            new Date(`${dueDateValue}T12:00:00`)
+          );
+      }
+
+      if (!existingProject.exists()) {
+        projectData.createdAt =
+          serverTimestamp();
+      }
+
+      await setDoc(
+        projectReference,
+        projectData,
+        {
+          merge: true
+        }
+      );
+
+      showStatus(
+        projectFormStatus,
+        "Project update saved successfully.",
+        "success"
+      );
+
+      sendDeviceNotification(
+        "Project updated",
+        `${title} is now ${progress}% complete.`
+      );
+    } catch (error) {
+      console.error(
+        "Project update failed:",
+        error
+      );
+
+      showStatus(
+        projectFormStatus,
+        error.message ||
+          "The project could not be saved.",
+        "error"
+      );
+    }
+  }
+);
+
+
+/* =========================================================
+   CREATE INVOICE
+========================================================= */
+
+invoiceForm?.addEventListener(
+  "submit",
+  async (event) => {
+    event.preventDefault();
+    hideStatus(invoiceFormStatus);
+
+    const userId = invoiceClientSelect.value;
+
+    const invoiceNumber =
+      document.getElementById("invoice-number")
+        .value.trim();
+
+    const amount =
+      Number(
+        document.getElementById("invoice-amount")
+          .value
+      );
+
+    const dueDateValue =
+      document.getElementById("invoice-due-date")
+        .value;
+
+    const description =
+      document.getElementById("invoice-description")
+        .value.trim();
+
+    const pdfUrl =
+      document.getElementById("invoice-pdf-url")
+        .value.trim();
+
+    if (
+      !userId ||
+      !invoiceNumber ||
+      !amount ||
+      !dueDateValue
+    ) {
+      showStatus(
+        invoiceFormStatus,
+        "Complete all required invoice fields.",
+        "error"
+      );
+
+      return;
+    }
+
+    try {
+      await addDoc(
+        collection(
+          db,
+          "users",
+          userId,
+          "invoices"
+        ),
+        {
+          invoiceNumber,
+          amount,
+          currency: "USD",
+          dueDate: Timestamp.fromDate(
+            new Date(`${dueDateValue}T12:00:00`)
+          ),
+          description,
+          pdfUrl,
+          status: "unpaid",
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp(),
+          createdBy: currentAdmin.uid
+        }
+      );
+
+      invoiceForm.reset();
+
+      showStatus(
+        invoiceFormStatus,
+        "Invoice created successfully.",
+        "success"
+      );
+
+      sendDeviceNotification(
+        "Invoice created",
+        `${invoiceNumber} was created for ${formatCurrency(amount)}.`
+      );
+    } catch (error) {
+      console.error(
+        "Invoice creation failed:",
+        error
+      );
+
+      showStatus(
+        invoiceFormStatus,
+        error.message ||
+          "The invoice could not be created.",
+        "error"
+      );
+    }
+  }
+);
+
+
+/* =========================================================
+   UPLOAD CLIENT FILE
+========================================================= */
+
+fileForm?.addEventListener(
+  "submit",
+  (event) => {
+    event.preventDefault();
+    hideStatus(fileFormStatus);
+
+    const userId = fileClientSelect.value;
+
+    const fileInput =
+      document.getElementById("admin-file-input");
+
+    const file = fileInput.files?.[0];
+
+    if (!userId || !file) {
+      showStatus(
+        fileFormStatus,
+        "Choose a client and a file.",
+        "error"
+      );
+
+      return;
+    }
+
+    if (file.size > 15 * 1024 * 1024) {
+      showStatus(
+        fileFormStatus,
+        "The file must be 15 MB or smaller.",
+        "error"
+      );
+
+      return;
+    }
+
+    const cleanFileName = file.name
+      .trim()
+      .replace(/\s+/g, "-")
+      .replace(/[^a-zA-Z0-9._-]/g, "");
+
+    const storageReference = ref(
+      storage,
+      `users/${userId}/uploads/` +
+      `${Date.now()}-${cleanFileName}`
+    );
+
+    const uploadTask = uploadBytesResumable(
+      storageReference,
+      file,
+      {
+        contentType:
+          file.type ||
+          "application/octet-stream",
+
+        customMetadata: {
+          originalName: file.name,
+          uploadedBy: currentAdmin.uid,
+          uploadedFor: userId
+        }
+      }
+    );
+
+    if (fileUploadProgress) {
+      fileUploadProgress.hidden = false;
+      fileUploadProgress.value = 0;
+    }
+
+    uploadTask.on(
+      "state_changed",
+
+      (snapshot) => {
+        const percentage = Math.round(
+          (
+            snapshot.bytesTransferred /
+            snapshot.totalBytes
+          ) * 100
+        );
+
+        if (fileUploadProgress) {
+          fileUploadProgress.value = percentage;
+        }
+
+        showStatus(
+          fileFormStatus,
+          `Uploading file: ${percentage}%`
+        );
+      },
+
+      (error) => {
+        console.error(
+          "File upload failed:",
+          error
+        );
+
+        if (fileUploadProgress) {
+          fileUploadProgress.hidden = true;
+        }
+
+        showStatus(
+          fileFormStatus,
+          error.message ||
+            "The file could not be uploaded.",
+          "error"
+        );
+      },
+
+      () => {
+        fileForm.reset();
+
+        if (fileUploadProgress) {
+          fileUploadProgress.hidden = true;
+          fileUploadProgress.value = 0;
+        }
+
+        showStatus(
+          fileFormStatus,
+          "File uploaded to the client portal.",
+          "success"
+        );
+
+        sendDeviceNotification(
+          "Client file uploaded",
+          `${file.name} was uploaded successfully.`
+        );
+      }
+    );
+  }
+);
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+logoutButton?.addEventListener(
+  "click",
+  async () => {
+    try {
+      await signOut(auth);
+      window.location.replace("login.html");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  }
+);
+
+
+/* =========================================================
+   ADMIN AUTHENTICATION
+========================================================= */
+
+onAuthStateChanged(
+  auth,
+  async (user) => {
+    if (!user) {
+      window.location.replace(
+        `login.html?next=${encodeURIComponent(
+          "admin-dashboard.html"
+        )}`
+      );
+
+      return;
+    }
+
+    try {
+      const profileSnapshot = await getDoc(
+        doc(db, "users", user.uid)
+      );
+
+      const profile = profileSnapshot.exists()
+        ? profileSnapshot.data()
+        : {};
+
+      const role = String(profile.role || "")
+        .trim()
+        .toLowerCase();
+
+      if (role !== "admin") {
+        window.location.replace(
+          "client-portal.html"
+        );
+
+        return;
+      }
+
+      currentAdmin = user;
+
+      if (adminEmail) {
+        adminEmail.textContent =
+          user.email || "Administrator";
+      }
+
+      document.documentElement.style.visibility =
+        "visible";
+
+      watchClients();
+    } catch (error) {
+      console.error(
+        "Admin verification failed:",
+        error
+      );
+
+      window.location.replace(
+        "client-portal.html"
+      );
+    }
+  }
+);
