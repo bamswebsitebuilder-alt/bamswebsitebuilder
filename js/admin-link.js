@@ -40,7 +40,7 @@ onAuthStateChanged(auth, async (user) => {
       ? userSnapshot.data()
       : {};
 
-    if (profile.role === "admin") {
+    if (String(profile.role || "").trim().toLowerCase() === "admin") {
       showAdminLinks();
     } else {
       hideAdminLinks();

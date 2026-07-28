@@ -1,3 +1,5 @@
+document.documentElement.style.visibility = "hidden";
+
 import { auth, db, storage } from "./firebase-config.js";
 
 import {
@@ -791,12 +793,13 @@ onAuthStateChanged(auth, async (user) => {
     const snapshot = await getDoc(doc(db, "users", user.uid));
     const profile = snapshot.exists() ? snapshot.data() : {};
 
-    if (profile.role !== "admin") {
+    if (String(profile.role || "").trim().toLowerCase() !== "admin") {
       window.location.replace("client-portal.html");
       return;
     }
 
     currentAdmin = user;
+    document.documentElement.style.visibility = "visible";
     adminEmail.textContent = user.email || "Administrator";
 
     watchClients();
