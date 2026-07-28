@@ -1,0 +1,1 @@
+Working Build 01: adds custom SVG navigation icons, animated hamburger morph, accessible scroll reveal, premium hover motion, and reduced-motion support. Existing Firebase/auth/portal/admin logic is preserved.
