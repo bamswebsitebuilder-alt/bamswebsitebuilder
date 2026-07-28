@@ -152,7 +152,11 @@ if (loginForm) {
 const registerForm = document.getElementById("register-form");
 
 if (registerForm) {
-  const fullNameInput = document.getElementById("register-name");
+  const firstNameInput = document.getElementById("first-name");
+  const lastNameInput = document.getElementById("last-name");
+  const businessNameInput = document.getElementById("business-name");
+  const phoneInput = document.getElementById("phone");
+  const confirmPasswordInput = document.getElementById("confirm-password");
   const emailInput = document.getElementById("register-email");
   const passwordInput = document.getElementById("register-password");
   const alert = document.getElementById("register-alert");
@@ -167,6 +171,11 @@ if (registerForm) {
       return;
     }
 
+    if (passwordInput.value !== confirmPasswordInput?.value) {
+      setAlert(alert, "The passwords do not match.");
+      return;
+    }
+
     setBusy(submit, true, "Creating Account...");
 
     try {
@@ -176,7 +185,11 @@ if (registerForm) {
         passwordInput.value
       );
 
-      const fullName = fullNameInput?.value.trim() || "";
+      const firstName = firstNameInput?.value.trim() || "";
+      const lastName = lastNameInput?.value.trim() || "";
+      const fullName = `${firstName} ${lastName}`.trim();
+      const businessName = businessNameInput?.value.trim() || "";
+      const phone = phoneInput?.value.trim() || "";
 
       if (fullName) {
         await updateProfile(credential.user, { displayName: fullName });
@@ -185,7 +198,11 @@ if (registerForm) {
       await setDoc(
         doc(db, "users", credential.user.uid),
         {
+          firstName,
+          lastName,
           fullName,
+          businessName,
+          phone,
           email: credential.user.email || emailInput.value.trim(),
           role: "client",
           createdAt: serverTimestamp(),
@@ -204,6 +221,7 @@ if (registerForm) {
 }
 
 const resetForm =
+  document.getElementById("forgot-form") ||
   document.getElementById("forgot-password-form") ||
   document.getElementById("reset-form");
 
@@ -212,6 +230,7 @@ if (resetForm) {
     document.getElementById("forgot-email") ||
     document.getElementById("reset-email");
   const alert =
+    document.getElementById("reset-message") ||
     document.getElementById("forgot-alert") ||
     document.getElementById("reset-alert");
   const submit =
