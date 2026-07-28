@@ -273,16 +273,22 @@ form?.addEventListener("submit", async (event) => {
     await addDoc(collection(db, "users", selectedClient.id, "messages"), {
       sender: "admin",
       senderId: currentAdmin.uid,
+      recipientId: selectedClient.id,
       text,
       seen: false,
+      createdAt: serverTimestamp(),
       timestamp: serverTimestamp()
     });
 
-    await updateDoc(doc(db, "users", selectedClient.id), {
+    // This summary update is optional. A failed summary update must not make
+    // the successfully created message appear to have failed.
+    updateDoc(doc(db, "users", selectedClient.id), {
       lastMessage: text,
       lastMessageAt: serverTimestamp(),
       unreadByClient: Number(selectedClient.unreadByClient || 0) + 1
-    }).catch(console.error);
+    }).catch((summaryError) => {
+      console.warn("Message sent, but client summary was not updated:", summaryError);
+    });
 
     textInput.value = "";
     textInput.focus();
@@ -290,7 +296,15 @@ form?.addEventListener("submit", async (event) => {
     setTimeout(clearStatus, 1800);
   } catch (error) {
     console.error("Send message error:", error);
-    showStatus("The message could not be sent.", true);
+
+    const code = error?.code || "";
+    if (code === "permission-denied") {
+      showStatus("Firebase blocked the message. Update your Firestore messaging rules.", true);
+    } else if (code === "unauthenticated") {
+      showStatus("Your admin session expired. Log in again.", true);
+    } else {
+      showStatus(`The message could not be sent${code ? ` (${code})` : ""}.`, true);
+    }
   } finally {
     sendButton.disabled = false;
   }
