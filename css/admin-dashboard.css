@@ -567,3 +567,12 @@ progress {
     pointer-events: auto;
   }
 }
+
+
+/* PROJECT TRACKER */
+#project-progress { padding: 0; accent-color: var(--admin-gold); }
+.admin-project-progress { min-width: 180px; }
+.admin-progress-track { height: 10px; margin-top: 9px; overflow: hidden; border: 1px solid var(--admin-border); border-radius: 999px; background: #070707; }
+.admin-progress-fill { height: 100%; background: linear-gradient(90deg, var(--admin-gold), var(--admin-gold-light)); border-radius: inherit; }
+.admin-project-date { margin-top: 6px; color: var(--admin-muted); font-size: .82rem; }
+@media (max-width:760px){.admin-project-progress{min-width:0;width:100%;}}

@@ -1194,3 +1194,21 @@
         padding: 14px;
     }
 }
+
+
+/* LIVE PROJECT TRACKER */
+.portal-project-summary { display:grid; gap:22px; }
+.portal-project-title-row { display:flex; align-items:flex-start; justify-content:space-between; gap:18px; flex-wrap:wrap; }
+.portal-project-title-row h2 { margin:0 0 8px; }
+.portal-project-meta { color:var(--portal-muted); line-height:1.65; }
+.portal-progress-number { color:var(--portal-gold); font-size:clamp(2rem,5vw,3.4rem); font-weight:900; line-height:1; }
+.portal-stage-grid { display:grid; grid-template-columns:repeat(7,minmax(90px,1fr)); gap:8px; overflow-x:auto; padding-bottom:4px; }
+.portal-stage { min-width:90px; padding:12px 8px; border:1px solid #303030; border-radius:10px; background:#0d0d0d; color:var(--portal-muted); text-align:center; font-size:.78rem; font-weight:800; }
+.portal-stage.complete { border-color:rgba(117,214,143,.38); color:var(--portal-success); background:rgba(117,214,143,.07); }
+.portal-stage.current { border-color:var(--portal-gold); color:var(--portal-gold); background:rgba(255,215,0,.08); }
+.portal-project-columns { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+.portal-project-box { padding:20px; border:1px solid #2b2b2b; border-radius:12px; background:#0d0d0d; }
+.portal-project-box h3 { margin:0 0 14px; }
+.portal-project-update { padding:18px; border-left:4px solid var(--portal-gold); background:rgba(255,215,0,.055); border-radius:0 10px 10px 0; line-height:1.75; }
+.portal-project-link { margin-top:4px; }
+@media(max-width:760px){.portal-project-columns{grid-template-columns:1fr}.portal-project-title-row{display:grid}.portal-progress-number{font-size:2.5rem}}

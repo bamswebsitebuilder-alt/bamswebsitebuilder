@@ -53,6 +53,8 @@ const uploadProgress = document.getElementById("upload-progress");
 const uploadStatus = document.getElementById("upload-status");
 const clientFileList = document.getElementById("client-file-list");
 const clientInvoiceList = document.getElementById("client-invoice-list");
+const portalDashboardProject = document.getElementById("portal-dashboard-project");
+const portalProjectDetails = document.getElementById("portal-project-details");
 
 /* =========================================================
    SETTINGS
@@ -539,6 +541,121 @@ const watchClientInvoices = (user) => {
   );
 };
 
+
+/* =========================================================
+   LIVE PROJECT TRACKER
+========================================================= */
+const PROJECT_STAGES = ["Planning", "Design", "Development", "Testing", "Client Review", "Launch", "Completed"];
+
+const escapeText = (value) => String(value ?? "");
+
+const projectDate = (value) => {
+  if (!value) return "Not set";
+  const date = typeof value?.toDate === "function" ? value.toDate() : new Date(value);
+  if (Number.isNaN(date.getTime())) return "Not set";
+  return date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+};
+
+const makeTaskList = (tasks, emptyMessage) => {
+  const list = document.createElement("ul");
+  list.className = "checklist";
+  const clean = Array.isArray(tasks) ? tasks.filter(Boolean) : [];
+  if (!clean.length) {
+    const item = document.createElement("li");
+    item.textContent = emptyMessage;
+    list.appendChild(item);
+    return list;
+  }
+  clean.forEach((task) => {
+    const item = document.createElement("li");
+    item.className = "complete";
+    item.textContent = escapeText(task);
+    list.appendChild(item);
+  });
+  return list;
+};
+
+const makeUpcomingList = (tasks) => {
+  const list = document.createElement("ul");
+  list.className = "checklist";
+  const clean = Array.isArray(tasks) ? tasks.filter(Boolean) : [];
+  if (!clean.length) {
+    const item = document.createElement("li");
+    item.textContent = "No upcoming tasks have been added.";
+    list.appendChild(item);
+    return list;
+  }
+  clean.forEach((task, index) => {
+    const item = document.createElement("li");
+    if (index === 0) item.className = "current";
+    item.textContent = escapeText(task);
+    list.appendChild(item);
+  });
+  return list;
+};
+
+const renderNoProject = () => {
+  const html = '<article class="portal-card portal-empty-state"><p class="card-kicker">MY PROJECT</p><h2>No project assigned</h2><p>Your project details and timeline will appear here after BAM\'s Website Builder assigns a project.</p></article>';
+  if (portalDashboardProject) portalDashboardProject.innerHTML = html;
+  if (portalProjectDetails) portalProjectDetails.innerHTML = html;
+};
+
+const buildProjectCard = (project, compact = false) => {
+  const card = document.createElement("article");
+  card.className = "portal-card portal-project-summary";
+  const top = document.createElement("div");
+  top.className = "portal-project-title-row";
+  const heading = document.createElement("div");
+  const kicker = document.createElement("p"); kicker.className = "card-kicker"; kicker.textContent = compact ? "WEBSITE PROGRESS" : "MY WEBSITE PROJECT";
+  const title = document.createElement("h2"); title.textContent = project.title || "Website Project";
+  const meta = document.createElement("p"); meta.className = "portal-project-meta"; meta.textContent = `${project.status || "In Progress"} • Current stage: ${project.stage || "Planning"}`;
+  heading.append(kicker, title, meta);
+  const percent = document.createElement("div"); percent.className = "portal-progress-number"; percent.textContent = `${Math.max(0, Math.min(100, Number(project.progress) || 0))}%`;
+  top.append(heading, percent);
+  const track = document.createElement("div"); track.className = "progress-track";
+  const fill = document.createElement("span"); fill.style.width = `${Math.max(0, Math.min(100, Number(project.progress) || 0))}%`; track.appendChild(fill);
+  card.append(top, track);
+  const labels = document.createElement("div"); labels.className = "progress-labels";
+  const left = document.createElement("span"); left.textContent = project.stage || "Planning";
+  const right = document.createElement("strong"); right.textContent = `Estimated completion: ${projectDate(project.estimatedCompletion)}`;
+  labels.append(left, right); card.appendChild(labels);
+  if (compact) {
+    const update = document.createElement("div"); update.className = "portal-project-update"; update.textContent = project.currentUpdate || "Your project is active. More details will be added soon."; card.appendChild(update);
+    const actions = document.createElement("div"); actions.className = "portal-actions";
+    const button = document.createElement("button"); button.type = "button"; button.className = "portal-primary-button"; button.textContent = "View Full Project";
+    button.addEventListener("click", () => document.querySelector('.portal-nav-link[data-panel="project"]')?.click()); actions.appendChild(button); card.appendChild(actions);
+    return card;
+  }
+  const stageGrid = document.createElement("div"); stageGrid.className = "portal-stage-grid";
+  const currentIndex = Math.max(0, PROJECT_STAGES.indexOf(project.stage));
+  PROJECT_STAGES.forEach((stage, index) => { const node = document.createElement("div"); node.className = "portal-stage"; if (index < currentIndex) node.classList.add("complete"); if (index === currentIndex) node.classList.add("current"); node.textContent = stage; stageGrid.appendChild(node); });
+  card.appendChild(stageGrid);
+  const update = document.createElement("div"); update.className = "portal-project-update"; update.textContent = project.currentUpdate || "No current update has been posted."; card.appendChild(update);
+  const columns = document.createElement("div"); columns.className = "portal-project-columns";
+  const completed = document.createElement("section"); completed.className = "portal-project-box"; const ch = document.createElement("h3"); ch.textContent = "Completed"; completed.append(ch, makeTaskList(project.completedTasks, "No completed tasks have been added."));
+  const upcoming = document.createElement("section"); upcoming.className = "portal-project-box"; const uh = document.createElement("h3"); uh.textContent = "Coming Next"; upcoming.append(uh, makeUpcomingList(project.upcomingTasks));
+  columns.append(completed, upcoming); card.appendChild(columns);
+  const dates = document.createElement("p"); dates.className = "portal-project-meta"; dates.textContent = `Start date: ${projectDate(project.startDate)} • Last updated: ${projectDate(project.updatedAt)}`; card.appendChild(dates);
+  if (project.liveUrl) { const a = document.createElement("a"); a.className = "portal-primary-button portal-project-link"; a.href = project.liveUrl; a.target = "_blank"; a.rel = "noopener noreferrer"; a.textContent = project.status === "Completed" ? "Visit Your Live Website" : "View Website Preview"; card.appendChild(a); }
+  return card;
+};
+
+const watchClientProject = (user) => onSnapshot(
+  doc(db, "users", user.uid, "projects", "website"),
+  (snapshot) => {
+    if (!snapshot.exists()) { renderNoProject(); return; }
+    const project = { id: snapshot.id, ...snapshot.data() };
+    if (portalDashboardProject) { portalDashboardProject.replaceChildren(buildProjectCard(project, true)); }
+    if (portalProjectDetails) { portalProjectDetails.replaceChildren(buildProjectCard(project, false)); }
+  },
+  (error) => {
+    console.error("Unable to load project:", error);
+    const message = '<article class="portal-card portal-empty-state"><p class="card-kicker">MY PROJECT</p><h2>Project could not be loaded</h2><p>Please refresh the page or contact support.</p></article>';
+    if (portalDashboardProject) portalDashboardProject.innerHTML = message;
+    if (portalProjectDetails) portalProjectDetails.innerHTML = message;
+  }
+);
+
 /* =========================================================
    FILE SELECTION
 ========================================================= */
@@ -804,6 +921,7 @@ onAuthStateChanged(auth, async (user) => {
 
   await loadClientFiles(user);
   watchClientInvoices(user);
+  watchClientProject(user);
 });
 
 /* =========================================================

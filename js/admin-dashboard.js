@@ -37,6 +37,13 @@ const clientForm = document.getElementById("client-form");
 const clientFormStatus = document.getElementById("client-form-status");
 const clientList = document.getElementById("client-list");
 
+const projectForm = document.getElementById("project-form");
+const projectFormStatus = document.getElementById("project-form-status");
+const projectList = document.getElementById("project-list");
+const projectClientSelect = document.getElementById("project-client");
+const projectProgress = document.getElementById("project-progress");
+const projectProgressValue = document.getElementById("project-progress-value");
+
 const invoiceForm = document.getElementById("invoice-form");
 const invoiceFormStatus = document.getElementById("invoice-form-status");
 const invoiceList = document.getElementById("invoice-list");
@@ -76,6 +83,9 @@ if (adminSidebar && window.innerWidth <= 760) {
 let currentAdmin = null;
 let clientRecords = [];
 let invoiceRecords = [];
+let projectRecords = [];
+let projectUnsubscribers = [];
+const projectsByClient = new Map();
 let activityRecords = [];
 let firstClientSnapshotLoaded = false;
 let firstInvoiceSnapshotLoaded = false;
@@ -202,6 +212,7 @@ const buildClientOptions = () => {
 
   invoiceClientSelect.innerHTML = options;
   fileClientSelect.innerHTML = options;
+  if (projectClientSelect) projectClientSelect.innerHTML = options;
 };
 
 const renderClients = () => {
@@ -244,6 +255,164 @@ const renderClients = () => {
     clientList.appendChild(item);
   });
 };
+
+
+const linesToArray = (value) => String(value || "")
+  .split(/\r?\n/)
+  .map((item) => item.trim())
+  .filter(Boolean);
+
+const dateInputValue = (value) => {
+  if (!value) return "";
+  const date = typeof value?.toDate === "function" ? value.toDate() : new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  return date.toISOString().slice(0, 10);
+};
+
+const renderProjects = () => {
+  if (!projectList) return;
+  projectList.replaceChildren();
+  if (!projectRecords.length) {
+    projectList.innerHTML = '<p class="admin-status">No projects have been assigned yet.</p>';
+    return;
+  }
+  projectRecords.forEach((project) => {
+    const client = clientRecords.find((item) => item.id === project.userId);
+    const item = document.createElement("div");
+    item.className = "admin-list-item";
+    const info = document.createElement("div");
+    info.className = "admin-list-info";
+    const title = document.createElement("strong");
+    title.textContent = project.title || "Website Project";
+    const meta = document.createElement("div");
+    meta.className = "admin-list-meta";
+    meta.textContent = [client?.fullName || client?.email || project.userId, project.stage, project.status].filter(Boolean).join(" • ");
+    const date = document.createElement("div");
+    date.className = "admin-project-date";
+    date.textContent = project.estimatedCompletion ? `Estimated completion: ${formatDate(project.estimatedCompletion)}` : "No completion date set";
+    info.append(title, meta, date);
+    const actions = document.createElement("div");
+    actions.className = "admin-list-actions admin-project-progress";
+    const percent = document.createElement("strong");
+    percent.textContent = `${Math.max(0, Math.min(100, Number(project.progress) || 0))}%`;
+    const track = document.createElement("div");
+    track.className = "admin-progress-track";
+    const fill = document.createElement("div");
+    fill.className = "admin-progress-fill";
+    fill.style.width = `${Math.max(0, Math.min(100, Number(project.progress) || 0))}%`;
+    track.appendChild(fill);
+    const edit = document.createElement("button");
+    edit.type = "button";
+    edit.className = "admin-small-button";
+    edit.textContent = "Edit Project";
+    edit.addEventListener("click", () => {
+      setActivePanel("projects");
+      projectClientSelect.value = project.userId;
+      document.getElementById("project-title").value = project.title || "";
+      document.getElementById("project-stage").value = project.stage || "Planning";
+      document.getElementById("project-status").value = project.status || "In Progress";
+      projectProgress.value = String(Number(project.progress) || 0);
+      projectProgressValue.textContent = `${projectProgress.value}%`;
+      document.getElementById("project-start-date").value = dateInputValue(project.startDate);
+      document.getElementById("project-due-date").value = dateInputValue(project.estimatedCompletion);
+      document.getElementById("project-update").value = project.currentUpdate || "";
+      document.getElementById("project-completed").value = (project.completedTasks || []).join("\n");
+      document.getElementById("project-upcoming").value = (project.upcomingTasks || []).join("\n");
+      document.getElementById("project-live-url").value = project.liveUrl || "";
+      projectForm.scrollIntoView({behavior:"smooth", block:"start"});
+    });
+    actions.append(percent, track, edit);
+    item.append(info, actions);
+    projectList.appendChild(item);
+  });
+};
+
+const stopProjectWatchers = () => {
+  projectUnsubscribers.forEach((unsubscribe) => unsubscribe());
+  projectUnsubscribers = [];
+  projectsByClient.clear();
+};
+
+const publishProjects = () => {
+  projectRecords = [...projectsByClient.values()].filter(Boolean).sort((a,b) => timestampToMillis(b.updatedAt) - timestampToMillis(a.updatedAt));
+  renderProjects();
+};
+
+const watchProjects = () => {
+  stopProjectWatchers();
+  if (!clientRecords.length) { projectRecords = []; renderProjects(); return; }
+  clientRecords.forEach((client) => {
+    const unsubscribe = onSnapshot(
+      doc(db, "users", client.id, "projects", "website"),
+      (snapshot) => {
+        projectsByClient.set(client.id, snapshot.exists() ? { id: snapshot.id, userId: client.id, ...snapshot.data() } : null);
+        publishProjects();
+      },
+      (error) => {
+        console.error(`Unable to load project for ${client.id}:`, error);
+        projectsByClient.set(client.id, null);
+        publishProjects();
+      }
+    );
+    projectUnsubscribers.push(unsubscribe);
+  });
+};
+
+projectProgress?.addEventListener("input", () => {
+  if (projectProgressValue) projectProgressValue.textContent = `${projectProgress.value}%`;
+});
+
+projectClientSelect?.addEventListener("change", () => {
+  const project = projectRecords.find((item) => item.userId === projectClientSelect.value);
+  if (!project) return;
+  document.getElementById("project-title").value = project.title || "";
+  document.getElementById("project-stage").value = project.stage || "Planning";
+  document.getElementById("project-status").value = project.status || "In Progress";
+  projectProgress.value = String(Number(project.progress) || 0);
+  projectProgressValue.textContent = `${projectProgress.value}%`;
+  document.getElementById("project-start-date").value = dateInputValue(project.startDate);
+  document.getElementById("project-due-date").value = dateInputValue(project.estimatedCompletion);
+  document.getElementById("project-update").value = project.currentUpdate || "";
+  document.getElementById("project-completed").value = (project.completedTasks || []).join("\n");
+  document.getElementById("project-upcoming").value = (project.upcomingTasks || []).join("\n");
+  document.getElementById("project-live-url").value = project.liveUrl || "";
+});
+
+projectForm?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  hideStatus(projectFormStatus);
+  const userId = projectClientSelect.value;
+  if (!userId || !currentAdmin) return;
+  const start = document.getElementById("project-start-date").value;
+  const due = document.getElementById("project-due-date").value;
+  const submit = projectForm.querySelector('button[type="submit"]');
+  submit.disabled = true;
+  submit.textContent = "Saving...";
+  try {
+    await setDoc(doc(db, "users", userId, "projects", "website"), {
+      title: document.getElementById("project-title").value.trim(),
+      stage: document.getElementById("project-stage").value,
+      status: document.getElementById("project-status").value,
+      progress: Math.max(0, Math.min(100, Number(projectProgress.value) || 0)),
+      startDate: start ? Timestamp.fromDate(new Date(`${start}T12:00:00`)) : null,
+      estimatedCompletion: due ? Timestamp.fromDate(new Date(`${due}T12:00:00`)) : null,
+      currentUpdate: document.getElementById("project-update").value.trim(),
+      completedTasks: linesToArray(document.getElementById("project-completed").value),
+      upcomingTasks: linesToArray(document.getElementById("project-upcoming").value),
+      liveUrl: document.getElementById("project-live-url").value.trim(),
+      updatedAt: serverTimestamp(),
+      updatedBy: currentAdmin.uid,
+      createdAt: projectsByClient.get(userId)?.createdAt || serverTimestamp()
+    }, { merge: true });
+    showStatus(projectFormStatus, "Project update published to the client's portal.", "success");
+  } catch (error) {
+    console.error("Project save failed:", error);
+    showStatus(projectFormStatus, "The project could not be saved. Check your Firestore rules.", "error");
+  } finally {
+    submit.disabled = false;
+    submit.textContent = "Save Project Update";
+  }
+});
 
 const renderInvoices = () => {
   invoiceList.replaceChildren();
@@ -495,6 +664,7 @@ const watchClients = () => {
       renderClients();
       buildClientOptions();
       watchInvoices();
+      watchProjects();
       renderInvoices();
       updateStats();
       rebuildActivity();
