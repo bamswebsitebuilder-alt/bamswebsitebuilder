@@ -545,7 +545,7 @@ const watchClientInvoices = (user) => {
 /* =========================================================
    LIVE PROJECT TRACKER
 ========================================================= */
-const PROJECT_STAGES = ["Planning", "Design", "Development", "Testing", "Client Review", "Launch", "Completed"];
+const PROJECT_STAGES = ["Planning", "Design", "Development", "Review", "Launch", "Maintenance", "Completed"];
 
 const escapeText = (value) => String(value ?? "");
 
@@ -641,7 +641,7 @@ const buildProjectCard = (project, compact = false) => {
 };
 
 const watchClientProject = (user) => onSnapshot(
-  doc(db, "users", user.uid, "projects", "website"),
+  doc(db, "users", user.uid, "projects", "current"),
   (snapshot) => {
     if (!snapshot.exists()) { renderNoProject(); return; }
     const project = { id: snapshot.id, ...snapshot.data() };

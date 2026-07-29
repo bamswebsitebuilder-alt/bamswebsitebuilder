@@ -16,7 +16,8 @@
   <title>Client Portal | BAM's Website Builder</title>
 
   <link rel="stylesheet" href="css/style.css?v=100">
- <link rel="stylesheet" href="css/portal.css?v=100">
+ <link rel="stylesheet" href="css/portal.css?v=101">
+  <link rel="stylesheet" href="css/portal-messages.css?v=1">
 
   <link
     rel="icon"
@@ -336,6 +337,7 @@
             type="button"
           >
             Messages
+            <span class="portal-message-count" id="portal-message-count" hidden>0</span>
           </button>
 
           <button
@@ -495,27 +497,49 @@
         </section>
 
         <!-- MESSAGES -->
-        <section
-          class="portal-panel"
-          id="messages"
-        >
+        <section class="portal-panel" id="messages">
+          <article class="portal-card portal-message-card">
+            <div class="portal-message-header">
+              <p class="card-kicker">COMMUNICATION</p>
+              <h2>Message BAM's Website Builder</h2>
+              <p>Send questions, feedback, and project information. Messages update in real time.</p>
+            </div>
 
-          <article class="portal-card portal-empty-state">
+            <div
+              class="portal-message-thread"
+              id="portal-message-thread"
+              aria-live="polite"
+            >
+              <div class="portal-message-empty">
+                <h3>Loading messages...</h3>
+                <p>Your conversation will appear here.</p>
+              </div>
+            </div>
 
-            <p class="card-kicker">
-              COMMUNICATION
-            </p>
+            <form class="portal-message-composer" id="portal-message-form">
+              <label class="sr-only" for="portal-message-text">Message</label>
+              <textarea
+                id="portal-message-text"
+                rows="3"
+                maxlength="2000"
+                placeholder="Type your message..."
+                disabled
+                required
+              ></textarea>
 
-            <h2>
-              No messages yet
-            </h2>
-
-            <p>
-              Messages from BAM's Website Builder will appear here.
-            </p>
-
+              <div class="portal-message-actions">
+                <p class="portal-message-status" id="portal-message-status" role="status" hidden></p>
+                <button
+                  class="portal-primary-button"
+                  id="portal-message-send"
+                  type="submit"
+                  disabled
+                >
+                  Send Message
+                </button>
+              </div>
+            </form>
           </article>
-
         </section>
 
         <!-- SUPPORT -->
@@ -678,11 +702,13 @@
 
   <!-- JAVASCRIPT -->
   <script src="js/navigation.js?v=100"></script>
-  <script src="js/portal.js?v=100"></script>
+  <script src="js/portal.js?v=101"></script>
 
   <script
     type="module"
-    src="js/portal-auth.js?v=100"
-  ></script><script src="js/animations.js?v=1"></script>
+    src="js/portal-auth.js?v=101"
+  ></script>
+  <script type="module" src="js/portal-messages.js?v=1"></script>
+  <script src="js/animations.js?v=1"></script>
 </body>
 </html>

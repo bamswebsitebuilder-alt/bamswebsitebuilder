@@ -9,7 +9,8 @@ import {
   orderBy,
   query,
   serverTimestamp,
-  updateDoc
+  updateDoc,
+  increment
 } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
 import {
@@ -285,7 +286,7 @@ form?.addEventListener("submit", async (event) => {
     updateDoc(doc(db, "users", selectedClient.id), {
       lastMessage: text,
       lastMessageAt: serverTimestamp(),
-      unreadByClient: Number(selectedClient.unreadByClient || 0) + 1
+      unreadByClient: increment(1)
     }).catch((summaryError) => {
       console.warn("Message sent, but client summary was not updated:", summaryError);
     });
