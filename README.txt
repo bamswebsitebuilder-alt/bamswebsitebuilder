@@ -1,13 +1,22 @@
-BAM'S WEBSITE BUILDER - FINAL ENGLISH FILE FIX
+BAM'S WEBSITE BUILDER - NEW CODE WITH CSS AND JAVASCRIPT
 
-Fixed:
-- Removed every reference to the deleted /css/page-theme.css file.
-- Removed old duplicate navigation underline style blocks.
-- Kept one consistent navigation underline block on every page that uses the main navigation.
-- Active underline: 48px.
-- Hover underline: 28px.
-- Removed premium.css and premium.js references if present.
-- Preserved page content, Firebase configuration, forms, portal scripts, and admin functionality.
-- Clean filenames are ready for upload.
+Added clean folders and filenames:
+- css/style.css
+- css/animations.css
+- css/portal.css
+- css/portal-messages.css
+- css/admin-dashboard.css
+- css/admin-messages.css
+- js/navigation.js
+- js/animations.js
+- js/auth.js
+- js/firebase-config.js
+- js/portal.js
+- js/portal-auth.js
+- js/portal-messages.js
+- js/admin-dashboard.js
+- js/admin-messages.js
+- js/admin-link.js
+- js/script.js
 
-Upload the files using the names included in this ZIP.
+HTML references were updated to use these files with v=200 cache versions.

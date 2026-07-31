@@ -5,53 +5,25 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Services | BAM's Website Builder</title>
-<link href="/css/style.css?v=101" rel="stylesheet"/>
-<link href="/images/icon-dark.jpg" rel="icon" type="image/jpeg"/>
-<link href="/css/animations.css?v=2" rel="stylesheet"/>
-<link rel="canonical" href="https://bamswebsitebuilder.com/services"/>
-<style id="consistent-navigation-underline">
-/* Keeps the active desktop navigation underline identical on every page. */
-.desktop-navigation a {
-  position: relative !important;
-  text-decoration: none !important;
-}
-.desktop-navigation a::after {
-  content: "" !important;
-  position: absolute !important;
-  left: 50% !important;
-  bottom: -10px !important;
-  width: 0 !important;
-  height: 3px !important;
-  border: 0 !important;
-  border-radius: 999px !important;
-  background: #f0c400 !important;
-  transform: translateX(-50%) !important;
-  transition: width .2s ease !important;
-}
-.desktop-navigation a.active::after,
-.desktop-navigation a[aria-current="page"]::after {
-  width: 48px !important;
-}
-.desktop-navigation a:not(.active):not([aria-current="page"]):hover::after {
-  width: 28px !important;
-}
-</style>
+<link href="css/style.css?v=200" rel="stylesheet"/>
+<link href="images/icon-dark.jpg" rel="icon" type="image/jpeg"/>
+<link href="css/animations.css?v=200" rel="stylesheet"/>
 </head>
 <body><header class="site-header" id="site-header">
 <div class="header-container">
-<a aria-label="BAM's Website Builder home" class="site-brand" href="/">
+<a aria-label="BAM's Website Builder home" class="site-brand" href="index.html">
 <span class="brand-text">
 <strong>BAM'S</strong>
 <small>WEBSITE BUILDER</small>
 </span>
 </a>
 <nav aria-label="Main navigation" class="desktop-navigation">
-<a data-page="home" href="/">Home</a><a aria-current="page" class="active" data-page="services" href="/services">Services</a><a data-page="prices" href="/prices">Prices</a><a data-page="portfolio" href="/portfolio">Portfolio</a><a data-page="reviews" href="/reviews">Reviews</a><a data-page="contact" href="/contact">Contact</a><a data-page="login" href="/login">Login</a>
+<a data-page="index" href="index.html">Home</a><a aria-current="page" class="active" data-page="services" href="services.html">Services</a><a data-page="prices" href="prices.html">Prices</a><a data-page="portfolio" href="portfolio.html">Portfolio</a><a data-page="reviews" href="reviews.html">Reviews</a><a data-page="contact" href="contact.html">Contact</a><a data-page="login" href="login.html">Login</a>
 </nav>
 <div class="desktop-language">
-<a class="language-active" href="/services">English</a>
+<a class="language-active" href="services.html">English</a>
 <span aria-hidden="true">|</span>
-<a href="/es/services">Español</a>
+<a href="es/services.html">Español</a>
 </div>
 <button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open navigation menu" class="menu-toggle" id="menu-toggle" type="button">
 <span></span><span></span><span></span>
@@ -59,7 +31,7 @@
 </div>
 </header><div class="menu-overlay" id="menu-overlay"></div><aside aria-hidden="true" aria-label="Mobile navigation" class="mobile-menu" id="mobile-menu">
 <div class="mobile-menu-header">
-<a class="mobile-menu-brand" href="/">
+<a class="mobile-menu-brand" href="index.html">
 <span>
 <strong>BAM'S</strong>
 <small>WEBSITE BUILDER</small>
@@ -70,17 +42,17 @@
 </button>
 </div>
 <nav class="mobile-navigation">
-<a data-page="home" href="/"><span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#home"></use></svg></span><span>Home</span></a><a aria-current="page" class="active" data-page="services" href="/services"><span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#services"></use></svg></span><span>Services</span></a><a data-page="prices" href="/prices"><span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#prices"></use></svg></span><span>Prices</span></a><a data-page="portfolio" href="/portfolio"><span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#portfolio"></use></svg></span><span>Portfolio</span></a><a data-page="reviews" href="/reviews"><span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#reviews"></use></svg></span><span>Reviews</span></a><a data-page="contact" href="/contact"><span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#contact"></use></svg></span><span>Contact</span></a><a data-page="login" href="/login"><span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#login"></use></svg></span><span>Login</span></a>
+<a data-page="index" href="index.html"><span aria-hidden="true" class="mobile-link-icon">⌂</span><span>Home</span></a><a aria-current="page" class="active" data-page="services" href="services.html"><span aria-hidden="true" class="mobile-link-icon">◆</span><span>Services</span></a><a data-page="prices" href="prices.html"><span aria-hidden="true" class="mobile-link-icon">$</span><span>Prices</span></a><a data-page="portfolio" href="portfolio.html"><span aria-hidden="true" class="mobile-link-icon">▣</span><span>Portfolio</span></a><a data-page="reviews" href="reviews.html"><span aria-hidden="true" class="mobile-link-icon">★</span><span>Reviews</span></a><a data-page="contact" href="contact.html"><span aria-hidden="true" class="mobile-link-icon">✉</span><span>Contact</span></a><a data-page="login" href="login.html"><span aria-hidden="true" class="mobile-link-icon">→</span><span>Login</span></a>
 </nav>
 <div class="mobile-language-section">
 <p>Language</p>
 <div class="mobile-language-links">
-<a class="language-active" href="/services">English</a>
-<a href="/es/services">Español</a>
+<a class="language-active" href="services.html">English</a>
+<a href="es/services.html">Español</a>
 </div>
 </div>
 <div class="mobile-menu-cta">
-<a href="/contact">Get a Free Quote</a>
+<a href="contact.html">Get a Free Quote</a>
 </div>
 <div class="mobile-menu-contact">
 <a href="tel:+17274178762">727-417-8762</a>
@@ -93,7 +65,7 @@
 
 <!-- HERO -->
 <section class="hero">
-<img alt="BAM's Website Builder Logo" class="hero-logo-bg" src="/images/logo-dark.jpg"/>
+<img alt="BAM's Website Builder Logo" class="hero-logo-bg" src="images/logo-dark.jpg"/>
 <div class="hero-content">
 <h4>
                 OUR SERVICES
@@ -108,7 +80,7 @@
                 presence.
             </p>
 <div class="hero-buttons">
-<a class="btn" href="/contact">
+<a class="btn" href="contact.html">
                     Get A Free Quote
                 </a>
 </div>
@@ -219,7 +191,7 @@
                 Let's build a professional website that helps your business stand out online and attract more customers.
             </p>
 <br/>
-<a class="btn" href="/contact">
+<a class="btn" href="contact.html">
                 Start Your Project
             </a>
 </div>
@@ -233,20 +205,20 @@
     </div>
     <div>
       <h4>Quick Links</h4>
-      <div class="footer-links"><a href="/services">Services</a><a href="/prices">Prices</a><a href="/portfolio">Portfolio</a><a href="/reviews">Reviews</a><a href="/contact">Contact</a></div>
+      <div class="footer-links"><a href="services.html">Services</a><a href="prices.html">Prices</a><a href="portfolio.html">Portfolio</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a></div>
     </div>
     <div>
       <h4>Client Access</h4>
-      <div class="footer-links"><a href="/login">Login</a><a href="/register">Create Account</a><a href="/forgot-password">Forgot Password</a></div>
+      <div class="footer-links"><a href="login.html">Login</a><a href="register.html">Create Account</a><a href="forgot-password.html">Forgot Password</a></div>
     </div>
     <div>
       <h4>Contact</h4>
-      <div class="footer-links"><a href="tel:+17274178762">727-417-8762</a><a href="mailto:bamswebsitebuilder@gmail.com">bamswebsitebuilder@gmail.com</a><a href="/contact">Request a Quote</a><a href="/es">Español</a></div>
+      <div class="footer-links"><a href="tel:+17274178762">727-417-8762</a><a href="mailto:bamswebsitebuilder@gmail.com">bamswebsitebuilder@gmail.com</a><a href="contact.html">Request a Quote</a><a href="es/index.html">Español</a></div>
     </div>
   </div>
   <div class="footer-bottom">© 2026 BAM's Website Builder. All Rights Reserved.</div>
 </footer>
-<script src="/js/navigation.js?v=100"></script>
+<script src="js/navigation.js?v=200"></script>
 <!-- Start of LiveChat (www.livechat.com) code -->
 <script>
     window.__lc = window.__lc || {};
@@ -256,6 +228,8 @@
     ;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},get:function(){if(!e._h)throw new Error("[LiveChatWidget] You can't use getters before load.");return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},init:function(){var n=t.createElement("script");n.async=!0,n.type="text/javascript",n.src="https://cdn.livechatinc.com/tracking.js",t.head.appendChild(n)}};!n.__lc.asyncInit&&e.init(),n.LiveChatWidget=n.LiveChatWidget||e}(window,document,[].slice))
 </script>
 <noscript><a href="https://www.livechat.com/chat-with/19864799/" rel="nofollow">Chat with us</a>, powered by <a href="https://www.livechat.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a></noscript>
-<!-- End of LiveChat code --><script src="/js/animations.js?v=1"></script>
+<!-- End of LiveChat code -->
+<script src="js/animations.js?v=200"></script>
+<script type="module" src="js/admin-link.js?v=200"></script>
 </body>
 </html>
