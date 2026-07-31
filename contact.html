@@ -11,7 +11,34 @@
 <link href="/css/animations.css?v=2" rel="stylesheet"/>
 <link rel="canonical" href="https://bamswebsitebuilder.com/contact"/>
 <link href="/css/page-theme.css?v=1" rel="stylesheet"/>
-<link rel="stylesheet" href="/css/premium.css?v=1"/>
+
+<style id="consistent-navigation-underline">
+/* Keeps the active desktop navigation underline identical on every page. */
+.desktop-navigation a {
+  position: relative !important;
+  text-decoration: none !important;
+}
+.desktop-navigation a::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 50% !important;
+  bottom: -10px !important;
+  width: 0 !important;
+  height: 3px !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: #f0c400 !important;
+  transform: translateX(-50%) !important;
+  transition: width .2s ease !important;
+}
+.desktop-navigation a.active::after,
+.desktop-navigation a[aria-current="page"]::after {
+  width: 48px !important;
+}
+.desktop-navigation a:not(.active):not([aria-current="page"]):hover::after {
+  width: 28px !important;
+}
+</style>
 </head>
 <body><header class="site-header" id="site-header">
 <div class="header-container">
@@ -293,6 +320,5 @@
 </script>
 <noscript><a href="https://www.livechat.com/chat-with/19864799/" rel="nofollow">Chat with us</a>, powered by <a href="https://www.livechat.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a></noscript>
 <!-- End of LiveChat code --><script src="/js/animations.js?v=1"></script>
-<script src="/js/premium.js?v=1"></script>
 </body>
 </html>

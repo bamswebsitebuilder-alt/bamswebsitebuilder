@@ -1,20 +1,10 @@
-BAM'S WEBSITE BUILDER - PREMIUM UPDATE
+BAM'S WEBSITE BUILDER - CONSISTENT NAVIGATION UNDERLINE
 
-Included files:
-- home.html
-- portfolio.html
-- prices.html
-- reviews.html
-- contact.html
-- css/premium.css
-- js/premium.js
+What was fixed:
+- Every uploaded page with the main desktop navigation now uses the same 48px gold active underline.
+- The underline uses the same thickness, position, color, and rounded ends on every page.
+- Contact page premium.css and premium.js references were removed because they caused conflicting navigation styling.
+- Existing page content, forms, Firebase scripts, portal functionality, and admin dashboard code were preserved.
 
-Upload instructions:
-1. Upload the five HTML files to the same locations as your current pages.
-2. Upload premium.css into your site's /css/ folder.
-3. Upload premium.js into your site's /js/ folder.
-4. Keep your existing style.css, page-theme.css, animations.css, navigation.js, images, and other website files.
-5. The new files reference your existing images and current website paths.
-
-Important:
-This package does not include your existing image folder or your other pages because they were not uploaded in this message.
+Upload these files using their clean names.
+Note: Prices and Reviews were not included in this upload, so they are not inside this ZIP.
