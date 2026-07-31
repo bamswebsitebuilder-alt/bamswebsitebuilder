@@ -1,10 +1,13 @@
-BAM'S WEBSITE BUILDER - CONSISTENT NAVIGATION UNDERLINE
+BAM'S WEBSITE BUILDER - FINAL ENGLISH FILE FIX
 
-What was fixed:
-- Every uploaded page with the main desktop navigation now uses the same 48px gold active underline.
-- The underline uses the same thickness, position, color, and rounded ends on every page.
-- Contact page premium.css and premium.js references were removed because they caused conflicting navigation styling.
-- Existing page content, forms, Firebase scripts, portal functionality, and admin dashboard code were preserved.
+Fixed:
+- Removed every reference to the deleted /css/page-theme.css file.
+- Removed old duplicate navigation underline style blocks.
+- Kept one consistent navigation underline block on every page that uses the main navigation.
+- Active underline: 48px.
+- Hover underline: 28px.
+- Removed premium.css and premium.js references if present.
+- Preserved page content, Firebase configuration, forms, portal scripts, and admin functionality.
+- Clean filenames are ready for upload.
 
-Upload these files using their clean names.
-Note: Prices and Reviews were not included in this upload, so they are not inside this ZIP.
+Upload the files using the names included in this ZIP.
