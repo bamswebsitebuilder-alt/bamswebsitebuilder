@@ -1,11 +1,20 @@
-BAM'S WEBSITE BUILDER - ENGLISH PAGES
+BAM'S WEBSITE BUILDER - PREMIUM UPDATE
 
-Upload the CONTENTS of this folder to your website root/public_html folder.
-This package contains the English public pages plus the shared CSS and JavaScript files.
+Included files:
+- home.html
+- portfolio.html
+- prices.html
+- reviews.html
+- contact.html
+- css/premium.css
+- js/premium.js
 
-Keep the folder structure exactly as included:
-- HTML files in the website root
-- css folder in the website root
-- js folder in the website root
+Upload instructions:
+1. Upload the five HTML files to the same locations as your current pages.
+2. Upload premium.css into your site's /css/ folder.
+3. Upload premium.js into your site's /js/ folder.
+4. Keep your existing style.css, page-theme.css, animations.css, navigation.js, images, and other website files.
+5. The new files reference your existing images and current website paths.
 
-The Spanish pages are provided in a separate ZIP package.
+Important:
+This package does not include your existing image folder or your other pages because they were not uploaded in this message.
