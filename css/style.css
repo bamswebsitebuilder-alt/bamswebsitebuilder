@@ -2949,3 +2949,177 @@ iframe[src*="livechat.com" i] {
   .desktop-navigation a { font-size: .62rem; letter-spacing: .045em; }
   .desktop-language { margin-left: 8px; gap: 5px; }
 }
+
+/* =========================================================
+   FOOTER LAYOUT FIX — DESKTOP, TABLET, AND MOBILE
+   Prevents footer links and contact details from running together.
+========================================================= */
+
+footer,
+.site-footer {
+    display: grid;
+    grid-template-columns: minmax(220px, 1.25fr) minmax(180px, 0.8fr) minmax(220px, 1fr);
+    align-items: start;
+    gap: 34px clamp(28px, 4vw, 64px);
+
+    width: 100%;
+    padding: 42px clamp(22px, 8vw, 120px);
+
+    color: #b8b8b8;
+    background: #080808;
+    border-top: 1px solid rgba(255, 215, 0, 0.2);
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+footer > *,
+.site-footer > * {
+    min-width: 0;
+}
+
+footer h2,
+footer h3,
+footer h4,
+.site-footer h2,
+.site-footer h3,
+.site-footer h4 {
+    margin: 0 0 10px;
+    color: #ffffff;
+    line-height: 1.25;
+}
+
+footer p,
+.site-footer p {
+    margin: 0 0 10px;
+    color: #b8b8b8;
+}
+
+footer ul,
+.site-footer ul {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+footer nav,
+footer .footer-links,
+footer .quick-links,
+.site-footer nav,
+.site-footer .footer-links,
+.site-footer .quick-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+}
+
+footer a,
+.site-footer a {
+    display: inline-flex;
+    align-items: center;
+
+    color: #ffd700;
+    font-weight: 700;
+    line-height: 1.45;
+    text-decoration: none;
+
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+footer a:hover,
+.site-footer a:hover {
+    text-decoration: underline;
+}
+
+footer .footer-contact,
+footer .contact-links,
+footer .footer-info,
+.site-footer .footer-contact,
+.site-footer .contact-links,
+.site-footer .footer-info {
+    display: grid;
+    gap: 8px;
+}
+
+footer .footer-bottom,
+footer .copyright,
+.site-footer .footer-bottom,
+.site-footer .copyright {
+    grid-column: 1 / -1;
+    width: 100%;
+    margin-top: 4px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+}
+
+/* Adds separation even when the HTML contains plain consecutive links. */
+footer a + a,
+.site-footer a + a {
+    margin-left: 14px;
+}
+
+footer br + a,
+.site-footer br + a {
+    margin-left: 0;
+}
+
+@media (max-width: 900px) {
+    footer,
+    .site-footer {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 30px;
+        padding: 38px 24px;
+    }
+
+    footer > :first-child,
+    .site-footer > :first-child {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 620px) {
+    footer,
+    .site-footer {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 26px;
+
+        padding: 34px 20px;
+        text-align: left;
+    }
+
+    footer nav,
+    footer .footer-links,
+    footer .quick-links,
+    .site-footer nav,
+    .site-footer .footer-links,
+    .site-footer .quick-links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 9px;
+    }
+
+    footer a,
+    .site-footer a {
+        width: fit-content;
+        max-width: 100%;
+    }
+
+    footer a + a,
+    .site-footer a + a {
+        margin-left: 0;
+    }
+
+    footer .footer-bottom,
+    footer .copyright,
+    .site-footer .footer-bottom,
+    .site-footer .copyright {
+        text-align: left;
+    }
+}
