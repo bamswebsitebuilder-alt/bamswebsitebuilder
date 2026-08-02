@@ -1,12 +1,12 @@
 {
   "hosting": {
     "public": ".",
-    "cleanUrls": true,
-    "trailingSlash": false,
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ]
+    ],
+    "cleanUrls": true,
+    "trailingSlash": false
   }
 }
