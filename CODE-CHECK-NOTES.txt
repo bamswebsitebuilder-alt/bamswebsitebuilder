@@ -1,0 +1,17 @@
+BAM'S WEBSITE BUILDER - DOUBLE-CHECKED BUILD
+
+Main issue found:
+- The uploaded source had Blush & Bloom demo code saved as the root index.html, services.html, and reviews.html. That made the live BAM website display a different design.
+
+Corrections in this build:
+- Root index.html and home.html now use the same BAM homepage code.
+- BAM versions of Services, Portfolio, Templates, and Reviews are preserved.
+- Fixed missing FleetFlow preview image references.
+- Fixed the Spanish Velocity Drive Rentals link.
+- Restored the missing Spanish portal authentication script path.
+- Fixed broken nested Blend Lab favicon paths.
+- Preserved clean URLs through firebase.json, .htaccess, and _redirects.
+
+Deployment:
+Upload the contents inside this folder to the website root. Do not upload the outer folder as a subfolder.
+Clear the browser cache or use a private/incognito window after deployment.
