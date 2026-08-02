@@ -3123,3 +3123,34 @@ footer br + a,
         text-align: left;
     }
 }
+
+/* =========================================================
+   MODERN PORTFOLIO GRID
+========================================================= */
+.portfolio-filters{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;max-width:1100px;margin:0 auto 38px}
+.portfolio-filter{min-height:44px;padding:0 20px;color:#ddd;background:#111;border:1px solid rgba(255,215,0,.22);border-radius:999px;font-size:.82rem;font-weight:800;cursor:pointer;transition:.25s ease}
+.portfolio-filter:hover,.portfolio-filter.active{color:#111;background:#ffd700;border-color:#ffd700;transform:translateY(-2px)}
+.portfolio-grid-modern{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;max-width:1320px}
+.portfolio-card-modern{display:flex;flex-direction:column;min-height:100%;border-radius:18px}
+.portfolio-card-modern[hidden]{display:none!important}
+.portfolio-card-modern .portfolio-image-wrapper{min-height:300px;height:300px;border-right:0;border-bottom:1px solid rgba(255,215,0,.15);padding:20px}
+.portfolio-card-modern .portfolio-project-image{width:100%;height:100%;max-height:none;object-fit:contain}
+.portfolio-card-modern .portfolio-logo-image{max-width:78%;max-height:220px}
+.portfolio-card-modern .portfolio-card-content{flex:1;justify-content:flex-start;padding:30px}
+.portfolio-card-modern .portfolio-category{margin-bottom:10px;font-size:11px;letter-spacing:2px}
+.portfolio-card-modern h2{margin-bottom:13px;font-size:clamp(27px,3vw,36px)}
+.portfolio-card-modern p{margin-bottom:20px;font-size:15.5px;line-height:1.7}
+.portfolio-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.portfolio-tags li{padding:7px 11px;color:#d8d8d8;background:#0c0c0c;border:1px solid #333;border-radius:999px;font-size:12px;line-height:1}
+.portfolio-tags li::before{display:none}
+.portfolio-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;width:100%}
+.portfolio-actions .portfolio-button{flex:1 1 170px;min-height:46px;padding:0 18px;font-size:13px}
+.portfolio-button-secondary{color:#ffd700;background:transparent}
+.portfolio-button-secondary:hover{color:#111;background:#ffd700}
+.portfolio-cta{display:flex;align-items:center;justify-content:space-between;gap:30px;max-width:1320px;margin:46px auto 0;padding:34px 38px;background:linear-gradient(135deg,rgba(255,215,0,.12),rgba(255,215,0,.03)),#111;border:1px solid rgba(255,215,0,.25);border-radius:18px}
+.portfolio-cta h2{margin:0 0 8px;font-size:clamp(28px,4vw,42px)}
+.portfolio-cta p{color:#bbb;line-height:1.6}
+.portfolio-cta-actions{display:flex;flex-wrap:wrap;gap:12px;min-width:min(100%,390px)}
+.portfolio-cta-actions .portfolio-button{flex:1;white-space:nowrap}
+@media(max-width:900px){.portfolio-grid-modern{grid-template-columns:1fr}.portfolio-card-modern .portfolio-image-wrapper{height:340px}.portfolio-cta{flex-direction:column;align-items:flex-start}.portfolio-cta-actions{width:100%}}
+@media(max-width:520px){.portfolio-filters{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;padding-bottom:8px}.portfolio-filter{flex:0 0 auto}.portfolio-card-modern .portfolio-image-wrapper{height:250px;min-height:250px}.portfolio-card-modern .portfolio-card-content{padding:24px 20px}.portfolio-actions{flex-direction:column}.portfolio-actions .portfolio-button{width:100%;flex-basis:auto}.portfolio-cta{padding:28px 22px}.portfolio-cta-actions{flex-direction:column}.portfolio-cta-actions .portfolio-button{width:100%}}
