@@ -1,0 +1,11 @@
+{
+  "name": "BAM's Website Builder",
+  "short_name": "BAM's",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090909",
+  "theme_color": "#d4a637",
+  "icons": [
+    {"src":"/images/icon-dark.jpg","sizes":"512x512","type":"image/jpeg"}
+  ]
+}

@@ -1,28 +1,9 @@
-BAM'S WEBSITE BUILDER - CLEAN URL PACKAGE
+FLEETFLOW INSTALLATION
 
-This package updates internal links to use clean URLs such as:
-  /services
-  /portfolio
-  /login
-instead of URLs ending in .html.
+1. Upload the fleetflow folder to your website root.
+2. Upload images/fleetflow-preview.svg to your main images folder.
+3. Replace your current home.html, index.html, and portfolio.html with the updated files included here.
+4. contact.html is included for convenience; FleetFlow was already present in its template selector.
+5. Open /fleetflow/ to view the demo.
 
-FIREBASE HOSTING
-1. Use the included firebase.json.
-2. If you already have a firebase.json, add these properties inside "hosting":
-     "cleanUrls": true,
-     "trailingSlash": false
-3. Keep your existing rewrites, headers, redirects, and functions settings.
-4. Deploy again with Firebase Hosting.
-
-APACHE / CPANEL
-Upload the included .htaccess file to the same root folder as index.html.
-
-NETLIFY
-Upload the included _redirects file to the published website folder.
-
-IMPORTANT
-- Use only the configuration for your hosting provider.
-- Do not delete your existing Firebase settings when merging firebase.json.
-- Keep the actual files named services.html, login.html, and so on. The server hides
-  the extension; renaming the files is not required.
-- Clear your browser cache after deployment.
+The tracking and quote tools are front-end demonstrations and do not book real shipments.

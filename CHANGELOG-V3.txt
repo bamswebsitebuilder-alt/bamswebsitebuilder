@@ -1,0 +1,30 @@
+BAM'S WEBSITE BUILDER - V3 UPDATE
+Updated: August 2, 2026
+
+WHAT WAS IMPROVED
+- Preserved clean URLs and converted internal .html links to extension-free links.
+- Kept Firebase Hosting cleanUrls enabled.
+- Kept Apache .htaccess clean URL rules for compatible hosting.
+- Added stronger page titles and search descriptions to the main public pages.
+- Added Open Graph and social sharing metadata to the main public pages.
+- Added robots.txt and sitemap.xml for search engines.
+- Added a web app manifest and theme color.
+- Added shared accessibility improvements, including a skip link and visible keyboard focus.
+- Added automatic lazy loading/async decoding for non-primary images.
+- Added a back-to-top control across the main English and Spanish pages.
+- Added reduced-motion support for visitors who prefer fewer animations.
+- Added Firebase Hosting cache and security headers.
+- Preserved Firebase authentication, portal, admin, messaging, and invoice scripts.
+- Verified the main JavaScript files with Node syntax checks.
+- Verified firebase.json and site.webmanifest JSON syntax.
+
+CLEAN URL EXAMPLES
+/services instead of /services.html
+/portfolio instead of /portfolio.html
+/contact instead of /contact.html
+/es/services instead of /es/services.html
+
+DEPLOYMENT
+Upload the contents of this folder to the same hosting setup you currently use.
+For Firebase Hosting, deploy with your normal Firebase deploy process.
+For Apache hosting, keep the included .htaccess file.
