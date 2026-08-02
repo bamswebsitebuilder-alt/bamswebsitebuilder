@@ -1,171 +1,631 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="View recent website projects created by BAM's Website Builder." name="description"/>
-<title>Portfolio | BAM's Website Builder</title>
-<!-- Main website CSS -->
-<link href="/css/style-updated.css?v=1" rel="stylesheet"/>
-<!-- Portfolio page CSS -->
-<link href="/images/icon-dark.jpg" rel="icon" type="image/jpeg"/>
-<link href="/css/animations.css?v=2" rel="stylesheet"/>
-<link rel="canonical" href="https://bamswebsitebuilder.com/portfolio"/>
-<link href="/css/page-theme.css?v=1" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="description"
+        content="View recent website projects created by BAM's Website Builder."
+    >
+
+    <title>Portfolio | BAM's Website Builder</title>
+
+    <link rel="canonical" href="https://bamswebsitebuilder.com/portfolio">
+    <link rel="icon" href="/images/icon-dark.jpg" type="image/jpeg">
+
+    <link rel="stylesheet" href="/css/style-updated.css?v=3">
+    <link rel="stylesheet" href="/css/animations.css?v=2">
 </head>
-<body><header class="site-header" id="site-header">
-<div class="header-container">
-<a aria-label="BAM's Website Builder home" class="site-brand" href="/">
-<span class="brand-text">
-<strong>BAM'S</strong>
-<small>WEBSITE BUILDER</small>
-</span>
-</a>
-<nav aria-label="Main navigation" class="desktop-navigation">
-<a data-page="home" href="/">Home</a><a data-page="services" href="/services">Services</a><a data-page="prices" href="/prices">Prices</a><a aria-current="page" class="active" data-page="portfolio" href="/portfolio">Portfolio</a><a data-page="reviews" href="/reviews">Reviews</a><a data-page="contact" href="/contact">Contact</a><a data-page="login" href="/login">Login</a>
-</nav>
-<div class="desktop-language">
-<a class="language-active" href="/portfolio">English</a>
-<span aria-hidden="true">|</span>
-<a href="/es/portfolio">Español</a>
-</div>
-<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open navigation menu" class="menu-toggle" id="menu-toggle" type="button">
-<span></span><span></span><span></span>
-</button>
-</div>
-</header><div class="menu-overlay" id="menu-overlay"></div><aside aria-hidden="true" aria-label="Mobile navigation" class="mobile-menu" id="mobile-menu">
-<div class="mobile-menu-header">
-<a class="mobile-menu-brand" href="/">
-<span>
-<strong>BAM'S</strong>
-<small>WEBSITE BUILDER</small>
-</span>
-</a>
-<button aria-label="Close navigation menu" class="mobile-menu-close" id="mobile-menu-close" type="button">
-<span></span><span></span>
-</button>
-</div>
-<nav class="mobile-navigation">
-<a data-page="home" href="/"><span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#home"></use></svg></span><span>Home</span></a><a data-page="services" href="/services"><span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#services"></use></svg></span><span>Services</span></a><a data-page="prices" href="/prices"><span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#prices"></use></svg></span><span>Prices</span></a><a aria-current="page" class="active" data-page="portfolio" href="/portfolio"><span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#portfolio"></use></svg></span><span>Portfolio</span></a><a data-page="reviews" href="/reviews"><span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#reviews"></use></svg></span><span>Reviews</span></a><a data-page="contact" href="/contact"><span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#contact"></use></svg></span><span>Contact</span></a><a data-page="login" href="/login"><span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#login"></use></svg></span><span>Login</span></a>
-</nav>
-<div class="mobile-language-section">
-<p>Language</p>
-<div class="mobile-language-links">
-<a class="language-active" href="/portfolio">English</a>
-<a href="/es/portfolio">Español</a>
-</div>
-</div>
-<div class="mobile-menu-cta">
-<a href="/contact">Get a Free Quote</a>
-</div>
-<div class="mobile-menu-contact">
-<a href="tel:+17274178762">727-417-8762</a>
-<a href="mailto:bamswebsitebuilder@gmail.com">bamswebsitebuilder@gmail.com</a>
-</div>
-</aside>
-<!-- HEADER -->
-<!-- SHARED STICKY NAVIGATION -->
+<body>
+    <!-- Site Header -->
+    <header class="site-header" id="site-header">
+        <div class="header-container">
+            <a
+                class="site-brand"
+                href="/"
+                aria-label="BAM's Website Builder home"
+            >
+                <span class="brand-text">
+                    <strong>BAM'S</strong>
+                    <small>WEBSITE BUILDER</small>
+                </span>
+            </a>
 
+            <nav class="desktop-navigation" aria-label="Main navigation">
+                <a href="/" data-page="home">Home</a>
+                <a href="/services" data-page="services">Services</a>
+                <a href="/prices" data-page="prices">Prices</a>
+                <a
+                    class="active"
+                    href="/portfolio"
+                    data-page="portfolio"
+                    aria-current="page"
+                >
+                    Portfolio
+                </a>
+                <a href="/reviews" data-page="reviews">Reviews</a>
+                <a href="/contact" data-page="contact">Contact</a>
+                <a href="/login" data-page="login">Login</a>
+            </nav>
 
+            <div class="desktop-language">
+                <a class="language-active" href="/portfolio">English</a>
+                <span aria-hidden="true">|</span>
+                <a href="/es/portfolio">Español</a>
+            </div>
 
-<!-- MAIN CONTENT -->
-<main>
-<section class="portfolio-page">
-<div class="portfolio-header">
-<span class="portfolio-eyebrow">Our Work</span>
-<h1>Websites Built to Stand Out</h1>
-<p>Explore modern, mobile-friendly websites created for businesses, brands, creators, and growing online platforms.</p>
-</div>
+            <button
+                class="menu-toggle"
+                id="menu-toggle"
+                type="button"
+                aria-label="Open navigation menu"
+                aria-controls="mobile-menu"
+                aria-expanded="false"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
 
-<div class="portfolio-filters" aria-label="Filter portfolio projects">
-<button class="portfolio-filter active" type="button" data-filter="all">All</button>
-<button class="portfolio-filter" type="button" data-filter="platform">Platforms</button>
-<button class="portfolio-filter" type="button" data-filter="author">Authors</button>
-<button class="portfolio-filter" type="button" data-filter="barber">Barbers</button>
-<button class="portfolio-filter" type="button" data-filter="automotive">Automotive</button>
-<button class="portfolio-filter" type="button" data-filter="beauty">Beauty</button>
-</div>
+    <!-- Mobile Navigation -->
+    <div class="menu-overlay" id="menu-overlay"></div>
 
-<div class="portfolio-grid portfolio-grid-modern">
-<article class="portfolio-card portfolio-card-modern" data-category="automotive">
-<div class="portfolio-image-wrapper"><img alt="Velocity Drive Rentals website preview" class="portfolio-project-image" src="/images/velocity-drive-rentals.jpg"/></div>
-<div class="portfolio-card-content"><span class="portfolio-category">Car Rental Website</span><h2>Velocity Drive Rentals</h2><p>A polished rental website that helps customers browse vehicles, compare rates, and begin a reservation online.</p><ul class="portfolio-features portfolio-tags"><li>Fleet</li><li>Reservations</li><li>Customer Portal</li></ul><div class="portfolio-actions"><a class="portfolio-button" href="/velocity-drive-rentals/" target="_blank" rel="noopener noreferrer">View Live Site</a><a class="portfolio-button portfolio-button-secondary" href="/contact">Build Something Similar</a></div></div>
-</article>
+    <aside
+        class="mobile-menu"
+        id="mobile-menu"
+        aria-label="Mobile navigation"
+        aria-hidden="true"
+    >
+        <div class="mobile-menu-header">
+            <a class="mobile-menu-brand" href="/">
+                <span>
+                    <strong>BAM'S</strong>
+                    <small>WEBSITE BUILDER</small>
+                </span>
+            </a>
 
-<article class="portfolio-card portfolio-card-modern" data-category="beauty">
-<div class="portfolio-image-wrapper logo-showcase"><img alt="Blush and Bloom logo" class="portfolio-logo-image" src="/images/blush-bloom-logo.svg"/></div>
-<div class="portfolio-card-content"><span class="portfolio-category">Beauty Website</span><h2>Blush &amp; Bloom</h2><p>A soft, feminine website designed for a beauty business with clear services, strong calls to action, and a welcoming brand experience.</p><ul class="portfolio-features portfolio-tags"><li>Services</li><li>Booking Ready</li><li>Mobile Friendly</li></ul><div class="portfolio-actions"><a class="portfolio-button" href="/blush-bloom/" target="_blank" rel="noopener noreferrer">View Live Site</a><a class="portfolio-button portfolio-button-secondary" href="/contact">Build Something Similar</a></div></div>
-</article>
+            <button
+                class="mobile-menu-close"
+                id="mobile-menu-close"
+                type="button"
+                aria-label="Close navigation menu"
+            >
+                <span></span>
+                <span></span>
+            </button>
+        </div>
 
-<article class="portfolio-card portfolio-card-modern" data-category="barber">
-<div class="portfolio-image-wrapper logo-showcase"><img alt="G3 Blend Lab logo" class="portfolio-logo-image" src="/images/g3-blend-lab-logo.png"/></div>
-<div class="portfolio-card-content"><span class="portfolio-category">Barber Website</span><h2>G3 Blend Lab</h2><p>A bold barber website with a premium dark style, service details, haircut examples, and appointment-focused calls to action.</p><ul class="portfolio-features portfolio-tags"><li>Booking</li><li>Gallery</li><li>Pricing</li></ul><div class="portfolio-actions"><a class="portfolio-button" href="/blend-lab/" target="_blank" rel="noopener noreferrer">View Live Site</a><a class="portfolio-button portfolio-button-secondary" href="/contact">Build Something Similar</a></div></div>
-</article>
+        <nav class="mobile-navigation">
+            <a href="/" data-page="home">
+                <span class="mobile-link-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <use href="/images/bam-icons.svg#home"></use>
+                    </svg>
+                </span>
+                <span>Home</span>
+            </a>
 
-<article class="portfolio-card portfolio-card-modern" data-category="platform">
-<div class="portfolio-image-wrapper logo-showcase"><img alt="ConnectSphere logo" class="portfolio-logo-image" src="/images/connectsphere.png"/></div>
-<div class="portfolio-card-content"><span class="portfolio-category">Social Platform</span><h2>ConnectSphere</h2><p>A responsive social platform concept featuring profiles, messaging, notifications, and an interactive community feed.</p><ul class="portfolio-features portfolio-tags"><li>Profiles</li><li>Messaging</li><li>Community Feed</li></ul><div class="portfolio-actions"><a class="portfolio-button" href="/connectsphere/" target="_blank" rel="noopener noreferrer">View Live Site</a><a class="portfolio-button portfolio-button-secondary" href="/contact">Build Something Similar</a></div></div>
-</article>
+            <a href="/services" data-page="services">
+                <span class="mobile-link-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <use href="/images/bam-icons.svg#services"></use>
+                    </svg>
+                </span>
+                <span>Services</span>
+            </a>
 
-<article class="portfolio-card portfolio-card-modern" data-category="author">
-<div class="portfolio-image-wrapper"><img alt="Kade Mercer author website preview" class="portfolio-project-image" src="/images/book1.png"/></div>
-<div class="portfolio-card-content"><span class="portfolio-category">Author Website</span><h2>Kade Mercer</h2><p>A dramatic author website built to showcase books, introduce the writer, share updates, and connect with readers.</p><ul class="portfolio-features portfolio-tags"><li>Book Showcase</li><li>Author Bio</li><li>Reader Resources</li></ul><div class="portfolio-actions"><a class="portfolio-button" href="/kade-mercer/" target="_blank" rel="noopener noreferrer">View Live Site</a><a class="portfolio-button portfolio-button-secondary" href="/contact">Build Something Similar</a></div></div>
-</article>
-</div>
+            <a href="/prices" data-page="prices">
+                <span class="mobile-link-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <use href="/images/bam-icons.svg#prices"></use>
+                    </svg>
+                </span>
+                <span>Prices</span>
+            </a>
 
-<section class="portfolio-cta">
-<div><span class="portfolio-eyebrow">Your Business Could Be Next</span><h2>Like one of these designs?</h2><p>Let’s create a custom website that fits your brand, services, and goals.</p></div>
-<div class="portfolio-cta-actions"><a class="portfolio-button" href="/contact">Request a Free Quote</a><a class="portfolio-button portfolio-button-secondary" href="/prices">View Pricing</a></div>
-</section>
-</section>
-</main>
-<!-- FOOTER -->
-<footer class="home-footer">
-  <div class="footer-grid">
-    <div>
-      <h3>BAM'S WEBSITE BUILDER</h3>
-      <p>Professional, responsive websites built to help small businesses strengthen their online presence and attract more customers.</p>
-    </div>
-    <div>
-      <h4>Quick Links</h4>
-      <div class="footer-links"><a href="/services">Services</a><a href="/prices">Prices</a><a href="/portfolio">Portfolio</a><a href="/reviews">Reviews</a><a href="/contact">Contact</a></div>
-    </div>
-    <div>
-      <h4>Client Access</h4>
-      <div class="footer-links"><a href="/login">Login</a><a href="/register">Create Account</a><a href="/forgot-password">Forgot Password</a></div>
-    </div>
-    <div>
-      <h4>Contact</h4>
-      <div class="footer-links"><a href="tel:+17274178762">727-417-8762</a><a href="mailto:bamswebsitebuilder@gmail.com">bamswebsitebuilder@gmail.com</a><a href="/contact">Request a Quote</a><a href="/es">Español</a></div>
-    </div>
-  </div>
-  <div class="footer-bottom">© 2026 BAM's Website Builder. All Rights Reserved.</div>
-</footer>
-<script src="/js/navigation.js?v=100"></script>
-<!-- Start of LiveChat (www.livechat.com) code -->
-<script>
-    window.__lc = window.__lc || {};
-    window.__lc.license = 19864799;
-    window.__lc.integration_name = "manual_onboarding";
-    window.__lc.product_name = "livechat";
-    ;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},get:function(){if(!e._h)throw new Error("[LiveChatWidget] You can't use getters before load.");return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},init:function(){var n=t.createElement("script");n.async=!0,n.type="text/javascript",n.src="https://cdn.livechatinc.com/tracking.js",t.head.appendChild(n)}};!n.__lc.asyncInit&&e.init(),n.LiveChatWidget=n.LiveChatWidget||e}(window,document,[].slice))
-</script>
-<noscript><a href="https://www.livechat.com/chat-with/19864799/" rel="nofollow">Chat with us</a>, powered by <a href="https://www.livechat.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a></noscript>
-<!-- End of LiveChat code --><script src="/js/animations.js?v=1"></script>
-<script>
-const filters=document.querySelectorAll('.portfolio-filter');
-const projects=document.querySelectorAll('.portfolio-card-modern');
-filters.forEach(button=>button.addEventListener('click',()=>{
-  filters.forEach(item=>item.classList.remove('active'));
-  button.classList.add('active');
-  const filter=button.dataset.filter;
-  projects.forEach(project=>{
-    const show=filter==='all'||project.dataset.category===filter;
-    project.hidden=!show;
-  });
-}));
-</script>
+            <a
+                class="active"
+                href="/portfolio"
+                data-page="portfolio"
+                aria-current="page"
+            >
+                <span class="mobile-link-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <use href="/images/bam-icons.svg#portfolio"></use>
+                    </svg>
+                </span>
+                <span>Portfolio</span>
+            </a>
 
+            <a href="/reviews" data-page="reviews">
+                <span class="mobile-link-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <use href="/images/bam-icons.svg#reviews"></use>
+                    </svg>
+                </span>
+                <span>Reviews</span>
+            </a>
+
+            <a href="/contact" data-page="contact">
+                <span class="mobile-link-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <use href="/images/bam-icons.svg#contact"></use>
+                    </svg>
+                </span>
+                <span>Contact</span>
+            </a>
+
+            <a href="/login" data-page="login">
+                <span class="mobile-link-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <use href="/images/bam-icons.svg#login"></use>
+                    </svg>
+                </span>
+                <span>Login</span>
+            </a>
+        </nav>
+
+        <div class="mobile-language-section">
+            <p>Language</p>
+            <div class="mobile-language-links">
+                <a class="language-active" href="/portfolio">English</a>
+                <a href="/es/portfolio">Español</a>
+            </div>
+        </div>
+
+        <div class="mobile-menu-cta">
+            <a href="/contact">Get a Free Quote</a>
+        </div>
+
+        <div class="mobile-menu-contact">
+            <a href="tel:+17274178762">727-417-8762</a>
+            <a href="mailto:bamswebsitebuilder@gmail.com">
+                bamswebsitebuilder@gmail.com
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+        <section class="portfolio-page">
+            <header class="portfolio-header">
+                <span class="portfolio-eyebrow">Our Work</span>
+                <h1>Websites Built to Stand Out</h1>
+                <p>
+                    Explore modern, mobile-friendly websites created for
+                    businesses, brands, creators, and growing online platforms.
+                </p>
+            </header>
+
+            <!-- Portfolio Filters -->
+            <div class="portfolio-filters" aria-label="Filter portfolio projects">
+                <button class="portfolio-filter active" type="button" data-filter="all">
+                    All
+                </button>
+                <button class="portfolio-filter" type="button" data-filter="platform">
+                    Platforms
+                </button>
+                <button class="portfolio-filter" type="button" data-filter="author">
+                    Authors
+                </button>
+                <button class="portfolio-filter" type="button" data-filter="barber">
+                    Barbers
+                </button>
+                <button class="portfolio-filter" type="button" data-filter="automotive">
+                    Automotive
+                </button>
+                <button class="portfolio-filter" type="button" data-filter="beauty">
+                    Beauty
+                </button>
+            </div>
+
+            <!-- Portfolio Projects -->
+            <div class="portfolio-grid portfolio-grid-modern">
+                <article
+                    class="portfolio-card portfolio-card-modern"
+                    data-category="automotive"
+                >
+                    <div class="portfolio-image-wrapper">
+                        <img
+                            class="portfolio-project-image"
+                            src="/images/velocity-drive-rentals.jpg"
+                            alt="Velocity Drive Rentals website preview"
+                        >
+                    </div>
+
+                    <div class="portfolio-card-content">
+                        <span class="portfolio-category">Car Rental Website</span>
+                        <h2>Velocity Drive Rentals</h2>
+                        <p>
+                            A polished rental website that helps customers browse
+                            vehicles, compare rates, and begin a reservation online.
+                        </p>
+
+                        <ul class="portfolio-features portfolio-tags">
+                            <li>Fleet</li>
+                            <li>Reservations</li>
+                            <li>Customer Portal</li>
+                        </ul>
+
+                        <div class="portfolio-actions">
+                            <a
+                                class="portfolio-button"
+                                href="/velocity-drive-rentals/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                View Live Site
+                            </a>
+                            <a
+                                class="portfolio-button portfolio-button-secondary"
+                                href="/contact"
+                            >
+                                Build Something Similar
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article
+                    class="portfolio-card portfolio-card-modern"
+                    data-category="beauty"
+                >
+                    <div class="portfolio-image-wrapper logo-showcase">
+                        <img
+                            class="portfolio-logo-image"
+                            src="/images/blush-bloom-logo.svg"
+                            alt="Blush and Bloom logo"
+                        >
+                    </div>
+
+                    <div class="portfolio-card-content">
+                        <span class="portfolio-category">Beauty Website</span>
+                        <h2>Blush &amp; Bloom</h2>
+                        <p>
+                            A soft, feminine website designed for a beauty business
+                            with clear services, strong calls to action, and a
+                            welcoming brand experience.
+                        </p>
+
+                        <ul class="portfolio-features portfolio-tags">
+                            <li>Services</li>
+                            <li>Booking Ready</li>
+                            <li>Mobile Friendly</li>
+                        </ul>
+
+                        <div class="portfolio-actions">
+                            <a
+                                class="portfolio-button"
+                                href="/blush-bloom/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                View Live Site
+                            </a>
+                            <a
+                                class="portfolio-button portfolio-button-secondary"
+                                href="/contact"
+                            >
+                                Build Something Similar
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article
+                    class="portfolio-card portfolio-card-modern"
+                    data-category="barber"
+                >
+                    <div class="portfolio-image-wrapper logo-showcase">
+                        <img
+                            class="portfolio-logo-image"
+                            src="/images/g3-blend-lab-logo.png"
+                            alt="G3 Blend Lab logo"
+                        >
+                    </div>
+
+                    <div class="portfolio-card-content">
+                        <span class="portfolio-category">Barber Website</span>
+                        <h2>G3 Blend Lab</h2>
+                        <p>
+                            A bold barber website with a premium dark style,
+                            service details, haircut examples, and
+                            appointment-focused calls to action.
+                        </p>
+
+                        <ul class="portfolio-features portfolio-tags">
+                            <li>Booking</li>
+                            <li>Gallery</li>
+                            <li>Pricing</li>
+                        </ul>
+
+                        <div class="portfolio-actions">
+                            <a
+                                class="portfolio-button"
+                                href="/blend-lab/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                View Live Site
+                            </a>
+                            <a
+                                class="portfolio-button portfolio-button-secondary"
+                                href="/contact"
+                            >
+                                Build Something Similar
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article
+                    class="portfolio-card portfolio-card-modern"
+                    data-category="platform"
+                >
+                    <div class="portfolio-image-wrapper logo-showcase">
+                        <img
+                            class="portfolio-logo-image"
+                            src="/images/connectsphere.png"
+                            alt="ConnectSphere logo"
+                        >
+                    </div>
+
+                    <div class="portfolio-card-content">
+                        <span class="portfolio-category">Social Platform</span>
+                        <h2>ConnectSphere</h2>
+                        <p>
+                            A responsive social platform concept featuring profiles,
+                            messaging, notifications, and an interactive community feed.
+                        </p>
+
+                        <ul class="portfolio-features portfolio-tags">
+                            <li>Profiles</li>
+                            <li>Messaging</li>
+                            <li>Community Feed</li>
+                        </ul>
+
+                        <div class="portfolio-actions">
+                            <a
+                                class="portfolio-button"
+                                href="/connectsphere/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                View Live Site
+                            </a>
+                            <a
+                                class="portfolio-button portfolio-button-secondary"
+                                href="/contact"
+                            >
+                                Build Something Similar
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article
+                    class="portfolio-card portfolio-card-modern"
+                    data-category="author"
+                >
+                    <div class="portfolio-image-wrapper">
+                        <img
+                            class="portfolio-project-image"
+                            src="/images/book1.png"
+                            alt="Kade Mercer author website preview"
+                        >
+                    </div>
+
+                    <div class="portfolio-card-content">
+                        <span class="portfolio-category">Author Website</span>
+                        <h2>Kade Mercer</h2>
+                        <p>
+                            A dramatic author website built to showcase books,
+                            introduce the writer, share updates, and connect with readers.
+                        </p>
+
+                        <ul class="portfolio-features portfolio-tags">
+                            <li>Book Showcase</li>
+                            <li>Author Bio</li>
+                            <li>Reader Resources</li>
+                        </ul>
+
+                        <div class="portfolio-actions">
+                            <a
+                                class="portfolio-button"
+                                href="/kade-mercer/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                View Live Site
+                            </a>
+                            <a
+                                class="portfolio-button portfolio-button-secondary"
+                                href="/contact"
+                            >
+                                Build Something Similar
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Portfolio Call to Action -->
+            <section class="portfolio-cta">
+                <div>
+                    <span class="portfolio-eyebrow">Your Business Could Be Next</span>
+                    <h2>Like one of these designs?</h2>
+                    <p>
+                        Let’s create a custom website that fits your brand,
+                        services, and goals.
+                    </p>
+                </div>
+
+                <div class="portfolio-cta-actions">
+                    <a class="portfolio-button" href="/contact">
+                        Request a Free Quote
+                    </a>
+                    <a
+                        class="portfolio-button portfolio-button-secondary"
+                        href="/prices"
+                    >
+                        View Pricing
+                    </a>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="home-footer">
+        <div class="footer-grid">
+            <div>
+                <h3>BAM'S WEBSITE BUILDER</h3>
+                <p>
+                    Professional, responsive websites built to help small businesses
+                    strengthen their online presence and attract more customers.
+                </p>
+            </div>
+
+            <div>
+                <h4>Quick Links</h4>
+                <div class="footer-links">
+                    <a href="/services">Services</a>
+                    <a href="/prices">Prices</a>
+                    <a href="/portfolio">Portfolio</a>
+                    <a href="/reviews">Reviews</a>
+                    <a href="/contact">Contact</a>
+                </div>
+            </div>
+
+            <div>
+                <h4>Client Access</h4>
+                <div class="footer-links">
+                    <a href="/login">Login</a>
+                    <a href="/register">Create Account</a>
+                    <a href="/forgot-password">Forgot Password</a>
+                </div>
+            </div>
+
+            <div>
+                <h4>Contact</h4>
+                <div class="footer-links">
+                    <a href="tel:+17274178762">727-417-8762</a>
+                    <a href="mailto:bamswebsitebuilder@gmail.com">
+                        bamswebsitebuilder@gmail.com
+                    </a>
+                    <a href="/contact">Request a Quote</a>
+                    <a href="/es">Español</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            © 2026 BAM's Website Builder. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- Shared Scripts -->
+    <script src="/js/navigation.js?v=100"></script>
+    <script src="/js/animations.js?v=1"></script>
+
+    <!-- Portfolio Filtering -->
+    <script>
+        const filterButtons = document.querySelectorAll(".portfolio-filter");
+        const portfolioProjects = document.querySelectorAll(".portfolio-card-modern");
+
+        filterButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const selectedFilter = button.dataset.filter;
+
+                filterButtons.forEach((filterButton) => {
+                    filterButton.classList.remove("active");
+                });
+
+                button.classList.add("active");
+
+                portfolioProjects.forEach((project) => {
+                    const matchesFilter =
+                        selectedFilter === "all" ||
+                        project.dataset.category === selectedFilter;
+
+                    project.hidden = !matchesFilter;
+                });
+            });
+        });
+    </script>
+
+    <!-- LiveChat -->
+    <script>
+        window.__lc = window.__lc || {};
+        window.__lc.license = 19864799;
+        window.__lc.integration_name = "manual_onboarding";
+        window.__lc.product_name = "livechat";
+
+        (function (windowObject, documentObject, arraySlice) {
+            function queueCommand(command) {
+                return liveChat._h
+                    ? liveChat._h.apply(null, command)
+                    : liveChat._q.push(command);
+            }
+
+            const liveChat = {
+                _q: [],
+                _h: null,
+                _v: "2.0",
+                on() {
+                    queueCommand(["on", arraySlice.call(arguments)]);
+                },
+                once() {
+                    queueCommand(["once", arraySlice.call(arguments)]);
+                },
+                off() {
+                    queueCommand(["off", arraySlice.call(arguments)]);
+                },
+                get() {
+                    if (!liveChat._h) {
+                        throw new Error(
+                            "[LiveChatWidget] You cannot use getters before load."
+                        );
+                    }
+
+                    return queueCommand(["get", arraySlice.call(arguments)]);
+                },
+                call() {
+                    queueCommand(["call", arraySlice.call(arguments)]);
+                },
+                init() {
+                    const script = documentObject.createElement("script");
+                    script.async = true;
+                    script.type = "text/javascript";
+                    script.src = "https://cdn.livechatinc.com/tracking.js";
+                    documentObject.head.appendChild(script);
+                }
+            };
+
+            if (!windowObject.__lc.asyncInit) {
+                liveChat.init();
+            }
+
+            windowObject.LiveChatWidget = windowObject.LiveChatWidget || liveChat;
+        })(window, document, Array.prototype.slice);
+    </script>
+
+    <noscript>
+        <a
+            href="https://www.livechat.com/chat-with/19864799/"
+            rel="nofollow"
+        >
+            Chat with us
+        </a>, powered by
+        <a
+            href="https://www.livechat.com/?welcome"
+            target="_blank"
+            rel="noopener nofollow"
+        >
+            LiveChat
+        </a>
+    </noscript>
 </body>
 </html>
