@@ -1,0 +1,17 @@
+FLEETFLOW V3 FIXED
+
+Upload the CONTENTS of this folder directly into your live /fleetflow/ folder:
+- index.html
+- services.html
+- tracking.html
+- quote.html
+- style.css
+- script.js
+- logo.svg
+- .htaccess (if your host supports Apache)
+
+Do not upload the outer fleetflow folder inside the existing /fleetflow/ folder.
+After upload, test: https://www.bamswebsitebuilder.com/fleetflow/index.html?v=3
+Then test: https://www.bamswebsitebuilder.com/fleetflow/
+
+This build uses explicit .html links so navigation works even if clean-URL rewrites fail.
