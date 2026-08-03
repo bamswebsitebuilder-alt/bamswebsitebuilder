@@ -1,17 +1,22 @@
-FLEETFLOW V3 FIXED
+FLEETFLOW RENAMED BUILD
 
-Upload the CONTENTS of this folder directly into your live /fleetflow/ folder:
+Upload these files directly into your live /fleetflow/ folder and replace the old versions:
 - index.html
-- services.html
-- tracking.html
-- quote.html
+- solutions.html
+- control-tower.html
+- consultation.html
 - style.css
 - script.js
 - logo.svg
-- .htaccess (if your host supports Apache)
+- .htaccess
 
-Do not upload the outer fleetflow folder inside the existing /fleetflow/ folder.
-After upload, test: https://www.bamswebsitebuilder.com/fleetflow/index.html?v=3
-Then test: https://www.bamswebsitebuilder.com/fleetflow/
+Delete the old renamed pages after upload:
+- services.html
+- tracking.html
+- quote.html
 
-This build uses explicit .html links so navigation works even if clean-URL rewrites fail.
+Do not rename index.html. The /fleetflow/ URL needs index.html as the default homepage.
+
+Test:
+https://www.bamswebsitebuilder.com/fleetflow/index.html?v=4
+https://www.bamswebsitebuilder.com/fleetflow/
