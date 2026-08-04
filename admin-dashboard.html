@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Admin dashboard for BAM's Website Builder.">
-  <title>Admin Dashboard | BAM's Website Builder</title>
+  <title>Panel de administración | BAM's Website Builder</title>
 
   <link rel="icon" href="/images/icon-dark.jpg" type="image/jpeg">
-  <link rel="stylesheet" href="/css/style.css?v=101">
-  <link rel="stylesheet" href="/css/admin-dashboard.css?v=108">
-  <link rel="stylesheet" href="/css/admin-messages.css?v=2">
-<link href="/css/animations.css?v=2" rel="stylesheet"/>
-<link rel="canonical" href="https://bamswebsitebuilder.com/admin-dashboard"/>
-    <link rel="stylesheet" href="/css/footer-fix.css?v=1">
+  <link rel="stylesheet" href="/css/style.css?v=72">
+  <link rel="stylesheet" href="/css/admin-dashboard.css?v=107">
+  <link rel="stylesheet" href="/css/admin-messages.css?v=1">
+<link href="/css/animations.css?v=1" rel="stylesheet"/>
+<link rel="canonical" href="https://bamswebsitebuilder.com/es/admin-dashboard"/>
 <link rel="stylesheet" href="/css/site-upgrades.css?v=1">
 </head>
 
@@ -23,7 +22,7 @@
       class="admin-menu-toggle"
       id="admin-menu-toggle"
       type="button"
-      aria-label="Open admin menu"
+      aria-label="Abrir menú de administración"
       aria-controls="admin-sidebar"
       aria-expanded="false"
     >
@@ -32,52 +31,52 @@
       <span></span>
     </button>
 
-    <a class="admin-brand" href="/" aria-label="BAM's Website Builder home">
+    <a class="admin-brand" href="/es/" aria-label="Inicio de BAM's Website Builder">
       <strong>BAM'S</strong>
       <span>WEBSITE BUILDER</span>
     </a>
 
     <div class="admin-header-actions">
-      <span id="admin-email">Loading...</span>
-      <a class="admin-header-link" href="/client-portal">Client Portal</a>
-      <button id="admin-logout" type="button">Log Out</button>
+      <span id="admin-email">Cargando...</span>
+      <a class="admin-header-link" href="/es/client-portal">Portal del cliente</a>
+      <button id="admin-logout" type="button">Cerrar sesión</button>
     </div>
   </header>
 
   <div class="admin-shell">
 
     <aside class="admin-sidebar" id="admin-sidebar" aria-hidden="false">
-      <p class="admin-sidebar-label">ADMIN MENU</p>
+      <p class="admin-sidebar-label">MENÚ DE ADMINISTRACIÓN</p>
 
       <nav class="admin-nav" aria-label="Admin navigation">
         <button class="admin-nav-button active" type="button" data-panel="overview">
-          Overview
+          Resumen
         </button>
 
         <button class="admin-nav-button" type="button" data-panel="clients">
-          Clients
+          Clientes
         </button>
 
         <button class="admin-nav-button" type="button" data-panel="projects">
-          Projects
+          Proyectos
         </button>
 
         <button class="admin-nav-button" type="button" data-panel="invoices">
-          Invoices
+          Facturas
         </button>
 
         <button class="admin-nav-button" type="button" data-panel="files">
-          Files
+          Archivos
         </button>
 
 
         <button class="admin-nav-button" type="button" data-panel="messages">
-          Messages
+          Mensajes
           <span class="admin-nav-count" id="message-count" hidden>0</span>
         </button>
 
         <button class="admin-nav-button" type="button" data-panel="notifications">
-          Notifications
+          Notificaciones
           <span class="admin-nav-count" id="notification-count" hidden>0</span>
         </button>
       </nav>
@@ -95,29 +94,29 @@
 
       <section class="admin-panel active" id="overview">
         <div class="admin-page-heading">
-          <p class="admin-kicker">DASHBOARD</p>
-          <h1>Admin Overview</h1>
-          <p>Manage your clients, projects, invoices, files, and recent activity.</p>
+          <p class="admin-kicker">PANEL</p>
+          <h1>Admin Resumen</h1>
+          <p>Administra clientes, proyectos, facturas, archivos y actividad reciente.</p>
         </div>
 
         <div class="admin-stat-grid">
           <article class="admin-stat-card">
-            <span>Total Clients</span>
+            <span>Total Clientes</span>
             <strong id="stat-clients">0</strong>
           </article>
 
           <article class="admin-stat-card">
-            <span>Unpaid Invoices</span>
+            <span>Unpaid Facturas</span>
             <strong id="stat-unpaid">0</strong>
           </article>
 
           <article class="admin-stat-card">
-            <span>Paid Invoices</span>
+            <span>Paid Facturas</span>
             <strong id="stat-paid">0</strong>
           </article>
 
           <article class="admin-stat-card">
-            <span>Outstanding Balance</span>
+            <span>Saldo pendiente</span>
             <strong id="stat-balance">$0.00</strong>
           </article>
         </div>
@@ -125,30 +124,30 @@
         <article class="admin-card">
           <div class="admin-card-heading">
             <div>
-              <p class="admin-kicker">QUICK ACTIONS</p>
-              <h2>Manage Your Business</h2>
+              <p class="admin-kicker">ACCIONES RÁPIDAS</p>
+              <h2>Administra tu negocio</h2>
             </div>
           </div>
 
           <div class="admin-action-row">
             <button class="admin-primary-button" type="button" data-open-panel="clients">
-              Add Client
+              Agregar cliente
             </button>
 
             <button class="admin-secondary-button" type="button" data-open-panel="projects">
-              Update Project
+              Actualizar proyecto
             </button>
 
             <button class="admin-secondary-button" type="button" data-open-panel="invoices">
-              Create Invoice
+              Crear factura
             </button>
 
             <button class="admin-secondary-button" type="button" data-open-panel="files">
-              Upload File
+              Subir archivo
             </button>
 
             <button class="admin-secondary-button" type="button" data-open-panel="messages">
-              Message Client
+              Enviar mensaje
             </button>
           </div>
         </article>
@@ -156,8 +155,8 @@
 
       <section class="admin-panel" id="clients">
         <div class="admin-page-heading">
-          <p class="admin-kicker">CLIENTS</p>
-          <h1>Client Management</h1>
+          <p class="admin-kicker">CLIENTES</p>
+          <h1>Administración de clientes</h1>
           <p>Add client profiles and review registered client accounts.</p>
         </div>
 
@@ -203,7 +202,7 @@
 
         <article class="admin-card">
           <div class="admin-card-heading">
-            <h2>Registered Clients</h2>
+            <h2>Registered Clientes</h2>
           </div>
 
           <div class="admin-list" id="client-list">
@@ -214,14 +213,14 @@
 
       <section class="admin-panel" id="projects">
         <div class="admin-page-heading">
-          <p class="admin-kicker">PROJECTS</p>
-          <h1>Project Tracker</h1>
+          <p class="admin-kicker">PROYECTOS</p>
+          <h1>Seguimiento de proyectos</h1>
           <p>Assign projects and keep clients updated on progress.</p>
         </div>
 
         <article class="admin-card">
           <div class="admin-card-heading">
-            <h2>Create or Update Project</h2>
+            <h2>Create or Actualizar proyecto</h2>
           </div>
 
           <form id="project-form">
@@ -308,7 +307,7 @@
 
         <article class="admin-card">
           <div class="admin-card-heading">
-            <h2>Current Projects</h2>
+            <h2>Current Proyectos</h2>
           </div>
 
           <div class="admin-list" id="project-list">
@@ -319,14 +318,14 @@
 
       <section class="admin-panel" id="invoices">
         <div class="admin-page-heading">
-          <p class="admin-kicker">INVOICES</p>
-          <h1>Invoice Management</h1>
+          <p class="admin-kicker">FACTURAS</p>
+          <h1>Administración de facturas</h1>
           <p>Create invoices and track payment status.</p>
         </div>
 
         <article class="admin-card">
           <div class="admin-card-heading">
-            <h2>Create Invoice</h2>
+            <h2>Crear factura</h2>
           </div>
 
           <form id="invoice-form">
@@ -366,7 +365,7 @@
 
             <div class="admin-form-actions">
               <p class="admin-status" id="invoice-form-status" hidden></p>
-              <button class="admin-primary-button" type="submit">Create Invoice</button>
+              <button class="admin-primary-button" type="submit">Crear factura</button>
             </div>
           </form>
         </article>
@@ -391,7 +390,7 @@
 
         <article class="admin-card">
           <div class="admin-card-heading">
-            <h2>Upload File</h2>
+            <h2>Subir archivo</h2>
           </div>
 
           <form id="admin-file-form">
@@ -414,7 +413,7 @@
 
             <div class="admin-form-actions">
               <p class="admin-status" id="file-form-status" hidden></p>
-              <button class="admin-primary-button" type="submit">Upload File</button>
+              <button class="admin-primary-button" type="submit">Subir archivo</button>
             </div>
           </form>
         </article>
@@ -500,7 +499,7 @@
         <article class="admin-card">
           <div class="admin-card-heading">
             <div>
-              <h2>Browser Notifications</h2>
+              <h2>Browser Notificaciones</h2>
               <p id="notification-status" class="admin-status">
                 Enable notifications to receive updates on this device.
               </p>
@@ -511,7 +510,7 @@
               id="enable-browser-notifications"
               type="button"
             >
-              Enable Notifications
+              Enable Notificaciones
             </button>
           </div>
         </article>
