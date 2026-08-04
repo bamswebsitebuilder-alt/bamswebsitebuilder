@@ -1,0 +1,9 @@
+FleetFlow image fix
+
+1. Upload index.html to the website root and replace the existing file.
+2. Upload portfolio.html to the website root and replace the existing file.
+3. Upload fleetflow-preview-v2.png into the /images/ folder.
+4. Keep the filename exactly: fleetflow-preview-v2.png
+5. Clear your browser cache or open the site in a private/incognito window.
+
+The HTML now uses /images/fleetflow-preview-v2.png?v=2 instead of the SVG file.

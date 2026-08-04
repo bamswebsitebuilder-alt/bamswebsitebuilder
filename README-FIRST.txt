@@ -1,9 +1,11 @@
-FLEETFLOW INSTALLATION
+FLEETFLOW V2 UPDATE
 
-1. Upload the fleetflow folder to your website root.
-2. Upload images/fleetflow-preview.svg to your main images folder.
-3. Replace your current home.html, index.html, and portfolio.html with the updated files included here.
-4. contact.html is included for convenience; FleetFlow was already present in its template selector.
-5. Open /fleetflow/ to view the demo.
+Upload mapping:
+- fleetflow/ -> your website's /fleetflow/ folder
+- index.html -> main English homepage
+- portfolio.html -> main English portfolio page
+- es/index.html -> Spanish homepage
+- images/fleetflow-preview-v2.svg -> main /images/ folder
+- 404.html is included unchanged for convenience
 
-The tracking and quote tools are front-end demonstrations and do not book real shipments.
+The redesign replaces the parcel-carrier/FedEx-like presentation with an original enterprise logistics technology platform focused on fleet operations, route intelligence, warehouses, freight, analytics, and a network control tower.
