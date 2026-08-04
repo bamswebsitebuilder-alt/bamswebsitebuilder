@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Panel de proyectos para clientes de BAM's Website Builder." name="description"/>
+<title>Portal del cliente | BAM's Website Builder</title>
+<link href="/css/style.css?v=72" rel="stylesheet"/>
+<link href="/css/portal.css?v=81" rel="stylesheet"/>
+<link href="/images/icon-dark.jpg" rel="icon" type="image/jpeg"/><link href="/css/animations.css?v=1" rel="stylesheet"/>
+<link href="/css/site-upgrades.css?v=1" rel="stylesheet"/>
+</head>
+<body class="client-portal-page" data-auth-protected="true"><header class="site-header" id="site-header">
+<div class="header-container">
+<a aria-label="BAM's Website Builder home" class="site-brand" href="/es/">
+<span class="brand-text">
+<strong>BAM'S</strong>
+<small>WEBSITE BUILDER</small>
+</span>
+</a>
+<nav aria-label="Main navigation" class="desktop-navigation">
+<a data-page="home" href="/es/">Inicio</a><a data-page="services" href="/es/services">Servicios</a><a data-page="prices" href="/es/prices">Precios</a><a data-page="templates" href="/es/templates">Plantillas</a><a data-page="portfolio" href="/es/portfolio">Portafolio</a><a data-page="reviews" href="/es/reviews">Reseñas</a><a data-page="contact" href="/es/contact">Contacto</a><a aria-current="page" class="active" data-page="login" href="/es/login">Iniciar sesión</a>
+</nav>
+<div class="desktop-language">
+<a href="/client-portal">Inglés</a>
+<span aria-hidden="true">|</span>
+<a class="language-active" href="/es/client-portal">Español</a>
+</div>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menú de navegación" class="menu-toggle" id="menu-toggle" type="button">
+<span></span><span></span><span></span>
+</button>
+</div>
+</header><div class="menu-overlay" id="menu-overlay"></div><aside aria-hidden="true" aria-label="Navegación móvil" class="mobile-menu" id="mobile-menu">
+<div class="mobile-menu-header">
+<a class="mobile-menu-brand" href="/es/">
+<span>
+<strong>BAM'S</strong>
+<small>WEBSITE BUILDER</small>
+</span>
+</a>
+<button aria-label="Cerrar menú de navegación" class="mobile-menu-close" id="mobile-menu-close" type="button">
+<span></span><span></span>
+</button>
+</div>
+<nav class="mobile-navigation">
+<a data-page="home" href="/es/"><span aria-hidden="true" class="mobile-link-icon"><svg viewbox="0 0 24 24"><use href="/images/bam-icons.svg#home"></use></svg></span><span>Inicio</span></a><a data-page="services" href="/es/services"><span aria-hidden="true" class="mobile-link-icon"><svg viewbox="0 0 24 24"><use href="/images/bam-icons.svg#services"></use></svg></span><span>Servicios</span></a><a data-page="prices" href="/es/prices"><span aria-hidden="true" class="mobile-link-icon"><svg viewbox="0 0 24 24"><use href="/images/bam-icons.svg#prices"></use></svg></span><span>Precios</span></a><a data-page="templates" href="/es/templates"><span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#templates"></use></svg></span><span>Plantillas</span></a><a data-page="portfolio" href="/es/portfolio"><span aria-hidden="true" class="mobile-link-icon"><svg viewbox="0 0 24 24"><use href="/images/bam-icons.svg#portfolio"></use></svg></span><span>Portafolio</span></a><a data-page="reviews" href="/es/reviews"><span aria-hidden="true" class="mobile-link-icon"><svg viewbox="0 0 24 24"><use href="/images/bam-icons.svg#reviews"></use></svg></span><span>Reseñas</span></a><a data-page="contact" href="/es/contact"><span aria-hidden="true" class="mobile-link-icon"><svg viewbox="0 0 24 24"><use href="/images/bam-icons.svg#contact"></use></svg></span><span>Contacto</span></a><a aria-current="page" class="active" data-page="login" href="/es/login"><span aria-hidden="true" class="mobile-link-icon"><svg viewbox="0 0 24 24"><use href="/images/bam-icons.svg#login"></use></svg></span><span>Iniciar sesión</span></a>
+</nav>
+<div class="mobile-language-section">
+<p>Idioma</p>
+<div class="mobile-language-links">
+<a href="/client-portal">Inglés</a>
+<a class="language-active" href="/es/client-portal">Español</a>
+</div>
+</div>
+<div class="mobile-menu-cta">
+<a href="/es/contact">Obtén una cotización gratis</a>
+</div>
+<div class="mobile-menu-contact">
+<a href="tel:+17274178762">727-417-8762</a>
+<a href="mailto:bamswebsitebuilder@gmail.com">bamswebsitebuilder@gmail.com</a>
+</div>
+</aside>
+<main class="portal-page">
+<section class="portal-topbar">
+<div>
+<p class="portal-eyebrow">PORTAL DEL CLIENTE</p>
+<h1 id="portal-welcome">Portal del cliente</h1>
+<p>Aquí encontrarás la información más reciente sobre tu proyecto de sitio web.</p>
+</div>
+<div class="portal-user">
+<div class="portal-avatar" id="portal-avatar">C</div>
+<div>
+<strong id="portal-user-name">Cuenta del cliente</strong>
+<span id="portal-user-email"></span>
+</div>
+<a class="portal-logout" href="#" id="portal-logout">Cerrar sesión</a>
+</div>
+</section>
+<section class="portal-layout">
+<aside class="portal-sidebar">
+<nav aria-label="Secciones del portal del cliente" class="portal-nav">
+<button class="portal-nav-link active" data-panel="dashboard" type="button">Panel</button>
+<button class="portal-nav-link" data-panel="project" type="button">Mi proyecto</button>
+<button class="portal-nav-link" data-panel="files" type="button">Archivos</button>
+<button class="portal-nav-link" data-panel="invoices" type="button">Facturas</button>
+<button class="portal-nav-link" data-panel="messages" type="button">Mensajes</button>
+<button class="portal-nav-link" data-panel="support" type="button">Soporte</button>
+<button class="portal-nav-link" data-panel="account" type="button">Cuenta</button>
+</nav>
+</aside>
+<div class="portal-content">
+<section class="portal-panel active" id="dashboard">
+<article class="portal-card portal-empty-state">
+<p class="card-kicker">BIENVENIDO A TU PORTAL</p>
+<h2>Todavía no se ha asignado ningún proyecto</h2>
+<p>Tu cuenta está lista. Cuando BAM's Website Builder asigne un proyecto, aquí aparecerán el progreso, los archivos, las facturas y los mensajes.</p>
+<div class="portal-actions">
+<a class="portal-primary-button" href="/es/contact">Contactar soporte</a>
+</div>
+</article>
+</section>
+<section class="portal-panel" id="project">
+<article class="portal-card portal-empty-state">
+<p class="card-kicker">MI PROYECTO</p>
+<h2>No hay ningún proyecto asignado</h2>
+<p>Los detalles y el calendario de tu proyecto aparecerán aquí cuando se te asigne uno.</p>
+</article>
+</section>
+<section class="portal-panel" id="files">
+<article class="portal-card">
+<div class="card-heading"><div>
+<p class="card-kicker">ARCHIVOS DEL PROYECTO</p>
+<h2>Sube tus archivos</h2>
+<p>Sube logotipos, fotos, archivos PDF, documentos y otros materiales necesarios para tu proyecto de sitio web.</p>
+</div></div>
+<div class="portal-upload-box">
+<label class="portal-file-picker" for="portal-file-input">
+<span id="selected-file-name">Elegir archivo</span>
+</label>
+<input accept=".jpg,.jpeg,.png,.webp,.gif,.pdf,.doc,.docx,.txt,.zip" id="portal-file-input" type="file"/>
+<button class="portal-primary-button" disabled="" id="upload-file-button" type="button">Subir archivo</button>
+<progress hidden="" id="upload-progress" max="100" value="0"></progress>
+<p class="portal-file-status" hidden="" id="upload-status" role="status"></p>
+<small>Tamaño máximo por archivo: 15 MB.</small>
+</div>
+<h3 class="section-subtitle">Tus archivos subidos</h3>
+<div class="file-list" id="client-file-list">
+<p class="portal-file-status">Buscando archivos subidos...</p>
+</div>
+</article>
+</section>
+<section class="portal-panel" id="invoices">
+<article class="portal-card portal-empty-state">
+<p class="card-kicker">FACTURACIÓN</p>
+<h2>No hay facturas disponibles</h2>
+<p>Las facturas asignadas a tu cuenta aparecerán aquí.</p>
+</article>
+</section>
+<section class="portal-panel" id="messages">
+<article class="portal-card portal-empty-state">
+<p class="card-kicker">COMUNICACIÓN</p>
+<h2>Todavía no hay mensajes</h2>
+<p>Los mensajes de BAM's Website Builder aparecerán aquí.</p>
+</article>
+</section>
+<section class="portal-panel" id="support">
+<article class="portal-card portal-empty-state">
+<p class="card-kicker">CENTRO DE AYUDA</p>
+<h2>No hay solicitudes de soporte</h2>
+<p>No tienes solicitudes de soporte abiertas.</p>
+</article>
+</section>
+<section class="portal-panel" id="account">
+<article class="portal-card">
+<div class="card-heading"><div>
+<p class="card-kicker">CONFIGURACIÓN DE LA CUENTA</p>
+<h2>Información del perfil</h2>
+</div></div>
+<form class="portal-form" id="account-form">
+<div class="portal-form-grid">
+<div class="form-group">
+<label for="account-name">Nombre completo</label>
+<input id="account-name" name="name" type="text" value=""/>
+</div>
+<div class="form-group">
+<label for="account-email">Correo electrónico</label>
+<input id="account-email" name="email" readonly="" type="email" value=""/>
+</div>
+<div class="form-group">
+<label for="account-business">Nombre del negocio</label>
+<input id="account-business" name="business" type="text" value=""/>
+</div>
+<div class="form-group">
+<label for="account-phone">Número de teléfono</label>
+<input id="account-phone" name="phone" type="tel" value=""/>
+</div>
+</div>
+<div class="portal-actions">
+<p class="form-alert" hidden="" id="account-alert" role="status"></p>
+<button class="portal-primary-button" type="submit">Guardar cambios</button>
+<a class="portal-secondary-button" href="/es/forgot-password">Cambiar contraseña</a>
+</div>
+</form>
+</article>
+</section>
+</div>
+</section>
+</main>
+<footer>
+<p>© 2026 BAM's Website Builder. Todos los derechos reservados.</p>
+<p><a href="/es/contact">Contactar soporte</a></p>
+</footer>
+<script src="/js/navigation.js?v=71"></script>
+<script src="/js/portal.js?v=72"></script>
+<script src="/js/portal-auth-es.js?v=81" type="module"></script>
+<script src="/js/animations.js?v=1"></script>
+<script defer="" src="/js/site-upgrades.js?v=1"></script>
+</body>
+</html>
