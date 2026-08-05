@@ -19,6 +19,41 @@
 <meta property="og:image" content="https://www.bamswebsitebuilder.com/images/logo-dark.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="/css/site-upgrades.css?v=1">
+
+<style id="hero-logo-centering-fix">
+/* Center the hero logo behind the hero text */
+.hero{
+    position:relative;
+    overflow:hidden;
+    isolation:isolate;
+}
+.hero-logo-bg{
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:clamp(280px,48vw,720px);
+    max-width:none;
+    height:auto;
+    transform:translate(-50%,-50%);
+    object-fit:contain;
+    opacity:.16;
+    z-index:0;
+    pointer-events:none;
+    user-select:none;
+}
+.hero-content{
+    position:relative;
+    z-index:1;
+    margin-inline:auto;
+}
+@media (max-width:650px){
+    .hero-logo-bg{
+        width:clamp(260px,88vw,460px);
+        opacity:.13;
+    }
+}
+</style>
+
 </head>
 <body><header class="site-header" id="site-header">
 <div class="header-container">
