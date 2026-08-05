@@ -6,7 +6,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta name="description" content="Contact BAM's Website Builder for a free website design quote in Clearwater, Florida and beyond.">
 <title>Get a Free Website Quote | BAM's Website Builder</title>
-<link href="/css/style.css?v=103" rel="stylesheet"/>
+<link href="/css/style.css?v=102" rel="stylesheet"/>
 <link href="/images/icon-dark.jpg" rel="icon" type="image/jpeg"/>
 <link href="/css/animations.css?v=2" rel="stylesheet"/>
 <link rel="canonical" href="https://bamswebsitebuilder.com/contact"/>
@@ -336,33 +336,20 @@
 <script>
 (function () {
   const params = new URLSearchParams(window.location.search);
-  const templateName = params.get('template');
-  const packageKey = (params.get('package') || '').toLowerCase();
-  const paymentKey = (params.get('payment') || '').toLowerCase();
-  const templateSelect = document.getElementById('template-choice');
-  const packageSelect = document.getElementById('package');
+  const template = params.get('template');
+  const payment = params.get('payment');
+  const select = document.getElementById('template-choice');
   const message = document.getElementById('message');
-  const packageMap = { starter: 'Starter Website', business: 'Business Website', premium: 'Premium Website' };
-
-  if (templateName && templateSelect) {
-    const option = Array.from(templateSelect.options).find((item) => item.value.toLowerCase() === templateName.toLowerCase());
-    if (option) templateSelect.value = option.value;
+  if (template && select) {
+    const option = Array.from(select.options).find(item => item.value.toLowerCase() === template.toLowerCase());
+    if (option) select.value = option.value;
   }
-  if (packageSelect && packageMap[packageKey]) packageSelect.value = packageMap[packageKey];
-  if (templateName && message && !message.value.trim()) {
-    const paymentText = paymentKey === 'full' ? 'full payment' : 'deposit';
-    message.value = `I would like to use the ${templateName} template with the ${packageMap[packageKey] || 'recommended website package'} and pay the ${paymentText}. Please send me the secure payment link and next steps.`;
-  }
-  if (templateName) {
-    const form = document.querySelector('.contact-form');
-    if (form) {
-      form.classList.add('template-request-active');
-      window.setTimeout(() => form.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
-    }
+  if (payment && message && !message.value) {
+    message.value = 'I would like to use the selected template and pay the ' + payment + ' option. Please send me the secure payment link and next steps.';
   }
 })();
 </script>
-<script src="/js/navigation.js?v=103"></script>
+<script src="/js/navigation.js?v=102"></script>
 <!-- Start of LiveChat (www.livechat.com) code -->
 <script>
     window.__lc = window.__lc || {};

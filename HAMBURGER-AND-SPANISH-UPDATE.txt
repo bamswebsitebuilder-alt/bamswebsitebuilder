@@ -1,0 +1,12 @@
+BAM'S WEBSITE BUILDER UPDATE
+
+This package preserves the original project and assets while applying:
+- Updated English root HTML pages
+- Corrected Spanish pages in /es/
+- Updated shared /css/style.css
+- Updated shared /js/navigation.js
+- Cache version updated to v=102
+
+Upload the contents of BAM's-Website-Design to the website root while preserving all folders.
+English homepage: /
+Spanish homepage: /es/

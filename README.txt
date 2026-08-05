@@ -1,16 +1,30 @@
-BAM FIX PACK
+BLUSH & BLOOM NAIL STUDIO — BUSINESS BUNDLE DEMO
 
-Upload these files to your GitHub repository:
-- style.css -> /css/style.css
-- navigation.js -> /js/navigation.js
-- HTML files -> repository root (matching their names)
+Included website pages:
+1. Home
+2. Services
+3. Gallery
+4. About
+5. Reviews
+6. Booking
+7. Shop (additional page)
+8. Policies (additional page)
 
-Changes included:
-- Fixed header and hamburger remain visible while scrolling.
-- Mobile drawer and overlay remain fixed to the viewport.
-- Background scrolling is locked while the menu is open.
-- Menu closes on links, overlay, Escape, resize, and page restore.
-- Hero logo is centered as a low-opacity watermark behind the content.
-- CSS/JS cache versions changed to v=103 in supplied HTML files.
+Included add-on preparation, excluding maintenance:
+- Additional website pages: Shop and Policies
+- Domain connection: site uses relative links and is ready for hosting/domain mapping
+- Business email setup: placeholder domain email is included; connect the real mailbox after domain setup
+- Google Business Profile setup: Google/Review links are included as placeholders
+- Website content updates: pricing, text, contact details, and images are organized for replacement
+- Website redesign: full pink-and-white multi-page redesign
+- Booking system integration: booking page and form prepared for Square, GlossGenius, Calendly, etc.
+- Online store setup: demo products/cart feedback prepared for Stripe, Square, or PayPal
+- Search engine optimization: unique page titles and meta descriptions on every page
 
-The uploaded home(36).html and forgot-password(25).html contain Spanish content, so they were preserved with descriptive source filenames instead of being silently mapped over English pages.
+Before launch, replace:
+- Business phone, email, city/address, and social links
+- Google Maps and review links
+- Demo portfolio images
+- Booking provider link or form endpoint
+- Store products and payment provider
+- Policies with the client’s final approved wording
