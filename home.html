@@ -93,36 +93,57 @@
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#090909">
 
+
 <style id="hero-logo-centering-fix">
-/* Center the hero logo behind the hero text */
-.hero{
-    position:relative;
-    overflow:hidden;
-    isolation:isolate;
+/* Final hero logo fix: centered, behind content, and protected from animation overrides */
+.hero {
+    position: relative !important;
+    display: grid !important;
+    place-items: center !important;
+    overflow: hidden !important;
+    isolation: isolate !important;
+    text-align: center !important;
 }
-.hero-logo-bg{
-    position:absolute;
-    top:50%;
-    left:50%;
-    width:clamp(280px,48vw,720px);
-    max-width:none;
-    height:auto;
-    transform:translate(-50%,-50%);
-    object-fit:contain;
-    opacity:.16;
-    z-index:0;
-    pointer-events:none;
-    user-select:none;
+
+.hero > .hero-logo-bg {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: min(72vw, 680px) !important;
+    max-width: none !important;
+    height: auto !important;
+    margin: 0 !important;
+    transform: translate(-50%, -50%) !important;
+    translate: none !important;
+    inset: auto !important;
+    object-fit: contain !important;
+    opacity: 0.18 !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+    user-select: none !important;
+    animation: none !important;
+    transition: none !important;
 }
-.hero-content{
-    position:relative;
-    z-index:1;
-    margin-inline:auto;
+
+.hero > .hero-content {
+    position: relative !important;
+    z-index: 2 !important;
+    width: min(900px, 100%) !important;
+    margin: 0 auto !important;
+    text-align: center !important;
 }
-@media (max-width:650px){
-    .hero-logo-bg{
-        width:clamp(260px,88vw,460px);
-        opacity:.13;
+
+.hero .hero-buttons,
+.hero .hero-trust {
+    justify-content: center !important;
+}
+
+@media (max-width: 650px) {
+    .hero > .hero-logo-bg {
+        width: min(96vw, 480px) !important;
+        opacity: 0.14 !important;
     }
 }
 </style>
