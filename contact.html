@@ -336,16 +336,29 @@
 <script>
 (function () {
   const params = new URLSearchParams(window.location.search);
-  const template = params.get('template');
-  const payment = params.get('payment');
-  const select = document.getElementById('template-choice');
+  const templateName = params.get('template');
+  const packageKey = (params.get('package') || '').toLowerCase();
+  const paymentKey = (params.get('payment') || '').toLowerCase();
+  const templateSelect = document.getElementById('template-choice');
+  const packageSelect = document.getElementById('package');
   const message = document.getElementById('message');
-  if (template && select) {
-    const option = Array.from(select.options).find(item => item.value.toLowerCase() === template.toLowerCase());
-    if (option) select.value = option.value;
+  const packageMap = { starter: 'Starter Website', business: 'Business Website', premium: 'Premium Website' };
+
+  if (templateName && templateSelect) {
+    const option = Array.from(templateSelect.options).find((item) => item.value.toLowerCase() === templateName.toLowerCase());
+    if (option) templateSelect.value = option.value;
   }
-  if (payment && message && !message.value) {
-    message.value = 'I would like to use the selected template and pay the ' + payment + ' option. Please send me the secure payment link and next steps.';
+  if (packageSelect && packageMap[packageKey]) packageSelect.value = packageMap[packageKey];
+  if (templateName && message && !message.value.trim()) {
+    const paymentText = paymentKey === 'full' ? 'full payment' : 'deposit';
+    message.value = `I would like to use the ${templateName} template with the ${packageMap[packageKey] || 'recommended website package'} and pay the ${paymentText}. Please send me the secure payment link and next steps.`;
+  }
+  if (templateName) {
+    const form = document.querySelector('.contact-form');
+    if (form) {
+      form.classList.add('template-request-active');
+      window.setTimeout(() => form.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    }
   }
 })();
 </script>
