@@ -1,0 +1,21 @@
+BAM'S WEBSITE DESIGN - FULL STATIC AUDIT AND REPAIR
+Date: August 5, 2026
+
+Repairs completed:
+- Fixed the Spanish homepage link to the Velocity Drive Rentals demo so it resolves from /es/.
+- Updated the Spanish templates page from the obsolete FleetFlow preview filename to fleetflow-preview-v2.png.
+- Corrected Spanish Kade Mercer book-cover paths so all three covers load.
+- Removed nonexistent BAM hero background requests while retaining the intended gradient design.
+- Replaced the missing Blend Lab hero image reference with an existing project image.
+- Removed nonexistent Kade Mercer hero and author-photo requests while retaining visual gradient fallbacks.
+
+Validation completed:
+- Checked 2,638 internal HTML/CSS references: 0 missing local files.
+- Checked all JavaScript files with Node syntax validation: 0 syntax errors.
+- Checked HTML pages for duplicate IDs, missing language attributes, missing titles, missing H1 headings, and images without alt attributes: 0 issues.
+- Checked CSS files for balanced structural braces: 0 issues.
+- Validated firebase.json syntax.
+- Confirmed there are no insecure HTTP asset references.
+
+Deployment:
+Upload the contents inside this folder to the website root. Do not upload the outer folder as a nested directory.
