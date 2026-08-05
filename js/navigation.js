@@ -16,44 +16,11 @@
     const closeButton = document.getElementById('mobile-menu-close');
     const header = document.getElementById('site-header');
 
-    const updateHeader = () => {
-      if (!header) return;
-      const scrolled = window.scrollY > 12;
-      header.classList.toggle('header-scrolled', scrolled);
-      header.classList.toggle('scrolled', scrolled);
-    };
-
-    updateHeader();
-    window.addEventListener('scroll', updateHeader, { passive: true });
-
     if (!toggle || !menu || !overlay) return;
 
     let lastFocusedElement = null;
-    let lockedScrollY = 0;
-
-    const isOpen = () => menu.classList.contains('open');
-
-    const lockPage = () => {
-      lockedScrollY = window.scrollY;
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${lockedScrollY}px`;
-      document.body.style.right = '0';
-      document.body.style.left = '0';
-      document.body.style.width = '100%';
-    };
-
-    const unlockPage = () => {
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.right = '';
-      document.body.style.left = '';
-      document.body.style.width = '';
-      window.scrollTo(0, lockedScrollY);
-    };
 
     const setOpen = (open) => {
-      if (open === isOpen()) return;
-
       toggle.classList.toggle('active', open);
       menu.classList.toggle('active', open);
       menu.classList.toggle('open', open);
@@ -66,21 +33,24 @@
 
       if (open) {
         lastFocusedElement = document.activeElement;
-        lockPage();
-        requestAnimationFrame(() => {
-          const firstControl = menu.querySelector('a, button');
-          firstControl?.focus({ preventScroll: true });
+        window.requestAnimationFrame(() => {
+          const firstLink = menu.querySelector('a, button');
+          if (firstLink) firstLink.focus({ preventScroll: true });
         });
-      } else {
-        unlockPage();
-        lastFocusedElement?.focus?.({ preventScroll: true });
+      } else if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+        lastFocusedElement.focus({ preventScroll: true });
         lastFocusedElement = null;
       }
     };
 
+    const isOpen = () => menu.classList.contains('active') || menu.classList.contains('open');
+    const openMenu = () => setOpen(true);
     const closeMenu = () => setOpen(false);
 
-    toggle.addEventListener('click', () => setOpen(!isOpen()));
+    toggle.addEventListener('click', () => {
+      isOpen() ? closeMenu() : openMenu();
+    });
+
     closeButton?.addEventListener('click', closeMenu);
     overlay.addEventListener('click', closeMenu);
 
@@ -93,12 +63,17 @@
     });
 
     window.addEventListener('resize', () => {
-      if (window.innerWidth > 900 && isOpen()) closeMenu();
+      if (window.innerWidth > 1100 && isOpen()) closeMenu();
     });
 
-    window.addEventListener('pageshow', () => {
-      if (isOpen()) closeMenu();
-      updateHeader();
-    });
+    const updateHeader = () => {
+      if (!header) return;
+      const scrolled = window.scrollY > 12;
+      header.classList.toggle('header-scrolled', scrolled);
+      header.classList.toggle('scrolled', scrolled);
+    };
+
+    updateHeader();
+    window.addEventListener('scroll', updateHeader, { passive: true });
   });
 })();
