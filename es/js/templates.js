@@ -21,3 +21,12 @@ filterButtons.forEach((button) => {
         });
     });
 });
+
+
+/* Accessible feedback while the contact page opens. */
+document.querySelectorAll('.template-select').forEach((link) => {
+  link.addEventListener('click', () => {
+    link.classList.add('is-loading');
+    link.setAttribute('aria-busy', 'true');
+  }, { once: true });
+});
