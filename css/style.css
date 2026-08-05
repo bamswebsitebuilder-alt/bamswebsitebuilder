@@ -3124,3 +3124,150 @@ footer br + a,
     }
 }
 .contact-form.template-request-active{scroll-margin-top:110px;outline:1px solid rgba(212,166,55,.55);box-shadow:0 0 0 5px rgba(212,166,55,.08),0 22px 60px rgba(0,0,0,.22)}
+
+
+/* =========================================================
+   BAM FIX PACK — STICKY MOBILE HEADER + HERO WATERMARK
+   Added 2026-08-05
+========================================================= */
+
+/* Keep the shared header and hamburger visible while scrolling. */
+.site-header {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    left: 0 !important;
+    z-index: 10000 !important;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    will-change: background-color, box-shadow;
+}
+
+.header-container {
+    min-height: var(--header-height);
+}
+
+.menu-toggle {
+    position: relative;
+    z-index: 10002;
+    flex-shrink: 0;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.menu-overlay {
+    position: fixed !important;
+    z-index: 10010 !important;
+}
+
+.mobile-menu {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 10020 !important;
+    height: 100vh;
+    height: 100dvh;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+}
+
+.mobile-menu-header {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    padding-top: env(safe-area-inset-top);
+}
+
+body.menu-open {
+    overflow: hidden !important;
+    touch-action: none;
+}
+
+/* Homepage/service hero logo as a centered background watermark. */
+.hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+}
+
+.hero::after {
+    z-index: 0;
+    pointer-events: none;
+}
+
+.hero-logo-bg {
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    right: auto;
+    z-index: 1;
+    width: min(760px, 78vw);
+    max-width: 760px;
+    max-height: 86%;
+    object-fit: contain;
+    object-position: center;
+    opacity: 0.085;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: screen;
+    filter: brightness(.92) contrast(1.12) saturate(.9);
+    pointer-events: none;
+    user-select: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+@media (max-width: 900px) {
+    body {
+        padding-top: var(--header-height);
+    }
+
+    .site-header {
+        height: var(--header-height);
+    }
+
+    .menu-toggle {
+        display: flex !important;
+    }
+}
+
+@media (max-width: 760px) {
+    .hero {
+        min-height: calc(100svh - var(--header-height));
+        padding: 90px 24px 75px;
+        text-align: center;
+    }
+
+    .hero-content {
+        width: 100%;
+        max-width: 620px;
+        margin-inline: auto;
+    }
+
+    .hero-logo-bg {
+        top: 48%;
+        left: 50%;
+        right: auto;
+        width: 118vw;
+        max-width: 620px;
+        max-height: 72%;
+        opacity: .07;
+        transform: translate(-50%, -50%);
+    }
+}
+
+@media (max-width: 430px) {
+    .hero {
+        padding: 70px 18px 60px;
+    }
+
+    .hero-logo-bg {
+        top: 47%;
+        width: 135vw;
+        max-width: 570px;
+        opacity: .065;
+    }
+}
