@@ -227,8 +227,7 @@ select:focus-visible {
             rgba(0, 0, 0, 0.98) 0%,
             rgba(0, 0, 0, 0.88) 45%,
             rgba(0, 0, 0, 0.55) 100%
-        ),
-        url("../images/hero-background.jpg") center / cover no-repeat;
+        );
 }
 
 .hero::after {
@@ -569,8 +568,7 @@ select:focus-visible {
             145deg,
             rgba(183, 25, 34, 0.4),
             rgba(0, 0, 0, 0.8)
-        ),
-        url("../images/author-photo.jpg") center / cover no-repeat;
+        );
 
     border-radius: 10px;
 }

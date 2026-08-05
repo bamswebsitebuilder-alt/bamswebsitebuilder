@@ -840,8 +840,7 @@ body.menu-open {
             rgba(7, 7, 7, 0.98) 0%,
             rgba(7, 7, 7, 0.91) 48%,
             rgba(7, 7, 7, 0.68) 100%
-        ),
-        url("../images/hero-bg.jpg") center / cover no-repeat;
+        );
 
     overflow: hidden;
 }

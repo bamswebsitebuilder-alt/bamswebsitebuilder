@@ -219,7 +219,7 @@ select:focus-visible {
             rgba(0, 0, 0, 0.86) 48%,
             rgba(0, 0, 0, 0.50) 100%
         ),
-        url("../images/hero-background.jpg") center / cover no-repeat;
+        url("../images/Cut 1.jpeg") center / cover no-repeat;
 }
 
 .hero::after {
