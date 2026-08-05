@@ -1,16 +1,188 @@
-/* BAM'S PROFESSIONAL MOTION + ICON SYSTEM */
-:root{--motion-fast:180ms;--motion-base:420ms;--motion-slow:760ms;--ease-premium:cubic-bezier(.22,1,.36,1)}
-.mobile-link-icon{display:grid!important;place-items:center;width:38px!important;height:38px!important;border-radius:12px!important;background:linear-gradient(145deg,rgba(240,196,90,.16),rgba(212,166,55,.05))!important;border:1px solid rgba(240,196,90,.28)!important;color:#f0c45a!important;transition:transform var(--motion-base) var(--ease-premium),background var(--motion-fast) ease,box-shadow var(--motion-fast) ease!important}
-.mobile-link-icon svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.mobile-navigation a:hover .mobile-link-icon,.mobile-navigation a.active .mobile-link-icon{transform:translateY(-2px) scale(1.04);background:rgba(240,196,90,.2)!important;box-shadow:0 10px 30px rgba(212,166,55,.13)}
-.menu-toggle span{transform-origin:center;transition:transform .35s var(--ease-premium),opacity .2s ease,width .35s var(--ease-premium)!important}
-.menu-toggle.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}.menu-toggle.active span:nth-child(2){opacity:0;width:0}.menu-toggle.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-[data-reveal]{opacity:0;transform:translateY(26px);transition:opacity var(--motion-slow) var(--ease-premium),transform var(--motion-slow) var(--ease-premium)}
-[data-reveal].is-visible{opacity:1;transform:none}
-[data-reveal-delay="1"]{transition-delay:80ms}[data-reveal-delay="2"]{transition-delay:160ms}[data-reveal-delay="3"]{transition-delay:240ms}
-.home-card,.service-card,.price-card,.portfolio-card,.review-summary-card,.portal-card,.admin-card,.admin-stat-card{transition:transform .45s var(--ease-premium),border-color .3s ease,box-shadow .45s var(--ease-premium)!important}
-.home-card:hover,.service-card:hover,.price-card:hover,.portfolio-card:hover,.review-summary-card:hover{transform:translateY(-8px);border-color:rgba(240,196,90,.48)!important;box-shadow:0 24px 65px rgba(0,0,0,.38),0 0 0 1px rgba(240,196,90,.06)}
-.btn,.secondary-button,.price-button,.portfolio-button,.auth-submit,.portal-primary-button,.admin-primary-button{position:relative;overflow:hidden;isolation:isolate}
-.btn::after,.secondary-button::after,.price-button::after,.portfolio-button::after,.auth-submit::after,.portal-primary-button::after,.admin-primary-button::after{content:"";position:absolute;inset:-2px;z-index:-1;background:linear-gradient(110deg,transparent 25%,rgba(255,255,255,.3) 45%,transparent 65%);transform:translateX(-130%);transition:transform .7s var(--ease-premium)}
-.btn:hover::after,.secondary-button:hover::after,.price-button:hover::after,.portfolio-button:hover::after,.auth-submit:hover::after,.portal-primary-button:hover::after,.admin-primary-button:hover::after{transform:translateX(130%)}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}[data-reveal]{opacity:1!important;transform:none!important}}
+/* =========================================================
+   BAM'S PROFESSIONAL MOTION + ICON SYSTEM
+   ========================================================= */
+:root {
+    --motion-fast: 180ms;
+    --motion-base: 420ms;
+    --motion-slow: 760ms;
+    --ease-premium: cubic-bezier(.22, 1, .36, 1);
+}
+/* =========================================================
+   MOBILE NAVIGATION ICONS
+   ========================================================= */
+.mobile-link-icon {
+    display: grid !important;
+    place-items: center;
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(240, 196, 90, 0.28) !important;
+    background: linear-gradient(
+        145deg,
+        rgba(240, 196, 90, 0.16),
+        rgba(212, 166, 55, 0.05)
+    ) !important;
+    color: #f0c45a !important;
+    transition:
+        transform var(--motion-base) var(--ease-premium),
+        background var(--motion-fast) ease,
+        box-shadow var(--motion-fast) ease !important;
+}
+.mobile-link-icon svg {
+    width: 19px;
+    height: 19px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.mobile-navigation a:hover .mobile-link-icon,
+.mobile-navigation a.active .mobile-link-icon {
+    transform: translateY(-2px) scale(1.04);
+    background: rgba(240, 196, 90, 0.2) !important;
+    box-shadow:
+        0 10px 30px rgba(212, 166, 55, 0.13);
+}
+/* =========================================================
+   HAMBURGER MENU ANIMATION
+   ========================================================= */
+.menu-toggle span {
+    transform-origin: center;
+    transition:
+        transform 0.35s var(--ease-premium),
+        opacity 0.2s ease,
+        width 0.35s var(--ease-premium) !important;
+}
+.menu-toggle.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.menu-toggle.active span:nth-child(2) {
+    width: 0;
+    opacity: 0;
+}
+.menu-toggle.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+/* =========================================================
+   SCROLL REVEAL ANIMATIONS
+   ========================================================= */
+[data-reveal] {
+    opacity: 0;
+    transform: translateY(26px);
+    transition:
+        opacity var(--motion-slow) var(--ease-premium),
+        transform var(--motion-slow) var(--ease-premium);
+}
+[data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+}
+[data-reveal-delay="1"] {
+    transition-delay: 80ms;
+}
+[data-reveal-delay="2"] {
+    transition-delay: 160ms;
+}
+[data-reveal-delay="3"] {
+    transition-delay: 240ms;
+}
+/* =========================================================
+   CARD MOTION
+   ========================================================= */
+.home-card,
+.service-card,
+.price-card,
+.portfolio-card,
+.review-summary-card,
+.portal-card,
+.admin-card,
+.admin-stat-card {
+    transition:
+        transform 0.45s var(--ease-premium),
+        border-color 0.3s ease,
+        box-shadow 0.45s var(--ease-premium) !important;
+}
+.home-card:hover,
+.service-card:hover,
+.price-card:hover,
+.portfolio-card:hover,
+.review-summary-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(240, 196, 90, 0.48) !important;
+    box-shadow:
+        0 24px 65px rgba(0, 0, 0, 0.38),
+        0 0 0 1px rgba(240, 196, 90, 0.06);
+}
+/* =========================================================
+   BUTTON SHIMMER EFFECT
+   ========================================================= */
+.btn,
+.secondary-button,
+.price-button,
+.portfolio-button,
+.auth-submit,
+.portal-primary-button,
+.admin-primary-button {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+.btn::after,
+.secondary-button::after,
+.price-button::after,
+.portfolio-button::after,
+.auth-submit::after,
+.portal-primary-button::after,
+.admin-primary-button::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    z-index: -1;
+    background: linear-gradient(
+        110deg,
+        transparent 25%,
+        rgba(255, 255, 255, 0.3) 45%,
+        transparent 65%
+    );
+    transform: translateX(-130%);
+    transition:
+        transform 0.7s var(--ease-premium);
+}
+.btn:hover::after,
+.secondary-button:hover::after,
+.price-button:hover::after,
+.portfolio-button:hover::after,
+.auth-submit:hover::after,
+.portal-primary-button:hover::after,
+.admin-primary-button:hover::after {
+    transform: translateX(130%);
+}
+/* =========================================================
+   MOBILE PORTFOLIO SAFETY
+   Prevent portfolio cards from remaining hidden on phones
+   ========================================================= */
+@media (max-width: 760px) {
+    .portfolio-page[data-reveal],
+    .portfolio-grid[data-reveal] {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+/* =========================================================
+   REDUCED MOTION ACCESSIBILITY
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    [data-reveal] {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
