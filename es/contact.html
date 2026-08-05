@@ -101,21 +101,6 @@
 <label for="business">Nombre del negocio</label>
 <input autocomplete="organization" id="business" name="Business Name" type="text"/>
 </div>
-<!-- TEMPLATE CHOICE -->
-<div class="form-group" id="template-choice-group">
-<label for="template-choice">Plantilla seleccionada</label>
-<select id="template-choice" name="Selected Template">
-<option value="">Ninguna plantilla seleccionada</option>
-<option value="Ember Sage">Ember Sage — Restaurante</option>
-<option value="G3 Blend Lab">G3 Blend Lab — Barbería</option>
-<option value="Blush Bloom">Blush Bloom — Salón de uñas</option>
-<option value="Rainforest Glow">Rainforest Glow — Belleza</option>
-<option value="ConnectSphere">ConnectSphere — Plataforma social</option>
-<option value="Velocity Drive Rentals">Velocity Drive Rentals — Alquiler de autos</option>
-<option value="FleetFlow">FleetFlow — Logística</option>
-<option value="Kade Mercer">Kade Mercer — Autor</option>
-</select>
-</div>
 <!-- WEBSITE PACKAGE -->
 <div class="form-group">
 <label for="package">Paquete web</label>
@@ -204,36 +189,7 @@
 </div>
 <div class="footer-bottom">© 2026 BAM's Website Builder. All Rights Reserved.</div>
 </footer>
-<script>
-(function () {
-  const params = new URLSearchParams(window.location.search);
-  const templateName = params.get('template');
-  const packageKey = (params.get('package') || '').toLowerCase();
-  const paymentKey = (params.get('payment') || '').toLowerCase();
-  const templateSelect = document.getElementById('template-choice');
-  const packageSelect = document.getElementById('package');
-  const message = document.getElementById('message');
-  const packageMap = { starter: 'Sitio inicial', business: 'Sitio empresarial', premium: 'Sitio premium' };
-
-  if (templateName && templateSelect) {
-    const option = Array.from(templateSelect.options).find((item) => item.value.toLowerCase() === templateName.toLowerCase());
-    if (option) templateSelect.value = option.value;
-  }
-  if (packageSelect && packageMap[packageKey]) packageSelect.value = packageMap[packageKey];
-  if (templateName && message && !message.value.trim()) {
-    const paymentText = paymentKey === 'full' ? 'el pago completo' : 'el depósito';
-    message.value = `Quiero usar la plantilla ${templateName} con el paquete ${packageMap[packageKey] || 'recomendado'} y pagar ${paymentText}. Por favor, envíenme el enlace de pago seguro y los próximos pasos.`;
-  }
-  if (templateName) {
-    const form = document.querySelector('.contact-form');
-    if (form) {
-      form.classList.add('template-request-active');
-      window.setTimeout(() => form.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
-    }
-  }
-})();
-</script>
-<script src="/js/navigation.js?v=101"></script>
+<script src="/js/navigation.js?v=102"></script>
 <!-- Start of LiveChat (www.livechat.com) code -->
 <script>
     window.__lc = window.__lc || {};
