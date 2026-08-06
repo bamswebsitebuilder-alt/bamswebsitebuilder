@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#123c2d"/><stop offset="1" stop-color="#4e8b4b"/></linearGradient></defs>
+<rect width="1200" height="700" fill="url(#g)"/><circle cx="980" cy="115" r="72" fill="#f4d35e" opacity=".95"/>
+<path d="M0 510 C220 410 420 570 640 470 C840 380 1010 480 1200 410 V700 H0Z" fill="#7db65c"/>
+<path d="M0 570 C230 490 430 625 660 525 C860 445 1030 540 1200 485 V700 H0Z" fill="#376f45"/>
+<g fill="#fff"><text x="90" y="170" font-family="Arial, sans-serif" font-size="34" font-weight="700" letter-spacing="4">EVERGREEN</text><text x="90" y="235" font-family="Arial, sans-serif" font-size="68" font-weight="800">Lawn Care</text><text x="90" y="292" font-family="Arial, sans-serif" font-size="25" opacity=".9">A greener lawn starts here.</text></g>
+<rect x="90" y="340" width="220" height="58" rx="12" fill="#f4d35e"/><text x="128" y="378" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#173b2f">FREE QUOTE</text>
+<g transform="translate(810 350)"><rect x="0" y="110" width="235" height="95" rx="18" fill="#20372c"/><circle cx="55" cy="220" r="42" fill="#18251f"/><circle cx="190" cy="220" r="42" fill="#18251f"/><rect x="90" y="40" width="105" height="85" rx="12" fill="#f4d35e"/><path d="M48 110 L96 62 L96 140 Z" fill="#d9ead3"/><rect x="195" y="80" width="75" height="18" rx="9" fill="#d9ead3"/></g>
+</svg>
