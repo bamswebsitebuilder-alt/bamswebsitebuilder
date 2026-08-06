@@ -1,1 +1,0 @@
-Gulf Coast Pro Wash static website bundle. Open index.html to preview. Replace placeholder phone/email and connect forms/authentication to your live backend before launch. Service area: Pinellas and Hillsborough Counties, Florida.
