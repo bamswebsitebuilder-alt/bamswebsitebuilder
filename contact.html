@@ -6,12 +6,12 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta name="description" content="Contact BAM's Website Builder for a free website design quote in Clearwater, Florida and beyond.">
 <title>Get a Free Website Quote | BAM's Website Builder</title>
-<link href="/css/style.css?v=20260806-20" rel="stylesheet"/>
+<link href="/css/style.css?v=20260806-30" rel="stylesheet"/>
 <link href="/images/icon-dark.jpg" rel="icon" type="image/jpeg"/>
 <!-- animations.css disabled while fixing template dropdown -->
 <link rel="canonical" href="https://bamswebsitebuilder.com/contact"/>
-<link href="/css/page-theme.css?v=20260806-20" rel="stylesheet"/>
-    <link rel="stylesheet" href="/css/footer-fix.css?v=20260806-20">
+<link href="/css/page-theme.css?v=20260806-30" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/footer-fix.css?v=20260806-30">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Get a Free Website Quote | BAM's Website Builder">
@@ -34,6 +34,25 @@
     color: #9f9f9f;
     font-size: 0.82rem;
     line-height: 1.45;
+}
+</style>
+
+<style>
+#template-choice-group, #template-choice {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+.selected-template-status {
+    margin: 10px 0 0;
+    padding: 11px 13px;
+    color: #ffd700;
+    background: rgba(255, 215, 0, 0.08);
+    border: 1px solid rgba(255, 215, 0, 0.28);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.4;
 }
 </style>
 </head>
@@ -151,7 +170,7 @@
 <div class="form-group" id="template-choice-group">
 <label for="template-choice">Selected Template</label>
 <select id="template-choice" name="Selected Template">
-<option value="">No template selected</option>
+<option value="">Choose a template</option>
 <optgroup label="Newest Templates">
 <option value="Gulf Coast Pro Wash">Gulf Coast Pro Wash — Pressure Washing</option>
 <option value="EverGreen Lawn Care">EverGreen Lawn Care — Lawn Care</option>
@@ -358,29 +377,44 @@
 </footer>
 
 <script>
-(function () {
-  const params = new URLSearchParams(window.location.search);
-  const template = params.get('template');
-  const payment = params.get('payment');
-  const select = document.getElementById('template-choice');
-  const message = document.getElementById('message');
-  if (template && select) {
-    const normalizedTemplate = template.trim().toLowerCase();
-    const option = Array.from(select.options).find((item) =>
-      item.value.trim().toLowerCase() === normalizedTemplate
-    );
+document.addEventListener('DOMContentLoaded', function () {
+    const params = new URLSearchParams(window.location.search);
+    const requestedTemplate = (params.get('template') || '').trim();
+    const payment = (params.get('payment') || '').trim();
+    const select = document.getElementById('template-choice');
+    const status = document.getElementById('selected-template-status');
+    const message = document.getElementById('message');
 
-    if (option) {
-      select.value = option.value;
-      select.dispatchEvent(new Event('change', { bubbles: true }));
+    function updateStatus() {
+        if (!status || !select) return;
+        const selectedText = select.options[select.selectedIndex]?.text || '';
+        status.textContent = select.value
+            ? 'Selected template: ' + selectedText
+            : 'No template selected.';
     }
-  }
-  if (payment && message && !message.value) {
-    message.value = 'I would like to use the selected template and pay the ' + payment + ' option. Please send me the secure payment link and next steps.';
-  }
-})();
+
+    if (select) {
+        if (requestedTemplate) {
+            const normalized = requestedTemplate.toLowerCase();
+            const match = Array.from(select.options).find(function (option) {
+                return option.value.trim().toLowerCase() === normalized;
+            });
+
+            if (match) {
+                select.value = match.value;
+            }
+        }
+
+        select.addEventListener('change', updateStatus);
+        updateStatus();
+    }
+
+    if (payment && message && !message.value) {
+        message.value = 'I would like to use the selected template and pay the ' + payment + ' option. Please send me the secure payment link and next steps.';
+    }
+});
 </script>
-<script src="/js/navigation.js?v=20260806-20"></script>
+<script src="/js/navigation.js?v=20260806-30"></script>
 <!-- Start of LiveChat (www.livechat.com) code -->
 <script>
     window.__lc = window.__lc || {};
