@@ -6,19 +6,36 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta name="description" content="Contact BAM's Website Builder for a free website design quote in Clearwater, Florida and beyond.">
 <title>Get a Free Website Quote | BAM's Website Builder</title>
-<link href="/css/style.css?v=20260806-12" rel="stylesheet"/>
+<link href="/css/style.css?v=20260806-20" rel="stylesheet"/>
 <link href="/images/icon-dark.jpg" rel="icon" type="image/jpeg"/>
-<link href="/css/animations.css?v=20260806-12" rel="stylesheet"/>
+<!-- animations.css disabled while fixing template dropdown -->
 <link rel="canonical" href="https://bamswebsitebuilder.com/contact"/>
-<link href="/css/page-theme.css?v=20260806-12" rel="stylesheet"/>
-    <link rel="stylesheet" href="/css/footer-fix.css?v=20260806-12">
+<link href="/css/page-theme.css?v=20260806-20" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/footer-fix.css?v=20260806-20">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Get a Free Website Quote | BAM's Website Builder">
 <meta property="og:description" content="Contact BAM's Website Builder for a free website design quote in Clearwater, Florida and beyond.">
 <meta property="og:image" content="https://www.bamswebsitebuilder.com/images/logo-dark.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="/css/site-upgrades.css?v=20260806-12">
+<!-- site-upgrades.css disabled while fixing template dropdown -->
+
+<style>
+#template-choice-group,
+#template-choice,
+#template-choice option,
+#template-choice optgroup {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.template-choice-help {
+    margin-top: 8px;
+    color: #9f9f9f;
+    font-size: 0.82rem;
+    line-height: 1.45;
+}
+</style>
 </head>
 <body><header class="site-header" id="site-header">
 <div class="header-container">
@@ -135,17 +152,22 @@
 <label for="template-choice">Selected Template</label>
 <select id="template-choice" name="Selected Template">
 <option value="">No template selected</option>
+<optgroup label="Newest Templates">
+<option value="Gulf Coast Pro Wash">Gulf Coast Pro Wash — Pressure Washing</option>
+<option value="EverGreen Lawn Care">EverGreen Lawn Care — Lawn Care</option>
+</optgroup>
+<optgroup label="All Templates">
 <option value="Ember Sage">Ember Sage — Restaurant</option>
 <option value="G3 Blend Lab">G3 Blend Lab — Barbershop</option>
 <option value="Blush Bloom">Blush Bloom — Nail Salon</option>
-<option value="Rainforest Glow">Rainforest Glow — Waxing & Lashes</option>
+<option value="Rainforest Glow">Rainforest Glow — Waxing &amp; Lashes</option>
 <option value="ConnectSphere">ConnectSphere — Social Platform</option>
 <option value="Velocity Drive Rentals">Velocity Drive Rentals — Car Rental</option>
-<option value="FleetFlow">FleetFlow — Shipping & Logistics</option>
+<option value="FleetFlow">FleetFlow — Shipping &amp; Logistics</option>
 <option value="Kade Mercer">Kade Mercer — Author</option>
-<option value="Gulf Coast Pro Wash">Gulf Coast Pro Wash — Pressure Washing</option>
-<option value="EverGreen Lawn Care">EverGreen Lawn Care — Lawn Care</option>
+</optgroup>
 </select>
+<p class="template-choice-help">The newest templates appear at the top of this list.</p>
 </div>
 <!-- WEBSITE PACKAGE -->
 <div class="form-group">
@@ -343,15 +365,22 @@
   const select = document.getElementById('template-choice');
   const message = document.getElementById('message');
   if (template && select) {
-    const option = Array.from(select.options).find(item => item.value.toLowerCase() === template.toLowerCase());
-    if (option) select.value = option.value;
+    const normalizedTemplate = template.trim().toLowerCase();
+    const option = Array.from(select.options).find((item) =>
+      item.value.trim().toLowerCase() === normalizedTemplate
+    );
+
+    if (option) {
+      select.value = option.value;
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+    }
   }
   if (payment && message && !message.value) {
     message.value = 'I would like to use the selected template and pay the ' + payment + ' option. Please send me the secure payment link and next steps.';
   }
 })();
 </script>
-<script src="/js/navigation.js?v=20260806-12"></script>
+<script src="/js/navigation.js?v=20260806-20"></script>
 <!-- Start of LiveChat (www.livechat.com) code -->
 <script>
     window.__lc = window.__lc || {};
@@ -361,7 +390,7 @@
     ;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},get:function(){if(!e._h)throw new Error("[LiveChatWidget] You can't use getters before load.");return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},init:function(){var n=t.createElement("script");n.async=!0,n.type="text/javascript",n.src="https://cdn.livechatinc.com/tracking.js",t.head.appendChild(n)}};!n.__lc.asyncInit&&e.init(),n.LiveChatWidget=n.LiveChatWidget||e}(window,document,[].slice))
 </script>
 <noscript><a href="https://www.livechat.com/chat-with/19864799/" rel="nofollow">Chat with us</a>, powered by <a href="https://www.livechat.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a></noscript>
-<!-- End of LiveChat code --><script src="/js/animations.js?v=20260806-12"></script>
-<script src="/js/site-upgrades.js?v=20260806-12" defer></script>
+<!-- End of LiveChat code -->
+<!-- animations.js and site-upgrades.js disabled while fixing template dropdown -->
 </body>
 </html>
