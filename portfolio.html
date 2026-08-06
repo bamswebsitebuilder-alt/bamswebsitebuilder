@@ -5,13 +5,15 @@
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0"
+        content="width=device-width, initial-scale=1, viewport-fit=cover"
     >
 
     <meta
         name="description"
         content="View website demos and portfolio projects created for restaurants, salons, transportation, authors, social platforms, and local businesses."
     >
+
+    <meta name="theme-color" content="#090909">
 
     <title>Website Design Portfolio | BAM's Website Builder</title>
 
@@ -39,53 +41,78 @@
     >
 
     <meta
+        property="og:url"
+        content="https://www.bamswebsitebuilder.com/portfolio"
+    >
+
+    <meta
         property="og:image"
         content="https://www.bamswebsitebuilder.com/images/logo-dark.jpg"
     >
 
+    <meta
+        property="og:image:alt"
+        content="BAM's Website Builder logo"
+    >
+
     <meta name="twitter:card" content="summary_large_image">
+
+    <meta
+        name="twitter:title"
+        content="Website Design Portfolio | BAM's Website Builder"
+    >
+
+    <meta
+        name="twitter:description"
+        content="View responsive website demos and portfolio projects created by BAM's Website Builder."
+    >
+
+    <meta
+        name="twitter:image"
+        content="https://www.bamswebsitebuilder.com/images/logo-dark.jpg"
+    >
 
     <!-- Main website stylesheet -->
     <link
         rel="stylesheet"
-        href="/css/style.css?v=103"
+        href="/css/style.css?v=20260806-4"
     >
 
-    <!-- Page theme -->
+    <!-- Page-specific theme -->
     <link
         rel="stylesheet"
-        href="/css/page-theme.css?v=2"
+        href="/css/page-theme.css?v=20260806-4"
     >
 
-    <!-- Footer fixes -->
+    <!-- Footer layout fixes -->
     <link
         rel="stylesheet"
-        href="/css/footer-fix.css?v=2"
+        href="/css/footer-fix.css?v=20260806-4"
     >
 
-    <!-- General site upgrades -->
+    <!-- Shared site upgrades -->
     <link
         rel="stylesheet"
-        href="/css/site-upgrades.css?v=2"
+        href="/css/site-upgrades.css?v=20260806-4"
     >
 
     <!--
-        Animation stylesheet temporarily disabled while testing
-        mobile portfolio visibility.
+        Animation CSS remains disabled while mobile
+        portfolio visibility is being tested.
 
         <link
             rel="stylesheet"
-            href="/css/animations.css?v=3"
+            href="/css/animations.css?v=20260806-4"
         >
     -->
 
     <!--
-        This stylesheet must remain last so its portfolio
-        mobile rules override all earlier stylesheets.
+        IMPORTANT:
+        This stylesheet must remain after every other CSS file.
     -->
     <link
         rel="stylesheet"
-        href="/css/portfolio-mobile-fix.css?v=2"
+        href="/css/portfolio-mobile-fix.css?v=20260806-4"
     >
 </head>
 
@@ -94,7 +121,10 @@
          SITE HEADER
     =========================== -->
 
-    <header class="site-header" id="site-header">
+    <header
+        class="site-header"
+        id="site-header"
+    >
         <div class="header-container">
             <a
                 class="site-brand"
@@ -111,19 +141,31 @@
                 class="desktop-navigation"
                 aria-label="Main navigation"
             >
-                <a data-page="home" href="/">
+                <a
+                    data-page="home"
+                    href="/"
+                >
                     Home
                 </a>
 
-                <a data-page="services" href="/services">
+                <a
+                    data-page="services"
+                    href="/services"
+                >
                     Services
                 </a>
 
-                <a data-page="prices" href="/prices">
+                <a
+                    data-page="prices"
+                    href="/prices"
+                >
                     Prices
                 </a>
 
-                <a data-page="templates" href="/templates">
+                <a
+                    data-page="templates"
+                    href="/templates"
+                >
                     Templates
                 </a>
 
@@ -136,23 +178,36 @@
                     Portfolio
                 </a>
 
-                <a data-page="reviews" href="/reviews">
+                <a
+                    data-page="reviews"
+                    href="/reviews"
+                >
                     Reviews
                 </a>
 
-                <a data-page="contact" href="/contact">
+                <a
+                    data-page="contact"
+                    href="/contact"
+                >
                     Contact
                 </a>
 
-                <a data-page="login" href="/login">
+                <a
+                    data-page="login"
+                    href="/login"
+                >
                     Login
                 </a>
             </nav>
 
-            <div class="desktop-language">
+            <div
+                class="desktop-language"
+                aria-label="Language selection"
+            >
                 <a
                     class="language-active"
                     href="/portfolio"
+                    lang="en"
                     aria-current="page"
                 >
                     English
@@ -160,7 +215,10 @@
 
                 <span aria-hidden="true">|</span>
 
-                <a href="/es/portfolio">
+                <a
+                    href="/es/portfolio"
+                    lang="es"
+                >
                     Español
                 </a>
             </div>
@@ -173,16 +231,16 @@
                 aria-controls="mobile-menu"
                 aria-expanded="false"
             >
-                <span></span>
-                <span></span>
-                <span></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
             </button>
         </div>
     </header>
 
 
     <!-- ==========================
-         MOBILE MENU
+         MOBILE NAVIGATION
     =========================== -->
 
     <div
@@ -196,6 +254,7 @@
         id="mobile-menu"
         aria-label="Mobile navigation"
         aria-hidden="true"
+        tabindex="-1"
     >
         <div class="mobile-menu-header">
             <a
@@ -215,8 +274,8 @@
                 type="button"
                 aria-label="Close navigation menu"
             >
-                <span></span>
-                <span></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
             </button>
         </div>
 
@@ -224,12 +283,18 @@
             class="mobile-navigation"
             aria-label="Mobile main navigation"
         >
-            <a data-page="home" href="/">
+            <a
+                data-page="home"
+                href="/"
+            >
                 <span
                     class="mobile-link-icon"
                     aria-hidden="true"
                 >
-                    <svg viewBox="0 0 24 24">
+                    <svg
+                        viewBox="0 0 24 24"
+                        focusable="false"
+                    >
                         <use href="/images/bam-icons.svg#home"></use>
                     </svg>
                 </span>
@@ -237,12 +302,18 @@
                 <span>Home</span>
             </a>
 
-            <a data-page="services" href="/services">
+            <a
+                data-page="services"
+                href="/services"
+            >
                 <span
                     class="mobile-link-icon"
                     aria-hidden="true"
                 >
-                    <svg viewBox="0 0 24 24">
+                    <svg
+                        viewBox="0 0 24 24"
+                        focusable="false"
+                    >
                         <use href="/images/bam-icons.svg#services"></use>
                     </svg>
                 </span>
@@ -250,12 +321,18 @@
                 <span>Services</span>
             </a>
 
-            <a data-page="prices" href="/prices">
+            <a
+                data-page="prices"
+                href="/prices"
+            >
                 <span
                     class="mobile-link-icon"
                     aria-hidden="true"
                 >
-                    <svg viewBox="0 0 24 24">
+                    <svg
+                        viewBox="0 0 24 24"
+                        focusable="false"
+                    >
                         <use href="/images/bam-icons.svg#prices"></use>
                     </svg>
                 </span>
@@ -263,12 +340,18 @@
                 <span>Prices</span>
             </a>
 
-            <a data-page="templates" href="/templates">
+            <a
+                data-page="templates"
+                href="/templates"
+            >
                 <span
                     class="mobile-link-icon"
                     aria-hidden="true"
                 >
-                    <svg viewBox="0 0 24 24">
+                    <svg
+                        viewBox="0 0 24 24"
+                        focusable="false"
+                    >
                         <use href="/images/bam-icons.svg#portfolio"></use>
                     </svg>
                 </span>
@@ -286,7 +369,10 @@
                     class="mobile-link-icon"
                     aria-hidden="true"
                 >
-                    <svg viewBox="0 0 24 24">
+                    <svg
+                        viewBox="0 0 24 24"
+                        focusable="false"
+                    >
                         <use href="/images/bam-icons.svg#portfolio"></use>
                     </svg>
                 </span>
@@ -294,12 +380,18 @@
                 <span>Portfolio</span>
             </a>
 
-            <a data-page="reviews" href="/reviews">
+            <a
+                data-page="reviews"
+                href="/reviews"
+            >
                 <span
                     class="mobile-link-icon"
                     aria-hidden="true"
                 >
-                    <svg viewBox="0 0 24 24">
+                    <svg
+                        viewBox="0 0 24 24"
+                        focusable="false"
+                    >
                         <use href="/images/bam-icons.svg#reviews"></use>
                     </svg>
                 </span>
@@ -307,12 +399,18 @@
                 <span>Reviews</span>
             </a>
 
-            <a data-page="contact" href="/contact">
+            <a
+                data-page="contact"
+                href="/contact"
+            >
                 <span
                     class="mobile-link-icon"
                     aria-hidden="true"
                 >
-                    <svg viewBox="0 0 24 24">
+                    <svg
+                        viewBox="0 0 24 24"
+                        focusable="false"
+                    >
                         <use href="/images/bam-icons.svg#contact"></use>
                     </svg>
                 </span>
@@ -320,12 +418,18 @@
                 <span>Contact</span>
             </a>
 
-            <a data-page="login" href="/login">
+            <a
+                data-page="login"
+                href="/login"
+            >
                 <span
                     class="mobile-link-icon"
                     aria-hidden="true"
                 >
-                    <svg viewBox="0 0 24 24">
+                    <svg
+                        viewBox="0 0 24 24"
+                        focusable="false"
+                    >
                         <use href="/images/bam-icons.svg#login"></use>
                     </svg>
                 </span>
@@ -341,12 +445,16 @@
                 <a
                     class="language-active"
                     href="/portfolio"
+                    lang="en"
                     aria-current="page"
                 >
                     English
                 </a>
 
-                <a href="/es/portfolio">
+                <a
+                    href="/es/portfolio"
+                    lang="es"
+                >
                     Español
                 </a>
             </div>
@@ -371,17 +479,20 @@
 
 
     <!-- ==========================
-         MAIN PORTFOLIO CONTENT
+         MAIN CONTENT
     =========================== -->
 
     <main id="main-content">
-        <section class="portfolio-page">
+        <section
+            class="portfolio-page"
+            aria-labelledby="portfolio-title"
+        >
             <div class="portfolio-header">
                 <span class="portfolio-eyebrow">
                     Our Work
                 </span>
 
-                <h1>
+                <h1 id="portfolio-title">
                     Featured Projects
                 </h1>
 
@@ -403,6 +514,7 @@
                             alt="ConnectSphere logo"
                             loading="eager"
                             decoding="async"
+                            fetchpriority="high"
                         >
                     </div>
 
@@ -432,6 +544,7 @@
                             href="/connectsphere/"
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label="Visit the ConnectSphere website"
                         >
                             Visit Website
                         </a>
@@ -478,6 +591,7 @@
                             href="/kade-mercer/"
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label="Visit the Kade Mercer website"
                         >
                             Visit Website
                         </a>
@@ -525,6 +639,7 @@
                             href="/blend-lab/"
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label="Visit the G3 Blend Lab website"
                         >
                             Visit Website
                         </a>
@@ -573,6 +688,7 @@
                             href="/velocity-drive-rentals/"
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label="Visit the Velocity Drive Rentals website"
                         >
                             Visit Website
                         </a>
@@ -619,6 +735,7 @@
                             href="/blush-bloom/"
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label="Visit the Blush Bloom website"
                         >
                             Visit Website
                         </a>
@@ -666,6 +783,7 @@
                             href="/ember-sage-kitchen/"
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label="Visit the Ember and Sage Kitchen website"
                         >
                             Visit Website
                         </a>
@@ -713,6 +831,7 @@
                             href="/rainforest-glow/"
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label="Visit the Rainforest Glow website"
                         >
                             Visit Website
                         </a>
@@ -726,7 +845,7 @@
                     <div class="portfolio-image-wrapper">
                         <img
                             class="portfolio-project-image"
-                            src="/images/fleetflow-preview-v2.png?v=2"
+                            src="/images/fleetflow-preview-v2.png?v=3"
                             alt="FleetFlow shipping and logistics website preview"
                             loading="lazy"
                             decoding="async"
@@ -759,6 +878,7 @@
                             href="/fleetflow/"
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label="Visit the FleetFlow Logistics website"
                         >
                             Visit Website
                         </a>
@@ -807,6 +927,7 @@
                             href="/gulf-coast-pro-wash/"
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label="Visit the Gulf Coast Pro Wash website"
                         >
                             Visit Website
                         </a>
@@ -853,6 +974,7 @@
                             href="/evergreen-lawn-care/"
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label="Visit the EverGreen Lawn Care website"
                         >
                             Visit Website
                         </a>
@@ -882,30 +1004,36 @@
             <div>
                 <h4>Quick Links</h4>
 
-                <div class="footer-links">
+                <nav
+                    class="footer-links"
+                    aria-label="Footer quick links"
+                >
                     <a href="/services">Services</a>
                     <a href="/prices">Prices</a>
                     <a href="/templates">Templates</a>
                     <a href="/portfolio">Portfolio</a>
                     <a href="/reviews">Reviews</a>
                     <a href="/contact">Contact</a>
-                </div>
+                </nav>
             </div>
 
             <div>
                 <h4>Client Access</h4>
 
-                <div class="footer-links">
+                <nav
+                    class="footer-links"
+                    aria-label="Client access links"
+                >
                     <a href="/login">Login</a>
                     <a href="/register">Create Account</a>
                     <a href="/forgot-password">Forgot Password</a>
-                </div>
+                </nav>
             </div>
 
             <div>
                 <h4>Contact</h4>
 
-                <div class="footer-links">
+                <div class="footer-links footer-contact">
                     <a href="tel:+17274178762">
                         727-417-8762
                     </a>
@@ -918,7 +1046,10 @@
                         Request a Quote
                     </a>
 
-                    <a href="/es">
+                    <a
+                        href="/es"
+                        lang="es"
+                    >
                         Español
                     </a>
                 </div>
@@ -936,22 +1067,22 @@
     =========================== -->
 
     <script
-        src="/js/navigation.js?v=103"
+        src="/js/navigation.js?v=20260806-4"
         defer
     ></script>
 
     <!--
-        Animation script temporarily disabled while testing
-        mobile portfolio visibility.
+        Animation JavaScript remains disabled while mobile
+        portfolio visibility is being tested.
 
         <script
-            src="/js/animations.js?v=2"
+            src="/js/animations.js?v=20260806-4"
             defer
         ></script>
     -->
 
     <script
-        src="/js/site-upgrades.js?v=2"
+        src="/js/site-upgrades.js?v=20260806-4"
         defer
     ></script>
 
