@@ -3166,3 +3166,13 @@ main,
         grid-template-columns: 1fr !important;
     }
 }
+
+/* Prevent reveal effects from leaving portfolio content blurry on phones. */
+@media (max-width: 760px) {
+    .motion-enabled .portfolio-page[data-reveal],
+    .motion-enabled .portfolio-card[data-reveal],
+    .motion-enabled .portfolio-page[data-reveal].is-visible,
+    .motion-enabled .portfolio-card[data-reveal].is-visible {
+        filter: none !important;
+    }
+}
