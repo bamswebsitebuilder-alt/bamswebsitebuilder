@@ -19,12 +19,12 @@
 <link href="https://bamswebsitebuilder.com/templates" hreflang="en" rel="alternate"/>
 <link href="/css/site-upgrades.css?v=1" rel="stylesheet"/>
 <style>
-/* Match the clear, self-contained mobile icons used on the English site. */
+/* Keep mobile navigation icons visible and consistently sized. */
 .mobile-navigation .mobile-link-icon {
     width: 2rem;
     height: 2rem;
     flex: 0 0 2rem;
-    display: inline-grid;
+    display: inline-grid !important;
     place-items: center;
     border-radius: 0.625rem;
     color: #f4c15d;
@@ -34,7 +34,7 @@
 .mobile-navigation .mobile-link-icon svg {
     width: 1.15rem;
     height: 1.15rem;
-    display: block;
+    display: block !important;
     fill: none;
     stroke: currentColor;
     stroke-width: 1.9;
