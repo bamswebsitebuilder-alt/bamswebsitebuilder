@@ -16,7 +16,7 @@
 
     <title>Kade Mercer | Thriller Author</title>
 
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/style.css?v=2">
 </head>
 
 <body>
@@ -26,42 +26,54 @@
     ========================== -->
 
     <header class="site-header">
-
-        <a href="#home" class="author-logo">
+        <a href="#home" class="author-logo" aria-label="Kade Mercer home">
             KADE <span>MERCER</span>
         </a>
 
-        <nav class="main-nav" aria-label="Main navigation">
+        <div class="desktop-language-switcher" aria-label="Language selection">
+            <a href="/kade-mercer/" class="active-language" aria-current="page">English</a>
+            <span aria-hidden="true">|</span>
+            <a href="/kade-mercer/es/">Español</a>
+        </div>
 
-            <a href="#home">
-                Home
-            </a>
+        <button
+            class="menu-button"
+            type="button"
+            aria-expanded="false"
+            aria-controls="main-navigation"
+            aria-label="Open navigation"
+        >
+            <span></span><span></span><span></span>
+        </button>
 
-            <a href="#books">
-                Books
-            </a>
+        <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+            <div class="mobile-menu-top">
+                <a href="#home" class="mobile-menu-logo">KADE <span>MERCER</span></a>
+                <button class="menu-close" type="button" aria-label="Close navigation">×</button>
+            </div>
 
-            <a href="#about">
-                About
-            </a>
+            <div class="mobile-menu-divider"></div>
 
-            <a href="#featured" class="header-button">
-                Latest Release
-            </a>
+            <div class="nav-links">
+                <a href="#home"><span class="nav-icon">⌂</span><span>Home</span></a>
+                <a href="#books"><span class="nav-icon">▣</span><span>Books</span></a>
+                <a href="#featured"><span class="nav-icon">★</span><span>Latest Release</span></a>
+                <a href="#about"><span class="nav-icon">●</span><span>About</span></a>
+            </div>
 
+            <div class="mobile-language-block">
+                <p>LANGUAGE</p>
+                <div class="mobile-language-buttons">
+                    <a href="/kade-mercer/" class="active-language" aria-current="page">English</a>
+                    <a href="/kade-mercer/es/">Español</a>
+                </div>
+            </div>
+
+            <a href="#books" class="mobile-menu-cta">EXPLORE THE BOOKS</a>
+            <p class="mobile-menu-note">Thriller and suspense novels by Kade Mercer</p>
         </nav>
 
-        <div class="language-switcher">
-    <a href="/kade-mercer/" class="active-language" aria-current="page">
-        English
-    </a>
-    <span aria-hidden="true">|</span>
-    <a href="/kade-mercer/es/">
-        Español
-    </a>
-</div>
-
-
+        <button class="menu-overlay" type="button" aria-label="Close navigation" tabindex="-1"></button>
     </header>
 
 
@@ -298,7 +310,7 @@
                     the truth before the country turns against him.
                 </p>
 
-                <a href="#" class="primary-button">
+                <a href="https://books.apple.com/us/book/american-terrorist/id6772084247?ls=1" class="primary-button" target="_blank" rel="noopener noreferrer">
                     Buy the Book
                 </a>
 
@@ -417,6 +429,7 @@
 
     </footer>
 
+    <script defer src="js/script.js?v=2"></script>
 </body>
 
 </html>

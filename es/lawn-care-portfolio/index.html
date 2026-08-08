@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+        name="description"
+        content="Pressure washing and soft washing services from Gulf Coast Pro Wash, serving Pinellas and Hillsborough Counties."
+    >
+
+    <title>Pressure Washing &amp; Soft Washing | Gulf Coast Pro Wash</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            color: #10233c;
+            background: #f6fbff;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+
+            padding: 14px 5vw;
+
+            color: #ffffff;
+            background: #072a4c;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .brand {
+            display: grid;
+            grid-template-columns: auto auto;
+            align-items: center;
+            column-gap: 9px;
+
+            flex-shrink: 0;
+            text-decoration: none;
+        }
+
+        .brand-icon {
+            grid-row: 1 / 3;
+            font-size: 2rem;
+        }
+
+        .brand strong {
+            letter-spacing: 0.08em;
+        }
+
+        .brand small {
+            color: #70d3ff;
+            letter-spacing: 0.14em;
+        }
+
+        .site-navigation {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 20px;
+        }
+
+        .site-navigation a {
+            font-size: 0.92rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .site-navigation a:hover,
+        .site-navigation a:focus-visible {
+            color: #70d3ff;
+        }
+
+        .hero {
+            display: grid;
+            place-items: center;
+
+            min-height: 72vh;
+            padding: 80px 5vw;
+
+            color: #ffffff;
+            text-align: center;
+
+            background:
+                linear-gradient(120deg, rgba(5, 44, 82, 0.87), rgba(11, 111, 165, 0.8)),
+                url("a_mockup_of_a_power_washing_company_s_website_name.png") center / cover;
+        }
+
+        .hero-content {
+            width: 100%;
+            max-width: 950px;
+        }
+
+        .eyebrow {
+            margin: 0 0 12px;
+
+            color: #67e1ff;
+            font-weight: 900;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            max-width: 950px;
+            margin: 0.2em auto;
+
+            font-size: clamp(2.5rem, 7vw, 5.7rem);
+            line-height: 1.05;
+        }
+
+        .hero-description {
+            max-width: 760px;
+            margin: 0 auto;
+
+            font-size: 1.2rem;
+            line-height: 1.7;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px;
+
+            margin-top: 28px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 14px 22px;
+
+            color: #05233d;
+            background: #49d17d;
+            border-radius: 8px;
+
+            font-weight: 900;
+            text-decoration: none;
+        }
+
+        .button:hover,
+        .button:focus-visible {
+            filter: brightness(1.05);
+            transform: translateY(-1px);
+        }
+
+        .button-secondary {
+            color: #0b4d75;
+            background: #ffffff;
+        }
+
+        .section {
+            padding: 75px 5vw;
+        }
+
+        .section-dark {
+            color: #ffffff;
+            background: #062b4e;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .section h2 {
+            margin: 0.25em 0;
+            font-size: clamp(2rem, 4vw, 3.4rem);
+        }
+
+        .lead {
+            max-width: 780px;
+            margin: 0 auto 35px;
+
+            color: #4c6278;
+            line-height: 1.7;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .card {
+            padding: 26px;
+
+            background: #ffffff;
+            border: 1px solid #d8ebf6;
+            border-radius: 18px;
+            box-shadow: 0 12px 30px rgba(13, 65, 98, 0.05);
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        .service-icon {
+            margin-bottom: 12px;
+            font-size: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1px;
+
+            overflow: hidden;
+            background: #77cce9;
+            border-radius: 18px;
+        }
+
+        .stat {
+            padding: 30px;
+            background: #07345c;
+            text-align: center;
+        }
+
+        .stat strong {
+            display: block;
+            color: #75e59a;
+            font-size: 2rem;
+        }
+
+        .site-footer {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr;
+            gap: 30px;
+
+            padding: 45px 5vw;
+
+            color: #c9dfeb;
+            background: #041d33;
+        }
+
+        .site-footer a,
+        .site-footer span {
+            display: block;
+            margin: 8px 0;
+            text-decoration: none;
+        }
+
+        .site-footer a:hover,
+        .site-footer a:focus-visible {
+            color: #75e59a;
+        }
+
+        @media (max-width: 850px) {
+            .site-header {
+                align-items: flex-start;
+            }
+
+            .card-grid,
+            .stats-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .site-header {
+                position: static;
+                display: block;
+            }
+
+            .brand {
+                width: max-content;
+                margin-bottom: 14px;
+            }
+
+            .site-navigation {
+                justify-content: flex-start;
+                gap: 12px;
+            }
+
+            .card-grid,
+            .stats-grid,
+            .site-footer {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                min-height: 65vh;
+                padding-top: 64px;
+                padding-bottom: 64px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <a class="brand" href="index.html" aria-label="Gulf Coast Pro Wash home">
+            <span class="brand-icon" aria-hidden="true">💧</span>
+            <strong>GULF COAST</strong>
+            <small>PRO WASH</small>
+        </a>
+
+        <nav class="site-navigation" aria-label="Primary navigation">
+            <a href="index.html" aria-current="page">Home</a>
+            <a href="services.html">Services</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="https://www.bamswebsitebuilder.com/contact?template=Gulf%20Coast%20Pro%20Wash">
+                Free Estimate
+            </a>
+            <a href="login.html">Client Login</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <p class="eyebrow">Pinellas &amp; Hillsborough Counties</p>
+
+                <h1>Restore Your Property’s Curb Appeal</h1>
+
+                <p class="hero-description">
+                    Residential and commercial pressure washing, soft washing,
+                    roof cleaning, concrete cleaning, and exterior maintenance
+                    delivered with professional care.
+                </p>
+
+                <div class="actions">
+                    <a
+                        class="button"
+                        href="https://www.bamswebsitebuilder.com/contact?template=Gulf%20Coast%20Pro%20Wash"
+                    >
+                        Get a Free Estimate
+                    </a>
+
+                    <a class="button button-secondary" href="tel:+17275550144">
+                        Call (727) 555-0144
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container text-center">
+                <p class="eyebrow">Our Services</p>
+                <h2>Cleaner Surfaces. Better First Impressions.</h2>
+
+                <p class="lead">
+                    From coastal homes to busy commercial properties, we use
+                    the right pressure, detergents, and process for each surface.
+                </p>
+
+                <div class="card-grid">
+                    <article class="card">
+                        <div class="service-icon" aria-hidden="true">💦</div>
+                        <h3>House Washing</h3>
+                        <p>
+                            Low-pressure soft washing for siding, stucco, brick,
+                            and painted surfaces.
+                        </p>
+                    </article>
+
+                    <article class="card">
+                        <div class="service-icon" aria-hidden="true">💦</div>
+                        <h3>Roof Cleaning</h3>
+                        <p>
+                            Safe soft washing that removes algae, mildew, and
+                            dark streaks.
+                        </p>
+                    </article>
+
+                    <article class="card">
+                        <div class="service-icon" aria-hidden="true">💦</div>
+                        <h3>Driveways &amp; Sidewalks</h3>
+                        <p>
+                            Surface cleaning for concrete, pavers, walkways,
+                            and curbs.
+                        </p>
+                    </article>
+
+                    <article class="card">
+                        <div class="service-icon" aria-hidden="true">💦</div>
+                        <h3>Pool Decks &amp; Patios</h3>
+                        <p>
+                            Restore outdoor living areas without damaging
+                            delicate finishes.
+                        </p>
+                    </article>
+
+                    <article class="card">
+                        <div class="service-icon" aria-hidden="true">💦</div>
+                        <h3>Paver Cleaning &amp; Sealing</h3>
+                        <p>
+                            Deep cleaning, joint stabilization, and protective
+                            sealing.
+                        </p>
+                    </article>
+
+                    <article class="card">
+                        <div class="service-icon" aria-hidden="true">💦</div>
+                        <h3>Commercial Washing</h3>
+                        <p>
+                            Storefronts, offices, restaurants, HOAs, and
+                            multi-family properties.
+                        </p>
+                    </article>
+                </div>
+
+                <div class="actions">
+                    <a class="button" href="services.html">View All Services</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-dark" aria-label="Service statistics">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat">
+                        <strong>2</strong>
+                        Counties Served
+                    </div>
+
+                    <div class="stat">
+                        <strong>12+</strong>
+                        Cleaning Services
+                    </div>
+
+                    <div class="stat">
+                        <strong>100%</strong>
+                        Free Estimates
+                    </div>
+
+                    <div class="stat">
+                        <strong>5-Star</strong>
+                        Service Goal
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container text-center">
+                <p class="eyebrow">Why Choose Us</p>
+                <h2>Professional Exterior Cleaning Without the Guesswork</h2>
+
+                <div class="card-grid">
+                    <article class="card">
+                        <h3>Surface-Safe Methods</h3>
+                        <p>
+                            Soft washing and controlled pressure selected for
+                            each material.
+                        </p>
+                    </article>
+
+                    <article class="card">
+                        <h3>Clear Communication</h3>
+                        <p>
+                            Upfront estimates, appointment updates, and customer
+                            portal access.
+                        </p>
+                    </article>
+
+                    <article class="card">
+                        <h3>Local Service</h3>
+                        <p>
+                            Serving communities across Pinellas and Hillsborough
+                            Counties.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <strong>Gulf Coast Pro Wash</strong>
+            <p>
+                Professional exterior cleaning throughout Pinellas and
+                Hillsborough Counties.
+            </p>
+        </div>
+
+        <nav aria-label="Footer navigation">
+            <a href="services.html">Services</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="gallery.html">Before &amp; After</a>
+            <a href="https://www.bamswebsitebuilder.com/contact?template=Gulf%20Coast%20Pro%20Wash">
+                Request Estimate
+            </a>
+        </nav>
+
+        <div>
+            <a href="tel:+17275550144">(727) 555-0144</a>
+            <a href="mailto:estimates@gulfcoastprowash.com">
+                estimates@gulfcoastprowash.com
+            </a>
+            <span>Licensed &amp; insured</span>
+        </div>
+    </footer>
+</body>
+</html>
