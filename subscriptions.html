@@ -49,7 +49,14 @@
       font-weight: 700;
     }
 
-    .stripe-note {
+    .paypal-button-wrap {
+      width: 100%;
+      max-width: 320px;
+      margin: 24px auto 0;
+      min-height: 45px;
+    }
+
+    .paypal-note {
       max-width: 900px;
       margin: 36px auto 0;
       padding: 20px;
@@ -60,7 +67,7 @@
       text-align: center;
     }
 
-    .stripe-note strong {
+    .paypal-note strong {
       color: #f5c400;
     }
   </style>
@@ -119,8 +126,15 @@
           <small>WEBSITE BUILDER</small>
         </span>
       </a>
-      <button class="mobile-menu-close" id="mobile-menu-close" type="button" aria-label="Close navigation menu">
-        <span></span><span></span>
+
+      <button
+        class="mobile-menu-close"
+        id="mobile-menu-close"
+        type="button"
+        aria-label="Close navigation menu"
+      >
+        <span></span>
+        <span></span>
       </button>
     </div>
 
@@ -138,6 +152,7 @@
 
     <div class="mobile-language-section">
       <p>Language</p>
+
       <div class="mobile-language-links">
         <a class="language-active" href="/subscriptions">English</a>
         <a href="/es/subscriptions" lang="es" hreflang="es">Español</a>
@@ -153,13 +168,21 @@
     <section class="pricing-section">
       <div class="pricing-heading">
         <p class="section-label">MONTHLY WEBSITE PLANS</p>
-        <h1>Professional Website. <span>Smaller Monthly Payments.</span></h1>
+
+        <h1>
+          Professional Website.
+          <span>Smaller Monthly Payments.</span>
+        </h1>
+
         <p class="pricing-intro">
-          Choose a 12-month payment plan for your website project. Your existing one-time packages are still available on the Prices page.
+          Choose a 12-month payment plan for your website project.
+          Your existing one-time packages are still available on the Prices page.
         </p>
       </div>
 
       <div class="pricing-grid">
+
+        <!-- STARTER -->
         <article class="price-card starter-card">
           <div class="card-top starter-top">
             <h2>Starter</h2>
@@ -182,11 +205,13 @@
             <li>Basic website setup</li>
           </ul>
 
-          <a class="price-button" href="/contact?plan=starter-monthly" data-stripe-plan="starter">
-            Choose Starter
-          </a>
+          <div
+            class="paypal-button-wrap"
+            id="paypal-button-container-P-2X4855030H9632908NJ47KRQ"
+          ></div>
         </article>
 
+        <!-- BUSINESS -->
         <article class="price-card featured-card">
           <div class="popular-badge">MOST POPULAR</div>
 
@@ -212,11 +237,13 @@
             <li>Basic search engine setup</li>
           </ul>
 
-          <a class="price-button" href="/contact?plan=business-monthly" data-stripe-plan="business">
-            Choose Business
-          </a>
+          <div
+            class="paypal-button-wrap"
+            id="paypal-button-container-P-0A9124042N887170MNJ47NZQ"
+          ></div>
         </article>
 
+        <!-- PREMIUM -->
         <article class="price-card premium-card">
           <div class="card-top premium-top">
             <h2>Premium</h2>
@@ -240,15 +267,16 @@
             <li>Search engine optimization setup</li>
           </ul>
 
-          <a class="price-button" href="/contact?plan=premium-monthly" data-stripe-plan="premium">
-            Choose Premium
-          </a>
+          <div
+            class="paypal-button-wrap"
+            id="paypal-button-container-P-1DF06614NY927051XNJ47PDA"
+          ></div>
         </article>
       </div>
 
-      <div class="stripe-note">
-        <strong>Stripe checkout ready.</strong>
-        The plan buttons currently route to your contact flow until your live Stripe Payment Links are added. This prevents accidental or unverified charges during setup.
+      <div class="paypal-note">
+        <strong>Secure checkout with PayPal.</strong>
+        Select a website plan above to start your 12-month subscription.
       </div>
     </section>
   </main>
@@ -286,14 +314,83 @@
     </div>
 
     <div class="bam-social-links" aria-label="BAM's social media">
-      <a href="https://www.facebook.com/bamswebsitebuilder" target="_blank" rel="noopener noreferrer">Facebook</a>
-      <a href="https://www.instagram.com/bamswebsitebuilder" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a
+        href="https://www.facebook.com/bamswebsitebuilder"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Facebook
+      </a>
+
+      <a
+        href="https://www.instagram.com/bamswebsitebuilder"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Instagram
+      </a>
     </div>
 
-    <div class="footer-bottom">© 2026 BAM's Website Builder. All rights reserved.</div>
+    <div class="footer-bottom">
+      © 2026 BAM's Website Builder. All rights reserved.
+    </div>
   </footer>
 
   <script src="/js/navigation.js"></script>
   <script src="/js/script.js"></script>
+
+  <!-- PayPal SDK: load only once -->
+  <script
+    src="https://www.paypal.com/sdk/js?client-id=BAArA5EjOUBuSZDfnoE8clr8nzBHqDmRdPVCtNi5i8mj2L4SpL54k4SQnwm2O3LuQtDX3WYawewsr_I_2I&vault=true&intent=subscription"
+    data-sdk-integration-source="button-factory">
+  </script>
+
+  <script>
+    function renderSubscriptionButton(containerSelector, planId) {
+      paypal.Buttons({
+        style: {
+          shape: 'rect',
+          color: 'gold',
+          layout: 'vertical',
+          label: 'subscribe'
+        },
+
+        createSubscription: function(data, actions) {
+          return actions.subscription.create({
+            plan_id: planId
+          });
+        },
+
+        onApprove: function(data) {
+          alert(
+            'Your subscription was created successfully. Subscription ID: ' +
+            data.subscriptionID
+          );
+        },
+
+        onError: function(error) {
+          console.error('PayPal subscription error:', error);
+          alert(
+            'There was a problem starting your subscription. Please try again or contact us for help.'
+          );
+        }
+      }).render(containerSelector);
+    }
+
+    renderSubscriptionButton(
+      '#paypal-button-container-P-2X4855030H9632908NJ47KRQ',
+      'P-2X4855030H9632908NJ47KRQ'
+    );
+
+    renderSubscriptionButton(
+      '#paypal-button-container-P-0A9124042N887170MNJ47NZQ',
+      'P-0A9124042N887170MNJ47NZQ'
+    );
+
+    renderSubscriptionButton(
+      '#paypal-button-container-P-1DF06614NY927051XNJ47PDA',
+      'P-1DF06614NY927051XNJ47PDA'
+    );
+  </script>
 </body>
 </html>
