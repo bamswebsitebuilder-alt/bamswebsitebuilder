@@ -80,8 +80,14 @@
         <a href="/portfolio">Portfolio</a>
         <a href="/reviews">Reviews</a>
         <a href="/contact">Contact</a>
-        <a href="/login">Login</a><a href="/es/subscriptions" class="language-switch" lang="es" hreflang="es">Español</a>
+        <a href="/login">Login</a>
       </nav>
+
+      <div class="desktop-language">
+        <a class="language-active" href="/subscriptions">English</a>
+        <span aria-hidden="true">|</span>
+        <a href="/es/subscriptions" lang="es" hreflang="es">Español</a>
+      </div>
 
       <button
         class="menu-toggle"
@@ -97,6 +103,46 @@
       </button>
     </div>
   </header>
+
+  <div class="menu-overlay" id="menu-overlay"></div>
+
+  <aside class="mobile-menu" id="mobile-menu" aria-hidden="true" aria-label="Mobile navigation">
+    <div class="mobile-menu-header">
+      <a class="mobile-menu-brand" href="/">
+        <span>
+          <strong>BAM'S</strong>
+          <small>WEBSITE BUILDER</small>
+        </span>
+      </a>
+      <button class="mobile-menu-close" id="mobile-menu-close" type="button" aria-label="Close navigation menu">
+        <span></span><span></span>
+      </button>
+    </div>
+
+    <nav class="mobile-navigation">
+      <a href="/">Home</a>
+      <a href="/services">Services</a>
+      <a href="/prices">Prices</a>
+      <a class="active" href="/subscriptions" aria-current="page">Website Plans</a>
+      <a href="/templates">Templates</a>
+      <a href="/portfolio">Portfolio</a>
+      <a href="/reviews">Reviews</a>
+      <a href="/contact">Contact</a>
+      <a href="/login">Login</a>
+    </nav>
+
+    <div class="mobile-language-section">
+      <p>Language</p>
+      <div class="mobile-language-links">
+        <a class="language-active" href="/subscriptions">English</a>
+        <a href="/es/subscriptions" lang="es" hreflang="es">Español</a>
+      </div>
+    </div>
+
+    <div class="mobile-menu-cta">
+      <a href="/contact">Get a Free Quote</a>
+    </div>
+  </aside>
 
   <main>
     <section class="pricing-section">
