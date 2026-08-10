@@ -3123,174 +3123,56 @@ footer br + a,
     }
 }
 
-
 /* =========================================================
-   FINAL GLOBAL HEADER / LANGUAGE LAYOUT FIX
-   Keeps English layout unchanged and gives Spanish labels
-   enough room without colliding with the language switch.
+   FINAL PORTFOLIO VISIBILITY SAFEGUARD
 ========================================================= */
-
-/* Prevent flex children from forcing the header wider than the viewport. */
-.header-container,
-.desktop-navigation,
-.desktop-language,
-.site-brand {
-    min-width: 0;
+main,
+.portfolio-page,
+.portfolio-header,
+.portfolio-grid,
+.portfolio-card,
+.portfolio-image-wrapper,
+.portfolio-card-content,
+.portfolio-category,
+.portfolio-features,
+.portfolio-button,
+.portfolio-image,
+.portfolio-project-image,
+.portfolio-logo-image {
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
-.desktop-language {
-    white-space: nowrap;
+.portfolio-page,
+.portfolio-header {
+    display: block !important;
 }
 
-.desktop-language a,
-.desktop-language span {
-    flex: 0 0 auto;
+.portfolio-grid,
+.portfolio-card {
+    display: grid !important;
 }
 
-/* Spanish desktop navigation needs slightly tighter spacing
-   because the translated labels are longer. */
-@media (min-width: 1181px) {
-    html[lang="es"] .header-container {
-        gap: 12px;
-        padding-inline: clamp(18px, 2.4vw, 38px);
-    }
+.portfolio-image-wrapper {
+    display: flex !important;
+}
 
-    html[lang="es"] .site-brand {
-        flex: 0 0 175px;
-    }
+.portfolio-card-content {
+    display: flex !important;
+}
 
-    html[lang="es"] .desktop-navigation {
-        gap: clamp(7px, 0.7vw, 13px);
-        margin-left: auto;
-    }
-
-    html[lang="es"] .desktop-navigation a {
-        font-size: clamp(0.56rem, 0.58vw, 0.65rem);
-        letter-spacing: 0.035em;
-    }
-
-    html[lang="es"] .desktop-language {
-        gap: 5px;
-        margin-left: 7px;
-    }
-
-    html[lang="es"] .desktop-language a {
-        font-size: 0.65rem;
+@media (max-width: 1000px) {
+    .portfolio-card {
+        grid-template-columns: 1fr !important;
     }
 }
 
-/* At medium desktop widths the Spanish labels no longer fit cleanly.
-   Use the same mobile drawer instead of allowing header overlap. */
-@media (min-width: 901px) and (max-width: 1180px) {
-    html[lang="es"] .desktop-navigation,
-    html[lang="es"] .desktop-language {
-        display: none !important;
+/* Prevent reveal effects from leaving portfolio content blurry on phones. */
+@media (max-width: 760px) {
+    .motion-enabled .portfolio-page[data-reveal],
+    .motion-enabled .portfolio-card[data-reveal],
+    .motion-enabled .portfolio-page[data-reveal].is-visible,
+    .motion-enabled .portfolio-card[data-reveal].is-visible {
+        filter: none !important;
     }
-
-    html[lang="es"] .menu-toggle {
-        display: flex !important;
-    }
-
-    html[lang="es"] .mobile-menu,
-    html[lang="es"] .menu-overlay {
-        display: flex;
-    }
-
-    html[lang="es"] .mobile-menu {
-        display: flex;
-    }
-
-    html[lang="es"] .menu-overlay {
-        display: block;
-    }
-
-    html[lang="es"] .header-container {
-        padding-inline: 20px;
-    }
-
-    html[lang="es"] .site-brand {
-        flex: 0 1 auto;
-    }
-}
-
-/* Keep the normal mobile behavior consistent on every page. */
-@media (max-width: 900px) {
-    .desktop-navigation,
-    .desktop-language {
-        display: none !important;
-    }
-
-    .menu-toggle {
-        display: flex !important;
-    }
-}
-
-/* =========================================================
-   CONTACT DETAIL ICON POLISH
-   Makes phone, email, and response-time icons easier to see.
-========================================================= */
-
-.contact-detail-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    min-height: 54px;
-}
-
-.contact-detail-icon {
-    display: grid;
-    place-items: center;
-    flex: 0 0 48px;
-    width: 48px;
-    height: 48px;
-    color: #f4c15d;
-    background: rgba(244, 193, 93, 0.16);
-    border: 1.5px solid rgba(244, 193, 93, 0.55);
-    border-radius: 12px;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
-}
-
-.contact-detail-icon svg {
-    display: block;
-    width: 25px;
-    height: 25px;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 2.15;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-@media (max-width: 700px) {
-    .contact-detail-icon {
-        flex-basis: 44px;
-        width: 44px;
-        height: 44px;
-    }
-
-    .contact-detail-icon svg {
-        width: 23px;
-        height: 23px;
-    }
-}
-
-/* =========================================================
-   SUBSCRIPTION NOTICE
-   Prevents the Stripe message from appearing as a white box.
-========================================================= */
-
-.stripe-note {
-    box-sizing: border-box;
-    max-width: 900px;
-    margin: 36px auto 0;
-    padding: 20px;
-    color: #ffffff;
-    background: #1f1f1f;
-    border: 1px solid #f5c400;
-    border-radius: 14px;
-    text-align: center;
-}
-
-.stripe-note strong {
-    color: #f5c400;
 }

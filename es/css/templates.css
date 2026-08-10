@@ -12,3 +12,7 @@
 .template-demo,.template-select,.pay-deposit,.pay-full{transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
 .template-demo:hover,.template-select:hover,.pay-deposit:hover,.pay-full:hover{transform:translateY(-2px)}
 @media(max-width:1150px){.desktop-navigation{gap:14px}.desktop-navigation a{font-size:.84rem}}
+
+.template-select{position:relative;z-index:2;cursor:pointer;touch-action:manipulation}
+.template-select.is-loading{opacity:.82;pointer-events:none}
+.template-select.is-loading::after{content:" …";letter-spacing:.08em}

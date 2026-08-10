@@ -8,10 +8,12 @@
    Portal del cliente | BAM's Website Builder
   </title>
   <link href="/css/style.css?v=102" rel="stylesheet"/>
-  <link href="/css/portal.css?v=81" rel="stylesheet"/>
-  <link href="/images/icon-dark.jpg" rel="icon" type="image/jpeg"/>
-  <link href="/css/animations.css?v=1" rel="stylesheet"/>
+  <link href="/css/portal.css?v=102" rel="stylesheet"/>
+  <link href="/css/portal-messages.css?v=2" rel="stylesheet"/>
+  <link href="/css/animations.css?v=2" rel="stylesheet"/>
+  <link href="/css/footer-fix.css?v=1" rel="stylesheet"/>
   <link href="/css/site-upgrades.css?v=1" rel="stylesheet"/>
+  <link href="/images/icon-dark.jpg" rel="icon" type="image/jpeg"/>
   <style>
    /* Match the clear, self-contained mobile icons used on the English site. */
 .mobile-navigation .mobile-link-icon {
@@ -62,6 +64,8 @@
   .desktop-language { display: none; }
 }
   </style>
+  <link href="https://bamswebsitebuilder.com/client-portal" hreflang="en" rel="alternate"/>
+  <link href="https://bamswebsitebuilder.com/es/client-portal" hreflang="es" rel="alternate"/>
  </head>
  <body class="client-portal-page" data-auth-protected="true">
   <header class="site-header" id="site-header">
@@ -341,6 +345,9 @@
       <button class="portal-nav-link" data-panel="project" type="button">
        Mi proyecto
       </button>
+      <button class="portal-nav-link" data-panel="billing" type="button">
+       Facturaci&oacute;n
+      </button>
       <button class="portal-nav-link" data-panel="files" type="button">
        Archivos
       </button>
@@ -388,6 +395,26 @@
        <p>
         Los detalles y el calendario de tu proyecto aparecer&aacute;n aqu&iacute; cuando se te asigne uno.
        </p>
+      </article>
+     </section>
+     <section class="portal-panel" id="billing">
+      <article class="portal-card">
+       <div class="card-heading">
+        <div>
+         <p class="card-kicker">
+          FACTURACI&Oacute;N CON STRIPE
+         </p>
+         <h2>
+          Plan web y facturaci&oacute;n
+         </h2>
+         <p>
+          Tu suscripci&oacute;n de Stripe, m&eacute;todo de pago, facturas y pr&oacute;ximo pago estar&aacute;n disponibles aqu&iacute; cuando se conecte el checkout en vivo.
+         </p>
+        </div>
+       </div>
+       <a class="portal-primary-button" href="/es/subscriptions">
+        Ver Planes Web
+       </a>
       </article>
      </section>
      <section class="portal-panel" id="files">
@@ -447,16 +474,41 @@
       </article>
      </section>
      <section class="portal-panel" id="messages">
-      <article class="portal-card portal-empty-state">
-       <p class="card-kicker">
-        COMUNICACI&Oacute;N
-       </p>
-       <h2>
-        Todav&iacute;a no hay mensajes
-       </h2>
-       <p>
-        Los mensajes de BAM's Website Builder aparecer&aacute;n aqu&iacute;.
-       </p>
+      <article class="portal-card portal-message-card">
+       <div class="portal-message-header">
+        <p class="card-kicker">
+         COMUNICACI&Oacute;N
+        </p>
+        <h2>
+         Enviar mensaje a BAM's Website Builder
+        </h2>
+        <p>
+         Env&iacute;a preguntas, comentarios e informaci&oacute;n del proyecto. Los mensajes se actualizan en tiempo real.
+        </p>
+       </div>
+       <div aria-live="polite" class="portal-message-thread" id="portal-message-thread">
+        <div class="portal-message-empty">
+         <h3>
+          Cargando mensajes...
+         </h3>
+         <p>
+          Tu conversaci&oacute;n aparecer&aacute; aqu&iacute;.
+         </p>
+        </div>
+       </div>
+       <form class="portal-message-composer" id="portal-message-form">
+        <label class="sr-only" for="portal-message-text">
+         Mensaje
+        </label>
+        <textarea disabled="" id="portal-message-text" maxlength="2000" placeholder="Escribe tu mensaje..." required="" rows="3"></textarea>
+        <div class="portal-message-actions">
+         <p class="portal-message-status" hidden="" id="portal-message-status" role="status">
+         </p>
+         <button class="portal-primary-button" disabled="" id="portal-message-send" type="submit">
+          Enviar mensaje
+         </button>
+        </div>
+       </form>
       </article>
      </section>
      <section class="portal-panel" id="support">
@@ -539,13 +591,15 @@
   </footer>
   <script src="/js/navigation.js?v=102">
   </script>
-  <script src="/js/portal.js?v=72">
+  <script src="/js/portal.js?v=101">
   </script>
   <script src="/js/portal-auth-es.js?v=81" type="module">
   </script>
   <script src="/js/animations.js?v=1">
   </script>
   <script defer="" src="/js/site-upgrades.js?v=1">
+  </script>
+  <script src="/js/portal-messages.js?v=1">
   </script>
  </body>
 </html>
