@@ -1,6 +1,0 @@
-ROOT HOMEPAGE FIX
-
-Upload the CONTENTS of this BAM's-Website-Design folder to your website document root.
-The main BAM homepage is index.html.
-The author site remains at kade-mercer/index.html and should load only at /kade-mercer/.
-Do not move kade-mercer/index.html into the website root.
