@@ -241,3 +241,5 @@ body > .admin-shell {
         padding: 24px 20px;
     }
 }
+
+.bam-social-links{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;padding:0 20px 22px}.bam-social-links a{color:#aaa;text-decoration:none;font-weight:700}.bam-social-links a:hover,.bam-social-links a:focus-visible{color:#f0c45a}
