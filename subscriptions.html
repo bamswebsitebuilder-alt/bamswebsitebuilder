@@ -9,12 +9,14 @@
     content="Flexible monthly website payment plans from BAM's Website Builder."
   >
 
+  <meta name="theme-color" content="#080808">
+
   <title>Website Plans | BAM's Website Builder</title>
 
-  <link rel="stylesheet" href="/css/style.css?v=102">
-  <link rel="stylesheet" href="/css/page-theme.css?v=1">
-  <link rel="stylesheet" href="/css/footer-fix.css?v=1">
-  <link rel="stylesheet" href="/css/site-upgrades.css?v=1">
+  <link rel="stylesheet" href="/css/style.css?v=20260810-2">
+  <link rel="stylesheet" href="/css/page-theme.css?v=20260810-2">
+  <link rel="stylesheet" href="/css/footer-fix.css?v=20260810-2">
+  <link rel="stylesheet" href="/css/site-upgrades.css?v=20260810-2">
 
   <link
     rel="icon"
@@ -23,18 +25,18 @@
   >
 
   <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
     html,
     body {
       width: 100%;
       margin: 0;
       padding: 0;
       overflow-x: hidden;
-    }
-
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
     }
 
     /* =========================
@@ -81,7 +83,7 @@
     }
 
     /* =========================
-       PRICING GRID
+       PRICING CARDS
     ========================== */
 
     .pricing-grid {
@@ -102,16 +104,12 @@
       margin-top: 0;
     }
 
-    /* =========================
-       PRICE
-    ========================== */
-
     .monthly-price {
       display: flex;
       align-items: baseline;
       justify-content: center;
       gap: 5px;
-      margin-top: 12px;
+      margin-top: 28px;
       padding: 0 16px;
     }
 
@@ -121,46 +119,41 @@
     }
 
     .monthly-price small {
-      color: #666;
+      color: #999;
       font-weight: 700;
     }
 
     .term-note {
       margin: 18px 0 26px;
       padding: 0 24px;
-      color: #777;
+      color: #999;
       font-size: 0.9rem;
+      text-align: center;
     }
 
     /* =========================
-       FEATURE CHECK MARKS
+       CHECK MARKS
     ========================== */
 
     .feature-list {
-      list-style: none !important;
-      margin: 0 0 20px !important;
-      padding: 0 28px !important;
+      margin-bottom: 20px;
+      list-style: none;
     }
 
     .feature-list li {
       position: relative;
-      list-style: none !important;
-      margin: 0 0 18px !important;
-      padding: 0 0 0 36px !important;
-      line-height: 1.45;
+      padding-left: 30px;
     }
 
     .feature-list li::before {
-      content: "✓" !important;
+      content: "\2713";
       position: absolute;
-      left: 0 !important;
-      top: 0.05em;
-      width: 24px;
-      color: #f5c400;
-      font-size: 1.45rem;
+      top: 0;
+      left: 0;
+      color: #ffd700;
+      font-size: 18px;
       font-weight: 900;
-      line-height: 1;
-      text-align: center;
+      line-height: 1.5;
     }
 
     /* =========================
@@ -171,7 +164,8 @@
       width: calc(100% - 40px);
       max-width: 320px;
       min-height: 45px;
-      margin: 28px auto 10px;
+      margin: auto auto 10px;
+      padding-top: 20px;
     }
 
     .paypal-note {
@@ -183,6 +177,7 @@
       background: #1f1f1f;
       color: #fff;
       text-align: center;
+      line-height: 1.6;
     }
 
     .paypal-note strong {
@@ -259,7 +254,7 @@
       }
 
       .monthly-price {
-        margin-top: 10px !important;
+        margin-top: 25px !important;
         padding: 0 12px;
         flex-wrap: nowrap;
       }
@@ -277,33 +272,25 @@
       .term-note {
         margin: 22px 0 30px !important;
         padding: 0 22px !important;
-        text-align: left;
+        text-align: center;
         line-height: 1.4;
       }
 
       .feature-list {
         margin: 0 !important;
-        padding: 0 24px 10px !important;
+        padding: 0 28px 10px 50px !important;
       }
 
       .feature-list li {
-        margin-bottom: 22px !important;
-        padding-left: 38px !important;
-        font-size: 1rem;
+        margin-bottom: 21px !important;
+        padding-left: 30px;
         line-height: 1.45;
-      }
-
-      .feature-list li::before {
-        left: 0 !important;
-        top: 0.02em;
-        width: 26px;
-        font-size: 1.5rem;
       }
 
       .paypal-button-wrap {
         width: calc(100% - 36px);
         max-width: none;
-        margin: 24px auto 16px !important;
+        margin: 10px auto 16px !important;
       }
 
       .paypal-note {
@@ -331,12 +318,8 @@
       }
 
       .feature-list {
-        padding-left: 20px !important;
+        padding-left: 42px !important;
         padding-right: 20px !important;
-      }
-
-      .feature-list li {
-        padding-left: 36px !important;
       }
     }
   </style>
@@ -344,9 +327,7 @@
 
 <body>
 
-  <!-- =========================
-       HEADER
-  ========================== -->
+  <!-- HEADER -->
 
   <header class="site-header" id="site-header">
     <div class="header-container">
@@ -425,9 +406,7 @@
     id="menu-overlay"
   ></div>
 
-  <!-- =========================
-       MOBILE MENU
-  ========================== -->
+  <!-- MOBILE MENU -->
 
   <aside
     class="mobile-menu"
@@ -442,7 +421,7 @@
         class="mobile-menu-brand"
         href="/"
       >
-        <span>
+        <span class="brand-text">
           <strong>BAM'S</strong>
           <small>WEBSITE BUILDER</small>
         </span>
@@ -484,7 +463,6 @@
       <p>Language</p>
 
       <div class="mobile-language-links">
-
         <a
           class="language-active"
           href="/subscriptions"
@@ -499,7 +477,6 @@
         >
           Español
         </a>
-
       </div>
     </div>
 
@@ -511,9 +488,7 @@
 
   </aside>
 
-  <!-- =========================
-       MAIN CONTENT
-  ========================== -->
+  <!-- MAIN -->
 
   <main>
 
@@ -540,10 +515,6 @@
 
       </div>
 
-      <!-- =========================
-           PRICING CARDS
-      ========================== -->
-
       <div class="pricing-grid">
 
         <!-- STARTER -->
@@ -551,13 +522,11 @@
         <article class="price-card starter-card">
 
           <div class="card-top starter-top">
-
             <h2>Starter</h2>
 
             <p>
               Great for a simple online presence
             </p>
-
           </div>
 
           <div class="monthly-price">
@@ -594,13 +563,11 @@
           </div>
 
           <div class="card-top business-top">
-
             <h2>Business</h2>
 
             <p>
               Best for growing businesses
             </p>
-
           </div>
 
           <div class="monthly-price">
@@ -634,13 +601,11 @@
         <article class="price-card premium-card">
 
           <div class="card-top premium-top">
-
             <h2>Premium</h2>
 
             <p>
               For businesses that need more
             </p>
-
           </div>
 
           <div class="monthly-price">
@@ -671,90 +636,60 @@
 
       </div>
 
-      <!-- PAYPAL MESSAGE -->
-
       <div class="paypal-note">
-
         <strong>
           Secure checkout with PayPal.
         </strong>
 
         Select a website plan above to start your
-        12-month subscription.
-
+        12-month subscription. After subscribing, you will
+        automatically continue to the project information form.
       </div>
 
     </section>
 
   </main>
 
-  <!-- =========================
-       FOOTER
-  ========================== -->
+  <!-- FOOTER -->
 
   <footer class="home-footer">
 
     <div class="footer-grid">
 
       <div>
-
-        <h3>
-          BAM'S WEBSITE BUILDER
-        </h3>
+        <h3>BAM'S WEBSITE BUILDER</h3>
 
         <p>
           Custom websites for small businesses,
           entrepreneurs, and growing brands.
         </p>
-
       </div>
 
       <div>
-
         <h4>Explore</h4>
 
         <div class="footer-links">
-          <a href="/prices">
-            One-Time Prices
-          </a>
-
-          <a href="/subscriptions">
-            Website Plans
-          </a>
-
-          <a href="/portfolio">
-            Portfolio
-          </a>
+          <a href="/prices">One-Time Prices</a>
+          <a href="/subscriptions">Website Plans</a>
+          <a href="/portfolio">Portfolio</a>
         </div>
-
       </div>
 
       <div>
-
         <h4>Support</h4>
 
         <div class="footer-links">
-          <a href="/contact">
-            Contact
-          </a>
-
-          <a href="/login">
-            Client Login
-          </a>
+          <a href="/contact">Contact</a>
+          <a href="/login">Client Login</a>
         </div>
-
       </div>
 
       <div>
-
         <h4>Get Started</h4>
 
         <div class="footer-links">
-          <a href="/contact">
-            Free Quote
-          </a>
+          <a href="/contact">Free Quote</a>
         </div>
-
       </div>
 
     </div>
@@ -763,7 +698,6 @@
       class="bam-social-links"
       aria-label="BAM's social media"
     >
-
       <a
         href="https://www.facebook.com/bamswebsitebuilder"
         target="_blank"
@@ -779,39 +713,45 @@
       >
         Instagram
       </a>
-
     </div>
 
     <div class="footer-bottom">
-      © 2026 BAM's Website Builder.
+      &copy; 2026 BAM's Website Builder.
       All rights reserved.
     </div>
 
   </footer>
 
-  <!-- =========================
-       SITE SCRIPTS
-  ========================== -->
+  <!-- NAVIGATION -->
 
-  <script src="/js/navigation.js"></script>
-  <script src="/js/script.js"></script>
+  <script src="/js/navigation.js?v=20260810-2"></script>
+  <script src="/js/script.js?v=20260810-2"></script>
 
-  <!-- =========================
-       PAYPAL SDK
-  ========================== -->
+  <!-- PAYPAL SDK -->
 
   <script
     src="https://www.paypal.com/sdk/js?client-id=BAArA5EjOUBuSZDfnoE8clr8nzBHqDmRdPVCtNi5i8mj2L4SpL54k4SQnwm2O3LuQtDX3WYawewsr_I_2I&vault=true&intent=subscription"
     data-sdk-integration-source="button-factory"
   ></script>
 
-  <!-- =========================
-       PAYPAL BUTTONS
-  ========================== -->
+  <!-- PAYPAL SUBSCRIPTIONS -->
 
   <script>
-    function renderSubscriptionButton(containerSelector, planId) {
+    function renderSubscriptionButton(
+      containerSelector,
+      planId,
+      planName
+    ) {
+
+      if (
+        typeof paypal === 'undefined' ||
+        !document.querySelector(containerSelector)
+      ) {
+        return;
+      }
+
       paypal.Buttons({
+
         style: {
           shape: 'rect',
           color: 'gold',
@@ -819,21 +759,48 @@
           label: 'subscribe'
         },
 
-        createSubscription: function(data, actions) {
+        createSubscription: function (data, actions) {
+
           return actions.subscription.create({
             plan_id: planId
           });
+
         },
 
-        onApprove: function(data) {
-          alert(
-            'Your subscription was created successfully. ' +
-            'Subscription ID: ' +
-            data.subscriptionID
+        onApprove: function (data) {
+
+          const subscriptionId =
+            encodeURIComponent(data.subscriptionID || '');
+
+          const selectedPlan =
+            encodeURIComponent(planName);
+
+          /*
+            After PayPal approves the subscription,
+            send the customer directly to the contact page.
+
+            We pass:
+            1. subscribed=yes
+            2. the plan they purchased
+            3. their PayPal subscription ID
+          */
+
+          window.location.href =
+            '/contact' +
+            '?subscribed=yes' +
+            '&plan=' + selectedPlan +
+            '&subscription_id=' + subscriptionId;
+
+        },
+
+        onCancel: function () {
+          console.log(
+            'PayPal subscription checkout was cancelled.'
           );
         },
 
-        onError: function(error) {
+        onError: function (error) {
+
           console.error(
             'PayPal subscription error:',
             error
@@ -843,23 +810,38 @@
             'There was a problem starting your subscription. ' +
             'Please try again or contact us for help.'
           );
+
         }
+
       }).render(containerSelector);
+
     }
+
+
+    /* STARTER */
 
     renderSubscriptionButton(
       '#paypal-button-container-P-2X4855030H9632908NJ47KRQ',
-      'P-2X4855030H9632908NJ47KRQ'
+      'P-2X4855030H9632908NJ47KRQ',
+      'starter-monthly'
     );
+
+
+    /* BUSINESS */
 
     renderSubscriptionButton(
       '#paypal-button-container-P-0A9124042N887170MNJ47NZQ',
-      'P-0A9124042N887170MNJ47NZQ'
+      'P-0A9124042N887170MNJ47NZQ',
+      'business-monthly'
     );
+
+
+    /* PREMIUM */
 
     renderSubscriptionButton(
       '#paypal-button-container-P-1DF06614NY927051XNJ47PDA',
-      'P-1DF06614NY927051XNJ47PDA'
+      'P-1DF06614NY927051XNJ47PDA',
+      'premium-monthly'
     );
   </script>
 
