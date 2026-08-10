@@ -1,19 +1,81 @@
 <!DOCTYPE html>
 <html lang="es">
  <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width,initial-scale=1" name="viewport">
-  <meta content="Planes mensuales flexibles para sitios web de BAM's Website Builder." name="description">
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <meta content="Planes mensuales flexibles para sitios web de BAM's Website Builder." name="description"/>
   <title>
    Planes Web | BAM's Website Builder
   </title>
-  <link href="/css/style.css?v=102" rel="stylesheet">
-  <link href="/css/page-theme.css?v=1" rel="stylesheet">
-  <link href="/css/footer-fix.css?v=1" rel="stylesheet">
-  <link href="/css/site-upgrades.css?v=1" rel="stylesheet">
-  <link href="/images/icon-dark.jpg" rel="icon" type="image/jpeg">
+  <link href="/css/style.css?v=102" rel="stylesheet"/>
+  <link href="/css/page-theme.css?v=1" rel="stylesheet"/>
+  <link href="/css/footer-fix.css?v=1" rel="stylesheet"/>
+  <link href="/css/site-upgrades.css?v=1" rel="stylesheet"/>
+  <link href="/images/icon-dark.jpg" rel="icon" type="image/jpeg"/>
   <style>
-   html,body{width:100%;margin:0;padding:0;overflow-x:hidden}.pricing-section{box-sizing:border-box;width:100%;margin:0}.term-note{font-size:.85rem;color:#666;margin:12px 0 20px}.stripe-note{max-width:900px;margin:36px auto 0;padding:20px;border:1px solid #f5c400;border-radius:14px;background:#1f1f1f;color:#fff;text-align:center}.monthly-price{display:flex;align-items:baseline;justify-content:center;gap:4px}.monthly-price .price{font-size:3rem}.monthly-price small{font-weight:700;color:#666}
+   /* Subscription page layout fixes */
+html,
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.pricing-section {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+}
+
+.stripe-note {
+  max-width: 900px;
+  margin: 36px auto 0;
+  padding: 20px;
+  border: 1px solid #f5c400;
+  border-radius: 14px;
+  background: #1f1f1f;
+  color: #fff;
+  text-align: center;
+}
+
+/* Keep the language switch separate from Iniciar sesión */
+.header-container {
+  display: flex;
+  align-items: center;
+}
+
+.desktop-navigation {
+  min-width: 0;
+}
+
+.desktop-language {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 8px;
+  margin-left: 22px;
+  padding-left: 18px;
+  white-space: nowrap;
+  border-left: 1px solid rgba(245, 196, 0, 0.45);
+}
+
+.desktop-language a {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+@media (max-width: 1180px) {
+  .desktop-navigation {
+    gap: 12px;
+  }
+
+  .desktop-language {
+    margin-left: 14px;
+    padding-left: 12px;
+    gap: 6px;
+  }
+}
   </style>
  </head>
  <body>
