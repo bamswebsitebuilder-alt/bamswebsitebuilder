@@ -7,120 +7,81 @@
   <title>
    Planes Web | BAM's Website Builder
   </title>
-  <link href="/css/style.css?v=102" rel="stylesheet"/>
-  <link href="/css/page-theme.css?v=1" rel="stylesheet"/>
-  <link href="/css/footer-fix.css?v=1" rel="stylesheet"/>
-  <link href="/css/site-upgrades.css?v=1" rel="stylesheet"/>
-  <link href="/images/icon-dark.jpg" rel="icon" type="image/jpeg"/>
-  <style>
-   html,
-body {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-}
-
-.pricing-section {
-  box-sizing: border-box;
-  width: 100%;
-  margin: 0;
-}
-
-.term-note {
-  margin: 12px 0 20px;
-  color: #666;
-  font-size: 0.85rem;
-}
-
-.monthly-price {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 4px;
-}
-
-.monthly-price .price {
-  font-size: 3rem;
-}
-
-.monthly-price small {
-  color: #666;
-  font-weight: 700;
-}
-
-/* Match the English subscription page notice */
-.stripe-note{box-sizing:border-box;max-width:900px;margin:36px auto 0;padding:20px;border:1px solid #f5c400;border-radius:14px;background:#1f1f1f;color:#fff;text-align:center}
-
-.stripe-note strong {
-  color: #f5c400;
-}
-
-/* Match the English language-switch spacing */
-.desktop-language {
-  display: flex;
+  <link href="/css/style.css?v=20260810-1" rel="stylesheet"/>
+  <link href="/css/page-theme.css?v=20260810-1" rel="stylesheet"/>
+  <link href="/css/footer-fix.css?v=20260810-1" rel="stylesheet"/>
+  <link href="/css/site-upgrades.css?v=20260810-1" rel="stylesheet"/>
+  <link href="/images/logo-header.jpg" rel="icon" type="image/jpeg"/>
+  <link href="https://bamswebsitebuilder.com/subscriptions" hreflang="en" rel="alternate"/>
+  <link href="https://bamswebsitebuilder.com/es/subscriptions" hreflang="es" rel="alternate"/>
+  <style id="bam-spanish-consistency">
+   /* BAM Spanish consistency fix */
+.site-brand,
+.mobile-menu-brand {
+  display: inline-flex;
   align-items: center;
-  flex-shrink: 0;
-  gap: 8px;
-  margin-left: 14px;
-  white-space: nowrap;
-}
-
-.desktop-language a {
-  display: inline-block;
+  flex: 0 0 auto;
   text-decoration: none;
+  min-width: 0;
 }
-
-.desktop-language .language-active {
-  color: #f5c400;
-  font-weight: 700;
+.site-header-logo {
+  display: block;
+  width: 190px;
+  max-width: 21vw;
+  height: 58px;
+  object-fit: contain;
+  object-position: left center;
 }
-
-.desktop-language span {
-  opacity: 0.7;
+.mobile-header-logo {
+  display: block;
+  width: 205px;
+  max-width: 68vw;
+  height: 68px;
+  object-fit: contain;
+  object-position: left center;
 }
-
-/* Spanish labels are longer, so keep the switch from colliding with login. */
-@media (max-width: 1180px) {
-  .desktop-language {
-    display: none;
-  }
-}
-  </style>
-  <style id="spanish-nav-fixes">
-   /* Spanish navigation and language-switch alignment */
+.header-container { min-width: 0; }
+.desktop-navigation { min-width: 0; }
 .desktop-language {
   display: flex;
   align-items: center;
   flex: 0 0 auto;
-  gap: 8px;
-  margin-left: 16px;
+  gap: 9px;
+  margin-left: 18px;
+  padding-left: 14px;
+  border-left: 1px solid rgba(244,193,93,.32);
   white-space: nowrap;
 }
 .desktop-language a,
-.desktop-language span {
-  display: inline-block;
-  white-space: nowrap;
+.desktop-language span { display:inline-block; white-space:nowrap; }
+@media (min-width:1181px) {
+  html[lang="es"] .header-container { gap:12px; padding-inline:clamp(18px,2.2vw,36px); }
+  html[lang="es"] .site-header-logo { width:160px; max-width:17vw; }
+  html[lang="es"] .desktop-navigation { gap:clamp(7px,.65vw,12px); margin-left:auto; }
+  html[lang="es"] .desktop-navigation a { font-size:clamp(.56rem,.58vw,.65rem); letter-spacing:.035em; }
+  html[lang="es"] .desktop-language { margin-left:7px; padding-left:10px; gap:6px; }
+  html[lang="es"] .desktop-language a { font-size:.65rem; }
 }
-@media (max-width: 1180px) {
-  .desktop-language { display: none; }
+@media (min-width:901px) and (max-width:1180px) {
+  html[lang="es"] .desktop-navigation,
+  html[lang="es"] .desktop-language { display:none !important; }
+  html[lang="es"] .menu-toggle { display:flex !important; }
+  html[lang="es"] .mobile-menu { display:flex; }
+  html[lang="es"] .menu-overlay { display:block; }
+}
+@media (max-width:900px) {
+  .desktop-navigation,.desktop-language { display:none !important; }
+  .menu-toggle { display:flex !important; }
+  .site-header-logo { width:155px; max-width:52vw; height:52px; }
 }
   </style>
-  <link href="https://bamswebsitebuilder.com/subscriptions" hreflang="en" rel="alternate"/>
-  <link href="https://bamswebsitebuilder.com/es/subscriptions" hreflang="es" rel="alternate"/>
+  <meta content="https://www.bamswebsitebuilder.com/images/logo-dark.jpg" property="og:image"/>
  </head>
  <body>
   <header class="site-header" id="site-header">
    <div class="header-container">
     <a aria-label="Inicio de BAM's Website Builder" class="site-brand" href="/es/">
-     <span class="brand-text">
-      <strong>
-       BAM'S
-      </strong>
-      <small>
-       WEBSITE BUILDER
-      </small>
-     </span>
+     <img alt="BAM's Website Builder" class="site-header-logo" src="/images/logo-header.jpg"/>
     </a>
     <nav aria-label="Navegaci&oacute;n principal" class="desktop-navigation">
      <a href="/es/">
@@ -177,14 +138,7 @@ body {
   <aside aria-hidden="true" aria-label="Navegaci&oacute;n m&oacute;vil" class="mobile-menu" id="mobile-menu">
    <div class="mobile-menu-header">
     <a class="mobile-menu-brand" href="/es/">
-     <span>
-      <strong>
-       BAM'S
-      </strong>
-      <small>
-       WEBSITE BUILDER
-      </small>
-     </span>
+     <img alt="BAM's Website Builder" class="mobile-header-logo" src="/images/logo-header.jpg"/>
     </a>
     <button aria-label="Cerrar men&uacute; de navegaci&oacute;n" class="mobile-menu-close" id="mobile-menu-close" type="button">
      <span>
@@ -195,31 +149,103 @@ body {
    </div>
    <nav class="mobile-navigation">
     <a href="/es/">
-     Inicio
+     <span aria-hidden="true" class="mobile-link-icon">
+      <svg viewbox="0 0 24 24">
+       <use href="/images/bam-icons.svg#home">
+       </use>
+      </svg>
+     </span>
+     <span>
+      Inicio
+     </span>
     </a>
     <a href="/es/services">
-     Servicios
+     <span aria-hidden="true" class="mobile-link-icon">
+      <svg viewbox="0 0 24 24">
+       <use href="/images/bam-icons.svg#services">
+       </use>
+      </svg>
+     </span>
+     <span>
+      Servicios
+     </span>
     </a>
     <a href="/es/prices">
-     Precios
+     <span aria-hidden="true" class="mobile-link-icon">
+      <svg viewbox="0 0 24 24">
+       <use href="/images/bam-icons.svg#prices">
+       </use>
+      </svg>
+     </span>
+     <span>
+      Precios
+     </span>
     </a>
     <a aria-current="page" class="active" href="/es/subscriptions">
-     Planes Web
+     <span aria-hidden="true" class="mobile-link-icon">
+      <svg viewbox="0 0 24 24">
+       <use href="/images/bam-icons.svg#prices">
+       </use>
+      </svg>
+     </span>
+     <span>
+      Planes Web
+     </span>
     </a>
     <a href="/es/templates">
-     Plantillas
+     <span aria-hidden="true" class="mobile-link-icon">
+      <svg viewbox="0 0 24 24">
+       <use href="/images/bam-icons.svg#templates">
+       </use>
+      </svg>
+     </span>
+     <span>
+      Plantillas
+     </span>
     </a>
     <a href="/es/portfolio">
-     Portafolio
+     <span aria-hidden="true" class="mobile-link-icon">
+      <svg viewbox="0 0 24 24">
+       <use href="/images/bam-icons.svg#portfolio">
+       </use>
+      </svg>
+     </span>
+     <span>
+      Portafolio
+     </span>
     </a>
     <a href="/es/reviews">
-     Rese&ntilde;as
+     <span aria-hidden="true" class="mobile-link-icon">
+      <svg viewbox="0 0 24 24">
+       <use href="/images/bam-icons.svg#reviews">
+       </use>
+      </svg>
+     </span>
+     <span>
+      Rese&ntilde;as
+     </span>
     </a>
     <a href="/es/contact">
-     Contacto
+     <span aria-hidden="true" class="mobile-link-icon">
+      <svg viewbox="0 0 24 24">
+       <use href="/images/bam-icons.svg#contact">
+       </use>
+      </svg>
+     </span>
+     <span>
+      Contacto
+     </span>
     </a>
     <a href="/es/login">
-     Iniciar sesi&oacute;n
+     <span aria-hidden="true" class="mobile-link-icon">
+      <svg viewbox="0 0 24 24">
+       <use href="/images/bam-icons.svg#login">
+       </use>
+      </svg>
+     </span>
+     <span>
+      Iniciar sesi&oacute;n
+     </span>
     </a>
    </nav>
    <div class="mobile-language-section">
@@ -241,7 +267,7 @@ body {
     </a>
    </div>
   </aside>
-  <main>
+  <main id="main-content">
    <section class="pricing-section">
     <div class="pricing-heading">
      <p class="section-label">

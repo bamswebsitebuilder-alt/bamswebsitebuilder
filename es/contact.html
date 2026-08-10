@@ -7,10 +7,10 @@
   <title>
    Contacto | BAM's Website Builder
   </title>
-  <link href="/css/style.css?v=20260806-30" rel="stylesheet"/>
-  <link href="/css/page-theme.css?v=20260806-30" rel="stylesheet"/>
-  <link href="/css/footer-fix.css?v=20260806-30" rel="stylesheet"/>
-  <link href="/images/icon-dark.jpg" rel="icon" type="image/jpeg"/>
+  <link href="/css/style.css?v=20260810-1" rel="stylesheet"/>
+  <link href="/css/page-theme.css?v=20260810-1" rel="stylesheet"/>
+  <link href="/css/footer-fix.css?v=20260810-1" rel="stylesheet"/>
+  <link href="/images/logo-header.jpg" rel="icon" type="image/jpeg"/>
   <link href="https://bamswebsitebuilder.com/es/contact" rel="canonical"/>
   <style>
    /* Match the clear, self-contained mobile icons used on the English site. */
@@ -57,41 +57,79 @@
 .subscription-contact-box a{font-weight:800;text-decoration:none;color:#f4c15d}
 .subscription-contact-box a:hover,.subscription-contact-box a:focus-visible{text-decoration:underline}
 @media(max-width:700px){.contact-detail-icon{width:34px;height:34px;flex-basis:34px}.subscription-contact-box{padding:17px 18px}}
+  
+.contact-detail-item{gap:15px;min-height:54px}.contact-detail-icon{width:48px;height:48px;flex:0 0 48px;border:1.5px solid rgba(244,193,93,.55);background:rgba(244,193,93,.16);box-shadow:0 4px 14px rgba(0,0,0,.18)}.contact-detail-icon svg{width:25px;height:25px;stroke-width:2.15}@media(max-width:700px){.contact-detail-icon{width:44px;height:44px;flex-basis:44px}.contact-detail-icon svg{width:23px;height:23px}}
   </style>
-  <style id="spanish-nav-fixes">
-   /* Spanish navigation and language-switch alignment */
+  <link href="https://bamswebsitebuilder.com/contact" hreflang="en" rel="alternate"/>
+  <link href="https://bamswebsitebuilder.com/es/contact" hreflang="es" rel="alternate"/>
+  <style id="bam-spanish-consistency">
+   /* BAM Spanish consistency fix */
+.site-brand,
+.mobile-menu-brand {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  text-decoration: none;
+  min-width: 0;
+}
+.site-header-logo {
+  display: block;
+  width: 190px;
+  max-width: 21vw;
+  height: 58px;
+  object-fit: contain;
+  object-position: left center;
+}
+.mobile-header-logo {
+  display: block;
+  width: 205px;
+  max-width: 68vw;
+  height: 68px;
+  object-fit: contain;
+  object-position: left center;
+}
+.header-container { min-width: 0; }
+.desktop-navigation { min-width: 0; }
 .desktop-language {
   display: flex;
   align-items: center;
   flex: 0 0 auto;
-  gap: 8px;
-  margin-left: 16px;
+  gap: 9px;
+  margin-left: 18px;
+  padding-left: 14px;
+  border-left: 1px solid rgba(244,193,93,.32);
   white-space: nowrap;
 }
 .desktop-language a,
-.desktop-language span {
-  display: inline-block;
-  white-space: nowrap;
+.desktop-language span { display:inline-block; white-space:nowrap; }
+@media (min-width:1181px) {
+  html[lang="es"] .header-container { gap:12px; padding-inline:clamp(18px,2.2vw,36px); }
+  html[lang="es"] .site-header-logo { width:160px; max-width:17vw; }
+  html[lang="es"] .desktop-navigation { gap:clamp(7px,.65vw,12px); margin-left:auto; }
+  html[lang="es"] .desktop-navigation a { font-size:clamp(.56rem,.58vw,.65rem); letter-spacing:.035em; }
+  html[lang="es"] .desktop-language { margin-left:7px; padding-left:10px; gap:6px; }
+  html[lang="es"] .desktop-language a { font-size:.65rem; }
 }
-@media (max-width: 1180px) {
-  .desktop-language { display: none; }
+@media (min-width:901px) and (max-width:1180px) {
+  html[lang="es"] .desktop-navigation,
+  html[lang="es"] .desktop-language { display:none !important; }
+  html[lang="es"] .menu-toggle { display:flex !important; }
+  html[lang="es"] .mobile-menu { display:flex; }
+  html[lang="es"] .menu-overlay { display:block; }
+}
+@media (max-width:900px) {
+  .desktop-navigation,.desktop-language { display:none !important; }
+  .menu-toggle { display:flex !important; }
+  .site-header-logo { width:155px; max-width:52vw; height:52px; }
 }
   </style>
-  <link href="https://bamswebsitebuilder.com/contact" hreflang="en" rel="alternate"/>
-  <link href="https://bamswebsitebuilder.com/es/contact" hreflang="es" rel="alternate"/>
+  <meta content="https://www.bamswebsitebuilder.com/images/logo-dark.jpg" property="og:image"/>
  </head>
  <body>
   <header class="site-header" id="site-header">
    <div class="header-container">
     <a aria-label="Inicio de BAM's Website Builder" class="site-brand" href="/es/">
-     <span class="brand-text">
-      <strong>
-       BAM'S
-      </strong>
-      <small>
-       WEBSITE BUILDER
-      </small>
-     </span>
+     <img alt="BAM's Website Builder" class="site-header-logo" src="/images/logo-header.jpg"/>
     </a>
     <nav aria-label="Navegaci&oacute;n principal" class="desktop-navigation">
      <a data-page="home" href="/es/">
@@ -148,14 +186,7 @@
   <aside aria-hidden="true" aria-label="Navegaci&oacute;n m&oacute;vil" class="mobile-menu" id="mobile-menu">
    <div class="mobile-menu-header">
     <a class="mobile-menu-brand" href="/es/">
-     <span>
-      <strong>
-       BAM'S
-      </strong>
-      <small>
-       WEBSITE BUILDER
-      </small>
-     </span>
+     <img alt="BAM's Website Builder" class="mobile-header-logo" src="/images/logo-header.jpg"/>
     </a>
     <button aria-label="Cerrar men&uacute; de navegaci&oacute;n" class="mobile-menu-close" id="mobile-menu-close" type="button">
      <span>
@@ -323,7 +354,7 @@
   <!-- HEADER -->
   <!-- SHARED STICKY NAVIGATION -->
   <!-- CONTACT PAGE -->
-  <main>
+  <main id="main-content">
    <section class="contact-section">
     <div class="contact-container">
      <!-- CONTACT INFORMATION -->

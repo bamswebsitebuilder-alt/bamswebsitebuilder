@@ -3,20 +3,81 @@
  <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <meta content="Admin dashboard for BAM's Website Builder." name="description"/>
+  <meta content="Panel de administraci&oacute;n de BAM's Website Builder." name="description"/>
   <title>
    Panel de administraci&oacute;n | BAM's Website Builder
   </title>
-  <link href="/css/style.css?v=102" rel="stylesheet"/>
-  <link href="/css/admin-dashboard.css?v=108" rel="stylesheet"/>
-  <link href="/css/admin-messages.css?v=2" rel="stylesheet"/>
-  <link href="/css/animations.css?v=2" rel="stylesheet"/>
-  <link href="/css/footer-fix.css?v=1" rel="stylesheet"/>
-  <link href="/css/site-upgrades.css?v=1" rel="stylesheet"/>
-  <link href="/images/icon-dark.jpg" rel="icon" type="image/jpeg"/>
+  <link href="/css/style.css?v=20260810-1" rel="stylesheet"/>
+  <link href="/css/admin-dashboard.css?v=20260810-1" rel="stylesheet"/>
+  <link href="/css/admin-messages.css?v=20260810-1" rel="stylesheet"/>
+  <link href="/css/animations.css?v=20260810-1" rel="stylesheet"/>
+  <link href="/css/footer-fix.css?v=20260810-1" rel="stylesheet"/>
+  <link href="/css/site-upgrades.css?v=20260810-1" rel="stylesheet"/>
+  <link href="/images/logo-header.jpg" rel="icon" type="image/jpeg"/>
   <link href="https://bamswebsitebuilder.com/es/admin-dashboard" rel="canonical"/>
   <link href="https://bamswebsitebuilder.com/admin-dashboard" hreflang="en" rel="alternate"/>
   <link href="https://bamswebsitebuilder.com/es/admin-dashboard" hreflang="es" rel="alternate"/>
+  <style id="bam-spanish-consistency">
+   /* BAM Spanish consistency fix */
+.site-brand,
+.mobile-menu-brand {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  text-decoration: none;
+  min-width: 0;
+}
+.site-header-logo {
+  display: block;
+  width: 190px;
+  max-width: 21vw;
+  height: 58px;
+  object-fit: contain;
+  object-position: left center;
+}
+.mobile-header-logo {
+  display: block;
+  width: 205px;
+  max-width: 68vw;
+  height: 68px;
+  object-fit: contain;
+  object-position: left center;
+}
+.header-container { min-width: 0; }
+.desktop-navigation { min-width: 0; }
+.desktop-language {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 9px;
+  margin-left: 18px;
+  padding-left: 14px;
+  border-left: 1px solid rgba(244,193,93,.32);
+  white-space: nowrap;
+}
+.desktop-language a,
+.desktop-language span { display:inline-block; white-space:nowrap; }
+@media (min-width:1181px) {
+  html[lang="es"] .header-container { gap:12px; padding-inline:clamp(18px,2.2vw,36px); }
+  html[lang="es"] .site-header-logo { width:160px; max-width:17vw; }
+  html[lang="es"] .desktop-navigation { gap:clamp(7px,.65vw,12px); margin-left:auto; }
+  html[lang="es"] .desktop-navigation a { font-size:clamp(.56rem,.58vw,.65rem); letter-spacing:.035em; }
+  html[lang="es"] .desktop-language { margin-left:7px; padding-left:10px; gap:6px; }
+  html[lang="es"] .desktop-language a { font-size:.65rem; }
+}
+@media (min-width:901px) and (max-width:1180px) {
+  html[lang="es"] .desktop-navigation,
+  html[lang="es"] .desktop-language { display:none !important; }
+  html[lang="es"] .menu-toggle { display:flex !important; }
+  html[lang="es"] .mobile-menu { display:flex; }
+  html[lang="es"] .menu-overlay { display:block; }
+}
+@media (max-width:900px) {
+  .desktop-navigation,.desktop-language { display:none !important; }
+  .menu-toggle { display:flex !important; }
+  .site-header-logo { width:155px; max-width:52vw; height:52px; }
+}
+  </style>
  </head>
  <body class="admin-dashboard-page">
   <header class="admin-header">
@@ -29,12 +90,7 @@
     </span>
    </button>
    <a aria-label="Inicio de BAM's Website Builder" class="admin-brand" href="/es/">
-    <strong>
-     BAM'S
-    </strong>
-    <span>
-     WEBSITE BUILDER
-    </span>
+    <img alt="BAM's Website Builder" src="/images/logo-header.jpg" style="display:block;width:170px;max-width:36vw;height:52px;object-fit:contain;object-position:left center;"/>
    </a>
    <div class="admin-header-actions">
     <span id="admin-email">
@@ -86,9 +142,9 @@
      </button>
     </nav>
    </aside>
-   <button aria-label="Close admin menu" class="admin-sidebar-overlay" hidden="" id="admin-sidebar-overlay" type="button">
+   <button aria-label="Cerrar men&uacute; de administraci&oacute;n" class="admin-sidebar-overlay" hidden="" id="admin-sidebar-overlay" type="button">
    </button>
-   <main class="admin-content">
+   <main class="admin-content" id="main-content">
     <section class="admin-panel active" id="overview">
      <div class="admin-page-heading">
       <p class="admin-kicker">
@@ -112,7 +168,7 @@
       </article>
       <article class="admin-stat-card">
        <span>
-        Unpaid Facturas
+        Facturas pendientes
        </span>
        <strong id="stat-unpaid">
         0
@@ -120,7 +176,7 @@
       </article>
       <article class="admin-stat-card">
        <span>
-        Paid Facturas
+        Facturas pagadas
        </span>
        <strong id="stat-paid">
         0
@@ -174,13 +230,13 @@
        Administraci&oacute;n de clientes
       </h1>
       <p>
-       Add client profiles and review registered client accounts.
+       Agrega perfiles de clientes y revisa las cuentas registradas.
       </p>
      </div>
      <article class="admin-card">
       <div class="admin-card-heading">
        <h2>
-        Add or Update Client
+        Agregar o actualizar cliente
        </h2>
       </div>
       <form id="client-form">
@@ -193,25 +249,25 @@
         </div>
         <div class="admin-field">
          <label for="client-name">
-          Full Name
+          Nombre completo
          </label>
          <input id="client-name" required="" type="text"/>
         </div>
         <div class="admin-field">
          <label for="client-email">
-          Email Address
+          Correo electr&oacute;nico
          </label>
          <input id="client-email" required="" type="email"/>
         </div>
         <div class="admin-field">
          <label for="client-business">
-          Business Name
+          Nombre del negocio
          </label>
          <input id="client-business" type="text"/>
         </div>
         <div class="admin-field">
          <label for="client-phone">
-          Phone Number
+          N&uacute;mero de tel&eacute;fono
          </label>
          <input id="client-phone" type="tel"/>
         </div>
@@ -233,7 +289,7 @@
       </div>
       <div class="admin-list" id="client-list">
        <p class="admin-status">
-        Loading clients...
+        Cargando clientes...
        </p>
       </div>
      </article>
@@ -260,11 +316,11 @@
        <div class="admin-form-grid">
         <div class="admin-field">
          <label for="project-client">
-          Choose a Client
+          Elegir cliente
          </label>
          <select id="project-client" required="">
           <option value="">
-           Choose a client
+           Elige un cliente
           </option>
          </select>
         </div>
@@ -441,11 +497,11 @@
        <div class="admin-form-grid">
         <div class="admin-field">
          <label for="invoice-client">
-          Choose a Client
+          Elegir cliente
          </label>
          <select id="invoice-client" required="">
           <option value="">
-           Choose a client
+           Elige un cliente
           </option>
          </select>
         </div>
@@ -492,12 +548,12 @@
      <article class="admin-card">
       <div class="admin-card-heading">
        <h2>
-        Invoice History
+        Historial de facturas
        </h2>
       </div>
       <div class="admin-list" id="invoice-list">
        <p class="admin-status">
-        Loading invoices...
+        Cargando facturas...
        </p>
       </div>
      </article>
@@ -505,13 +561,13 @@
     <section class="admin-panel" id="files">
      <div class="admin-page-heading">
       <p class="admin-kicker">
-       FILES
+       ARCHIVOS
       </p>
       <h1>
-       Client File Uploads
+       Archivos de clientes
       </h1>
       <p>
-       Upload documents and project files directly to a client's account.
+       Sube documentos y archivos de proyecto directamente a la cuenta de un cliente.
       </p>
      </div>
      <article class="admin-card">
@@ -524,21 +580,21 @@
        <div class="admin-form-grid">
         <div class="admin-field">
          <label for="file-client">
-          Choose a Client
+          Elegir cliente
          </label>
          <select id="file-client" required="">
           <option value="">
-           Choose a client
+           Elige un cliente
           </option>
          </select>
         </div>
         <div class="admin-field">
          <label for="admin-file-input">
-          Choose File
+          Elegir archivo
          </label>
          <input id="admin-file-input" required="" type="file"/>
          <small>
-          Maximum file size: 15 MB.
+          Tama&ntilde;o m&aacute;ximo de archivo: 15 MB.
          </small>
         </div>
        </div>
@@ -557,26 +613,26 @@
     <section class="admin-panel" id="messages">
      <div class="admin-page-heading">
       <p class="admin-kicker">
-       MESSAGES
+       MENSAJES
       </p>
       <h1>
-       Client Messaging
+       Mensajer&iacute;a con clientes
       </h1>
       <p>
-       Send and receive messages with your clients in real time.
+       Env&iacute;a y recibe mensajes con tus clientes en tiempo real.
       </p>
      </div>
      <div class="message-layout">
       <aside class="message-sidebar admin-card">
        <div class="message-sidebar-header">
         <h2>
-         Conversations
+         Conversaciones
         </h2>
-        <input aria-label="Search clients" id="message-client-search" placeholder="Search clients" type="search"/>
+        <input aria-label="Buscar clientes" id="message-client-search" placeholder="Buscar clientes" type="search"/>
        </div>
        <div class="message-client-list" id="message-client-list">
         <p class="admin-status">
-         Loading clients...
+         Cargando clientes...
         </p>
        </div>
       </aside>
@@ -584,36 +640,36 @@
        <div class="message-chat-header">
         <div>
          <p class="admin-kicker">
-          CONVERSATION
+          CONVERSACI&Oacute;N
          </p>
          <h2 id="message-chat-name">
-          Choose a client
+          Elige un cliente
          </h2>
          <p class="admin-status" id="message-chat-email">
-          Select a client to view the conversation.
+          Selecciona un cliente para ver la conversaci&oacute;n.
          </p>
         </div>
        </div>
        <div aria-live="polite" class="message-thread" id="message-thread">
         <div class="message-empty-state">
          <h3>
-          No conversation selected
+          No hay una conversaci&oacute;n seleccionada
          </h3>
          <p>
-          Choose a client from the list to start messaging.
+          Elige un cliente de la lista para comenzar a enviar mensajes.
          </p>
         </div>
        </div>
        <form class="message-composer" id="message-form">
         <label class="sr-only" for="message-text">
-         Message
+         Mensaje
         </label>
-        <textarea disabled="" id="message-text" maxlength="2000" placeholder="Type your message..." required="" rows="2"></textarea>
+        <textarea disabled="" id="message-text" maxlength="2000" placeholder="Escribe tu mensaje..." required="" rows="2"></textarea>
         <div class="message-composer-actions">
          <p class="admin-status" hidden="" id="message-status">
          </p>
          <button class="admin-primary-button" disabled="" id="message-send-button" type="submit">
-          Send Message
+          Enviar mensaje
          </button>
         </div>
        </form>
@@ -623,23 +679,23 @@
     <section class="admin-panel" id="notifications">
      <div class="admin-page-heading">
       <p class="admin-kicker">
-       NOTIFICATIONS
+       NOTIFICACIONES
       </p>
       <h1>
-       Recent Activity
+       Actividad reciente
       </h1>
       <p>
-       Review client, project, and invoice activity.
+       Revisa la actividad de clientes, proyectos y facturas.
       </p>
      </div>
      <article class="admin-card">
       <div class="admin-card-heading">
        <div>
         <h2>
-         Browser Notificaciones
+         Notificaciones del navegador
         </h2>
         <p class="admin-status" id="notification-status">
-         Enable notifications to receive updates on this device.
+         Activa las notificaciones para recibir actualizaciones en este dispositivo.
         </p>
        </div>
        <button class="admin-secondary-button" id="enable-browser-notifications" type="button">
