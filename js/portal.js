@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll("[data-pay-invoice]").forEach((button) => {
     button.addEventListener("click", () => {
-      showToast("Connect Stripe, Square, or PayPal to accept invoice payments.");
+      showToast("Connect Stripe to accept invoice payments.");
     });
   });
 });
