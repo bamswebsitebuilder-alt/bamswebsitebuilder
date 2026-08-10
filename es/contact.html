@@ -43,6 +43,22 @@
     border-color: #f4c15d;
 }
 </style>
+
+<style id="contact-polish">
+.contact-details{display:grid;gap:12px;margin-top:28px}
+.contact-detail-item{display:flex;align-items:center;gap:12px;margin:0!important}
+.contact-detail-icon{width:38px;height:38px;flex:0 0 38px;display:grid;place-items:center;border-radius:10px;background:rgba(244,193,93,.12);border:1px solid rgba(244,193,93,.3);color:#f4c15d}
+.contact-detail-icon svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.contact-detail-copy{min-width:0}
+.contact-detail-copy strong{display:block;margin-bottom:2px}
+.contact-detail-copy a,.contact-detail-copy span{overflow-wrap:anywhere}
+.subscription-contact-box{margin:0 0 26px;padding:20px 22px;border:1px solid rgba(244,193,93,.38);border-radius:14px;background:rgba(244,193,93,.08)}
+.subscription-contact-box h2{margin:0 0 8px;font-size:1.2rem}
+.subscription-contact-box p{margin:0 0 12px;line-height:1.55}
+.subscription-contact-box a{font-weight:800;text-decoration:none;color:#f4c15d}
+.subscription-contact-box a:hover,.subscription-contact-box a:focus-visible{text-decoration:underline}
+@media(max-width:700px){.contact-detail-icon{width:34px;height:34px;flex-basis:34px}.subscription-contact-box{padding:17px 18px}}
+</style>
 </head>
 <body><header class="site-header" id="site-header">
 <div class="header-container">
@@ -53,7 +69,7 @@
 </span>
 </a>
 <nav aria-label="Navegación principal" class="desktop-navigation">
-<a data-page="home" href="/es/">Inicio</a><a data-page="services" href="/es/services">Servicios</a><a data-page="prices" href="/es/prices">Precios</a><a data-page="templates" href="/es/templates">Plantillas</a><a data-page="portfolio" href="/es/portfolio">Portafolio</a><a data-page="reviews" href="/es/reviews">Reseñas</a><a aria-current="page" class="active" data-page="contact" href="/es/contact">Contacto</a><a data-page="login" href="/es/login">Iniciar sesión</a>
+<a data-page="home" href="/es/">Inicio</a><a data-page="services" href="/es/services">Servicios</a><a data-page="prices" href="/es/prices">Precios</a><a data-page="subscriptions" href="/es/subscriptions">Planes Web</a><a data-page="templates" href="/es/templates">Plantillas</a><a data-page="portfolio" href="/es/portfolio">Portafolio</a><a data-page="reviews" href="/es/reviews">Reseñas</a><a aria-current="page" class="active" data-page="contact" href="/es/contact">Contacto</a><a data-page="login" href="/es/login">Iniciar sesión</a>
 </nav>
 <div class="desktop-language">
 <a class="" href="/contact">English</a>
@@ -106,9 +122,9 @@
 <h1>Construyamos<br/>Tu sitio web</h1>
 <p>Cuéntanos sobre tu negocio y el tipo de sitio que necesitas. Completa el formulario para recibir una cotización gratis.</p>
 <div class="contact-details">
-<p>
-<strong>Tiempo de respuesta:</strong>
-<br/>Hasta 72 horas</p>
+<div class="contact-detail-item"><span class="contact-detail-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"/></svg></span><span class="contact-detail-copy"><strong>Teléfono</strong><a href="tel:+17274178762">727-417-8762</a></span></div>
+<div class="contact-detail-item"><span class="contact-detail-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg></span><span class="contact-detail-copy"><strong>Correo electrónico</strong><a href="mailto:bamswebsitebuilder@gmail.com">bamswebsitebuilder@gmail.com</a></span></div>
+<div class="contact-detail-item"><span class="contact-detail-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="contact-detail-copy"><strong>Tiempo de respuesta</strong><span>Hasta 72 horas</span></span></div>
 </div>
 </div>
 <!-- CONTACT FORM -->
@@ -117,6 +133,22 @@
 <input name="_subject" type="hidden" value="Nueva solicitud de sitio web"/>
 <input name="_captcha" type="hidden" value="false"/>
 <input name="_template" type="hidden" value="table"/>
+<div class="subscription-contact-box" id="subscription-interest">
+<h2>¿Prefieres pagar mensualmente?</h2>
+<p>También ofrecemos planes de pago de 12 meses: Inicial $24.99/mes, Empresarial $44.99/mes y Premium $74.99/mes.</p>
+<a href="/es/subscriptions">Ver planes mensuales →</a>
+</div>
+<div class="form-group">
+<label for="payment-option">Opción de pago</label>
+<select id="payment-option" name="Payment Option">
+<option value="">Selecciona una opción de pago</option>
+<option value="One-time payment">Pago único</option>
+<option value="Starter Monthly - $24.99/month for 12 months">Inicial — $24.99/mes por 12 meses</option>
+<option value="Business Monthly - $44.99/month for 12 months">Empresarial — $44.99/mes por 12 meses</option>
+<option value="Premium Monthly - $74.99/month for 12 months">Premium — $74.99/mes por 12 meses</option>
+</select>
+</div>
+
 <!-- FULL NAME -->
 <div class="form-group">
 <label for="name">Nombre completo</label>
@@ -224,7 +256,7 @@
 </div>
 <div>
 <h4>Enlaces rápidos</h4>
-<div class="footer-links"><a href="/es/services">Servicios</a><a href="/es/prices">Precios</a><a href="/es/templates">Plantillas</a><a href="/es/portfolio">Portafolio</a><a href="/es/reviews">Reseñas</a><a href="/es/contact">Contacto</a></div>
+<div class="footer-links"><a href="/es/services">Servicios</a><a href="/es/prices">Precios</a><a href="/es/subscriptions">Planes Web</a><a href="/es/templates">Plantillas</a><a href="/es/portfolio">Portafolio</a><a href="/es/reviews">Reseñas</a><a href="/es/contact">Contacto</a></div>
 </div>
 <div>
 <h4>Acceso de clientes</h4>
@@ -244,6 +276,8 @@
     var template = params.get('template');
     var packageKey = params.get('package');
     var payment = params.get('payment');
+    var plan = (params.get('plan') || '').toLowerCase();
+    var paymentOption = document.getElementById('payment-option');
     var templateSelect = document.getElementById('website-template');
     var packageSelect = document.getElementById('package');
     var message = document.getElementById('message');
@@ -252,6 +286,15 @@
         business: 'Sitio empresarial',
         premium: 'Sitio premium'
     };
+
+    var monthlyValues = {
+        'starter-monthly': 'Starter Monthly - $24.99/month for 12 months',
+        'business-monthly': 'Business Monthly - $44.99/month for 12 months',
+        'premium-monthly': 'Premium Monthly - $74.99/month for 12 months'
+    };
+    if (plan && paymentOption && monthlyValues[plan]) {
+        paymentOption.value = monthlyValues[plan];
+    }
 
     if (template && templateSelect) {
         templateSelect.value = template;
