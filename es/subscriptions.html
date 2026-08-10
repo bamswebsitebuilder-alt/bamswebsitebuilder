@@ -13,8 +13,7 @@
   <link href="/css/site-upgrades.css?v=1" rel="stylesheet"/>
   <link href="/images/icon-dark.jpg" rel="icon" type="image/jpeg"/>
   <style>
-   /* Subscription page layout fixes */
-html,
+   html,
 body {
   width: 100%;
   margin: 0;
@@ -28,7 +27,31 @@ body {
   margin: 0;
 }
 
+.term-note {
+  margin: 12px 0 20px;
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.monthly-price {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+}
+
+.monthly-price .price {
+  font-size: 3rem;
+}
+
+.monthly-price small {
+  color: #666;
+  font-weight: 700;
+}
+
+/* Match the English subscription page notice */
 .stripe-note {
+  box-sizing: border-box;
   max-width: 900px;
   margin: 36px auto 0;
   padding: 20px;
@@ -39,41 +62,38 @@ body {
   text-align: center;
 }
 
-/* Keep the language switch separate from Iniciar sesión */
-.header-container {
-  display: flex;
-  align-items: center;
+.stripe-note strong {
+  color: #f5c400;
 }
 
-.desktop-navigation {
-  min-width: 0;
-}
-
+/* Match the English language-switch spacing */
 .desktop-language {
   display: flex;
   align-items: center;
-  flex: 0 0 auto;
+  flex-shrink: 0;
   gap: 8px;
-  margin-left: 22px;
-  padding-left: 18px;
+  margin-left: 14px;
   white-space: nowrap;
-  border-left: 1px solid rgba(245, 196, 0, 0.45);
 }
 
 .desktop-language a {
   display: inline-block;
-  white-space: nowrap;
+  text-decoration: none;
 }
 
-@media (max-width: 1180px) {
-  .desktop-navigation {
-    gap: 12px;
-  }
+.desktop-language .language-active {
+  color: #f5c400;
+  font-weight: 700;
+}
 
+.desktop-language span {
+  opacity: 0.7;
+}
+
+/* Spanish labels are longer, so keep the switch from colliding with login. */
+@media (max-width: 1180px) {
   .desktop-language {
-    margin-left: 14px;
-    padding-left: 12px;
-    gap: 6px;
+    display: none;
   }
 }
   </style>
