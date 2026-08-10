@@ -22,10 +22,6 @@
   <link rel="stylesheet" href="/css/site-upgrades.css?v=20260810-4">
 
   <style>
-    /* =========================
-       TEXT LOGO
-    ========================== */
-
     .site-brand,
     .mobile-menu-brand {
       display: inline-flex;
@@ -58,10 +54,6 @@
       letter-spacing: 0.22em;
       white-space: nowrap;
     }
-
-    /* =========================
-       CONTACT PAGE FINAL OVERRIDE
-    ========================== */
 
     .contact-section {
       min-height: calc(100vh - var(--header-height));
@@ -173,10 +165,6 @@
       font-weight: 700;
     }
 
-    /* =========================
-       FORM
-    ========================== */
-
     .contact-form {
       padding: 38px;
       background:
@@ -222,9 +210,24 @@
       text-decoration: underline;
     }
 
-    /* =========================
-       TEMPLATE SELECTOR
-    ========================== */
+    .paypal-success-box {
+      display: none;
+      margin: 0 0 26px;
+      padding: 18px 20px;
+      color: #ffffff;
+      background: rgba(46, 160, 67, 0.12);
+      border: 1px solid rgba(76, 200, 100, 0.45);
+      border-radius: 14px;
+      line-height: 1.55;
+    }
+
+    .paypal-success-box.active {
+      display: block;
+    }
+
+    .paypal-success-box strong {
+      color: #8ee59f;
+    }
 
     #template-choice-group,
     #template-choice {
@@ -251,10 +254,6 @@
       font-weight: 700;
     }
 
-    /* =========================
-       TABLET
-    ========================== */
-
     @media (max-width: 1000px) {
       .contact-container {
         grid-template-columns: 1fr;
@@ -262,10 +261,6 @@
         max-width: 760px;
       }
     }
-
-    /* =========================
-       MOBILE FIX
-    ========================== */
 
     @media (max-width: 760px) {
       .contact-section {
@@ -539,8 +534,6 @@
 
           <div class="contact-details">
 
-            <!-- PHONE -->
-
             <div class="contact-detail-item">
 
               <span class="contact-detail-icon" aria-hidden="true">
@@ -570,8 +563,6 @@
 
             </div>
 
-            <!-- EMAIL -->
-
             <div class="contact-detail-item">
 
               <span class="contact-detail-icon" aria-hidden="true">
@@ -595,8 +586,6 @@
               </span>
 
             </div>
-
-            <!-- RESPONSE TIME -->
 
             <div class="contact-detail-item">
 
@@ -643,6 +632,33 @@
             name="_template"
             value="table"
           >
+
+          <!-- PAYPAL SUBSCRIPTION ID -->
+          <input
+            type="hidden"
+            id="paypal-subscription-id"
+            name="PayPal Subscription ID"
+            value=""
+          >
+
+          <!-- PAYPAL STATUS -->
+          <input
+            type="hidden"
+            id="paypal-subscription-status"
+            name="PayPal Subscription Status"
+            value=""
+          >
+
+          <!-- PAYPAL SUCCESS MESSAGE -->
+
+          <div
+            class="paypal-success-box"
+            id="paypal-success-box"
+          >
+            <strong>PayPal subscription received.</strong>
+            Your payment option and website package have been selected automatically.
+            Please complete the remaining project information below.
+          </div>
 
           <!-- MONTHLY PAYMENT BOX -->
 
@@ -1091,7 +1107,7 @@
 
   </footer>
 
-  <!-- CONTACT PAGE SCRIPT -->
+  <!-- CONTACT / PAYPAL HANDLING -->
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -1102,8 +1118,14 @@
       const requestedTemplate =
         (params.get('template') || '').trim();
 
+      const subscribed =
+        (params.get('subscribed') || '').trim().toLowerCase();
+
       const plan =
         (params.get('plan') || '').trim().toLowerCase();
+
+      const subscriptionId =
+        (params.get('subscription_id') || '').trim();
 
       const paymentOption =
         document.getElementById('payment-option');
@@ -1117,49 +1139,66 @@
       const packageSelect =
         document.getElementById('package');
 
-      const monthlyValues = {
+      const paypalSubscriptionId =
+        document.getElementById('paypal-subscription-id');
 
-        'starter-monthly':
-          'Starter Monthly - $24.99/month for 12 months',
+      const paypalSubscriptionStatus =
+        document.getElementById('paypal-subscription-status');
 
-        'business-monthly':
-          'Business Monthly - $44.99/month for 12 months',
+      const paypalSuccessBox =
+        document.getElementById('paypal-success-box');
 
-        'premium-monthly':
-          'Premium Monthly - $74.99/month for 12 months'
-
-      };
 
       const packageValues = {
-
-        'starter-monthly':
-          'Starter Website',
-
-        'business-monthly':
-          'Business Website',
-
-        'premium-monthly':
-          'Premium Website'
-
+        'starter-monthly': 'Starter Website',
+        'business-monthly': 'Business Website',
+        'premium-monthly': 'Premium Website'
       };
 
-      if (
-        plan &&
-        paymentOption &&
-        monthlyValues[plan]
-      ) {
-        paymentOption.value =
-          monthlyValues[plan];
+
+      /*
+        PAYPAL SUBSCRIPTION RETURN
+      */
+
+      if (subscribed === 'yes') {
+
+        if (paymentOption) {
+          paymentOption.value =
+            'Already subscribed through PayPal';
+        }
+
+        if (
+          packageSelect &&
+          plan &&
+          packageValues[plan]
+        ) {
+          packageSelect.value =
+            packageValues[plan];
+        }
+
+        if (
+          paypalSubscriptionId &&
+          subscriptionId
+        ) {
+          paypalSubscriptionId.value =
+            subscriptionId;
+        }
+
+        if (paypalSubscriptionStatus) {
+          paypalSubscriptionStatus.value =
+            'Subscription approved through PayPal checkout';
+        }
+
+        if (paypalSuccessBox) {
+          paypalSuccessBox.classList.add('active');
+        }
+
       }
 
-      if (
-        plan &&
-        packageSelect &&
-        packageValues[plan]
-      ) {
-        packageSelect.value =
-          packageValues[plan];
-      }
+
+      /*
+        TEMPLATE SELECTION
+      */
 
       function updateTemplateStatus() {
 
@@ -1180,6 +1219,7 @@
             ? 'Selected template: ' + selectedOption.text
             : 'No template selected.';
       }
+
 
       if (templateSelect) {
 
@@ -1217,49 +1257,7 @@
     });
   </script>
 
-  <!-- NAVIGATION -->
-
   <script src="/js/navigation.js?v=20260810-4"></script>
 
-  <!-- LIVECHAT -->
-
-  <script>
-    window.__lc = window.__lc || {};
-    window.__lc.license = 19864799;
-    window.__lc.integration_name = "manual_onboarding";
-    window.__lc.product_name = "livechat";
-
-    ;(function(n,t,c){
-
-      function i(n){
-        return e._h
-          ? e._h.apply(null,n)
-          : e._q.push(n);
-      }
-
-      var e = {
-        _q: [],
-        _h: null,
-        _v: "2.0",
-
-        on: function(){
-          i(["on",c.call(arguments)]);
-        },
-
-        once: function(){
-          i(["once",c.call(arguments)]);
-        },
-
-        off: function(){
-          i(["off",c.call(arguments)]);
-        },
-
-        get: function(){
-
-          if(!e._h){
-            throw new Error(
-              "[LiveChatWidget] You can't use getters before load."
-            );
-          }
-
-          return i(["get",c.call
+</body>
+</html>
