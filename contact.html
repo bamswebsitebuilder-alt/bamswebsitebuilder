@@ -16,31 +16,12 @@
   <link rel="canonical" href="https://bamswebsitebuilder.com/contact">
   <link rel="icon" href="/images/icon-dark.jpg" type="image/jpeg">
 
-  <link rel="stylesheet" href="/css/style.css?v=20260810-2">
-  <link rel="stylesheet" href="/css/page-theme.css?v=20260810-2">
-  <link rel="stylesheet" href="/css/footer-fix.css?v=20260810-2">
-  <link rel="stylesheet" href="/css/site-upgrades.css?v=20260810-2">
+  <link rel="stylesheet" href="/css/style.css?v=20260810-4">
+  <link rel="stylesheet" href="/css/page-theme.css?v=20260810-4">
+  <link rel="stylesheet" href="/css/footer-fix.css?v=20260810-4">
+  <link rel="stylesheet" href="/css/site-upgrades.css?v=20260810-4">
 
   <style>
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      width: 100%;
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-    }
-
-    body {
-      background: #080808;
-      color: #fff;
-    }
-
     /* =========================
        TEXT LOGO
     ========================== */
@@ -60,7 +41,7 @@
     }
 
     .brand-text strong {
-      color: #f4c15d;
+      color: #f1c75b;
       font-family: Georgia, "Times New Roman", serif;
       font-size: 1.75rem;
       font-weight: 800;
@@ -79,76 +60,63 @@
     }
 
     /* =========================
-       CONTACT PAGE
+       CONTACT PAGE FINAL OVERRIDE
     ========================== */
 
     .contact-section {
-      width: 100%;
-      padding: 72px 20px 80px;
-      background: #080808;
+      min-height: calc(100vh - var(--header-height));
+      padding: 70px 8% 90px !important;
     }
 
     .contact-container {
       width: 100%;
-      max-width: 1180px;
+      max-width: 1150px;
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-      gap: 40px;
-      align-items: start;
     }
 
-    /* =========================
-       CONTACT INFORMATION
-    ========================== */
-
     .contact-information {
-      width: 100%;
-      padding: 52px 42px;
+      padding: 48px 42px;
       background: #151515;
-      border: 1px solid rgba(244, 193, 93, 0.45);
-      border-radius: 28px;
+      border: 1px solid rgba(212, 166, 55, 0.42);
+      border-radius: 24px;
     }
 
     .contact-information h4 {
-      margin: 0 0 22px;
-      color: #f4c15d;
-      font-size: 0.84rem;
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      margin: 0 0 18px !important;
+      color: #ffd700;
+      font-size: 14px;
       font-weight: 900;
-      letter-spacing: 0.34em;
+      letter-spacing: 4px;
       line-height: 1.3;
       text-align: center;
     }
 
     .contact-information h1 {
-      margin: 0;
+      margin: 0 !important;
       color: #fff;
-      font-size: clamp(2.8rem, 5vw, 4.7rem);
-      font-weight: 800;
-      line-height: 1.04;
-      letter-spacing: -0.04em;
+      font-size: clamp(42px, 6vw, 68px);
+      line-height: 1.06;
       text-align: center;
     }
 
     .contact-information > p {
-      max-width: 580px;
-      margin: 30px auto 0;
-      color: #c5c5c5;
-      font-size: 1.05rem;
-      line-height: 1.72;
+      max-width: 620px;
+      margin: 30px auto 0 !important;
+      color: #c8c8c8;
+      font-size: 17px;
+      line-height: 1.75;
       text-align: center;
     }
 
-    /* =========================
-       CONTACT DETAILS
-    ========================== */
-
     .contact-details {
-      width: 100%;
-      max-width: 520px;
-      margin: 40px auto 0;
       display: grid;
       gap: 22px;
+      width: 100%;
+      max-width: 520px;
+      margin: 40px auto 0 !important;
     }
 
     .contact-detail-item {
@@ -158,14 +126,14 @@
     }
 
     .contact-detail-icon {
+      display: grid;
+      place-items: center;
       width: 56px;
       height: 56px;
       flex: 0 0 56px;
-      display: grid;
-      place-items: center;
       color: #f4c15d;
       background: rgba(244, 193, 93, 0.05);
-      border: 1px solid rgba(244, 193, 93, 0.52);
+      border: 1px solid rgba(244, 193, 93, 0.5);
       border-radius: 15px;
     }
 
@@ -181,131 +149,77 @@
 
     .contact-detail-copy {
       min-width: 0;
-      color: #c9c9c9;
-      line-height: 1.4;
     }
 
     .contact-detail-copy strong {
       display: block;
       margin-bottom: 3px;
       color: #fff;
-      font-size: 1.05rem;
+      font-size: 17px;
       font-weight: 800;
+    }
+
+    .contact-detail-copy a,
+    .contact-detail-copy span {
+      color: #c8c8c8;
+      font-size: 16px;
+      line-height: 1.45;
+      text-decoration: none;
+      overflow-wrap: anywhere;
     }
 
     .contact-detail-copy a {
       color: #fff;
       font-weight: 700;
-      text-decoration: none;
-      overflow-wrap: anywhere;
-    }
-
-    .contact-detail-copy a:hover {
-      color: #f4c15d;
-    }
-
-    /* =========================
-       FORM CARD
-    ========================== */
-
-    .contact-form {
-      width: 100%;
-      padding: 40px;
-      background: #151515;
-      border: 1px solid rgba(244, 193, 93, 0.38);
-      border-radius: 28px;
-    }
-
-    /* =========================
-       MONTHLY PLAN BOX
-    ========================== */
-
-    .subscription-contact-box {
-      margin: 0 0 30px;
-      padding: 26px;
-      background: rgba(244, 193, 93, 0.06);
-      border: 1px solid rgba(244, 193, 93, 0.45);
-      border-radius: 20px;
-    }
-
-    .subscription-contact-box h2 {
-      margin: 0 0 14px;
-      color: #fff;
-      font-size: 1.4rem;
-      line-height: 1.25;
-    }
-
-    .subscription-contact-box p {
-      margin: 0 0 18px;
-      color: #c8c8c8;
-      font-size: 1rem;
-      line-height: 1.7;
-    }
-
-    .subscription-contact-box a {
-      color: #f4c15d;
-      font-size: 1rem;
-      font-weight: 800;
-      text-decoration: none;
-    }
-
-    .subscription-contact-box a:hover {
-      text-decoration: underline;
     }
 
     /* =========================
        FORM
     ========================== */
 
-    .form-group {
-      width: 100%;
-      margin: 0 0 22px;
+    .contact-form {
+      padding: 38px;
+      background:
+        linear-gradient(
+          145deg,
+          #191919,
+          #101010
+        );
+      border: 1px solid rgba(255, 215, 0, 0.22);
+      border-radius: 24px;
+      box-shadow: 0 24px 55px rgba(0, 0, 0, 0.45);
     }
 
-    .form-group label {
-      display: block;
-      margin: 0 0 8px;
+    .subscription-contact-box {
+      margin: 0 0 30px;
+      padding: 26px;
+      background: rgba(244, 193, 93, 0.06);
+      border: 1px solid rgba(244, 193, 93, 0.42);
+      border-radius: 18px;
+    }
+
+    .subscription-contact-box h2 {
+      margin: 0 0 14px;
       color: #fff;
-      font-size: 0.95rem;
+      font-size: 1.4rem;
+      line-height: 1.3;
+    }
+
+    .subscription-contact-box p {
+      margin: 0 0 16px;
+      color: #c8c8c8;
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    .subscription-contact-box a {
+      color: #f4c15d;
       font-weight: 800;
+      text-decoration: none;
     }
 
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      display: block;
-      width: 100%;
-      padding: 15px 16px;
-      color: #fff;
-      background: #0e0e0e;
-      border: 1px solid #4a4a4a;
-      border-radius: 10px;
-      outline: none;
-      font: inherit;
-      font-size: 16px;
-    }
-
-    .form-group select {
-      min-height: 54px;
-    }
-
-    .form-group textarea {
-      min-height: 150px;
-      resize: vertical;
-      line-height: 1.55;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: #f4c15d;
-      box-shadow: 0 0 0 3px rgba(244, 193, 93, 0.12);
-    }
-
-    .form-group select option,
-    .form-group select optgroup {
-      color: #fff;
-      background: #151515;
+    .subscription-contact-box a:hover {
+      text-decoration: underline;
     }
 
     /* =========================
@@ -338,32 +252,14 @@
     }
 
     /* =========================
-       SUBMIT BUTTON
-    ========================== */
-
-    .contact-form > button[type="submit"] {
-      width: 100%;
-      min-height: 54px;
-      padding: 15px 24px;
-      color: #111;
-      background: #f4c15d;
-      border: 0;
-      border-radius: 10px;
-      font: inherit;
-      font-size: 1rem;
-      font-weight: 900;
-      cursor: pointer;
-    }
-
-    /* =========================
        TABLET
     ========================== */
 
-    @media (max-width: 950px) {
+    @media (max-width: 1000px) {
       .contact-container {
-        max-width: 760px;
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: 32px;
+        max-width: 760px;
       }
     }
 
@@ -371,43 +267,46 @@
        MOBILE FIX
     ========================== */
 
-    @media (max-width: 700px) {
-      /*
-        This is the important fix:
-        the old page started directly under your fixed header.
-      */
+    @media (max-width: 760px) {
       .contact-section {
-        padding: 34px 16px 55px !important;
+        padding: 36px 16px 60px !important;
       }
 
       .contact-container {
-        gap: 28px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 30px;
+        width: 100%;
+        margin: 0 auto;
       }
 
       .contact-information {
-        padding: 46px 24px 40px;
-        border-radius: 24px;
+        width: 100%;
+        margin: 0 !important;
+        padding: 40px 22px 38px !important;
+        border-radius: 22px;
       }
 
       .contact-information h4 {
-        margin: 0 0 20px;
-        font-size: 0.76rem;
-        letter-spacing: 0.32em;
+        margin: 0 0 18px !important;
+        font-size: 12px;
+        letter-spacing: 3px;
       }
 
       .contact-information h1 {
-        font-size: clamp(2.55rem, 11.5vw, 3.7rem);
-        line-height: 1.02;
+        margin: 0 !important;
+        font-size: clamp(2.5rem, 11vw, 3.5rem) !important;
+        line-height: 1.04 !important;
       }
 
       .contact-information > p {
-        margin-top: 30px;
+        margin: 28px auto 0 !important;
         font-size: 1rem;
-        line-height: 1.7;
+        line-height: 1.65;
       }
 
       .contact-details {
-        margin-top: 36px;
+        margin: 36px auto 0 !important;
         gap: 22px;
       }
 
@@ -416,29 +315,36 @@
       }
 
       .contact-detail-icon {
-        width: 53px;
-        height: 53px;
-        flex-basis: 53px;
+        width: 52px;
+        height: 52px;
+        flex-basis: 52px;
+      }
+
+      .contact-detail-icon svg {
+        width: 26px;
+        height: 26px;
       }
 
       .contact-detail-copy strong {
         font-size: 1rem;
       }
 
-      .contact-detail-copy,
-      .contact-detail-copy a {
-        font-size: 0.98rem;
+      .contact-detail-copy a,
+      .contact-detail-copy span {
+        font-size: 0.96rem;
       }
 
       .contact-form {
-        padding: 28px 20px;
-        border-radius: 24px;
+        width: 100%;
+        margin: 0 !important;
+        padding: 26px 18px 30px !important;
+        border-radius: 22px;
       }
 
       .subscription-contact-box {
-        margin-bottom: 26px;
-        padding: 22px 20px;
-        border-radius: 18px;
+        margin: 0 0 26px !important;
+        padding: 22px 18px !important;
+        border-radius: 17px;
       }
 
       .subscription-contact-box h2 {
@@ -446,27 +352,25 @@
       }
 
       .subscription-contact-box p {
-        line-height: 1.65;
+        font-size: 0.98rem;
       }
     }
 
-    @media (max-width: 390px) {
+    @media (max-width: 430px) {
       .contact-section {
-        padding-left: 12px !important;
-        padding-right: 12px !important;
+        padding: 30px 12px 55px !important;
       }
 
       .contact-information {
-        padding-left: 18px;
-        padding-right: 18px;
+        padding: 36px 17px 36px !important;
       }
 
       .contact-information h1 {
-        font-size: 2.45rem;
+        font-size: 2.4rem !important;
       }
 
       .contact-information > p {
-        font-size: 0.95rem;
+        font-size: 0.94rem;
       }
 
       .contact-detail-icon {
@@ -475,14 +379,14 @@
         flex-basis: 48px;
       }
 
-      .contact-detail-copy,
-      .contact-detail-copy a {
-        font-size: 0.9rem;
+      .contact-detail-copy a,
+      .contact-detail-copy span {
+        font-size: 0.88rem;
       }
 
       .contact-form {
-        padding-left: 16px;
-        padding-right: 16px;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
       }
     }
   </style>
@@ -521,7 +425,7 @@
       <div class="desktop-language">
         <a class="language-active" href="/contact">English</a>
         <span aria-hidden="true">|</span>
-        <a href="/es/contact" lang="es">Español</a>
+        <a href="/es/contact" lang="es" hreflang="es">Español</a>
       </div>
 
       <button
@@ -580,12 +484,13 @@
       <a href="/templates">Templates</a>
       <a href="/portfolio">Portfolio</a>
       <a href="/reviews">Reviews</a>
-      <a class="active" href="/contact">Contact</a>
+      <a class="active" href="/contact" aria-current="page">Contact</a>
       <a href="/login">Login</a>
     </nav>
 
     <div class="mobile-language-section">
       <p>Language</p>
+
       <div class="mobile-language-links">
         <a class="language-active" href="/contact">English</a>
         <a href="/es/contact" lang="es">Español</a>
@@ -594,6 +499,14 @@
 
     <div class="mobile-menu-cta">
       <a href="/contact">Get a Free Quote</a>
+    </div>
+
+    <div class="mobile-menu-contact">
+      <a href="tel:+17274178762">727-417-8762</a>
+
+      <a href="mailto:bamswebsitebuilder@gmail.com">
+        bamswebsitebuilder@gmail.com
+      </a>
     </div>
 
   </aside>
@@ -606,7 +519,7 @@
 
       <div class="contact-container">
 
-        <!-- CONTACT INFO -->
+        <!-- CONTACT INFORMATION -->
 
         <div class="contact-information">
 
@@ -625,6 +538,8 @@
           </p>
 
           <div class="contact-details">
+
+            <!-- PHONE -->
 
             <div class="contact-detail-item">
 
@@ -650,12 +565,12 @@
 
               <span class="contact-detail-copy">
                 <strong>Phone</strong>
-                <a href="tel:+17274178762">
-                  727-417-8762
-                </a>
+                <a href="tel:+17274178762">727-417-8762</a>
               </span>
 
             </div>
+
+            <!-- EMAIL -->
 
             <div class="contact-detail-item">
 
@@ -680,6 +595,8 @@
               </span>
 
             </div>
+
+            <!-- RESPONSE TIME -->
 
             <div class="contact-detail-item">
 
@@ -727,6 +644,8 @@
             value="table"
           >
 
+          <!-- MONTHLY PAYMENT BOX -->
+
           <div
             class="subscription-contact-box"
             id="subscription-interest"
@@ -746,6 +665,8 @@
             </a>
 
           </div>
+
+          <!-- PAYMENT OPTION -->
 
           <div class="form-group">
 
@@ -786,6 +707,8 @@
 
           </div>
 
+          <!-- FULL NAME -->
+
           <div class="form-group">
             <label for="name">Full Name</label>
 
@@ -797,6 +720,8 @@
               required
             >
           </div>
+
+          <!-- EMAIL -->
 
           <div class="form-group">
             <label for="email">Email Address</label>
@@ -810,6 +735,8 @@
             >
           </div>
 
+          <!-- BUSINESS -->
+
           <div class="form-group">
             <label for="business">Business Name</label>
 
@@ -820,6 +747,8 @@
               autocomplete="organization"
             >
           </div>
+
+          <!-- TEMPLATE -->
 
           <div
             class="form-group"
@@ -902,6 +831,8 @@
 
           </div>
 
+          <!-- WEBSITE PACKAGE -->
+
           <div class="form-group">
 
             <label for="package">
@@ -933,6 +864,8 @@
             </select>
 
           </div>
+
+          <!-- WEBSITE TYPE -->
 
           <div class="form-group">
 
@@ -970,6 +903,8 @@
 
           </div>
 
+          <!-- ADDITIONAL SERVICES -->
+
           <div class="form-group">
 
             <label for="additional-service">
@@ -985,22 +920,59 @@
                 Select an additional service
               </option>
 
-              <option>No Additional Service</option>
-              <option>Additional Website Page</option>
-              <option>Website Maintenance</option>
-              <option>Domain Name Connection</option>
-              <option>Business Email Setup</option>
-              <option>Google Business Profile Setup</option>
-              <option>Website Content Updates</option>
-              <option>Website Redesign</option>
-              <option>Booking System Integration</option>
-              <option>Online Store Setup</option>
-              <option>Search Engine Optimization</option>
-              <option>Other</option>
+              <option value="No Additional Service">
+                No Additional Service
+              </option>
+
+              <option value="Additional Website Page">
+                Additional Website Page
+              </option>
+
+              <option value="Website Maintenance">
+                Website Maintenance
+              </option>
+
+              <option value="Domain Name Connection">
+                Domain Name Connection
+              </option>
+
+              <option value="Business Email Setup">
+                Business Email Setup
+              </option>
+
+              <option value="Google Business Profile Setup">
+                Google Business Profile Setup
+              </option>
+
+              <option value="Website Content Updates">
+                Website Content Updates
+              </option>
+
+              <option value="Website Redesign">
+                Website Redesign
+              </option>
+
+              <option value="Booking System Integration">
+                Booking System Integration
+              </option>
+
+              <option value="Online Store Setup">
+                Online Store Setup
+              </option>
+
+              <option value="Search Engine Optimization">
+                Search Engine Optimization
+              </option>
+
+              <option value="Other">
+                Other
+              </option>
 
             </select>
 
           </div>
+
+          <!-- PROJECT DETAILS -->
 
           <div class="form-group">
 
@@ -1075,11 +1047,18 @@
 
         <div class="footer-links">
           <a href="tel:+17274178762">727-417-8762</a>
+
           <a href="mailto:bamswebsitebuilder@gmail.com">
             bamswebsitebuilder@gmail.com
           </a>
-          <a href="/contact">Request a Quote</a>
-          <a href="/es">Español</a>
+
+          <a href="/contact">
+            Request a Quote
+          </a>
+
+          <a href="/es">
+            Español
+          </a>
         </div>
       </div>
 
@@ -1112,7 +1091,7 @@
 
   </footer>
 
-  <!-- CONTACT SCRIPT -->
+  <!-- CONTACT PAGE SCRIPT -->
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -1138,7 +1117,6 @@
       const packageSelect =
         document.getElementById('package');
 
-
       const monthlyValues = {
 
         'starter-monthly':
@@ -1151,7 +1129,6 @@
           'Premium Monthly - $74.99/month for 12 months'
 
       };
-
 
       const packageValues = {
 
@@ -1166,7 +1143,6 @@
 
       };
 
-
       if (
         plan &&
         paymentOption &&
@@ -1176,7 +1152,6 @@
           monthlyValues[plan];
       }
 
-
       if (
         plan &&
         packageSelect &&
@@ -1185,7 +1160,6 @@
         packageSelect.value =
           packageValues[plan];
       }
-
 
       function updateTemplateStatus() {
 
@@ -1206,7 +1180,6 @@
             ? 'Selected template: ' + selectedOption.text
             : 'No template selected.';
       }
-
 
       if (templateSelect) {
 
@@ -1246,7 +1219,7 @@
 
   <!-- NAVIGATION -->
 
-  <script src="/js/navigation.js?v=20260810-2"></script>
+  <script src="/js/navigation.js?v=20260810-4"></script>
 
   <!-- LIVECHAT -->
 
@@ -1264,24 +1237,24 @@
           : e._q.push(n);
       }
 
-      var e={
-        _q:[],
-        _h:null,
-        _v:"2.0",
+      var e = {
+        _q: [],
+        _h: null,
+        _v: "2.0",
 
-        on:function(){
+        on: function(){
           i(["on",c.call(arguments)]);
         },
 
-        once:function(){
+        once: function(){
           i(["once",c.call(arguments)]);
         },
 
-        off:function(){
+        off: function(){
           i(["off",c.call(arguments)]);
         },
 
-        get:function(){
+        get: function(){
 
           if(!e._h){
             throw new Error(
@@ -1289,39 +1262,4 @@
             );
           }
 
-          return i(["get",c.call(arguments)]);
-        },
-
-        call:function(){
-          i(["call",c.call(arguments)]);
-        },
-
-        init:function(){
-
-          var n=t.createElement("script");
-
-          n.async=true;
-          n.type="text/javascript";
-          n.src=
-            "https://cdn.livechatinc.com/tracking.js";
-
-          t.head.appendChild(n);
-        }
-      };
-
-      if(!n.__lc.asyncInit){
-        e.init();
-      }
-
-      n.LiveChatWidget=
-        n.LiveChatWidget||e;
-
-    }(
-      window,
-      document,
-      [].slice
-    ));
-  </script>
-
-</body>
-</html>
+          return i(["get",c.call
