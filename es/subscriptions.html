@@ -50,17 +50,7 @@ body {
 }
 
 /* Match the English subscription page notice */
-.stripe-note {
-  box-sizing: border-box;
-  max-width: 900px;
-  margin: 36px auto 0;
-  padding: 20px;
-  border: 1px solid #f5c400;
-  border-radius: 14px;
-  background: #1f1f1f;
-  color: #fff;
-  text-align: center;
-}
+.stripe-note{box-sizing:border-box;max-width:900px;margin:36px auto 0;padding:20px;border:1px solid #f5c400;border-radius:14px;background:#1f1f1f;color:#fff;text-align:center}
 
 .stripe-note strong {
   color: #f5c400;
@@ -95,6 +85,25 @@ body {
   .desktop-language {
     display: none;
   }
+}
+  </style>
+  <style id="spanish-nav-fixes">
+   /* Spanish navigation and language-switch alignment */
+.desktop-language {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 8px;
+  margin-left: 16px;
+  white-space: nowrap;
+}
+.desktop-language a,
+.desktop-language span {
+  display: inline-block;
+  white-space: nowrap;
+}
+@media (max-width: 1180px) {
+  .desktop-language { display: none; }
 }
   </style>
  </head>
