@@ -2,43 +2,60 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <meta
     name="description"
-    content="Contact BAM's Website Builder for a free website design quote in Clearwater, Florida and beyond."
+    content="Contact BAM's Website Builder for a free website design quote."
   >
 
-  <meta name="theme-color" content="#151412">
+  <meta name="theme-color" content="#080808">
 
   <title>Get a Free Website Quote | BAM's Website Builder</title>
 
   <link rel="canonical" href="https://bamswebsitebuilder.com/contact">
-
   <link rel="icon" href="/images/logo-dark.jpg" type="image/jpeg">
 
-  <link rel="stylesheet" href="/css/style.css?v=20260806-30">
-  <link rel="stylesheet" href="/css/page-theme.css?v=20260806-30">
-  <link rel="stylesheet" href="/css/footer-fix.css?v=20260806-30">
-
-  <!-- Social Sharing -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Get a Free Website Quote | BAM's Website Builder">
-  <meta
-    property="og:description"
-    content="Contact BAM's Website Builder for a free website design quote in Clearwater, Florida and beyond."
-  >
-  <meta
-    property="og:image"
-    content="https://www.bamswebsitebuilder.com/images/logo-dark.jpg"
-  >
-
-  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/css/style.css?v=20260810-1">
+  <link rel="stylesheet" href="/css/page-theme.css?v=20260810-1">
+  <link rel="stylesheet" href="/css/footer-fix.css?v=20260810-1">
 
   <style>
-    /* =========================
-       LOGO
-    ========================== */
+    /* ========================================
+       BASIC PAGE FIXES
+    ======================================== */
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    body {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      background: #080808;
+    }
+
+    main {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    /* ========================================
+       HEADER / LOGO
+    ======================================== */
 
     .site-brand {
       display: inline-flex;
@@ -50,9 +67,8 @@
     .site-logo-image {
       display: block;
       width: 170px;
-      height: 58px;
+      height: auto;
       object-fit: contain;
-      object-position: left center;
     }
 
     .mobile-menu-brand {
@@ -63,76 +79,104 @@
 
     .mobile-site-logo-image {
       display: block;
-      width: 180px;
-      height: 64px;
+      width: 175px;
+      height: auto;
       object-fit: contain;
-      object-position: left center;
     }
 
-    /* =========================
-       TEMPLATE SELECTOR
-    ========================== */
 
-    #template-choice-group,
-    #template-choice,
-    #template-choice option,
-    #template-choice optgroup {
-      display: block !important;
-      visibility: visible !important;
-      opacity: 1 !important;
+    /* ========================================
+       CONTACT SECTION
+    ======================================== */
+
+    .contact-section {
+      width: 100%;
+      margin: 0;
+      padding: 70px 24px 90px;
+      background: #080808;
     }
 
-    .template-choice-help {
-      margin-top: 8px;
-      color: #9f9f9f;
+    .contact-container {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      gap: 70px;
+      align-items: start;
+    }
+
+
+    /* ========================================
+       CONTACT INFORMATION
+    ======================================== */
+
+    .contact-information {
+      min-width: 0;
+    }
+
+    .contact-information h4 {
+      margin: 0 0 16px;
+      color: #f4c15d;
       font-size: 0.82rem;
-      line-height: 1.45;
+      font-weight: 800;
+      letter-spacing: 0.2em;
     }
 
-    .selected-template-status {
-      margin: 10px 0 0;
-      padding: 11px 13px;
-      color: #ffd700;
-      background: rgba(255, 215, 0, 0.08);
-      border: 1px solid rgba(255, 215, 0, 0.28);
-      border-radius: 8px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      line-height: 1.4;
+    .contact-information h1 {
+      margin: 0 0 24px;
+      color: #ffffff;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
     }
 
-    /* =========================
+    .contact-information > p {
+      max-width: 520px;
+      margin: 0;
+      color: #b8b8b8;
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+
+    /* ========================================
        CONTACT DETAILS
-    ========================== */
+    ======================================== */
 
     .contact-details {
       display: grid;
-      gap: 12px;
-      margin-top: 28px;
+      gap: 14px;
+      margin-top: 32px;
     }
 
     .contact-detail-item {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin: 0 !important;
+      gap: 13px;
+      margin: 0;
     }
 
     .contact-detail-icon {
-      width: 38px;
-      height: 38px;
-      flex: 0 0 38px;
+      width: 40px;
+      height: 40px;
+      flex: 0 0 40px;
+
       display: grid;
       place-items: center;
+
+      border: 1px solid rgba(244, 193, 93, 0.35);
       border-radius: 10px;
-      background: rgba(244, 193, 93, 0.12);
-      border: 1px solid rgba(244, 193, 93, 0.3);
+
+      background: rgba(244, 193, 93, 0.1);
       color: #f4c15d;
     }
 
     .contact-detail-icon svg {
       width: 20px;
       height: 20px;
+
       fill: none;
       stroke: currentColor;
       stroke-width: 1.9;
@@ -142,54 +186,201 @@
 
     .contact-detail-copy {
       min-width: 0;
+      color: #b8b8b8;
     }
 
     .contact-detail-copy strong {
       display: block;
-      margin-bottom: 2px;
+      margin: 0 0 2px;
+      color: #ffffff;
+      font-size: 0.9rem;
     }
 
     .contact-detail-copy a,
     .contact-detail-copy span {
+      color: #b8b8b8;
+      text-decoration: none;
       overflow-wrap: anywhere;
     }
 
-    /* =========================
-       PAYPAL MONTHLY PLAN BOX
-    ========================== */
+    .contact-detail-copy a:hover {
+      color: #f4c15d;
+    }
+
+
+    /* ========================================
+       CONTACT FORM
+    ======================================== */
+
+    .contact-form {
+      width: 100%;
+      min-width: 0;
+      margin: 0;
+      padding: 34px;
+
+      border: 1px solid rgba(244, 193, 93, 0.18);
+      border-radius: 18px;
+
+      background: #111111;
+    }
+
+    .form-group {
+      width: 100%;
+      margin: 0 0 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin: 0 0 8px;
+
+      color: #ffffff;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+
+      margin: 0;
+      padding: 14px 15px;
+
+      border: 1px solid #333333;
+      border-radius: 8px;
+
+      outline: none;
+
+      background: #181818;
+      color: #ffffff;
+
+      font: inherit;
+      font-size: 16px;
+    }
+
+    .contact-form select {
+      min-height: 50px;
+    }
+
+    .contact-form textarea {
+      min-height: 150px;
+      resize: vertical;
+      line-height: 1.55;
+    }
+
+    .contact-form input:focus,
+    .contact-form select:focus,
+    .contact-form textarea:focus {
+      border-color: #f4c15d;
+      box-shadow: 0 0 0 3px rgba(244, 193, 93, 0.1);
+    }
+
+    .contact-form button[type="submit"] {
+      width: 100%;
+      min-height: 52px;
+
+      margin: 4px 0 0;
+      padding: 14px 22px;
+
+      border: 1px solid #f4c15d;
+      border-radius: 9px;
+
+      background: #f4c15d;
+      color: #111111;
+
+      font: inherit;
+      font-weight: 900;
+      font-size: 1rem;
+
+      cursor: pointer;
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .contact-form button[type="submit"]:hover {
+      transform: translateY(-1px);
+      background: #ffd45f;
+    }
+
+
+    /* ========================================
+       MONTHLY PLAN BOX
+    ======================================== */
 
     .subscription-contact-box {
-      margin: 0 0 26px;
-      padding: 20px 22px;
-      border: 1px solid rgba(244, 193, 93, 0.38);
+      width: 100%;
+      margin: 0 0 28px;
+      padding: 20px;
+
+      border: 1px solid rgba(244, 193, 93, 0.4);
       border-radius: 14px;
-      background: rgba(244, 193, 93, 0.08);
+
+      background: rgba(244, 193, 93, 0.07);
     }
 
     .subscription-contact-box h2 {
       margin: 0 0 8px;
+      color: #ffffff;
       font-size: 1.2rem;
     }
 
     .subscription-contact-box p {
       margin: 0 0 12px;
-      line-height: 1.55;
+      color: #c6c6c6;
+      line-height: 1.6;
     }
 
     .subscription-contact-box a {
+      color: #f4c15d;
       font-weight: 800;
       text-decoration: none;
-      color: #f4c15d;
     }
 
-    .subscription-contact-box a:hover,
-    .subscription-contact-box a:focus-visible {
+    .subscription-contact-box a:hover {
       text-decoration: underline;
     }
 
-    /* =========================
+
+    /* ========================================
+       TEMPLATE SELECT
+    ======================================== */
+
+    #template-choice-group,
+    #template-choice {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    .template-choice-help {
+      margin: 8px 0 0;
+      color: #8f8f8f;
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    .selected-template-status {
+      margin: 10px 0 0;
+      padding: 11px 13px;
+
+      border: 1px solid rgba(244, 193, 93, 0.28);
+      border-radius: 8px;
+
+      background: rgba(244, 193, 93, 0.07);
+      color: #f4c15d;
+
+      font-size: 0.86rem;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+
+    /* ========================================
        MOBILE MENU ICONS
-    ========================== */
+    ======================================== */
 
     .mobile-link-icon {
       background: rgba(244, 193, 93, 0.1) !important;
@@ -200,47 +391,115 @@
     .mobile-link-icon svg use {
       color: #f4c15d !important;
       fill: #f4c15d !important;
-      filter: none !important;
       opacity: 1 !important;
     }
 
     .mobile-navigation a.active .mobile-link-icon {
       background: rgba(244, 193, 93, 0.2) !important;
       border-color: #f4c15d !important;
-      box-shadow: 0 0 0 3px rgba(244, 193, 93, 0.1);
     }
 
-    @media (max-width: 700px) {
-      .contact-detail-icon {
-        width: 34px;
-        height: 34px;
-        flex-basis: 34px;
+
+    /* ========================================
+       TABLET
+    ======================================== */
+
+    @media (max-width: 900px) {
+
+      .contact-section {
+        padding: 55px 24px 75px;
       }
 
-      .subscription-contact-box {
-        padding: 17px 18px;
+      .contact-container {
+        grid-template-columns: 1fr;
+        gap: 42px;
+      }
+
+      .contact-information {
+        max-width: 650px;
+      }
+
+      .contact-form {
+        max-width: 700px;
       }
     }
 
-    @media (max-width: 520px) {
+
+    /* ========================================
+       MOBILE SPACING FIX
+    ======================================== */
+
+    @media (max-width: 600px) {
+
       .site-logo-image {
-        width: 138px;
-        height: 50px;
+        width: 140px;
       }
 
       .mobile-site-logo-image {
         width: 155px;
-        height: 56px;
+      }
+
+      .contact-section {
+        padding:
+          42px
+          max(18px, env(safe-area-inset-right))
+          65px
+          max(18px, env(safe-area-inset-left));
+      }
+
+      .contact-container {
+        width: 100%;
+        gap: 34px;
+      }
+
+      .contact-information h4 {
+        margin-bottom: 12px;
+        font-size: 0.76rem;
+      }
+
+      .contact-information h1 {
+        margin-bottom: 18px;
+        font-size: 2.65rem;
+        line-height: 1.06;
+      }
+
+      .contact-information > p {
+        font-size: 0.97rem;
+        line-height: 1.65;
+      }
+
+      .contact-details {
+        margin-top: 26px;
+        gap: 13px;
+      }
+
+      .contact-detail-icon {
+        width: 36px;
+        height: 36px;
+        flex-basis: 36px;
+      }
+
+      .contact-form {
+        padding: 22px 18px;
+        border-radius: 15px;
+      }
+
+      .subscription-contact-box {
+        margin-bottom: 24px;
+        padding: 17px;
+      }
+
+      .form-group {
+        margin-bottom: 18px;
       }
     }
   </style>
 </head>
 
+
 <body>
 
-  <!-- =========================
-       HEADER
-  ========================== -->
+  <!-- HEADER -->
 
   <header class="site-header" id="site-header">
     <div class="header-container">
@@ -251,33 +510,22 @@
         aria-label="BAM's Website Builder home"
       >
         <img
+          class="site-logo-image"
           src="/images/logo-dark.jpg"
           alt="BAM's Website Builder"
-          class="site-logo-image"
-          width="220"
-          height="72"
         >
       </a>
 
       <nav class="desktop-navigation" aria-label="Main navigation">
-        <a data-page="home" href="/">Home</a>
-        <a data-page="services" href="/services">Services</a>
-        <a data-page="prices" href="/prices">Prices</a>
-        <a data-page="subscriptions" href="/subscriptions">Website Plans</a>
-        <a data-page="templates" href="/templates">Templates</a>
-        <a data-page="portfolio" href="/portfolio">Portfolio</a>
-        <a data-page="reviews" href="/reviews">Reviews</a>
-
-        <a
-          class="active"
-          data-page="contact"
-          href="/contact"
-          aria-current="page"
-        >
-          Contact
-        </a>
-
-        <a data-page="login" href="/login">Login</a>
+        <a href="/">Home</a>
+        <a href="/services">Services</a>
+        <a href="/prices">Prices</a>
+        <a href="/subscriptions">Website Plans</a>
+        <a href="/templates">Templates</a>
+        <a href="/portfolio">Portfolio</a>
+        <a href="/reviews">Reviews</a>
+        <a class="active" href="/contact" aria-current="page">Contact</a>
+        <a href="/login">Login</a>
       </nav>
 
       <div class="desktop-language">
@@ -302,11 +550,10 @@
     </div>
   </header>
 
-  <div class="menu-overlay" id="menu-overlay"></div>
 
-  <!-- =========================
-       MOBILE MENU
-  ========================== -->
+  <!-- MOBILE MENU -->
+
+  <div class="menu-overlay" id="menu-overlay"></div>
 
   <aside
     class="mobile-menu"
@@ -319,11 +566,9 @@
 
       <a class="mobile-menu-brand" href="/">
         <img
+          class="mobile-site-logo-image"
           src="/images/logo-dark.jpg"
           alt="BAM's Website Builder"
-          class="mobile-site-logo-image"
-          width="210"
-          height="72"
         >
       </a>
 
@@ -341,91 +586,15 @@
 
     <nav class="mobile-navigation">
 
-      <a data-page="home" href="/">
-        <span class="mobile-link-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <use href="/images/bam-icons.svg#home"></use>
-          </svg>
-        </span>
-        <span>Home</span>
-      </a>
-
-      <a data-page="services" href="/services">
-        <span class="mobile-link-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <use href="/images/bam-icons.svg#services"></use>
-          </svg>
-        </span>
-        <span>Services</span>
-      </a>
-
-      <a data-page="prices" href="/prices">
-        <span class="mobile-link-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <use href="/images/bam-icons.svg#prices"></use>
-          </svg>
-        </span>
-        <span>Prices</span>
-      </a>
-
-      <a data-page="subscriptions" href="/subscriptions">
-        <span class="mobile-link-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <use href="/images/bam-icons.svg#prices"></use>
-          </svg>
-        </span>
-        <span>Website Plans</span>
-      </a>
-
-      <a data-page="templates" href="/templates">
-        <span class="mobile-link-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <use href="/images/bam-icons.svg#templates"></use>
-          </svg>
-        </span>
-        <span>Templates</span>
-      </a>
-
-      <a data-page="portfolio" href="/portfolio">
-        <span class="mobile-link-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <use href="/images/bam-icons.svg#portfolio"></use>
-          </svg>
-        </span>
-        <span>Portfolio</span>
-      </a>
-
-      <a data-page="reviews" href="/reviews">
-        <span class="mobile-link-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <use href="/images/bam-icons.svg#reviews"></use>
-          </svg>
-        </span>
-        <span>Reviews</span>
-      </a>
-
-      <a
-        class="active"
-        data-page="contact"
-        href="/contact"
-        aria-current="page"
-      >
-        <span class="mobile-link-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <use href="/images/bam-icons.svg#contact"></use>
-          </svg>
-        </span>
-        <span>Contact</span>
-      </a>
-
-      <a data-page="login" href="/login">
-        <span class="mobile-link-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <use href="/images/bam-icons.svg#login"></use>
-          </svg>
-        </span>
-        <span>Login</span>
-      </a>
+      <a href="/">Home</a>
+      <a href="/services">Services</a>
+      <a href="/prices">Prices</a>
+      <a href="/subscriptions">Website Plans</a>
+      <a href="/templates">Templates</a>
+      <a href="/portfolio">Portfolio</a>
+      <a href="/reviews">Reviews</a>
+      <a class="active" href="/contact">Contact</a>
+      <a href="/login">Login</a>
 
     </nav>
 
@@ -442,19 +611,10 @@
       <a href="/contact">Get a Free Quote</a>
     </div>
 
-    <div class="mobile-menu-contact">
-      <a href="tel:+17274178762">727-417-8762</a>
-
-      <a href="mailto:bamswebsitebuilder@gmail.com">
-        bamswebsitebuilder@gmail.com
-      </a>
-    </div>
-
   </aside>
 
-  <!-- =========================
-       CONTACT PAGE
-  ========================== -->
+
+  <!-- CONTACT PAGE -->
 
   <main>
 
@@ -462,15 +622,15 @@
 
       <div class="contact-container">
 
-        <!-- CONTACT INFORMATION -->
+
+        <!-- LEFT SIDE -->
 
         <div class="contact-information">
 
           <h4>CONTACT US</h4>
 
           <h1>
-            Let's Build
-            <br>
+            Let's Build<br>
             Your Website
           </h1>
 
@@ -480,52 +640,32 @@
             BAM's Website Builder.
           </p>
 
-          <div class="contact-details">
 
-            <!-- PHONE -->
+          <div class="contact-details">
 
             <div class="contact-detail-item">
 
               <span class="contact-detail-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24">
-                  <path
-                    d="M22 16.92v3a2 2 0 0 1-2.18 2
-                    19.79 19.79 0 0 1-8.63-3.07
-                    19.5 19.5 0 0 1-6-6
-                    A19.79 19.79 0 0 1 2.12 4.18
-                    2 2 0 0 1 4.11 2h3
-                    a2 2 0 0 1 2 1.72
-                    c.12.9.33 1.78.62 2.63
-                    a2 2 0 0 1-.45 2.11
-                    L8 9.73a16 16 0 0 0 6 6
-                    l1.27-1.27
-                    a2 2 0 0 1 2.11-.45
-                    c.85.29 1.73.5 2.63.62
-                    A2 2 0 0 1 22 16.92z"
-                  ></path>
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"></path>
                 </svg>
               </span>
 
               <span class="contact-detail-copy">
                 <strong>Phone</strong>
-                <a href="tel:+17274178762">727-417-8762</a>
+                <a href="tel:+17274178762">
+                  727-417-8762
+                </a>
               </span>
 
             </div>
 
-            <!-- EMAIL -->
 
             <div class="contact-detail-item">
 
               <span class="contact-detail-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24">
-                  <rect
-                    x="3"
-                    y="5"
-                    width="18"
-                    height="14"
-                    rx="2"
-                  ></rect>
+                  <rect x="3" y="5" width="18" height="14" rx="2"></rect>
                   <path d="m4 7 8 6 8-6"></path>
                 </svg>
               </span>
@@ -539,7 +679,6 @@
 
             </div>
 
-            <!-- RESPONSE TIME -->
 
             <div class="contact-detail-item">
 
@@ -561,17 +700,14 @@
 
         </div>
 
-        <!-- =========================
-             CONTACT FORM
-        ========================== -->
+
+        <!-- CONTACT FORM -->
 
         <form
           class="contact-form"
           action="https://formsubmit.co/bamswebsitebuilder@gmail.com"
           method="POST"
         >
-
-          <!-- FormSubmit Settings -->
 
           <input
             type="hidden"
@@ -591,7 +727,8 @@
             value="table"
           >
 
-          <!-- MONTHLY PAYPAL PLANS -->
+
+          <!-- MONTHLY PLANS -->
 
           <div
             class="subscription-contact-box"
@@ -601,28 +738,30 @@
             <h2>Prefer to pay monthly?</h2>
 
             <p>
-              Choose one of our 12-month website plans and subscribe
-              securely through PayPal: Starter $24.99/month,
-              Business $44.99/month, or Premium $74.99/month.
+              We offer 12-month website payment plans:
+              Starter at $24.99/month,
+              Business at $44.99/month,
+              and Premium at $74.99/month.
             </p>
 
             <a href="/subscriptions">
-              View PayPal monthly plans &rarr;
+              View monthly website plans &rarr;
             </a>
 
           </div>
 
-          <!-- PAYMENT OPTION -->
+
+          <!-- PAYMENT -->
 
           <div class="form-group">
 
             <label for="payment-option">
-              Preferred Payment Option
+              Payment Option
             </label>
 
             <select
               id="payment-option"
-              name="Preferred Payment Option"
+              name="Payment Option"
             >
 
               <option value="">
@@ -633,33 +772,28 @@
                 One-time payment
               </option>
 
-              <option
-                value="Starter PayPal Plan - $24.99/month for 12 months"
-              >
+              <option value="Starter Monthly - $24.99/month for 12 months">
                 Starter — $24.99/month for 12 months
               </option>
 
-              <option
-                value="Business PayPal Plan - $44.99/month for 12 months"
-              >
+              <option value="Business Monthly - $44.99/month for 12 months">
                 Business — $44.99/month for 12 months
               </option>
 
-              <option
-                value="Premium PayPal Plan - $74.99/month for 12 months"
-              >
+              <option value="Premium Monthly - $74.99/month for 12 months">
                 Premium — $74.99/month for 12 months
               </option>
 
               <option value="Already subscribed through PayPal">
-                I already subscribed through PayPal
+                Already subscribed through PayPal
               </option>
 
             </select>
 
           </div>
 
-          <!-- FULL NAME -->
+
+          <!-- NAME -->
 
           <div class="form-group">
 
@@ -676,6 +810,7 @@
             >
 
           </div>
+
 
           <!-- EMAIL -->
 
@@ -695,7 +830,8 @@
 
           </div>
 
-          <!-- BUSINESS NAME -->
+
+          <!-- BUSINESS -->
 
           <div class="form-group">
 
@@ -712,7 +848,8 @@
 
           </div>
 
-          <!-- TEMPLATE CHOICE -->
+
+          <!-- TEMPLATE -->
 
           <div
             class="form-group"
@@ -795,7 +932,8 @@
 
           </div>
 
-          <!-- WEBSITE PACKAGE -->
+
+          <!-- PACKAGE -->
 
           <div class="form-group">
 
@@ -809,11 +947,7 @@
               required
             >
 
-              <option
-                value=""
-                disabled
-                selected
-              >
+              <option value="" disabled selected>
                 Select a package
               </option>
 
@@ -833,6 +967,7 @@
 
           </div>
 
+
           <!-- WEBSITE TYPE -->
 
           <div class="form-group">
@@ -847,35 +982,32 @@
               required
             >
 
-              <option
-                value=""
-                disabled
-                selected
-              >
+              <option value="" disabled selected>
                 Select a website type
               </option>
 
-              <option value="Business Website">Business Website</option>
-              <option value="Restaurant Website">Restaurant Website</option>
-              <option value="E-Commerce Store">E-Commerce Store</option>
-              <option value="Portfolio Website">Portfolio Website</option>
-              <option value="Author or Book Website">Author or Book Website</option>
-              <option value="Real Estate Website">Real Estate Website</option>
-              <option value="Construction Website">Construction Website</option>
-              <option value="Fitness Website">Fitness Website</option>
-              <option value="Medical Website">Medical Website</option>
-              <option value="Church Website">Church Website</option>
-              <option value="Nonprofit Website">Nonprofit Website</option>
-              <option value="Personal Website">Personal Website</option>
-              <option value="Landing Page">Landing Page</option>
-              <option value="Blog">Blog</option>
-              <option value="Other">Other</option>
+              <option>Business Website</option>
+              <option>Restaurant Website</option>
+              <option>E-Commerce Store</option>
+              <option>Portfolio Website</option>
+              <option>Author or Book Website</option>
+              <option>Real Estate Website</option>
+              <option>Construction Website</option>
+              <option>Fitness Website</option>
+              <option>Medical Website</option>
+              <option>Church Website</option>
+              <option>Nonprofit Website</option>
+              <option>Personal Website</option>
+              <option>Landing Page</option>
+              <option>Blog</option>
+              <option>Other</option>
 
             </select>
 
           </div>
 
-          <!-- ADDITIONAL SERVICES -->
+
+          <!-- ADDITIONAL SERVICE -->
 
           <div class="form-group">
 
@@ -892,57 +1024,23 @@
                 Select an additional service
               </option>
 
-              <option value="No Additional Service">
-                No Additional Service
-              </option>
-
-              <option value="Additional Website Page">
-                Additional Website Page
-              </option>
-
-              <option value="Website Maintenance">
-                Website Maintenance
-              </option>
-
-              <option value="Domain Name Connection">
-                Domain Name Connection
-              </option>
-
-              <option value="Business Email Setup">
-                Business Email Setup
-              </option>
-
-              <option value="Google Business Profile Setup">
-                Google Business Profile Setup
-              </option>
-
-              <option value="Website Content Updates">
-                Website Content Updates
-              </option>
-
-              <option value="Website Redesign">
-                Website Redesign
-              </option>
-
-              <option value="Booking System Integration">
-                Booking System Integration
-              </option>
-
-              <option value="Online Store Setup">
-                Online Store Setup
-              </option>
-
-              <option value="Search Engine Optimization">
-                Search Engine Optimization
-              </option>
-
-              <option value="Other">
-                Other
-              </option>
+              <option>No Additional Service</option>
+              <option>Additional Website Page</option>
+              <option>Website Maintenance</option>
+              <option>Domain Name Connection</option>
+              <option>Business Email Setup</option>
+              <option>Google Business Profile Setup</option>
+              <option>Website Content Updates</option>
+              <option>Website Redesign</option>
+              <option>Booking System Integration</option>
+              <option>Online Store Setup</option>
+              <option>Search Engine Optimization</option>
+              <option>Other</option>
 
             </select>
 
           </div>
+
 
           <!-- PROJECT DETAILS -->
 
@@ -962,7 +1060,6 @@
 
           </div>
 
-          <!-- SUBMIT -->
 
           <button type="submit">
             Send Message
@@ -976,25 +1073,22 @@
 
   </main>
 
-  <!-- =========================
-       FOOTER
-  ========================== -->
+
+  <!-- FOOTER -->
 
   <footer class="home-footer">
 
     <div class="footer-grid">
 
       <div>
-
         <h3>BAM'S WEBSITE BUILDER</h3>
 
         <p>
-          Professional, responsive websites built to help small
-          businesses strengthen their online presence and attract
-          more customers.
+          Professional, responsive websites built to help small businesses
+          strengthen their online presence and attract more customers.
         </p>
-
       </div>
+
 
       <div>
 
@@ -1012,6 +1106,7 @@
 
       </div>
 
+
       <div>
 
         <h4>Client Access</h4>
@@ -1023,6 +1118,7 @@
         </div>
 
       </div>
+
 
       <div>
 
@@ -1052,9 +1148,6 @@
 
     </div>
 
-    <div class="footer-bottom">
-      &copy; 2026 BAM's Website Builder. All Rights Reserved.
-    </div>
 
     <div
       class="bam-social-links"
@@ -1065,7 +1158,6 @@
         href="https://www.facebook.com/bamswebsitebuilder"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="BAM's Website Builder on Facebook"
       >
         Facebook
       </a>
@@ -1074,18 +1166,21 @@
         href="https://www.instagram.com/bamswebsitebuilder"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="BAM's Website Builder on Instagram"
       >
         Instagram
       </a>
 
     </div>
 
+
+    <div class="footer-bottom">
+      &copy; 2026 BAM's Website Builder. All Rights Reserved.
+    </div>
+
   </footer>
 
-  <!-- =========================
-       CONTACT PAGE JAVASCRIPT
-  ========================== -->
+
+  <!-- CONTACT PAGE JAVASCRIPT -->
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -1095,14 +1190,8 @@
       const requestedTemplate =
         (params.get('template') || '').trim();
 
-      const payment =
-        (params.get('payment') || '').trim();
-
       const plan =
         (params.get('plan') || '').trim().toLowerCase();
-
-      const paymentOption =
-        document.getElementById('payment-option');
 
       const templateSelect =
         document.getElementById('template-choice');
@@ -1110,26 +1199,22 @@
       const templateStatus =
         document.getElementById('selected-template-status');
 
-      const message =
-        document.getElementById('message');
+      const paymentOption =
+        document.getElementById('payment-option');
 
       const packageSelect =
         document.getElementById('package');
 
 
-      /* =========================
-         PAYPAL PLAN MAPPING
-      ========================== */
-
       const monthlyValues = {
         'starter-monthly':
-          'Starter PayPal Plan - $24.99/month for 12 months',
+          'Starter Monthly - $24.99/month for 12 months',
 
         'business-monthly':
-          'Business PayPal Plan - $44.99/month for 12 months',
+          'Business Monthly - $44.99/month for 12 months',
 
         'premium-monthly':
-          'Premium PayPal Plan - $74.99/month for 12 months'
+          'Premium Monthly - $74.99/month for 12 months'
       };
 
 
@@ -1140,6 +1225,8 @@
       };
 
 
+      /* Automatically select monthly plan */
+
       if (
         plan &&
         paymentOption &&
@@ -1148,6 +1235,8 @@
         paymentOption.value = monthlyValues[plan];
       }
 
+
+      /* Automatically select matching package */
 
       if (
         plan &&
@@ -1158,9 +1247,7 @@
       }
 
 
-      /* =========================
-         TEMPLATE SELECTION
-      ========================== */
+      /* Template status */
 
       function updateTemplateStatus() {
 
@@ -1168,22 +1255,19 @@
           return;
         }
 
-        const selectedOption =
+        const selected =
           templateSelect.options[
             templateSelect.selectedIndex
           ];
 
-        const selectedText =
-          selectedOption
-            ? selectedOption.text
-            : '';
-
         templateStatus.textContent =
           templateSelect.value
-            ? 'Selected template: ' + selectedText
+            ? 'Selected template: ' + selected.text
             : 'No template selected.';
       }
 
+
+      /* Preselect template from URL */
 
       if (templateSelect) {
 
@@ -1195,13 +1279,10 @@
           const match =
             Array.from(templateSelect.options).find(
               function (option) {
-
                 return (
-                  option.value
-                    .trim()
-                    .toLowerCase() === normalized
+                  option.value.trim().toLowerCase() ===
+                  normalized
                 );
-
               }
             );
 
@@ -1209,6 +1290,7 @@
             templateSelect.value = match.value;
           }
         }
+
 
         templateSelect.addEventListener(
           'change',
@@ -1218,34 +1300,16 @@
         updateTemplateStatus();
       }
 
-
-      /* =========================
-         OPTIONAL PAYMENT MESSAGE
-      ========================== */
-
-      if (
-        payment &&
-        message &&
-        !message.value
-      ) {
-
-        message.value =
-          'I am interested in the ' +
-          payment +
-          ' option. Please contact me with the next steps for my website project.';
-
-      }
-
     });
   </script>
 
-  <!-- Navigation -->
-  <script src="/js/navigation.js?v=20260806-30"></script>
+
+  <!-- NAVIGATION -->
+
+  <script src="/js/navigation.js?v=20260810-1"></script>
 
 
-  <!-- =========================
-       LIVECHAT
-  ========================== -->
+  <!-- LIVECHAT -->
 
   <script>
     window.__lc = window.__lc || {};
@@ -1254,11 +1318,11 @@
     window.__lc.integration_name = "manual_onboarding";
     window.__lc.product_name = "livechat";
 
-    ;(function (n, t, c) {
+    ;(function(n,t,c){
 
-      function i(n) {
+      function i(n){
         return e._h
-          ? e._h.apply(null, n)
+          ? e._h.apply(null,n)
           : e._q.push(n);
       }
 
@@ -1267,34 +1331,34 @@
         _h: null,
         _v: "2.0",
 
-        on: function () {
-          i(["on", c.call(arguments)]);
+        on: function(){
+          i(["on",c.call(arguments)]);
         },
 
-        once: function () {
-          i(["once", c.call(arguments)]);
+        once: function(){
+          i(["once",c.call(arguments)]);
         },
 
-        off: function () {
-          i(["off", c.call(arguments)]);
+        off: function(){
+          i(["off",c.call(arguments)]);
         },
 
-        get: function () {
+        get: function(){
 
-          if (!e._h) {
+          if(!e._h){
             throw new Error(
               "[LiveChatWidget] You can't use getters before load."
             );
           }
 
-          return i(["get", c.call(arguments)]);
+          return i(["get",c.call(arguments)]);
         },
 
-        call: function () {
-          i(["call", c.call(arguments)]);
+        call: function(){
+          i(["call",c.call(arguments)]);
         },
 
-        init: function () {
+        init: function(){
 
           var n = t.createElement("script");
 
@@ -1307,7 +1371,7 @@
         }
       };
 
-      if (!n.__lc.asyncInit) {
+      if(!n.__lc.asyncInit){
         e.init();
       }
 
@@ -1320,23 +1384,6 @@
       [].slice
     ));
   </script>
-
-  <noscript>
-    <a
-      href="https://www.livechat.com/chat-with/19864799/"
-      rel="nofollow"
-    >
-      Chat with us
-    </a>,
-    powered by
-    <a
-      href="https://www.livechat.com/?welcome"
-      rel="noopener nofollow"
-      target="_blank"
-    >
-      LiveChat
-    </a>
-  </noscript>
 
 </body>
 </html>
