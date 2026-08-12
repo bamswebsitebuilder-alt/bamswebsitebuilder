@@ -89,54 +89,15 @@
 }
    </style>
   </meta>
-  <style id="contact-logo-restore">
-   .site-brand {
-    display: inline-flex;
-    align-items: center;
-    flex: 0 0 auto;
-    text-decoration: none;
-}
-
-.site-logo-image {
-    display: block;
-    width: 170px;
-    height: 58px;
-    object-fit: contain;
-    object-position: left center;
-}
-
-.mobile-menu-brand {
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
-}
-
-.mobile-site-logo-image {
-    display: block;
-    width: 180px;
-    height: 64px;
-    object-fit: contain;
-    object-position: left center;
-}
-
-@media (max-width: 520px) {
-    .site-logo-image {
-        width: 138px;
-        height: 50px;
-    }
-
-    .mobile-site-logo-image {
-        width: 155px;
-        height: 56px;
-    }
-}
-  </style>
  </head>
  <body>
   <header class="site-header" id="site-header">
    <div class="header-container">
     <a aria-label="BAM's Website Builder home" class="site-brand" href="/">
-     <img alt="BAM's Website Builder" class="site-logo-image" height="72" src="/images/logo-dark.jpg" width="220"/>
+     <span class="brand-text">
+      <strong>BAM'S</strong>
+      <small>WEBSITE BUILDER</small>
+     </span>
     </a>
     <nav aria-label="Main navigation" class="desktop-navigation">
      <a data-page="home" href="/">
@@ -193,7 +154,10 @@
   <aside aria-hidden="true" aria-label="Mobile navigation" class="mobile-menu" id="mobile-menu">
    <div class="mobile-menu-header">
     <a class="mobile-menu-brand" href="/">
-     <img alt="BAM's Website Builder" class="mobile-site-logo-image" height="72" src="/images/logo-dark.jpg" width="210"/>
+     <span>
+      <strong>BAM'S</strong>
+      <small>WEBSITE BUILDER</small>
+     </span>
     </a>
     <button aria-label="Close navigation menu" class="mobile-menu-close" id="mobile-menu-close" type="button">
      <span>
