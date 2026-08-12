@@ -3,9 +3,8 @@
  <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" href="/images/favicon-32x32.png" type="image/png" sizes="32x32">
-<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <link rel="icon" href="/images/favicon-32x32.png?v=20260812-3" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=20260812-3">
 <meta content="Contact BAM's Website Builder for a free website design quote in Clearwater, Florida and beyond." name="description"/>
   <title>
    Get a Free Website Quote | BAM's Website Builder
@@ -413,6 +412,8 @@
       <input name="_subject" type="hidden" value="New Website Inquiry"/>
       <input name="_captcha" type="hidden" value="false"/>
       <input name="_template" type="hidden" value="table"/>
+      <input id="paypal-subscription-id" name="PayPal Subscription ID" type="hidden" value=""/>
+      <input id="paypal-subscription-status" name="PayPal Subscription Status" type="hidden" value=""/>
       <div class="subscription-contact-box" id="subscription-interest">
        <h2>
         Prefer to pay monthly?
@@ -747,7 +748,11 @@
     const requestedTemplate = (params.get('template') || '').trim();
     const payment = (params.get('payment') || '').trim();
     const plan = (params.get('plan') || '').trim().toLowerCase();
+    const subscribed = (params.get('subscribed') || '').trim().toLowerCase();
+    const subscriptionId = (params.get('subscription_id') || '').trim();
     const paymentOption = document.getElementById('payment-option');
+    const subscriptionIdField = document.getElementById('paypal-subscription-id');
+    const subscriptionStatusField = document.getElementById('paypal-subscription-status');
     const select = document.getElementById('template-choice');
     const status = document.getElementById('selected-template-status');
     const message = document.getElementById('message');
@@ -760,6 +765,14 @@
 
     if (plan && paymentOption && monthlyValues[plan]) {
         paymentOption.value = monthlyValues[plan];
+    }
+
+    if (subscribed === 'yes') {
+        if (subscriptionIdField) subscriptionIdField.value = subscriptionId;
+        if (subscriptionStatusField) subscriptionStatusField.value = 'Approved';
+        if (message && !message.value) {
+            message.value = 'My PayPal subscription was approved. Here are my website project details:';
+        }
     }
 
     function updateStatus() {

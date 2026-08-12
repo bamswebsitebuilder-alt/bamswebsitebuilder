@@ -3,21 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" href="/images/favicon-32x32.png" type="image/png" sizes="32x32">
-<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <link rel="icon" href="/images/favicon-32x32.png?v=20260812-3" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=20260812-3">
 <meta name="description" content="Flexible monthly website payment plans from BAM's Website Builder.">
   <title>Website Plans | BAM's Website Builder</title>
 
   <link rel="stylesheet" href="/css/style.css?v=102">
   <link rel="stylesheet" href="/css/page-theme.css?v=1">
   <link rel="stylesheet" href="/css/footer-fix.css?v=1">
-  <link rel="stylesheet" href="/css/site-upgrades.css?v=1">
+  <link rel="stylesheet" href="/css/site-upgrades.css?v=3">
   <link rel="canonical" href="https://bamswebsitebuilder.com/subscriptions">
   <link rel="alternate" hreflang="en" href="https://bamswebsitebuilder.com/subscriptions">
   <link rel="alternate" hreflang="es" href="https://bamswebsitebuilder.com/es/subscriptions">
   <link rel="alternate" hreflang="x-default" href="https://bamswebsitebuilder.com/subscriptions">
-  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=20260812-3">
 
   <style>
     html,
@@ -56,7 +55,15 @@
       font-weight: 700;
     }
 
-    .stripe-note {
+    .paypal-button-wrap {
+      width: calc(100% - 40px);
+      max-width: 320px;
+      min-height: 45px;
+      margin: auto auto 18px;
+      padding-top: 20px;
+    }
+
+    .paypal-note {
       max-width: 900px;
       margin: 36px auto 0;
       padding: 20px;
@@ -67,7 +74,7 @@
       text-align: center;
     }
 
-    .stripe-note strong {
+    .paypal-note strong {
       color: #f5c400;
     }
   </style>
@@ -190,9 +197,7 @@
             <li>Basic website setup</li>
           </ul>
 
-          <a class="price-button" href="/contact?plan=starter-monthly" data-stripe-plan="starter">
-            Choose Starter
-          </a>
+          <div class="paypal-button-wrap" id="paypal-button-container-P-2X4855030H9632908NJ47KRQ"></div>
         </article>
 
         <article class="price-card featured-card">
@@ -220,9 +225,7 @@
             <li>Basic search engine setup</li>
           </ul>
 
-          <a class="price-button" href="/contact?plan=business-monthly" data-stripe-plan="business">
-            Choose Business
-          </a>
+          <div class="paypal-button-wrap" id="paypal-button-container-P-0A9124042N887170MNJ47NZQ"></div>
         </article>
 
         <article class="price-card premium-card">
@@ -248,15 +251,13 @@
             <li>Search engine optimization setup</li>
           </ul>
 
-          <a class="price-button" href="/contact?plan=premium-monthly" data-stripe-plan="premium">
-            Choose Premium
-          </a>
+          <div class="paypal-button-wrap" id="paypal-button-container-P-1DF06614NY927051XNJ47PDA"></div>
         </article>
       </div>
 
-      <div class="stripe-note">
-        <strong>Stripe checkout ready.</strong>
-        The plan buttons currently route to your contact flow until your live Stripe Payment Links are added. This prevents accidental or unverified charges during setup.
+      <div class="paypal-note">
+        <strong>Secure checkout with PayPal.</strong>
+        Select a website plan above to start your 12-month subscription. After approval, you will continue to the project information form.
       </div>
     </section>
   </main>
@@ -303,5 +304,25 @@
 
   <script src="/js/navigation.js"></script>
   <script src="/js/script.js"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=BAArA5EjOUBuSZDfnoE8clr8nzBHqDmRdPVCtNi5i8mj2L4SpL54k4SQnwm2O3LuQtDX3WYawewsr_I_2I&amp;vault=true&amp;intent=subscription" data-sdk-integration-source="button-factory"></script>
+  <script>
+    function renderSubscriptionButton(containerSelector, planId, planName) {
+      if (typeof paypal === 'undefined' || !document.querySelector(containerSelector)) return;
+      paypal.Buttons({
+        style: { shape: 'rect', color: 'gold', layout: 'vertical', label: 'subscribe' },
+        createSubscription: function (data, actions) { return actions.subscription.create({ plan_id: planId }); },
+        onApprove: function (data) {
+          window.location.href = '/contact?subscribed=yes&plan=' + encodeURIComponent(planName) + '&subscription_id=' + encodeURIComponent(data.subscriptionID || '');
+        },
+        onError: function (error) {
+          console.error('PayPal subscription error:', error);
+          alert('There was a problem starting your subscription. Please try again or contact us for help.');
+        }
+      }).render(containerSelector);
+    }
+    renderSubscriptionButton('#paypal-button-container-P-2X4855030H9632908NJ47KRQ', 'P-2X4855030H9632908NJ47KRQ', 'starter-monthly');
+    renderSubscriptionButton('#paypal-button-container-P-0A9124042N887170MNJ47NZQ', 'P-0A9124042N887170MNJ47NZQ', 'business-monthly');
+    renderSubscriptionButton('#paypal-button-container-P-1DF06614NY927051XNJ47PDA', 'P-1DF06614NY927051XNJ47PDA', 'premium-monthly');
+  </script>
 </body>
 </html>
