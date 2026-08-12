@@ -9,3 +9,89 @@ button,a,input,select,textarea{font:inherit}
 .demo-notice{position:fixed;left:50%;bottom:16px;z-index:9980;transform:translateX(-50%);max-width:calc(100% - 32px);padding:10px 15px;border:1px solid rgba(244,207,84,.35);border-radius:999px;background:rgba(10,10,10,.92);color:#eee;font-size:.78rem;backdrop-filter:blur(12px)}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 @media(max-width:600px){.back-to-top{right:12px;bottom:12px}.demo-notice{bottom:10px;border-radius:14px;text-align:center}}
+
+/* Professional pricing-page hero proportions */
+.pricing-section{
+  padding-top:clamp(76px,7vw,112px)!important;
+}
+.pricing-section>.pricing-heading{
+  width:min(100%,780px);
+  margin:0 auto clamp(42px,5vw,62px)!important;
+}
+.pricing-section>.pricing-heading .section-label{
+  margin-bottom:14px;
+  font-size:.78rem;
+  letter-spacing:.18em;
+}
+.pricing-section>.pricing-heading h1{
+  max-width:760px;
+  margin:0 auto 18px!important;
+  font-size:clamp(2.35rem,4.7vw,4.2rem)!important;
+  line-height:1.08!important;
+  text-wrap:balance;
+}
+.pricing-section>.pricing-heading .pricing-intro{
+  max-width:660px;
+  font-size:clamp(1rem,1.35vw,1.1rem);
+  line-height:1.65;
+}
+html[lang="es"] .pricing-section>.pricing-heading{
+  width:min(100%,820px);
+}
+html[lang="es"] .pricing-section>.pricing-heading h1{
+  max-width:800px;
+  font-size:clamp(2.2rem,4.25vw,3.8rem)!important;
+}
+@media(max-width:650px){
+  .pricing-section{padding-top:58px!important}
+  .pricing-section>.pricing-heading{margin-bottom:36px!important}
+  .pricing-section>.pricing-heading h1{font-size:clamp(2rem,10vw,2.75rem)!important}
+  html[lang="es"] .pricing-section>.pricing-heading h1{font-size:clamp(1.85rem,9.2vw,2.55rem)!important}
+  .pricing-section>.pricing-heading .pricing-intro{font-size:1rem;line-height:1.55}
+}
+
+/* Keep the English and Spanish homepage background logo identical */
+.hero{
+  position:relative!important;
+  display:grid!important;
+  place-items:center!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  text-align:center!important;
+}
+.hero>.hero-logo-bg{
+  position:absolute!important;
+  top:50%!important;
+  left:50%!important;
+  right:auto!important;
+  bottom:auto!important;
+  inset:auto!important;
+  width:min(72vw,680px)!important;
+  max-width:none!important;
+  height:auto!important;
+  max-height:none!important;
+  margin:0!important;
+  transform:translate(-50%,-50%)!important;
+  translate:none!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  opacity:.18!important;
+  z-index:0!important;
+  mix-blend-mode:normal!important;
+  filter:none!important;
+  pointer-events:none!important;
+  user-select:none!important;
+  animation:none!important;
+  transition:none!important;
+}
+.hero>.hero-content{
+  position:relative!important;
+  z-index:2!important;
+  width:min(900px,100%)!important;
+  margin:0 auto!important;
+  text-align:center!important;
+}
+.hero .hero-buttons,.hero .hero-trust{justify-content:center!important}
+@media(max-width:650px){
+  .hero>.hero-logo-bg{width:min(96vw,480px)!important;opacity:.14!important}
+}
