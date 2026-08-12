@@ -1,164 +1,71 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
  <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <link rel="icon" href="/images/favicon-32x32.png?v=20260812-3" type="image/png" sizes="32x32">
-<link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=20260812-3">
-<meta content="Explora plantillas profesionales de sitios web de BAM's Website Builder." name="description"/>
+  <meta content="Browse ready-made website templates from BAM's Website Builder." name="description"/>
   <title>
-   Plantillas | BAM's Website Builder
+   Templates | BAM's Website Builder
   </title>
-  <link href="/css/style.css?v=20260810-1" rel="stylesheet"/>
-  <link href="/css/page-theme.css?v=20260810-1" rel="stylesheet"/>
-  <link href="/css/templates.css?v=20260810-1" rel="stylesheet"/>
-  <link href="/css/footer-fix.css?v=20260810-1" rel="stylesheet"/>
-  <link href="/css/animations.css?v=20260810-1" rel="stylesheet"/>
-  <link href="/css/site-upgrades.css?v=3" rel="stylesheet"/>
-  <link href="https://bamswebsitebuilder.com/es/templates" rel="canonical"/>
-  <style>
-   /* Keep mobile navigation icons visible and consistently sized. */
-.mobile-navigation .mobile-link-icon {
-    width: 2rem;
-    height: 2rem;
-    flex: 0 0 2rem;
-    display: inline-grid !important;
-    place-items: center;
-    border-radius: 0.625rem;
-    color: #f4c15d;
-    background: rgba(244, 193, 93, 0.12);
-    border: 1px solid rgba(244, 193, 93, 0.28);
-}
-.mobile-navigation .mobile-link-icon svg {
-    width: 1.15rem;
-    height: 1.15rem;
-    display: block !important;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.9;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-.mobile-navigation a:hover .mobile-link-icon,
-.mobile-navigation a:focus-visible .mobile-link-icon,
-.mobile-navigation a.active .mobile-link-icon {
-    color: #111827;
-    background: #f4c15d;
-    border-color: #f4c15d;
-}
-  </style>
-  <link href="https://bamswebsitebuilder.com/templates" hreflang="en" rel="alternate"/>
-  <link href="https://bamswebsitebuilder.com/es/templates" hreflang="es" rel="alternate"/>
-  <style id="bam-spanish-consistency">
-   /* BAM Spanish consistency fix */
-.site-brand,
-.mobile-menu-brand {
-  display: inline-flex;
-  align-items: center;
-  flex: 0 0 auto;
-  text-decoration: none;
-  min-width: 0;
-}
-.site-header-logo {
-  display: block;
-  width: 190px;
-  max-width: 21vw;
-  height: 58px;
-  object-fit: contain;
-  object-position: left center;
-}
-.mobile-header-logo {
-  display: block;
-  width: 205px;
-  max-width: 68vw;
-  height: 68px;
-  object-fit: contain;
-  object-position: left center;
-}
-.header-container { min-width: 0; }
-.desktop-navigation { min-width: 0; }
-.desktop-language {
-  display: flex;
-  align-items: center;
-  flex: 0 0 auto;
-  gap: 9px;
-  margin-left: 18px;
-  padding-left: 14px;
-  border-left: 1px solid rgba(244,193,93,.32);
-  white-space: nowrap;
-}
-.desktop-language a,
-.desktop-language span { display:inline-block; white-space:nowrap; }
-@media (min-width:1181px) {
-  html[lang="es"] .header-container { gap:12px; padding-inline:clamp(18px,2.2vw,36px); }
-  html[lang="es"] .site-header-logo { width:160px; max-width:17vw; }
-  html[lang="es"] .desktop-navigation { gap:clamp(7px,.65vw,12px); margin-left:auto; }
-  html[lang="es"] .desktop-navigation a { font-size:clamp(.56rem,.58vw,.65rem); letter-spacing:.035em; }
-  html[lang="es"] .desktop-language { margin-left:7px; padding-left:10px; gap:6px; }
-  html[lang="es"] .desktop-language a { font-size:.65rem; }
-}
-@media (min-width:901px) and (max-width:1180px) {
-  html[lang="es"] .desktop-navigation,
-  html[lang="es"] .desktop-language { display:none !important; }
-  html[lang="es"] .menu-toggle { display:flex !important; }
-  html[lang="es"] .mobile-menu { display:flex; }
-  html[lang="es"] .menu-overlay { display:block; }
-}
-@media (max-width:900px) {
-  .desktop-navigation,.desktop-language { display:none !important; }
-  .menu-toggle { display:flex !important; }
-  .site-header-logo { width:155px; max-width:52vw; height:52px; }
-}
-  </style>
-  <meta content="https://www.bamswebsitebuilder.com/images/logo-dark.jpg" property="og:image"/>
+  <link href="/images/icon-dark.jpg" rel="icon" type="image/jpeg"/>
+  <link href="/css/style.css?v=101" rel="stylesheet"/>
+  <link href="/css/page-theme.css?v=1" rel="stylesheet"/>
+  <link href="/css/templates.css?v=1" rel="stylesheet"/>
+  <link href="/css/footer-fix.css?v=1" rel="stylesheet"/>
+  <link href="/css/animations.css?v=2" rel="stylesheet"/>
+  <link href="https://bamswebsitebuilder.com/templates" rel="canonical"/>
  </head>
  <body>
   <header class="site-header" id="site-header">
    <div class="header-container">
-    <a aria-label="Inicio de BAM's Website Builder" class="site-brand" href="/es/">
-     <img alt="BAM's Website Builder" class="site-header-logo" src="/images/logo-header.jpg"/>
+    <a aria-label="BAM's Website Builder home" class="site-brand" href="/">
+     <span class="brand-text">
+      <strong>
+       BAM'S
+      </strong>
+      <small>
+       WEBSITE BUILDER
+      </small>
+     </span>
     </a>
-    <nav aria-label="Navegaci&oacute;n principal" class="desktop-navigation">
-     <a data-page="home" href="/es/">
-      Inicio
+    <nav aria-label="Main navigation" class="desktop-navigation">
+     <a data-page="home" href="/">
+      Home
      </a>
-     <a data-page="services" href="/es/services">
-      Servicios
+     <a data-page="services" href="/services">
+      Services
      </a>
-     <a data-page="prices" href="/es/prices">
-      Precios
+     <a data-page="prices" href="/prices">
+      Prices
      </a>
-     <a data-page="subscriptions" href="/es/subscriptions">
-      Planes Web
+     <a aria-current="page" class="active" data-page="templates" href="/templates">
+      Templates
      </a>
-     <a aria-current="page" class="active" data-page="templates" href="/es/templates">
-      Plantillas
+     <a data-page="portfolio" href="/portfolio">
+      Portfolio
      </a>
-     <a data-page="portfolio" href="/es/portfolio">
-      Portafolio
+     <a data-page="reviews" href="/reviews">
+      Reviews
      </a>
-     <a data-page="reviews" href="/es/reviews">
-      Rese&ntilde;as
+     <a data-page="contact" href="/contact">
+      Contact
      </a>
-     <a data-page="contact" href="/es/contact">
-      Contacto
-     </a>
-     <a data-page="login" href="/es/login">
-      Iniciar sesi&oacute;n
+     <a data-page="login" href="/login">
+      Login
      </a>
     </nav>
     <div class="desktop-language">
-     <a href="/templates">
+     <a class="language-active" href="/templates">
       English
      </a>
      <span>
       |
      </span>
-     <a class="language-active" href="/es/templates">
+     <a href="/es/templates">
       Espa&ntilde;ol
      </a>
     </div>
-    <button aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir men&uacute; de navegaci&oacute;n" class="menu-toggle" id="menu-toggle" type="button">
+    <button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open navigation menu" class="menu-toggle" id="menu-toggle" type="button">
      <span>
      </span>
      <span>
@@ -170,12 +77,19 @@
   </header>
   <div class="menu-overlay" id="menu-overlay">
   </div>
-  <aside aria-hidden="true" aria-label="Navegaci&oacute;n m&oacute;vil" class="mobile-menu" id="mobile-menu">
+  <aside aria-hidden="true" aria-label="Mobile navigation" class="mobile-menu" id="mobile-menu">
    <div class="mobile-menu-header">
-    <a class="mobile-menu-brand" href="/es/">
-     <img alt="BAM's Website Builder" class="mobile-header-logo" src="/images/logo-header.jpg"/>
+    <a class="mobile-menu-brand" href="/">
+     <span>
+      <strong>
+       BAM'S
+      </strong>
+      <small>
+       WEBSITE BUILDER
+      </small>
+     </span>
     </a>
-    <button aria-label="Cerrar men&uacute; de navegaci&oacute;n" class="mobile-menu-close" id="mobile-menu-close" type="button">
+    <button aria-label="Close navigation menu" class="mobile-menu-close" id="mobile-menu-close" type="button">
      <span>
      </span>
      <span>
@@ -183,180 +97,93 @@
     </button>
    </div>
    <nav class="mobile-navigation">
-    <a data-page="home" href="/es/">
-     <span aria-hidden="true" class="mobile-link-icon">
-      <svg viewbox="0 0 24 24">
-       <path d="M3 10.8 12 3l9 7.8">
-       </path>
-       <path d="M5.5 9.3V21h13V9.3">
-       </path>
-       <path d="M9.5 21v-6h5v6">
-       </path>
-      </svg>
-     </span>
+    <a data-page="home" href="/">
      <span>
-      Inicio
+      Home
      </span>
     </a>
-    <a data-page="services" href="/es/services">
-     <span aria-hidden="true" class="mobile-link-icon">
-      <svg viewbox="0 0 24 24">
-       <path d="M12 3 3.5 7.5 12 12l8.5-4.5L12 3Z">
-       </path>
-       <path d="m3.5 12 8.5 4.5 8.5-4.5">
-       </path>
-       <path d="m3.5 16.5 8.5 4.5 8.5-4.5">
-       </path>
-      </svg>
-     </span>
+    <a data-page="services" href="/services">
      <span>
-      Servicios
+      Services
      </span>
     </a>
-    <a data-page="prices" href="/es/prices">
-     <span aria-hidden="true" class="mobile-link-icon">
-      <svg viewbox="0 0 24 24">
-       <path d="M12 2v20">
-       </path>
-       <path d="M17 6.5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6">
-       </path>
-      </svg>
-     </span>
+    <a data-page="prices" href="/prices">
      <span>
-      Precios
+      Prices
      </span>
     </a>
-    <a data-page="subscriptions" href="/es/subscriptions">
-     <span aria-hidden="true" class="mobile-link-icon">
-      <svg viewbox="0 0 24 24">
-       <rect height="14" rx="2" width="18" x="3" y="5">
-       </rect>
-       <path d="M3 10h18">
-       </path>
-       <path d="M7 15h4">
-       </path>
-      </svg>
-     </span>
+    <a class="active" data-page="templates" href="/templates">
      <span>
-      Planes Web
+      Templates
      </span>
     </a>
-    <a class="active" data-page="templates" href="/es/templates">
-     <span aria-hidden="true" class="mobile-link-icon">
-      <svg viewbox="0 0 24 24">
-       <rect height="16" rx="2" width="18" x="3" y="4">
-       </rect>
-       <path d="M3 9h18">
-       </path>
-       <path d="M8 9v11">
-       </path>
-      </svg>
-     </span>
+    <a data-page="portfolio" href="/portfolio">
      <span>
-      Plantillas
+      Portfolio
      </span>
     </a>
-    <a data-page="portfolio" href="/es/portfolio">
-     <span aria-hidden="true" class="mobile-link-icon">
-      <svg viewbox="0 0 24 24">
-       <rect height="13" rx="2" width="18" x="3" y="7">
-       </rect>
-       <path d="M8 7V4h8v3">
-       </path>
-       <path d="M3 12h18">
-       </path>
-       <path d="M10 12v2h4v-2">
-       </path>
-      </svg>
-     </span>
+    <a data-page="reviews" href="/reviews">
      <span>
-      Portafolio
+      Reviews
      </span>
     </a>
-    <a data-page="reviews" href="/es/reviews">
-     <span aria-hidden="true" class="mobile-link-icon">
-      <svg viewbox="0 0 24 24">
-       <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z">
-       </path>
-      </svg>
-     </span>
+    <a data-page="contact" href="/contact">
      <span>
-      Rese&ntilde;as
+      Contact
      </span>
     </a>
-    <a data-page="contact" href="/es/contact">
-     <span aria-hidden="true" class="mobile-link-icon">
-      <svg viewbox="0 0 24 24">
-       <rect height="14" rx="2" width="18" x="3" y="5">
-       </rect>
-       <path d="m4 7 8 6 8-6">
-       </path>
-      </svg>
-     </span>
+    <a data-page="login" href="/login">
      <span>
-      Contacto
-     </span>
-    </a>
-    <a data-page="login" href="/es/login">
-     <span aria-hidden="true" class="mobile-link-icon">
-      <svg viewbox="0 0 24 24">
-       <circle cx="12" cy="8" r="4">
-       </circle>
-       <path d="M4.5 21a7.5 7.5 0 0 1 15 0">
-       </path>
-      </svg>
-     </span>
-     <span>
-      Iniciar sesi&oacute;n
+      Login
      </span>
     </a>
    </nav>
    <div class="mobile-language-section">
     <p>
-     Idioma
+     Language
     </p>
     <div class="mobile-language-links">
-     <a href="/templates">
+     <a class="language-active" href="/templates">
       English
      </a>
-     <a class="language-active" href="/es/templates">
+     <a href="/es/templates">
       Espa&ntilde;ol
      </a>
     </div>
    </div>
    <div class="mobile-menu-cta">
-    <a href="/es/contact">
-     Obt&eacute;n una cotizaci&oacute;n gratis
+    <a href="/contact">
+     Get a Free Quote
     </a>
    </div>
   </aside>
-  <main class="templates-page" id="main-content">
+  <main class="templates-page">
    <section class="templates-hero">
     <div class="templates-wrap">
      <p class="templates-eyebrow">
-      Plantillas profesionales para sitios web
+      Professional Website Templates
      </p>
      <h1>
-      Sitios web listos para usar,
+      Ready-Made Websites,
       <span>
-       Hechos para tu negocio.
+       Made for Your Business.
       </span>
      </h1>
      <p>
-      Elige un dise&ntilde;o profesional, personal&iacute;zalo con tu marca y contenido, y lanza tu sitio m&aacute;s r&aacute;pido sin sacrificar calidad.
+      Choose a professional starting design, personalize it with your branding and content, and launch faster without sacrificing quality.
      </p>
      <div class="template-benefits">
       <span>
-       Totalmente responsivo
+       Fully Responsive
       </span>
       <span>
-       F&aacute;cil de personalizar
+       Easy to Customize
       </span>
       <span>
-       Entrega r&aacute;pida
+       Fast Delivery
       </span>
       <span>
-       Opciones de pago seguras
+       Secure Payment Options
       </span>
      </div>
     </div>
@@ -365,30 +192,30 @@
     <div class="templates-wrap">
      <div class="template-heading">
       <p class="templates-eyebrow">
-       Explora las plantillas
+       Browse Templates
       </p>
       <h2>
-       Elige el estilo de tu sitio web
+       Choose Your Website Style
       </h2>
      </div>
      <div class="template-filters">
       <button class="template-filter active" data-filter="all" type="button">
-       Todas las plantillas
+       All Templates
       </button>
       <button class="template-filter" data-filter="food" type="button">
-       Restaurante
+       Restaurant
       </button>
       <button class="template-filter" data-filter="beauty" type="button">
-       Belleza
+       Beauty
       </button>
       <button class="template-filter" data-filter="service" type="button">
-       Negocios de servicios
+       Service Businesses
       </button>
       <button class="template-filter" data-filter="professional" type="button">
-       Profesional
+       Professional
       </button>
       <button class="template-filter" data-filter="tech" type="button">
-       Tecnolog&iacute;a
+       Tech
       </button>
      </div>
      <div class="template-grid">
@@ -397,46 +224,46 @@
         Popular
        </span>
        <div class="template-preview">
-        <img alt="Vista previa del sitio web del restaurante Ember Sage" loading="lazy" onerror="this.onerror=null;this.src='/images/logo-dark.jpg';" src="/images/ember-sage-kitchen-preview.png"/>
+        <img alt="Ember Sage restaurant website preview" loading="lazy" onerror="this.onerror=null;this.src='/images/logo-dark.jpg';" src="/images/ember-sage-kitchen-preview.png"/>
        </div>
        <div class="template-card-body">
         <p class="template-category">
-         Restaurante
+         Restaurant
         </p>
         <h2>
          Ember Sage
         </h2>
         <ul>
          <li>
-          Men&uacute; en l&iacute;nea
+          Online menu
          </li>
          <li>
-          Formulario de reservaci&oacute;n
+          Reservation form
          </li>
          <li>
-          Galer&iacute;a
+          Gallery
          </li>
          <li>
-          Dise&ntilde;o responsivo
+          Mobile responsive
          </li>
         </ul>
         <p class="template-price">
          <span>
-          Plantilla de Negocio
+          Business Template
          </span>
          <strong>
           $500
          </strong>
          <small>
-          precio inicial
+          starting price
          </small>
         </p>
         <div class="template-actions">
          <a class="template-demo" href="/ember-sage-kitchen/" rel="noopener" target="_blank">
-          Ver demostraci&oacute;n
+          Live Demo
          </a>
-         <a class="template-select" href="/es/contact?template=Ember%20Sage&amp;package=business&amp;payment=deposit">
-          Usar esta plantilla
+         <a class="template-select" href="/contact?template=Ember%20Sage&amp;package=business&amp;payment=deposit">
+          Use This Template
          </a>
         </div>
        </div>
@@ -446,144 +273,144 @@
         Popular
        </span>
        <div class="template-preview">
-        <img alt="Vista previa del sitio web de barber&iacute;a G3 Blend Lab" loading="lazy" onerror="this.onerror=null;this.src='/images/logo-dark.jpg';" src="/images/g3-blend-lab-logo.png"/>
+        <img alt="G3 Blend Lab barber website preview" loading="lazy" onerror="this.onerror=null;this.src='/images/logo-dark.jpg';" src="/images/g3-blend-lab-logo.png"/>
        </div>
        <div class="template-card-body">
         <p class="template-category">
-         Barber&iacute;a
+         Barbershop
         </p>
         <h2>
          G3 Blend Lab
         </h2>
         <ul>
          <li>
-          Presentaci&oacute;n de servicios
+          Services showcase
          </li>
          <li>
-          Sistema de reservas
+          Booking system
          </li>
          <li>
-          Galer&iacute;a
+          Gallery
          </li>
          <li>
-          Dise&ntilde;o responsivo
+          Mobile responsive
          </li>
         </ul>
         <p class="template-price">
          <span>
-          Plantilla de Negocio
+          Business Template
          </span>
          <strong>
           $500
          </strong>
          <small>
-          precio inicial
+          starting price
          </small>
         </p>
         <div class="template-actions">
          <a class="template-demo" href="/blend-lab/" rel="noopener" target="_blank">
-          Ver demostraci&oacute;n
+          Live Demo
          </a>
-         <a class="template-select" href="/es/contact?template=G3%20Blend%20Lab&amp;package=business&amp;payment=deposit">
-          Usar esta plantilla
+         <a class="template-select" href="/contact?template=G3%20Blend%20Lab&amp;package=business&amp;payment=deposit">
+          Use This Template
          </a>
         </div>
        </div>
       </article>
       <article class="template-card" data-category="beauty">
        <span class="template-badge">
-        Nuevo
+        New
        </span>
        <div class="template-preview">
-        <img alt="Vista previa del sitio web del sal&oacute;n de u&ntilde;as Blush Bloom" loading="lazy" onerror="this.onerror=null;this.src='/images/logo-dark.jpg';" src="/images/blush-bloom-logo.svg"/>
+        <img alt="Blush Bloom nail salon website preview" loading="lazy" onerror="this.onerror=null;this.src='/images/logo-dark.jpg';" src="/images/blush-bloom-logo.svg"/>
        </div>
        <div class="template-card-body">
         <p class="template-category">
-         Sal&oacute;n de u&ntilde;as
+         Nail Salon
         </p>
         <h2>
          Blush Bloom
         </h2>
         <ul>
          <li>
-          Servicios y precios
+          Services &amp; pricing
          </li>
          <li>
-          Galer&iacute;a
+          Gallery
          </li>
          <li>
-          Reservas en l&iacute;nea
+          Online booking
          </li>
          <li>
-          Dise&ntilde;o responsivo
+          Mobile responsive
          </li>
         </ul>
         <p class="template-price">
          <span>
-          Plantilla de Negocio
+          Business Template
          </span>
          <strong>
           $500
          </strong>
          <small>
-          precio inicial
+          starting price
          </small>
         </p>
         <div class="template-actions">
          <a class="template-demo" href="/blush-bloom/" rel="noopener" target="_blank">
-          Ver demostraci&oacute;n
+          Live Demo
          </a>
-         <a class="template-select" href="/es/contact?template=Blush%20Bloom&amp;package=business&amp;payment=deposit">
-          Usar esta plantilla
+         <a class="template-select" href="/contact?template=Blush%20Bloom&amp;package=business&amp;payment=deposit">
+          Use This Template
          </a>
         </div>
        </div>
       </article>
       <article class="template-card" data-category="beauty">
        <span class="template-badge">
-        Nuevo
+        New
        </span>
        <div class="template-preview">
-        <img alt="Vista previa del sitio web de depilaci&oacute;n y pesta&ntilde;as Rainforest Glow" loading="lazy" onerror="this.onerror=null;this.src='/images/logo-dark.jpg';" src="/images/rainforest-glow-preview.jpg"/>
+        <img alt="Rainforest Glow waxing and lash studio website preview" loading="lazy" onerror="this.onerror=null;this.src='/images/logo-dark.jpg';" src="/images/rainforest-glow-preview.jpg"/>
        </div>
        <div class="template-card-body">
         <p class="template-category">
-         Estudio de depilaci&oacute;n
+         Waxing Studio
         </p>
         <h2>
          Rainforest Glow
         </h2>
         <ul>
          <li>
-          Servicios de depilaci&oacute;n y pesta&ntilde;as
+          Waxing &amp; lash services
          </li>
          <li>
-          Reservas en l&iacute;nea
+          Online booking
          </li>
          <li>
-          Galer&iacute;a
+          Gallery
          </li>
          <li>
-          Dise&ntilde;o responsivo
+          Mobile responsive
          </li>
         </ul>
         <p class="template-price">
          <span>
-          Plantilla de Negocio
+          Business Template
          </span>
          <strong>
           $500
          </strong>
          <small>
-          precio inicial
+          starting price
          </small>
         </p>
         <div class="template-actions">
          <a class="template-demo" href="/rainforest-glow/" rel="noopener" target="_blank">
-          Ver demostraci&oacute;n
+          Live Demo
          </a>
-         <a class="template-select" href="/es/contact?template=Rainforest%20Glow&amp;package=business&amp;payment=deposit">
-          Usar esta plantilla
+         <a class="template-select" href="/contact?template=Rainforest%20Glow&amp;package=business&amp;payment=deposit">
+          Use This Template
          </a>
         </div>
        </div>
@@ -593,285 +420,187 @@
         Premium
        </span>
        <div class="template-preview">
-        <img alt="Vista previa de la plataforma social ConnectSphere" loading="lazy" onerror="this.onerror=null;this.src='/images/logo-dark.jpg';" src="/images/connectsphere.png"/>
+        <img alt="ConnectSphere social platform website preview" loading="lazy" onerror="this.onerror=null;this.src='/images/logo-dark.jpg';" src="/images/connectsphere.png"/>
        </div>
        <div class="template-card-body">
         <p class="template-category">
-         Tecnolog&iacute;a y redes sociales
+         Tech &amp; Social
         </p>
         <h2>
          ConnectSphere
         </h2>
         <ul>
          <li>
-          Perfiles de usuario
+          User profiles
          </li>
          <li>
-          Sistema de mensajer&iacute;a
+          Messaging system
          </li>
          <li>
-          Notificaciones
+          Notifications
          </li>
          <li>
-          Dise&ntilde;o responsivo
+          Mobile responsive
          </li>
         </ul>
         <p class="template-price">
          <span>
-          Plantilla Premium
+          Premium Template
          </span>
          <strong>
           $850
          </strong>
          <small>
-          precio inicial
+          starting price
          </small>
         </p>
         <div class="template-actions">
          <a class="template-demo" href="/connectsphere/" rel="noopener" target="_blank">
-          Ver demostraci&oacute;n
+          Live Demo
          </a>
-         <a class="template-select" href="/es/contact?template=ConnectSphere&amp;package=premium&amp;payment=deposit">
-          Usar esta plantilla
+         <a class="template-select" href="/contact?template=ConnectSphere&amp;package=premium&amp;payment=deposit">
+          Use This Template
          </a>
         </div>
        </div>
       </article>
       <article class="template-card" data-category="service">
        <div class="template-preview">
-        <img alt="Vista previa del sitio web Velocity Drive Rentals" loading="lazy" onerror="this.onerror=null;this.src='/images/logo-dark.jpg';" src="/images/velocity-drive-rentals.jpg"/>
+        <img alt="Velocity Drive Rentals website preview" loading="lazy" onerror="this.onerror=null;this.src='/images/logo-dark.jpg';" src="/images/velocity-drive-rentals.jpg"/>
        </div>
        <div class="template-card-body">
         <p class="template-category">
-         Alquiler de autos
+         Car Rental
         </p>
         <h2>
          Velocity Drive Rentals
         </h2>
         <ul>
          <li>
-          Listado de veh&iacute;culos
+          Vehicle listings
          </li>
          <li>
-          Sistema de reservas
+          Booking system
          </li>
          <li>
-          Planes de precios
+          Pricing plans
          </li>
          <li>
-          Dise&ntilde;o responsivo
+          Mobile responsive
          </li>
         </ul>
         <p class="template-price">
          <span>
-          Plantilla Premium
+          Premium Template
          </span>
          <strong>
           $850
          </strong>
          <small>
-          precio inicial
+          starting price
          </small>
         </p>
         <div class="template-actions">
          <a class="template-demo" href="/velocity-drive-rentals/" rel="noopener" target="_blank">
-          Ver demostraci&oacute;n
+          Live Demo
          </a>
-         <a class="template-select" href="/es/contact?template=Velocity%20Drive%20Rentals&amp;package=premium&amp;payment=deposit">
-          Usar esta plantilla
+         <a class="template-select" href="/contact?template=Velocity%20Drive%20Rentals&amp;package=premium&amp;payment=deposit">
+          Use This Template
          </a>
         </div>
        </div>
       </article>
       <article class="template-card" data-category="professional">
        <span class="template-badge">
-        Nuevo
+        New
        </span>
        <div class="template-preview">
-        <img alt="Vista previa del sitio web de env&iacute;os y log&iacute;stica FleetFlow" loading="lazy" onerror="this.onerror=null;this.src='/images/logo-dark.jpg';" src="/images/fleetflow-preview-v2.png"/>
+        <img alt="FleetFlow shipping and logistics website preview" loading="lazy" onerror="this.onerror=null;this.src='/images/logo-dark.jpg';" src="/images/fleetflow-preview-v2.png"/>
        </div>
        <div class="template-card-body">
         <p class="template-category">
-         Env&iacute;os y log&iacute;stica
+         Shipping &amp; Logistics
         </p>
         <h2>
          FleetFlow
         </h2>
         <ul>
          <li>
-          Presentaci&oacute;n de servicios
+          Service showcase
          </li>
          <li>
-          Solicitar una cotizaci&oacute;n
+          Request a quote
          </li>
          <li>
-          Secci&oacute;n de rastreo
+          Tracking section
          </li>
          <li>
-          Dise&ntilde;o responsivo
+          Mobile responsive
          </li>
         </ul>
         <p class="template-price">
          <span>
-          Plantilla de Negocio
+          Business Template
          </span>
          <strong>
           $500
          </strong>
          <small>
-          precio inicial
+          starting price
          </small>
         </p>
         <div class="template-actions">
          <a class="template-demo" href="/fleetflow/" rel="noopener" target="_blank">
-          Ver demostraci&oacute;n
+          Live Demo
          </a>
-         <a class="template-select" href="/es/contact?template=FleetFlow&amp;package=business&amp;payment=deposit">
-          Usar esta plantilla
+         <a class="template-select" href="/contact?template=FleetFlow&amp;package=business&amp;payment=deposit">
+          Use This Template
          </a>
         </div>
        </div>
       </article>
       <article class="template-card" data-category="professional">
        <div class="template-preview">
-        <img alt="Vista previa del sitio web del autor Kade Mercer" loading="lazy" onerror="this.onerror=null;this.src='/images/logo-dark.jpg';" src="/images/book1.png"/>
+        <img alt="Kade Mercer author website preview" loading="lazy" onerror="this.onerror=null;this.src='/images/logo-dark.jpg';" src="/images/book1.png"/>
        </div>
        <div class="template-card-body">
         <p class="template-category">
-         Autor / Escritor
+         Author / Writer
         </p>
         <h2>
          Kade Mercer
         </h2>
         <ul>
          <li>
-          Presentaci&oacute;n de libros
+          Book showcase
          </li>
          <li>
-          Biograf&iacute;a del autor
+          Author biography
          </li>
          <li>
-          Blog / noticias
+          Blog / news
          </li>
          <li>
-          Dise&ntilde;o responsivo
+          Mobile responsive
          </li>
         </ul>
         <p class="template-price">
          <span>
-          Plantilla Inicial
+          Starter Template
          </span>
          <strong>
           $250
          </strong>
          <small>
-          precio inicial
+          starting price
          </small>
         </p>
         <div class="template-actions">
          <a class="template-demo" href="/kade-mercer/" rel="noopener" target="_blank">
-          Ver demostraci&oacute;n
+          Live Demo
          </a>
-         <a class="template-select" href="/es/contact?template=Kade%20Mercer&amp;package=starter&amp;payment=deposit">
-          Usar esta plantilla
-         </a>
-        </div>
-       </div>
-      </article>
-      <article class="template-card" data-category="service">
-       <span class="template-badge">
-        Nuevo
-       </span>
-       <div class="template-preview">
-        <img alt="Vista previa del sitio web Gulf Coast Pro Wash" loading="lazy" onerror="this.onerror=null;this.src='/images/logo-dark.jpg';" src="/images/gulf-coast-pro-wash-preview.png"/>
-       </div>
-       <div class="template-card-body">
-        <p class="template-category">
-         Lavado a presi&oacute;n
-        </p>
-        <h2>
-         Gulf Coast Pro Wash
-        </h2>
-        <ul>
-         <li>
-          Servicios residenciales y comerciales
-         </li>
-         <li>
-          Solicitud de cotizaci&oacute;n
-         </li>
-         <li>
-          Galer&iacute;a de proyectos
-         </li>
-         <li>
-          Portal del cliente
-         </li>
-        </ul>
-        <p class="template-price">
-         <span>
-          Plantilla de Negocio
-         </span>
-         <strong>
-          $500
-         </strong>
-         <small>
-          precio inicial
-         </small>
-        </p>
-        <div class="template-actions">
-         <a class="template-demo" href="/gulf-coast-pro-wash/" rel="noopener" target="_blank">
-          Ver demostraci&oacute;n
-         </a>
-         <a class="template-select" href="/es/contact?template=Gulf%20Coast%20Pro%20Wash&amp;package=business&amp;payment=deposit">
-          Usar esta plantilla
-         </a>
-        </div>
-       </div>
-      </article>
-      <article class="template-card" data-category="service">
-       <span class="template-badge">
-        Nuevo
-       </span>
-       <div class="template-preview">
-        <img alt="Vista previa del sitio web EverGreen Lawn Care" loading="lazy" onerror="this.onerror=null;this.src='/images/logo-dark.jpg';" src="/images/evergreen-lawn-care-preview.svg"/>
-       </div>
-       <div class="template-card-body">
-        <p class="template-category">
-         Cuidado de c&eacute;sped
-        </p>
-        <h2>
-         EverGreen Lawn Care
-        </h2>
-        <ul>
-         <li>
-          Servicios y paquetes
-         </li>
-         <li>
-          Precios iniciales
-         </li>
-         <li>
-          Solicitudes de cotizaci&oacute;n
-         </li>
-         <li>
-          Portafolio de proyectos
-         </li>
-        </ul>
-        <p class="template-price">
-         <span>
-          Plantilla de Negocio
-         </span>
-         <strong>
-          $500
-         </strong>
-         <small>
-          precio inicial
-         </small>
-        </p>
-        <div class="template-actions">
-         <a class="template-demo" href="/evergreen-lawn-care/" rel="noopener" target="_blank">
-          Ver demostraci&oacute;n
-         </a>
-         <a class="template-select" href="/es/contact?template=EverGreen%20Lawn%20Care&amp;package=business&amp;payment=deposit">
-          Usar esta plantilla
+         <a class="template-select" href="/contact?template=Kade%20Mercer&amp;package=starter&amp;payment=deposit">
+          Use This Template
          </a>
         </div>
        </div>
@@ -879,20 +608,20 @@
      </div>
      <div class="payment-box">
       <p class="templates-eyebrow">
-       Pago flexible
+       Flexible Payment
       </p>
       <h2>
-       Elige tu opci&oacute;n de pago
+       Choose Your Payment Preference
       </h2>
       <p>
-       Selecciona un dep&oacute;sito o solicita el pago completo. Despu&eacute;s de revisar los detalles de tu proyecto, BAM's Website Builder te enviar&aacute; un enlace de pago seguro por PayPal.
+       Select a deposit or full-payment request. After your project details are reviewed, BAM's Website Builder will send a secure PayPal or card payment link.
       </p>
       <div class="payment-options">
-       <a class="pay-deposit" href="/es/contact?payment=deposit">
-        Solicitar enlace para dep&oacute;sito
+       <a class="pay-deposit" href="/contact?payment=deposit">
+        Request Deposit Link
        </a>
-       <a class="pay-full" href="/es/contact?payment=full">
-        Solicitar enlace de pago completo
+       <a class="pay-full" href="/contact?payment=full">
+        Request Full Payment Link
        </a>
       </div>
      </div>
@@ -902,10 +631,10 @@
     <div class="templates-wrap">
      <div class="template-heading">
       <p class="templates-eyebrow">
-       C&oacute;mo funciona
+       How It Works
       </p>
       <h2>
-       De la plantilla al lanzamiento
+       From Template to Launch
       </h2>
      </div>
      <div class="process-grid">
@@ -914,10 +643,10 @@
         1
        </strong>
        <h3>
-        Elige una plantilla
+        Choose a Template
        </h3>
        <p>
-        Elige el dise&ntilde;o que mejor se adapte a tu negocio.
+        Pick the layout that best fits your business.
        </p>
       </article>
       <article class="process-step">
@@ -925,10 +654,10 @@
         2
        </strong>
        <h3>
-        Env&iacute;a tus detalles
+        Send Your Details
        </h3>
        <p>
-        Env&iacute;a tu logotipo, colores, servicios, fotos y contenido.
+        Submit your logo, colors, services, photos, and content.
        </p>
       </article>
       <article class="process-step">
@@ -936,10 +665,10 @@
         3
        </strong>
        <h3>
-        Revisa el sitio web
+        Review the Website
        </h3>
        <p>
-        Solicita cambios y aprueba el dise&ntilde;o final.
+        Request changes and approve the finished design.
        </p>
       </article>
       <article class="process-step">
@@ -947,10 +676,10 @@
         4
        </strong>
        <h3>
-        Lanza tu sitio
+        Launch Your Site
        </h3>
        <p>
-        Completa el pago y publica tu nuevo sitio web.
+        Complete payment and publish your new website.
        </p>
       </article>
      </div>
@@ -964,53 +693,53 @@
       BAM'S WEBSITE BUILDER
      </h3>
      <p>
-      Sitios profesionales y responsivos creados para ayudar a los peque&ntilde;os negocios a fortalecer su presencia en l&iacute;nea y atraer m&aacute;s clientes.
+      Professional, responsive websites built to help small businesses strengthen their online presence and attract more customers.
      </p>
     </div>
     <div>
      <h4>
-      Enlaces r&aacute;pidos
+      Quick Links
      </h4>
      <div class="footer-links">
-      <a href="/es/services">
-       Servicios
+      <a href="/services">
+       Services
       </a>
-      <a href="/es/prices">
-       Precios
+      <a href="/prices">
+       Prices
       </a>
-      <a href="/es/templates">
-       Plantillas
+      <a href="/templates">
+       Templates
       </a>
-      <a href="/es/portfolio">
-       Portafolio
+      <a href="/portfolio">
+       Portfolio
       </a>
-      <a href="/es/reviews">
-       Rese&ntilde;as
+      <a href="/reviews">
+       Reviews
       </a>
-      <a href="/es/contact">
-       Contacto
+      <a href="/contact">
+       Contact
       </a>
      </div>
     </div>
     <div>
      <h4>
-      Acceso de clientes
+      Client Access
      </h4>
      <div class="footer-links">
-      <a href="/es/login">
-       Iniciar sesi&oacute;n
+      <a href="/login">
+       Login
       </a>
-      <a href="/es/register">
-       Crear cuenta
+      <a href="/register">
+       Create Account
       </a>
-      <a href="/es/forgot-password">
-       Olvid&eacute; mi contrase&ntilde;a
+      <a href="/forgot-password">
+       Forgot Password
       </a>
      </div>
     </div>
     <div>
      <h4>
-      Contacto
+      Contact
      </h4>
      <div class="footer-links">
       <a href="tel:+17274178762">
@@ -1019,32 +748,23 @@
       <a href="mailto:bamswebsitebuilder@gmail.com">
        bamswebsitebuilder@gmail.com
       </a>
-      <a href="/es/contact">
-       Solicitar cotizaci&oacute;n
+      <a href="/contact">
+       Request a Quote
       </a>
-      <a href="/es/">
+      <a href="/es">
        Espa&ntilde;ol
       </a>
      </div>
     </div>
    </div>
-   <div aria-label="Redes sociales de BAM's" class="bam-social-links">
-    <a href="https://www.facebook.com/bamswebsitebuilder" rel="noopener noreferrer" target="_blank">
-     Facebook
-    </a>
-    <a href="https://www.instagram.com/bamswebsitebuilder" rel="noopener noreferrer" target="_blank">
-     Instagram
-    </a>
-   </div>
    <div class="footer-bottom">
-    &copy; 2026 BAM's Website Builder. Todos los derechos reservados.
+    &copy; 2026 BAM's Website Builder. All Rights Reserved.
    </div>
   </footer>
-  <script src="/js/navigation.js?v=102">
+  <script src="/js/navigation.js?v=100">
   </script>
   <script src="/js/templates.js?v=1">
   </script>
-  <script defer="" src="/js/site-upgrades.js?v=1">
-  </script>
  </body>
 </html>
+
