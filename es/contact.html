@@ -3,9 +3,8 @@
  <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" href="/images/favicon-32x32.png" type="image/png" sizes="32x32">
-<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <link rel="icon" href="/images/favicon-32x32.png?v=20260812-3" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=20260812-3">
 <meta content="Contacta a BAM's Website Builder para solicitar una cotizaci&oacute;n gratuita de dise&ntilde;o web profesional." name="description"/>
   <title>
    Contacto | BAM's Website Builder
@@ -433,6 +432,8 @@
       <input name="_subject" type="hidden" value="Nueva solicitud de sitio web"/>
       <input name="_captcha" type="hidden" value="false"/>
       <input name="_template" type="hidden" value="table"/>
+      <input id="paypal-subscription-id" name="PayPal Subscription ID" type="hidden" value=""/>
+      <input id="paypal-subscription-status" name="PayPal Subscription Status" type="hidden" value=""/>
       <div class="subscription-contact-box" id="subscription-interest">
        <h2>
         &iquest;Prefieres pagar mensualmente?
@@ -761,7 +762,11 @@
     var packageKey = params.get('package');
     var payment = params.get('payment');
     var plan = (params.get('plan') || '').toLowerCase();
+    var subscribed = (params.get('subscribed') || '').toLowerCase();
+    var subscriptionId = (params.get('subscription_id') || '').trim();
     var paymentOption = document.getElementById('payment-option');
+    var subscriptionIdField = document.getElementById('paypal-subscription-id');
+    var subscriptionStatusField = document.getElementById('paypal-subscription-status');
     var templateSelect = document.getElementById('website-template');
     var packageSelect = document.getElementById('package');
     var message = document.getElementById('message');
@@ -778,6 +783,13 @@
     };
     if (plan && paymentOption && monthlyValues[plan]) {
         paymentOption.value = monthlyValues[plan];
+    }
+    if (subscribed === 'yes') {
+        if (subscriptionIdField) subscriptionIdField.value = subscriptionId;
+        if (subscriptionStatusField) subscriptionStatusField.value = 'Approved';
+        if (message && !message.value) {
+            message.value = 'Mi suscripci&oacute;n de PayPal fue aprobada. Estos son los detalles de mi proyecto:';
+        }
     }
 
     if (template && templateSelect) {
