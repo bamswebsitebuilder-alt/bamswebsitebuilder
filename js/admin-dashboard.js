@@ -1701,6 +1701,12 @@ onAuthStateChanged(
       return;
     }
 
+    if (!user.emailVerified) {
+      await signOut(auth);
+      window.location.replace("login.html?verify=1");
+      return;
+    }
+
     try {
       const profileSnapshot = await getDoc(
         doc(db, "users", user.uid)

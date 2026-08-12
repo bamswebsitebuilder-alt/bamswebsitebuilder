@@ -7,6 +7,7 @@ import {
   sendEmailVerification,
   sendPasswordResetEmail,
   setPersistence,
+  signOut,
   signInWithEmailAndPassword,
   updateProfile
 } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
@@ -115,6 +116,15 @@ if (loginForm) {
   const rememberInput = loginForm.querySelector('input[name="remember"]');
   const alert = document.getElementById("login-alert");
   const submit = document.getElementById("login-submit");
+  const pageParams = new URLSearchParams(window.location.search);
+
+  if (pageParams.get("verify") === "1") {
+    setAlert(
+      alert,
+      "Check your email and verify your account before signing in.",
+      true
+    );
+  }
 
   loginForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -140,6 +150,17 @@ if (loginForm) {
         emailInput.value.trim(),
         passwordInput.value
       );
+
+      if (!credential.user.emailVerified) {
+        await sendEmailVerification(credential.user).catch(() => {});
+        await signOut(auth);
+        setAlert(
+          alert,
+          "Please verify your email before continuing. We sent you a new verification link."
+        );
+        setBusy(submit, false);
+        return;
+      }
 
       await redirectAfterLogin(credential.user);
     } catch (error) {
@@ -212,7 +233,15 @@ if (registerForm) {
       );
 
       await sendEmailVerification(credential.user);
-      window.location.replace("client-portal.html?registered=1");
+      await signOut(auth);
+
+      const loginPath = document.documentElement.lang
+        .toLowerCase()
+        .startsWith("es")
+          ? "/es/login?verify=1"
+          : "/login?verify=1";
+
+      window.location.replace(loginPath);
     } catch (error) {
       setAlert(alert, friendlyAuthError(error));
       setBusy(submit, false);

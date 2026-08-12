@@ -884,6 +884,12 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
+  if (!user.emailVerified) {
+    await signOut(auth);
+    window.location.replace("login.html?verify=1");
+    return;
+  }
+
   currentUser = user;
 
   try {
