@@ -1,0 +1,22 @@
+.about-page{background:var(--bam-black,#0b0b0a);color:var(--bam-ivory,#f7f4ec)}
+.about-hero{padding:clamp(72px,9vw,130px) clamp(20px,5vw,72px);background:radial-gradient(circle at 75% 20%,rgba(216,169,40,.16),transparent 36%),#0b0b0a}
+.about-wrap{width:min(1180px,100%);margin:auto}
+.about-grid{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(38px,7vw,88px);align-items:center}
+.about-portrait{position:relative;max-width:510px;margin:auto}
+.about-portrait::before{content:none}
+.about-portrait img{position:relative;z-index:1;display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 30%;border:1px solid rgba(216,169,40,.38);border-radius:24px;box-shadow:0 24px 70px rgba(0,0,0,.42)}
+.about-kicker{margin:0 0 14px;color:#f0c75e;font-size:.78rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.about-copy h1{margin:0;font-size:clamp(2.5rem,6vw,5rem);line-height:1.02;letter-spacing:-.035em}
+.about-role{margin:16px 0 28px;color:#f0c75e;font-size:clamp(1rem,2vw,1.25rem);font-weight:700}
+.about-copy p{max-width:720px;margin:0 0 18px;color:#c6c2b9;font-size:1.03rem;line-height:1.82}
+.about-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.about-button{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:13px 22px;border-radius:10px;background:#d8a928;color:#0b0b0a;text-decoration:none;font-weight:800}
+.about-button-secondary{background:transparent;color:#f7f4ec;border:1px solid rgba(216,169,40,.45)}
+.about-values{padding:clamp(64px,8vw,100px) clamp(20px,5vw,72px);background:#171612}
+.about-values h2{text-align:center;margin:0 0 38px;font-size:clamp(2rem,4vw,3rem)}
+.about-value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.about-value{padding:28px;border:1px solid rgba(216,169,40,.25);border-radius:18px;background:#0f0f0d}
+.about-value span{display:grid;width:44px;height:44px;place-items:center;margin-bottom:18px;border-radius:12px;background:rgba(216,169,40,.12);color:#f0c75e;font-weight:900}
+.about-value h3{margin:0 0 10px}.about-value p{margin:0;color:#aaa79f;line-height:1.7}
+@media(max-width:800px){.about-grid{grid-template-columns:1fr}.about-copy{text-align:center}.about-copy p{margin-inline:auto}.about-actions{justify-content:center}.about-portrait{width:min(86vw,440px)}.about-value-grid{grid-template-columns:1fr}}
+@media(max-width:520px){.about-actions{flex-direction:column}.about-button{width:100%}}
