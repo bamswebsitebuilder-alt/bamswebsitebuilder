@@ -1,11 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
 <symbol id="home" viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5v8a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+<symbol id="about" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/></symbol>
 <symbol id="services" viewBox="0 0 24 24"><path d="M8 3h8v4H8zM4 9h16v12H4zM8 13h8M8 17h5"/></symbol>
 <symbol id="prices" viewBox="0 0 24 24"><path d="M12 2v20M16 6.5c-1-1-2.2-1.5-4-1.5-2.2 0-4 1.2-4 3s1.5 2.6 4 3c2.5.4 4 1.2 4 3s-1.8 3-4 3c-1.8 0-3.3-.6-4.5-1.8"/></symbol>
 <symbol id="templates" viewBox="0 0 24 24"><rect x="3" y="4" width="8" height="7" rx="1.5"/><rect x="13" y="4" width="8" height="7" rx="1.5"/><rect x="3" y="13" width="8" height="7" rx="1.5"/><rect x="13" y="13" width="8" height="7" rx="1.5"/></symbol>
+<symbol id="plans" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 9v11"/></symbol>
 <symbol id="portfolio" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="15" rx="2"/><path d="M8 5V3h8v2M3 11h18"/></symbol>
 <symbol id="reviews" viewBox="0 0 24 24"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></symbol>
 <symbol id="contact" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></symbol>
 <symbol id="login" viewBox="0 0 24 24"><path d="M10 4H5v16h5M14 8l4 4-4 4M8 12h10"/></symbol>
 <symbol id="globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></symbol>
+<symbol id="custom-design" viewBox="0 0 24 24"><path d="m12 3 1.3 3.7L17 8l-3.7 1.3L12 13l-1.3-3.7L7 8l3.7-1.3zM18.5 14l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8zM5.5 13l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></symbol>
+<symbol id="mobile" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M10 5h4M11 18.5h2"/></symbol>
+<symbol id="speed" viewBox="0 0 24 24"><path d="M4 16a8 8 0 1 1 16 0M12 16l4-5M7 19h10"/></symbol>
+<symbol id="search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></symbol>
+<symbol id="maintenance" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5M18.5 12A6.5 6.5 0 0 0 7 7.8L4 12M5.5 12A6.5 6.5 0 0 0 17 16.2l3-4.2"/></symbol>
+<symbol id="business" viewBox="0 0 24 24"><path d="m4 13 5 5L20 7"/></symbol>
+<symbol id="website" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/></symbol>
+<symbol id="clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="phone" viewBox="0 0 24 24"><path d="M7.5 3.5 10 8 8.2 9.8a15 15 0 0 0 6 6L16 14l4.5 2.5-.8 3.2a2 2 0 0 1-2.2 1.5A17.8 17.8 0 0 1 2.8 6.5a2 2 0 0 1 1.5-2.2z"/></symbol>
 </svg>
