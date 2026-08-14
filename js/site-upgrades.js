@@ -64,6 +64,17 @@
     });
   }
 
+  const homePortfolioGrid = document.querySelector('.portfolio-preview');
+  if (homePortfolioGrid && !homePortfolioGrid.querySelector('[data-bam-new-demo]')) {
+    demos.forEach((demo) => {
+      const card = document.createElement('article');
+      card.className = 'home-card portfolio-home-card';
+      card.dataset.bamNewDemo = 'true';
+      card.innerHTML = `<div class="portfolio-home-visual"><img alt="${demo.name} ${spanish?'vista previa':'website preview'}" loading="lazy" src="${demo.image}"></div><div class="portfolio-home-content"><span class="project-status-label">${spanish?'Concepto de demostración':'Demo Concept'}</span><span class="portfolio-type">${demo.type}</span><h3>${demo.name}</h3><p>${spanish?'Un concepto profesional y adaptable diseñado para presentar servicios claramente y generar consultas.':'A polished, responsive concept designed to present services clearly and generate inquiries.'}</p><a class="home-link" href="${demo.href}" rel="noopener noreferrer" target="_blank">${spanish?'Ver demo':'View Demo'} →</a></div>`;
+      homePortfolioGrid.append(card);
+    });
+  }
+
   const homePath = (location.pathname.replace(/\/$/, '') || '/').replace(/\.html$/, '');
   if ((homePath === '/' || homePath.endsWith('/home') || homePath === '/es') && !document.querySelector('.founder-preview')) {
     const hero = document.querySelector('.hero');
