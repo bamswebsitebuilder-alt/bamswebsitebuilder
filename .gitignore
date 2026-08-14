@@ -1,0 +1,33 @@
+# OS and editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Dependency and tool caches
+node_modules/
+.cache/
+coverage/
+
+# Logs, temporary files, and backups
+*.log
+*.tmp
+*.bak
+*.old
+*.orig
+
+# Local archives and deployment bundles
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
