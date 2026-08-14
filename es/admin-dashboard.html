@@ -1,10 +1,731 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin Dashboard | Velocity Drive Rentals</title><link rel="stylesheet" href="css/style.css"></head><body><header class="site-header"><div class="container header-inner">
-<a class="brand" href="./"><span class="brand-mark">VD</span><span>VELOCITY DRIVE<small>RENTALS</small></span></a>
-<button class="menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
-<nav class="nav"><a href="./">Home</a><a href="fleet">Fleet</a><a href="pricing">Pricing</a><a href="locations">Locations</a><a href="about">About</a><a href="contact">Contact</a><a href="customer-portal">Portal</a><button class="theme-toggle" aria-label="Change theme">☾</button><a class="btn btn-primary" href="booking">Reserve Now</a></nav>
-</div></header><main><section class="page-hero"><div class="container"><p class="eyebrow">Admin dashboard concept</p><h1>Manage your rental business.</h1></div></section><section class="section"><div class="container"><div class="stats"><div class="card stat"><span>Active rentals</span><strong>18</strong></div><div class="card stat"><span>Available vehicles</span><strong>42</strong></div><div class="card stat"><span>Today's revenue</span><strong>$3,840</strong></div><div class="card stat"><span>Reservations</span><strong>27</strong></div></div><div class="grid grid-2" style="margin-top:20px"><div class="card form-card"><h2>Recent reservations</h2><p class="section-copy">Demo dashboard content ready to connect to Firebase or another backend.</p></div><div class="card form-card"><h2>Fleet status</h2><p class="section-copy">Track available, rented, cleaning, and maintenance statuses.</p></div></div></div></section></main><footer class="site-footer"><div class="container footer-grid">
-<div><h3>Velocity Drive Rentals</h3><p class="section-copy">Premium vehicles, transparent pricing, and elevated service for every journey.</p></div>
-<div><strong>Company</strong><a href="about">About Us</a><a href="locations">Locations</a><a href="contact">Contact</a></div>
-<div><strong>Rentals</strong><a href="fleet">Our Fleet</a><a href="pricing">Pricing</a><a href="booking">Reserve</a></div>
-<div><strong>Account</strong><a href="customer-portal">Customer Portal</a><a href="admin-dashboard">Admin Demo</a><a href="es/">Español</a></div>
-</div></footer><script src="js/script.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <link rel="icon" href="/images/favicon-32x32.png?v=20260812-3" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=20260812-3">
+<meta content="Panel de administraci&oacute;n de BAM's Website Builder." name="description"/>
+  <title>
+   Panel de administraci&oacute;n | BAM's Website Builder
+  </title>
+  <link href="/css/style.css?v=20260810-1" rel="stylesheet"/>
+  <link href="/css/admin-dashboard.css?v=20260810-1" rel="stylesheet"/>
+  <link href="/css/admin-messages.css?v=20260810-1" rel="stylesheet"/>
+  <link href="/css/animations.css?v=20260810-1" rel="stylesheet"/>
+  <link href="/css/footer-fix.css?v=20260810-1" rel="stylesheet"/>
+  <link href="/css/site-upgrades.css?v=3" rel="stylesheet"/>
+  <link href="https://bamswebsitebuilder.com/es/admin-dashboard" rel="canonical"/>
+  <link href="https://bamswebsitebuilder.com/admin-dashboard" hreflang="en" rel="alternate"/>
+  <link href="https://bamswebsitebuilder.com/es/admin-dashboard" hreflang="es" rel="alternate"/>
+  <style id="bam-spanish-consistency">
+   /* BAM Spanish consistency fix */
+.site-brand,
+.mobile-menu-brand {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  text-decoration: none;
+  min-width: 0;
+}
+.site-header-logo {
+  display: block;
+  width: 190px;
+  max-width: 21vw;
+  height: 58px;
+  object-fit: contain;
+  object-position: left center;
+}
+.mobile-header-logo {
+  display: block;
+  width: 205px;
+  max-width: 68vw;
+  height: 68px;
+  object-fit: contain;
+  object-position: left center;
+}
+.header-container { min-width: 0; }
+.desktop-navigation { min-width: 0; }
+.desktop-language {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 9px;
+  margin-left: 18px;
+  padding-left: 14px;
+  border-left: 1px solid rgba(244,193,93,.32);
+  white-space: nowrap;
+}
+.desktop-language a,
+.desktop-language span { display:inline-block; white-space:nowrap; }
+@media (min-width:1181px) {
+  html[lang="es"] .header-container { gap:12px; padding-inline:clamp(18px,2.2vw,36px); }
+  html[lang="es"] .site-header-logo { width:160px; max-width:17vw; }
+  html[lang="es"] .desktop-navigation { gap:clamp(7px,.65vw,12px); margin-left:auto; }
+  html[lang="es"] .desktop-navigation a { font-size:clamp(.56rem,.58vw,.65rem); letter-spacing:.035em; }
+  html[lang="es"] .desktop-language { margin-left:7px; padding-left:10px; gap:6px; }
+  html[lang="es"] .desktop-language a { font-size:.65rem; }
+}
+@media (min-width:901px) and (max-width:1180px) {
+  html[lang="es"] .desktop-navigation,
+  html[lang="es"] .desktop-language { display:none !important; }
+  html[lang="es"] .menu-toggle { display:flex !important; }
+  html[lang="es"] .mobile-menu { display:flex; }
+  html[lang="es"] .menu-overlay { display:block; }
+}
+@media (max-width:900px) {
+  .desktop-navigation,.desktop-language { display:none !important; }
+  .menu-toggle { display:flex !important; }
+  .site-header-logo { width:155px; max-width:52vw; height:52px; }
+}
+  </style>
+ </head>
+ <body class="admin-dashboard-page">
+  <header class="admin-header">
+   <button aria-controls="admin-sidebar" aria-expanded="false" aria-label="Abrir men&uacute; de administraci&oacute;n" class="admin-menu-toggle" id="admin-menu-toggle" type="button">
+    <span>
+    </span>
+    <span>
+    </span>
+    <span>
+    </span>
+   </button>
+   <a aria-label="Inicio de BAM's Website Builder" class="admin-brand" href="/es/">
+    <img alt="BAM's Website Builder" src="/images/logo-header.jpg" style="display:block;width:170px;max-width:36vw;height:52px;object-fit:contain;object-position:left center;"/>
+   </a>
+   <div class="admin-header-actions">
+    <span id="admin-email">
+     Cargando...
+    </span>
+    <a class="admin-header-link" href="/es/client-portal">
+     Portal del cliente
+    </a>
+    <button id="admin-logout" type="button">
+     Cerrar sesi&oacute;n
+    </button>
+   </div>
+  </header>
+  <div class="admin-shell">
+   <aside aria-hidden="false" class="admin-sidebar" id="admin-sidebar">
+    <p class="admin-sidebar-label">
+     MEN&Uacute; DE ADMINISTRACI&Oacute;N
+    </p>
+    <nav aria-label="Admin navigation" class="admin-nav">
+     <button class="admin-nav-button active" data-panel="overview" type="button">
+      Resumen
+     </button>
+     <button class="admin-nav-button" data-panel="clients" type="button">
+      Clientes
+     </button>
+     <button class="admin-nav-button" data-panel="projects" type="button">
+      Proyectos
+     </button>
+     <button class="admin-nav-button" data-panel="subscriptions" type="button">
+      Suscripciones
+     </button>
+     <button class="admin-nav-button" data-panel="invoices" type="button">
+      Facturas
+     </button>
+     <button class="admin-nav-button" data-panel="files" type="button">
+      Archivos
+     </button>
+     <button class="admin-nav-button" data-panel="messages" type="button">
+      Mensajes
+      <span class="admin-nav-count" hidden="" id="message-count">
+       0
+      </span>
+     </button>
+     <button class="admin-nav-button" data-panel="notifications" type="button">
+      Notificaciones
+      <span class="admin-nav-count" hidden="" id="notification-count">
+       0
+      </span>
+     </button>
+    </nav>
+   </aside>
+   <button aria-label="Cerrar men&uacute; de administraci&oacute;n" class="admin-sidebar-overlay" hidden="" id="admin-sidebar-overlay" type="button">
+   </button>
+   <main class="admin-content" id="main-content">
+    <section class="admin-panel active" id="overview">
+     <div class="admin-page-heading">
+      <p class="admin-kicker">
+       PANEL
+      </p>
+      <h1>
+       Admin Resumen
+      </h1>
+      <p>
+       Administra clientes, proyectos, facturas, archivos y actividad reciente.
+      </p>
+     </div>
+     <div class="admin-stat-grid">
+      <article class="admin-stat-card">
+       <span>
+        Total Clientes
+       </span>
+       <strong id="stat-clients">
+        0
+       </strong>
+      </article>
+      <article class="admin-stat-card">
+       <span>
+        Facturas pendientes
+       </span>
+       <strong id="stat-unpaid">
+        0
+       </strong>
+      </article>
+      <article class="admin-stat-card">
+       <span>
+        Facturas pagadas
+       </span>
+       <strong id="stat-paid">
+        0
+       </strong>
+      </article>
+      <article class="admin-stat-card">
+       <span>
+        Saldo pendiente
+       </span>
+       <strong id="stat-balance">
+        $0.00
+       </strong>
+      </article>
+     </div>
+     <article class="admin-card">
+      <div class="admin-card-heading">
+       <div>
+        <p class="admin-kicker">
+         ACCIONES R&Aacute;PIDAS
+        </p>
+        <h2>
+         Administra tu negocio
+        </h2>
+       </div>
+      </div>
+      <div class="admin-action-row">
+       <button class="admin-primary-button" data-open-panel="clients" type="button">
+        Agregar cliente
+       </button>
+       <button class="admin-secondary-button" data-open-panel="projects" type="button">
+        Actualizar proyecto
+       </button>
+       <button class="admin-secondary-button" data-open-panel="invoices" type="button">
+        Crear factura
+       </button>
+       <button class="admin-secondary-button" data-open-panel="files" type="button">
+        Subir archivo
+       </button>
+       <button class="admin-secondary-button" data-open-panel="messages" type="button">
+        Enviar mensaje
+       </button>
+      </div>
+     </article>
+    </section>
+    <section class="admin-panel" id="clients">
+     <div class="admin-page-heading">
+      <p class="admin-kicker">
+       CLIENTES
+      </p>
+      <h1>
+       Administraci&oacute;n de clientes
+      </h1>
+      <p>
+       Agrega perfiles de clientes y revisa las cuentas registradas.
+      </p>
+     </div>
+     <article class="admin-card">
+      <div class="admin-card-heading">
+       <h2>
+        Agregar o actualizar cliente
+       </h2>
+      </div>
+      <form id="client-form">
+       <div class="admin-form-grid">
+        <div class="admin-field">
+         <label for="client-uid">
+          Firebase UID
+         </label>
+         <input id="client-uid" required="" type="text"/>
+        </div>
+        <div class="admin-field">
+         <label for="client-name">
+          Nombre completo
+         </label>
+         <input id="client-name" required="" type="text"/>
+        </div>
+        <div class="admin-field">
+         <label for="client-email">
+          Correo electr&oacute;nico
+         </label>
+         <input id="client-email" required="" type="email"/>
+        </div>
+        <div class="admin-field">
+         <label for="client-business">
+          Nombre del negocio
+         </label>
+         <input id="client-business" type="text"/>
+        </div>
+        <div class="admin-field">
+         <label for="client-phone">
+          N&uacute;mero de tel&eacute;fono
+         </label>
+         <input id="client-phone" type="tel"/>
+        </div>
+       </div>
+       <div class="admin-form-actions">
+        <p class="admin-status" hidden="" id="client-form-status">
+        </p>
+        <button class="admin-primary-button" type="submit">
+         Save Client
+        </button>
+       </div>
+      </form>
+     </article>
+     <article class="admin-card">
+      <div class="admin-card-heading">
+       <h2>
+        Registered Clientes
+       </h2>
+      </div>
+      <div class="admin-list" id="client-list">
+       <p class="admin-status">
+        Cargando clientes...
+       </p>
+      </div>
+     </article>
+    </section>
+    <section class="admin-panel" id="projects">
+     <div class="admin-page-heading">
+      <p class="admin-kicker">
+       PROYECTOS
+      </p>
+      <h1>
+       Seguimiento de proyectos
+      </h1>
+      <p>
+       Assign projects and keep clients updated on progress.
+      </p>
+     </div>
+     <article class="admin-card">
+      <div class="admin-card-heading">
+       <h2>
+        Create or Actualizar proyecto
+       </h2>
+      </div>
+      <form id="project-form">
+       <div class="admin-form-grid">
+        <div class="admin-field">
+         <label for="project-client">
+          Elegir cliente
+         </label>
+         <select id="project-client" required="">
+          <option value="">
+           Elige un cliente
+          </option>
+         </select>
+        </div>
+        <div class="admin-field">
+         <label for="project-title">
+          Project Name
+         </label>
+         <input id="project-title" required="" type="text"/>
+        </div>
+        <div class="admin-field">
+         <label for="project-stage">
+          Current Stage
+         </label>
+         <select id="project-stage">
+          <option value="Planning">
+           Planning
+          </option>
+          <option value="Design">
+           Design
+          </option>
+          <option value="Development">
+           Development
+          </option>
+          <option value="Review">
+           Review
+          </option>
+          <option value="Launch">
+           Launch
+          </option>
+          <option value="Maintenance">
+           Maintenance
+          </option>
+         </select>
+        </div>
+        <div class="admin-field">
+         <label for="project-status">
+          Status
+         </label>
+         <select id="project-status">
+          <option value="Not Started">
+           Not Started
+          </option>
+          <option selected="" value="In Progress">
+           In Progress
+          </option>
+          <option value="Waiting on Client">
+           Waiting on Client
+          </option>
+          <option value="Completed">
+           Completed
+          </option>
+          <option value="On Hold">
+           On Hold
+          </option>
+         </select>
+        </div>
+        <div class="admin-field">
+         <label for="project-start-date">
+          Start Date
+         </label>
+         <input id="project-start-date" type="date"/>
+        </div>
+        <div class="admin-field">
+         <label for="project-due-date">
+          Estimated Completion
+         </label>
+         <input id="project-due-date" type="date"/>
+        </div>
+        <div class="admin-field admin-field-full">
+         <label for="project-progress">
+          Progress:
+          <span id="project-progress-value">
+           0%
+          </span>
+         </label>
+         <input id="project-progress" max="100" min="0" type="range" value="0"/>
+        </div>
+        <div class="admin-field admin-field-full">
+         <label for="project-update">
+          Current Update
+         </label>
+         <textarea id="project-update" rows="4"></textarea>
+        </div>
+        <div class="admin-field">
+         <label for="project-completed">
+          Completed Tasks
+         </label>
+         <textarea id="project-completed" placeholder="Enter one task per line" rows="5"></textarea>
+        </div>
+        <div class="admin-field">
+         <label for="project-upcoming">
+          Upcoming Tasks
+         </label>
+         <textarea id="project-upcoming" placeholder="Enter one task per line" rows="5"></textarea>
+        </div>
+        <div class="admin-field admin-field-full">
+         <label for="project-live-url">
+          Live Website URL
+         </label>
+         <input id="project-live-url" placeholder="https://example.com" type="url"/>
+        </div>
+       </div>
+       <div class="admin-form-actions">
+        <p class="admin-status" hidden="" id="project-form-status">
+        </p>
+        <button class="admin-primary-button" type="submit">
+         Save Project
+        </button>
+       </div>
+      </form>
+     </article>
+     <article class="admin-card">
+      <div class="admin-card-heading">
+       <h2>
+        Current Proyectos
+       </h2>
+      </div>
+      <div class="admin-list" id="project-list">
+       <p class="admin-status">
+        Loading projects...
+       </p>
+      </div>
+     </article>
+    </section>
+    <section class="admin-panel" id="subscriptions">
+     <div class="admin-page-heading">
+      <p class="admin-kicker">
+       STRIPE
+      </p>
+      <h1>
+       Administraci&oacute;n de suscripciones
+      </h1>
+      <p>
+       Planes Inicial $20.83/mes, Empresarial $41.67/mes y Premium $70.83/mes. Los botones p&uacute;blicos est&aacute;n conectados a los planes de suscripci&oacute;n de PayPal.
+      </p>
+     </div>
+     <article class="admin-card">
+      <div class="admin-card-heading">
+       <h2>
+        Planes Web
+       </h2>
+      </div>
+      <div class="admin-list">
+       <p>
+        PayPal es el proveedor de pagos para los planes web de BAM's.
+       </p>
+       <p>
+        <a href="/es/subscriptions">
+         Abrir la p&aacute;gina p&uacute;blica de Planes Web
+        </a>
+       </p>
+      </div>
+     </article>
+    </section>
+    <section class="admin-panel" id="invoices">
+     <div class="admin-page-heading">
+      <p class="admin-kicker">
+       FACTURAS
+      </p>
+      <h1>
+       Administraci&oacute;n de facturas
+      </h1>
+      <p>
+       Create invoices and track payment status.
+      </p>
+     </div>
+     <article class="admin-card">
+      <div class="admin-card-heading">
+       <h2>
+        Crear factura
+       </h2>
+      </div>
+      <form id="invoice-form">
+       <div class="admin-form-grid">
+        <div class="admin-field">
+         <label for="invoice-client">
+          Elegir cliente
+         </label>
+         <select id="invoice-client" required="">
+          <option value="">
+           Elige un cliente
+          </option>
+         </select>
+        </div>
+        <div class="admin-field">
+         <label for="invoice-number">
+          Invoice Number
+         </label>
+         <input id="invoice-number" required="" type="text"/>
+        </div>
+        <div class="admin-field">
+         <label for="invoice-amount">
+          Amount
+         </label>
+         <input id="invoice-amount" min="0.01" required="" step="0.01" type="number"/>
+        </div>
+        <div class="admin-field">
+         <label for="invoice-due-date">
+          Due Date
+         </label>
+         <input id="invoice-due-date" required="" type="date"/>
+        </div>
+        <div class="admin-field admin-field-full">
+         <label for="invoice-description">
+          Description
+         </label>
+         <textarea id="invoice-description" rows="4"></textarea>
+        </div>
+        <div class="admin-field admin-field-full">
+         <label for="invoice-pdf-url">
+          Invoice PDF URL
+         </label>
+         <input id="invoice-pdf-url" placeholder="https://example.com/invoice.pdf" type="url"/>
+        </div>
+       </div>
+       <div class="admin-form-actions">
+        <p class="admin-status" hidden="" id="invoice-form-status">
+        </p>
+        <button class="admin-primary-button" type="submit">
+         Crear factura
+        </button>
+       </div>
+      </form>
+     </article>
+     <article class="admin-card">
+      <div class="admin-card-heading">
+       <h2>
+        Historial de facturas
+       </h2>
+      </div>
+      <div class="admin-list" id="invoice-list">
+       <p class="admin-status">
+        Cargando facturas...
+       </p>
+      </div>
+     </article>
+    </section>
+    <section class="admin-panel" id="files">
+     <div class="admin-page-heading">
+      <p class="admin-kicker">
+       ARCHIVOS
+      </p>
+      <h1>
+       Archivos de clientes
+      </h1>
+      <p>
+       Sube documentos y archivos de proyecto directamente a la cuenta de un cliente.
+      </p>
+     </div>
+     <article class="admin-card">
+      <div class="admin-card-heading">
+       <h2>
+        Subir archivo
+       </h2>
+      </div>
+      <form id="admin-file-form">
+       <div class="admin-form-grid">
+        <div class="admin-field">
+         <label for="file-client">
+          Elegir cliente
+         </label>
+         <select id="file-client" required="">
+          <option value="">
+           Elige un cliente
+          </option>
+         </select>
+        </div>
+        <div class="admin-field">
+         <label for="admin-file-input">
+          Elegir archivo
+         </label>
+         <input id="admin-file-input" required="" type="file"/>
+         <small>
+          Tama&ntilde;o m&aacute;ximo de archivo: 15 MB.
+         </small>
+        </div>
+       </div>
+       <progress hidden="" id="admin-upload-progress" max="100" value="0">
+       </progress>
+       <div class="admin-form-actions">
+        <p class="admin-status" hidden="" id="file-form-status">
+        </p>
+        <button class="admin-primary-button" type="submit">
+         Subir archivo
+        </button>
+       </div>
+      </form>
+     </article>
+    </section>
+    <section class="admin-panel" id="messages">
+     <div class="admin-page-heading">
+      <p class="admin-kicker">
+       MENSAJES
+      </p>
+      <h1>
+       Mensajer&iacute;a con clientes
+      </h1>
+      <p>
+       Env&iacute;a y recibe mensajes con tus clientes en tiempo real.
+      </p>
+     </div>
+     <div class="message-layout">
+      <aside class="message-sidebar admin-card">
+       <div class="message-sidebar-header">
+        <h2>
+         Conversaciones
+        </h2>
+        <input aria-label="Buscar clientes" id="message-client-search" placeholder="Buscar clientes" type="search"/>
+       </div>
+       <div class="message-client-list" id="message-client-list">
+        <p class="admin-status">
+         Cargando clientes...
+        </p>
+       </div>
+      </aside>
+      <section aria-label="Selected conversation" class="message-chat admin-card">
+       <div class="message-chat-header">
+        <div>
+         <p class="admin-kicker">
+          CONVERSACI&Oacute;N
+         </p>
+         <h2 id="message-chat-name">
+          Elige un cliente
+         </h2>
+         <p class="admin-status" id="message-chat-email">
+          Selecciona un cliente para ver la conversaci&oacute;n.
+         </p>
+        </div>
+       </div>
+       <div aria-live="polite" class="message-thread" id="message-thread">
+        <div class="message-empty-state">
+         <h3>
+          No hay una conversaci&oacute;n seleccionada
+         </h3>
+         <p>
+          Elige un cliente de la lista para comenzar a enviar mensajes.
+         </p>
+        </div>
+       </div>
+       <form class="message-composer" id="message-form">
+        <label class="sr-only" for="message-text">
+         Mensaje
+        </label>
+        <textarea disabled="" id="message-text" maxlength="2000" placeholder="Escribe tu mensaje..." required="" rows="2"></textarea>
+        <div class="message-composer-actions">
+         <p class="admin-status" hidden="" id="message-status">
+         </p>
+         <button class="admin-primary-button" disabled="" id="message-send-button" type="submit">
+          Enviar mensaje
+         </button>
+        </div>
+       </form>
+      </section>
+     </div>
+    </section>
+    <section class="admin-panel" id="notifications">
+     <div class="admin-page-heading">
+      <p class="admin-kicker">
+       NOTIFICACIONES
+      </p>
+      <h1>
+       Actividad reciente
+      </h1>
+      <p>
+       Revisa la actividad de clientes, proyectos y facturas.
+      </p>
+     </div>
+     <article class="admin-card">
+      <div class="admin-card-heading">
+       <div>
+        <h2>
+         Notificaciones del navegador
+        </h2>
+        <p class="admin-status" id="notification-status">
+         Activa las notificaciones para recibir actualizaciones en este dispositivo.
+        </p>
+       </div>
+       <button class="admin-secondary-button" id="enable-browser-notifications" type="button">
+        Enable Notificaciones
+       </button>
+      </div>
+     </article>
+     <article class="admin-card">
+      <div class="admin-card-heading">
+       <h2>
+        Activity Feed
+       </h2>
+      </div>
+      <div class="admin-list" id="notification-list">
+       <p class="admin-status">
+        Loading activity...
+       </p>
+      </div>
+     </article>
+    </section>
+   </main>
+  </div>
+  <script src="/js/admin-dashboard.js?v=109" type="module">
+  </script>
+  <script src="/js/admin-messages.js?v=1" type="module">
+  </script>
+  <script src="/js/animations.js?v=1">
+  </script>
+  <script defer="" src="/js/site-upgrades.js?v=1">
+  </script>
+ </body>
+</html>
