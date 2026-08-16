@@ -12,8 +12,28 @@
 <header class="booking-header">
   <a class="booking-brand" href="/" aria-label="BAM's Website Builder home"><strong>BAM'S</strong><span>WEBSITE BUILDER</span></a>
   <nav aria-label="Booking navigation"><a href="/">Home</a><a href="/services">Services</a><a href="/portfolio">Portfolio</a><a href="/prices">Pricing</a><a href="/reviews">Reviews</a><a href="/contact">Contact</a></nav>
-  <a class="header-book" href="#booking"><span aria-hidden="true">▣</span> Book a Call</a>
+  <a class="header-book" href="#booking"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 3v3M17 3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z"/><path d="m9 15 2 2 4-5"/></svg> Book a Call</a>
+  <button class="booking-menu-toggle" id="booking-menu-toggle" type="button" aria-label="Open navigation menu" aria-controls="booking-mobile-menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </header>
+<div class="booking-menu-overlay" id="booking-menu-overlay"></div>
+<aside class="booking-mobile-menu" id="booking-mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
+  <div class="booking-mobile-top">
+    <a class="booking-brand" href="/"><strong>BAM'S</strong><span>WEBSITE BUILDER</span></a>
+    <button class="booking-menu-close" id="booking-menu-close" type="button" aria-label="Close navigation menu"><span></span><span></span></button>
+  </div>
+  <nav class="booking-mobile-links">
+    <a href="/services"><span class="drawer-icon">▤</span><strong>Services</strong></a>
+    <a href="/prices"><span class="drawer-icon">$</span><strong>Prices</strong></a>
+    <a href="/subscriptions"><span class="drawer-icon">▣</span><strong>Website Plans</strong></a>
+    <a href="/templates"><span class="drawer-icon">▦</span><strong>Templates</strong></a>
+    <a href="/portfolio"><span class="drawer-icon">▱</span><strong>Portfolio</strong></a>
+    <a href="/reviews"><span class="drawer-icon">☆</span><strong>Reviews</strong></a>
+    <a href="/contact"><span class="drawer-icon">✉</span><strong>Contact</strong></a>
+    <a class="active" href="/booking.html"><span class="drawer-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 3v3M17 3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z"/><path d="m9 15 2 2 4-5"/></svg></span><strong>Book a Call</strong></a>
+    <a href="/login"><span class="drawer-icon">↪</span><strong>Login</strong></a>
+  </nav>
+  <div class="booking-mobile-language"><p>LANGUAGE</p><div><a class="active" href="/booking.html">English</a><a href="/es">Español</a></div></div>
+</aside>
 
 <main>
   <section class="booking-hero">
