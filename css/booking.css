@@ -107,3 +107,9 @@
 .summary-logo{display:grid;place-items:center;width:64px;height:52px;padding:3px;overflow:hidden;background:#050505;border-radius:3px}
 .summary-logo img{display:block;width:100%;height:100%;object-fit:contain;object-position:center}
 @media(max-width:650px){.summary-logo{width:72px;height:60px;padding:4px}}
+
+/* Booking page language switch */
+.booking-language-switcher{display:flex;align-items:center;gap:7px;margin-left:10px;color:#777;font-size:.68rem;font-weight:800;letter-spacing:.08em}
+.booking-language-switcher a{color:#aaa;text-decoration:none}
+.booking-language-switcher a:hover,.booking-language-switcher a.active{color:var(--gold-light)}
+@media(max-width:650px){.booking-language-switcher{display:none}}
