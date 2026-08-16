@@ -90,3 +90,15 @@
  .booking-drawer-brand span{font-size:.58rem!important;letter-spacing:.14em!important}
  .booking-mobile-menu{padding-inline:18px}
 }
+
+/* Match the closed booking header logo to the horizontal drawer lockup */
+@media(max-width:650px){
+ .booking-header>.booking-brand{display:inline-flex!important;flex-direction:row!important;align-items:baseline!important;gap:10px!important;min-width:0!important;white-space:nowrap!important}
+ .booking-header>.booking-brand strong{display:inline!important;margin:0!important;color:var(--gold-light)!important;font-family:Georgia,"Times New Roman",serif!important;font-size:1.55rem!important;line-height:1!important;letter-spacing:.025em!important}
+ .booking-header>.booking-brand span{display:inline!important;margin:0!important;color:#fff!important;font-size:.52rem!important;font-weight:800!important;letter-spacing:.16em!important}
+}
+@media(max-width:380px){
+ .booking-header>.booking-brand{gap:7px!important}
+ .booking-header>.booking-brand strong{font-size:1.38rem!important}
+ .booking-header>.booking-brand span{font-size:.46rem!important;letter-spacing:.12em!important}
+}
