@@ -55,3 +55,38 @@
  .booking-mobile-links>a{grid-template-columns:62px 1fr;min-height:76px}
  .drawer-icon{width:48px;height:48px}
 }
+
+/* Final mobile navigation and scale polish */
+.booking-drawer-brand{display:inline-flex!important;flex-direction:row!important;align-items:baseline!important;gap:14px!important;color:#fff!important;text-decoration:none!important;white-space:nowrap!important}
+.booking-drawer-brand strong{display:inline!important;margin:0!important;color:var(--gold-light)!important;font-family:Georgia,"Times New Roman",serif!important;font-size:2rem!important;line-height:1!important;letter-spacing:.03em!important;text-decoration:none!important}
+.booking-drawer-brand span{display:inline!important;margin:0!important;color:#fff!important;font-size:.72rem!important;font-weight:800!important;letter-spacing:.18em!important;text-decoration:none!important}
+@media(max-width:650px){
+ .booking-header{min-height:82px;padding:14px 22px}
+ .booking-header>.booking-brand strong{font-size:1.45rem}
+ .booking-header>.booking-brand span{font-size:.55rem}
+ .booking-menu-toggle{width:50px;height:50px;border-radius:9px}
+ .booking-mobile-menu{padding:24px 24px 22px}
+ .booking-mobile-top{min-height:82px;padding-bottom:20px}
+ .booking-menu-close{flex-basis:52px;width:52px;height:52px}
+ .booking-menu-close span{top:24px;left:13px;width:26px}
+ .booking-mobile-links>a{grid-template-columns:58px 1fr;min-height:66px}
+ .booking-mobile-links>a strong{font-size:.9rem;letter-spacing:.08em}
+ .drawer-icon{width:43px;height:43px;border-radius:12px}
+ .drawer-icon svg{width:23px;height:23px}
+ .booking-mobile-language{padding-top:20px}
+ .booking-mobile-language>p{font-size:.72rem;margin-bottom:12px}
+ .booking-mobile-language a{padding:11px;font-size:.82rem}
+ .booking-hero{padding:52px 26px 62px}
+ .hero-copy h1{font-size:clamp(2.85rem,12vw,3.65rem);letter-spacing:-.025em}
+ .hero-copy>p:not(.eyebrow){font-size:1rem;line-height:1.65}
+ .hero-benefits{margin-top:24px;gap:12px}
+ .booking-section{padding-inline:14px}
+ .panel{padding:14px}
+ .service-option{padding:13px 12px}
+}
+@media(max-width:380px){
+ .booking-drawer-brand{gap:9px!important}
+ .booking-drawer-brand strong{font-size:1.65rem!important}
+ .booking-drawer-brand span{font-size:.58rem!important;letter-spacing:.14em!important}
+ .booking-mobile-menu{padding-inline:18px}
+}
