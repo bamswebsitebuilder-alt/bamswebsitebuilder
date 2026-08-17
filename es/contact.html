@@ -746,6 +746,10 @@
     'use strict';
     var params = new URLSearchParams(window.location.search);
     var template = params.get('template');
+    var requestedDemo = (params.get('demo') || '').trim();
+    var requestedService = (params.get('service') || '').trim();
+    var requestedDate = (params.get('date') || '').trim();
+    var requestedZip = (params.get('zip') || '').trim();
     var packageKey = params.get('package');
     var payment = params.get('payment');
     var plan = (params.get('plan') || '').toLowerCase();
@@ -757,6 +761,14 @@
     var templateSelect = document.getElementById('website-template');
     var packageSelect = document.getElementById('package');
     var message = document.getElementById('message');
+    if (message && requestedDemo && !message.value) {
+        message.value = [
+            'Me interesa la demostración web ' + requestedDemo + '.',
+            requestedService ? 'Servicio solicitado: ' + requestedService : '',
+            requestedDate ? 'Fecha preferida: ' + requestedDate : '',
+            requestedZip ? 'Código postal: ' + requestedZip : ''
+        ].filter(Boolean).join('\n');
+    }
     var packageValues = {
         starter: 'Sitio inicial',
         business: 'Sitio empresarial',
