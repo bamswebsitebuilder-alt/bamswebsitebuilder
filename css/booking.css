@@ -113,3 +113,7 @@
 .booking-language-switcher a{color:#aaa;text-decoration:none}
 .booking-language-switcher a:hover,.booking-language-switcher a.active{color:var(--gold-light)}
 @media(max-width:650px){.booking-language-switcher{display:none}}
+
+/* Accessible fallback for visitors who cannot complete the Google Calendar handoff. */
+.booking-fallback{margin:8px 0 0;text-align:center;color:#777;font-size:.68rem}
+.booking-fallback a{color:#8b641b;font-weight:800;text-decoration:underline;text-underline-offset:3px}
