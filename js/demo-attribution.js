@@ -2,6 +2,39 @@
   'use strict';
   const spanish = document.documentElement.lang.toLowerCase().startsWith('es') || location.pathname.includes('/es/');
   const contactUrl = spanish ? 'https://www.bamswebsitebuilder.com/es/contact' : 'https://www.bamswebsitebuilder.com/contact';
+  const canonicalUrl = `https://www.bamswebsitebuilder.com${location.pathname.endsWith('/') ? location.pathname : `${location.pathname}/`}`;
+
+  if (!document.querySelector('link[rel="canonical"]')) {
+    const canonical = document.createElement('link');
+    canonical.rel = 'canonical';
+    canonical.href = canonicalUrl;
+    document.head.append(canonical);
+  }
+  if (!document.querySelector('meta[property="og:title"]')) {
+    const socialMeta = [
+      ['og:title', document.title],
+      ['og:description', document.querySelector('meta[name="description"]')?.content || 'Professional demo website created by BAM\'s Website Builder.'],
+      ['og:url', canonicalUrl],
+      ['og:type', 'website']
+    ];
+    socialMeta.forEach(([property, content]) => {
+      const meta = document.createElement('meta');
+      meta.setAttribute('property', property);
+      meta.content = content;
+      document.head.append(meta);
+    });
+  }
+
+  document.querySelectorAll('form input, form select, form textarea').forEach((field, index) => {
+    if (field.type === 'hidden' || field.type === 'submit' || field.closest('label')) return;
+    const text = field.placeholder || field.name || `${spanish ? 'Campo' : 'Field'} ${index + 1}`;
+    field.setAttribute('aria-label', field.getAttribute('aria-label') || text);
+  });
+
+  document.querySelectorAll('.contact-form').forEach((form) => {
+    form.action = contactUrl;
+    form.method = 'get';
+  });
   const quotePattern = /quote|estimate|consultation|free quote|request service|cotizaci[oó]n|presupuesto|estimado|consulta|solicitar servicio/i;
   document.querySelectorAll('a').forEach((link) => {
     const text = `${link.textContent} ${link.getAttribute('aria-label') || ''}`.trim();
@@ -21,6 +54,6 @@
     document.body.append(credit);
   }
   const style = document.createElement('style');
-  style.textContent = '.bam-demo-credit{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 18px;padding:16px 20px;background:#0b0b0a;color:#f7f4ec;border-top:1px solid rgba(216,169,40,.35);font:600 13px/1.4 Arial,sans-serif;text-align:center}.bam-demo-credit a{color:#f0c75e!important;text-decoration:none!important;font-weight:800}.bam-demo-credit a:hover{text-decoration:underline!important}';
+  style.textContent = '.bam-demo-credit{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 18px;padding:16px 20px;background:#0b0b0a;color:#f7f4ec;border-top:1px solid rgba(216,169,40,.35);font:600 13px/1.4 Arial,sans-serif;text-align:center}.bam-demo-credit a{color:#f0c75e!important;text-decoration:none!important;font-weight:800}.bam-demo-credit a:hover{text-decoration:underline!important}@media(max-width:600px){.bam-demo-credit{align-items:stretch;flex-direction:column;padding:18px 16px}.bam-demo-credit a{display:block;padding:10px 12px;border:1px solid rgba(240,199,94,.35);border-radius:8px}}';
   document.head.append(style);
 })();
