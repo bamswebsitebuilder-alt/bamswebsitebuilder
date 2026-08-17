@@ -528,6 +528,10 @@
    document.addEventListener('DOMContentLoaded', function () {
     const params = new URLSearchParams(window.location.search);
     const requestedTemplate = (params.get('template') || '').trim();
+    const requestedDemo = (params.get('demo') || '').trim();
+    const requestedService = (params.get('service') || '').trim();
+    const requestedDate = (params.get('date') || '').trim();
+    const requestedZip = (params.get('zip') || '').trim();
     const payment = (params.get('payment') || '').trim();
     const plan = (params.get('plan') || '').trim().toLowerCase();
     const subscribed = (params.get('subscribed') || '').trim().toLowerCase();
@@ -538,6 +542,16 @@
     const select = document.getElementById('template-choice');
     const status = document.getElementById('selected-template-status');
     const message = document.getElementById('message');
+
+    if (message && requestedDemo && !message.value) {
+        const details = [
+            'I am interested in the ' + requestedDemo + ' website demo.',
+            requestedService ? 'Requested service: ' + requestedService : '',
+            requestedDate ? 'Preferred date: ' + requestedDate : '',
+            requestedZip ? 'ZIP code: ' + requestedZip : ''
+        ].filter(Boolean);
+        message.value = details.join('\n');
+    }
 
     const monthlyValues = {
         'starter-monthly': 'Starter Monthly - $20.83/month for 12 months',
