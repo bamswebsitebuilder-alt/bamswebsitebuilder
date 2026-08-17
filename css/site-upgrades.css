@@ -140,7 +140,7 @@ body{background:var(--bam-black);color:var(--bam-ivory)}
 .payment-plan-note .price-button{grid-column:2;grid-row:1/3;width:auto!important;min-width:230px;margin:0!important;padding:14px 20px!important}
 /* Keep booking available without crowding the main navigation. */
 .desktop-navigation a[data-page="booking"]{
-  position:fixed!important;left:max(18px,env(safe-area-inset-left))!important;bottom:max(18px,env(safe-area-inset-bottom))!important;
+  position:fixed!important;top:auto!important;right:auto!important;left:max(18px,env(safe-area-inset-left))!important;bottom:max(18px,env(safe-area-inset-bottom))!important;
   z-index:9970!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;
   min-width:150px!important;min-height:50px!important;padding:12px 20px!important;border:1px solid rgba(244,207,84,.72)!important;
   border-radius:999px!important;background:linear-gradient(135deg,#f4cf54,#d8a928)!important;color:#090909!important;
