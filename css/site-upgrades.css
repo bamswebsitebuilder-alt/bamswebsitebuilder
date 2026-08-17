@@ -138,7 +138,18 @@ body{background:var(--bam-black);color:var(--bam-ivory)}
 .payment-plan-note strong,.payment-plan-note p{grid-column:1;margin:0!important}
 .payment-plan-note p{margin-top:6px!important;color:var(--bam-muted)!important}
 .payment-plan-note .price-button{grid-column:2;grid-row:1/3;width:auto!important;min-width:230px;margin:0!important;padding:14px 20px!important}
-@media(max-width:1280px){.desktop-navigation,.desktop-language{display:none!important}.menu-toggle{display:flex!important;margin-left:auto}.site-header-logo{width:164px!important;max-width:50vw!important;height:54px!important;object-position:left center!important}}
+/* Keep booking available without crowding the main navigation. */
+.desktop-navigation a[data-page="booking"]{
+  position:fixed!important;left:max(18px,env(safe-area-inset-left))!important;bottom:max(18px,env(safe-area-inset-bottom))!important;
+  z-index:9970!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  min-width:150px!important;min-height:50px!important;padding:12px 20px!important;border:1px solid rgba(244,207,84,.72)!important;
+  border-radius:999px!important;background:linear-gradient(135deg,#f4cf54,#d8a928)!important;color:#090909!important;
+  box-shadow:0 12px 32px rgba(0,0,0,.42),0 0 22px rgba(216,169,40,.18)!important;font-size:.76rem!important;
+  font-weight:900!important;letter-spacing:.09em!important;text-decoration:none!important;text-transform:uppercase!important;
+}
+.desktop-navigation a[data-page="booking"]::after{display:none!important}
+.desktop-navigation a[data-page="booking"]:hover{transform:translateY(-2px)!important;box-shadow:0 16px 38px rgba(0,0,0,.48),0 0 28px rgba(216,169,40,.3)!important}
+@media(max-width:1280px){.desktop-navigation{display:contents!important}.desktop-navigation a:not([data-page="booking"]){display:none!important}.desktop-language{display:none!important}.menu-toggle{display:flex!important;margin-left:auto}.site-header-logo{width:164px!important;max-width:50vw!important;height:54px!important;object-position:left center!important}}
 @media(max-width:650px){
   :root{--header-height:74px}
   .header-container{position:relative;justify-content:center;padding-inline:64px!important}
@@ -152,6 +163,7 @@ body{background:var(--bam-black);color:var(--bam-ivory)}
   .payment-plan-note .price-button{grid-column:1!important;grid-row:auto!important;min-width:0;width:100%!important;margin-top:18px!important}
   .founder-preview-inner{grid-template-columns:1fr;text-align:center}.founder-preview img{margin:auto;width:150px;height:150px}.founder-preview p{margin-inline:auto}
   .template-plan-grid{grid-template-columns:1fr}.template-plan-showcase{padding:26px 18px}.template-plan-button{width:100%}
+  .desktop-navigation a[data-page="booking"]{left:max(12px,env(safe-area-inset-left))!important;bottom:max(12px,env(safe-area-inset-bottom))!important;min-width:132px!important;min-height:46px!important;padding:10px 16px!important;font-size:.68rem!important}
 }
 
 /* Keep the English and Spanish homepage background logo identical */
@@ -199,6 +211,3 @@ body{background:var(--bam-black);color:var(--bam-ivory)}
 @media(max-width:650px){
   .hero>.hero-logo-bg{width:min(96vw,480px)!important;opacity:.14!important}
 }
-
-/* Booking is a mobile-menu CTA beneath Get a Free Quote, not a desktop nav item. */
-.desktop-navigation a[data-page="booking"]{display:none!important}
