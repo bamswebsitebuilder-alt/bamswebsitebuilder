@@ -4,7 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Reserva una Consulta Web Gratis | BAM's Website Builder</title>
-  <meta name="description" content="Book a free 30-minute website consultation with BAM's Website Builder in Clearwater, Florida.">
+  <meta name="description" content="Reserva una consulta web gratuita de 30 minutos con BAM's Website Builder en Clearwater, Florida.">
+  <link rel="canonical" href="https://www.bamswebsitebuilder.com/es/booking.html">
+  <link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/booking.html">
+  <link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/booking.html">
   <link rel="icon" href="/images/icon-dark.jpg?v=20260814" type="image/png">
   <link rel="stylesheet" href="/css/booking.css?v=10">
 </head>
@@ -70,8 +73,8 @@
       </fieldset>
 
       <section class="panel calendar-panel" aria-labelledby="calendar-title">
-        <div class="calendar-head"><button type="button" id="prev-month" aria-label="Previous month">‹</button><h2 id="calendar-title"></h2><button type="button" id="next-month" aria-label="Next month">›</button></div>
-        <div class="weekdays" aria-hidden="true"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div>
+        <div class="calendar-head"><button type="button" id="prev-month" aria-label="Mes anterior">‹</button><h2 id="calendar-title"></h2><button type="button" id="next-month" aria-label="Mes siguiente">›</button></div>
+        <div class="weekdays" aria-hidden="true"><span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span></div>
         <div class="calendar-days" id="calendar-days"></div>
         <p class="times-title" id="times-title">Elige una fecha para ver los horarios disponibles</p>
         <div class="time-grid" id="time-grid"></div>
@@ -82,13 +85,14 @@
         <div class="summary-service"><div class="summary-logo"><img src="/images/booking-summary-logo.jpeg?v=1" alt="BAM's Website Builder"></div><p><strong id="summary-service">Consulta de diseño web</strong><span id="summary-duration">30 min</span></p><b>GRATIS</b></div>
         <dl class="summary-list"><div><dt>Fecha</dt><dd id="summary-date">Selecciona una fecha</dd></div><div><dt>Hora</dt><dd id="summary-time">Selecciona una hora</dd></div><div><dt>Con</dt><dd>BAM's Website Builder</dd></div></dl>
         <h3>TUS DATOS</h3>
-        <label><span class="sr-only">Full name</span><input name="name" autocomplete="name" placeholder="Nombre completo" required></label>
-        <label><span class="sr-only">Email address</span><input name="email" type="email" autocomplete="email" placeholder="Correo electrónico" required></label>
-        <label><span class="sr-only">Phone number</span><input name="phone" type="tel" autocomplete="tel" placeholder="Número de teléfono" required></label>
-        <label><span class="sr-only">Project notes</span><textarea name="notes" rows="3" placeholder="Cuéntanos un poco sobre tu proyecto (opcional)"></textarea></label>
+        <label><span class="sr-only">Nombre completo</span><input name="name" autocomplete="name" placeholder="Nombre completo" required></label>
+        <label><span class="sr-only">Correo electrónico</span><input name="email" type="email" autocomplete="email" placeholder="Correo electrónico" required></label>
+        <label><span class="sr-only">Número de teléfono</span><input name="phone" type="tel" autocomplete="tel" placeholder="Número de teléfono" required></label>
+        <label><span class="sr-only">Detalles del proyecto</span><textarea name="notes" rows="3" placeholder="Cuéntanos un poco sobre tu proyecto (opcional)"></textarea></label>
         <input type="hidden" name="date" id="booking-date"><input type="hidden" name="time" id="booking-time">
         <button class="confirm-button" type="submit">CONTINUAR A GOOGLE CALENDAR</button>
         <p class="secure-note">Tu reserva se abre de forma segura en Google Calendar.</p>
+        <p class="booking-fallback">¿Tienes problemas? <a href="mailto:bamswebsitebuilder@gmail.com?subject=Solicitud%20de%20consulta%20web">Escríbenos para programar tu llamada</a>.</p>
         <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
       </section>
     </form>
