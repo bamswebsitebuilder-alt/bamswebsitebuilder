@@ -199,3 +199,6 @@ body{background:var(--bam-black);color:var(--bam-ivory)}
 @media(max-width:650px){
   .hero>.hero-logo-bg{width:min(96vw,480px)!important;opacity:.14!important}
 }
+
+/* Booking is a mobile-menu CTA beneath Get a Free Quote, not a desktop nav item. */
+.desktop-navigation a[data-page="booking"]{display:none!important}
