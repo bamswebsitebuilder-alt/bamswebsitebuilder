@@ -110,16 +110,17 @@
 }
   </style>
   <meta content="https://www.bamswebsitebuilder.com/images/logo-dark.jpg" property="og:image"/>
+ <link rel="stylesheet" href="/css/responsive-fixes.css?v=4">
  <style id="reviews-desktop-navigation-fit">
  @media (min-width: 1181px) {
-  .header-container { max-width: 1600px; padding-inline: 18px; gap: 10px; }
-  .site-brand { flex: 0 0 160px; }
-  .desktop-navigation { gap: clamp(8px, .7vw, 13px); }
-  .desktop-navigation a { font-size: clamp(.56rem, .58vw, .64rem); letter-spacing: .03em; }
-  .desktop-language { gap: 5px; margin-left: 3px; }
+  .header-container { width: 100%; max-width: 1600px; padding-inline: 12px; gap: 8px; }
+  .site-brand { flex: 0 0 140px; }
+  .desktop-navigation { flex: 1 1 auto; justify-content: flex-end; gap: clamp(7px, .62vw, 11px); }
+  .desktop-navigation a { font-size: clamp(.54rem, .55vw, .61rem); letter-spacing: .025em; }
+  .desktop-navigation a[data-page="booking"] { min-height: 38px; margin-left: 0; padding: 8px 11px; font-size: .57rem; }
+  .desktop-language { flex: 0 0 auto; gap: 4px; margin-left: 2px; font-size: .58rem; }
  }
  </style>
- <link rel="stylesheet" href="/css/responsive-fixes.css?v=4">
 </head>
  <body>
   <header class="site-header" id="site-header">
