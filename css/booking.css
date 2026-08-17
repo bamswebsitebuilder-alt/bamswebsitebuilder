@@ -120,7 +120,7 @@
 
 
 /* Branded artwork inside the booking-page device mockups. */
-.screen-logo{display:block;width:clamp(82px,28%,132px);height:auto;max-height:58px;object-fit:contain;object-position:left center;border-radius:2px}
+.screen-logo{display:block;width:clamp(96px,34%,150px);height:58px;object-fit:cover;object-position:center 52%;border-radius:2px}
 .desktop-screen .screen-logo{margin-bottom:22px}
-.phone-screen .screen-logo{width:78px;max-height:46px;margin-bottom:24px}
+.phone-screen .screen-logo{width:84px;height:46px;margin-bottom:24px}
 .desktop-screen b,.phone-screen b{margin-top:0}
