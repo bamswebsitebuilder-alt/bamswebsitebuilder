@@ -39,16 +39,17 @@
   width: 28px !important;
 }
 </style>
+<link rel="stylesheet" href="/css/responsive-fixes.css?v=4">
 <style id="reviews-desktop-navigation-fit">
 @media (min-width: 901px) {
-  .header-container { max-width: 1600px; padding-inline: 20px; gap: 14px; }
-  .site-brand { flex: 0 0 170px; }
-  .desktop-navigation { gap: clamp(12px, 1vw, 18px); }
-  .desktop-navigation a { font-size: clamp(.62rem, .65vw, .7rem); letter-spacing: .05em; }
-  .desktop-language { gap: 6px; margin-left: 4px; }
+  .header-container { width: 100%; max-width: 1600px; padding-inline: 14px; gap: 10px; }
+  .site-brand { flex: 0 0 145px; }
+  .desktop-navigation { flex: 1 1 auto; justify-content: flex-end; gap: clamp(8px, .8vw, 14px); }
+  .desktop-navigation a { font-size: clamp(.58rem, .61vw, .67rem); letter-spacing: .04em; }
+  .desktop-navigation a[data-page="booking"] { min-height: 38px; margin-left: 0; padding: 8px 13px; font-size: .62rem; }
+  .desktop-language { flex: 0 0 auto; gap: 5px; margin-left: 2px; font-size: .62rem; }
 }
 </style>
-<link rel="stylesheet" href="/css/responsive-fixes.css?v=4">
 </head>
 <body><header class="site-header" id="site-header">
 <div class="header-container">
