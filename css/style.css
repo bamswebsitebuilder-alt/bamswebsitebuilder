@@ -232,6 +232,33 @@ body.menu-open {
     width: 100%;
 }
 
+/* Make the primary conversion action stand out from standard navigation links. */
+.desktop-navigation a[data-page="booking"] {
+    margin-left: 4px;
+    padding: 10px 16px;
+    border: 1px solid var(--nav-gold-light);
+    border-radius: 999px;
+    background: var(--nav-gold-light);
+    color: #101010;
+    font-weight: 800;
+    line-height: 1;
+    box-shadow: 0 8px 20px rgba(212, 166, 55, 0.24);
+    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.desktop-navigation a[data-page="booking"]::after {
+    display: none;
+}
+
+.desktop-navigation a[data-page="booking"]:hover,
+.desktop-navigation a[data-page="booking"]:focus-visible {
+    background: #fff1a6;
+    border-color: #fff1a6;
+    color: #101010;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(212, 166, 55, 0.36);
+}
+
 
 /* ==========================
    DESKTOP LANGUAGE LINKS
