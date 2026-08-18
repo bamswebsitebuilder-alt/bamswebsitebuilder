@@ -38,6 +38,56 @@
 .desktop-navigation a[aria-current="page"]::after {
   width: 48px;
 }
+
+/* Restored contact form choices shared by desktop and mobile */
+#template-choice-group,
+#template-choice {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+}
+
+.template-choice-help {
+  margin: 8px 0 0;
+  color: #9f9f9f;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.subscription-contact-box {
+  margin: 0 0 26px;
+  padding: 20px 22px;
+  border: 1px solid rgba(244, 193, 93, 0.38);
+  border-radius: 14px;
+  background: rgba(244, 193, 93, 0.08);
+}
+
+.subscription-contact-box h2 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+}
+
+.subscription-contact-box p {
+  margin: 0 0 12px;
+  line-height: 1.55;
+}
+
+.subscription-contact-box a {
+  color: #f4c15d;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.subscription-contact-box a:hover,
+.subscription-contact-box a:focus-visible {
+  text-decoration: underline;
+}
+
+@media (max-width: 700px) {
+  .subscription-contact-box {
+    padding: 17px 18px;
+  }
+}
 </style>
 <link rel="stylesheet" href="/css/responsive-fixes.css">
 </head>
@@ -131,6 +181,23 @@
 <input name="_subject" type="hidden" value="New Website Inquiry"/>
 <input name="_captcha" type="hidden" value="false"/>
 <input name="_template" type="hidden" value="table"/>
+<input id="paypal-subscription-id" name="PayPal Subscription ID" type="hidden" value=""/>
+<input id="paypal-subscription-status" name="PayPal Subscription Status" type="hidden" value=""/>
+<div class="subscription-contact-box" id="subscription-interest">
+<h2>Prefer to pay monthly?</h2>
+<p>We also offer 12-month website payment plans: Starter $20.83/month, Business $41.67/month, and Premium $70.83/month.</p>
+<a href="/subscriptions">View monthly website plans &rarr;</a>
+</div>
+<div class="form-group">
+<label for="payment-option">Payment Option</label>
+<select id="payment-option" name="Payment Option">
+<option value="">Select a payment option</option>
+<option value="One-time payment">One-time payment</option>
+<option value="Starter Monthly - $20.83/month for 12 months">Starter &mdash; $20.83/month for 12 months</option>
+<option value="Business Monthly - $41.67/month for 12 months">Business &mdash; $41.67/month for 12 months</option>
+<option value="Premium Monthly - $70.83/month for 12 months">Premium &mdash; $70.83/month for 12 months</option>
+</select>
+</div>
 <!-- FULL NAME -->
 <div class="form-group">
 <label for="name">
@@ -151,6 +218,46 @@
                             Business Name
                         </label>
 <input autocomplete="organization" id="business" name="Business Name" type="text"/>
+</div>
+<!-- TEMPLATE CHOICE -->
+<div class="form-group" id="template-choice-group">
+<label for="template-choice">Selected Template</label>
+<select id="template-choice" name="Selected Template">
+<option value="">Choose a template</option>
+<optgroup label="Newest Templates">
+<option value="Gulf Coast Pro Wash">Gulf Coast Pro Wash &mdash; Pressure Washing</option>
+<option value="EverGreen Lawn Care">EverGreen Lawn Care &mdash; Lawn Care</option>
+</optgroup>
+<optgroup label="Industry Templates">
+<option value="Summit Roofing Co.">Summit Roofing Co. &mdash; Roofing</option>
+<option value="IronPeak Roofing">IronPeak Roofing &mdash; Roofing</option>
+<option value="Coastal Air Comfort">Coastal Air Comfort &mdash; HVAC</option>
+<option value="Precision Climate">Precision Climate &mdash; HVAC</option>
+<option value="Harbor Health Clinic">Harbor Health Clinic &mdash; Medical Office</option>
+<option value="Everwell Medical">Everwell Medical &mdash; Medical Office</option>
+<option value="BrightBay Dental">BrightBay Dental &mdash; Dentist Office</option>
+<option value="Pearl &amp; Pine Dentistry">Pearl &amp; Pine Dentistry &mdash; Dentist Office</option>
+<option value="StoneLine Construction">StoneLine Construction &mdash; Construction</option>
+<option value="Forge &amp; Frame Builders">Forge &amp; Frame Builders &mdash; Construction</option>
+<option value="CoreRise Fitness">CoreRise Fitness &mdash; Gym / Fitness</option>
+<option value="Forge Athletics Club">Forge Athletics Club &mdash; Gym / Fitness</option>
+<option value="Ember Cup Coffee">Ember Cup Coffee &mdash; Coffee Shop</option>
+<option value="Juniper &amp; Roast">Juniper &amp; Roast &mdash; Coffee Shop</option>
+<option value="Bayline Auto Care">Bayline Auto Care &mdash; Auto Repair</option>
+<option value="TorqueWorks Garage">TorqueWorks Garage &mdash; Auto Repair</option>
+</optgroup>
+<optgroup label="All Templates">
+<option value="Ember Sage">Ember Sage &mdash; Restaurant</option>
+<option value="G3 Blend Lab">G3 Blend Lab &mdash; Barbershop</option>
+<option value="Blush Bloom">Blush Bloom &mdash; Nail Salon</option>
+<option value="Rainforest Glow">Rainforest Glow &mdash; Waxing &amp; Lashes</option>
+<option value="ConnectSphere">ConnectSphere &mdash; Social Platform</option>
+<option value="Velocity Drive Rentals">Velocity Drive Rentals &mdash; Car Rental</option>
+<option value="FleetFlow">FleetFlow &mdash; Shipping &amp; Logistics</option>
+<option value="Kade Mercer">Kade Mercer &mdash; Author</option>
+</optgroup>
+</select>
+<p class="template-choice-help">The newest templates appear at the top of this list.</p>
 </div>
 <!-- WEBSITE PACKAGE -->
 <div class="form-group">
@@ -312,6 +419,65 @@
   </div>
   <div class="footer-bottom">© 2026 BAM's Website Builder. All Rights Reserved.</div>
 </footer>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const params = new URLSearchParams(window.location.search);
+  const requestedTemplate = (params.get('template') || '').trim();
+  const requestedDemo = (params.get('demo') || '').trim();
+  const requestedService = (params.get('service') || '').trim();
+  const requestedDate = (params.get('date') || '').trim();
+  const requestedZip = (params.get('zip') || '').trim();
+  const payment = (params.get('payment') || '').trim();
+  const plan = (params.get('plan') || '').trim().toLowerCase();
+  const subscribed = (params.get('subscribed') || '').trim().toLowerCase();
+  const subscriptionId = (params.get('subscription_id') || '').trim();
+  const paymentOption = document.getElementById('payment-option');
+  const subscriptionIdField = document.getElementById('paypal-subscription-id');
+  const subscriptionStatusField = document.getElementById('paypal-subscription-status');
+  const templateChoice = document.getElementById('template-choice');
+  const message = document.getElementById('message');
+
+  if (message && requestedDemo && !message.value) {
+    const details = [
+      'I am interested in the ' + requestedDemo + ' website demo.',
+      requestedService ? 'Requested service: ' + requestedService : '',
+      requestedDate ? 'Preferred date: ' + requestedDate : '',
+      requestedZip ? 'ZIP code: ' + requestedZip : ''
+    ].filter(Boolean);
+    message.value = details.join('\n');
+  }
+
+  const monthlyValues = {
+    'starter-monthly': 'Starter Monthly - $20.83/month for 12 months',
+    'business-monthly': 'Business Monthly - $41.67/month for 12 months',
+    'premium-monthly': 'Premium Monthly - $70.83/month for 12 months'
+  };
+
+  if (plan && paymentOption && monthlyValues[plan]) {
+    paymentOption.value = monthlyValues[plan];
+  }
+
+  if (subscribed === 'yes') {
+    if (subscriptionIdField) subscriptionIdField.value = subscriptionId;
+    if (subscriptionStatusField) subscriptionStatusField.value = 'Approved';
+    if (message && !message.value) {
+      message.value = 'My PayPal subscription was approved. Here are my website project details:';
+    }
+  }
+
+  if (templateChoice && requestedTemplate) {
+    const normalized = requestedTemplate.toLowerCase();
+    const match = Array.from(templateChoice.options).find(function (option) {
+      return option.value.trim().toLowerCase() === normalized;
+    });
+    if (match) templateChoice.value = match.value;
+  }
+
+  if (payment && message && !message.value) {
+    message.value = 'I would like to use the selected template and pay the ' + payment + ' option. Please send me the secure payment link and next steps.';
+  }
+});
+</script>
 <script src="/js/navigation.js?v=100"></script>
 <!-- Start of LiveChat (www.livechat.com) code -->
 <script>
@@ -325,3 +491,4 @@
 <!-- End of LiveChat code --><script src="/js/animations.js?v=1"></script>
 </body>
 </html>
+
