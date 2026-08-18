@@ -15,6 +15,10 @@
     const aboutLabel = spanish ? 'Nosotros' : 'About';
     const iconMarkup = (name) => `<span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#${name}"></use></svg></span>`;
 
+    document.querySelectorAll('a[href="/booking.html"], a[href="/es/booking.html"]').forEach((link) => {
+      link.href = spanish ? '/es/booking' : '/booking';
+    });
+
     const bookingLink = document.querySelector('.desktop-navigation a[data-page="booking"]');
     if (bookingLink && !document.querySelector('.floating-booking-button')) {
       const floatingBooking = bookingLink.cloneNode(true);
