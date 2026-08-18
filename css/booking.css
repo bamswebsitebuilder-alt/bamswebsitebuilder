@@ -141,4 +141,4 @@
 .phone-screen .screen-logo{width:84px;height:46px;margin-bottom:24px}
 .desktop-screen b,.phone-screen b{margin-top:0}
 .header-book{position:fixed!important;left:max(18px,env(safe-area-inset-left))!important;bottom:max(18px,env(safe-area-inset-bottom))!important;top:auto!important;right:auto!important;z-index:9970!important;min-width:150px!important;min-height:50px!important;justify-content:center!important;box-shadow:0 12px 32px rgba(0,0,0,.42),0 0 22px rgba(216,169,40,.18)!important}
-@media(max-width:700px){.header-book{display:inline-flex!important;left:max(12px,env(safe-area-inset-left))!important;bottom:max(12px,env(safe-area-inset-bottom))!important;min-width:132px!important;min-height:46px!important;padding:10px 16px!important;font-size:.68rem!important}}
+@media(max-width:700px){.header-book{display:none!important}}
