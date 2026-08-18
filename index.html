@@ -150,6 +150,18 @@
 </style>
 
 <link rel="stylesheet" href="/css/responsive-fixes.css">
+
+<style id="mobile-content-visibility-failsafe">
+/* Keep homepage content visible on mobile if reveal animations fail to initialize. */
+@media (max-width: 900px) {
+  html.motion-enabled main [data-reveal],
+  main .motion-hero-item {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+}
+</style>
 </head>
 <body><header class="site-header" id="site-header">
 <div class="header-container">
