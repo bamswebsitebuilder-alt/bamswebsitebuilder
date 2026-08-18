@@ -1,5 +1,17 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/booking.html",
+      "destination": "/booking",
+      "permanent": true
+    },
+    {
+      "source": "/es/booking.html",
+      "destination": "/es/booking",
+      "permanent": true
+    }
+  ]
 }
