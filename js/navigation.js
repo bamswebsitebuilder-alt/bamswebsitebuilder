@@ -20,12 +20,22 @@
     });
 
     const bookingLink = document.querySelector('.desktop-navigation a[data-page="booking"]');
-    if (bookingLink && !document.querySelector('.floating-booking-button')) {
-      const floatingBooking = bookingLink.cloneNode(true);
-      floatingBooking.className = 'floating-booking-button';
-      floatingBooking.removeAttribute('aria-current');
-      document.body.append(floatingBooking);
-    }
+    const desktopBookingLayout = window.matchMedia('(min-width: 1281px)');
+    const syncFloatingBooking = () => {
+      const currentButton = document.querySelector('.floating-booking-button');
+      if (!desktopBookingLayout.matches) {
+        currentButton?.remove();
+        return;
+      }
+      if (bookingLink && !currentButton) {
+        const floatingBooking = bookingLink.cloneNode(true);
+        floatingBooking.className = 'floating-booking-button';
+        floatingBooking.removeAttribute('aria-current');
+        document.body.append(floatingBooking);
+      }
+    };
+    syncFloatingBooking();
+    desktopBookingLayout.addEventListener('change', syncFloatingBooking);
 
     document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]').forEach((link) => {
       link.href = '/images/icon-dark.jpg?v=20260814';
