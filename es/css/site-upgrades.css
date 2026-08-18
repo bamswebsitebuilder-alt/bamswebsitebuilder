@@ -4,7 +4,7 @@
 :focus-visible{outline:3px solid #f4cf54;outline-offset:3px}
 img{max-width:100%;height:auto}
 button,a,input,select,textarea{font:inherit}
-.back-to-top{position:fixed;right:18px;bottom:18px;z-index:9990;width:46px;height:46px;border:1px solid rgba(244,207,84,.5);border-radius:50%;background:#111;color:#f4cf54;font-size:1.25rem;cursor:pointer;opacity:0;visibility:hidden;transform:translateY(12px);transition:.2s ease;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.back-to-top{display:none!important}
 .back-to-top.is-visible{opacity:1;visibility:visible;transform:none}
 .demo-notice{position:fixed;left:50%;bottom:16px;z-index:9980;transform:translateX(-50%);max-width:calc(100% - 32px);padding:10px 15px;border:1px solid rgba(244,207,84,.35);border-radius:999px;background:rgba(10,10,10,.92);color:#eee;font-size:.78rem;backdrop-filter:blur(12px)}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
