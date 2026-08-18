@@ -100,15 +100,4 @@
     img.decoding = 'async';
   });
   document.querySelectorAll('[data-current-year], .current-year').forEach(el => el.textContent = new Date().getFullYear());
-  if (!document.querySelector('.back-to-top')) {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'back-to-top';
-    button.setAttribute('aria-label', spanish ? 'Volver arriba' : 'Back to top');
-    button.textContent = '↑';
-    button.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
-    document.body.append(button);
-    const update = () => button.classList.toggle('is-visible', window.scrollY > 600);
-    update(); window.addEventListener('scroll', update, {passive:true});
-  }
 })();
