@@ -15,6 +15,14 @@
     const aboutLabel = spanish ? 'Nosotros' : 'About';
     const iconMarkup = (name) => `<span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#${name}"></use></svg></span>`;
 
+    const bookingLink = document.querySelector('.desktop-navigation a[data-page="booking"]');
+    if (bookingLink && !document.querySelector('.floating-booking-button')) {
+      const floatingBooking = bookingLink.cloneNode(true);
+      floatingBooking.className = 'floating-booking-button';
+      floatingBooking.removeAttribute('aria-current');
+      document.body.append(floatingBooking);
+    }
+
     document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]').forEach((link) => {
       link.href = '/images/icon-dark.jpg?v=20260814';
       link.type = 'image/jpeg';
