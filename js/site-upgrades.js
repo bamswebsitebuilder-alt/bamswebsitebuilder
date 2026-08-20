@@ -99,5 +99,15 @@
     if (i > 0) img.loading = 'lazy';
     img.decoding = 'async';
   });
+  document.querySelectorAll('.bam-social-links').forEach((socialLinks) => {
+    if (socialLinks.querySelector('a[href="https://x.com/bamswebsite"]')) return;
+    const xLink = document.createElement('a');
+    xLink.href = 'https://x.com/bamswebsite';
+    xLink.target = '_blank';
+    xLink.rel = 'noopener noreferrer';
+    xLink.setAttribute('aria-label', "BAM's Website Builder on X");
+    xLink.textContent = 'X';
+    socialLinks.append(xLink);
+  });
   document.querySelectorAll('[data-current-year], .current-year').forEach(el => el.textContent = new Date().getFullYear());
 })();
