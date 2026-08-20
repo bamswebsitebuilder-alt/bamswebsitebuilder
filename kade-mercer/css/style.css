@@ -611,7 +611,7 @@ select:focus-visible {
    MOBILE DRAWER
 ========================== */
 
-@media (max-width: 760px) {
+@media (max-width: 780px) {
     :root {
         --header-height: 76px;
     }

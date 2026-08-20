@@ -97,7 +97,7 @@ textarea,
 
 
 /* Stack the mobile calls to action and keep their labels readable. */
-.mobile-menu-cta {
+.mobile-menu-cta:not(a) {
     display: grid;
     gap: 12px;
 }
