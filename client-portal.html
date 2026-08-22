@@ -268,6 +268,7 @@
         <div
           class="portal-avatar"
           id="portal-avatar"
+          aria-label="Profile picture"
         >
           C
         </div>
@@ -598,6 +599,8 @@
                   Profile information
                 </h2>
 
+                <p>Update your contact information and profile picture.</p>
+
               </div>
             </div>
 
@@ -605,6 +608,17 @@
               class="portal-form"
               id="account-form"
             >
+
+              <div class="profile-photo-editor">
+                <div class="profile-photo-preview" id="profile-photo-preview" aria-hidden="true">C</div>
+                <div>
+                  <strong>Profile picture</strong>
+                  <p>Upload a JPG, PNG, or WebP image up to 5 MB.</p>
+                  <input id="profile-photo-input" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+                  <button class="portal-secondary-button" id="profile-photo-button" type="button">Choose Picture</button>
+                  <p class="form-alert" id="profile-photo-status" role="status" hidden></p>
+                </div>
+              </div>
 
               <div class="portal-form-grid">
 
@@ -723,6 +737,7 @@
     src="/js/portal-auth.js?v=102"
   ></script>
   <script type="module" src="/js/portal-messages.js?v=1"></script>
+  <script type="module" src="/js/profile-picture.js?v=1"></script>
   <script src="/js/animations.js?v=1"></script>
 <script src="/js/site-upgrades.js?v=1" defer></script>
 </body>

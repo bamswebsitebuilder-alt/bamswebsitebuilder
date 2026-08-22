@@ -368,6 +368,66 @@
     font-weight: 900;
 }
 
+.portal-avatar.has-photo,
+.profile-photo-preview.has-photo {
+  padding: 0;
+  overflow: hidden;
+  background: #111;
+}
+
+.portal-avatar img,
+.profile-photo-preview img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.profile-photo-editor {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(212, 166, 55, 0.35);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.profile-photo-preview {
+  width: 76px;
+  height: 76px;
+  flex: 0 0 76px;
+  display: grid;
+  place-items: center;
+  border: 2px solid #d4a637;
+  border-radius: 50%;
+  color: #111;
+  background: #d4a637;
+  font-size: 1.7rem;
+  font-weight: 800;
+}
+
+.profile-photo-editor p {
+  margin: 0.25rem 0 0.65rem;
+}
+
+.profile-photo-editor .form-alert {
+  margin-top: 0.65rem;
+}
+
+@media (max-width: 560px) {
+  .profile-photo-editor {
+    align-items: flex-start;
+  }
+
+  .profile-photo-preview {
+    width: 62px;
+    height: 62px;
+    flex-basis: 62px;
+  }
+}
+
 .portal-user strong,
 .portal-user span {
     display: block;

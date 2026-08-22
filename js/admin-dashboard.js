@@ -447,6 +447,22 @@ const renderClients = () => {
     const item = document.createElement("div");
     item.className = "admin-list-item";
 
+    const identity = document.createElement("div");
+    identity.className = "admin-client-identity";
+
+    const clientAvatar = document.createElement("div");
+    clientAvatar.className = "admin-client-avatar";
+
+    if (client.photoURL) {
+      const image = document.createElement("img");
+      image.src = client.photoURL;
+      image.alt = "";
+      image.referrerPolicy = "no-referrer";
+      clientAvatar.appendChild(image);
+    } else {
+      clientAvatar.textContent = getClientLabel(client).charAt(0).toUpperCase();
+    }
+
     const information = document.createElement("div");
     information.className = "admin-list-info";
 
@@ -470,7 +486,8 @@ const renderClients = () => {
     badge.textContent = "client";
 
     information.append(title, details);
-    item.append(information, badge);
+    identity.append(clientAvatar, information);
+    item.append(identity, badge);
 
     clientList.appendChild(item);
   });

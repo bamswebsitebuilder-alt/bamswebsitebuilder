@@ -95,6 +95,12 @@
     <img alt="BAM's Website Builder" src="/images/logo-header.jpg" style="display:block;width:170px;max-width:36vw;height:52px;object-fit:contain;object-position:left center;"/>
    </a>
    <div class="admin-header-actions">
+    <div class="admin-profile-photo-wrap">
+     <div class="admin-profile-photo" id="admin-profile-photo" aria-label="Foto de perfil del administrador">A</div>
+     <input id="profile-photo-input" type="file" accept="image/jpeg,image/png,image/webp" hidden=""/>
+     <button class="admin-photo-button" id="profile-photo-button" type="button">Cambiar foto</button>
+     <span class="admin-photo-status" id="profile-photo-status" role="status" hidden=""></span>
+    </div>
     <span id="admin-email">
      Cargando...
     </span>
@@ -724,6 +730,7 @@
   </script>
   <script src="/js/admin-messages.js?v=1" type="module">
   </script>
+  <script src="/js/profile-picture.js?v=1" type="module"></script>
   <script src="/js/animations.js?v=1">
   </script>
   <script defer="" src="/js/site-upgrades.js?v=1">

@@ -355,7 +355,7 @@
      </p>
     </div>
     <div class="portal-user">
-     <div class="portal-avatar" id="portal-avatar">
+     <div class="portal-avatar" id="portal-avatar" aria-label="Foto de perfil">
       C
      </div>
      <div>
@@ -571,6 +571,16 @@
         </div>
        </div>
        <form class="portal-form" id="account-form">
+        <div class="profile-photo-editor">
+         <div class="profile-photo-preview" id="profile-photo-preview" aria-hidden="true">C</div>
+         <div>
+          <strong>Foto de perfil</strong>
+          <p>Sube una imagen JPG, PNG o WebP de hasta 5 MB.</p>
+          <input id="profile-photo-input" type="file" accept="image/jpeg,image/png,image/webp" hidden=""/>
+          <button class="portal-secondary-button" id="profile-photo-button" type="button">Elegir foto</button>
+          <p class="form-alert" id="profile-photo-status" role="status" hidden=""></p>
+         </div>
+        </div>
         <div class="portal-form-grid">
          <div class="form-group">
           <label for="account-name">
@@ -634,7 +644,8 @@
   </script>
   <script defer="" src="/js/site-upgrades.js?v=4">
   </script>
-  <script src="/js/portal-messages.js?v=1">
+  <script src="/js/portal-messages.js?v=1" type="module">
   </script>
+  <script src="/js/profile-picture.js?v=1" type="module"></script>
  </body>
 </html>
