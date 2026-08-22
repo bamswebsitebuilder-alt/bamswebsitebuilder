@@ -453,9 +453,11 @@ const renderClients = () => {
     const clientAvatar = document.createElement("div");
     clientAvatar.className = "admin-client-avatar";
 
-    if (client.photoURL) {
+    const clientPhoto = client.photoDataUrl || client.photoURL || "";
+
+    if (clientPhoto) {
       const image = document.createElement("img");
-      image.src = client.photoURL;
+      image.src = clientPhoto;
       image.alt = "";
       image.referrerPolicy = "no-referrer";
       clientAvatar.appendChild(image);
