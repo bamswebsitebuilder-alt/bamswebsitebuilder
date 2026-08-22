@@ -400,6 +400,10 @@ const loadClientFiles = async (user) => {
             getMetadata(fileReference)
           ]);
 
+          if (metadata.customMetadata?.purpose === "profile-picture") {
+            return null;
+          }
+
           return {
             name:
               metadata.customMetadata?.originalName ||
@@ -433,7 +437,7 @@ const loadClientFiles = async (user) => {
 
     if (validFiles.length === 0) {
       showFileListMessage(
-        "Your uploaded files could not be displayed."
+        "You have not uploaded any project files yet."
       );
 
       return;

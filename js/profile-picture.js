@@ -117,7 +117,9 @@ input?.addEventListener("change", () => {
   showStatus(copy.uploading);
 
   const extension = file.type === "image/png" ? "png" : file.type === "image/webp" ? "webp" : "jpg";
-  const photoReference = ref(storage, `users/${currentUser.uid}/profile/avatar.${extension}`);
+  // Use the same per-user area already authorized for portal uploads.
+  // The metadata tag keeps profile images out of the project-file list.
+  const photoReference = ref(storage, `users/${currentUser.uid}/uploads/profile-avatar.${extension}`);
   const upload = uploadBytesResumable(photoReference, file, {
     contentType: file.type,
     cacheControl: "public,max-age=3600",
