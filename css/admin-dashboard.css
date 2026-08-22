@@ -65,6 +65,63 @@ body.admin-dashboard-page {
   font-size: 0.9rem;
 }
 
+.admin-profile-photo-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-profile-photo {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 2px solid #d4a637;
+  border-radius: 50%;
+  background: #d4a637;
+  color: #111;
+  font-weight: 800;
+}
+
+.admin-profile-photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.admin-header-actions .admin-photo-button {
+  padding: 0.45rem 0.7rem;
+  border: 1px solid rgba(212, 166, 55, 0.65);
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  font-size: 0.78rem;
+}
+
+.admin-photo-status {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  width: max-content;
+  max-width: 280px;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid rgba(212, 166, 55, 0.5);
+  border-radius: 8px;
+  background: #151515;
+  color: #fff;
+  font-size: 0.78rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.admin-photo-status.success-alert {
+  border-color: #55b879;
+}
+
 .admin-header-actions button {
   border: 1px solid var(--admin-border);
   border-radius: 999px;
@@ -293,6 +350,10 @@ body.admin-dashboard-page {
 .admin-list-info {
   min-width: 0;
 }
+
+.admin-client-identity { min-width: 0; display: flex; align-items: center; gap: 12px; }
+.admin-client-avatar { width: 44px; height: 44px; flex: 0 0 44px; display: grid; place-items: center; overflow: hidden; border: 1px solid rgba(212, 166, 55, 0.55); border-radius: 50%; background: rgba(212, 166, 55, 0.15); color: var(--admin-gold-light); font-weight: 900; }
+.admin-client-avatar img { width: 100%; height: 100%; display: block; object-fit: cover; }
 
 .admin-list-info strong {
   display: block;

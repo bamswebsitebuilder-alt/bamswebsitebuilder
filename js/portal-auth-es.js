@@ -203,6 +203,22 @@ const validateFile = (file) => {
   };
 };
 
+const renderAvatar = (photoURL, displayName) => {
+  if (!avatar) return;
+  avatar.replaceChildren();
+  avatar.classList.toggle("has-photo", Boolean(photoURL));
+
+  if (photoURL) {
+    const image = document.createElement("img");
+    image.src = photoURL;
+    image.alt = "";
+    image.referrerPolicy = "no-referrer";
+    avatar.appendChild(image);
+  } else {
+    avatar.textContent = (displayName || "Cliente").charAt(0).toUpperCase();
+  }
+};
+
 /* =========================================================
    PROFILE LOADING
 ========================================================= */
@@ -248,10 +264,7 @@ const loadProfile = async (user) => {
     userEmail.textContent = email;
   }
 
-  if (avatar) {
-    avatar.textContent =
-      displayName.charAt(0).toUpperCase();
-  }
+  renderAvatar(profile.photoURL || user.photoURL || "", displayName);
 
   if (accountName) {
     accountName.value = displayName;
@@ -919,7 +932,7 @@ onAuthStateChanged(auth, async (user) => {
         user.email || "";
     }
 
-    if (avatar) {
+    if (avatar && !avatar.classList.contains("has-photo")) {
       avatar.textContent =
         fallbackName.charAt(0).toUpperCase();
     }
@@ -1035,7 +1048,7 @@ accountForm?.addEventListener(
           `Welcome back, ${firstName || "Client"}`;
       }
 
-      if (avatar) {
+      if (avatar && !avatar.classList.contains("has-photo")) {
         avatar.textContent =
           fullName.charAt(0).toUpperCase();
       }
