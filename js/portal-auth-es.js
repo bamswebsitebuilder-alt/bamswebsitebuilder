@@ -264,7 +264,7 @@ const loadProfile = async (user) => {
     userEmail.textContent = email;
   }
 
-  renderAvatar(profile.photoURL || user.photoURL || "", displayName);
+  renderAvatar(profile.photoDataUrl || profile.photoURL || user.photoURL || "", displayName);
 
   if (accountName) {
     accountName.value = displayName;

@@ -1,9 +1,6 @@
-import { auth, db, storage } from "./firebase-config.js";
+import { auth, db } from "./firebase-config.js";
 
-import {
-  onAuthStateChanged,
-  updateProfile
-} from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
 
 import {
   doc,
@@ -11,12 +8,6 @@ import {
   serverTimestamp,
   setDoc
 } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
-
-import {
-  getDownloadURL,
-  ref,
-  uploadBytesResumable
-} from "https://www.gstatic.com/firebasejs/12.11.0/firebase-storage.js";
 
 const input = document.getElementById("profile-photo-input");
 const button = document.getElementById("profile-photo-button");
@@ -27,17 +18,18 @@ const targets = [
   document.getElementById("admin-profile-photo")
 ].filter(Boolean);
 
-const MAX_SIZE = 5 * 1024 * 1024;
+const MAX_SIZE = 20 * 1024 * 1024;
+const OUTPUT_SIZE = 512;
 const ALLOWED_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
 const spanish = document.documentElement.lang?.toLowerCase().startsWith("es");
 let currentUser = null;
 
 const copy = {
   choose: spanish ? "Cambiar foto" : "Change Photo",
-  uploading: spanish ? "Subiendo…" : "Uploading…",
+  uploading: spanish ? "Preparando foto…" : "Preparing photo…",
   success: spanish ? "Tu foto de perfil se actualizó." : "Your profile picture was updated.",
   invalidType: spanish ? "Elige una imagen JPG, PNG o WebP." : "Choose a JPG, PNG, or WebP image.",
-  tooLarge: spanish ? "La imagen debe tener 5 MB o menos." : "The image must be 5 MB or smaller.",
+  tooLarge: spanish ? "La imagen debe tener 20 MB o menos." : "The image must be 20 MB or smaller.",
   signedOut: spanish ? "Inicia sesión para cambiar tu foto." : "Sign in to change your picture.",
   failed: spanish ? "No se pudo actualizar la foto. Inténtalo de nuevo." : "The picture could not be updated. Please try again."
 };
@@ -79,7 +71,58 @@ const loadPhoto = async (user) => {
     console.error("Unable to load profile picture:", error);
   }
 
-  renderPhoto(profile.photoURL || user.photoURL || "", profile.fullName || user.displayName || "");
+  renderPhoto(
+    profile.photoDataUrl || profile.photoURL || user.photoURL || "",
+    profile.fullName || user.displayName || ""
+  );
+};
+
+const loadImage = (file) => {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    const objectUrl = URL.createObjectURL(file);
+
+    image.onload = () => {
+      URL.revokeObjectURL(objectUrl);
+      resolve(image);
+    };
+
+    image.onerror = () => {
+      URL.revokeObjectURL(objectUrl);
+      reject(new Error("The selected image could not be read."));
+    };
+
+    image.src = objectUrl;
+  });
+};
+
+const optimizePhoto = async (file) => {
+  const image = await loadImage(file);
+  const sourceSize = Math.min(image.naturalWidth, image.naturalHeight);
+  const sourceX = Math.max(0, (image.naturalWidth - sourceSize) / 2);
+  const sourceY = Math.max(0, (image.naturalHeight - sourceSize) / 2);
+  const canvas = document.createElement("canvas");
+  canvas.width = OUTPUT_SIZE;
+  canvas.height = OUTPUT_SIZE;
+
+  const context = canvas.getContext("2d", { alpha: false });
+  if (!context) throw new Error("Image processing is unavailable.");
+
+  context.fillStyle = "#ffffff";
+  context.fillRect(0, 0, OUTPUT_SIZE, OUTPUT_SIZE);
+  context.drawImage(
+    image,
+    sourceX,
+    sourceY,
+    sourceSize,
+    sourceSize,
+    0,
+    0,
+    OUTPUT_SIZE,
+    OUTPUT_SIZE
+  );
+
+  return canvas.toDataURL("image/jpeg", 0.84);
 };
 
 const resetButton = () => {
@@ -90,7 +133,7 @@ const resetButton = () => {
 
 button?.addEventListener("click", () => input?.click());
 
-input?.addEventListener("change", () => {
+input?.addEventListener("change", async () => {
   const file = input.files?.[0];
   if (!file) return;
 
@@ -116,51 +159,24 @@ input?.addEventListener("change", () => {
   button.textContent = copy.uploading;
   showStatus(copy.uploading);
 
-  const extension = file.type === "image/png" ? "png" : file.type === "image/webp" ? "webp" : "jpg";
-  // Use the same per-user area already authorized for portal uploads.
-  // The metadata tag keeps profile images out of the project-file list.
-  const photoReference = ref(storage, `users/${currentUser.uid}/uploads/profile-avatar.${extension}`);
-  const upload = uploadBytesResumable(photoReference, file, {
-    contentType: file.type,
-    cacheControl: "public,max-age=3600",
-    customMetadata: { uploadedBy: currentUser.uid, purpose: "profile-picture" }
-  });
+  try {
+    const photoDataUrl = await optimizePhoto(file);
 
-  upload.on(
-    "state_changed",
-    (snapshot) => {
-      const percent = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-      showStatus(`${copy.uploading.replace("…", "")} ${percent}%`);
-    },
-    (error) => {
-      console.error("Profile picture upload failed:", error);
-      showStatus(copy.failed);
-      input.value = "";
-      resetButton();
-    },
-    async () => {
-      try {
-        const photoURL = await getDownloadURL(upload.snapshot.ref);
-        await Promise.all([
-          updateProfile(currentUser, { photoURL }),
-          setDoc(doc(db, "users", currentUser.uid), {
-            photoURL,
-            photoUpdatedAt: serverTimestamp(),
-            updatedAt: serverTimestamp()
-          }, { merge: true })
-        ]);
+    await setDoc(doc(db, "users", currentUser.uid), {
+      photoDataUrl,
+      photoUpdatedAt: serverTimestamp(),
+      updatedAt: serverTimestamp()
+    }, { merge: true });
 
-        renderPhoto(photoURL, currentUser.displayName || "");
-        showStatus(copy.success, true);
-      } catch (error) {
-        console.error("Profile picture save failed:", error);
-        showStatus(copy.failed);
-      } finally {
-        input.value = "";
-        resetButton();
-      }
-    }
-  );
+    renderPhoto(photoDataUrl, currentUser.displayName || "");
+    showStatus(copy.success, true);
+  } catch (error) {
+    console.error("Profile picture save failed:", error);
+    showStatus(copy.failed);
+  } finally {
+    input.value = "";
+    resetButton();
+  }
 });
 
 onAuthStateChanged(auth, (user) => {
