@@ -56,7 +56,8 @@ const friendlyAuthError = (error) => {
     "auth/network-request-failed": "A network error occurred. Check your connection and try again.",
     "auth/email-already-in-use": "An account already exists for this email address.",
     "auth/weak-password": "Use a stronger password with at least 6 characters.",
-    "auth/operation-not-allowed": "Email/password sign-in is not enabled in Firebase Authentication."
+    "auth/operation-not-allowed": "Email/password sign-in is not enabled in Firebase Authentication.",
+    "portal/role-unavailable": "Your account was signed in, but the portal could not load your access level. Please try again."
   };
 
   console.error("Firebase authentication error:", error);
@@ -87,23 +88,53 @@ const getUserRole = async (user) => {
       .toLowerCase();
   } catch (error) {
     console.error("Unable to read account role:", error);
-    return "client";
+    const roleError = new Error("Unable to load the portal access level.");
+    roleError.code = "portal/role-unavailable";
+    throw roleError;
   }
 };
 
 const redirectAfterLogin = async (user) => {
   const role = await getUserRole(user);
   const requestedPage = new URLSearchParams(window.location.search).get("next");
+  const isSpanish = document.documentElement.lang
+    .toLowerCase()
+    .startsWith("es");
 
   if (role === "admin") {
-    window.location.replace("admin-dashboard.html");
+    window.location.replace(
+      isSpanish ? "/es/admin-dashboard" : "/admin-dashboard"
+    );
     return;
   }
 
-  const safeClientDestination =
-    requestedPage === "client-portal.html"
-      ? requestedPage
-      : "client-portal.html";
+  const defaultClientDestination = isSpanish
+    ? "/es/client-portal"
+    : "/client-portal";
+
+  let safeClientDestination = defaultClientDestination;
+
+  if (requestedPage) {
+    try {
+      const requestedUrl = new URL(requestedPage, window.location.origin);
+      const allowedPaths = new Set([
+        "/client-portal",
+        "/client-portal.html",
+        "/es/client-portal",
+        "/es/client-portal.html"
+      ]);
+
+      if (
+        requestedUrl.origin === window.location.origin &&
+        allowedPaths.has(requestedUrl.pathname)
+      ) {
+        safeClientDestination =
+          `${requestedUrl.pathname}${requestedUrl.search}${requestedUrl.hash}`;
+      }
+    } catch (error) {
+      console.warn("Ignored invalid login destination:", error);
+    }
+  }
 
   window.location.replace(safeClientDestination);
 };
