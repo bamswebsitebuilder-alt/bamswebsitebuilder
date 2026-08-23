@@ -1,11 +1,71 @@
 {
   "name": "BAM's Website Builder",
   "short_name": "BAM's",
+  "description": "Manage website projects, messages, invoices, files, and appointments with BAM's Website Builder.",
+  "id": "/",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#090909",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui"
+  ],
+  "orientation": "portrait-primary",
+  "background_color": "#050505",
   "theme_color": "#d4a637",
+  "lang": "en-US",
+  "categories": [
+    "business",
+    "productivity"
+  ],
   "icons": [
-    {"src":"/images/icon-dark.jpg","sizes":"512x512","type":"image/jpeg"}
+    {
+      "src": "/images/app-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/app-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Client Portal",
+      "short_name": "Portal",
+      "url": "/client-portal",
+      "icons": [
+        {
+          "src": "/images/app-icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Book a Call",
+      "short_name": "Book",
+      "url": "/booking",
+      "icons": [
+        {
+          "src": "/images/app-icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Contact BAM's",
+      "short_name": "Contact",
+      "url": "/contact",
+      "icons": [
+        {
+          "src": "/images/app-icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
   ]
 }
