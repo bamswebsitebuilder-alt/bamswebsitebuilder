@@ -8,7 +8,6 @@
 .template-price small{margin-top:3px;color:#8f8f8f;font-size:.72rem}
 .template-preview{position:relative;background:linear-gradient(135deg,#171717,#080808)}
 .template-preview img{display:block}
-.template-preview::after{content:"Website Preview";position:absolute;right:10px;bottom:10px;padding:5px 8px;border-radius:999px;background:rgba(0,0,0,.72);color:#f0c45a;font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 .template-demo,.template-select,.pay-deposit,.pay-full{transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
 .template-demo:hover,.template-select:hover,.pay-deposit:hover,.pay-full:hover{transform:translateY(-2px)}
 @media(max-width:1150px){.desktop-navigation{gap:14px}.desktop-navigation a{font-size:.84rem}}
