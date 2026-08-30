@@ -3,6 +3,19 @@
   const spanish = document.documentElement.lang.toLowerCase().startsWith('es');
   const page = (location.pathname.replace(/\/$/, '').split('/').pop() || 'home').replace(/\.html$/, '');
 
+  const retiredDemoNames = new Set([
+    'Titan Athletics', 'Summit Roofing Co.', 'IronPeak Roofing',
+    'Coastal Air Comfort', 'Precision Climate', 'Harbor Health Clinic',
+    'Everwell Medical', 'BrightBay Dental', 'Pearl & Pine Dentistry',
+    'StoneLine Construction', 'Forge & Frame Builders', 'CoreRise Fitness',
+    'Forge Athletics Club', 'Ember Cup Coffee', 'Juniper & Roast',
+    'Bayline Auto Care', 'TorqueWorks Garage'
+  ]);
+  document.querySelectorAll('.template-card, .portfolio-card, .portfolio-home-card').forEach((card) => {
+    const heading = card.querySelector('h2, h3');
+    if (heading && retiredDemoNames.has(heading.textContent.trim())) card.remove();
+  });
+
   document.querySelectorAll('.desktop-navigation a, .mobile-navigation a').forEach((link) => {
     const isAbout = page === 'about' && link.dataset.page === 'about';
     if (isAbout) {
@@ -34,23 +47,7 @@
   const portfolioAdditions = [
     {name:'G3 Blend Lab',type:spanish?'Sitio web para barbería':'Barber Website',image:'/images/g3-blend-lab-logo.png',href:'/blend-lab/',features:spanish?['Servicios y precios','Galería de cortes','Reservas en línea']:['Services and pricing','Haircut gallery','Online booking']},
     {name:'Kade Mercer',type:spanish?'Sitio web para autor':'Author Website',image:'/images/book1.png',href:'/kade-mercer/',features:spanish?['Exhibición de libros','Biografía del autor','Recursos para lectores']:['Book showcase','Author biography','Reader resources']},
-    {name:'Velocity Drive Rentals',type:spanish?'Alquiler de automóviles':'Car Rental Website',image:'/images/velocity-drive-rentals.jpg',href:'/velocity-drive-rentals/',features:spanish?['Catálogo de vehículos','Reservas y precios','Herramientas para clientes']:['Vehicle catalog','Booking and pricing','Customer tools']},
-    {name:'Summit Roofing Co.',type:spanish?'Empresa de techado':'Roofing Company',image:'https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&w=1200&q=82',href:'/roofing-starter/',features:spanish?['Reparación de techos','Daños por tormentas','Inspecciones gratuitas']:['Roof repair','Storm damage','Free inspections']},
-    {name:'IronPeak Roofing',type:spanish?'Empresa de techado premium':'Premium Roofing Company',image:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=82',href:'/roofing-premium/',features:spanish?['Techos metálicos','Sistemas comerciales','Impermeabilización']:['Metal roofing','Commercial systems','Waterproofing']},
-    {name:'Coastal Air Comfort',type:spanish?'Empresa de climatización':'HVAC Company',image:'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1200&q=82',href:'/hvac-starter/',features:spanish?['Reparación de aire','Instalación de sistemas','Calidad del aire']:['AC repair','System installation','Indoor air quality']},
-    {name:'Precision Climate',type:spanish?'Climatización premium':'Premium HVAC Company',image:'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=1200&q=82',href:'/hvac-premium/',features:spanish?['Termostatos inteligentes','Sistemas comerciales','Mantenimiento preventivo']:['Smart thermostats','Commercial HVAC','Preventive maintenance']},
-    {name:'Harbor Health Clinic',type:spanish?'Consultorio médico':'Medical Office',image:'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=82',href:'/medical-office-starter/',features:spanish?['Atención primaria','Visitas el mismo día','Recursos para pacientes']:['Primary care','Same-day visits','Patient resources']},
-    {name:'Everwell Medical',type:spanish?'Consultorio médico premium':'Premium Medical Office',image:'https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=1200&q=82',href:'/medical-office-premium/',features:spanish?['Medicina preventiva','Atención especializada','Portal del paciente']:['Preventive medicine','Specialty care','Patient portal']},
-    {name:'BrightBay Dental',type:spanish?'Consultorio dental':'Dental Office',image:'https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=1200&q=82',href:'/dentist-office-starter/',features:spanish?['Exámenes dentales','Atención familiar','Citas de emergencia']:['Dental exams','Family care','Emergency appointments']},
-    {name:'Pearl & Pine Dentistry',type:spanish?'Odontología premium':'Premium Dentistry',image:'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1200&q=82',href:'/dentist-office-premium/',features:spanish?['Odontología cosmética','Implantes','Diseño de sonrisa']:['Cosmetic dentistry','Implants','Smile design']},
-    {name:'StoneLine Construction',type:spanish?'Empresa de construcción':'Construction Company',image:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=82',href:'/construction-starter/',features:spanish?['Construcción nueva','Renovaciones','Planificación']:['New construction','Renovations','Project planning']},
-    {name:'Forge & Frame Builders',type:spanish?'Constructora premium':'Premium Construction Company',image:'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=82',href:'/construction-premium/',features:spanish?['Casas personalizadas','Renovaciones de lujo','Gestión de proyectos']:['Custom homes','Luxury renovations','Project management']},
-    {name:'CoreRise Fitness',type:spanish?'Gimnasio':'Fitness Center',image:'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=82',href:'/fitness-starter/',features:spanish?['Entrenamiento de fuerza','Clases grupales','Programas para miembros']:['Strength training','Group classes','Member programs']},
-    {name:'Forge Athletics Club',type:spanish?'Club de rendimiento':'Performance Fitness Club',image:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1200&q=82',href:'/fitness-premium/',features:spanish?['Entrenamiento deportivo','Recuperación','Apoyo nutricional']:['Athlete coaching','Recovery programs','Nutrition support']},
-    {name:'Ember Cup Coffee',type:spanish?'Cafetería':'Coffee Shop',image:'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=82',href:'/coffee-shop-starter/',features:spanish?['Menú de café','Pedidos móviles','Catering']:['Coffee menu','Mobile ordering','Catering']},
-    {name:'Juniper & Roast',type:spanish?'Cafetería premium':'Premium Coffee Shop',image:'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=82',href:'/coffee-shop-premium/',features:spanish?['Café de especialidad','Menú de temporada','Eventos comunitarios']:['Specialty coffee','Seasonal menu','Community events']},
-    {name:'Bayline Auto Care',type:spanish?'Taller mecánico':'Auto Repair Shop',image:'https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1200&q=82',href:'/auto-repair-starter/',features:spanish?['Diagnóstico','Servicio de frenos','Mantenimiento']:['Diagnostics','Brake service','Scheduled maintenance']},
-    {name:'TorqueWorks Garage',type:spanish?'Taller mecánico premium':'Premium Auto Garage',image:'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=82',href:'/auto-repair-premium/',features:spanish?['Servicio de rendimiento','Reparación de motor','Inspecciones digitales']:['Performance service','Engine repair','Digital inspections']}
+    {name:'Velocity Drive Rentals',type:spanish?'Alquiler de automóviles':'Car Rental Website',image:'/images/velocity-drive-rentals.jpg',href:'/velocity-drive-rentals/',features:spanish?['Catálogo de vehículos','Reservas y precios','Herramientas para clientes']:['Vehicle catalog','Booking and pricing','Customer tools']}
   ];
 
   const templateGrid = document.querySelector('.template-grid');
@@ -77,11 +74,7 @@
 
   const homePortfolioGrid = document.querySelector('.portfolio-preview');
   if (homePortfolioGrid) {
-    const homeDemos = [
-      {name:'Titan Athletics',type:spanish?'Deportes Escolares':'School Athletics',image:'https://images.unsplash.com/photo-1566577739112-5180d4bf9390?auto=format&fit=crop&w=1200&q=82',href:'/titan-athletics/'},
-      ...demos
-    ];
-    homeDemos.forEach((demo) => {
+    demos.forEach((demo) => {
       const exists = [...homePortfolioGrid.querySelectorAll('h3')].some((heading) => heading.textContent.trim() === demo.name);
       if (exists) return;
       const card = document.createElement('article');
