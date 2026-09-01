@@ -784,3 +784,26 @@ html[data-theme="dark"] .about-hero .about-grid{
 @media(max-width:800px){
   .about-hero .about-grid{padding:0!important}
 }
+
+
+/* Force-remove About biography panel in both themes — 2026-09-01 */
+html[data-theme="light"] .about-hero .about-copy,
+html[data-theme="dark"] .about-hero .about-copy{
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important
+}
+html[data-theme="light"] .about-hero .about-copy::before,
+html[data-theme="light"] .about-hero .about-copy::after,
+html[data-theme="dark"] .about-hero .about-copy::before,
+html[data-theme="dark"] .about-hero .about-copy::after{
+  content:none!important;
+  display:none!important;
+  background:none!important;
+  box-shadow:none!important
+}
