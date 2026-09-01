@@ -169,6 +169,157 @@
                     </p>
 <div class="contact-details">
 <div class="contact-detail-item">
+<span aria-hidden="true" class="contact-detail-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="/images/bam-icons.svg#clock"></use></svg></span>
+<span class="contact-detail-copy">
+<strong>Response Time</strong>
+<span>Up to 72 hours</span>
+</span>
+</div>
+</div>
+
+  height: 3px;
+  border-radius: 999px;
+  background: #f0c400;
+  transform: translateX(-50%);
+  transition: width .25s ease;
+}
+
+.desktop-navigation a:hover::after,
+.desktop-navigation a.active::after,
+.desktop-navigation a[aria-current="page"]::after {
+  width: 48px;
+}
+
+/* Restored contact form choices shared by desktop and mobile */
+#template-choice-group,
+#template-choice {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+}
+
+.template-choice-help {
+  margin: 8px 0 0;
+  color: #9f9f9f;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.subscription-contact-box {
+  margin: 0 0 26px;
+  padding: 20px 22px;
+  border: 1px solid rgba(244, 193, 93, 0.38);
+  border-radius: 14px;
+  background: rgba(244, 193, 93, 0.08);
+}
+
+.subscription-contact-box h2 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+}
+
+.subscription-contact-box p {
+  margin: 0 0 12px;
+  line-height: 1.55;
+}
+
+.subscription-contact-box a {
+  color: #f4c15d;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.subscription-contact-box a:hover,
+.subscription-contact-box a:focus-visible {
+  text-decoration: underline;
+}
+
+@media (max-width: 700px) {
+  .subscription-contact-box {
+    padding: 17px 18px;
+  }
+}
+</style>
+<link rel="stylesheet" href="/css/responsive-fixes.css">
+</head>
+<body><header class="site-header" id="site-header">
+<div class="header-container">
+<a aria-label="BAM's Website Builder home" class="site-brand" href="/">
+<span class="brand-text">
+<strong>BAM'S</strong>
+<small>WEBSITE BUILDER</small>
+</span>
+</a>
+<nav aria-label="Main navigation" class="desktop-navigation">
+<a data-page="home" href="/">Home</a><a data-page="about" href="/about">About</a><a data-page="services" href="/services">Services</a><a data-page="prices" href="/prices">Prices</a><a data-page="subscriptions" href="/subscriptions">Website Plans</a><a data-page="templates" href="/templates">Templates</a><a data-page="portfolio" href="/portfolio">Portfolio</a><a data-page="reviews" href="/reviews">Reviews</a><a aria-current="page" class="active" data-page="contact" href="/contact">Contact</a><a data-page="booking" href="/booking.html">Book a Call</a><a data-page="login" href="/login">Login</a>
+</nav>
+<div class="desktop-language">
+<a class="language-active" href="/contact">English</a>
+<span aria-hidden="true">|</span>
+<a href="/es/contact">Español</a>
+</div>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open navigation menu" class="menu-toggle" id="menu-toggle" type="button">
+<span></span><span></span><span></span>
+</button>
+</div>
+</header><div class="menu-overlay" id="menu-overlay"></div><aside aria-hidden="true" aria-label="Mobile navigation" class="mobile-menu" id="mobile-menu">
+<div class="mobile-menu-header">
+<a class="mobile-menu-brand" href="/">
+<span>
+<strong>BAM'S</strong>
+<small>WEBSITE BUILDER</small>
+</span>
+</a>
+<button aria-label="Close navigation menu" class="mobile-menu-close" id="mobile-menu-close" type="button">
+<span></span><span></span>
+</button>
+</div>
+<nav class="mobile-navigation">
+<a data-page="home" href="/"><span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#home"></use></svg></span><span>Home</span></a><a data-page="about" href="/about"><span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"></circle><path d="M5.5 21c.7-4.3 2.9-6.5 6.5-6.5s5.8 2.2 6.5 6.5"></path></svg></span><span>About</span></a><a data-page="services" href="/services"><span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#services"></use></svg></span><span>Services</span></a><a data-page="prices" href="/prices"><span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#prices"></use></svg></span><span>Prices</span></a><a data-page="subscriptions" href="/subscriptions"><span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#prices"></use></svg></span><span>Website Plans</span></a><a data-page="templates" href="/templates"><span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#portfolio"></use></svg></span><span>Templates</span></a><a data-page="portfolio" href="/portfolio"><span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#portfolio"></use></svg></span><span>Portfolio</span></a><a data-page="reviews" href="/reviews"><span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#reviews"></use></svg></span><span>Reviews</span></a><a aria-current="page" class="active" data-page="contact" href="/contact"><span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#contact"></use></svg></span><span>Contact</span></a><a data-page="login" href="/login"><span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#login"></use></svg></span><span>Login</span></a>
+</nav>
+<div class="mobile-language-section">
+<p>Language</p>
+<div class="mobile-language-links">
+<a class="language-active" href="/contact">English</a>
+<a href="/es/contact">Español</a>
+</div>
+</div>
+<div class="mobile-menu-cta">
+<a href="/contact">Get a Free Quote</a>
+<a class="mobile-menu-booking" data-page="booking" href="/booking.html">Book a Call</a>
+
+</div>
+<div class="mobile-menu-contact">
+<a href="tel:+17274178762">727-417-8762</a>
+<a href="mailto:bamswebsitebuilder@gmail.com">bamswebsitebuilder@gmail.com</a>
+</div>
+</aside>
+<!-- HEADER -->
+<!-- SHARED STICKY NAVIGATION -->
+
+
+
+<!-- CONTACT PAGE -->
+<main>
+<section class="contact-section">
+<div class="contact-container">
+<!-- CONTACT INFORMATION -->
+<div class="contact-information">
+<h4>
+                        CONTACT US
+                    </h4>
+<h1>
+                        Let's Build
+                        <br/>
+                        Your Website
+                    </h1>
+<p>
+                        Tell us about your business and the type of website
+                        you need. Complete the form to receive a free project
+                        quote from BAM's Website Builder.
+                    </p>
+<div class="contact-details">
+<div class="contact-detail-item">
 <span aria-hidden="true" class="contact-detail-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="/images/bam-icons.svg#phone"></use></svg></span>
 <span class="contact-detail-copy">
 <strong>Phone</strong>
