@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bams-app-v7';
+const CACHE_NAME = 'bams-app-v8';
 const APP_SHELL = [
   '/',
   '/offline.html',
