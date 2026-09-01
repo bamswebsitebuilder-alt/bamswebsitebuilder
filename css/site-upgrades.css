@@ -764,3 +764,23 @@ html[data-theme="light"] .contact-detail-copy a{color:#292720!important}
   .about-hero .about-portrait{width:min(82vw,390px);margin-inline:auto}
   .about-hero .about-copy{text-align:center}
 }
+
+
+/* Remove About page container card — 2026-09-01 */
+.about-hero .about-grid{
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important
+}
+html[data-theme="light"] .about-hero .about-grid,
+html[data-theme="dark"] .about-hero .about-grid{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important
+}
+@media(max-width:800px){
+  .about-hero .about-grid{padding:0!important}
+}
