@@ -195,7 +195,7 @@ html body .desktop-navigation a:hover::after,html body .desktop-navigation a.act
   object-position:center!important;
   opacity:.18!important;
   z-index:0!important;
-  mix-blend-mode:normal!important;
+  mix-blend-mode:screen!important;
   filter:none!important;
   pointer-events:none!important;
   user-select:none!important;
