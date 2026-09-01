@@ -52,8 +52,18 @@
   }
 
   ready(() => {
-    const headerContainer = document.querySelector('.header-container');
-    if (headerContainer && !headerContainer.querySelector('.theme-toggle')) {
+    document.querySelectorAll('.header-container > .theme-toggle').forEach((button) => button.remove());
+
+    const mobileMenu = document.querySelector('.mobile-menu');
+    if (mobileMenu && !mobileMenu.querySelector('.mobile-theme-section')) {
+      const themeSection = document.createElement('div');
+      themeSection.className = 'mobile-theme-section';
+
+      const themeLabel = document.createElement('span');
+      themeLabel.textContent = document.documentElement.lang.toLowerCase().startsWith('es')
+        ? 'Apariencia'
+        : 'Appearance';
+
       const themeToggle = document.createElement('button');
       themeToggle.className = 'theme-toggle';
       themeToggle.type = 'button';
@@ -64,8 +74,10 @@
         } catch {}
         applyTheme(nextTheme);
       });
-      const menuButton = headerContainer.querySelector('.menu-toggle');
-      headerContainer.insertBefore(themeToggle, menuButton || null);
+
+      themeSection.append(themeLabel, themeToggle);
+      const languageSection = mobileMenu.querySelector('.mobile-language-section');
+      mobileMenu.insertBefore(themeSection, languageSection || mobileMenu.querySelector('.mobile-menu-cta'));
     }
     applyTheme(getSavedTheme());
 
