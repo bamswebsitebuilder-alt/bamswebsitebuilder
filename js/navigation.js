@@ -1,6 +1,42 @@
 (() => {
   'use strict';
 
+  const THEME_KEY = 'bam-theme';
+  const getSavedTheme = () => {
+    try {
+      return localStorage.getItem(THEME_KEY) === 'light' ? 'light' : 'dark';
+    } catch {
+      return 'dark';
+    }
+  };
+  const applyTheme = (theme) => {
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+
+    document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]').forEach((link) => {
+      link.href = theme === 'light'
+        ? '/images/icon-light.jpg?v=20260901'
+        : '/images/icon-dark.jpg?v=20260901';
+      link.type = 'image/jpeg';
+    });
+
+    document.querySelectorAll('.hero-logo-bg').forEach((logo) => {
+      logo.src = theme === 'light' ? '/images/logo-light.jpg' : '/images/logo-dark.jpg';
+    });
+
+    document.querySelectorAll('.theme-toggle').forEach((button) => {
+      const light = theme === 'light';
+      button.innerHTML = light
+        ? '<span aria-hidden="true">☾</span>'
+        : '<span aria-hidden="true">☀</span>';
+      button.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
+      button.setAttribute('title', light ? 'Dark mode' : 'Light mode');
+      button.setAttribute('aria-pressed', String(light));
+    });
+  };
+
+  applyTheme(getSavedTheme());
+
   const ready = (callback) => {
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', callback, { once: true });
@@ -16,6 +52,23 @@
   }
 
   ready(() => {
+    const headerContainer = document.querySelector('.header-container');
+    if (headerContainer && !headerContainer.querySelector('.theme-toggle')) {
+      const themeToggle = document.createElement('button');
+      themeToggle.className = 'theme-toggle';
+      themeToggle.type = 'button';
+      themeToggle.addEventListener('click', () => {
+        const nextTheme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+        try {
+          localStorage.setItem(THEME_KEY, nextTheme);
+        } catch {}
+        applyTheme(nextTheme);
+      });
+      const menuButton = headerContainer.querySelector('.menu-toggle');
+      headerContainer.insertBefore(themeToggle, menuButton || null);
+    }
+    applyTheme(getSavedTheme());
+
     const spanish = document.documentElement.lang.toLowerCase().startsWith('es');
     const aboutHref = spanish ? '/es/about' : '/about';
     const aboutLabel = spanish ? 'Nosotros' : 'About';
@@ -43,10 +96,7 @@
     syncFloatingBooking();
     desktopBookingLayout.addEventListener('change', syncFloatingBooking);
 
-    document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]').forEach((link) => {
-      link.href = '/images/icon-dark.jpg?v=20260814';
-      link.type = 'image/jpeg';
-    });
+    applyTheme(getSavedTheme());
 
     document.querySelectorAll('.desktop-navigation').forEach((nav) => {
       if (nav.querySelector('[data-page="about"]')) return;
