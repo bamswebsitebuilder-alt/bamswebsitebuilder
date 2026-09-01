@@ -359,3 +359,98 @@ html[data-theme="light"] .card-top{
 }
 html[data-theme="light"] .stats-strip{background:rgba(184,134,11,.32);border-color:rgba(184,134,11,.32)}
 html[data-theme="light"] .stat-block{background:#fff4d8;color:#382710}
+
+
+/* =========================================================
+   DEEP NAVY AND GOLD DARK THEME
+========================================================= */
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --nav-black:#061322;
+  --nav-panel:#0a1b2e;
+  --nav-border:rgba(212,166,55,.4)
+}
+html[data-theme="dark"] body{background:#071426;color:#f7f8fb}
+html[data-theme="dark"] .site-header,
+html[data-theme="dark"] .site-header.header-scrolled,
+html[data-theme="dark"] .site-header.scrolled{
+  background:rgba(5,17,31,.97);
+  border-bottom-color:rgba(212,166,55,.4);
+  box-shadow:0 10px 30px rgba(0,7,18,.5)
+}
+html[data-theme="dark"] .mobile-menu{background:#081a2e;border-left-color:rgba(212,166,55,.38)}
+html[data-theme="dark"] .menu-overlay{background:rgba(1,8,18,.72)}
+html[data-theme="dark"] .theme-toggle{background:#102a46;border-color:rgba(212,166,55,.52);color:#f1c75b}
+html[data-theme="dark"] .theme-toggle:hover{background:#17395d}
+html[data-theme="dark"] .hero{
+  background:radial-gradient(circle at 72% 38%,rgba(212,166,55,.12),transparent 34%),linear-gradient(135deg,#061322 0%,#0b213a 58%,#102d4d 100%)!important
+}
+html[data-theme="dark"] .hero>.hero-logo-bg{mix-blend-mode:screen!important;opacity:.16!important}
+html[data-theme="dark"] main,
+html[data-theme="dark"] .home-section,
+html[data-theme="dark"] .pricing-section,
+html[data-theme="dark"] .services-section,
+html[data-theme="dark"] .portfolio-page,
+html[data-theme="dark"] .reviews-section,
+html[data-theme="dark"] .contact-section,
+html[data-theme="dark"] .about-page{
+  background:#071426!important;
+  color:#f7f8fb
+}
+html[data-theme="dark"] .home-section-alt,
+html[data-theme="dark"] .additional-services,
+html[data-theme="dark"] .portfolio-header,
+html[data-theme="dark"] .pricing-heading,
+html[data-theme="dark"] .about-values{
+  background:#0a1b2e!important
+}
+html[data-theme="dark"] .home-card,
+html[data-theme="dark"] .price-card,
+html[data-theme="dark"] .service-row,
+html[data-theme="dark"] .portfolio-card,
+html[data-theme="dark"] .review-card,
+html[data-theme="dark"] .contact-card,
+html[data-theme="dark"] .login-card,
+html[data-theme="dark"] .portal-card,
+html[data-theme="dark"] .dashboard-card,
+html[data-theme="dark"] .about-value,
+html[data-theme="dark"] .about-copy{
+  background:linear-gradient(145deg,#0d223a,#09192b)!important;
+  color:#f7f8fb!important;
+  border-color:rgba(212,166,55,.3)!important;
+  box-shadow:0 16px 46px rgba(0,7,18,.34)!important
+}
+html[data-theme="dark"] .home-card p,
+html[data-theme="dark"] .service-info p,
+html[data-theme="dark"] .portfolio-card p,
+html[data-theme="dark"] .pricing-intro,
+html[data-theme="dark"] .pricing-disclaimer,
+html[data-theme="dark"] .home-intro,
+html[data-theme="dark"] .about-page p{color:#cbd6e3!important}
+html[data-theme="dark"] .home-title,
+html[data-theme="dark"] .home-card h3,
+html[data-theme="dark"] .service-info h3,
+html[data-theme="dark"] .portfolio-card h2,
+html[data-theme="dark"] .pricing-heading h1,
+html[data-theme="dark"] .about-page h1,
+html[data-theme="dark"] .about-page h2,
+html[data-theme="dark"] .about-page h3{color:#fff!important}
+html[data-theme="dark"] .home-eyebrow,
+html[data-theme="dark"] .section-label,
+html[data-theme="dark"] .portfolio-type,
+html[data-theme="dark"] .about-kicker,
+html[data-theme="dark"] .about-role{color:#f1c75b!important}
+html[data-theme="dark"] .portfolio-home-visual,
+html[data-theme="dark"] .card-top{
+  background:radial-gradient(circle at top right,rgba(212,166,55,.18),transparent 44%),linear-gradient(145deg,#102d4d,#08182a)!important;
+  border-color:rgba(212,166,55,.28)!important
+}
+html[data-theme="dark"] input,
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] select{
+  background:#0a1b2e!important;
+  color:#fff!important;
+  border-color:rgba(212,166,55,.32)!important
+}
+html[data-theme="dark"] .stat-block{background:#0b1f36!important}
+html[data-theme="dark"] .home-footer{background:#04101f;border-top:2px solid rgba(212,166,55,.48)}
