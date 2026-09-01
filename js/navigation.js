@@ -79,6 +79,21 @@
       const languageSection = mobileMenu.querySelector('.mobile-language-section');
       mobileMenu.insertBefore(themeSection, languageSection || mobileMenu.querySelector('.mobile-menu-cta'));
     }
+    const headerContainer = document.querySelector('.header-container');
+    if (headerContainer && !headerContainer.querySelector('.desktop-theme-toggle')) {
+      const desktopThemeToggle = document.createElement('button');
+      desktopThemeToggle.className = 'theme-toggle desktop-theme-toggle';
+      desktopThemeToggle.type = 'button';
+      desktopThemeToggle.addEventListener('click', () => {
+        const nextTheme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+        try {
+          localStorage.setItem(THEME_KEY, nextTheme);
+        } catch {}
+        applyTheme(nextTheme);
+      });
+      const menuButton = headerContainer.querySelector('.menu-toggle');
+      headerContainer.insertBefore(desktopThemeToggle, menuButton || null);
+    }
     applyTheme(getSavedTheme());
 
     const spanish = document.documentElement.lang.toLowerCase().startsWith('es');
