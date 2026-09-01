@@ -364,6 +364,218 @@ html[data-theme="light"] .stat-block{background:#fff4d8;color:#382710}
 
 
 /* =========================================================
+   PROFESSIONAL LIGHT-THEME TYPOGRAPHY AND CONTRAST
+========================================================= */
+html[data-theme="light"]{
+  --light-ink:#20201d;
+  --light-heading:#171713;
+  --light-body:#4f4d45;
+  --light-muted:#68655b;
+  --light-gold:#8a6200;
+  --light-gold-strong:#6f4d00;
+  --light-surface:#fffdf8;
+  --light-surface-alt:#f6efe2;
+  --light-border:rgba(111,77,0,.22)
+}
+html[data-theme="light"] body{
+  color:var(--light-ink);
+  background:#fbf7ef;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility
+}
+html[data-theme="light"] .brand-text strong,
+html[data-theme="light"] .desktop-navigation a:hover,
+html[data-theme="light"] .desktop-navigation a.active,
+html[data-theme="light"] .desktop-navigation a[aria-current="page"],
+html[data-theme="light"] .desktop-language a:hover,
+html[data-theme="light"] .desktop-language a.language-active{color:#765300!important}
+html[data-theme="light"] .desktop-navigation a,
+html[data-theme="light"] .desktop-language a,
+html[data-theme="light"] .brand-text small{color:#292720!important}
+html[data-theme="light"] main{color:var(--light-ink)!important;background:#fbf7ef!important}
+html[data-theme="light"] main h1,
+html[data-theme="light"] main h2,
+html[data-theme="light"] main h3,
+html[data-theme="light"] main h4,
+html[data-theme="light"] main h5,
+html[data-theme="light"] main h6{
+  color:var(--light-heading)!important;
+  font-weight:800;
+  letter-spacing:-.025em;
+  text-wrap:balance
+}
+html[data-theme="light"] main h1{font-weight:850;letter-spacing:-.04em}
+html[data-theme="light"] main p,
+html[data-theme="light"] main li,
+html[data-theme="light"] main dd,
+html[data-theme="light"] main blockquote,
+html[data-theme="light"] main small{color:var(--light-body)!important;line-height:1.72}
+html[data-theme="light"] main strong,
+html[data-theme="light"] main b{color:var(--light-heading)}
+html[data-theme="light"] main a:not(.btn):not(.primary-button):not(.secondary-button):not(.price-button):not(.home-button):not(.home-button-secondary):not(.portfolio-button):not(.about-button):not(.auth-submit):not(.error-home-link){color:var(--light-gold-strong)}
+
+html[data-theme="light"] .home-eyebrow,
+html[data-theme="light"] .section-label,
+html[data-theme="light"] .portfolio-eyebrow,
+html[data-theme="light"] .portfolio-category,
+html[data-theme="light"] .portfolio-type,
+html[data-theme="light"] .templates-eyebrow,
+html[data-theme="light"] .template-category,
+html[data-theme="light"] .about-kicker,
+html[data-theme="light"] .about-role,
+html[data-theme="light"] .auth-kicker,
+html[data-theme="light"] .auth-badge,
+html[data-theme="light"] .project-status-label{
+  color:var(--light-gold-strong)!important;
+  font-weight:850!important;
+  letter-spacing:.12em
+}
+html[data-theme="light"] .home-intro,
+html[data-theme="light"] .pricing-intro,
+html[data-theme="light"] .pricing-disclaimer,
+html[data-theme="light"] .price-note,
+html[data-theme="light"] .term-note,
+html[data-theme="light"] .paypal-note,
+html[data-theme="light"] .template-heading p,
+html[data-theme="light"] .portfolio-header p,
+html[data-theme="light"] .reviews-header p,
+html[data-theme="light"] .auth-intro p,
+html[data-theme="light"] .about-copy p,
+html[data-theme="light"] .contact-information p{color:var(--light-body)!important}
+
+html[data-theme="light"] .home-section,
+html[data-theme="light"] .pricing-section,
+html[data-theme="light"] .services-section,
+html[data-theme="light"] .content-section,
+html[data-theme="light"] .portfolio-page,
+html[data-theme="light"] .reviews-page,
+html[data-theme="light"] .contact-section,
+html[data-theme="light"] .templates-page,
+html[data-theme="light"] .auth-page,
+html[data-theme="light"] .about-page,
+html[data-theme="light"] .error-main{background:#fbf7ef!important;color:var(--light-ink)!important}
+html[data-theme="light"] .home-section-alt,
+html[data-theme="light"] .additional-services,
+html[data-theme="light"] .portfolio-header,
+html[data-theme="light"] .pricing-heading,
+html[data-theme="light"] .templates-hero,
+html[data-theme="light"] .about-values,
+html[data-theme="light"] .review-cta{background:var(--light-surface-alt)!important}
+
+html[data-theme="light"] .home-card,
+html[data-theme="light"] .price-card,
+html[data-theme="light"] .service-card,
+html[data-theme="light"] .service-row,
+html[data-theme="light"] .portfolio-card,
+html[data-theme="light"] .review-panel,
+html[data-theme="light"] .review-summary-card,
+html[data-theme="light"] .template-card,
+html[data-theme="light"] .process-step,
+html[data-theme="light"] .payment-box,
+html[data-theme="light"] .contact-information,
+html[data-theme="light"] .contact-form,
+html[data-theme="light"] .subscription-contact-box,
+html[data-theme="light"] .auth-card,
+html[data-theme="light"] .about-copy,
+html[data-theme="light"] .about-value,
+html[data-theme="light"] .error-card,
+html[data-theme="light"] .faq-list details{
+  background:var(--light-surface)!important;
+  color:var(--light-ink)!important;
+  border-color:var(--light-border)!important;
+  box-shadow:0 14px 38px rgba(63,48,17,.08)!important
+}
+html[data-theme="light"] .home-card p,
+html[data-theme="light"] .service-card p,
+html[data-theme="light"] .service-info p,
+html[data-theme="light"] .portfolio-card p,
+html[data-theme="light"] .portfolio-features li,
+html[data-theme="light"] .template-card p,
+html[data-theme="light"] .template-benefits li,
+html[data-theme="light"] .review-panel p,
+html[data-theme="light"] .review-summary-card p,
+html[data-theme="light"] .faq-list details p{color:var(--light-body)!important}
+html[data-theme="light"] .feature-list li,
+html[data-theme="light"] .services-table td,
+html[data-theme="light"] .services-table th{color:var(--light-ink)!important}
+html[data-theme="light"] .services-table th{background:#eee1c8!important;color:var(--light-heading)!important}
+html[data-theme="light"] .services-table td{background:#fffdf8!important;border-color:var(--light-border)!important}
+
+html[data-theme="light"] label,
+html[data-theme="light"] legend{color:var(--light-heading)!important;font-weight:750}
+html[data-theme="light"] input,
+html[data-theme="light"] textarea,
+html[data-theme="light"] select{
+  background:#fff!important;
+  color:var(--light-ink)!important;
+  border-color:rgba(73,65,46,.3)!important
+}
+html[data-theme="light"] input::placeholder,
+html[data-theme="light"] textarea::placeholder{color:#79756b!important;opacity:1}
+html[data-theme="light"] input:focus,
+html[data-theme="light"] textarea:focus,
+html[data-theme="light"] select:focus{border-color:var(--light-gold)!important;box-shadow:0 0 0 3px rgba(138,98,0,.12)!important}
+
+html[data-theme="light"] .btn,
+html[data-theme="light"] .primary-button,
+html[data-theme="light"] .price-button,
+html[data-theme="light"] .home-button,
+html[data-theme="light"] .portfolio-button,
+html[data-theme="light"] .about-button,
+html[data-theme="light"] .auth-submit,
+html[data-theme="light"] .error-home-link{
+  background:#8a6200!important;
+  border-color:#8a6200!important;
+  color:#fff!important;
+  font-weight:850!important;
+  letter-spacing:.015em;
+  text-shadow:none!important
+}
+html[data-theme="light"] .secondary-button,
+html[data-theme="light"] .home-button-secondary,
+html[data-theme="light"] .about-button-secondary{
+  background:#fffdf8!important;
+  border-color:#8a6200!important;
+  color:#6f4d00!important;
+  font-weight:800!important
+}
+html[data-theme="light"] .btn:hover,
+html[data-theme="light"] .primary-button:hover,
+html[data-theme="light"] .price-button:hover,
+html[data-theme="light"] .home-button:hover,
+html[data-theme="light"] .portfolio-button:hover,
+html[data-theme="light"] .about-button:hover,
+html[data-theme="light"] .auth-submit:hover,
+html[data-theme="light"] .error-home-link:hover{background:#5f4300!important;border-color:#5f4300!important;color:#fff!important}
+
+html[data-theme="light"] .stat-block{background:#fffdf8!important;color:var(--light-ink)!important}
+html[data-theme="light"] .stat-block span{color:var(--light-body)!important}
+html[data-theme="light"] .stat-block strong,
+html[data-theme="light"] .price,
+html[data-theme="light"] .monthly-price,
+html[data-theme="light"] .template-price{color:var(--light-gold-strong)!important}
+html[data-theme="light"] .hero-trust span,
+html[data-theme="light"] .template-badge,
+html[data-theme="light"] .popular-badge,
+html[data-theme="light"] .project-status-label{
+  background:#f3e7cc!important;
+  border-color:var(--light-border)!important;
+  color:#5f4400!important
+}
+html[data-theme="light"] .home-footer{
+  background:#292720!important;
+  color:#f5f1e8!important;
+  border-top:3px solid #a87912
+}
+html[data-theme="light"] .home-footer h3,
+html[data-theme="light"] .home-footer h4{color:#fff!important}
+html[data-theme="light"] .home-footer p,
+html[data-theme="light"] .home-footer a,
+html[data-theme="light"] .footer-bottom{color:#d8d3c8!important}
+html[data-theme="light"] .home-footer a:hover{color:#f0c45a!important}
+
+
+/* =========================================================
    DEEP NAVY AND GOLD DARK THEME
 ========================================================= */
 html[data-theme="dark"]{
