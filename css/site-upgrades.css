@@ -216,3 +216,122 @@ html body .desktop-navigation a:hover::after,html body .desktop-navigation a.act
 
 /* Booking is a mobile-menu CTA beneath Get a Free Quote, not a desktop nav item. */
 .desktop-navigation a[data-page="booking"]{display:none!important}
+
+
+/* =========================================================
+   DARK / LIGHT THEME SWITCH
+========================================================= */
+.theme-toggle{
+  display:inline-grid;
+  place-items:center;
+  flex:0 0 42px;
+  width:42px;
+  height:42px;
+  margin-left:12px;
+  border:1px solid rgba(212,166,55,.48);
+  border-radius:50%;
+  background:#151515;
+  color:#f1c75b;
+  font-size:1.2rem;
+  line-height:1;
+  cursor:pointer;
+  box-shadow:0 7px 20px rgba(0,0,0,.2);
+  transition:transform .2s ease,background .2s ease,color .2s ease,border-color .2s ease;
+}
+.theme-toggle:hover{transform:translateY(-1px);background:#222}
+.theme-toggle:focus-visible{outline:3px solid rgba(212,166,55,.35);outline-offset:3px}
+@media(max-width:900px){
+  .theme-toggle{margin-left:auto;margin-right:10px}
+}
+html[data-theme="light"]{
+  color-scheme:light;
+  --nav-black:#fffdf8;
+  --nav-panel:#fffaf0;
+  --nav-border:rgba(126,91,12,.26);
+}
+html[data-theme="light"] body{color:#1d1d1b;background:#f7f3ea}
+html[data-theme="light"] .site-header,
+html[data-theme="light"] .site-header.header-scrolled,
+html[data-theme="light"] .site-header.scrolled{
+  background:rgba(255,253,248,.97);
+  border-bottom-color:rgba(160,116,18,.3);
+  box-shadow:0 8px 28px rgba(74,54,12,.1)
+}
+html[data-theme="light"] .brand-text small,
+html[data-theme="light"] .desktop-navigation a,
+html[data-theme="light"] .desktop-language a{color:#292720}
+html[data-theme="light"] .brand-text strong,
+html[data-theme="light"] .desktop-navigation a:hover,
+html[data-theme="light"] .desktop-navigation a.active,
+html[data-theme="light"] .desktop-navigation a[aria-current="page"],
+html[data-theme="light"] .desktop-language a:hover,
+html[data-theme="light"] .desktop-language a.language-active{color:#9a6b00}
+html[data-theme="light"] .theme-toggle{background:#fff8e7;color:#6c4b00;border-color:rgba(154,107,0,.34);box-shadow:0 7px 20px rgba(74,54,12,.1)}
+html[data-theme="light"] .menu-toggle span,
+html[data-theme="light"] .mobile-menu-close span{background:#292720}
+html[data-theme="light"] .mobile-menu{background:#fffdf8;color:#25231d;border-left-color:rgba(154,107,0,.25)}
+html[data-theme="light"] .mobile-navigation a,
+html[data-theme="light"] .mobile-language-section p,
+html[data-theme="light"] .mobile-language-links a,
+html[data-theme="light"] .mobile-menu-contact a{color:#292720}
+html[data-theme="light"] .mobile-navigation a:hover,
+html[data-theme="light"] .mobile-navigation a.active,
+html[data-theme="light"] .mobile-navigation a[aria-current="page"]{background:#f6ead0;color:#7c5700}
+html[data-theme="light"] .menu-overlay{background:rgba(45,38,23,.34)}
+html[data-theme="light"] .hero{
+  background:radial-gradient(circle at 50% 40%,rgba(212,166,55,.16),transparent 42%),linear-gradient(135deg,#fffdf8 0%,#f4ead5 100%)!important
+}
+html[data-theme="light"] .hero>.hero-logo-bg{mix-blend-mode:multiply!important;opacity:.13!important}
+html[data-theme="light"] .hero-content h1,
+html[data-theme="light"] .hero-content p{color:#24221d}
+html[data-theme="light"] .hero-content h4,
+html[data-theme="light"] .home-eyebrow,
+html[data-theme="light"] .section-label{color:#9a6b00}
+html[data-theme="light"] .hero-trust span{background:rgba(255,255,255,.65);border-color:rgba(154,107,0,.24);color:#343128}
+html[data-theme="light"] .home-section,
+html[data-theme="light"] .pricing-section,
+html[data-theme="light"] .services-section,
+html[data-theme="light"] .portfolio-page,
+html[data-theme="light"] .reviews-section,
+html[data-theme="light"] .contact-section,
+html[data-theme="light"] main{background:#f7f3ea;color:#24221d}
+html[data-theme="light"] .home-section-alt,
+html[data-theme="light"] .additional-services,
+html[data-theme="light"] .portfolio-header,
+html[data-theme="light"] .pricing-heading{background:#efe7d8}
+html[data-theme="light"] .home-title,
+html[data-theme="light"] .pricing-heading h1,
+html[data-theme="light"] .additional-services-heading h2,
+html[data-theme="light"] .portfolio-header h1,
+html[data-theme="light"] .service-info h3,
+html[data-theme="light"] .home-card h3{color:#24221d}
+html[data-theme="light"] .home-intro,
+html[data-theme="light"] .home-card p,
+html[data-theme="light"] .pricing-intro,
+html[data-theme="light"] .pricing-disclaimer,
+html[data-theme="light"] .additional-services-heading p,
+html[data-theme="light"] .service-info p,
+html[data-theme="light"] .portfolio-header p{color:#5b574d}
+html[data-theme="light"] .home-card,
+html[data-theme="light"] .price-card,
+html[data-theme="light"] .service-row,
+html[data-theme="light"] .portfolio-card,
+html[data-theme="light"] .review-card,
+html[data-theme="light"] .contact-card,
+html[data-theme="light"] .login-card,
+html[data-theme="light"] .portal-card,
+html[data-theme="light"] .dashboard-card{
+  background:#fffdf8!important;
+  color:#24221d!important;
+  border-color:rgba(154,107,0,.22)!important;
+  box-shadow:0 16px 42px rgba(74,54,12,.1)!important
+}
+html[data-theme="light"] input,
+html[data-theme="light"] textarea,
+html[data-theme="light"] select{
+  background:#fff!important;
+  color:#24221d!important;
+  border-color:rgba(92,76,39,.3)!important
+}
+html[data-theme="light"] .home-footer{background:#211f1a;color:#f7f3ea}
+html[data-theme="light"] .floating-booking-button{color:#17130a}
