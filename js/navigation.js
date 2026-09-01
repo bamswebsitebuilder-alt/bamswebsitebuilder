@@ -2,6 +2,23 @@
   'use strict';
 
   const THEME_KEY = 'bam-theme';
+  const themeEnhancementStyles = `
+    .mobile-theme-section{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:18px 0 26px;padding:18px 20px;border:1px solid rgba(212,166,55,.28);border-radius:16px;background:rgba(212,166,55,.07)}
+    .mobile-theme-text{display:grid;gap:4px;min-width:0}.mobile-theme-text strong{font-size:.92rem;letter-spacing:.08em;text-transform:uppercase}.mobile-theme-status{color:#bcb6aa;font-size:.82rem;font-weight:650}
+    .mobile-theme-toggle{display:inline-flex!important;width:58px!important;height:32px!important;margin:0!important;padding:3px!important;border-radius:999px!important;background:#262626!important;box-shadow:none!important}
+    .theme-switch-track{position:relative;display:block;width:100%;height:100%}.theme-switch-thumb{position:absolute;top:0;left:0;width:24px;height:24px;border-radius:50%;background:#f1c75b;box-shadow:0 2px 8px rgba(0,0,0,.32);transition:transform .22s ease,background .22s ease}
+    html[data-theme="light"] .mobile-theme-section{background:#f5e7c6;border-color:rgba(138,98,0,.25)}html[data-theme="light"] .mobile-theme-status{color:#66563d}html[data-theme="light"] .mobile-theme-toggle{background:#d9be7a!important}html[data-theme="light"] .theme-switch-thumb{transform:translateX(26px);background:#765300}
+    html[data-theme="light"] .final-cta{background:radial-gradient(circle at center,rgba(212,166,55,.16),transparent 60%),#f3ead8!important;color:#20201d!important;border-top:1px solid rgba(138,98,0,.24)!important}
+    html[data-theme="light"] .final-cta .home-eyebrow{color:#765300!important}html[data-theme="light"] .final-cta .home-title{color:#20201d!important;text-shadow:none!important}html[data-theme="light"] .final-cta p{color:#514d44!important}
+    html[data-theme="light"] .final-cta .home-button{background:#8a6200!important;border-color:#8a6200!important;color:#fff!important}html[data-theme="light"] .final-cta .home-button-secondary{background:#fffdf8!important;border-color:#8a6200!important;color:#654700!important}
+    @media(max-width:1280px){.desktop-theme-toggle{display:none!important}}
+  `;
+  if (!document.getElementById('bam-theme-enhancements')) {
+    const style = document.createElement('style');
+    style.id = 'bam-theme-enhancements';
+    style.textContent = themeEnhancementStyles;
+    document.head.append(style);
+  }
   const getSavedTheme = () => {
     try {
       return localStorage.getItem(THEME_KEY) === 'light' ? 'light' : 'dark';
@@ -26,9 +43,18 @@
 
     document.querySelectorAll('.theme-toggle').forEach((button) => {
       const light = theme === 'light';
-      button.innerHTML = light
-        ? '<span aria-hidden="true">☾</span>'
-        : '<span aria-hidden="true">☀</span>';
+      if (button.classList.contains('mobile-theme-toggle')) {
+        button.innerHTML = '<span class="theme-switch-track" aria-hidden="true"><span class="theme-switch-thumb"></span></span>';
+        const status = button.closest('.mobile-theme-section')?.querySelector('.mobile-theme-status');
+        const spanish = document.documentElement.lang.toLowerCase().startsWith('es');
+        if (status) status.textContent = light
+          ? (spanish ? 'Modo claro' : 'Light mode')
+          : (spanish ? 'Modo oscuro' : 'Dark mode');
+      } else {
+        button.innerHTML = light
+          ? '<span aria-hidden="true">☾</span>'
+          : '<span aria-hidden="true">☀</span>';
+      }
       button.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
       button.setAttribute('title', light ? 'Dark mode' : 'Light mode');
       button.setAttribute('aria-pressed', String(light));
@@ -59,13 +85,23 @@
       const themeSection = document.createElement('div');
       themeSection.className = 'mobile-theme-section';
 
-      const themeLabel = document.createElement('span');
-      themeLabel.textContent = document.documentElement.lang.toLowerCase().startsWith('es')
-        ? 'Apariencia'
-        : 'Appearance';
+      const spanishTheme = document.documentElement.lang.toLowerCase().startsWith('es');
+      const themeText = document.createElement('span');
+      themeText.className = 'mobile-theme-text';
+
+      const themeLabel = document.createElement('strong');
+      themeLabel.textContent = spanishTheme ? 'Apariencia' : 'Appearance';
+
+      const themeStatus = document.createElement('span');
+      themeStatus.className = 'mobile-theme-status';
+      themeStatus.textContent = document.documentElement.dataset.theme === 'light'
+        ? (spanishTheme ? 'Modo claro' : 'Light mode')
+        : (spanishTheme ? 'Modo oscuro' : 'Dark mode');
+
+      themeText.append(themeLabel, themeStatus);
 
       const themeToggle = document.createElement('button');
-      themeToggle.className = 'theme-toggle';
+      themeToggle.className = 'theme-toggle mobile-theme-toggle';
       themeToggle.type = 'button';
       themeToggle.addEventListener('click', () => {
         const nextTheme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
@@ -75,7 +111,7 @@
         applyTheme(nextTheme);
       });
 
-      themeSection.append(themeLabel, themeToggle);
+      themeSection.append(themeText, themeToggle);
       const languageSection = mobileMenu.querySelector('.mobile-language-section');
       mobileMenu.insertBefore(themeSection, languageSection || mobileMenu.querySelector('.mobile-menu-cta'));
     }
