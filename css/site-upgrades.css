@@ -152,7 +152,7 @@ body{background:var(--bam-black);color:var(--bam-ivory)}
 .floating-booking-button:hover{transform:translateY(-2px)!important;box-shadow:0 16px 38px rgba(0,0,0,.48),0 0 28px rgba(216,169,40,.3)!important}
 html body .desktop-navigation a::after{left:0!important;right:0!important;bottom:20px!important;width:0!important;height:2px!important;margin:auto!important;transform:none!important}
 html body .desktop-navigation a:hover::after,html body .desktop-navigation a.active::after,html body .desktop-navigation a[aria-current="page"]::after{width:100%!important}
-@media(max-width:1280px){.desktop-navigation,.desktop-language{display:none!important}.menu-toggle{display:flex!important;margin-left:auto}.site-header-logo{width:164px!important;max-width:50vw!important;height:54px!important;object-position:left center!important}.floating-booking-button{display:none!important}}
+@media(max-width:1100px){.desktop-navigation,.desktop-language{display:none!important}.menu-toggle{display:flex!important;margin-left:auto}.site-header-logo{width:164px!important;max-width:50vw!important;height:54px!important;object-position:left center!important}.floating-booking-button{display:none!important}}
 @media(max-width:650px){
   :root{--header-height:74px}
   .header-container{position:relative;justify-content:center;padding-inline:64px!important}
@@ -689,6 +689,8 @@ html[data-theme="dark"] .template-preview{
   background:radial-gradient(circle at top right,rgba(212,166,55,.18),transparent 44%),linear-gradient(145deg,#181818,#090909)!important;
   border-color:rgba(212,166,55,.28)!important
 }
+html[data-theme="dark"] .card-top h2{color:#fff!important}
+html[data-theme="dark"] .card-top p{color:#d6d6d6!important}
 html[data-theme="dark"] input,
 html[data-theme="dark"] textarea,
 html[data-theme="dark"] select{
