@@ -1,11 +1,10 @@
-import { auth, db } from "../js/firebase-config.js";
+import { auth } from "../js/firebase-config.js";
 import {
   onAuthStateChanged,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut
 } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
-import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
 const requestedRole = document.body.dataset.portalRole;
 const isDashboard = document.body.dataset.portalView === "dashboard";
@@ -13,6 +12,10 @@ const form = document.getElementById("staff-login-form");
 const alertBox = document.getElementById("staff-alert");
 const logoutButton = document.getElementById("staff-logout");
 const resetButton = document.getElementById("reset-password");
+const roleEmails = {
+  coach: new Set(["braionmoreland@gmail.com"]),
+  admin: new Set(["braionmoreland@gmail.com"])
+};
 
 const roleDestination = role => role === "admin" ? "admin-dashboard" : "coach-dashboard";
 
@@ -23,19 +26,13 @@ function showAlert(message, type = "error") {
   alertBox.hidden = false;
 }
 
-async function getTitanRole(user) {
-  const snapshot = await getDoc(doc(db, "users", user.uid));
-  if (!snapshot.exists() || snapshot.data().active === false) return "";
-  return String(snapshot.data().titanRole || "").trim().toLowerCase();
-}
-
 async function verifyRole(user) {
-  const role = await getTitanRole(user);
-  if (role !== requestedRole) {
+  const email = String(user.email || "").trim().toLowerCase();
+  if (!roleEmails[requestedRole]?.has(email)) {
     await signOut(auth);
     throw new Error(`This account does not have ${requestedRole} access.`);
   }
-  return role;
+  return requestedRole;
 }
 
 if (form) {
