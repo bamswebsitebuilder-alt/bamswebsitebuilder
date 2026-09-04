@@ -870,3 +870,22 @@ html[data-theme="light"] .template-plan-button{
 }
 html[data-theme="light"] .template-plan-button:hover,
 html[data-theme="light"] .template-plan-button:focus-visible{background:#5f4300!important;color:#fff!important}
+
+/* Lower-page light-mode contrast fixes — 2026-09-03 */
+html[data-theme="light"] .paypal-note{
+  background:#fffdf8!important;
+  color:#514d44!important;
+  border-color:rgba(138,98,0,.38)!important;
+  box-shadow:0 12px 30px rgba(63,48,17,.08)!important
+}
+html[data-theme="light"] .paypal-note strong{color:#765300!important}
+html[data-theme="light"] .template-process{
+  background:#f3ead8!important;
+  color:#20201d!important;
+  border-color:rgba(138,98,0,.28)!important
+}
+html[data-theme="light"] .template-process .template-heading h2{
+  color:#20201d!important;
+  text-shadow:none!important
+}
+html[data-theme="light"] .template-process .templates-eyebrow{color:#765300!important}

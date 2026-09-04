@@ -11,7 +11,7 @@
     html[data-theme="light"] .final-cta{background:radial-gradient(circle at center,rgba(212,166,55,.16),transparent 60%),#f3ead8!important;color:#20201d!important;border-top:1px solid rgba(138,98,0,.24)!important}
     html[data-theme="light"] .final-cta .home-eyebrow{color:#765300!important}html[data-theme="light"] .final-cta .home-title{color:#20201d!important;text-shadow:none!important}html[data-theme="light"] .final-cta p{color:#514d44!important}
     html[data-theme="light"] .final-cta .home-button{background:#8a6200!important;border-color:#8a6200!important;color:#fff!important}html[data-theme="light"] .final-cta .home-button-secondary{background:#fffdf8!important;border-color:#8a6200!important;color:#654700!important}
-    @media(max-width:1280px){.desktop-theme-toggle{display:none!important}}
+    @media(max-width:1100px){.desktop-theme-toggle{display:none!important}}
   `;
   if (!document.getElementById('bam-theme-enhancements')) {
     const style = document.createElement('style');
