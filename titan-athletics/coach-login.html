@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Secure coach access for Titan Athletics.">
+  <title>Coach Login | Titan Athletics</title>
+  <link rel="stylesheet" href="staff-portal.css?v=1">
+</head>
+<body data-portal-role="coach" data-portal-view="login">
+  <header class="staff-header"><div class="staff-nav"><a class="brand" href="./"><b class="mark">T</b><span>TITAN<small>ATHLETICS</small></span></a><a class="back-link" href="./">← Back to athletics</a></div></header>
+  <main class="portal-main">
+    <section class="login-shell">
+      <div class="login-intro"><p class="role-label">COACH ACCESS</p><h1>Lead your team.</h1><p>A dedicated workspace for Titan Athletics coaches.</p><div class="role-points"><span>Review team schedules</span><span>Manage roster information</span><span>Prepare game updates</span></div></div>
+      <div class="login-card"><h2>Coach login</h2><p>Use the email and password assigned to your coach account.</p><form id="staff-login-form"><div class="field"><label for="email">Coach email</label><input id="email" name="email" type="email" autocomplete="email" required></div><div class="field"><label for="password">Password</label><input id="password" name="password" type="password" autocomplete="current-password" required></div><div class="form-row"><span>Coach accounts only</span><button class="text-button" id="reset-password" type="button">Forgot password?</button></div><p class="form-alert" id="staff-alert" role="alert" hidden></p><button class="primary-button" type="submit">Sign in as Coach</button></form><p class="login-switch">Administrator? <a href="admin-login">Go to Admin Login</a></p></div>
+    </section>
+  </main>
+  <footer class="staff-footer">Titan Athletics · Ponderosa High School</footer>
+  <script type="module" src="staff-auth.js?v=1"></script>
+</body>
+</html>

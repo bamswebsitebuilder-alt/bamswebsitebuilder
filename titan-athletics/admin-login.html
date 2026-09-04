@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Secure administrator access for Titan Athletics.">
+  <title>Admin Login | Titan Athletics</title>
+  <link rel="stylesheet" href="staff-portal.css?v=1">
+</head>
+<body data-portal-role="admin" data-portal-view="login">
+  <header class="staff-header"><div class="staff-nav"><a class="brand" href="./"><b class="mark">T</b><span>TITAN<small>ATHLETICS</small></span></a><a class="back-link" href="./">← Back to athletics</a></div></header>
+  <main class="portal-main">
+    <section class="login-shell">
+      <div class="login-intro"><p class="role-label">ADMINISTRATOR ACCESS</p><h1>Run athletics.</h1><p>A separate, restricted workspace for Titan Athletics administrators.</p><div class="role-points"><span>Oversee every sports program</span><span>Manage coach access</span><span>Publish department updates</span></div></div>
+      <div class="login-card"><h2>Admin login</h2><p>Use the email and password assigned to your administrator account.</p><form id="staff-login-form"><div class="field"><label for="email">Administrator email</label><input id="email" name="email" type="email" autocomplete="email" required></div><div class="field"><label for="password">Password</label><input id="password" name="password" type="password" autocomplete="current-password" required></div><div class="form-row"><span>Admin accounts only</span><button class="text-button" id="reset-password" type="button">Forgot password?</button></div><p class="form-alert" id="staff-alert" role="alert" hidden></p><button class="primary-button" type="submit">Sign in as Administrator</button></form><p class="login-switch">Coach? <a href="coach-login">Go to Coach Login</a></p></div>
+    </section>
+  </main>
+  <footer class="staff-footer">Titan Athletics · Ponderosa High School</footer>
+  <script type="module" src="staff-auth.js?v=1"></script>
+</body>
+</html>
