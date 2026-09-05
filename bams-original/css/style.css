@@ -232,7 +232,8 @@ nav a.active::after {
 
 .btn,
 .primary-button,
-.secondary-button {
+.secondary-button,
+.btn-outline {
     display: inline-block;
 
     padding: 15px 27px;
@@ -272,10 +273,53 @@ nav a.active::after {
     background: transparent;
 }
 
-.secondary-button:hover {
+.btn-outline {
+    color: #ffd700;
+    background: transparent;
+}
+
+.secondary-button:hover,
+.btn-outline:hover {
     color: #111111;
     background: #ffd700;
     transform: translateY(-3px);
+}
+
+
+/* ==========================
+   ABOUT / CONTENT PANELS
+========================== */
+
+.about {
+    padding: 90px 8%;
+    text-align: center;
+    background: #111111;
+    border-top: 1px solid rgba(255, 215, 0, 0.12);
+}
+
+.about:nth-of-type(even) {
+    background: #0d0d0d;
+}
+
+.about h2 {
+    max-width: 850px;
+    margin: 0 auto 22px;
+    color: #ffffff;
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.15;
+}
+
+.about p {
+    max-width: 850px;
+    margin: 0 auto;
+    color: #c9c9c9;
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+.about strong {
+    color: #ffd700;
+    font-size: 20px;
 }
 
 
@@ -1516,8 +1560,13 @@ footer a:hover {
 
     .primary-button,
     .secondary-button,
-    .btn {
+    .btn,
+    .btn-outline {
         width: 100%;
+    }
+
+    .about {
+        padding: 65px 20px;
     }
 
     .section-label {
