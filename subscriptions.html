@@ -61,6 +61,12 @@
       min-height: 45px;
       margin: auto auto 18px;
       padding-top: 20px;
+      background: transparent !important;
+    }
+
+    .paypal-button-wrap > div,
+    .paypal-button-wrap iframe {
+      background: transparent !important;
     }
 
     .paypal-note {
@@ -314,8 +320,7 @@
     function renderSubscriptionButton(containerSelector, planId, planName) {
       if (typeof paypal === 'undefined' || !document.querySelector(containerSelector)) return;
       paypal.Buttons({
-        fundingSource: paypal.FUNDING.PAYPAL,
-        style: { shape: 'rect', color: 'gold', layout: 'vertical', label: 'subscribe', height: 45 },
+        style: { shape: 'rect', color: 'gold', layout: 'vertical', label: 'subscribe' },
         createSubscription: function (data, actions) { return actions.subscription.create({ plan_id: planId }); },
         onApprove: function (data) {
           window.location.href = '/contact?subscribed=yes&plan=' + encodeURIComponent(planName) + '&subscription_id=' + encodeURIComponent(data.subscriptionID || '');
