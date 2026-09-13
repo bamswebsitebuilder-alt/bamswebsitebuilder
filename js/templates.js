@@ -47,12 +47,18 @@ if (afterhoursCard) {
         <li>Advanced contact forms</li>
         <li>Search engine optimization</li>
         <li>Priority support</li>
+        <li>Domain name connection</li>
+        <li>Business email setup</li>
+        <li>Google Business Profile setup</li>
+        <li>Website maintenance setup</li>
+        <li>Website content updates</li>
+        <li>Booking system integration</li>
+        <li>Expanded ecommerce features</li>
       </ul>
-      <p><strong>Additional services available:</strong> domain connection, business email, Google Business Profile setup, website maintenance, content updates, booking integration, and expanded ecommerce features.</p>
       <p class="template-price">
-        <span>Premium Template</span>
+        <span>Premium + Additional Services</span>
         <strong>$850</strong>
-        <small>starting price + optional add-on services</small>
+        <small>starting price</small>
       </p>
       <div class="template-actions">
         <a class="template-demo" href="/afterhours/" target="_blank" rel="noopener">Live Demo</a>
