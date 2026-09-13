@@ -889,3 +889,14 @@ html[data-theme="light"] .template-process .template-heading h2{
   text-shadow:none!important
 }
 html[data-theme="light"] .template-process .templates-eyebrow{color:#765300!important}
+
+/* Let the PayPal checkout area share the plans section's background in every theme. */
+html .pricing-section .paypal-note {
+  background: transparent !important;
+  color: inherit !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+html .pricing-section .paypal-button-wrap {
+  background: transparent;
+}
