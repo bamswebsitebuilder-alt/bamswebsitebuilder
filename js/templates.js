@@ -61,7 +61,7 @@ if (afterhoursCard) {
         <small>starting price</small>
       </p>
       <div class="template-actions">
-        <a class="template-demo" href="/afterhours/" target="_blank" rel="noopener">Live Demo</a>
+        <a class="template-demo" href="/afterhours-premium/" target="_blank" rel="noopener">Live Demo</a>
         <a class="template-select" data-package="premium" data-template="AFTERHOURS Premium" href="/contact?template=AFTERHOURS%20Premium&amp;package=premium">Use This Template</a>
       </div>
     </div>`;
