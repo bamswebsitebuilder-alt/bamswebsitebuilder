@@ -41,22 +41,15 @@ if (afterhoursCard) {
       <p class="template-category">Clothing Brand / Premium Store</p>
       <h2>AFTERHOURS Premium</h2>
       <ul>
-        <li>Everything in the base clothing template</li>
         <li>Up to 10 website pages</li>
-        <li>Online store setup</li>
+        <li>Full online store experience</li>
+        <li>Product pages and shopping cart</li>
         <li>Advanced contact forms</li>
+        <li>Booking integration</li>
         <li>Search engine optimization</li>
-        <li>Priority support</li>
-        <li>Domain name connection</li>
-        <li>Business email setup</li>
-        <li>Google Business Profile setup</li>
-        <li>Website maintenance setup</li>
-        <li>Website content updates</li>
-        <li>Booking system integration</li>
-        <li>Expanded ecommerce features</li>
       </ul>
       <p class="template-price">
-        <span>Premium + Additional Services</span>
+        <span>Premium Template</span>
         <strong>$850</strong>
         <small>starting price</small>
       </p>
