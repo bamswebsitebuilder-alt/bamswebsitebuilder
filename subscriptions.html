@@ -320,6 +320,7 @@
     function renderSubscriptionButton(containerSelector, planId, planName) {
       if (typeof paypal === 'undefined' || !document.querySelector(containerSelector)) return;
       paypal.Buttons({
+        fundingSource: paypal.FUNDING.PAYPAL,
         style: { shape: 'rect', color: 'gold', layout: 'vertical', label: 'subscribe' },
         createSubscription: function (data, actions) { return actions.subscription.create({ plan_id: planId }); },
         onApprove: function (data) {
