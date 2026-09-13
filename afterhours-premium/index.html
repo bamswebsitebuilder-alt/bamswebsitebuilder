@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AFTERHOURS Premium — Streetwear Store Demo</title>
+<meta name="description" content="Premium AFTERHOURS streetwear ecommerce demo with shopping, booking, contact, SEO-ready structure and expanded store features.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="announcement">FREE SHIPPING OVER $100 <span>PREMIUM STORE DEMO</span> SECURE CHECKOUT READY</div>
+<header>
+  <a class="wordmark" href="#top">AFTERHOURS<span>®</span></a>
+  <nav><a href="#shop">Shop</a><a href="#lookbook">Lookbook</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+  <a class="cart-link" href="#cart">Cart <span id="cart-count">0</span></a>
+</header>
+<main id="top">
+<section class="hero">
+  <img src="../afterhours/campaign.png" alt="AFTERHOURS streetwear campaign">
+  <div class="hero-overlay"></div>
+  <div class="hero-copy"><p>COLLECTION 001 / PREMIUM EDITION</p><h1>AFTER DARK.<br>ALL YOURS.</h1><div class="hero-actions"><a class="button" href="#shop">SHOP NOW</a><a class="button ghost" href="#book">BOOK A STYLE CONSULT</a></div></div>
+</section>
+
+<section class="feature-strip" aria-label="Store features"><span>SECURE CHECKOUT</span><span>MOBILE SHOPPING</span><span>ORDER SUPPORT</span><span>SIZE GUIDE</span><span>BOOKING INTEGRATION</span></section>
+
+<section id="shop" class="section">
+  <div class="section-heading"><div><p class="eyebrow">SHOP COLLECTION 001</p><h2>FEATURED DROPS</h2></div><p>Real product presentation with pricing, sizes, add-to-cart interactions and ecommerce-ready structure.</p></div>
+  <div class="product-grid">
+    <article class="product-card"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=85" alt="Black heavyweight streetwear T-shirt"><div class="product-info"><p class="eyebrow">TOPS / 001</p><h3>THE HEAVY TEE</h3><p>Oversized heavyweight cotton tee with dropped shoulders.</p><div class="row"><strong>$38</strong><select aria-label="Heavy Tee size"><option>S</option><option>M</option><option>L</option><option>XL</option></select></div><button class="add-cart" data-name="Heavy Tee" data-price="38">ADD TO CART</button></div></article>
+    <article class="product-card"><img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=900&q=85" alt="Oversized streetwear hoodie"><div class="product-info"><p class="eyebrow">LAYERS / 002</p><h3>LATE NIGHT HOODIE</h3><p>Premium oversized hoodie built for late nights and everyday rotation.</p><div class="row"><strong>$68</strong><select aria-label="Hoodie size"><option>S</option><option>M</option><option>L</option><option>XL</option></select></div><button class="add-cart" data-name="Late Night Hoodie" data-price="68">ADD TO CART</button></div></article>
+    <article class="product-card"><img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=900&q=85" alt="Relaxed black streetwear pants"><div class="product-info"><p class="eyebrow">BOTTOMS / 003</p><h3>EVERYDAY SWEATPANT</h3><p>Straight-leg relaxed sweatpants designed to complete the set.</p><div class="row"><strong>$58</strong><select aria-label="Sweatpant size"><option>S</option><option>M</option><option>L</option><option>XL</option></select></div><button class="add-cart" data-name="Everyday Sweatpant" data-price="58">ADD TO CART</button></div></article>
+  </div>
+</section>
+
+<section id="cart" class="cart-panel section">
+  <div><p class="eyebrow">YOUR BAG</p><h2>SHOPPING CART</h2></div>
+  <div id="cart-items" class="cart-items"><p>Your cart is empty.</p></div>
+  <div class="cart-total">Total: <strong id="cart-total">$0.00</strong></div>
+  <button id="checkout-button" class="button">PROCEED TO CHECKOUT</button>
+  <p class="fineprint">Demo checkout only. Production sites can connect approved payment, tax, shipping and inventory tools.</p>
+</section>
+
+<section id="lookbook" class="lookbook section">
+  <p class="eyebrow">EDITORIAL / LOOKBOOK</p><h2>STYLE THE DROP</h2>
+  <div class="look-grid"><img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1000&q=85" alt="Streetwear fashion look"><img src="https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=1000&q=85" alt="Streetwear clothing look"><img src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=1000&q=85" alt="Urban fashion look"></div>
+</section>
+
+<section id="book" class="split-section">
+  <div><p class="eyebrow">BOOKING SYSTEM</p><h2>PRIVATE STYLE CONSULT</h2><p>Customers can request a virtual or in-person style consultation directly from the website.</p></div>
+  <form id="booking-form" class="form-card"><label>Name<input required name="name"></label><label>Email<input required type="email" name="email"></label><label>Preferred date<input required type="date" name="date"></label><label>Consult type<select name="type"><option>Virtual</option><option>In person</option></select></label><button class="button" type="submit">REQUEST APPOINTMENT</button><p class="form-status" id="booking-status"></p></form>
+</section>
+
+<section id="about" class="story"><p class="eyebrow">BRAND STORY</p><h2>LESS DRESS CODE.<br>MORE <em>YOU.</em></h2><p>AFTERHOURS is a premium streetwear concept designed around oversized silhouettes, clean product presentation, strong storytelling and a complete mobile-first shopping experience.</p></section>
+
+<section id="contact" class="split-section contact-section">
+  <div><p class="eyebrow">CUSTOMER SUPPORT</p><h2>NEED HELP?</h2><p>Advanced contact forms can collect order questions, returns, wholesale inquiries and collaboration requests.</p><p><strong>Email:</strong> support@afterhours-demo.com</p></div>
+  <form id="contact-form" class="form-card"><label>Name<input required name="name"></label><label>Email<input required type="email" name="email"></label><label>Topic<select name="topic"><option>Order support</option><option>Returns</option><option>Wholesale</option><option>Collaboration</option></select></label><label>Message<textarea required rows="5" name="message"></textarea></label><button class="button" type="submit">SEND MESSAGE</button><p class="form-status" id="contact-status"></p></form>
+</section>
+
+<section class="premium-features section"><p class="eyebrow">PREMIUM BUILD</p><h2>WHAT IS ACTUALLY APPLIED</h2><div class="feature-grid"><article><h3>Online Store</h3><p>Product cards, pricing, sizes, cart logic and checkout-ready flow.</p></article><article><h3>Advanced Forms</h3><p>Customer support and booking forms built into the experience.</p></article><article><h3>SEO Structure</h3><p>Search-friendly page title, description, semantic sections and product content.</p></article><article><h3>Booking Integration</h3><p>A dedicated appointment workflow for consultations or services.</p></article><article><h3>Content Expansion</h3><p>Shop, cart, lookbook, brand story, support and service sections.</p></article><article><h3>Mobile Experience</h3><p>Responsive storefront layout designed for phone shoppers.</p></article></div></section>
+</main>
+<footer><div><a class="wordmark" href="#top">AFTERHOURS®</a><p>PREMIUM STREETWEAR STORE DEMO</p></div><div><p>© 2026 AFTERHOURS</p><p>Website demo by BAM's Website Builder</p></div></footer>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>
