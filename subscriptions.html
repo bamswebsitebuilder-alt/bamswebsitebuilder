@@ -314,7 +314,8 @@
     function renderSubscriptionButton(containerSelector, planId, planName) {
       if (typeof paypal === 'undefined' || !document.querySelector(containerSelector)) return;
       paypal.Buttons({
-        style: { shape: 'rect', color: 'gold', layout: 'vertical', label: 'subscribe' },
+        fundingSource: paypal.FUNDING.PAYPAL,
+        style: { shape: 'rect', color: 'gold', layout: 'vertical', label: 'subscribe', height: 45 },
         createSubscription: function (data, actions) { return actions.subscription.create({ plan_id: planId }); },
         onApprove: function (data) {
           window.location.href = '/contact?subscribed=yes&plan=' + encodeURIComponent(planName) + '&subscription_id=' + encodeURIComponent(data.subscriptionID || '');
