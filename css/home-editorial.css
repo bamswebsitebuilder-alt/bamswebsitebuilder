@@ -107,3 +107,81 @@ body{background:var(--bam-bg);color:var(--bam-text)}
   .hero{padding:70px 20px!important;min-height:72vh}.hero h1{font-size:clamp(3rem,15vw,5.4rem)!important}.hero .hero-content>p{font-size:.95rem!important}.hero-buttons{flex-direction:column!important;align-items:stretch!important}.hero .btn,.hero .secondary-button{width:100%!important}.hero .hero-trust{display:grid!important;grid-template-columns:1fr 1fr;gap:11px!important}.hero .hero-trust span{padding:0!important;border-right:0!important}
   .home-section,.home-section-alt{padding:68px 20px!important}.home-card{padding:25px!important}.portfolio-home-visual,.portfolio-home-visual img{min-height:280px!important}.founder-preview-inner>img{min-height:380px!important}.founder-preview-copy{padding:50px 22px!important}.founder-preview-actions{flex-direction:column}.review-callout{grid-template-columns:1fr!important}.final-cta{padding:80px 20px!important}
 }
+
+/* Button system fix */
+.hero-buttons,
+.home-actions,
+.founder-preview-actions{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  align-items:center!important;
+  gap:12px!important;
+}
+
+.hero .btn,
+.hero .secondary-button,
+.home-button,
+.home-button-secondary{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+  text-decoration:none!important;
+  white-space:nowrap!important;
+  line-height:1!important;
+  cursor:pointer!important;
+  transition:
+    background .22s ease,
+    border-color .22s ease,
+    color .22s ease,
+    transform .22s ease!important;
+}
+
+.hero .btn:hover,
+.home-button:hover{
+  background:#f5d47f!important;
+  border-color:#f5d47f!important;
+  color:#050505!important;
+  transform:translateY(-2px)!important;
+}
+
+.hero .secondary-button:hover,
+.home-button-secondary:hover{
+  background:#ffffff!important;
+  border-color:#ffffff!important;
+  color:#050505!important;
+  transform:translateY(-2px)!important;
+}
+
+.hero .btn:focus-visible,
+.hero .secondary-button:focus-visible,
+.home-button:focus-visible,
+.home-button-secondary:focus-visible{
+  outline:2px solid var(--bam-gold-light)!important;
+  outline-offset:3px!important;
+}
+
+.home-actions{
+  margin-top:26px!important;
+}
+
+.final-cta .home-actions{
+  justify-content:flex-start!important;
+}
+
+@media(max-width:650px){
+  .hero-buttons,
+  .home-actions,
+  .founder-preview-actions{
+    flex-direction:column!important;
+    align-items:stretch!important;
+  }
+
+  .hero .btn,
+  .hero .secondary-button,
+  .home-button,
+  .home-button-secondary{
+    width:100%!important;
+    min-height:54px!important;
+  }
+}
