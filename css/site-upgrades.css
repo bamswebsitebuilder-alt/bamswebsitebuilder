@@ -270,6 +270,12 @@ html[data-theme="light"] .theme-toggle{background:#fff8e7;color:#6c4b00;border-c
 html[data-theme="light"] .menu-toggle span,
 html[data-theme="light"] .mobile-menu-close span{background:#292720}
 html[data-theme="light"] .mobile-menu{background:#fff8e7;color:#3b2a12;border-left-color:rgba(154,107,0,.25)}
+html[data-theme="light"] .mobile-menu-header{
+  background:#fff8e7;
+  border-bottom-color:rgba(154,107,0,.22);
+  box-shadow:0 12px 28px rgba(74,54,12,.1)
+}
+html[data-theme="light"] .mobile-menu-brand small{color:#292720!important}
 html[data-theme="light"] .mobile-navigation a,
 html[data-theme="light"] .mobile-language-section p,
 html[data-theme="light"] .mobile-language-links a,
