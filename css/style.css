@@ -447,23 +447,22 @@ body.menu-open {
 .mobile-menu-header {
     position: sticky;
     top: 0;
-    z-index: 2;
+    z-index: 10;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    min-height: 182px;
-    margin-bottom: 32px;
+    min-height: calc(182px + env(safe-area-inset-top));
+    margin: 0 -40px 32px;
+    padding:
+        env(safe-area-inset-top)
+        40px
+        0;
 
-    background:
-        linear-gradient(
-            180deg,
-            rgba(17, 16, 13, 0.99),
-            rgba(17, 16, 13, 0.95)
-        );
-
+    background: #11100d;
     border-bottom: 1px solid rgba(255, 255, 255, 0.11);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
 }
 
 .mobile-menu-brand {
@@ -791,8 +790,12 @@ body.menu-open {
     }
 
     .mobile-menu-header {
-        min-height: 142px;
-        margin-bottom: 20px;
+        min-height: calc(142px + env(safe-area-inset-top));
+        margin: 0 -28px 20px;
+        padding:
+            env(safe-area-inset-top)
+            28px
+            0;
     }
 
     .mobile-menu-brand strong {
