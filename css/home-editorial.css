@@ -22,15 +22,33 @@ body{background:var(--bam-bg);color:var(--bam-text)}
 .desktop-language{margin-left:18px}
 
 /* Loading screen */
-#bam-loader{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;background:#030303;color:#fff;transition:opacity .55s ease,visibility .55s ease}
+#bam-loader{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 38%,rgba(212,166,55,.10),transparent 28%),linear-gradient(180deg,#070707 0%,#020202 100%);color:#fff;transition:opacity .6s ease,visibility .6s ease}
+#bam-loader::before{content:"";position:absolute;inset:18px;border:1px solid rgba(239,198,106,.14);pointer-events:none}
+#bam-loader::after{content:"";position:absolute;top:0;left:50%;width:1px;height:18%;background:linear-gradient(180deg,rgba(239,198,106,0),rgba(239,198,106,.45));pointer-events:none}
 #bam-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
-.bam-loader-inner{text-align:center;padding:24px}
-.bam-loader-brand{display:block;color:var(--bam-gold-light);font-size:clamp(2.2rem,7vw,5.8rem);font-weight:950;letter-spacing:-.05em;line-height:.88}
-.bam-loader-sub{display:block;margin-top:10px;font-size:.58rem;font-weight:800;letter-spacing:.42em;text-transform:uppercase;color:#d7d2ca}
-.bam-loader-line{width:min(240px,56vw);height:1px;margin:30px auto 0;background:rgba(255,255,255,.12);overflow:hidden}
-.bam-loader-line::after{content:"";display:block;width:45%;height:100%;background:var(--bam-gold-light);animation:bamLoad 1s ease-in-out infinite}
-.bam-loader-copy{margin-top:15px;color:#777;font-size:.56rem;letter-spacing:.22em;text-transform:uppercase}
-@keyframes bamLoad{0%{transform:translateX(-120%)}50%{transform:translateX(115%)}100%{transform:translateX(260%)}}
+.bam-loader-inner{position:relative;width:min(720px,calc(100vw - 48px));text-align:center;padding:38px 24px}
+.bam-loader-kicker{margin-bottom:24px;color:#8f8a82;font-size:.56rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.bam-loader-brand{display:block;color:var(--bam-gold-light);font-size:clamp(3rem,9vw,7rem);font-weight:950;letter-spacing:-.055em;line-height:.82;text-shadow:0 0 34px rgba(239,198,106,.08)}
+.bam-loader-sub{display:block;margin-top:13px;font-size:clamp(.56rem,1.2vw,.72rem);font-weight:800;letter-spacing:.44em;text-transform:uppercase;color:#f1ece4}
+.bam-loader-message{max-width:590px;margin:26px auto 0;color:#aaa49b;font-size:clamp(.82rem,1.5vw,.96rem);line-height:1.7}
+.bam-loader-services{display:flex;justify-content:center;flex-wrap:wrap;gap:0;margin-top:22px;color:#d8d2c8;font-size:.54rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
+.bam-loader-services span{padding:0 13px;border-right:1px solid rgba(255,255,255,.14)}
+.bam-loader-services span:last-child{border-right:0}
+.bam-loader-line{width:min(330px,68vw);height:1px;margin:30px auto 0;background:rgba(255,255,255,.11);overflow:hidden}
+.bam-loader-line::after{content:"";display:block;width:38%;height:100%;background:linear-gradient(90deg,var(--bam-gold),var(--bam-gold-light));box-shadow:0 0 12px rgba(239,198,106,.4);animation:bamLoad 1.15s ease-in-out infinite}
+.bam-loader-copy{margin-top:17px;color:#777;font-size:.52rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+@keyframes bamLoad{0%{transform:translateX(-125%)}50%{transform:translateX(135%)}100%{transform:translateX(300%)}}
+@media(max-width:650px){
+  #bam-loader::before{inset:10px}
+  .bam-loader-inner{width:calc(100vw - 28px);padding:28px 18px}
+  .bam-loader-kicker{margin-bottom:20px;font-size:.49rem;letter-spacing:.16em}
+  .bam-loader-brand{font-size:clamp(3.6rem,21vw,5.7rem)}
+  .bam-loader-sub{font-size:.52rem;letter-spacing:.34em}
+  .bam-loader-message{max-width:340px;margin-top:23px;font-size:.82rem;line-height:1.62}
+  .bam-loader-services{gap:8px 0;margin-top:20px}
+  .bam-loader-services span{padding:0 9px;font-size:.48rem}
+  .bam-loader-copy{max-width:310px;margin:16px auto 0;font-size:.47rem;line-height:1.55;letter-spacing:.13em}
+}
 @media(prefers-reduced-motion:reduce){.bam-loader-line::after{animation:none;width:100%}#bam-loader{transition:none}}
 
 /* Hero */
