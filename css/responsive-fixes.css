@@ -121,3 +121,331 @@ textarea,
         margin-inline-start: 0;
     }
 }
+
+
+/* BAM mobile polish 2026-09-24
+   Shared phone-size improvements for the main public site. */
+@media (max-width: 760px) {
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .site-header {
+        min-height: 72px;
+    }
+
+    .header-container {
+        width: 100%;
+        min-width: 0;
+        min-height: 72px;
+        padding-inline: 16px !important;
+        gap: 12px !important;
+    }
+
+    .site-brand,
+    .mobile-menu-brand {
+        min-width: 0;
+        max-width: calc(100% - 72px);
+    }
+
+    .brand-text strong,
+    .site-brand strong {
+        font-size: clamp(1.4rem, 7vw, 1.85rem) !important;
+        line-height: 1 !important;
+    }
+
+    .brand-text small,
+    .site-brand small {
+        font-size: clamp(.52rem, 2.6vw, .68rem) !important;
+        letter-spacing: .14em !important;
+        white-space: nowrap;
+    }
+
+    .menu-toggle {
+        flex: 0 0 48px;
+        width: 48px !important;
+        height: 48px !important;
+        margin-left: auto;
+    }
+
+    .mobile-menu {
+        width: 100vw !important;
+        max-width: none !important;
+        height: 100dvh !important;
+        padding:
+          calc(18px + env(safe-area-inset-top))
+          18px
+          calc(24px + env(safe-area-inset-bottom)) !important;
+        overscroll-behavior: contain;
+    }
+
+    .mobile-menu-header {
+        min-height: 70px;
+        gap: 12px;
+    }
+
+    .mobile-menu-close {
+        flex: 0 0 48px;
+        width: 48px !important;
+        height: 48px !important;
+    }
+
+    .mobile-navigation {
+        width: 100%;
+    }
+
+    .mobile-navigation a {
+        width: 100%;
+        min-width: 0;
+        min-height: 56px;
+        gap: 14px;
+        padding-block: 10px !important;
+        padding-inline: 4px !important;
+        white-space: normal !important;
+    }
+
+    .mobile-navigation .mobile-link-icon {
+        flex: 0 0 42px !important;
+        width: 42px !important;
+        height: 42px !important;
+    }
+
+    .mobile-language-section,
+    .mobile-theme-section,
+    .mobile-menu-cta,
+    .mobile-menu-contact {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .mobile-menu-cta a {
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        white-space: normal !important;
+        line-height: 1.25;
+    }
+
+    .mobile-menu-contact a {
+        font-size: .88rem !important;
+        line-height: 1.45;
+    }
+
+    main,
+    .home-container,
+    .content-section,
+    .portfolio-page,
+    .templates-page,
+    .pricing-section,
+    .reviews-page,
+    .contact-page,
+    .founder-preview,
+    .final-cta {
+        max-width: 100%;
+    }
+
+    .content-section,
+    .portfolio-page,
+    .templates-page,
+    .pricing-section,
+    .reviews-page,
+    .contact-page {
+        padding-inline: 16px !important;
+    }
+
+    .hero {
+        min-height: auto !important;
+        padding: 72px 18px 58px !important;
+    }
+
+    .hero-content {
+        width: 100% !important;
+        max-width: 620px !important;
+        margin-inline: auto !important;
+    }
+
+    .hero h1 {
+        font-size: clamp(2.35rem, 11vw, 3.45rem) !important;
+        line-height: 1.02 !important;
+        overflow-wrap: anywhere;
+    }
+
+    .hero p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .hero-buttons,
+    .home-actions,
+    .review-cta-buttons,
+    .contact-actions {
+        width: 100%;
+        max-width: 430px;
+        margin-inline: auto;
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    .hero-buttons a,
+    .home-actions a,
+    .review-cta-buttons a,
+    .contact-actions a,
+    .btn,
+    .primary-button,
+    .secondary-button,
+    .home-button,
+    .home-button-secondary,
+    .price-button,
+    .portfolio-button,
+    .template-plan-button {
+        width: 100%;
+        min-height: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        white-space: normal;
+        line-height: 1.25;
+    }
+
+    .home-grid,
+    .portfolio-grid,
+    .template-grid,
+    .pricing-grid,
+    .services-grid,
+    .reviews-grid,
+    .footer-grid,
+    .process-grid,
+    .portfolio-preview {
+        grid-template-columns: 1fr !important;
+    }
+
+    .home-grid,
+    .portfolio-grid,
+    .template-grid,
+    .pricing-grid,
+    .services-grid,
+    .reviews-grid,
+    .portfolio-preview {
+        gap: 18px !important;
+    }
+
+    .home-card,
+    .portfolio-card,
+    .template-card,
+    .price-card,
+    .service-card,
+    .review-summary-card {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .portfolio-card {
+        grid-template-columns: 1fr !important;
+        overflow: hidden;
+    }
+
+    .portfolio-image-wrapper,
+    .portfolio-home-visual,
+    .template-preview {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .portfolio-image-wrapper img,
+    .portfolio-home-visual img,
+    .template-preview img {
+        width: 100%;
+        max-width: 100%;
+        object-fit: cover;
+    }
+
+    .portfolio-card-content,
+    .template-card-body,
+    .price-card,
+    .service-card {
+        padding: 20px !important;
+    }
+
+    .portfolio-card-content h2,
+    .template-card h2,
+    .price-card h2,
+    .service-card h3 {
+        overflow-wrap: anywhere;
+    }
+
+    .portfolio-features,
+    .feature-list {
+        padding-left: 20px;
+    }
+
+    .service-row {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+        align-items: start !important;
+    }
+
+    .service-row > strong {
+        justify-self: start;
+        text-align: left !important;
+    }
+
+    .paypal-button-wrap {
+        width: 100% !important;
+        max-width: 320px !important;
+        margin-inline: auto !important;
+    }
+
+    .google-reviews-widget iframe {
+        width: 100% !important;
+        min-height: 620px;
+    }
+
+    .footer-grid {
+        gap: 28px !important;
+        text-align: left;
+    }
+
+    .home-footer {
+        padding-inline: 18px !important;
+    }
+
+    .bam-social-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px 18px;
+    }
+}
+
+@media (max-width: 390px) {
+    .header-container {
+        padding-inline: 12px !important;
+    }
+
+    .content-section,
+    .portfolio-page,
+    .templates-page,
+    .pricing-section,
+    .reviews-page,
+    .contact-page {
+        padding-inline: 12px !important;
+    }
+
+    .hero {
+        padding-inline: 14px !important;
+    }
+
+    .portfolio-card-content,
+    .template-card-body,
+    .price-card,
+    .service-card {
+        padding: 18px !important;
+    }
+}
