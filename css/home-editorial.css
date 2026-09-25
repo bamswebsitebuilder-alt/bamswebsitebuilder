@@ -366,3 +366,62 @@ body{background:var(--bam-bg);color:var(--bam-text)}
     min-height:54px!important;
   }
 }
+
+
+/* 2026-09-25: image-first loading screen using BAM's supplied logo artwork */
+#bam-loader{
+  background:#000!important;
+}
+#bam-loader::before{
+  display:none!important;
+}
+.bam-loader-image-layout{
+  width:min(760px,92vw)!important;
+  padding:24px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+.bam-loader-logo-image{
+  display:block!important;
+  width:min(560px,78vw)!important;
+  height:auto!important;
+  aspect-ratio:1/1;
+  object-fit:contain!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  animation:bamLoaderLogoIn .6s cubic-bezier(.2,.7,.2,1) both;
+}
+.bam-loader-image-layout .bam-loader-progress{
+  width:min(360px,68vw)!important;
+  margin:20px auto 0!important;
+}
+.bam-loader-image-layout .bam-loader-line{
+  height:2px!important;
+  border:0!important;
+  background:rgba(255,255,255,.18)!important;
+}
+.bam-loader-image-layout .bam-loader-line::after{
+  background:#fff!important;
+  box-shadow:0 0 12px rgba(255,255,255,.5)!important;
+}
+.bam-loader-image-layout .bam-loader-status{
+  margin-top:12px!important;
+  color:#aaa!important;
+  font-size:.52rem!important;
+  letter-spacing:.22em!important;
+}
+@keyframes bamLoaderLogoIn{
+  from{opacity:0;transform:scale(.96)}
+  to{opacity:1;transform:scale(1)}
+}
+@media(max-width:650px){
+  .bam-loader-image-layout{width:100%!important;padding:18px!important}
+  .bam-loader-logo-image{width:min(430px,88vw)!important}
+  .bam-loader-image-layout .bam-loader-progress{width:min(280px,64vw)!important;margin-top:14px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .bam-loader-logo-image{animation:none!important}
+}
