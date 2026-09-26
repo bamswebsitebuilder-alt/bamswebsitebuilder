@@ -906,3 +906,82 @@ html .pricing-section .paypal-note {
 html .pricing-section .paypal-button-wrap {
   background: transparent;
 }
+
+
+/* 2026-09-26: site-wide clear next-step conversion band */
+.bam-next-step{
+  border-top:1px solid rgba(212,166,55,.22);
+  border-bottom:1px solid rgba(212,166,55,.22);
+  background:linear-gradient(135deg,rgba(212,166,55,.08),rgba(255,255,255,.015));
+  padding:34px clamp(20px,5vw,72px);
+}
+.bam-next-step-inner{
+  width:min(1380px,100%);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:28px;
+  align-items:center;
+}
+.bam-next-step span{
+  display:block;
+  margin-bottom:7px;
+  color:#c8a94d;
+  font-size:.62rem;
+  font-weight:800;
+  letter-spacing:.18em;
+}
+.bam-next-step h2{
+  margin:0;
+  color:inherit;
+  font-size:clamp(1.55rem,3vw,2.6rem);
+  line-height:1.05;
+  letter-spacing:-.03em;
+}
+.bam-next-step-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:flex-end;
+}
+.bam-next-step-actions a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:46px;
+  padding:0 18px;
+  border:1px solid rgba(255,255,255,.28);
+  text-decoration:none;
+  color:inherit;
+  font-size:.7rem;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.bam-next-step-actions .bam-next-primary{
+  background:#e9c867;
+  border-color:#e9c867;
+  color:#090909;
+}
+html[data-theme="light"] .bam-next-step{
+  background:#f4ead4;
+  border-color:rgba(118,83,0,.22);
+}
+html[data-theme="light"] .bam-next-step-actions a{
+  border-color:rgba(66,52,20,.28);
+  color:#2d281f;
+}
+html[data-theme="light"] .bam-next-step-actions .bam-next-primary{
+  background:#8a6200;
+  border-color:#8a6200;
+  color:white;
+}
+@media(max-width:820px){
+  .bam-next-step-inner{grid-template-columns:1fr}
+  .bam-next-step-actions{justify-content:flex-start}
+}
+@media(max-width:520px){
+  .bam-next-step{padding:28px 20px}
+  .bam-next-step-actions{display:grid;grid-template-columns:1fr}
+  .bam-next-step-actions a{width:100%}
+}
