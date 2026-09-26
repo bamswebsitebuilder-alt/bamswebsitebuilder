@@ -124,6 +124,17 @@
   </style>
   <meta content="https://www.bamswebsitebuilder.com/images/logo-dark.jpg" property="og:image"/>
  <style>.template-preview.industry-logo-showcase,.portfolio-image-wrapper.industry-logo-showcase{background:radial-gradient(circle at 82% 12%,rgba(214,167,67,.22),transparent 36%),#090909;padding:22px}.template-preview img.industry-card-logo,.portfolio-image-wrapper img.industry-card-logo{display:block;width:100%;height:100%;object-fit:contain;object-position:center}.portfolio-image-wrapper img.industry-card-logo{max-width:520px;max-height:180px;margin:auto}</style><style>.industry-photo-preview{position:relative;overflow:hidden;background:#080808!important;padding:0!important}.industry-photo-preview>.industry-project-photo{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important}.industry-photo-preview>.industry-logo-overlay{position:absolute;left:14px;bottom:14px;width:min(70%,245px);padding:7px;border:1px solid rgba(255,255,255,.28);border-radius:10px;background:rgba(5,5,5,.88);box-shadow:0 10px 25px #0007}.industry-photo-preview>.industry-logo-overlay img{display:block;width:100%;height:auto;max-height:62px;object-fit:contain}.portfolio-image-wrapper.industry-photo-preview{min-height:260px}.template-preview.industry-photo-preview{min-height:220px}@media(max-width:620px){.portfolio-image-wrapper.industry-photo-preview{min-height:250px}.industry-photo-preview>.industry-logo-overlay{width:min(72%,220px)}}</style><link rel="preconnect" href="https://images.unsplash.com" crossorigin><style>(max-width:620px){.template-card,.portfolio-card{content-visibility:auto;contain-intrinsic-size:720px}.template-grid,.portfolio-grid{gap:22px}.template-card-body,.portfolio-card-content{padding:22px!important}.template-actions{gap:10px}.template-actions a,.portfolio-button{min-height:48px;display:flex;align-items:center;justify-content:center}}</style><link rel="stylesheet" href="/css/responsive-fixes.css">
+<style>
+.portfolio-templates-cta{display:flex;align-items:center;justify-content:space-between;gap:32px;max-width:1200px;margin:42px auto 0;padding:clamp(26px,4vw,42px);border:1px solid rgba(212,166,55,.42);border-radius:20px;background:linear-gradient(135deg,#1d1a12,#101010);box-shadow:0 16px 40px rgba(0,0,0,.2)}
+.portfolio-templates-eyebrow{display:block;margin-bottom:10px;color:#f0c45a;font-size:.75rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
+.portfolio-templates-cta h2{margin:0 0 10px;color:#fff;font-size:clamp(1.6rem,3vw,2.15rem);line-height:1.15}
+.portfolio-templates-cta p{margin:0;color:#d2cec5;line-height:1.55}
+.portfolio-templates-cta>a{display:inline-flex;align-items:center;justify-content:center;gap:10px;flex:none;min-height:50px;padding:14px 21px;border-radius:10px;background:#d4a637;color:#111!important;font-weight:800;text-align:center;text-decoration:none}
+.portfolio-templates-cta>a:hover,.portfolio-templates-cta>a:focus-visible{background:#f0c45a}
+html[data-theme="light"] .portfolio-templates-cta{background:linear-gradient(135deg,#fff9eb,#f2e6cc);border-color:rgba(138,98,0,.4)}
+html[data-theme="light"] .portfolio-templates-cta h2{color:#292317}html[data-theme="light"] .portfolio-templates-cta p{color:#514934}html[data-theme="light"] .portfolio-templates-eyebrow{color:#765300}
+@media(max-width:760px){.portfolio-templates-cta{flex-direction:column;align-items:stretch;gap:22px;margin-top:24px;text-align:center}.portfolio-templates-cta>a{width:100%}}
+</style>
 </head>
  <body>
   <header class="site-header" id="site-header">
@@ -144,11 +155,11 @@
      <a data-page="subscriptions" href="/es/subscriptions">
       Planes Web
      </a>
-     <a data-page="templates" href="/es/templates">
-      Plantillas
-     </a>
      <a aria-current="page" class="active" data-page="portfolio" href="/es/portfolio">
       Portafolio
+     </a>
+     <a data-page="templates" href="/es/templates">
+      Plantillas
      </a>
      <a data-page="reviews" href="/es/reviews">
       Rese&ntilde;as
@@ -254,21 +265,6 @@
       Planes Web
      </span>
     </a>
-    <a data-page="templates" href="/es/templates">
-     <span aria-hidden="true" class="mobile-link-icon">
-      <svg viewbox="0 0 24 24">
-       <rect height="16" rx="2" width="18" x="3" y="4">
-       </rect>
-       <path d="M3 9h18">
-       </path>
-       <path d="M8 9v11">
-       </path>
-      </svg>
-     </span>
-     <span>
-      Plantillas
-     </span>
-    </a>
     <a aria-current="page" class="active" data-page="portfolio" href="/es/portfolio">
      <span aria-hidden="true" class="mobile-link-icon">
       <svg viewbox="0 0 24 24">
@@ -284,6 +280,21 @@
      </span>
      <span>
       Portafolio
+     </span>
+    </a>
+    <a data-page="templates" href="/es/templates">
+     <span aria-hidden="true" class="mobile-link-icon">
+      <svg viewbox="0 0 24 24">
+       <rect height="16" rx="2" width="18" x="3" y="4">
+       </rect>
+       <path d="M3 9h18">
+       </path>
+       <path d="M8 9v11">
+       </path>
+      </svg>
+     </span>
+     <span>
+      Plantillas
      </span>
     </a>
     <a data-page="reviews" href="/es/reviews">
@@ -421,6 +432,11 @@
 
 </div>
 
+<aside class="portfolio-templates-cta" aria-labelledby="portfolio-templates-title">
+<div><span class="portfolio-templates-eyebrow">Explora más</span><h2 id="portfolio-templates-title">¿Buscas un sitio web como el tuyo?</h2><p>Descubre más diseños por sector en nuestra página de plantillas.</p></div>
+<a href="/es/templates">Visitar la página de plantillas <span aria-hidden="true">→</span></a>
+</aside>
+
 </section></main>
   <!-- FOOTER -->
   <footer class="home-footer">
@@ -447,11 +463,11 @@
       <a href="/es/subscriptions">
        Planes Web
       </a>
-      <a href="/es/templates">
-       Plantillas
-      </a>
       <a href="/es/portfolio">
        Portafolio
+      </a>
+      <a href="/es/templates">
+       Plantillas
       </a>
       <a href="/es/reviews">
        Rese&ntilde;as
