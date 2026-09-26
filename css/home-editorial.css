@@ -425,3 +425,54 @@ body{background:var(--bam-bg);color:var(--bam-text)}
 @media(prefers-reduced-motion:reduce){
   .bam-loader-logo-image{animation:none!important}
 }
+
+
+/* 2026-09-26: simplified buying journey */
+.hero-conversion .hero-content{max-width:900px}
+.start-here-section .home-section-heading,
+.plans-preview-section .home-section-heading{grid-template-columns:minmax(0,1.2fr) minmax(280px,.65fr)}
+.buying-path-grid,
+.plan-preview-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--bam-line);border-left:1px solid var(--bam-line)}
+.buying-path-card,
+.plan-preview-card{position:relative;display:flex;flex-direction:column;align-items:flex-start;min-height:100%;padding:36px;border-right:1px solid var(--bam-line);border-bottom:1px solid var(--bam-line);background:#070707}
+.buying-path-number{margin-bottom:34px;color:var(--bam-gold-light);font-size:.62rem;font-weight:800;letter-spacing:.2em}
+.buying-path-card h3,
+.plan-preview-card h3{margin:0 0 13px;color:var(--bam-text);font-size:clamp(1.45rem,2.2vw,2.2rem);line-height:1;letter-spacing:-.035em}
+.buying-path-card p,
+.plan-preview-card p{margin:0 0 28px;color:#99948c;line-height:1.7}
+.buying-path-card .home-button,
+.buying-path-card .home-button-secondary{margin-top:auto}
+.portfolio-preview-three{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+.portfolio-preview-three .portfolio-home-visual,
+.portfolio-preview-three .portfolio-home-visual img{min-height:330px!important}
+.desktop-section-action{align-self:end}
+.mobile-section-action{display:none!important}
+.plan-preview-card{padding:34px 32px}
+.plan-preview-card.featured{background:#0d0b06;box-shadow:inset 0 3px 0 var(--bam-gold-light)}
+.plan-label{color:#d8d3ca;font-size:.66rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase}
+.plan-badge{position:absolute;top:18px;right:18px;color:var(--bam-gold-light);font-size:.53rem;font-weight:900;letter-spacing:.14em}
+.plan-price{display:flex;align-items:baseline;gap:7px;margin:18px 0 16px}
+.plan-price strong{color:var(--bam-text);font-size:clamp(2.4rem,4vw,4.1rem);line-height:.9;letter-spacing:-.055em}
+.plan-price span{color:#8f8a82;font-size:.78rem}
+.plan-term-note{margin:18px 0 0;color:#807b73;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}
+.compact-benefit-grid .home-card{min-height:250px}
+.founder-preview-compact .founder-preview-inner>img{min-height:520px!important}
+.faq-compact .faq-list{max-width:1050px!important}
+@media(max-width:980px){
+  .start-here-section .home-section-heading,
+  .plans-preview-section .home-section-heading{grid-template-columns:1fr}
+  .buying-path-grid,
+  .plan-preview-grid{grid-template-columns:1fr}
+  .portfolio-preview-three{grid-template-columns:1fr!important}
+  .desktop-section-action{display:none!important}
+  .mobile-section-action{display:flex!important}
+  .portfolio-preview-three .portfolio-home-visual,
+  .portfolio-preview-three .portfolio-home-visual img{min-height:300px!important}
+}
+@media(max-width:650px){
+  .buying-path-card,
+  .plan-preview-card{padding:28px 24px}
+  .buying-path-number{margin-bottom:22px}
+  .plan-badge{position:static;margin-bottom:12px}
+  .founder-preview-compact .founder-preview-inner>img{min-height:360px!important}
+}
