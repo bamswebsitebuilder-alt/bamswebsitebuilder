@@ -2,6 +2,16 @@
   'use strict';
 
   const THEME_KEY = 'bam-theme';
+
+  // Site-wide cookie consent manager.
+  if (!document.querySelector('script[data-bam-cookie-consent]')) {
+    const consentScript = document.createElement('script');
+    consentScript.src = '/js/cookie-consent.js?v=20260926-1';
+    consentScript.defer = true;
+    consentScript.dataset.bamCookieConsent = 'true';
+    document.head.appendChild(consentScript);
+  }
+
   const themeEnhancementStyles = `
     .mobile-theme-section{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:18px 0 26px;padding:18px 20px;border:1px solid rgba(212,166,55,.28);border-radius:16px;background:rgba(212,166,55,.07)}
     .mobile-theme-text{display:grid;gap:4px;min-width:0}.mobile-theme-text strong{font-size:.92rem;letter-spacing:.08em;text-transform:uppercase}.mobile-theme-status{color:#bcb6aa;font-size:.82rem;font-weight:650}
