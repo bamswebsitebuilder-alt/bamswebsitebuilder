@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bams-app-v11';
+const CACHE_NAME = 'bams-app-v12';
 const APP_SHELL = [
   '/',
   '/offline.html',
@@ -37,7 +37,22 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  if (['style', 'script', 'image', 'font'].includes(event.request.destination)) {
+  if (['style', 'script'].includes(event.request.destination)) {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          if (response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+          }
+          return response;
+        })
+        .catch(() => caches.match(event.request))
+    );
+    return;
+  }
+
+  if (['image', 'font'].includes(event.request.destination)) {
     event.respondWith(
       caches.match(event.request).then((cached) =>
         cached || fetch(event.request).then((response) => {
