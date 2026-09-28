@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const STORAGE_KEY = 'bam-cookie-consent-v2';
+  const STORAGE_KEY = 'bam-cookie-consent-v3';
   const STYLE_ID = 'bam-cookie-consent-styles';
   const spanish = document.documentElement.lang.toLowerCase().startsWith('es');
 
@@ -104,6 +104,9 @@
       .bam-consent-toggle[disabled]{opacity:.75;cursor:not-allowed}
       .bam-consent-settings-actions{display:grid;gap:12px;margin-top:18px}
       body.bam-consent-open{overflow:hidden}
+      .bam-privacy-reopen{position:fixed;left:14px;bottom:14px;z-index:2147482999;border:1px solid rgba(255,255,255,.28);background:#0a0a0a;color:#fff;border-radius:999px;padding:10px 14px;font:inherit;font-size:.72rem;font-weight:800;letter-spacing:.06em;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.28)}
+      .bam-privacy-reopen:hover{background:#171717}
+      html[data-theme="light"] .bam-privacy-reopen{background:#fffdf8;color:#2b2415;border-color:rgba(90,65,10,.28)}
       @media(min-width:900px){
         .bam-consent-backdrop{background:rgba(0,0,0,.25)}
         .bam-consent-panel{left:auto;right:26px;bottom:26px;transform:translateY(120%);width:min(470px,calc(100% - 52px));border-radius:18px;padding:30px}
@@ -169,6 +172,17 @@
     `;
 
     document.body.append(backdrop, panel);
+
+    let reopenButton = document.getElementById('bam-privacy-reopen');
+    if (!reopenButton) {
+      reopenButton = document.createElement('button');
+      reopenButton.id = 'bam-privacy-reopen';
+      reopenButton.className = 'bam-privacy-reopen';
+      reopenButton.type = 'button';
+      reopenButton.textContent = spanish ? 'Privacidad' : 'Privacy Choices';
+      reopenButton.setAttribute('aria-label', spanish ? 'Abrir preferencias de privacidad' : 'Open privacy preferences');
+      document.body.appendChild(reopenButton);
+    }
 
     const main = panel.querySelector('.bam-consent-main');
     const settings = panel.querySelector('.bam-consent-settings');
@@ -261,7 +275,10 @@
       openPanel();
     };
 
-    if (!readConsent().decided) openPanel();
+    reopenButton.addEventListener('click', window.BAMOpenCookieSettings);
+
+    const forceOpen = new URLSearchParams(window.location.search).get('privacy') === '1';
+    if (!readConsent().decided || forceOpen) openPanel();
   };
 
   if (document.readyState === 'loading') {
