@@ -3,7 +3,7 @@
 
   const LIVECHAT_LICENSE = 19864799;
   const TRACKING_SCRIPT_URL = 'https://cdn.livechatinc.com/tracking.js';
-  const CONSENT_KEY = 'bam-cookie-consent-v2';
+  const CONSENT_KEY = 'bam-cookie-consent-v3';
 
   const hasFunctionalConsent = () => {
     try {
