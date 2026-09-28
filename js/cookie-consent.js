@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const STORAGE_KEY = 'bam-cookie-consent-v1';
+  const STORAGE_KEY = 'bam-cookie-consent-v2';
   const STYLE_ID = 'bam-cookie-consent-styles';
   const spanish = document.documentElement.lang.toLowerCase().startsWith('es');
 
