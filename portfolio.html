@@ -94,6 +94,17 @@ html[data-theme="light"] .portfolio-templates-cta{background:linear-gradient(135
 html[data-theme="light"] .portfolio-templates-cta h2{color:#292317}html[data-theme="light"] .portfolio-templates-cta p{color:#514934}html[data-theme="light"] .portfolio-templates-eyebrow{color:#765300}
 @media(max-width:760px){.portfolio-templates-cta{flex-direction:column;align-items:stretch;gap:22px;margin-top:24px;text-align:center}.portfolio-templates-cta>a{width:100%}}
 </style>
+<style id="portfolio-case-study-upgrade">
+.case-study-summary{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0 6px}
+.case-study-summary>div{padding:14px 15px;border:1px solid rgba(212,166,55,.18);border-radius:12px;background:rgba(212,166,55,.055)}
+.case-study-summary span{display:block;margin-bottom:6px;color:#d4a637;font-size:.69rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.case-study-summary p{margin:0!important;font-size:.92rem!important;line-height:1.55!important}
+.project-status-label{display:inline-flex;align-self:flex-start;margin-bottom:10px;padding:7px 10px;border:1px solid rgba(212,166,55,.34);border-radius:999px;color:#f1c75b;background:rgba(212,166,55,.08);font-size:.68rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+html[data-theme="light"] .case-study-summary>div{background:rgba(138,98,0,.05);border-color:rgba(138,98,0,.18)}
+html[data-theme="light"] .case-study-summary span{color:#765300}
+html[data-theme="light"] .project-status-label{color:#765300;border-color:rgba(118,83,0,.28);background:rgba(118,83,0,.06)}
+@media(max-width:760px){.case-study-summary{grid-template-columns:1fr;width:100%;text-align:left}.project-status-label{align-self:center}}
+</style>
 </head>
 <body><header class="site-header" id="site-header">
 <div class="header-container">
@@ -172,29 +183,27 @@ html[data-theme="light"] .portfolio-templates-cta h2{color:#292317}html[data-the
 </div>
 <!-- PORTFOLIO PROJECTS -->
 <div class="portfolio-grid">
-<article class="portfolio-card" id="afterhours-project"><div class="portfolio-image-wrapper"><img src="/afterhours/campaign.png" alt="AFTERHOURS streetwear campaign" loading="lazy" class="portfolio-project-image"></div><div class="portfolio-card-content"><span class="project-status-label">Demo Concept</span><span class="portfolio-category">Clothing Brand / Streetwear</span><h2>AFTERHOURS</h2><p>A clothing brand concept with editorial photography, electric-blue accents, and a collection showcase ready to personalize.</p><ul class="portfolio-features"><li>Mobile-friendly layout</li><li>Collection showcase</li><li>Product detail previews</li><li>Brand story</li></ul><a class="portfolio-button" href="/afterhours/" target="_blank" rel="noopener noreferrer">Live Demo</a></div></article>
+<article class="portfolio-card" id="afterhours-project"><div class="portfolio-image-wrapper"><img src="/afterhours/campaign.png" alt="AFTERHOURS streetwear campaign" loading="lazy" class="portfolio-project-image"></div><div class="portfolio-card-content"><span class="project-status-label">Demo Concept</span><span class="portfolio-category">Clothing Brand / Streetwear</span><h2>AFTERHOURS</h2><div class="case-study-summary"><div><span>Brand Goal</span><p>Create a distinctive fashion-first storefront concept that feels editorial, modern, and mobile-ready.</p></div><div><span>Key Features</span><p>Collection showcase • Product previews • Brand story</p></div></div><p>A clothing brand concept with editorial photography, electric-blue accents, and a collection showcase ready to personalize.</p><ul class="portfolio-features"><li>Mobile-friendly layout</li><li>Collection showcase</li><li>Product detail previews</li><li>Brand story</li></ul><a class="portfolio-button" href="/afterhours/" target="_blank" rel="noopener noreferrer">Live Demo</a></div></article>
 
 <article class="portfolio-card">
 <div class="portfolio-image-wrapper"><img alt="Titan Athletics high school sports website preview" class="portfolio-project-image" src="https://images.unsplash.com/photo-1566577739112-5180d4bf9390?auto=format&amp;fit=crop&amp;w=1200&amp;q=82"/></div>
-<div class="portfolio-card-content"><span class="portfolio-category">School Athletics Website</span><h2>Titan Athletics</h2><p>A bold, mobile-responsive athletics hub that brings game-day energy to schedules, scores, standings, player profiles, school news, and booster support.</p><ul class="portfolio-features"><li>Scores and Schedule Dashboard</li><li>Featured Player Profiles</li><li>League Standings and Records</li><li>Sports Navigation and News</li><li>Interactive Newsletter Signup</li></ul><a class="portfolio-button" href="/titan-athletics/" rel="noopener noreferrer" target="_blank">Visit Website</a></div>
-</article>
+<div class="portfolio-card-content"><span class="project-status-label">Demo Concept</span><span class="portfolio-category">School Athletics Website</span><h2>Titan Athletics</h2><div class="case-study-summary"><div><span>Business Goal</span><p>Bring schedules, scores, standings, player profiles, news, and booster information into one energetic school athletics hub.</p></div><div><span>Key Features</span><p>Schedules & scores • Player profiles • Standings • News</p></div></div><p>A bold, mobile-responsive athletics hub that brings game-day energy to schedules, scores, standings, player profiles, school news, and booster support.</p><ul class="portfolio-features"><li>Scores and Schedule Dashboard</li><li>Featured Player Profiles</li><li>League Standings and Records</li><li>Sports Navigation and News</li><li>Interactive Newsletter Signup</li></ul><a class="portfolio-button" href="/titan-athletics/" rel="noopener noreferrer" target="_blank">Visit Website</a></div></article>
 
 <article class="portfolio-card">
 <div class="portfolio-image-wrapper"><img alt="ConnectSphere social platform website preview" class="portfolio-project-image" src="/images/connectsphere.png" loading="lazy"/></div>
-<div class="portfolio-card-content"><span class="portfolio-category">Social Platform</span><h2>ConnectSphere</h2><p>A social platform concept with profiles, messaging, a community feed, and notifications.</p><ul class="portfolio-features"><li>User profiles</li><li>Messaging system</li><li>Community feed</li><li>Mobile-friendly design</li></ul><a class="portfolio-button" href="/connectsphere/" rel="noopener noreferrer" target="_blank">Visit Website</a></div>
-</article>
+<div class="portfolio-card-content"><span class="project-status-label">Demo Concept</span><span class="portfolio-category">Social Platform</span><h2>ConnectSphere</h2><div class="case-study-summary"><div><span>Platform Goal</span><p>Show how a community-focused social platform can organize profiles, messaging, feeds, and notifications in a clean interface.</p></div><div><span>Key Features</span><p>Profiles • Messaging • Community feed • Notifications</p></div></div><p>A social platform concept with profiles, messaging, a community feed, and notifications.</p><ul class="portfolio-features"><li>User profiles</li><li>Messaging system</li><li>Community feed</li><li>Mobile-friendly design</li></ul><a class="portfolio-button" href="/connectsphere/" rel="noopener noreferrer" target="_blank">Visit Website</a></div></article>
 
 <article class="portfolio-card">
 <div class="portfolio-image-wrapper">
 <img alt="Kade Mercer author website preview" class="portfolio-project-image" src="/images/book1.png"/>
 </div>
-<div class="portfolio-card-content">
+<div class="portfolio-card-content"><span class="project-status-label">Demo Concept</span>
 <span class="portfolio-category">
                             Author Website
                         </span>
 <h2>
                             Kade Mercer
-                        </h2>
+                        </h2><div class="case-study-summary"><div><span>Author Goal</span><p>Give an author a polished home for books, biography, upcoming releases, and reader-focused information.</p></div><div><span>Key Features</span><p>Book showcase • Biography • Upcoming releases • Reader content</p></div></div>
 <p>
                             A modern author website featuring published books,
                             author information, upcoming releases, and reader
@@ -220,18 +229,15 @@ html[data-theme="light"] .portfolio-templates-cta h2{color:#292317}html[data-the
 <a class="portfolio-button" href="/kade-mercer/" rel="noopener noreferrer" target="_blank">
                             Visit Website
                         </a>
-</div>
-</article>
+</div></article>
 
 <article class="portfolio-card">
 <div class="portfolio-image-wrapper"><img alt="Velocity Drive Rentals website preview" class="portfolio-project-image" src="/images/velocity-drive-rentals.jpg" loading="lazy"/></div>
-<div class="portfolio-card-content"><span class="portfolio-category">Car Rental Website</span><h2>Velocity Drive Rentals</h2><p>A premium car rental concept with a vehicle catalog, pricing, and a clear path to reserve a car.</p><ul class="portfolio-features"><li>Vehicle catalog</li><li>Rental pricing</li><li>Reservation flow</li><li>Mobile-friendly design</li></ul><a class="portfolio-button" href="/velocity-drive-rentals/" rel="noopener noreferrer" target="_blank">Visit Website</a></div>
-</article>
+<div class="portfolio-card-content"><span class="project-status-label">Demo Concept</span><span class="portfolio-category">Car Rental Website</span><h2>Velocity Drive Rentals</h2><div class="case-study-summary"><div><span>Business Goal</span><p>Make vehicle selection and rental information easy to browse with a clear path from inventory to reservation.</p></div><div><span>Key Features</span><p>Vehicle catalog • Pricing • Pickup details • Reservation flow</p></div></div><p>A premium car rental concept with a vehicle catalog, pricing, and a clear path to reserve a car.</p><ul class="portfolio-features"><li>Vehicle catalog</li><li>Rental pricing</li><li>Reservation flow</li><li>Mobile-friendly design</li></ul><a class="portfolio-button" href="/velocity-drive-rentals/" rel="noopener noreferrer" target="_blank">Visit Website</a></div></article>
 
 <article class="portfolio-card">
 <div class="portfolio-image-wrapper"><img alt="FleetFlow Logistics website preview" class="portfolio-project-image" src="/images/fleetflow-preview-v2.png?v=2" loading="lazy"/></div>
-<div class="portfolio-card-content"><span class="portfolio-category">Logistics Website</span><h2>FleetFlow Logistics</h2><p>A logistics concept showcasing fleet operations, shipping services, tracking, and quote requests.</p><ul class="portfolio-features"><li>Service showcase</li><li>Shipment tracking section</li><li>Request a quote</li><li>Mobile-friendly design</li></ul><a class="portfolio-button" href="/fleetflow/" rel="noopener noreferrer" target="_blank">Visit Website</a></div>
-</article>
+<div class="portfolio-card-content"><span class="project-status-label">Demo Concept</span><span class="portfolio-category">Logistics Website</span><h2>FleetFlow Logistics</h2><div class="case-study-summary"><div><span>Business Goal</span><p>Present logistics services clearly while giving customers fast access to tracking information and quote requests.</p></div><div><span>Key Features</span><p>Services • Shipment tracking • Quote requests • Mobile-ready layout</p></div></div><p>A logistics concept showcasing fleet operations, shipping services, tracking, and quote requests.</p><ul class="portfolio-features"><li>Service showcase</li><li>Shipment tracking section</li><li>Request a quote</li><li>Mobile-friendly design</li></ul><a class="portfolio-button" href="/fleetflow/" rel="noopener noreferrer" target="_blank">Visit Website</a></div></article>
 
 </div>
 

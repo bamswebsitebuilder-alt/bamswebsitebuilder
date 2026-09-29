@@ -72,6 +72,15 @@
 }
 </style>
 <link rel="stylesheet" href="/css/home-editorial.css?v=20260926-2">
+<style id="assurance-upgrade">
+.assurance-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.assurance-card{position:relative;padding-top:58px}
+.assurance-mark{position:absolute;top:22px;right:22px;color:#d4a637;font-weight:900;font-size:.8rem;letter-spacing:.12em}
+.assurance-card h3{margin-bottom:10px}
+.assurance-actions{margin-top:28px}
+@media(max-width:900px){.assurance-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.assurance-grid{grid-template-columns:1fr}.assurance-card{padding-top:52px}}
+</style>
 </head>
 <body>
 <div id="bam-loader" role="status" aria-live="polite" aria-label="Loading BAM's Website Builder">
@@ -251,19 +260,26 @@
   </div>
 </section>
 
-<section class="home-section home-section-alt" aria-labelledby="why-bam-title">
+<section class="home-section home-section-alt assurance-section" aria-labelledby="why-bam-title">
   <div class="home-container">
     <div class="home-section-heading">
       <div>
-        <p class="home-eyebrow">WHY BAM'S</p>
-        <h2 class="home-title" id="why-bam-title">More capability without making the process complicated.</h2>
+        <p class="home-eyebrow">YOUR PROJECT, BACKED BY BAM'S</p>
+        <h2 class="home-title" id="why-bam-title">Professional support from first idea through launch.</h2>
       </div>
+      <p class="home-intro">A clear process, practical tools, and direct support designed to make getting a professional website easier for small businesses.</p>
     </div>
-    <div class="home-grid home-grid-4 compact-benefit-grid">
-      <article class="home-card"><div class="home-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#custom-design"></use></svg></div><h3>Custom Design</h3><p>Your site is built around your business, brand, services, and goals.</p></article>
-      <article class="home-card"><div class="home-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#mobile"></use></svg></div><h3>Built for Every Screen</h3><p>Responsive layouts designed to work cleanly on phones, tablets, laptops, and desktops.</p></article>
-      <article class="home-card"><div class="home-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#search"></use></svg></div><h3>SEO-Ready Foundation</h3><p>Search-friendly structure, titles, descriptions, and content setup from the start.</p></article>
-      <article class="home-card"><div class="home-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#contact"></use></svg></div><h3>Direct Personal Support</h3><p>Work directly with BAM's throughout the project instead of being passed between departments.</p></article>
+    <div class="assurance-grid">
+      <article class="home-card assurance-card"><div class="assurance-mark">01</div><h3>Custom Built</h3><p>Your website is designed around your business, brand, services, and goals—not a one-size-fits-all layout.</p></article>
+      <article class="home-card assurance-card"><div class="assurance-mark">02</div><h3>Mobile Ready</h3><p>Responsive layouts are built to work cleanly across phones, tablets, laptops, and desktops.</p></article>
+      <article class="home-card assurance-card"><div class="assurance-mark">03</div><h3>Clear Pricing</h3><p>See starting prices, monthly website plans, and available add-ons before choosing the path that fits your business.</p></article>
+      <article class="home-card assurance-card"><div class="assurance-mark">04</div><h3>Direct Support</h3><p>Work directly with BAM's throughout the project with straightforward communication from planning to launch.</p></article>
+      <article class="home-card assurance-card"><div class="assurance-mark">05</div><h3>Client Portal</h3><p>Client access can keep project information, files, messages, updates, and invoices organized in one place.</p></article>
+      <article class="home-card assurance-card"><div class="assurance-mark">06</div><h3>Continued Support</h3><p>Maintenance, SEO, business email, and additional website features can be added as your business grows.</p></article>
+    </div>
+    <div class="home-actions assurance-actions">
+      <a class="home-button" href="/contact">Get a Free Quote</a>
+      <a class="home-button-secondary" href="/services">Explore Services</a>
     </div>
   </div>
 </section>
