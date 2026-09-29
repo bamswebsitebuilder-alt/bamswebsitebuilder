@@ -80,6 +80,19 @@
 </style>
 
 <link rel="stylesheet" href="/css/responsive-fixes.css">
+<style id="service-category-upgrade">
+.service-categories-section{padding-top:clamp(70px,9vw,120px)}
+.service-category-stack{display:grid;gap:54px;max-width:1200px;margin:48px auto 0}
+.service-category-group{padding:clamp(24px,4vw,40px);border:1px solid rgba(212,166,55,.2);border-radius:20px;background:linear-gradient(145deg,rgba(25,25,25,.92),rgba(12,12,12,.96))}
+.service-category-heading{display:flex;align-items:flex-start;gap:18px;margin-bottom:28px}
+.service-category-heading>span{display:grid;place-items:center;flex:0 0 48px;width:48px;height:48px;border:1px solid rgba(212,166,55,.45);border-radius:12px;color:#f1c75b;font-weight:900}
+.service-category-heading p{margin:0 0 6px;color:#d4a637;font-size:.75rem;font-weight:900;letter-spacing:.16em}
+.service-category-heading h3{margin:0;color:#fff;font-size:clamp(1.35rem,2.6vw,2rem);line-height:1.2}
+.service-category-group .services-grid{margin:0}
+html[data-theme="light"] .service-category-group{background:linear-gradient(145deg,#fffaf0,#f5ead5);border-color:rgba(138,98,0,.25)}
+html[data-theme="light"] .service-category-heading h3{color:#2c261a}
+@media(max-width:620px){.service-category-stack{gap:30px}.service-category-group{padding:22px 16px}.service-category-heading{gap:12px}.service-category-heading>span{flex-basis:42px;width:42px;height:42px}}
+</style>
 </head>
 <body><header class="site-header" id="site-header">
 <div class="header-container">
@@ -163,65 +176,53 @@
 </div>
 </section>
 <!-- SERVICES -->
-<section class="content-section">
-<div class="section-heading">
-<h2>
-                Our Web Design Services
-            </h2>
-<p>
-                We provide professional website solutions designed to help your business grow.
-            </p>
-</div>
-<div class="services-grid">
-<div class="service-card">
-<h3>Business Websites</h3>
-<p>
-                    Professional websites designed to showcase your company and convert visitors into customers.
-                </p>
-</div>
-<div class="service-card">
-<h3>Landing Pages</h3>
-<p>
-                    High-converting landing pages for promotions, advertising, and lead generation.
-                </p>
-</div>
-<div class="service-card">
-<h3>Portfolio Websites</h3>
-<p>
-                    Modern portfolio websites for creators, artists, photographers, and freelancers.
-                </p>
-</div>
-<div class="service-card">
-<h3>Website Redesign</h3>
-<p>
-                    Transform outdated websites into modern, responsive experiences.
-                </p>
-</div>
-<div class="service-card">
-<h3>Mobile Responsive Design</h3>
-<p>
-                    Every website is optimized for desktops, tablets, and smartphones.
-                </p>
-</div>
-<div class="service-card">
-<h3>SEO Optimization</h3>
-<p>
-                    Built with search engine best practices to improve your online visibility.
-                </p>
-</div>
-<div class="service-card">
-<h3>Fast Loading Websites</h3>
-<p>
-                    Optimized code and images provide a fast browsing experience.
-                </p>
-</div>
-<div class="service-card">
-<h3>Website Maintenance</h3>
-<p>
-                    Keep your website secure, updated, and performing at its best.
-                </p>
-</div>
-</div>
+<section class="content-section service-categories-section">
+  <div class="section-heading">
+    <h2>Website Services Built Around Your Business</h2>
+    <p>Choose what you need now and add more support as your business grows.</p>
+  </div>
+
+  <div class="service-category-stack">
+    <section class="service-category-group" aria-labelledby="service-create">
+      <div class="service-category-heading"><span>01</span><div><p>WEBSITE CREATION</p><h3 id="service-create">Build or refresh your online presence.</h3></div></div>
+      <div class="services-grid">
+        <div class="service-card"><h3>Business Websites</h3><p>Professional custom websites built around your services, brand, goals, and customer journey.</p></div>
+        <div class="service-card"><h3>Landing Pages</h3><p>Focused pages for promotions, advertising campaigns, launches, and lead generation.</p></div>
+        <div class="service-card"><h3>Portfolio Websites</h3><p>Polished websites for creators, authors, photographers, service providers, and other professionals.</p></div>
+        <div class="service-card"><h3>Website Redesign</h3><p>Modernize an outdated site with clearer structure, stronger visuals, and responsive layouts.</p></div>
+      </div>
+    </section>
+
+    <section class="service-category-group" aria-labelledby="service-growth">
+      <div class="service-category-heading"><span>02</span><div><p>BUSINESS GROWTH</p><h3 id="service-growth">Help more customers find and understand your business.</h3></div></div>
+      <div class="services-grid">
+        <div class="service-card"><h3>SEO Optimization</h3><p>Search-friendly page structure, titles, descriptions, and content setup to strengthen visibility.</p></div>
+        <div class="service-card"><h3>Google Business Support</h3><p>Support for connecting your website with a stronger local business presence and customer path.</p></div>
+        <div class="service-card"><h3>Business Email</h3><p>Professional business email setup that helps your company look established and consistent.</p></div>
+        <div class="service-card"><h3>Conversion-Focused Pages</h3><p>Clear calls-to-action, service messaging, quote paths, and contact experiences built around customer action.</p></div>
+      </div>
+    </section>
+
+    <section class="service-category-group" aria-labelledby="service-support">
+      <div class="service-category-heading"><span>03</span><div><p>WEBSITE SUPPORT</p><h3 id="service-support">Keep your website useful after launch.</h3></div></div>
+      <div class="services-grid">
+        <div class="service-card"><h3>Website Maintenance</h3><p>Ongoing help with updates, content changes, fixes, and general website upkeep.</p></div>
+        <div class="service-card"><h3>Mobile Responsive Design</h3><p>Layouts designed to remain clear and easy to use across phones, tablets, laptops, and desktops.</p></div>
+        <div class="service-card"><h3>Performance Improvements</h3><p>Practical code, image, and layout improvements that support a faster browsing experience.</p></div>
+        <div class="service-card"><h3>Post-Launch Support</h3><p>Continue working with BAM's as your content, services, or website needs change.</p></div>
+      </div>
+    </section>
+
+    <section class="service-category-group" aria-labelledby="service-advanced">
+      <div class="service-category-heading"><span>04</span><div><p>ADVANCED FEATURES</p><h3 id="service-advanced">Add tools that make your website work harder.</h3></div></div>
+      <div class="services-grid">
+        <div class="service-card"><h3>Client Portals</h3><p>Give clients a dedicated place for project information, messages, files, updates, and invoices.</p></div>
+        <div class="service-card"><h3>Booking Systems</h3><p>Make it easier for customers to schedule calls, consultations, or appointments from your website.</p></div>
+        <div class="service-card"><h3>E-commerce Features</h3><p>Add product or service purchasing flows when your project needs online selling capabilities.</p></div>
+        <div class="service-card"><h3>Sports &amp; Team Websites</h3><p>Organize schedules, scores, rosters, player information, news, and supporter content in one hub.</p></div>
+      </div>
+    </section>
+  </div>
 </section>
 <!-- WHY CHOOSE US -->
 <section class="content-section">
