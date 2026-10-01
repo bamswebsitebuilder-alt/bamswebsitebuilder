@@ -442,7 +442,7 @@ body{background:var(--bam-bg);color:var(--bam-text)}
 .plan-preview-card p{margin:0 0 28px;color:#99948c;line-height:1.7}
 .buying-path-card .home-button,
 .buying-path-card .home-button-secondary{margin-top:auto}
-.portfolio-preview-three{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+.portfolio-preview-three{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))!important;gap:18px!important;border:0!important}
 .portfolio-preview-three .portfolio-home-visual{min-height:0!important;height:180px!important}
 .portfolio-preview-three .portfolio-home-visual img{min-height:0!important;max-height:156px!important}
 .desktop-section-action{align-self:end}
@@ -463,13 +463,13 @@ body{background:var(--bam-bg);color:var(--bam-text)}
   .plans-preview-section .home-section-heading{grid-template-columns:1fr}
   .buying-path-grid,
   .plan-preview-grid{grid-template-columns:1fr}
-  .portfolio-preview-three{grid-template-columns:1fr!important}
   .desktop-section-action{display:none!important}
   .mobile-section-action{display:flex!important}
   .portfolio-preview-three .portfolio-home-visual{min-height:0!important;height:155px!important}
   .portfolio-preview-three .portfolio-home-visual img{min-height:0!important;max-height:131px!important}
 }
 @media(max-width:650px){
+  .portfolio-preview-three{grid-template-columns:1fr!important;gap:14px!important}
   .buying-path-card,
   .plan-preview-card{padding:28px 24px}
   .buying-path-number{margin-bottom:22px}
