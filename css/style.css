@@ -1245,9 +1245,7 @@ body.menu-open {
 
 .portfolio-card {
     display: grid;
-    grid-template-columns:
-        minmax(360px, 0.95fr)
-        minmax(0, 1.05fr);
+    grid-template-columns: 1fr;
 
     min-width: 0;
 
@@ -1283,7 +1281,7 @@ body.menu-open {
     justify-content: center;
 
     min-width: 0;
-    min-height: 500px;
+    min-height: 420px;
     padding: 24px;
 
     background:
@@ -1294,7 +1292,8 @@ body.menu-open {
         ),
         #080808;
 
-    border-right: 1px solid rgba(255, 215, 0, 0.16);
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.16);
 
     overflow: hidden;
 }
@@ -1303,9 +1302,10 @@ body.menu-open {
 .portfolio-project-image {
     display: block;
 
-    width: 100%;
-    height: 100%;
-    max-height: 560px;
+    width: auto;
+    max-width: 520px;
+    height: auto;
+    max-height: 520px;
 
     object-fit: contain;
     object-position: center;
@@ -1363,10 +1363,12 @@ body.menu-open {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
 
     min-width: 0;
-    padding: 50px;
+    padding: 42px;
+
+    text-align: center;
 }
 
 .portfolio-category {
@@ -1390,8 +1392,8 @@ body.menu-open {
 
 .portfolio-card p {
     width: 100%;
-    max-width: 560px;
-    margin-bottom: 25px;
+    max-width: 700px;
+    margin: 0 auto 25px;
 
     color: #c7c7c7;
     font-size: 17px;
@@ -1402,9 +1404,12 @@ body.menu-open {
     display: grid;
     gap: 12px;
 
-    width: 100%;
-    margin: 0 0 30px;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto 30px;
     padding: 0;
+
+    text-align: left;
 
     list-style: none;
 }
