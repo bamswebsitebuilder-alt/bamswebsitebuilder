@@ -40,23 +40,6 @@
     templateGrid.insertAdjacentElement('afterend', plans);
   }
 
-  const homePortfolioGrid = document.querySelector('.portfolio-preview');
-  if (homePortfolioGrid) {
-    const homeDemos = [
-      {name:'Titan Athletics',type:spanish?'Deportes Escolares':'School Athletics',image:'https://images.unsplash.com/photo-1566577739112-5180d4bf9390?auto=format&fit=crop&w=1200&q=82',href:'/titan-athletics/'},
-      ...demos
-    ];
-    homeDemos.forEach((demo) => {
-      const exists = [...homePortfolioGrid.querySelectorAll('h3')].some((heading) => heading.textContent.trim() === demo.name);
-      if (exists) return;
-      const card = document.createElement('article');
-      card.className = 'home-card portfolio-home-card';
-      card.dataset.bamNewDemo = 'true';
-      card.innerHTML = `<div class="portfolio-home-visual"><img alt="${demo.name} ${spanish?'vista previa':'website preview'}" loading="lazy" src="${demo.image}"></div><div class="portfolio-home-content"><span class="project-status-label">${spanish?'Concepto de demostración':'Demo Concept'}</span><span class="portfolio-type">${demo.type}</span><h3>${demo.name}</h3><p>${spanish?'Un concepto profesional y adaptable diseñado para presentar servicios claramente y generar consultas.':'A polished, responsive concept designed to present services clearly and generate inquiries.'}</p><a class="home-link" href="${demo.href}" rel="noopener noreferrer" target="_blank">${spanish?'Ver demo':'View Demo'} →</a></div>`;
-      homePortfolioGrid.append(card);
-    });
-  }
-
   const homePath = (location.pathname.replace(/\/$/, '') || '/').replace(/\.html$/, '');
   if ((homePath === '/' || homePath.endsWith('/home') || homePath === '/es') && !document.querySelector('.founder-preview')) {
     const hero = document.querySelector('.hero');
