@@ -111,6 +111,7 @@
         .bam-consent-backdrop{background:rgba(0,0,0,.25)}
         .bam-consent-panel{left:auto;right:26px;bottom:26px;transform:translateY(120%);width:min(470px,calc(100% - 52px));border-radius:18px;padding:30px}
         .bam-consent-panel.is-open{transform:translateY(0)}
+        .bam-privacy-reopen{left:auto;right:28px;bottom:28px}
       }
       @media(max-width:520px){
         .bam-consent-panel{padding:28px 22px calc(24px + env(safe-area-inset-bottom));border-radius:0;max-height:92vh}
