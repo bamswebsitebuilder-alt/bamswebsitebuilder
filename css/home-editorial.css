@@ -259,8 +259,8 @@ body{background:var(--bam-bg);color:var(--bam-text)}
 
 /* Portfolio */
 .portfolio-preview{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:0!important;border-top:1px solid var(--bam-line);border-left:1px solid var(--bam-line)}
-.portfolio-home-card{overflow:hidden!important}.portfolio-home-visual{min-height:0!important;height:220px!important;background:#0a0a0a!important;border:0!important;border-bottom:1px solid var(--bam-line)!important;padding:14px!important;display:flex!important;align-items:center!important;justify-content:center!important}
-.portfolio-home-visual img{width:100%!important;height:100%!important;min-height:0!important;max-height:192px!important;object-fit:contain!important;object-position:center!important;filter:saturate(.82) contrast(1.03);transition:transform .55s ease,filter .35s ease}
+.portfolio-home-card{overflow:hidden!important;padding:0!important}.portfolio-home-visual{min-height:0!important;height:180px!important;background:#0a0a0a!important;border:0!important;border-bottom:1px solid var(--bam-line)!important;padding:12px!important;display:flex!important;align-items:center!important;justify-content:center!important}
+.portfolio-home-visual img{display:block!important;width:100%!important;height:100%!important;min-height:0!important;max-height:156px!important;object-fit:contain!important;object-position:center!important;filter:saturate(.82) contrast(1.03);transition:transform .55s ease,filter .35s ease}
 .portfolio-home-card:hover .portfolio-home-visual img{transform:scale(1.025);filter:saturate(1) contrast(1.03)}
 .portfolio-home-content{padding:26px 30px 32px!important}.portfolio-type{color:#8f8a82!important;font-size:.6rem!important;letter-spacing:.2em!important}
 
@@ -286,7 +286,7 @@ body{background:var(--bam-bg);color:var(--bam-text)}
 }
 @media(max-width:650px){
   .hero{padding:70px 20px!important;min-height:72vh}.hero h1{font-size:clamp(3rem,15vw,5.4rem)!important}.hero .hero-content>p{font-size:.95rem!important}.hero-buttons{flex-direction:column!important;align-items:stretch!important}.hero .btn,.hero .secondary-button{width:100%!important}.hero .hero-trust{display:grid!important;grid-template-columns:1fr 1fr;gap:11px!important}.hero .hero-trust span{padding:0!important;border-right:0!important}
-  .home-section,.home-section-alt{padding:68px 20px!important}.home-card{padding:25px!important}.portfolio-home-visual{min-height:0!important;height:190px!important}.portfolio-home-visual img{min-height:0!important;max-height:164px!important}.founder-preview-inner>img{min-height:380px!important}.founder-preview-copy{padding:50px 22px!important}.founder-preview-actions{flex-direction:column}.review-callout{grid-template-columns:1fr!important}.final-cta{padding:80px 20px!important}
+  .home-section,.home-section-alt{padding:68px 20px!important}.home-card{padding:25px!important}.portfolio-home-card{padding:0!important}.portfolio-home-visual{min-height:0!important;height:155px!important}.portfolio-home-visual img{min-height:0!important;max-height:131px!important}.founder-preview-inner>img{min-height:380px!important}.founder-preview-copy{padding:50px 22px!important}.founder-preview-actions{flex-direction:column}.review-callout{grid-template-columns:1fr!important}.final-cta{padding:80px 20px!important}
 }
 
 /* Button system fix */
@@ -443,8 +443,8 @@ body{background:var(--bam-bg);color:var(--bam-text)}
 .buying-path-card .home-button,
 .buying-path-card .home-button-secondary{margin-top:auto}
 .portfolio-preview-three{grid-template-columns:repeat(3,minmax(0,1fr))!important}
-.portfolio-preview-three .portfolio-home-visual{min-height:0!important;height:220px!important}
-.portfolio-preview-three .portfolio-home-visual img{min-height:0!important;max-height:192px!important}
+.portfolio-preview-three .portfolio-home-visual{min-height:0!important;height:180px!important}
+.portfolio-preview-three .portfolio-home-visual img{min-height:0!important;max-height:156px!important}
 .desktop-section-action{align-self:end}
 .mobile-section-action{display:none!important}
 .plan-preview-card{padding:34px 32px}
@@ -466,8 +466,8 @@ body{background:var(--bam-bg);color:var(--bam-text)}
   .portfolio-preview-three{grid-template-columns:1fr!important}
   .desktop-section-action{display:none!important}
   .mobile-section-action{display:flex!important}
-  .portfolio-preview-three .portfolio-home-visual{min-height:0!important;height:190px!important}
-  .portfolio-preview-three .portfolio-home-visual img{min-height:0!important;max-height:164px!important}
+  .portfolio-preview-three .portfolio-home-visual{min-height:0!important;height:155px!important}
+  .portfolio-preview-three .portfolio-home-visual img{min-height:0!important;max-height:131px!important}
 }
 @media(max-width:650px){
   .buying-path-card,
