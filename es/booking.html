@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Reserva una Consulta Web Gratis | BAM's Website Builder</title>
-  <meta name="description" content="Reserva una consulta web gratuita de 30 minutos con BAM's Website Builder en Clearwater, Florida.">
+  <meta name="description" content="Reserva una consulta web gratuita con BAM's Website Builder en Clearwater, Florida.">
   <link rel="canonical" href="https://www.bamswebsitebuilder.com/es/booking">
   <link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/booking">
   <link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/booking">
@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="/css/booking.css?v=13">
 <link rel="stylesheet" href="/css/responsive-fixes.css">
 <link rel="stylesheet" href="/css/client-guide.css?v=20261010-1">
-</head>
+<style>.booking-handoff .panel{padding:26px}.booking-handoff h2{font-size:1.3rem;margin-bottom:16px}.booking-handoff p{line-height:1.65;margin:16px 0}.booking-handoff .confirm-button{display:block;text-align:center;text-decoration:none;padding:16px}.booking-handoff a{overflow-wrap:anywhere}</style></head>
 <body>
 <header class="booking-header">
   <a class="booking-brand" href="/es/" aria-label="BAM's Website Builder home"><strong>BAM'S</strong><span>WEBSITE BUILDER</span></a>
@@ -52,7 +52,7 @@
       <p>Programa una consulta gratuita con BAM's Website Builder. Hablaremos de tus objetivos, las necesidades de tu sitio web y los mejores próximos pasos para tu proyecto.</p>
       <div class="hero-benefits" aria-label="Beneficios de la llamada">
         <div><span class="benefit-icon">✓</span><p><strong>CONSULTA GRATUITA</strong><small>Sin compromiso</small></p></div>
-        <div><span class="benefit-icon">◷</span><p><strong>30 MINUTOS</strong><small>Conversación enfocada</small></p></div>
+        <div><span class="benefit-icon">◷</span><p><strong>CALENDARIO EN VIVO</strong><small>Conversación enfocada</small></p></div>
         <div><span class="benefit-icon">◇</span><p><strong>ORIENTACIÓN DEL PROYECTO</strong><small>Adaptada a tus objetivos</small></p></div>
       </div>
     </div>
@@ -63,44 +63,11 @@
   </section>
 
   <section class="booking-section" id="booking">
-    <div class="steps" aria-label="Pasos de la reserva">
-      <div><span>1</span>Elige servicio</div><div><span>2</span>Elige fecha y hora</div><div><span>3</span>Tus datos</div>
-    </div>
-    <form class="booking-grid" id="appointment-form">
-      <fieldset class="panel service-panel">
-        <legend class="sr-only">Elige un servicio</legend>
-        <label class="service-option selected"><input type="radio" name="service" value="Consulta de diseño web" data-duration="30" checked><span class="service-mark">⌁</span><span><b>Consulta de diseño web</b><small>30 min</small></span><strong>GRATIS</strong></label>
-        <label class="service-option"><input type="radio" name="service" value="Planificación de sitio nuevo" data-duration="30"><span class="service-mark">▤</span><span><b>Planificación de sitio nuevo</b><small>30 min</small></span><strong>GRATIS</strong></label>
-        <label class="service-option"><input type="radio" name="service" value="Consulta de comercio electrónico" data-duration="30"><span class="service-mark">⌑</span><span><b>Consulta de comercio electrónico</b><small>30 min</small></span><strong>GRATIS</strong></label>
-        <label class="service-option"><input type="radio" name="service" value="Revisión de rediseño web" data-duration="30"><span class="service-mark">▱</span><span><b>Revisión de rediseño web</b><small>30 min</small></span><strong>GRATIS</strong></label>
-        <label class="service-option"><input type="radio" name="service" value="Consulta de SEO y auditoría web" data-duration="30"><span class="service-mark">◎</span><span><b>Consulta de SEO y auditoría web</b><small>30 min</small></span><strong>GRATIS</strong></label>
-        <p class="service-help">¿No sabes qué necesitas?<br><a href="/es/contact">Hablemos y te orientaremos.</a></p>
-      </fieldset>
-
-      <section class="panel calendar-panel" aria-labelledby="calendar-title">
-        <div class="calendar-head"><button type="button" id="prev-month" aria-label="Mes anterior">‹</button><h2 id="calendar-title"></h2><button type="button" id="next-month" aria-label="Mes siguiente">›</button></div>
-        <div class="weekdays" aria-hidden="true"><span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span></div>
-        <div class="calendar-days" id="calendar-days"></div>
-        <p class="times-title" id="times-title">Elige una fecha para ver los horarios disponibles</p>
-        <div class="time-grid" id="time-grid"></div>
-      </section>
-
-      <section class="panel details-panel" aria-labelledby="details-title">
-        <h2 id="details-title">RESUMEN DE LA CITA</h2>
-        <div class="summary-service"><div class="summary-logo"><img src="/images/booking-summary-logo.jpeg?v=1" alt="BAM's Website Builder"></div><p><strong id="summary-service">Consulta de diseño web</strong><span id="summary-duration">30 min</span></p><b>GRATIS</b></div>
-        <dl class="summary-list"><div><dt>Fecha</dt><dd id="summary-date">Selecciona una fecha</dd></div><div><dt>Hora</dt><dd id="summary-time">Selecciona una hora</dd></div><div><dt>Con</dt><dd>BAM's Website Builder</dd></div></dl>
-        <h3>TUS DATOS</h3>
-        <label><span class="sr-only">Nombre completo</span><input name="name" autocomplete="name" placeholder="Nombre completo" required></label>
-        <label><span class="sr-only">Correo electrónico</span><input name="email" type="email" autocomplete="email" placeholder="Correo electrónico" required></label>
-        <label><span class="sr-only">Número de teléfono</span><input name="phone" type="tel" autocomplete="tel" placeholder="Número de teléfono" required></label>
-        <label><span class="sr-only">Detalles del proyecto</span><textarea name="notes" rows="3" placeholder="Cuéntanos un poco sobre tu proyecto (opcional)"></textarea></label>
-        <input type="hidden" name="date" id="booking-date"><input type="hidden" name="time" id="booking-time">
-        <button class="confirm-button" type="submit">CONTINUAR A GOOGLE CALENDAR</button>
-        <p class="secure-note">Tu reserva se abre de forma segura en Google Calendar.</p>
-        <p class="booking-fallback">¿Tienes problemas? <a href="mailto:bamswebsitebuilder@gmail.com?subject=Solicitud%20de%20consulta%20web">Escríbenos para programar tu llamada</a>.</p>
-        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
-      </section>
-    </form>
+    <div class="steps" aria-label="Pasos de la reserva"><div><span>1</span>Abre el calendario</div><div><span>2</span>Elige un horario disponible</div><div><span>3</span>Confirma tus datos</div></div>
+ <div class="booking-grid booking-handoff">
+ <section class="panel"><h2>Tu consulta gratuita</h2><p>Hablemos sobre tus objetivos, diseño, páginas, tienda en línea o mejoras para tu sitio web.</p><p>La duración de la cita y los horarios disponibles aparecen en Google Calendar.</p></section>
+ <section class="panel"><h2>Reserva en Google Calendar</h2><p>Elige una fecha y hora disponibles e ingresa tus datos directamente en el calendario. Tu cita queda reservada cuando completas la confirmación allí.</p><a class="confirm-button" href="https://calendar.app.google/L4gMAC1gDq7sSuQF6">VER HORARIOS DISPONIBLES</a><p class="secure-note">Verifica la zona horaria antes de confirmar. Recibirás los detalles de la cita y Google Meet después de reservar.</p></section>
+ <section class="panel"><h2>¿Necesitas ayuda?</h2><p>Si ningún horario te funciona o necesitas ayuda, contáctanos para programar tu consulta.</p><p><a href="/es/contact">Contactar a BAM’s</a></p><p><a href="mailto:bamswebsitebuilder@gmail.com">bamswebsitebuilder@gmail.com</a></p><p><a href="tel:+17274178762">727-417-8762</a></p></section></div>
 
     <div class="booking-promises">
       <div><span>✓</span><p><b>RESERVA FÁCIL</b><small>Reserva tu llamada en pocos pasos</small></p></div>
@@ -113,7 +80,7 @@
 
 <footer class="booking-footer"><a class="booking-brand" href="/es/"><strong>BAM'S</strong><span>WEBSITE BUILDER</span></a><p>Sitios web profesionales que hacen crecer tu negocio.<small>© 2026 BAM's Website Builder. Todos los derechos reservados.</small></p><div class="booking-footer-links"><a href="tel:+17274178762">727-417-8762</a><a href="mailto:bamswebsitebuilder@gmail.com">Escríbenos</a><a href="https://www.facebook.com/bamswebsitebuilder" target="_blank" rel="noopener noreferrer">Facebook</a><a href="https://www.instagram.com/bamswebsitebuilder" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://x.com/bamswebsite" target="_blank" rel="noopener noreferrer" aria-label="BAM's Website Builder on X">X</a></div><nav class="client-resource-links" aria-label="Recursos para clientes"><a href="/es/service-terms">Términos del Servicio</a><a href="/es/cancellation-policy">Cancelaciones y Reembolsos</a><a href="/es/faq">Preguntas Frecuentes</a><a href="/es/project-checklist">Preparar tu Proyecto</a></nav>
 </footer>
-<script src="/js/booking-es.js?v=1" defer></script>
+<script src="/js/booking-menu.js?v=20261010-1" defer></script>
 <script src="/js/cookie-consent.js?v=20260928-3"></script>
 </body>
 </html>
