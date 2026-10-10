@@ -172,18 +172,23 @@ textarea,
     }
 
     .mobile-menu {
-        width: 100vw !important;
+        width: 100% !important;
         max-width: none !important;
         height: 100dvh !important;
         padding:
-          calc(18px + env(safe-area-inset-top))
+          0
           18px
           calc(24px + env(safe-area-inset-bottom)) !important;
         overscroll-behavior: contain;
     }
 
     .mobile-menu-header {
-        min-height: 70px;
+        /* Keep the brand and close button flush with the viewport while links scroll. */
+        top: 0;
+        flex-shrink: 0;
+        min-height: calc(70px + env(safe-area-inset-top));
+        margin-inline: -18px;
+        padding: env(safe-area-inset-top) 18px 0;
         gap: 12px;
     }
 
