@@ -39,3 +39,6 @@ html[data-theme="light"] .client-guide a,html[data-theme="light"] .client-compar
 html[data-theme="light"] .client-guide-cta>a{color:#111}
 html[data-theme="light"] body.client-guide-page{background:#f3ead8}
 @media(max-width:600px){.client-guide{padding-left:18px;padding-right:18px}.client-resource-links{gap:12px 18px}.client-guide-faq details{padding:0 18px}.client-comparison{padding-left:18px;padding-right:18px}}
+
+.client-guide .terms-table{width:100%;min-width:620px;border-collapse:collapse;text-align:left}.terms-table caption{text-align:left;padding:14px;font-size:.9rem}.terms-table th,.terms-table td{padding:14px;border-bottom:1px solid var(--bam-border);vertical-align:top}.terms-table thead{background:rgba(212,166,55,.08)}
+.client-guide-content{grid-template-columns:minmax(0,1fr)}.client-guide-card{min-width:0;overflow-wrap:anywhere}
