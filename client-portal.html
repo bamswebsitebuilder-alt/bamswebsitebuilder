@@ -20,7 +20,7 @@
 
   <link rel="stylesheet" href="/css/style.css?v=102">
  <link rel="stylesheet" href="/css/portal.css?v=20260829-2">
-  <link rel="stylesheet" href="/css/portal-messages.css?v=2">
+  <link rel="stylesheet" href="/css/portal-messages.css?v=20261010-support-1">
 
   <link href="/css/animations.css?v=2" rel="stylesheet"/>
 <link rel="canonical" href="https://www.bamswebsitebuilder.com/client-portal"/>
@@ -564,20 +564,25 @@
           id="support"
         >
 
-          <article class="portal-card portal-empty-state">
-
-            <p class="card-kicker">
-              HELP CENTER
-            </p>
-
-            <h2>
-              No support requests
-            </h2>
-
-            <p>
-              You do not have any open support requests.
-            </p>
-
+          <article class="portal-card">
+            <p class="card-kicker">HELP CENTER</p>
+            <h2>Request support</h2>
+            <p>Tell us what you need help with. Your request goes directly to BAM's Website Builder. Replies will appear in Messages.</p>
+            <form class="portal-form" id="portal-support-form">
+              <label for="portal-support-subject">What do you need help with?</label>
+              <input id="portal-support-subject" type="text" maxlength="120" placeholder="For example: Update my website hours" required disabled>
+              <label for="portal-support-details">Describe the issue</label>
+              <textarea id="portal-support-details" rows="5" maxlength="1800" placeholder="Include the page address and details that will help us understand your request." required disabled></textarea>
+              <p class="portal-message-status" id="portal-support-status" role="status" hidden></p>
+              <div class="portal-actions">
+                <button class="portal-primary-button" id="portal-support-send" type="submit" disabled>Submit support request</button>
+                <button class="portal-secondary-button" id="portal-support-messages" type="button">View Messages</button>
+              </div>
+            </form>
+          </article>
+          <article class="portal-card">
+            <h2>Your submitted requests</h2>
+            <div id="portal-support-history" aria-live="polite"><p>Loading support requests...</p></div>
           </article>
 
         </section>
@@ -739,7 +744,7 @@
     type="module"
     src="/js/portal-auth.js?v=103"
   ></script>
-  <script type="module" src="/js/portal-messages.js?v=1"></script>
+  <script type="module" src="/js/portal-messages.js?v=20261010-support-1"></script>
   <script type="module" src="/js/profile-picture.js?v=2"></script>
   <script src="/js/animations.js?v=1"></script>
 <script src="/js/site-upgrades.js?v=1" defer></script>

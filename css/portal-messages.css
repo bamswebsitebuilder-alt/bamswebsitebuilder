@@ -1,4 +1,10 @@
 /* BAM'S CLIENT PORTAL MESSAGING */
+.portal-support-request{padding:18px 0;border-bottom:1px solid rgba(212,166,55,.2)}
+.portal-support-request:last-child{border-bottom:0}
+.portal-support-request h3{margin:0 0 8px;overflow-wrap:anywhere}
+.portal-support-request p{white-space:pre-wrap;overflow-wrap:anywhere}
+#portal-support-form label{font-weight:700}
+#portal-support-form button:disabled{opacity:.6;cursor:wait}
 .portal-message-card{display:flex;flex-direction:column;min-height:560px;padding:0;overflow:hidden}
 .portal-message-header{padding:24px 26px;border-bottom:1px solid rgba(212,166,55,.2)}
 .portal-message-header h2{margin:4px 0 6px}
