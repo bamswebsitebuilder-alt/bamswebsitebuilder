@@ -1,6 +1,22 @@
 /* Keep policy navigation legible without compressing its link labels. */
 .policy-document .header-container { gap: 20px; padding-inline: 24px; }
 .policy-document .site-brand { flex: 0 0 auto; }
+/* Match the horizontal wordmark used across the main site. */
+.policy-document .site-brand .brand-text,
+.policy-document .mobile-menu-brand > span {
+  display: inline-flex; flex-direction: row; align-items: baseline;
+  gap: 10px; white-space: nowrap; line-height: 1;
+}
+.policy-document .brand-text strong,
+.policy-document .mobile-menu-brand strong {
+  overflow: visible; font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.18rem !important; letter-spacing: .045em; white-space: nowrap;
+}
+.policy-document .brand-text small,
+.policy-document .mobile-menu-brand small {
+  overflow: visible; margin: 0; font-size: .54rem !important;
+  letter-spacing: .16em !important; white-space: nowrap;
+}
 .policy-document .desktop-navigation { gap: 16px; }
 .policy-document .desktop-navigation a { flex: 0 0 auto; font-size: .72rem; }
 .policy-document .desktop-language { flex: 0 0 auto; margin-left: 0; }
