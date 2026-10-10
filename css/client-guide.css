@@ -27,6 +27,11 @@
 .client-pricing-links{max-width:850px;margin:0 auto 30px;padding:0 20px;text-align:center;line-height:1.7}
 .client-pricing-links p:empty{display:none}.client-pricing-links a{text-decoration:underline;text-underline-offset:4px}
 #package-comparison{scroll-margin-top:110px}
+.plan-request-wrap{padding:20px;margin-top:auto;text-align:center}
+.plan-request-button{display:block;padding:14px 18px;border-radius:10px;background:#d4a637;color:#111!important;font-weight:800;text-decoration:none}
+.plan-request-button:hover{background:#f0c45a}.plan-request-button:focus-visible{outline:3px solid currentColor;outline-offset:4px}
+.quote-next-steps{padding:22px;border:1px solid var(--bam-border);border-radius:14px;line-height:1.7;margin-bottom:24px}
+.quote-next-steps h2{font-size:1.3rem;margin-bottom:12px}.quote-next-steps ol{padding-left:22px}.quote-next-steps p{margin-top:16px}
 .client-guide :focus-visible,.client-comparison :focus-visible,.client-resource-links a:focus-visible{outline:3px solid var(--bam-gold);outline-offset:4px}
 html[data-theme="light"] .client-guide,html[data-theme="light"] .client-comparison{--bam-text:#20201d;--bam-panel:#fffdf8;--bam-border:rgba(138,98,0,.25);color:#20201d}
 html[data-theme="light"] .client-guide-intro,html[data-theme="light"] .client-guide-muted,html[data-theme="light"] .client-comparison caption{color:#514d44}
