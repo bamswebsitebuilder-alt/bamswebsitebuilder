@@ -141,7 +141,7 @@
       link.href = spanish ? '/es/booking' : '/booking';
     });
 
-    const bookingLink = document.querySelector('.desktop-navigation a[data-page="booking"]');
+    const bookingLink = document.querySelector('.desktop-navigation > a[data-page="booking"]');
     const desktopBookingLayout = window.matchMedia('(min-width: 1281px)');
     const syncFloatingBooking = () => {
       const currentButton = document.querySelector('.floating-booking-button');
@@ -229,6 +229,19 @@
       const footer = document.querySelector('footer');
       footer?.insertAdjacentElement('beforebegin', band);
     }
+
+    document.querySelectorAll('.nav-more').forEach((details) => {
+      const summary = details.querySelector('summary');
+      details.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && details.open) {
+          details.open = false;
+          summary?.focus();
+        }
+      });
+      document.addEventListener('click', (event) => {
+        if (!details.contains(event.target)) details.open = false;
+      });
+    });
 
     const toggle = document.getElementById('menu-toggle');
     const menu = document.getElementById('mobile-menu');
