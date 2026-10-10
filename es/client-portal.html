@@ -6,7 +6,7 @@
   <link rel="icon" href="/images/icon-dark.jpg?v=20260814" type="image/jpeg">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=20260812-3">
 <meta content="Panel de proyectos para clientes de BAM's Website Builder." name="description"/>
-<meta content="noindex,nofollow" name="robots"/>
+
 <link href="https://www.bamswebsitebuilder.com/es/client-portal" rel="canonical"/>
   <title>
    Portal del cliente | BAM's Website Builder
@@ -113,8 +113,8 @@
   </style>
  <link rel="stylesheet" href="/css/responsive-fixes.css">
 <link rel="stylesheet" href="/css/client-guide.css?v=20261010-1">
-</head>
- <body class="client-portal-page" data-auth-protected="true">
+<link rel="stylesheet" href="/css/agreements.css?v=1"><meta name="robots" content="noindex, nofollow"><link rel="stylesheet" href="/css/accessibility.css?v=1"></head>
+ <body class="client-portal-page" data-auth-protected="true"><a class="site-skip-link" href="#main-content">Saltar al contenido</a>
   <header class="site-header" id="site-header">
    <div class="header-container">
     <a aria-label="Inicio de BAM's Website Builder" class="site-brand" href="/es/">
@@ -342,7 +342,7 @@
     </a>
    </div>
   </aside>
-  <main class="portal-page" id="main-content">
+  <main class="portal-page" id="main-content" tabindex="-1">
    <section class="portal-topbar">
     <div>
      <p class="portal-eyebrow">
@@ -379,7 +379,7 @@
       </button>
       <button class="portal-nav-link" data-panel="project" type="button">
        Mi proyecto
-      </button>
+      </button><button class="portal-nav-link" data-panel="agreements" type="button">Acuerdos</button>
       <button class="portal-nav-link" data-panel="billing" type="button">
        Facturaci&oacute;n
       </button>
@@ -419,7 +419,7 @@
        </div>
       </article>
      </section>
-     <section class="portal-panel" id="project">
+     <section class="portal-panel" id="agreements"><article class="portal-card"><p class="card-kicker">TUS ACUERDOS</p><h2>Cotizaciones y términos</h2><p>Revisa tu cotización y términos adjuntos antes de aceptar o pagar. Descarga una copia para tus registros. Aceptar no inicia un pago.</p><div id="client-agreements" role="region" aria-label="Acuerdos del cliente"><p>Cargando tus acuerdos…</p></div></article></section><section class="portal-panel" id="project">
       <article class="portal-card portal-empty-state">
        <p class="card-kicker">
         MI PROYECTO
@@ -577,7 +577,7 @@
          <div>
           <strong>Foto de perfil</strong>
           <p>Sube una imagen JPG, PNG o WebP de hasta 20 MB. Las fotos grandes se optimizan automáticamente.</p>
-          <input id="profile-photo-input" type="file" accept="image/jpeg,image/png,image/webp" hidden=""/>
+          <input id="profile-photo-input" aria-label="Seleccionar foto de perfil" type="file" accept="image/jpeg,image/png,image/webp" hidden=""/>
           <button class="portal-secondary-button" id="profile-photo-button" type="button">Elegir foto</button>
           <p class="form-alert" id="profile-photo-status" role="status" hidden=""></p>
          </div>
@@ -649,5 +649,5 @@
   <script src="/js/portal-messages.js?v=1" type="module">
   </script>
   <script src="/js/profile-picture.js?v=2" type="module"></script>
- </body>
+ <script type="module" src="/js/agreements-client.js?v=1"></script></body>
 </html>

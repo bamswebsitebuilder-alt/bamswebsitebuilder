@@ -4,7 +4,9 @@
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/node_modules/**"
+      "**/node_modules/**",
+      "firestore.rules",
+      "tests/**"
     ],
     "cleanUrls": true,
     "trailingSlash": false,
@@ -45,5 +47,17 @@
         ]
       }
     ]
+  },
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "emulators": {
+    "ui": {
+      "enabled": false
+    },
+    "firestore": {
+      "port": 8088
+    },
+    "singleProjectMode": true
   }
 }

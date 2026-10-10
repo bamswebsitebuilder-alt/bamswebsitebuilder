@@ -6,7 +6,7 @@
   <link rel="icon" href="/images/icon-dark.jpg?v=20260814" type="image/jpeg">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=20260812-3">
 <meta content="Panel de administraci&oacute;n de BAM's Website Builder." name="description"/>
-<meta content="noindex,nofollow" name="robots"/>
+
   <title>
    Panel de administraci&oacute;n | BAM's Website Builder
   </title>
@@ -81,8 +81,8 @@
 }
   </style>
  <link rel="stylesheet" href="/css/responsive-fixes.css">
-<link rel="stylesheet" href="/css/project-workflow.css?v=1"></head>
- <body class="admin-dashboard-page">
+<link rel="stylesheet" href="/css/project-workflow.css?v=1"><link rel="stylesheet" href="/css/agreements.css?v=1"><meta name="robots" content="noindex, nofollow"><link rel="stylesheet" href="/css/accessibility.css?v=1"></head>
+ <body class="admin-dashboard-page"><a class="site-skip-link" href="#main-content">Saltar al contenido</a>
   <header class="admin-header">
    <button aria-controls="admin-sidebar" aria-expanded="false" aria-label="Abrir men&uacute; de administraci&oacute;n" class="admin-menu-toggle" id="admin-menu-toggle" type="button">
     <span>
@@ -98,7 +98,7 @@
    <div class="admin-header-actions">
     <div class="admin-profile-photo-wrap">
      <div class="admin-profile-photo" id="admin-profile-photo" aria-label="Foto de perfil del administrador">A</div>
-     <input id="profile-photo-input" type="file" accept="image/jpeg,image/png,image/webp" hidden=""/>
+     <input id="profile-photo-input" aria-label="Seleccionar foto de perfil" type="file" accept="image/jpeg,image/png,image/webp" hidden=""/>
      <button class="admin-photo-button" id="profile-photo-button" type="button">Cambiar foto</button>
      <span class="admin-photo-status" id="profile-photo-status" role="status" hidden=""></span>
     </div>
@@ -153,7 +153,7 @@
    </aside>
    <button aria-label="Cerrar men&uacute; de administraci&oacute;n" class="admin-sidebar-overlay" hidden="" id="admin-sidebar-overlay" type="button">
    </button>
-   <main class="admin-content" id="main-content">
+   <main class="admin-content" id="main-content" tabindex="-1">
     <section class="admin-panel active" id="overview">
      <div class="admin-page-heading">
       <p class="admin-kicker">
@@ -440,7 +440,7 @@
         </button>
        </div>
       </form>
-     </article>
+     </article><article class="admin-card" id="project-agreements"><div class="admin-card-heading"><h2>Cotizaciones y acuerdos</h2></div><p>Completa y revisa la cotización real antes de emitirla. Emitirla confirma el acuerdo de BAM y guarda una copia fija en el portal asignado. No se pueden editar cotizaciones emitidas; retira una no aceptada y emite otra versión si cambian los datos. Aquí no se cobra ningún pago.</p><form id="agreement-form"><div class="admin-form-grid"><div class="admin-field"><label for="agreement-client">Elige un cliente</label><select id="agreement-client" required><option value="">Elige un cliente</option></select></div><div class="admin-field"><label for="agreement-language">Idioma del acuerdo</label><select id="agreement-language"><option value="en">English</option><option value="es" selected>Español</option></select></div><div class="admin-field"><label for="agreement-number">Número de cotización</label><input id="agreement-number" type="text" required></div><div class="admin-field"><label for="agreement-provider">Nombre exacto del proveedor</label><input id="agreement-provider" type="text" required></div><div class="admin-field"><label for="agreement-project">Nombre del proyecto</label><input id="agreement-project" type="text" required></div><div class="admin-field"><label for="agreement-amount">Precio total del proyecto (USD)</label><input id="agreement-amount" type="number" min="1" step="0.01" required></div><div class="admin-field"><label for="agreement-payments">Calendario e importes de pago</label><textarea id="agreement-payments" rows="3" maxlength="12000" required></textarea></div><div class="admin-field"><label for="agreement-delivery">Plazo estimado y fechas objetivo</label><textarea id="agreement-delivery" rows="3" maxlength="12000" required></textarea></div><div class="admin-field"><label for="agreement-revisions">Rondas de revisión incluidas</label><input id="agreement-revisions" type="number" min="0" max="20" step="1" required></div><div class="admin-field"><label for="agreement-scope">Páginas, funciones, archivos y entrega incluidos</label><textarea id="agreement-scope" rows="3" maxlength="12000" required></textarea></div><div class="admin-field"><label for="agreement-costs">Alojamiento, dominio y otros costos continuos</label><textarea id="agreement-costs" rows="3" maxlength="12000" required></textarea></div><div class="admin-field"><label for="agreement-variations">Variaciones expresas a los términos (opcional)</label><textarea id="agreement-variations" rows="3" maxlength="12000"></textarea></div></div><p>Las cotizaciones vencen 14 días tras emitirse. Usa otro número para cada revisión. Indica el alcance, importes, fechas, costos externos y entregables de cada etapa; no emitas una cotización incompleta.</p><div class="admin-form-actions"><button class="admin-small-button" id="agreement-preview-button" type="button">Vista previa</button><button class="admin-primary-button" type="submit">Emitir cotización en el portal</button></div><p id="agreement-form-status" role="status" aria-live="polite"></p></form><div id="agreement-preview" class="agreement-card" hidden></div><div id="admin-agreements"></div></article>
      <article class="admin-card">
       <div class="admin-card-heading">
        <h2>
@@ -727,7 +727,7 @@
     </section>
    </main>
   </div>
-  <script src="/js/admin-dashboard.js?v=110" type="module">
+  <script src="/js/admin-dashboard.js?v=111" type="module">
   </script>
   <script src="/js/admin-messages.js?v=1" type="module">
   </script>

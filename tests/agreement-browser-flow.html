@@ -1,0 +1,20 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Nonbinding agreement database test</title><link rel="stylesheet" href="/css/agreements.css"><style>body{max-width:900px;margin:auto;padding:24px;font:16px/1.6 Arial;background:#111;color:#eee}button{background:#d4a637;color:#111;padding:12px;border:0;border-radius:8px;font:inherit}h1{line-height:1.2}</style></head><body><main><h1>TEST ONLY — isolated database</h1><p>This is a nonbinding emulator test. It cannot create a real client quote, sign a real contract, or collect payment.</p><div id="preview" class="agreement-card"></div><p id="test-result" role="status"></p></main><script type="module">
+if(location.hostname!=='127.0.0.1'&&location.hostname!=='localhost')throw new Error('This test runs only on localhost.');
+const {initializeApp}=await import('https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js');
+const {getFirestore,connectFirestoreEmulator,doc,onSnapshot}=await import('https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js');
+const {acceptAgreement}=await import('/js/agreement-store.js');
+const {renderAgreement}=await import('/js/agreement-view.js');
+const {downloadAgreement}=await import('/js/agreement-model.js');
+const db=getFirestore(initializeApp({projectId:'demo-bam-agreements',apiKey:'demo-key',appId:'demo-app'}));
+connectFirestoreEmulator(db,'127.0.0.1',8088,{mockUserToken:{sub:'client',user_id:'client',email:'client@example.test',email_verified:true}});
+const user={uid:'client',email:'client@example.test',emailVerified:true};
+onSnapshot(doc(db,'users/client/agreements/browser-test'),snapshot=>{
+ if(!snapshot.exists()){document.getElementById('test-result').textContent='Seed the isolated browser-test quote first.';return;}
+ const quote={id:snapshot.id,...snapshot.data()};
+ onSnapshot(doc(db,'users/client/agreements/browser-test/acceptances/client'),receipt=>{
+  const acceptance=receipt.exists()?receipt.data():null;
+  renderAgreement(document.getElementById('preview'),quote,acceptance,{download:()=>downloadAgreement(quote,acceptance),accept:async(name,checked)=>acceptAgreement(db,user,quote.id,name,checked)});
+  if(acceptance)document.getElementById('test-result').textContent='PASS — actual client transaction saved an immutable emulator receipt and the browser rendered its server timestamp. No production data used.';
+ });
+},error=>{document.getElementById('test-result').textContent='FAIL: '+error.message;});
+</script></body></html>
