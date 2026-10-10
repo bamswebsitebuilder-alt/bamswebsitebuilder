@@ -136,6 +136,17 @@ html[data-theme="light"] .portfolio-templates-cta h2{color:#292317}html[data-the
 @media(max-width:760px){.portfolio-templates-cta{flex-direction:column;align-items:stretch;gap:22px;margin-top:24px;text-align:center}.portfolio-templates-cta>a{width:100%}}
 </style>
 <link rel="stylesheet" href="/css/client-guide.css?v=20261010-1">
+<style id="portfolio-case-study-upgrade">
+.case-study-summary{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0 6px}
+.case-study-summary>div{padding:14px 15px;border:1px solid rgba(212,166,55,.18);border-radius:12px;background:rgba(212,166,55,.055)}
+.case-study-summary span{display:block;margin-bottom:6px;color:#d4a637;font-size:.69rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.case-study-summary p{margin:0!important;font-size:.92rem!important;line-height:1.55!important}
+.project-status-label{display:inline-flex;align-self:flex-start;margin-bottom:10px;padding:7px 10px;border:1px solid rgba(212,166,55,.34);border-radius:999px;color:#f1c75b;background:rgba(212,166,55,.08);font-size:.68rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+html[data-theme="light"] .case-study-summary>div{background:rgba(138,98,0,.05);border-color:rgba(138,98,0,.18)}
+html[data-theme="light"] .case-study-summary span{color:#765300}
+html[data-theme="light"] .project-status-label{color:#765300;border-color:rgba(118,83,0,.28);background:rgba(118,83,0,.06)}
+@media(max-width:760px){.case-study-summary{grid-template-columns:1fr;width:100%;text-align:left}.project-status-label{align-self:center}}
+</style>
 </head>
  <body>
   <header class="site-header" id="site-header">
@@ -390,42 +401,7 @@ html[data-theme="light"] .portfolio-templates-cta h2{color:#292317}html[data-the
 
 <article class="portfolio-card"><div class="portfolio-image-wrapper"><img alt="Vista previa de la plataforma social ConnectSphere" class="portfolio-project-image" src="/images/connectsphere.png" loading="lazy"/></div><div class="portfolio-card-content"><span class="portfolio-category">Plataforma social</span><h2>ConnectSphere</h2><p>Un concepto de plataforma social con perfiles, mensajes, publicaciones y notificaciones.</p><ul class="portfolio-features"><li>Perfiles de usuarios</li><li>Sistema de mensajes</li><li>Publicaciones de la comunidad</li><li>Diseño adaptable a móviles</li></ul><a class="portfolio-button" href="/connectsphere/" rel="noopener noreferrer" target="_blank">Visitar sitio</a></div></article>
 
-<article class="portfolio-card">
-      <div class="portfolio-image-wrapper">
-       <img alt="Kade Mercer author website preview" class="portfolio-project-image" src="/images/book1.png"/>
-      </div>
-      <div class="portfolio-card-content">
-       <span class="portfolio-category">
-        Sitio web para autor
-       </span>
-       <h2>
-        Kade Mercer
-       </h2>
-       <p>
-        Un sitio moderno para autor con libros publicados, informaci&oacute;n del autor, pr&oacute;ximos lanzamientos y recursos para lectores.
-       </p>
-       <ul class="portfolio-features">
-        <li>
-         Presentaci&oacute;n de libros
-        </li>
-        <li>
-         Biograf&iacute;a del autor
-        </li>
-        <li>
-         Pr&oacute;ximos lanzamientos
-        </li>
-        <li>
-         Dise&ntilde;o compatible con m&oacute;viles
-        </li>
-        <li>
-         Tema oscuro profesional
-        </li>
-       </ul>
-       <a class="portfolio-button" href="/kade-mercer/" rel="noopener noreferrer" target="_blank">
-        Visitar sitio
-       </a>
-      </div>
-     </article>
+<article class="portfolio-card" id="kade-mercer-project"><div class="portfolio-image-wrapper"><img alt="Sitio web de autor de Kade Mercer" class="portfolio-project-image" src="/images/book1.png" loading="lazy"></div><div class="portfolio-card-content"><span class="project-status-label">Proyecto Completado</span><span class="portfolio-category">Sitio Web de Autor</span><h2>Kade Mercer</h2><div class="case-study-summary"><div><span>Objetivo del proyecto</span><p>Crear un sitio de autor que reúna los libros de Kade Mercer, su biografía y enlaces para comprar sus novelas.</p></div><div><span>Trabajo entregado</span><p>Colección de libros, lanzamiento destacado, biografía del autor y navegación en inglés y español.</p></div></div><p>Un sitio web de autor terminado, con una presentación visual de American Terrorist y Dark Network, enlaces a Apple Books y una sección de próximos lanzamientos.</p><ul class="portfolio-features"><li>Colección de libros y portadas</li><li>Enlaces de compra en Apple Books</li><li>Lanzamiento destacado y biografía</li><li>Versiones en inglés y español</li><li>Diseño adaptable a móviles</li></ul><a class="portfolio-button" href="/kade-mercer/" rel="noopener noreferrer" target="_blank">Ver Proyecto Completado</a></div></article>
 
 <article class="portfolio-card"><div class="portfolio-image-wrapper"><img alt="Vista previa de Velocity Drive Rentals" class="portfolio-project-image" src="/images/velocity-drive-rentals.jpg" loading="lazy"/></div><div class="portfolio-card-content"><span class="portfolio-category">Sitio web de alquiler de autos</span><h2>Velocity Drive Rentals</h2><p>Un concepto de alquiler de autos con catálogo de vehículos, precios y un camino claro para reservar.</p><ul class="portfolio-features"><li>Catálogo de vehículos</li><li>Precios de alquiler</li><li>Proceso de reserva</li><li>Diseño adaptable a móviles</li></ul><a class="portfolio-button" href="/velocity-drive-rentals/" rel="noopener noreferrer" target="_blank">Visitar sitio</a></div></article>
 
