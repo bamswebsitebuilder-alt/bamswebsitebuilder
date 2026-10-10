@@ -1,0 +1,40 @@
+/* Match the public website wordmark in both portal headers. */
+.portal-brand .brand-text {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0;
+  min-width: 0;
+  line-height: 1;
+  white-space: nowrap;
+}
+.portal-brand .brand-text strong {
+  color: #efc66a;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.18rem;
+  font-weight: 900;
+  letter-spacing: .045em;
+  line-height: 1;
+  overflow: visible;
+}
+.portal-brand .brand-text small {
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: .54rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  line-height: 1;
+  margin: 0;
+  overflow: visible;
+}
+@media (max-width: 760px) {
+  .portal-brand .brand-text strong { font-size: clamp(1.4rem, 7vw, 1.85rem); }
+  .portal-brand .brand-text small {
+    font-size: clamp(.52rem, 2.6vw, .68rem);
+    letter-spacing: .14em;
+  }
+  .workspace-header, .admin-header { flex-wrap: wrap; }
+  .admin-header .portal-brand { flex: 0 0 auto; }
+  .workspace-header-links, .admin-header-actions { margin-left: auto; }
+}
