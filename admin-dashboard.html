@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="/css/footer-fix.css?v=20260822-1">
 <link rel="stylesheet" href="/css/site-upgrades.css?v=20260903-2">
 <link rel="stylesheet" href="/css/responsive-fixes.css">
-<link rel="stylesheet" href="/css/project-workflow.css?v=1"><link rel="stylesheet" href="/css/agreements.css?v=1"><meta name="robots" content="noindex, nofollow"><link rel="stylesheet" href="/css/accessibility.css?v=1"></head>
+<link rel="stylesheet" href="/css/project-workflow.css?v=1"><link rel="stylesheet" href="/css/agreements.css?v=1"><meta name="robots" content="noindex, nofollow"><link rel="stylesheet" href="/css/accessibility.css?v=1"><link rel="stylesheet" href="/css/workspace.css?v=1"></head>
 
 <body class="admin-dashboard-page"><a class="site-skip-link" href="#main-content">Skip to main content</a>
 
@@ -40,14 +40,14 @@
       <span>WEBSITE BUILDER</span>
     </a>
 
-    <div class="admin-header-actions">
+    <span class="workspace-header-label">Business workspace</span><div class="admin-header-actions">
       <div class="admin-profile-photo-wrap">
         <div class="admin-profile-photo" id="admin-profile-photo" aria-label="Administrator profile picture">A</div>
         <input id="profile-photo-input" aria-label="Choose profile picture" type="file" accept="image/jpeg,image/png,image/webp" hidden>
         <button class="admin-photo-button" id="profile-photo-button" type="button">Change Photo</button>
         <span class="admin-photo-status" id="profile-photo-status" role="status" hidden></span>
       </div>
-      <span id="admin-email">Loading...</span>
+      <a class="workspace-language" href="/es/admin-dashboard">Español</a><span id="admin-email">Loading...</span>
       <button id="admin-logout" type="button">Log Out</button>
     </div>
   </header>
@@ -88,7 +88,7 @@
           Notifications
           <span class="admin-nav-count" id="notification-count" hidden>0</span>
         </button>
-      </nav>
+      </nav><div class="workspace-sidebar-note"><strong>One place for your business</strong><p>Manage projects, agreements, and client conversations.</p></div>
     </aside>
 
     <button
@@ -111,22 +111,22 @@
         <div class="admin-stat-grid">
           <article class="admin-stat-card">
             <span>Total Clients</span>
-            <strong id="stat-clients">0</strong>
+            <strong id="stat-clients">—</strong>
           </article>
 
           <article class="admin-stat-card">
             <span>Unpaid Invoices</span>
-            <strong id="stat-unpaid">0</strong>
+            <strong id="stat-unpaid">—</strong>
           </article>
 
           <article class="admin-stat-card">
             <span>Paid Invoices</span>
-            <strong id="stat-paid">0</strong>
+            <strong id="stat-paid">—</strong>
           </article>
 
           <article class="admin-stat-card">
             <span>Outstanding Balance</span>
-            <strong id="stat-balance">$0.00</strong>
+            <strong id="stat-balance">—</strong>
           </article>
         </div>
 
