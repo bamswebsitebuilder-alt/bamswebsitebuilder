@@ -53,7 +53,7 @@ function setup(storage=new Map()){
 }
 
 test('client selection prepares a draft without issuing it and keeps different client edits separate',()=>{
-  const ui=setup();ui.choose('one');assert.match(ui.field('number').value,/^BAM-/);assert.equal(ui.field('project').value,'Project one');
+  const ui=setup();ui.choose('one');assert.match(ui.field('number').value,/^[0-9]{10}$/);assert.equal(ui.field('project').value,'Project one');
   ui.field('scope').value='Private draft for one';ui.choose('two');assert.equal(ui.field('scope').value,'');assert.equal(ui.field('project').value,'Project two');
   ui.choose('one');assert.equal(ui.field('scope').value,'Private draft for one');assert.equal(ui.writes(),0);
 });
@@ -97,4 +97,13 @@ test('a refreshed dashboard restores the unfinished draft and its stable quote n
   const number=first.field('number').value;const second=setup(storage);second.choose('one');
   assert.equal(second.field('number').value,number);assert.equal(second.field('scope').value,first.field('scope').value);
   assert.equal(second.field('amount').value,'250');assert.equal(second.writes(),0);
+});
+
+
+test('manual numeric quote numbers are retained; letters cannot be previewed or issued',async()=>{
+  const ui=setup();ui.choose('one');ui.preset('starter');ui.complete();
+  ui.field('number').value='BAM-OLD-123';await ui.preview();assert.equal(ui.previews.length,0);
+  await ui.submit();assert.equal(ui.writes(),0);assert.match(ui.status.textContent,/digits only/);
+  ui.field('number').value='001001';await ui.preview();assert.equal(ui.previews[0].quoteNumber,'001001');
+  await ui.submit();assert.equal([...ui.stored.values()][0].quoteNumber,'001001');
 });

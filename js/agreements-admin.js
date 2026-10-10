@@ -24,7 +24,7 @@ export function createAdminAgreements(getAdmin,getProject=()=>({})) {
     try{const saved=JSON.parse(sessionStorage.getItem('bam-agreement-drafts-'+owner)||'[]');for(const [id,draft] of saved){if(typeof id==='string'&&draft&&fields.every(key=>typeof draft[key]==='string'))drafts.set(id,draft);}}catch{}
   }
   function fill(draft){fields.forEach(id=>{field(id).value=draft[id] ?? '';});}
-  function number(){return `BAM-${new Date().toISOString().slice(0,10).replaceAll('-','')}-${crypto.randomUUID().slice(0,8).toUpperCase()}`;}
+  function number(){return String(1000000000n + BigInt('0x'+crypto.randomUUID().replaceAll('-','').slice(0,12)) % 9000000000n);}
   function prepare(fresh=false){
     previewVersion++;clearTimeout(previewTimer);preview.hidden=true;
     if(activeClient && !fresh)remember();
@@ -68,6 +68,7 @@ export function createAdminAgreements(getAdmin,getProject=()=>({})) {
     if(!terms){const response=await fetch('/js/project-terms-v1.json');if(!response.ok)throw new Error('Terms could not be loaded.');terms=await response.json();}
     const client=clients.find(value=>value.id===select.value);if(!client)throw new Error(t('Choose a client first.','Elige un cliente.'));
     const value=id=>document.getElementById('agreement-'+id).value.trim();
+    if(!/^[0-9]{1,20}$/.test(value('number')))throw new Error(t('Use digits only for the quote number, or choose New draft to generate one.','Usa solo dígitos para el número de cotización, o elige Nuevo borrador para generar uno.'));
     if(value('revisions')==='')throw new Error(t('Enter the included revision rounds.','Indica las rondas de revisión.'));
     return validateQuote({quoteNumber:value('number'),clientName:client.fullName||[client.firstName,client.lastName].filter(Boolean).join(' ')||client.businessName,clientEmail:client.email,providerName:value('provider'),projectName:value('project'),scope:value('scope'),amount:Number(value('amount')),paymentSchedule:value('payments'),delivery:value('delivery'),revisions:Number(value('revisions')),ongoingCosts:value('costs'),variations:value('variations'),termsVersion:TERMS_VERSION,termsText:terms[value('language')],language:value('language')});
   }
