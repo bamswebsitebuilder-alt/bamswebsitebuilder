@@ -1,3 +1,4 @@
+import { loginDestination } from "./portal-routing.js?v=1";
 import { auth, db } from "./firebase-config.js";
 
 import {
@@ -101,42 +102,9 @@ const redirectAfterLogin = async (user) => {
     .toLowerCase()
     .startsWith("es");
 
-  if (role === "admin") {
-    window.location.replace(
-      isSpanish ? "/es/admin-dashboard" : "/admin-dashboard"
-    );
-    return;
-  }
-
-  const defaultClientDestination = isSpanish
-    ? "/es/client-portal"
-    : "/client-portal";
-
-  let safeClientDestination = defaultClientDestination;
-
-  if (requestedPage) {
-    try {
-      const requestedUrl = new URL(requestedPage, window.location.origin);
-      const allowedPaths = new Set([
-        "/client-portal",
-        "/client-portal.html",
-        "/es/client-portal",
-        "/es/client-portal.html"
-      ]);
-
-      if (
-        requestedUrl.origin === window.location.origin &&
-        allowedPaths.has(requestedUrl.pathname)
-      ) {
-        safeClientDestination =
-          `${requestedUrl.pathname}${requestedUrl.search}${requestedUrl.hash}`;
-      }
-    } catch (error) {
-      console.warn("Ignored invalid login destination:", error);
-    }
-  }
-
-  window.location.replace(safeClientDestination);
+  window.location.replace(loginDestination({
+    origin: window.location.origin, requestedPage, role, spanish: isSpanish
+  }));
 };
 
 const loginForm = document.getElementById("login-form");

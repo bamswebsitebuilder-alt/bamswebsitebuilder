@@ -1,3 +1,4 @@
+import { portalLoginUrl } from "./portal-routing.js?v=1";
 import { auth, db, storage } from "./firebase-config.js";
 
 import {
@@ -890,13 +891,7 @@ uploadButton?.addEventListener("click", () => {
 
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
-    const next = encodeURIComponent(
-      "client-portal.html"
-    );
-
-    window.location.replace(
-      `login.html?next=${next}`
-    );
+    window.location.replace(portalLoginUrl(window.location));
 
     return;
   }
