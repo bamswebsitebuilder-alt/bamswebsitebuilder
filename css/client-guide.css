@@ -1,0 +1,36 @@
+.client-guide{width:min(100%,1060px);margin:auto;padding:clamp(80px,9vw,120px) 24px 72px;line-height:1.75}
+.client-guide h1{font-size:clamp(2.1rem,5vw,3.8rem);line-height:1.12;margin:12px 0 20px;color:var(--bam-text)}
+.client-guide-eyebrow{color:var(--bam-gold);letter-spacing:.12em;font-weight:800;font-size:.82rem}
+.client-guide-intro{font-size:1.15rem;max-width:65ch;color:#b8b8b8;margin-bottom:20px}
+.client-guide-content{display:grid;gap:20px;margin-top:32px}
+.client-guide-card{padding:clamp(20px,3vw,30px);border:1px solid var(--bam-border);border-radius:18px;background:var(--bam-panel);line-height:1.75}
+.client-guide-card h2,.client-guide-card h3{font-size:1.35rem;color:var(--bam-text);line-height:1.3;margin:0 0 14px}
+.client-guide-card p{margin:0}.client-guide-card p+p{margin-top:14px}.client-guide-card ul{padding-left:24px;margin:0}.client-guide-card li+li{margin-top:10px}
+.client-guide a,.client-comparison a{color:#f0c45a;text-decoration:underline;text-underline-offset:4px}
+.client-resource-links{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 24px;padding:22px 24px;margin:0;line-height:1.6}
+.client-resource-links a{color:#f0c45a;text-decoration:underline;text-underline-offset:4px;font-size:.9rem}
+.client-guide>.client-resource-links{justify-content:flex-start;padding:18px 0;border-top:1px solid var(--bam-border);border-bottom:1px solid var(--bam-border)}
+.client-guide-muted{font-size:.92rem;color:#b8b8b8;line-height:1.7}
+.client-guide-faq details{border:1px solid var(--bam-border);border-radius:16px;background:var(--bam-panel);padding:0 24px}
+.client-guide-faq summary{padding:22px 0;cursor:pointer;font-weight:750;line-height:1.5}
+.client-guide-faq details p{padding:0 0 24px;margin:0;max-width:78ch}
+.client-guide-cta{border-top:1px solid var(--bam-border);margin-top:40px;padding-top:32px}
+.client-guide-cta h2{font-size:1.5rem;line-height:1.3}.client-guide-cta>a{display:inline-block;margin-top:18px;padding:12px 20px;border-radius:10px;background:var(--bam-gold);color:#111;text-decoration:none;font-weight:800}
+.client-comparison{width:min(100%,1180px);margin:0 auto;padding:24px 24px 64px;line-height:1.75}
+.client-comparison>h2{font-size:clamp(1.8rem,4vw,2.5rem);line-height:1.2;margin:0 0 18px}
+.client-table-scroll{overflow-x:auto;margin:24px 0;border:1px solid var(--bam-border);border-radius:16px}
+.client-comparison table{width:100%;min-width:680px;border-collapse:collapse;text-align:left;background:var(--bam-panel);color:var(--bam-text)}
+.client-comparison caption{text-align:left;padding:16px 20px;font-size:.92rem;color:#b8b8b8}
+.client-comparison th,.client-comparison td{padding:16px 20px;border-top:1px solid var(--bam-border);vertical-align:top}
+.client-comparison thead th{color:#f0c45a}.client-comparison tbody th{font-weight:650;width:32%}
+.client-comparison .client-guide-card{margin:24px 0}
+.client-pricing-links{max-width:850px;margin:0 auto 30px;padding:0 20px;text-align:center;line-height:1.7}
+.client-pricing-links p:empty{display:none}.client-pricing-links a{text-decoration:underline;text-underline-offset:4px}
+#package-comparison{scroll-margin-top:110px}
+.client-guide :focus-visible,.client-comparison :focus-visible,.client-resource-links a:focus-visible{outline:3px solid var(--bam-gold);outline-offset:4px}
+html[data-theme="light"] .client-guide,html[data-theme="light"] .client-comparison{--bam-text:#20201d;--bam-panel:#fffdf8;--bam-border:rgba(138,98,0,.25);color:#20201d}
+html[data-theme="light"] .client-guide-intro,html[data-theme="light"] .client-guide-muted,html[data-theme="light"] .client-comparison caption{color:#514d44}
+html[data-theme="light"] .client-guide a,html[data-theme="light"] .client-comparison a,html[data-theme="light"] .client-resource-links a,html[data-theme="light"] .client-comparison thead th{color:#765300}
+html[data-theme="light"] .client-guide-cta>a{color:#111}
+html[data-theme="light"] body.client-guide-page{background:#f3ead8}
+@media(max-width:600px){.client-guide{padding-left:18px;padding-right:18px}.client-resource-links{gap:12px 18px}.client-guide-faq details{padding:0 18px}.client-comparison{padding-left:18px;padding-right:18px}}
