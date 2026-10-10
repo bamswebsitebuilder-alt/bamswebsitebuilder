@@ -5,6 +5,8 @@ document.documentElement.style.visibility = "hidden";
 ========================================================= */
 
 import { auth, db, storage } from "./firebase-config.js";
+import { onboardingProject, projectAlerts } from "./project-workflow.js?v=1";
+import { createWorkflowEditor } from "./project-workflow-editor.js?v=1";
 
 import {
   onAuthStateChanged,
@@ -17,6 +19,7 @@ import {
   doc,
   getDoc,
   onSnapshot,
+  runTransaction,
   serverTimestamp,
   setDoc,
   Timestamp,
@@ -60,6 +63,8 @@ const clientFormStatus =
 const clientList = document.getElementById("client-list");
 
 const projectForm = document.getElementById("project-form");
+const workflowEditor = createWorkflowEditor(projectForm);
+workflowEditor?.load();
 const projectFormStatus =
   document.getElementById("project-form-status");
 const projectList = document.getElementById("project-list");
@@ -558,6 +563,12 @@ const renderProjects = () => {
       : "No estimated completion date";
 
     information.append(title, details, date);
+    projectAlerts(project).forEach(message => {
+      const alert = document.createElement("p");
+      alert.className = "workflow-alert";
+      alert.textContent = message;
+      information.append(alert);
+    });
 
     const actions = document.createElement("div");
     actions.className =
@@ -618,6 +629,7 @@ const renderProjects = () => {
 
       document.getElementById("project-live-url").value =
         project.liveUrl || "";
+      workflowEditor?.load(project);
     });
 
     actions.append(
@@ -1026,6 +1038,10 @@ const watchProjects = () => {
           });
         } else {
           projectsByClient.delete(client.id);
+          ensureOnboardingProject(client.id).catch(error => {
+            console.error("Automatic project setup failed:", error);
+            showStatus(projectFormStatus, "Automatic project setup failed. You can create the project with Save Project or reload to retry.", "error");
+          });
         }
 
         publishProjects();
@@ -1306,6 +1322,50 @@ clientForm?.addEventListener(
    SAVE PROJECT
 ========================================================= */
 
+// Create only missing projects; the transaction protects existing work.
+const onboardingAttempts = new Set();
+async function ensureOnboardingProject(userId) {
+  if (!currentAdmin || onboardingAttempts.has(userId)) return;
+  onboardingAttempts.add(userId);
+  const reference = doc(db, "users", userId, "projects", "current");
+  await runTransaction(db, async transaction => {
+    const existing = await transaction.get(reference);
+    if (!existing.exists()) transaction.set(reference, {
+      ...onboardingProject(), createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(), updatedBy: currentAdmin.uid
+    });
+    const alerts = projectAlerts(project);
+    if (alerts.length) activities.push({
+      title: "Project needs attention",
+      detail: `${project.title || "Website Project"}: ${alerts.join(" ")}`,
+      createdAt: project.updatedAt || project.createdAt,
+      time: getTimestampNumber(project.updatedAt || project.createdAt)
+    });
+  });
+}
+
+projectClientSelect?.addEventListener("change", () => {
+  const project = projectsByClient.get(projectClientSelect.value);
+  if (project) {
+    const index = projectRecords.findIndex(value => value.userId === projectClientSelect.value);
+    projectList.children[index]?.querySelector("button")?.click();
+    return;
+  }
+  ["project-title", "project-start-date", "project-due-date", "project-update", "project-completed", "project-upcoming", "project-live-url"].forEach(id => { document.getElementById(id).value = ""; });
+  document.getElementById("project-stage").value = "Planning";
+  document.getElementById("project-status").value = "Not Started";
+  projectProgress.value = 0;
+  projectProgressValue.textContent = "0%";
+  workflowEditor?.load(projectClientSelect.value ? onboardingProject() : {});
+  if (projectClientSelect.value) {
+    const draft = onboardingProject();
+    document.getElementById("project-title").value = draft.title;
+    document.getElementById("project-update").value = draft.currentUpdate;
+  }
+});
+
+setInterval(() => { if (currentAdmin) { renderProjects(); renderNotifications(); } }, 60000);
+
 projectForm?.addEventListener(
   "submit",
   async (event) => {
@@ -1397,20 +1457,24 @@ projectForm?.addEventListener(
         updatedAt: serverTimestamp(),
         updatedBy: currentAdmin.uid
       };
+      Object.assign(projectData, workflowEditor?.data(status, liveUrl));
+      if (projectData.automationEnabled && !currentUpdate) {
+        projectData.currentUpdate = `${projectData.stage}: ${projectData.progress}% complete. Next: ${projectData.upcomingTasks[0] || "verify the live website"}.`;
+      }
 
       if (startDateValue) {
         projectData.startDate =
           Timestamp.fromDate(
             new Date(`${startDateValue}T12:00:00`)
           );
-      }
+      } else projectData.startDate = null;
 
       if (dueDateValue) {
         projectData.estimatedCompletion =
           Timestamp.fromDate(
             new Date(`${dueDateValue}T12:00:00`)
           );
-      }
+      } else projectData.estimatedCompletion = null;
 
       if (!existingProject.exists()) {
         projectData.createdAt =
@@ -1433,7 +1497,7 @@ projectForm?.addEventListener(
 
       sendDeviceNotification(
         "Project updated",
-        `${title} is now ${progress}% complete.`
+        `${title} is now ${projectData.progress}% complete.`
       );
     } catch (error) {
       console.error(

@@ -1,0 +1,11 @@
+.workflow-editor{grid-column:1/-1;margin:0 0 12px;padding:20px;border:1px solid rgba(212,166,55,.35);border-radius:14px;min-width:0}
+.workflow-editor legend{padding:0 8px;font-weight:700}
+#project-form .admin-field[hidden],.workflow-editor [hidden]{display:none!important}
+.workflow-editor>label{display:flex;align-items:center;gap:8px}
+.workflow-editor input[type=checkbox]{width:20px;height:20px;flex:0 0 20px;accent-color:#d4a637}
+.workflow-editor p{font-size:.9rem;line-height:1.6}
+.workflow-task{display:grid;grid-template-columns:20px minmax(0,1fr) 145px auto;align-items:center;gap:10px;margin:12px 0}
+.workflow-task input[type=text],.workflow-task select{width:100%;min-width:0;padding:10px;border:1px solid #777;border-radius:8px;background:var(--card-bg,#171717);color:inherit;font:inherit}
+.workflow-task input[type=text]:focus,.workflow-task select:focus{outline:2px solid #d4a637;outline-offset:2px}
+.workflow-alert{padding:10px 12px;margin-top:10px;border-left:3px solid #d4a637;background:rgba(212,166,55,.08);line-height:1.5}
+@media(max-width:600px){.workflow-editor{padding:12px}.workflow-task{grid-template-columns:20px minmax(0,1fr)}.workflow-task select{grid-column:2}.workflow-task button{grid-column:2;justify-self:start}}
