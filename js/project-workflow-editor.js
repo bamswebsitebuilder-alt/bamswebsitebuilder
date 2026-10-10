@@ -35,6 +35,7 @@ export function createWorkflowEditor(form) {
       document.getElementById('project-progress').value = result.progress;
       document.getElementById('project-progress-value').textContent = `${result.progress}%`;
       document.getElementById('project-stage').value = result.stage;
+      document.getElementById('project-status').value = result.status;
       document.getElementById('project-completed').value = result.completedTasks.join('\n');
       document.getElementById('project-upcoming').value = result.upcomingTasks.join('\n');
       summary.textContent = `${result.progress}% • ${result.stage} • ${result.status}`;
