@@ -6,6 +6,7 @@ document.documentElement.style.visibility = "hidden";
 
 import { auth, db, storage } from "./firebase-config.js";
 import { onboardingProject, projectAlerts } from "./project-workflow.js?v=1";
+import { createAdminAgreements } from "./agreements-admin.js?v=1";
 import { createWorkflowEditor } from "./project-workflow-editor.js?v=1";
 
 import {
@@ -119,6 +120,7 @@ const statBalance = document.getElementById("stat-balance");
 ========================================================= */
 
 let currentAdmin = null;
+const agreementUI = createAdminAgreements(() => currentAdmin);
 
 let clientRecords = [];
 let projectRecords = [];
@@ -402,6 +404,7 @@ quickActionButtons.forEach((button) => {
 ========================================================= */
 
 const buildClientOptions = () => {
+  agreementUI?.clients(clientRecords);
   const options = [
     '<option value="">Choose a client</option>',
     ...clientRecords.map((client) => {

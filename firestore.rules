@@ -1,0 +1,222 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function userDocumentExists() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid));
+    }
+
+    function isAdmin() {
+      return userDocumentExists()
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
+    }
+
+    match /users/{userId} {
+
+      // =====================================================
+      // USER PROFILE
+      // =====================================================
+
+      allow read: if signedIn()
+        && (
+          request.auth.uid == userId
+          || isAdmin()
+        );
+
+      allow create: if isAdmin()
+        || (
+          signedIn()
+          && request.auth.uid == userId
+          && request.resource.data.role == "client"
+        );
+
+      allow update: if isAdmin()
+        || (
+          signedIn()
+          && request.auth.uid == userId
+          && request.resource.data.diff(resource.data)
+            .affectedKeys()
+            .hasOnly([
+              "firstName",
+              "lastName",
+              "fullName",
+              "businessName",
+              "phone",
+              "email",
+              "updatedAt",
+              "lastMessage",
+              "lastMessageAt",
+              "unreadByAdmin",
+              "unreadByClient"
+            ])
+        );
+
+      allow delete: if isAdmin();
+
+
+      match /agreements/{agreementId} {
+        allow read: if signedIn() && (request.auth.uid == userId || isAdmin());
+        allow create: if isAdmin()
+          && request.resource.data.state == "issued"
+          && request.resource.data.issuedBy == request.auth.uid
+          && request.resource.data.issuedAt == request.time
+          && request.resource.data.expiresAt is timestamp
+          && request.resource.data.expiresAt > request.time
+          && request.resource.data.amount is number && request.resource.data.amount > 0
+          && request.resource.data.quoteNumber is string && request.resource.data.quoteNumber.size() > 0
+          && request.resource.data.scope is string && request.resource.data.scope.size() > 0
+          && request.resource.data.clientName is string && request.resource.data.clientName.size() > 0
+          && request.resource.data.clientEmail is string
+          && request.resource.data.providerName is string && request.resource.data.providerName.size() > 0
+          && request.resource.data.projectName is string && request.resource.data.projectName.size() > 0
+          && request.resource.data.paymentSchedule is string && request.resource.data.paymentSchedule.size() > 0
+          && request.resource.data.delivery is string && request.resource.data.delivery.size() > 0
+          && request.resource.data.ongoingCosts is string && request.resource.data.ongoingCosts.size() > 0
+          && request.resource.data.revisions is int && request.resource.data.revisions >= 0
+          && request.resource.data.termsVersion == "1-2026-10-10"
+          && request.resource.data.termsText is string && request.resource.data.termsText.size() > 0;
+        allow update: if isAdmin() && resource.data.state == "issued"
+          && request.resource.data.state == "withdrawn"
+          && request.resource.data.withdrawnAt == request.time
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(["state", "withdrawnAt"])
+          && !exists(/databases/$(database)/documents/users/$(userId)/agreements/$(agreementId)/acceptances/client);
+        allow delete: if false;
+        match /acceptances/{acceptanceId} {
+          allow read: if signedIn() && (request.auth.uid == userId || isAdmin());
+          allow create: if signedIn() && request.auth.uid == userId
+            && request.auth.token.email_verified == true && acceptanceId == "client"
+            && request.resource.data.keys().hasOnly(["quoteId", "termsVersion", "name", "email", "clientUid", "statement", "acceptedAt"])
+            && request.resource.data.quoteId == agreementId
+            && request.resource.data.clientUid == request.auth.uid
+            && request.resource.data.email == request.auth.token.email
+            && request.resource.data.acceptedAt == request.time
+            && request.resource.data.name is string && request.resource.data.name.size() >= 2 && request.resource.data.name.size() <= 150
+            && request.resource.data.statement == "I accept this quote and its attached project terms."
+            && request.resource.data.termsVersion == get(/databases/$(database)/documents/users/$(userId)/agreements/$(agreementId)).data.termsVersion
+            && get(/databases/$(database)/documents/users/$(userId)/agreements/$(agreementId)).data.state == "issued"
+            && get(/databases/$(database)/documents/users/$(userId)/agreements/$(agreementId)).data.expiresAt > request.time;
+          allow update, delete: if false;
+        }
+      }
+      // =====================================================
+      // PROJECTS
+      // =====================================================
+
+      match /projects/{projectId} {
+
+        allow read: if signedIn()
+          && (
+            request.auth.uid == userId
+            || isAdmin()
+          );
+
+        allow create, update, delete: if isAdmin();
+      }
+
+      // =====================================================
+      // INVOICES
+      // =====================================================
+
+      match /invoices/{invoiceId} {
+
+        allow read: if signedIn()
+          && (
+            request.auth.uid == userId
+            || isAdmin()
+          );
+
+        allow create, update, delete: if isAdmin();
+      }
+
+      // =====================================================
+      // MESSAGES
+      // =====================================================
+
+      match /messages/{messageId} {
+
+        // Client can read only their own conversation.
+        // Admin can read every conversation.
+        allow read: if signedIn()
+          && (
+            request.auth.uid == userId
+            || isAdmin()
+          );
+
+        // Client or admin can send messages.
+        allow create: if signedIn()
+          && (
+            request.auth.uid == userId
+            || isAdmin()
+          )
+          && request.resource.data.text is string
+          && request.resource.data.text.size() > 0
+          && request.resource.data.text.size() <= 2000
+          && request.resource.data.sender in ["client", "admin"];
+
+        // Only allow read/seen status updates.
+        allow update: if signedIn()
+          && (
+            request.auth.uid == userId
+            || isAdmin()
+          )
+          && request.resource.data.diff(resource.data)
+            .affectedKeys()
+            .hasOnly([
+              "seen"
+            ]);
+
+        allow delete: if isAdmin();
+      }
+
+      // =====================================================
+      // CLIENT FILE RECORDS
+      // =====================================================
+
+      match /files/{fileId} {
+
+        allow read: if signedIn()
+          && (
+            request.auth.uid == userId
+            || isAdmin()
+          );
+
+        allow create: if signedIn()
+          && (
+            request.auth.uid == userId
+            || isAdmin()
+          );
+
+        allow update, delete: if isAdmin();
+      }
+
+      // =====================================================
+      // NOTIFICATIONS
+      // =====================================================
+
+      match /notifications/{notificationId} {
+
+        allow read: if signedIn()
+          && (
+            request.auth.uid == userId
+            || isAdmin()
+          );
+
+        allow create: if isAdmin();
+
+        allow update: if signedIn()
+          && (
+            request.auth.uid == userId
+            || isAdmin()
+          );
+
+        allow delete: if isAdmin();
+      }
+    }
+  }
+}

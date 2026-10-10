@@ -1,5 +1,3 @@
 User-agent: *
 Allow: /
-Disallow: /admin-dashboard
-Disallow: /client-portal
 Sitemap: https://www.bamswebsitebuilder.com/sitemap.xml

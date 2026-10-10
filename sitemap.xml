@@ -1,58 +1,234 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.bamswebsitebuilder.com/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/about</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/services</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/prices</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/subscriptions</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/templates</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/portfolio</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/bams-original/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/reviews</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/contact</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/booking</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/es/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/es/about</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/es/services</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/es/prices</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/es/subscriptions</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/es/templates</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/es/portfolio</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/es/reviews</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/es/contact</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/es/booking</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/titan-athletics/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/velocity-drive-rentals/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/ember-sage-kitchen/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/fleetflow/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/luxury-coastal-realty/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/hometown-realty/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/sterling-counsel/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/harbor-family-law/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/gulf-coast-pro-wash/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/evergreen-lawn-care/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/roofing-starter/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/roofing-premium/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/hvac-starter/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/hvac-premium/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/medical-office-starter/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/medical-office-premium/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/dentist-office-starter/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/dentist-office-premium/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/construction-starter/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/construction-premium/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/fitness-starter/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/fitness-premium/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/coffee-shop-starter/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/coffee-shop-premium/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/auto-repair-starter/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/auto-repair-premium/</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/cancellation-policy</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/es/cancellation-policy</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/service-terms</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/es/service-terms</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/faq</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/es/faq</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/project-checklist</loc></url>
-  <url><loc>https://www.bamswebsitebuilder.com/es/project-checklist</loc></url>
+<?xml version='1.0' encoding='utf-8'?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/about" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/about" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/services</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/services" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/services" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/prices</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/prices" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/prices" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/subscriptions</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/subscriptions" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/subscriptions" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/templates</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/templates" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/templates" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/portfolio</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/portfolio" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/portfolio" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/bams-original/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/reviews</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/reviews" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/reviews" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/contact" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/contact" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/booking</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/booking" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/booking" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/es/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/es/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/about" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/about" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/es/services</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/services" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/services" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/es/prices</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/prices" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/prices" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/es/subscriptions</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/subscriptions" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/subscriptions" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/es/templates</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/templates" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/templates" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/es/portfolio</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/portfolio" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/portfolio" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/es/reviews</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/reviews" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/reviews" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/es/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/contact" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/contact" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/es/booking</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/booking" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/booking" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/titan-athletics/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/velocity-drive-rentals/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/ember-sage-kitchen/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/fleetflow/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/luxury-coastal-realty/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/hometown-realty/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/sterling-counsel/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/harbor-family-law/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/gulf-coast-pro-wash/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/evergreen-lawn-care/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/roofing-starter/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/roofing-premium/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/hvac-starter/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/hvac-premium/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/medical-office-starter/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/medical-office-premium/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/dentist-office-starter/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/dentist-office-premium/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/construction-starter/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/construction-premium/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/fitness-starter/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/fitness-premium/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/coffee-shop-starter/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/coffee-shop-premium/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/auto-repair-starter/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/auto-repair-premium/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/cancellation-policy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/cancellation-policy" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/cancellation-policy" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/es/cancellation-policy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/cancellation-policy" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/cancellation-policy" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/service-terms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/service-terms" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/service-terms" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/es/service-terms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/service-terms" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/service-terms" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/faq</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/faq" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/faq" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/es/faq</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/faq" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/faq" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/project-checklist</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/project-checklist" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/project-checklist" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/es/project-checklist</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/project-checklist" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/project-checklist" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/privacy-policy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/privacy-policy" />
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/kade-mercer/</loc>
+  </url>
+  <url>
+    <loc>https://www.bamswebsitebuilder.com/kade-mercer/es/</loc>
+  </url>
 </urlset>

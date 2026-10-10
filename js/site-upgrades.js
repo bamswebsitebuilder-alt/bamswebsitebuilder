@@ -53,7 +53,7 @@
 
   const main = document.querySelector('main') || document.querySelector('section');
   if (main && !main.id) main.id = 'main-content';
-  if (main && !document.querySelector('.skip-link')) {
+  if (main && !document.querySelector('.skip-link, .site-skip-link')) {
     const skip = document.createElement('a');
     skip.className = 'skip-link';
     skip.href = '#main-content';
