@@ -830,6 +830,13 @@ const buildActivityRecords = () => {
         project.updatedAt || project.createdAt
       )
     });
+    const alerts = projectAlerts(project);
+    if (alerts.length) activities.push({
+      title: "Project needs attention",
+      detail: `${project.title || "Website Project"}: ${alerts.join(" ")}`,
+      createdAt: project.updatedAt || project.createdAt,
+      time: getTimestampNumber(project.updatedAt || project.createdAt)
+    });
   });
 
   invoiceRecords.forEach((invoice) => {
@@ -1333,13 +1340,6 @@ async function ensureOnboardingProject(userId) {
     if (!existing.exists()) transaction.set(reference, {
       ...onboardingProject(), createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(), updatedBy: currentAdmin.uid
-    });
-    const alerts = projectAlerts(project);
-    if (alerts.length) activities.push({
-      title: "Project needs attention",
-      detail: `${project.title || "Website Project"}: ${alerts.join(" ")}`,
-      createdAt: project.updatedAt || project.createdAt,
-      time: getTimestampNumber(project.updatedAt || project.createdAt)
     });
   });
 }
