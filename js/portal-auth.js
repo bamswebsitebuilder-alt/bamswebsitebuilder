@@ -637,7 +637,7 @@ const buildProjectCard = (project, compact = false) => {
   const right = document.createElement("strong"); right.textContent = `Estimated completion: ${projectDate(project.estimatedCompletion)}`;
   labels.append(left, right); card.appendChild(labels);
   if (compact) {
-    const update = document.createElement("div"); update.className = "portal-project-update"; update.textContent = project.currentUpdate || "Your project is active. More details will be added soon."; card.appendChild(update);
+    const update = document.createElement("div"); update.className = "portal-project-update"; update.textContent = [project.automationEnabled ? project.automaticUpdate : "", project.currentUpdate].filter(Boolean).join(" ") || "Your project is active. More details will be added soon."; card.appendChild(update);
     const actions = document.createElement("div"); actions.className = "portal-actions";
     const button = document.createElement("button"); button.type = "button"; button.className = "portal-primary-button"; button.textContent = "View Full Project";
     button.addEventListener("click", () => document.querySelector('.portal-nav-link[data-panel="project"]')?.click()); actions.appendChild(button); card.appendChild(actions);
@@ -647,7 +647,7 @@ const buildProjectCard = (project, compact = false) => {
   const currentIndex = Math.max(0, PROJECT_STAGES.indexOf(project.stage));
   PROJECT_STAGES.forEach((stage, index) => { const node = document.createElement("div"); node.className = "portal-stage"; if (index < currentIndex) node.classList.add("complete"); if (index === currentIndex) node.classList.add("current"); node.textContent = stage; stageGrid.appendChild(node); });
   card.appendChild(stageGrid);
-  const update = document.createElement("div"); update.className = "portal-project-update"; update.textContent = project.currentUpdate || "No current update has been posted."; card.appendChild(update);
+  const update = document.createElement("div"); update.className = "portal-project-update"; update.textContent = [project.automationEnabled ? project.automaticUpdate : "", project.currentUpdate].filter(Boolean).join(" ") || "No current update has been posted."; card.appendChild(update);
   const columns = document.createElement("div"); columns.className = "portal-project-columns";
   const completed = document.createElement("section"); completed.className = "portal-project-box"; const ch = document.createElement("h3"); ch.textContent = "Completed"; completed.append(ch, makeTaskList(project.completedTasks, "No completed tasks have been added."));
   const upcoming = document.createElement("section"); upcoming.className = "portal-project-box"; const uh = document.createElement("h3"); uh.textContent = "Coming Next"; upcoming.append(uh, makeUpcomingList(project.upcomingTasks));

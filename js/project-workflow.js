@@ -39,10 +39,13 @@ export function summarizeTasks(tasks, previousStatus = '', liveUrl = '') {
   const paused = ['On Hold', 'Waiting on Client'].includes(previousStatus);
   // A completed checklist is ready for launch; a live link is also required to finish.
   const launched = complete && /^https?:\/\//i.test(liveUrl);
+  const progress = complete ? 100 : Math.min(99, Math.round(completed.length / valid.length * 100));
+  const status = paused ? previousStatus : launched ? 'Completed' : completed.length ? 'In Progress' : 'Not Started';
   return {
-    progress: complete ? 100 : Math.min(99, Math.round(completed.length / valid.length * 100)),
+    progress,
     stage: launched ? 'Maintenance' : stage,
-    status: paused ? previousStatus : launched ? 'Completed' : completed.length ? 'In Progress' : 'Not Started',
+    status,
+    automaticUpdate: `${status}: ${progress}% complete. ${launched ? 'Your website is live.' : `Current stage: ${stage}. Next: ${upcoming[0]?.title || 'verify the live website link'}.`}`,
     completedTasks: completed.map(task => task.title.trim()),
     upcomingTasks: upcoming.map(task => task.title.trim())
   };
@@ -68,6 +71,6 @@ export function onboardingProject() {
   return {
     title: 'Website Project — Onboarding', automationEnabled: true, workflowTasks,
     ...summarizeTasks(workflowTasks),
-    currentUpdate: 'Your project is in planning. We will confirm the scope, written quote, and required materials before work begins.'
+    currentUpdate: ''
   };
 }

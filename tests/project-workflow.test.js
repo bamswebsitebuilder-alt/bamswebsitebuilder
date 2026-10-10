@@ -7,6 +7,7 @@ test('a project moves through required stages and waits for the actual live link
   assert.equal(summarizeTasks(tasks).status, 'Not Started');
   tasks.filter(task => task.stage === 'Planning').forEach(task => task.done = true);
   assert.equal(summarizeTasks(tasks).stage, 'Design');
+  assert.match(summarizeTasks(tasks).automaticUpdate, /Next: Prepare the website design/);
   tasks.filter(task => task.stage === 'Design').forEach(task => task.done = true);
   assert.equal(summarizeTasks(tasks).stage, 'Development');
   tasks.forEach(task => task.done = true);

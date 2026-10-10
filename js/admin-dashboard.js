@@ -1458,9 +1458,6 @@ projectForm?.addEventListener(
         updatedBy: currentAdmin.uid
       };
       Object.assign(projectData, workflowEditor?.data(status, liveUrl));
-      if (projectData.automationEnabled && !currentUpdate) {
-        projectData.currentUpdate = `${projectData.stage}: ${projectData.progress}% complete. Next: ${projectData.upcomingTasks[0] || "verify the live website"}.`;
-      }
 
       if (startDateValue) {
         projectData.startDate =
