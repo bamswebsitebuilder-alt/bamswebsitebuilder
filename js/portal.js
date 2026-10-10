@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const openPanel = (panelId) => {
     const targetPanel = document.getElementById(panelId);
-    if (!targetPanel) return;
+    if (!targetPanel?.classList.contains("portal-panel")) return;
 
     portalButtons.forEach((button) => {
       const active = button.dataset.panel === panelId;
@@ -59,10 +59,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   if (portalButtons.length && portalPanels.length) {
-    const requestedPanel = location.hash.slice(1);
-    if (document.getElementById(requestedPanel)?.classList.contains("portal-panel")) {
-      openPanel(requestedPanel);
-    }
+    const openRequestedPanel = () => openPanel(location.hash.slice(1));
+    openRequestedPanel();
+    window.addEventListener("hashchange", openRequestedPanel);
   }
 
   const uploadTrigger = document.getElementById("upload-trigger");
