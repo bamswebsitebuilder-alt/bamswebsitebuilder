@@ -283,7 +283,7 @@
     });
 
     window.addEventListener('resize', () => {
-      if (window.innerWidth > 1100 && isOpen()) closeMenu();
+      if (getComputedStyle(toggle).display === 'none' && isOpen()) closeMenu();
     });
 
     const updateHeader = () => {
