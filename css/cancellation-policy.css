@@ -1,0 +1,28 @@
+/* Keep policy navigation legible without compressing its link labels. */
+.policy-document .header-container { gap: 20px; padding-inline: 24px; }
+.policy-document .site-brand { flex: 0 0 auto; }
+.policy-document .desktop-navigation { gap: 16px; }
+.policy-document .desktop-navigation a { flex: 0 0 auto; font-size: .72rem; }
+.policy-document .desktop-language { flex: 0 0 auto; margin-left: 0; }
+.policy-document .desktop-theme-toggle { flex: 0 0 40px; width: 40px; height: 40px; margin-left: 0; border: 1px solid var(--nav-border); border-radius: 8px; background: transparent; color: var(--nav-gold-light); cursor: pointer; }
+.policy-document .policy-page { padding-block: clamp(36px, 5vw, 60px) 72px; }
+.policy-document .policy-page p + p { margin-top: 16px; }
+.policy-document .policy-page section { scroll-margin-top: 110px; }
+.policy-document .policy-page a:focus-visible { outline: 3px solid currentColor; outline-offset: 4px; border-radius: 2px; }
+.policy-document .policy-page > p:last-child { margin-top: 32px; }
+html[data-theme="light"] .policy-document { background: #f3ead8; color: #20201d; }
+html[data-theme="light"] .policy-document .policy-card { background: #fffdf8; border-color: rgba(118, 83, 0, .3); }
+/* Eleven links, language controls, and the theme switch need a wider header. */
+@media (max-width: 1400px) {
+  .policy-document .desktop-navigation,
+  .policy-document .desktop-language,
+  .policy-document .desktop-theme-toggle { display: none !important; }
+  .policy-document .menu-toggle { display: flex !important; }
+  .policy-document .mobile-menu { display: flex !important; }
+  .policy-document .menu-overlay { display: block !important; }
+}
+@media (max-width: 600px) {
+  .policy-document .policy-page { padding-inline: 20px; }
+  .policy-document .policy-page h1 { font-size: clamp(2rem, 8vw, 2.75rem); }
+  .policy-document .policy-card { padding: 20px; }
+}
