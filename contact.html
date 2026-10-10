@@ -97,7 +97,7 @@
 </style>
 <link rel="stylesheet" href="/css/responsive-fixes.css">
 <link rel="stylesheet" href="/css/client-guide.css?v=20261010-1">
-<link rel="stylesheet" href="/css/accessibility.css?v=1"></head>
+<link rel="stylesheet" href="/css/accessibility.css?v=1"><link rel="stylesheet" href="/css/public-polish.css?v=1"></head>
 <body><a class="site-skip-link" href="#main-content">Skip to main content</a><header class="site-header" id="site-header">
 <div class="header-container">
 <a aria-label="BAM's Website Builder home" class="site-brand" href="/">
@@ -106,9 +106,7 @@
 <small>WEBSITE BUILDER</small>
 </span>
 </a>
-<nav aria-label="Main navigation" class="desktop-navigation">
-<a data-page="home" href="/">Home</a><a data-page="about" href="/about">About</a><a data-page="services" href="/services">Services</a><a data-page="prices" href="/prices">Prices</a><a data-page="subscriptions" href="/subscriptions">Website Plans</a><a data-page="portfolio" href="/portfolio">Portfolio</a><a data-page="templates" href="/templates">Templates</a><a data-page="reviews" href="/reviews">Reviews</a><a aria-current="page" class="active" data-page="contact" href="/contact">Contact</a><a data-page="booking" href="/booking.html">Book a Call</a><a data-page="login" href="/login">Login</a>
-</nav>
+<nav aria-label="Main navigation" class="desktop-navigation"><a data-page="home" href="/">Home</a><a data-page="services" href="/services">Services</a><a data-page="prices" href="/prices">Prices</a><a data-page="portfolio" href="/portfolio">Portfolio</a><a data-page="contact" href="/contact" class="active" aria-current="page">Contact</a><details class="nav-more"><summary>More</summary><div class="nav-more-links"><a data-page="about" href="/about">About</a><a data-page="subscriptions" href="/subscriptions">Website plans</a><a data-page="templates" href="/templates">Templates</a><a data-page="reviews" href="/reviews">Reviews</a><a data-page="booking" href="/booking">Book a call</a><a data-page="faq" href="/faq">FAQ</a></div></details><a data-page="login" href="/login">Client login</a></nav>
 <div class="desktop-language">
 <a class="language-active" href="/contact">English</a>
 <span aria-hidden="true">|</span>
@@ -193,23 +191,10 @@
 <input name="_template" type="hidden" value="table"/>
 <input id="paypal-subscription-id" name="Customer Reported PayPal Subscription ID" type="hidden" value=""/>
 <input id="paypal-subscription-status" name="Payment Verification Status" type="hidden" value=""/>
-<div class="quote-next-steps"><h2>What happens after your inquiry</h2><ol><li>We review your needs and confirm the scope.</li><li>You receive a written quote to review and accept.</li><li>We send a secure payment link after your acceptance.</li></ol><p>Submitting this form does not accept a contract or start payments. A response may take up to 72 hours.</p></div>
-<div class="subscription-contact-box" id="subscription-interest">
-<h2>Prefer to pay monthly?</h2>
-<p>We also offer 12-month website payment plans: Starter $20.83/month, Business $41.67/month, and Premium $70.83/month.</p>
-<a href="/subscriptions">View monthly website plans &rarr;</a>
-</div>
-<div class="form-group">
-<label for="payment-option">Payment Option</label>
-<select id="payment-option" name="Payment Option">
-<option value="">Select a payment option</option>
-<option value="One-time payment">One-time payment</option>
-<option value="Starter Monthly - $20.83/month for 12 months">Starter &mdash; $20.83/month for 12 months</option>
-<option value="Business Monthly - $41.67/month for 12 months">Business &mdash; $41.67/month for 12 months</option>
-<option value="Premium Monthly - $70.83/month for 12 months">Premium &mdash; $70.83/month for 12 months</option>
-</select>
-</div>
-<!-- FULL NAME -->
+
+
+
+<p class="inquiry-intro">Just share your name, email, and what you need help with.</p><!-- FULL NAME -->
 <div class="form-group">
 <label for="name">
                             Full Name
@@ -231,10 +216,34 @@
 <input autocomplete="organization" id="business" name="Business Name" type="text"/>
 </div>
 <!-- TEMPLATE CHOICE -->
-<div class="form-group" id="template-choice-group">
+
+<!-- WEBSITE PACKAGE -->
+
+<!-- WEBSITE TYPE -->
+
+<!-- ADDITIONAL SERVICES -->
+
+<!-- PROJECT DETAILS -->
+<div class="form-group">
+<label for="message">
+                            Project Details
+                        </label>
+<textarea id="message" name="Project Details" placeholder="Tell us about your business, the pages you need, your preferred design style, and any special features." required="" rows="6"></textarea>
+</div>
+<!-- SUBMIT BUTTON -->
+<details class="inquiry-preferences" id="inquiry-preferences"><summary>Project preferences (optional)</summary><p>Leave these choices blank if you’re unsure. We’ll help you choose.</p><div class="form-group">
+<label for="payment-option">Payment Option</label>
+<select id="payment-option" name="Payment Option">
+<option value="">Help me choose</option>
+<option value="One-time payment">One-time payment</option>
+<option value="Starter Monthly - $20.83/month for 12 months">Starter &mdash; $20.83/month for 12 months</option>
+<option value="Business Monthly - $41.67/month for 12 months">Business &mdash; $41.67/month for 12 months</option>
+<option value="Premium Monthly - $70.83/month for 12 months">Premium &mdash; $70.83/month for 12 months</option>
+</select>
+</div><div class="form-group" id="template-choice-group">
 <label for="template-choice">Selected Template</label>
 <select id="template-choice" name="Selected Template">
-<option value="">Choose a template</option>
+<option value="">Help me choose</option>
 <option value="AFTERHOURS">AFTERHOURS — Streetwear</option>
 <optgroup label="Newest Templates">
 <option value="Gulf Coast Pro Wash">Gulf Coast Pro Wash &mdash; Pressure Washing</option>
@@ -270,16 +279,12 @@
 </optgroup>
 </select>
 <p class="template-choice-help">The newest templates appear at the top of this list.</p>
-</div>
-<!-- WEBSITE PACKAGE -->
-<div class="form-group">
+</div><div class="form-group">
 <label for="package">
                             Website Package
                         </label>
-<select id="package" name="Website Package" required="">
-<option disabled="" selected="" value="">
-                                Select a package
-                            </option>
+<select id="package" name="Website Package">
+<option value="">Help me choose</option>
 <option value="Starter Website">
                                 Starter Website
                             </option>
@@ -290,16 +295,12 @@
                                 Premium Website
                             </option>
 </select>
-</div>
-<!-- WEBSITE TYPE -->
-<div class="form-group">
+</div><div class="form-group">
 <label for="website-type">
                             Website Type
                         </label>
-<select id="website-type" name="Website Type" required="">
-<option disabled="" selected="" value="">
-                                Select a website type
-                            </option>
+<select id="website-type" name="Website Type">
+<option value="">Help me choose</option>
 <option value="Business Website">
                                 Business Website
                             </option>
@@ -346,16 +347,12 @@
                                 Other
                             </option>
 </select>
-</div>
-<!-- ADDITIONAL SERVICES -->
-<div class="form-group">
+</div><div class="form-group">
 <label for="additional-service">
                             Additional Services
                         </label>
 <select id="additional-service" name="Additional Service">
-<option selected="" value="">
-                                Select an additional service
-                            </option>
+<option value="">Help me choose</option>
 <option value="No Additional Service">
                                 No Additional Service
                             </option>
@@ -396,21 +393,17 @@
                                 Other
                             </option>
 </select>
-</div>
-<!-- PROJECT DETAILS -->
-<div class="form-group">
-<label for="message">
-                            Project Details
-                        </label>
-<textarea id="message" name="Project Details" placeholder="Tell us about your business, the pages you need, your preferred design style, and any special features." required="" rows="6"></textarea>
-</div>
-<!-- SUBMIT BUTTON -->
-<p class="cancellation-policy-note" style="max-width:75ch;margin:20px auto;padding:0 20px;line-height:1.6">Before paying, review the <a href="/service-terms" style="text-decoration:underline">Service Terms</a>, your project agreement, and our <a href="/cancellation-policy" style="text-decoration:underline">Cancellation &amp; Refund Policy</a>.</p>
+</div><div class="subscription-contact-box" id="subscription-interest">
+<h2>Prefer to pay monthly?</h2>
+<p>We also offer 12-month website payment plans: Starter $20.83/month, Business $41.67/month, and Premium $70.83/month.</p>
+<a href="/subscriptions">View monthly website plans &rarr;</a>
+</div></details><p class="cancellation-policy-note" style="max-width:75ch;margin:20px auto;padding:0 20px;line-height:1.6">Before paying, review the <a href="/service-terms" style="text-decoration:underline">Service Terms</a>, your project agreement, and our <a href="/cancellation-policy" style="text-decoration:underline">Cancellation &amp; Refund Policy</a>.</p>
 <button type="submit">
                         Send Message
                     </button>
 <p style="line-height:1.6">Gathering your materials? Use the <a href="/project-checklist" style="text-decoration:underline">project checklist</a>. You can inquire even if some content is not ready.</p>
-</form>
+
+<div class="quote-next-steps"><h2>What happens after your inquiry</h2><ol><li>We review your needs and confirm the scope.</li><li>You receive a written quote to review and accept.</li><li>We send a secure payment link after your acceptance.</li></ol><p>Submitting this form does not accept a contract or start payments. A response may take up to 72 hours.</p></div></form>
 </div>
 </section>
 </main>
@@ -438,8 +431,8 @@
     <div class="footer-bottom">© 2026 BAM's Website Builder. All Rights Reserved.</div>
 <nav class="client-resource-links" aria-label="Client resources"><a href="/service-terms">Service Terms</a><a href="/cancellation-policy">Cancellation &amp; Refund Policy</a><a href="/faq">FAQ</a><a href="/project-checklist">Project Checklist</a></nav>
 </footer>
-<script src="/js/quote-inquiry.js?v=20261010-1" defer></script>
-<script src="/js/navigation.js?v=20260928-3"></script>
+<script src="/js/quote-inquiry.js?v=2" defer></script>
+<script src="/js/navigation.js?v=20261010-polish-1"></script>
 <!-- Start of LiveChat (www.livechat.com) code -->
 <script>
     window.__lc = window.__lc || {};

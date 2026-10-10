@@ -53,4 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
       : 'I have a PayPal subscription reference. BAM’s must verify it directly in PayPal.');
   }
   if (message && !message.value && details.length) message.value = details.join('\n');
+  const preferences = document.getElementById('inquiry-preferences');
+  if (preferences && [packageChoice, paymentOption, templateChoice].some(select => select?.value)) preferences.open = true;
 });
