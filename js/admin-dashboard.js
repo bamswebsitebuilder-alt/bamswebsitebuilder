@@ -6,7 +6,7 @@ document.documentElement.style.visibility = "hidden";
 
 import { auth, db, storage } from "./firebase-config.js";
 import { onboardingProject, projectAlerts } from "./project-workflow.js?v=1";
-import { createAdminAgreements } from "./agreements-admin.js?v=2";
+import { createAdminAgreements } from "./agreements-admin.js?v=3";
 import { createWorkflowEditor } from "./project-workflow-editor.js?v=1";
 
 import {
