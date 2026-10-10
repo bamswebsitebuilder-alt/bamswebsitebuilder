@@ -11,3 +11,5 @@ firebase emulators:exec --only firestore --project demo-bam-agreements "node tes
 ```
 
 Browser acceptance was also verified with nonbinding localhost fixtures against the isolated emulator using the production transaction and renderer. Those temporary browser fixtures are kept outside the published repository.
+
+Agreement automation prepares a draft when an admin saves a client project or selects a client. Published package presets fill prices, payment schedules, estimates and revisions. Exact scope and outside costs remain required. Drafts are isolated by admin and client in browser-tab session storage; issued quotes are fixed Firestore records. Approve and issue uses a deterministic quote-number record ID so an uncertain commit can be retried without creating a second quote. Tests: `node --test tests/agreement-automation.test.js`.

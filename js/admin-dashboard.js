@@ -6,7 +6,7 @@ document.documentElement.style.visibility = "hidden";
 
 import { auth, db, storage } from "./firebase-config.js";
 import { onboardingProject, projectAlerts } from "./project-workflow.js?v=1";
-import { createAdminAgreements } from "./agreements-admin.js?v=1";
+import { createAdminAgreements } from "./agreements-admin.js?v=2";
 import { createWorkflowEditor } from "./project-workflow-editor.js?v=1";
 
 import {
@@ -120,7 +120,7 @@ const statBalance = document.getElementById("stat-balance");
 ========================================================= */
 
 let currentAdmin = null;
-const agreementUI = createAdminAgreements(() => currentAdmin);
+const agreementUI = createAdminAgreements(() => currentAdmin, userId => projectRecords.find(project => project.userId === userId) || {});
 
 let clientRecords = [];
 let projectRecords = [];
@@ -1016,6 +1016,7 @@ const publishProjects = () => {
     });
 
   renderProjects();
+  projectRecords.forEach(project => agreementUI?.project(project));
   renderNotifications();
 };
 
@@ -1488,6 +1489,8 @@ projectForm?.addEventListener(
           merge: true
         }
       );
+
+      agreementUI?.prepareFor(userId, projectData);
 
       showStatus(
         projectFormStatus,
