@@ -10,4 +10,4 @@ The security tests require Node, Java 21+, Firebase CLI, `firebase`, and `@fireb
 firebase emulators:exec --only firestore --project demo-bam-agreements "node tests/agreement-rules.test.mjs"
 ```
 
-The browser fixtures in this directory are nonbinding localhost tests. `agreement-browser-flow.html` requires the isolated emulator and a `browser-test` quote fixture; it uses the same `acceptAgreement` transaction and renderer as the live client portal. It refuses to run on a public hostname. The preview fixture exercises rendering without a database. Tests are excluded from deployment.
+Browser acceptance was also verified with nonbinding localhost fixtures against the isolated emulator using the production transaction and renderer. Those temporary browser fixtures are kept outside the published repository.
