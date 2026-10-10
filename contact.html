@@ -188,10 +188,12 @@
 <form action="https://formsubmit.co/bamswebsitebuilder@gmail.com" class="contact-form" method="POST">
 <!-- FORM SETTINGS -->
 <input name="_subject" type="hidden" value="New Website Inquiry"/>
+<input type="hidden" name="_next" value="https://www.bamswebsitebuilder.com/thank-you">
 <input name="_captcha" type="hidden" value="false"/>
 <input name="_template" type="hidden" value="table"/>
-<input id="paypal-subscription-id" name="PayPal Subscription ID" type="hidden" value=""/>
-<input id="paypal-subscription-status" name="PayPal Subscription Status" type="hidden" value=""/>
+<input id="paypal-subscription-id" name="Customer Reported PayPal Subscription ID" type="hidden" value=""/>
+<input id="paypal-subscription-status" name="Payment Verification Status" type="hidden" value=""/>
+<div class="quote-next-steps"><h2>What happens after your inquiry</h2><ol><li>We review your needs and confirm the scope.</li><li>You receive a written quote to review and accept.</li><li>We send a secure payment link after your acceptance.</li></ol><p>Submitting this form does not accept a contract or start payments. A response may take up to 72 hours.</p></div>
 <div class="subscription-contact-box" id="subscription-interest">
 <h2>Prefer to pay monthly?</h2>
 <p>We also offer 12-month website payment plans: Starter $20.83/month, Business $41.67/month, and Premium $70.83/month.</p>
@@ -436,65 +438,7 @@
     <div class="footer-bottom">© 2026 BAM's Website Builder. All Rights Reserved.</div>
 <nav class="client-resource-links" aria-label="Client resources"><a href="/service-terms">Service Terms</a><a href="/cancellation-policy">Cancellation &amp; Refund Policy</a><a href="/faq">FAQ</a><a href="/project-checklist">Project Checklist</a></nav>
 </footer>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  const params = new URLSearchParams(window.location.search);
-  const requestedTemplate = (params.get('template') || '').trim();
-  const requestedDemo = (params.get('demo') || '').trim();
-  const requestedService = (params.get('service') || '').trim();
-  const requestedDate = (params.get('date') || '').trim();
-  const requestedZip = (params.get('zip') || '').trim();
-  const payment = (params.get('payment') || '').trim();
-  const plan = (params.get('plan') || '').trim().toLowerCase();
-  const subscribed = (params.get('subscribed') || '').trim().toLowerCase();
-  const subscriptionId = (params.get('subscription_id') || '').trim();
-  const paymentOption = document.getElementById('payment-option');
-  const subscriptionIdField = document.getElementById('paypal-subscription-id');
-  const subscriptionStatusField = document.getElementById('paypal-subscription-status');
-  const templateChoice = document.getElementById('template-choice');
-  const message = document.getElementById('message');
-
-  if (message && requestedDemo && !message.value) {
-    const details = [
-      'I am interested in the ' + requestedDemo + ' website demo.',
-      requestedService ? 'Requested service: ' + requestedService : '',
-      requestedDate ? 'Preferred date: ' + requestedDate : '',
-      requestedZip ? 'ZIP code: ' + requestedZip : ''
-    ].filter(Boolean);
-    message.value = details.join('\n');
-  }
-
-  const monthlyValues = {
-    'starter-monthly': 'Starter Monthly - $20.83/month for 12 months',
-    'business-monthly': 'Business Monthly - $41.67/month for 12 months',
-    'premium-monthly': 'Premium Monthly - $70.83/month for 12 months'
-  };
-
-  if (plan && paymentOption && monthlyValues[plan]) {
-    paymentOption.value = monthlyValues[plan];
-  }
-
-  if (subscribed === 'yes') {
-    if (subscriptionIdField) subscriptionIdField.value = subscriptionId;
-    if (subscriptionStatusField) subscriptionStatusField.value = 'Approved';
-    if (message && !message.value) {
-      message.value = 'My PayPal subscription was approved. Here are my website project details:';
-    }
-  }
-
-  if (templateChoice && requestedTemplate) {
-    const normalized = requestedTemplate.toLowerCase();
-    const match = Array.from(templateChoice.options).find(function (option) {
-      return option.value.trim().toLowerCase() === normalized;
-    });
-    if (match) templateChoice.value = match.value;
-  }
-
-  if (payment && message && !message.value) {
-    message.value = 'I would like to use the selected template and pay the ' + payment + ' option. Please send me the secure payment link and next steps.';
-  }
-});
-</script>
+<script src="/js/quote-inquiry.js?v=20261010-1" defer></script>
 <script src="/js/navigation.js?v=20260928-3"></script>
 <!-- Start of LiveChat (www.livechat.com) code -->
 <script>

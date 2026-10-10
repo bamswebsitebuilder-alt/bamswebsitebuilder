@@ -398,11 +398,13 @@
      <form action="https://formsubmit.co/bamswebsitebuilder@gmail.com" class="contact-form" method="POST">
       <!-- FORM SETTINGS -->
       <input name="_subject" type="hidden" value="Nueva solicitud de sitio web"/>
+<input type="hidden" name="_next" value="https://www.bamswebsitebuilder.com/es/thank-you">
       <input name="_captcha" type="hidden" value="false"/>
       <input name="_template" type="hidden" value="table"/>
-      <input id="paypal-subscription-id" name="PayPal Subscription ID" type="hidden" value=""/>
-      <input id="paypal-subscription-status" name="PayPal Subscription Status" type="hidden" value=""/>
-      <div class="subscription-contact-box" id="subscription-interest">
+      <input id="paypal-subscription-id" name="Customer Reported PayPal Subscription ID" type="hidden" value=""/>
+      <input id="paypal-subscription-status" name="Payment Verification Status" type="hidden" value=""/>
+      <div class="quote-next-steps"><h2>Qué pasa después de tu consulta</h2><ol><li>Revisamos tus necesidades y confirmamos el alcance.</li><li>Recibes una cotización escrita para revisar y aceptar.</li><li>Te enviamos un enlace de pago seguro después de tu aceptación.</li></ol><p>Enviar este formulario no acepta un contrato ni inicia pagos. La respuesta puede tardar hasta 72 horas.</p></div>
+<div class="subscription-contact-box" id="subscription-interest">
        <h2>
         &iquest;Prefieres pagar mensualmente?
        </h2>
@@ -747,69 +749,7 @@
    </div>
   <nav class="client-resource-links" aria-label="Recursos para clientes"><a href="/es/service-terms">Términos del Servicio</a><a href="/es/cancellation-policy">Cancelaciones y Reembolsos</a><a href="/es/faq">Preguntas Frecuentes</a><a href="/es/project-checklist">Preparar tu Proyecto</a></nav>
 </footer>
-  <script>
-   (function () {
-    'use strict';
-    var params = new URLSearchParams(window.location.search);
-    var template = params.get('template');
-    var requestedDemo = (params.get('demo') || '').trim();
-    var requestedService = (params.get('service') || '').trim();
-    var requestedDate = (params.get('date') || '').trim();
-    var requestedZip = (params.get('zip') || '').trim();
-    var packageKey = params.get('package');
-    var payment = params.get('payment');
-    var plan = (params.get('plan') || '').toLowerCase();
-    var subscribed = (params.get('subscribed') || '').toLowerCase();
-    var subscriptionId = (params.get('subscription_id') || '').trim();
-    var paymentOption = document.getElementById('payment-option');
-    var subscriptionIdField = document.getElementById('paypal-subscription-id');
-    var subscriptionStatusField = document.getElementById('paypal-subscription-status');
-    var templateSelect = document.getElementById('website-template');
-    var packageSelect = document.getElementById('package');
-    var message = document.getElementById('message');
-    if (message && requestedDemo && !message.value) {
-        message.value = [
-            'Me interesa la demostración web ' + requestedDemo + '.',
-            requestedService ? 'Servicio solicitado: ' + requestedService : '',
-            requestedDate ? 'Fecha preferida: ' + requestedDate : '',
-            requestedZip ? 'Código postal: ' + requestedZip : ''
-        ].filter(Boolean).join('\n');
-    }
-    var packageValues = {
-        starter: 'Sitio inicial',
-        business: 'Sitio empresarial',
-        premium: 'Sitio premium'
-    };
-
-    var monthlyValues = {
-        'starter-monthly': 'Starter Monthly - $20.83/month for 12 months',
-        'business-monthly': 'Business Monthly - $41.67/month for 12 months',
-        'premium-monthly': 'Premium Monthly - $70.83/month for 12 months'
-    };
-    if (plan && paymentOption && monthlyValues[plan]) {
-        paymentOption.value = monthlyValues[plan];
-    }
-    if (subscribed === 'yes') {
-        if (subscriptionIdField) subscriptionIdField.value = subscriptionId;
-        if (subscriptionStatusField) subscriptionStatusField.value = 'Approved';
-        if (message && !message.value) {
-            message.value = 'Mi suscripci&oacute;n de PayPal fue aprobada. Estos son los detalles de mi proyecto:';
-        }
-    }
-
-    if (template && templateSelect) {
-        templateSelect.value = template;
-    }
-    if (packageKey && packageSelect && packageValues[packageKey]) {
-        packageSelect.value = packageValues[packageKey];
-    }
-    if (payment && message && !message.value) {
-        message.value = payment === 'full'
-            ? 'Preferencia de pago: pago completo.'
-            : 'Preferencia de pago: depósito inicial.';
-    }
-}());
-  </script>
+  <script src="/js/quote-inquiry.js?v=20261010-1" defer></script>
   <script src="/js/navigation.js?v=20260928-3">
   </script>
 <script src="/js/animations.js?v=1">
