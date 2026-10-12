@@ -1,4 +1,4 @@
-/* Brevo reCAPTCHA v3: obtain a fresh token for each native form submission. */
+/* Brevo reCAPTCHA v3: display an inline badge and obtain fresh submission tokens. */
 (() => {
   'use strict';
   const siteKey = '6LdMWewtAAAAALhvTMsECRl5Tn3pyITZ2nsrv_JD';
@@ -8,12 +8,11 @@
     captchaLoad = new Promise((resolve, reject) => {
       const script = document.createElement('script');
       const timeout = setTimeout(() => { script.remove(); reject(new Error('CAPTCHA timeout')); }, 15000);
-      script.src = 'https://www.google.com/recaptcha/api.js?render=' + siteKey + '&hl=' + language;
+      script.src = 'https://www.google.com/recaptcha/api.js?render=explicit&hl=' + language;
       script.async = true;
       script.onload = () => {
-        clearTimeout(timeout);
-        if (!window.grecaptcha) { reject(new Error('CAPTCHA unavailable')); return; }
-        window.grecaptcha.ready(resolve);
+        if (!window.grecaptcha) { clearTimeout(timeout); reject(new Error('CAPTCHA unavailable')); return; }
+        window.grecaptcha.ready(() => { clearTimeout(timeout); resolve(); });
       };
       script.onerror = () => { clearTimeout(timeout); script.remove(); reject(new Error('CAPTCHA unavailable')); };
       document.head.appendChild(script);
@@ -24,11 +23,38 @@
     const spanish = document.documentElement.lang === 'es';
     const button = form.querySelector('button[type="submit"]');
     const originalText = button.textContent;
+    const badge = document.createElement('div');
+    badge.className = 'bam-newsletter-captcha';
+    form.querySelector('.bam-newsletter-captcha-notice').before(badge);
     const status = document.createElement('p');
     status.setAttribute('role', 'status');
     status.setAttribute('aria-live', 'polite');
     status.hidden = true;
     form.appendChild(status);
+    let widgetId;
+    let widgetLoad;
+    function showCaptcha() {
+      if (widgetLoad) return widgetLoad;
+      widgetLoad = loadCaptcha(spanish ? 'es' : 'en').then(() => {
+        if (widgetId === undefined) {
+          widgetId = window.grecaptcha.render(badge, {
+            sitekey: siteKey,
+            size: 'invisible',
+            badge: 'inline'
+          });
+        }
+        return widgetId;
+      }).catch(error => { widgetLoad = undefined; throw error; });
+      return widgetLoad;
+    }
+    function showError() {
+      status.textContent = spanish
+        ? 'No se pudo cargar la verificación. Inténtalo de nuevo o permite reCAPTCHA en tu navegador.'
+        : 'Verification could not load. Please try again or allow reCAPTCHA in your browser.';
+      status.hidden = false;
+    }
+    // Load the badge before submission; generate the short-lived token only on submit.
+    showCaptcha().catch(showError);
     form.addEventListener('submit', async event => {
       event.preventDefault();
       if (form.dataset.captchaPending === 'true' || !form.reportValidity()) return;
@@ -38,14 +64,14 @@
       status.hidden = true;
       let tokenTimeout;
       try {
-        await loadCaptcha(spanish ? 'es' : 'en');
+        const clientId = await showCaptcha();
         const token = await Promise.race([
-          window.grecaptcha.execute(siteKey, { action: 'submit' }),
+          window.grecaptcha.execute(clientId, { action: 'submit' }),
           new Promise((resolve, reject) => { tokenTimeout = setTimeout(() => reject(new Error('Token timeout')), 15000); })
         ]);
         clearTimeout(tokenTimeout);
         if (!token) throw new Error('Missing CAPTCHA token');
-        let input = form.querySelector('input[name="g-recaptcha-response"]');
+        let input = form.querySelector('[name="g-recaptcha-response"]');
         if (!input) {
           input = document.createElement('input');
           input.type = 'hidden';
@@ -56,10 +82,7 @@
         HTMLFormElement.prototype.submit.call(form);
       } catch (error) {
         clearTimeout(tokenTimeout);
-        status.textContent = spanish
-          ? 'No se pudo completar la verificación. Inténtalo de nuevo o permite reCAPTCHA en tu navegador.'
-          : 'Verification could not be completed. Please try again or allow reCAPTCHA in your browser.';
-        status.hidden = false;
+        showError();
         button.disabled = false;
         button.textContent = originalText;
         delete form.dataset.captchaPending;
