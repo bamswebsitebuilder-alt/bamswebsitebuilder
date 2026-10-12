@@ -1,0 +1,21 @@
+/* Scoped Brevo signup styling; native POST preserves Brevo confirmation handling. */
+.bam-email-updates{padding:48px 20px;background:#121212;color:#f8f8f8;border-top:1px solid #635022;scroll-margin-top:110px}
+.bam-email-updates-inner{max-width:720px;margin:auto;text-align:center}
+.bam-email-updates h2{font-size:clamp(1.6rem,4vw,2.2rem);margin:0 0 14px;line-height:1.2}
+.bam-email-updates p{color:#d0d0d0;line-height:1.65;margin:0 0 22px}
+.bam-email-updates-form{max-width:560px;margin:auto;text-align:left}
+.bam-email-updates-form>label{display:block;font-weight:700;margin-bottom:8px}
+.bam-email-updates-fields{display:flex;gap:12px;align-items:stretch}
+.bam-email-updates-fields input{flex:1;min-width:0;min-height:48px;padding:12px 14px;background:#090909;color:#f8f8f8;border:1px solid #aaa;border-radius:10px;font:inherit;box-sizing:border-box}
+.bam-email-updates-fields input::placeholder{color:#aaa;opacity:1}
+.bam-email-updates-fields button{background:#d4a637;color:#111;padding:12px 24px;border:0;border-radius:10px;font:inherit;font-weight:700;min-height:48px;cursor:pointer}
+.bam-email-updates-fields button:hover{background:#f0c45a}
+.bam-email-updates-form :focus-visible{outline:3px solid #f0c45a;outline-offset:4px}
+.bam-email-updates small{display:block;margin-top:16px;color:#bbb;font-size:.85rem;line-height:1.6}
+.bam-email-updates-trap{display:none!important}
+html[data-theme=light] .bam-email-updates{background:#fffaf0;color:#20201d}
+html[data-theme=light] .bam-email-updates p,html[data-theme=light] .bam-email-updates small{color:#514d44}
+html[data-theme=light] .bam-email-updates-fields input{background:#fff;color:#20201d;border-color:#766b55}
+html[data-theme=light] .bam-email-updates-fields input::placeholder{color:#625d54}
+html[data-theme=light] .bam-email-updates-form :focus-visible{outline-color:#765300}
+@media(max-width:520px){.bam-email-updates-fields{flex-direction:column}.bam-email-updates-fields button{width:100%}}
