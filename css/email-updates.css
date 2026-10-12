@@ -19,3 +19,7 @@ html[data-theme=light] .bam-email-updates-fields input{background:#fff;color:#20
 html[data-theme=light] .bam-email-updates-fields input::placeholder{color:#625d54}
 html[data-theme=light] .bam-email-updates-form :focus-visible{outline-color:#765300}
 @media(max-width:520px){.bam-email-updates-fields{flex-direction:column}.bam-email-updates-fields button{width:100%}}
+
+/* Keep Google's badge inside the signup form, clear of floating chat controls. */
+.bam-newsletter-captcha{margin-top:18px;min-height:60px}
+.bam-newsletter-captcha .grecaptcha-badge{visibility:visible!important;opacity:1!important}
