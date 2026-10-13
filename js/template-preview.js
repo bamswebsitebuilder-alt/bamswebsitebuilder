@@ -47,7 +47,7 @@
       <button class="preview-mobile" type="button" aria-pressed="false">${t('Mobile view', 'Vista móvil')}</button>
       <a class="preview-quote">${t('Choose this design', 'Elegir este diseño')}</a></div></div>
     <p class="preview-status" role="status" aria-live="polite"></p>
-    <div class="preview-frame-wrap" hidden><iframe title="${t('Personalized template preview', 'Vista previa personalizada')}" sandbox="" referrerpolicy="no-referrer"></iframe></div>`;
+    <div class="preview-frame-wrap" hidden><iframe title="${t('Personalized template preview', 'Vista previa personalizada')}" sandbox="allow-same-origin" referrerpolicy="no-referrer"></iframe></div>`;
   document.body.append(dialog);
   const select = dialog.querySelector('select');
   designs.forEach((design, index) => select.add(new Option(design.name, String(index))));
