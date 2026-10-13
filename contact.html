@@ -97,7 +97,7 @@
 </style>
 
 
-<link rel="stylesheet" href="/css/site-growth.css?v=20261013-growth-1"><link rel="stylesheet" href="/css/footer-fix.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/responsive-fixes.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/client-guide.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/accessibility.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/public-polish.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/menu-organization.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/public-shell.css?v=20261013-consistency-1"></head>
+<link rel="stylesheet" href="/css/site-growth.css?v=20261013-growth-1"><link rel="stylesheet" href="/css/footer-fix.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/responsive-fixes.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/client-guide.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/accessibility.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/public-polish.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/menu-organization.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/public-shell.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/growth-improvements.css?v=20261013-growth-2"></head>
 <body><a class="site-skip-link" href="#main-content">Skip to main content</a><header class="site-header" id="site-header">
 <div class="header-container">
 <a aria-label="BAM's Website Builder home" class="site-brand" href="/">
@@ -182,7 +182,7 @@
 </div>
 <!-- CONTACT FORM -->
 <form action="https://formsubmit.co/bamswebsitebuilder@gmail.com" class="contact-form" method="POST">
-<!-- FORM SETTINGS -->
+<!-- FORM SETTINGS --><div class="growth-honeypot" aria-hidden="true"><label for="quote-honey">Leave this field empty</label><input id="quote-honey" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
 <input name="_subject" type="hidden" value="New Website Inquiry"/>
 <input type="hidden" name="_next" value="https://www.bamswebsitebuilder.com/thank-you">
 <input name="_captcha" type="hidden" value="false"/>
@@ -197,14 +197,14 @@
 <label for="name">
                             Full Name
                         </label>
-<input autocomplete="name" id="name" name="Name" required="" type="text"/>
+<input autocomplete="name" id="name" name="Name" maxlength="100" required="" type="text"/>
 </div>
 <!-- EMAIL ADDRESS -->
 <div class="form-group">
 <label for="email">
                             Email Address
                         </label>
-<input autocomplete="email" id="email" name="Email" required="" type="email"/>
+<input autocomplete="email" id="email" maxlength="254" name="email" required="" type="email"/>
 </div>
 <!-- BUSINESS NAME -->
 <div class="form-group">
@@ -463,16 +463,10 @@
 <script src="/js/quote-inquiry.js?v=20261013-growth-1" defer></script>
 
 <!-- Start of LiveChat (www.livechat.com) code -->
-<script>
-    window.__lc = window.__lc || {};
-    window.__lc.license = 19864799;
-    window.__lc.integration_name = "manual_onboarding";
-    window.__lc.product_name = "livechat";
-    ;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},get:function(){if(!e._h)throw new Error("[LiveChatWidget] You can't use getters before load.");return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},init:function(){var n=t.createElement("script");n.async=!0,n.type="text/javascript",n.src="https://cdn.livechatinc.com/tracking.js",t.head.appendChild(n)}};!n.__lc.asyncInit&&e.init(),n.LiveChatWidget=n.LiveChatWidget||e}(window,document,[].slice))
-</script>
+<script src="/js/livechat.js?v=20261013-growth-2" defer></script>
 <noscript><a href="https://www.livechat.com/chat-with/19864799/" rel="nofollow">Chat with us</a>, powered by <a href="https://www.livechat.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a></noscript>
 <!-- End of LiveChat code --><script src="/js/animations.js?v=1"></script>
 <script src="/js/cookie-consent.js?v=20260928-3"></script>
-<script src="/js/navigation.js?v=20261013-consistency-1"></script></body>
+<script src="/js/navigation.js?v=20261013-consistency-1"></script><script src="/js/analytics-config.js?v=20261013-growth-2" defer></script><script src="/js/site-analytics.js?v=20261013-growth-2" defer></script><script src="/js/inquiry-feedback.js?v=20261013-growth-2" defer></script></body>
 </html>
 

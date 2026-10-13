@@ -54,7 +54,14 @@
       status.hidden = false;
     }
     // Load the badge before submission; generate the short-lived token only on submit.
-    showCaptcha().catch(showError);
+    const prepare = () => showCaptcha().catch(showError);
+    form.addEventListener('focusin', prepare, { once: true });
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        if (entries.some(entry => entry.isIntersecting)) { prepare(); observer.disconnect(); }
+      }, { rootMargin: '300px' });
+      observer.observe(form);
+    } else prepare();
     form.addEventListener('submit', async event => {
       event.preventDefault();
       if (form.dataset.captchaPending === 'true' || !form.reportValidity()) return;
@@ -113,6 +120,7 @@
           form.appendChild(input);
         }
         input.value = token;
+        window.dispatchEvent(new CustomEvent('bam:newsletter-submit'));
         HTMLFormElement.prototype.submit.call(form);
       } catch (error) {
         clearTimeout(tokenTimeout);

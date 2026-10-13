@@ -29,5 +29,5 @@ function templateCards(es) {
   vm.runInNewContext(templateScript,{document:{documentElement:{lang:es?'es':'en'},querySelector(){return card},querySelectorAll(){return []}}});return [card.innerHTML,clone.innerHTML];
 }
 test('generated starter and premium designs keep the correct language and quote destination',()=>{
-  for (const es of [false,true]) for(const card of templateCards(es)) {assert.ok(card.includes(es?'href="/es/contact?template=':'href="/contact?template='));assert.ok(card.includes(es?'Elegir este diseño':'Choose this design'));assert.ok(card.includes(es?'Ver demostración':'Live Demo'));if(es)assert.ok(!card.includes('Up to 10 website pages'))}
+  for (const es of [false,true]) for(const card of templateCards(es)) {assert.ok(card.includes(es?'href="/es/contact?template=':'href="/contact?template='));assert.ok(card.includes(es?'Elegir diseño':'Choose Design'));assert.ok(card.includes(es?'Ver demo':'View Demo'));if(es)assert.ok(!card.includes('Up to 10 website pages'))}
 });

@@ -25,10 +25,10 @@
   });
 
   const demos = [
-    {name:'Maris & Coast Realty',type:spanish?'Bienes raíces de lujo':'Luxury Real Estate',image:'/images/luxury-real-estate-hero.png',href:'/luxury-coastal-realty/',tier:'Premium',price:'$1,100',category:'professional',features:spanish?['Galería de propiedades','Solicitudes de consulta','Diseño premium adaptable']:['Property gallery','Consultation requests','Premium responsive design']},
-    {name:'Hometown Keys Realty',type:spanish?'Agente residencial':'Residential Realtor',image:'/images/local-realtor-hero.png',href:'/hometown-realty/',tier:'Starter',price:'$400',category:'professional',features:spanish?['Servicios para compradores y vendedores','Perfil de Negocio de Google','Diseño adaptable']:['Buyer and seller services','Google Business setup','Responsive design']},
-    {name:'Sterling Counsel',type:spanish?'Bufete corporativo':'Corporate Law Firm',image:'/images/corporate-law-hero.png',href:'/sterling-counsel/',tier:'Premium',price:'$890 + $50/mo',category:'professional',features:spanish?['Áreas de práctica','Formularios de consulta','Correo empresarial y mantenimiento']:['Practice areas','Consultation forms','Business email and maintenance']},
-    {name:'Harbor Family Law',type:spanish?'Derecho familiar':'Family Law Office',image:'/images/family-law-hero.png',href:'/harbor-family-law/',tier:'Business',price:'$750',category:'professional',features:spanish?['Servicios legales claros','Integración de citas','Optimización SEO']:['Clear service presentation','Booking integration','SEO optimization']}
+    {name:'Maris & Coast Realty',type:spanish?'Bienes raíces de lujo':'Luxury Real Estate',image:'/images/luxury-real-estate-hero.webp',href:'/luxury-coastal-realty/',tier:'Premium',price:'$1,100',category:'professional',features:spanish?['Galería de propiedades','Solicitudes de consulta','Diseño premium adaptable']:['Property gallery','Consultation requests','Premium responsive design']},
+    {name:'Hometown Keys Realty',type:spanish?'Agente residencial':'Residential Realtor',image:'/images/local-realtor-hero.webp',href:'/hometown-realty/',tier:'Starter',price:'$400',category:'professional',features:spanish?['Servicios para compradores y vendedores','Perfil de Negocio de Google','Diseño adaptable']:['Buyer and seller services','Google Business setup','Responsive design']},
+    {name:'Sterling Counsel',type:spanish?'Bufete corporativo':'Corporate Law Firm',image:'/images/corporate-law-hero.webp',href:'/sterling-counsel/',tier:'Premium',price:'$890 + $50/mo',category:'professional',features:spanish?['Áreas de práctica','Formularios de consulta','Correo empresarial y mantenimiento']:['Practice areas','Consultation forms','Business email and maintenance']},
+    {name:'Harbor Family Law',type:spanish?'Derecho familiar':'Family Law Office',image:'/images/family-law-hero.webp',href:'/harbor-family-law/',tier:'Business',price:'$750',category:'professional',features:spanish?['Servicios legales claros','Integración de citas','Optimización SEO']:['Clear service presentation','Booking integration','SEO optimization']}
   ];
 
   const templateGrid = document.querySelector('.template-grid');
@@ -46,7 +46,7 @@
     if (hero) {
       const section = document.createElement('section');
       section.className = 'founder-preview';
-      section.innerHTML = `<div class="founder-preview-inner"><img src="/images/braion-moreland.jpg" alt="Braion Moreland"><div><p class="founder-preview-kicker">${spanish?'La persona detrás de BAM\'s':'THE PERSON BEHIND BAM\'S'}</p><h2>${spanish?'Conoce a Braion Moreland':'Meet Braion Moreland'}</h2><p>${spanish?'Fundador y diseñador web dedicado a crear sitios profesionales y a construir un futuro significativo para su familia.':'Founder and web designer dedicated to creating professional websites and building something meaningful for his family\'s future.'}</p><a href="${spanish?'/es/about':'/about'}">${spanish?'Conoce mi historia':'Read My Story'} →</a></div></div>`;
+      section.innerHTML = `<div class="founder-preview-inner"><img src="/images/braion-moreland.webp" alt="Braion Moreland"><div><p class="founder-preview-kicker">${spanish?'La persona detrás de BAM\'s':'THE PERSON BEHIND BAM\'S'}</p><h2>${spanish?'Conoce a Braion Moreland':'Meet Braion Moreland'}</h2><p>${spanish?'Fundador y diseñador web dedicado a crear sitios profesionales y a construir un futuro significativo para su familia.':'Founder and web designer dedicated to creating professional websites and building something meaningful for his family\'s future.'}</p><a href="${spanish?'/es/about':'/about'}">${spanish?'Conoce mi historia':'Read My Story'} →</a></div></div>`;
       hero.insertAdjacentElement('afterend', section);
     }
   }
