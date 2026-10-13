@@ -1,0 +1,26 @@
+/* One public website shell, independent of page-specific stylesheets. */
+html body .site-header{position:sticky!important;top:0!important;height:74px!important;min-height:74px!important;padding:0!important;z-index:5000!important;background:#090909!important;border-bottom:1px solid rgba(212,166,55,.25)!important;font-family:Arial,Helvetica,sans-serif!important}
+html body .header-container{box-sizing:border-box;display:flex!important;align-items:center!important;width:100%!important;max-width:1500px!important;height:74px!important;margin:0 auto!important;padding:0 clamp(20px,3vw,48px)!important;gap:0!important}
+html body .site-brand{display:flex!important;flex-shrink:0!important;text-decoration:none!important}
+html body .brand-text{display:flex!important;flex-direction:column!important;line-height:1!important}
+html body .brand-text strong{font:900 1.55rem/1 Arial,Helvetica,sans-serif!important;letter-spacing:-.025em!important;color:#f0c45a!important}
+html body .brand-text small{margin-top:5px!important;font:700 .49rem/1 Arial,Helvetica,sans-serif!important;letter-spacing:.34em!important;color:#fff!important}
+html body .desktop-navigation{align-items:center!important;margin-left:auto!important;gap:clamp(16px,1.5vw,26px)!important}
+html body .desktop-navigation>a,html body .desktop-navigation .nav-more>summary{font-family:Arial,Helvetica,sans-serif!important;font-size:.72rem!important;font-weight:800!important;letter-spacing:.055em!important;text-transform:uppercase!important}
+html body .desktop-language{display:flex!important;align-items:center!important;margin-left:18px!important;gap:8px!important;font-family:Arial,Helvetica,sans-serif!important}
+html body .home-footer{background:#090909!important;color:#bcb6aa!important;font:400 1rem/1.7 Arial,Helvetica,sans-serif!important;border-top:1px solid rgba(212,166,55,.25)!important}
+html body .home-footer .footer-grid{box-sizing:border-box;width:100%!important;max-width:1280px!important;margin:0 auto!important;padding:48px clamp(20px,4vw,48px) 32px!important;display:grid!important;grid-template-columns:1.35fr repeat(3,minmax(0,1fr))!important;gap:28px!important}
+html body .home-footer h3,html body .home-footer h4{font-family:Arial,Helvetica,sans-serif!important;line-height:1.4!important;margin:0 0 14px!important;color:#f4efe5!important}
+html body .home-footer h3{color:#f0c45a!important}
+html body .home-footer a{overflow-wrap:anywhere;color:#bcb6aa!important}
+html body .home-footer a:hover,html body .home-footer a:focus-visible{color:#f0c45a!important}
+html[data-theme=light] body .site-header{background:#fff8e8!important;border-color:rgba(118,83,0,.25)!important}
+html[data-theme=light] body .brand-text strong{color:#765300!important}
+html[data-theme=light] body .brand-text small{color:#20201d!important}
+html[data-theme=light] body .home-footer{background:#f3ead8!important;color:#514d44!important;border-color:rgba(118,83,0,.25)!important}
+html[data-theme=light] body .home-footer h3,html[data-theme=light] body .home-footer h4{color:#20201d!important}
+html[data-theme=light] body .home-footer a{color:#514d44!important}
+@media(min-width:1101px){html body .desktop-navigation{display:flex!important}html body .menu-toggle{display:none!important}}
+@media(max-width:1100px){html body .desktop-navigation,html body .desktop-language{display:none!important}html body .menu-toggle{display:flex!important;margin-left:auto!important}}
+@media(max-width:900px){html body .home-footer .footer-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:650px){html body .brand-text strong{font-size:1.35rem!important}html body .home-footer .footer-grid{grid-template-columns:1fr!important;gap:24px!important}}
