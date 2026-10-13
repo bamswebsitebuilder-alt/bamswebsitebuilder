@@ -61,7 +61,7 @@
 .templates-page .template-actions > :focus-visible { outline:3px solid #f4c15d; outline-offset:3px; }
 html[data-theme=light] .templates-page .template-actions > .template-demo,
 html[data-theme=light] .templates-page .template-actions > .template-personal-preview { background:#fffaf0; border-color:#a58235; color:#654800; }
-html[data-theme=light] .templates-page .template-actions > .template-select { background:#d6ad50; border-color:#a58235; color:#111; }
+html[data-theme=light] .templates-page .template-actions > .template-select { background:#d6ad50; border-color:#a58235; color:#111!important; }
 html[data-theme=light] .templates-page .template-actions > :hover { background:#f3e4bd; }
 html[data-theme=light] .templates-page .template-actions > .template-select:hover { background:#ecc771; }
 html[data-theme=light] .templates-page .template-actions > :focus-visible { outline-color:#765300; }
