@@ -153,7 +153,8 @@
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'template-personal-preview';
-    button.textContent = t('Preview with my business', 'Ver con mi negocio');
+    button.textContent = t('Business Preview', 'Vista de mi negocio');
+    button.setAttribute('aria-label', t(`Preview ${designs[index].name} with my business`, `Ver ${designs[index].name} con mi negocio`));
     button.addEventListener('click', () => open(index));
     card.querySelector('.template-actions').append(button);
   });

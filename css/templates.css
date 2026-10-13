@@ -16,3 +16,55 @@
 .template-select{position:relative;z-index:2;cursor:pointer;touch-action:manipulation}
 .template-select.is-loading{opacity:.82;pointer-events:none}
 .template-select.is-loading::after{content:" …";letter-spacing:.08em}
+
+/* A consistent action area for every template, including generated previews. */
+.templates-page .template-card { display:flex; flex-direction:column; }
+.templates-page .template-card[hidden] { display:none; }
+.templates-page .template-card-body { display:flex; flex-direction:column; flex:1; min-width:0; }
+.templates-page .template-card-body > ul { flex:1; }
+.templates-page .template-actions {
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:10px;
+  margin-top:auto;
+}
+.templates-page .template-actions > a,
+.templates-page .template-actions > button {
+  box-sizing:border-box;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  min-width:0;
+  min-height:48px;
+  margin:0;
+  padding:12px 16px;
+  border:1px solid rgba(214,173,80,.45);
+  border-radius:10px;
+  font-family:inherit;
+  font-size:.875rem;
+  font-weight:700;
+  line-height:1.4;
+  letter-spacing:0;
+  text-align:center;
+  text-decoration:none;
+  text-transform:none;
+  cursor:pointer;
+  touch-action:manipulation;
+  transition:background .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+.templates-page .template-actions > .template-demo { background:rgba(255,255,255,.035); color:#fff; }
+.templates-page .template-actions > .template-select { background:#d6ad50; border-color:#d6ad50; color:#111; }
+.templates-page .template-actions > .template-personal-preview { background:transparent; color:#f4c15d; grid-column:1 / -1; }
+.templates-page .template-actions > :hover { transform:none; border-color:#f4c15d; background:rgba(214,173,80,.12); }
+.templates-page .template-actions > .template-select:hover { background:#ecc771; color:#111; box-shadow:0 4px 14px rgba(214,173,80,.16); }
+.templates-page .template-actions > :focus-visible { outline:3px solid #f4c15d; outline-offset:3px; }
+html[data-theme=light] .templates-page .template-actions > .template-demo,
+html[data-theme=light] .templates-page .template-actions > .template-personal-preview { background:#fffaf0; border-color:#a58235; color:#654800; }
+html[data-theme=light] .templates-page .template-actions > .template-select { background:#d6ad50; border-color:#a58235; color:#111; }
+html[data-theme=light] .templates-page .template-actions > :hover { background:#f3e4bd; }
+html[data-theme=light] .templates-page .template-actions > .template-select:hover { background:#ecc771; }
+html[data-theme=light] .templates-page .template-actions > :focus-visible { outline-color:#765300; }
+@media(prefers-reduced-motion:reduce) {
+  .templates-page .template-actions > a,.templates-page .template-actions > button { transition:none; }
+}

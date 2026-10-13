@@ -6,8 +6,8 @@
 .preview-url-row input { flex:1; min-width:180px; }
 .personal-preview-intro input,.preview-editor input,.preview-editor textarea,.preview-editor select { width:100%; padding:12px; min-height:48px; background:#202020; color:#fff; border:1px solid #777; border-radius:8px; font:inherit; }
 .personal-preview-intro button,.personal-preview-dialog button,.preview-quote,.template-personal-preview { min-height:48px; padding:12px 18px; border:1px solid #d6ad50; border-radius:8px; background:#d6ad50; color:#111; font:inherit; font-weight:700; cursor:pointer; text-decoration:none; }
-.template-personal-preview { flex:1 0 100%; background:transparent; color:#f4c15d; }
-.template-actions { flex-wrap:wrap; }
+.template-personal-preview { grid-column:1 / -1; background:transparent; color:#f4c15d; }
+
 .personal-preview-dialog { width:calc(100% - 24px); max-width:1240px; max-height:94dvh; overflow:auto; padding:24px; border:1px solid #d6ad50; border-radius:16px; background:#111; color:#fff; }
 .personal-preview-dialog::backdrop { background:#000b; }
 .preview-dialog-heading { display:flex; align-items:center; justify-content:space-between; gap:16px; }

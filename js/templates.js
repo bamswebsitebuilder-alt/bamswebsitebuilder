@@ -4,7 +4,7 @@
 
 /* Split the AFTERHOURS clothing demo into a base option and a premium option. */
 const spanishTemplates = document.documentElement.lang.toLowerCase().startsWith('es');
-const designLabel = spanishTemplates ? 'Elegir este diseño' : 'Choose this design';
+const designLabel = spanishTemplates ? 'Elegir diseño' : 'Choose Design';
 const quotePath = spanishTemplates ? '/es/contact' : '/contact';
 const localizeTemplateMarkup = markup => Object.entries({"New Demo": "Nueva demostración", "Clothing Brand / Streetwear": "Marca de ropa / Streetwear", "Mobile-friendly clothing brand layout": "Diseño de ropa adaptable a móviles", "Collection showcase": "Presentación de colección", "Product detail previews": "Vista previa de productos", "Brand story section": "Historia de la marca", "Base Template": "Diseño inicial", "starting price": "precio inicial", "Live Demo": "Ver demostración", "Clothing Brand / Premium Store": "Marca de ropa / Tienda premium", "Up to 10 website pages": "Hasta 10 páginas web", "Full online store experience": "Experiencia de tienda en línea", "Product pages and shopping cart": "Páginas de productos y carrito", "Advanced contact forms": "Formularios avanzados de contacto", "Booking integration": "Integración de reservas", "Search engine optimization": "Optimización para buscadores", "Premium Template": "Diseño premium"}).reduce((text, [en, es]) => text.replaceAll(en, es), markup);
 const afterhoursCard = document.querySelector('#afterhours-template');
@@ -29,7 +29,7 @@ if (afterhoursCard) {
         <small>${spanishTemplates ? 'precio inicial' : 'starting price'}</small>
       </p>
       <div class="template-actions">
-        <a class="template-demo" href="/afterhours/" target="_blank" rel="noopener">${spanishTemplates ? 'Ver demostración' : 'Live Demo'}</a>
+        <a class="template-demo" href="/afterhours/" target="_blank" rel="noopener">${spanishTemplates ? 'Ver demo' : 'View Demo'}</a>
         <a class="template-select" data-package="starter" data-template="AFTERHOURS Starter" href="${quotePath}?template=AFTERHOURS%20Starter&amp;package=starter">${designLabel}</a>
       </div>
     </div>`;
@@ -59,13 +59,27 @@ if (afterhoursCard) {
         <small>${spanishTemplates ? 'precio inicial' : 'starting price'}</small>
       </p>
       <div class="template-actions">
-        <a class="template-demo" href="/afterhours-premium/" target="_blank" rel="noopener">${spanishTemplates ? 'Ver demostración' : 'Live Demo'}</a>
+        <a class="template-demo" href="/afterhours-premium/" target="_blank" rel="noopener">${spanishTemplates ? 'Ver demo' : 'View Demo'}</a>
         <a class="template-select" data-package="premium" data-template="AFTERHOURS Premium" href="${quotePath}?template=AFTERHOURS%20Premium&amp;package=premium">${designLabel}</a>
       </div>
     </div>`;
   if (spanishTemplates) premiumCard.innerHTML = localizeTemplateMarkup(premiumCard.innerHTML);
   afterhoursCard.insertAdjacentElement('afterend', premiumCard);
 }
+
+document.querySelectorAll('.template-card').forEach((card) => {
+  const name = card.querySelector('h2')?.textContent.trim() || '';
+  const demo = card.querySelector('.template-demo');
+  const choose = card.querySelector('.template-select');
+  if (demo) {
+    demo.textContent = spanishTemplates ? 'Ver demo' : 'View Demo';
+    demo.setAttribute('aria-label', spanishTemplates ? `Ver demo de ${name} (nueva pestaña)` : `View ${name} demo (new tab)`);
+  }
+  if (choose) {
+    choose.textContent = designLabel;
+    choose.setAttribute('aria-label', spanishTemplates ? `Elegir diseño ${name}` : `Choose ${name} design`);
+  }
+});
 
 const filterButtons = document.querySelectorAll('.template-filter');
 filterButtons.forEach((button) => {
