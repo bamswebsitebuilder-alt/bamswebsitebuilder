@@ -180,7 +180,7 @@
         link.innerHTML = `${iconMarkup('about')}<span>${aboutLabel}</span>`;
         home?.insertAdjacentElement('afterend', link);
       }
-      const iconNames = {home:'home',about:'about',services:'services',prices:'prices',subscriptions:'plans',templates:'templates',portfolio:'portfolio',reviews:'reviews',contact:'contact',login:'login'};
+      const iconNames = {home:'home',about:'about',services:'services',prices:'prices',subscriptions:'plans',templates:'templates',portfolio:'portfolio',reviews:'reviews',contact:'contact',login:'login','website-tips':'services','website-review':'contact','project-stories':'portfolio'};
       Object.entries(iconNames).forEach(([page, icon]) => {
         const link = nav.querySelector(`[data-page="${page}"]`);
         const current = link?.querySelector('.mobile-link-icon');

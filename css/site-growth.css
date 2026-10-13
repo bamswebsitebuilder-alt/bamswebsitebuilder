@@ -35,3 +35,4 @@ html[data-theme=light] .growth-kicker,html[data-theme=light] .quote-field-help a
 html[data-theme=light] .growth-review-form input,html[data-theme=light] .growth-review-form textarea{background:#fffdf8;color:#20201d;border-color:#a38a51}
 @media(max-width:900px){.growth-grid-three{grid-template-columns:1fr}.growth-story-gallery{grid-template-columns:1fr}}
 @media(max-width:650px){.growth-grid{grid-template-columns:1fr}.growth-card{padding:22px}.growth-review-form .growth-button{width:100%;justify-self:stretch}.design-choice{padding:12px 16px}}
+html[data-theme=light] .nav-more:has(a[aria-current=page])>summary{color:#765300!important}
