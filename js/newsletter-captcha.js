@@ -65,12 +65,46 @@
       let tokenTimeout;
       try {
         const clientId = await showCaptcha();
-        const token = await Promise.race([
-          window.grecaptcha.execute(clientId, { action: 'submit' }),
-          new Promise((resolve, reject) => { tokenTimeout = setTimeout(() => reject(new Error('Token timeout')), 15000); })
-        ]);
-        clearTimeout(tokenTimeout);
-        if (!token) throw new Error('Missing CAPTCHA token');
+        async function freshToken(action) {
+          const value = await Promise.race([
+            window.grecaptcha.execute(clientId, { action }),
+            new Promise((resolve, reject) => { tokenTimeout = setTimeout(() => reject(new Error('Token timeout')), 15000); })
+          ]);
+          clearTimeout(tokenTimeout);
+          if (!value) throw new Error('Missing CAPTCHA token');
+          return value;
+        }
+        // Enable this attribute only after the server configuration is verified.
+        const endpoint = form.dataset.subscriptionCheck;
+        if (endpoint) {
+          const checkToken = await freshToken('newsletter_status');
+          const controller = new AbortController();
+          const checkTimeout = setTimeout(() => controller.abort(), 25000);
+          let response;
+          try {
+            response = await fetch(endpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email: form.querySelector('[name="EMAIL"]').value.trim(), token: checkToken }),
+              signal: controller.signal
+            });
+          } finally { clearTimeout(checkTimeout); }
+          if (!response.ok) throw new Error('Subscription check unavailable');
+          const result = await response.json();
+          if (typeof result.subscribed !== 'boolean') throw new Error('Invalid subscription status');
+          if (result.subscribed) {
+            status.textContent = spanish
+              ? 'Este correo ya está suscrito a nuestras novedades y promociones.'
+              : 'This email is already subscribed to our updates and promotions.';
+            status.hidden = false;
+            button.disabled = false;
+            button.textContent = originalText;
+            delete form.dataset.captchaPending;
+            return;
+          }
+        }
+        // Google tokens are single-use: obtain a separate token for Brevo.
+        const token = await freshToken('submit');
         let input = form.querySelector('[name="g-recaptcha-response"]');
         if (!input) {
           input = document.createElement('input');

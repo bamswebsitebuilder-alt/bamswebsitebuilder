@@ -22,7 +22,7 @@ async function listId() {
   const configured = process.env.BREVO_NEWSLETTER_LIST_ID;
   if (configured && /^\d+$/.test(configured) && Number(configured) > 0) return Number(configured);
   const matches = [];
-  for (let offset = 0; offset < 5000; offset += 50) {
+  for (let offset = 0; offset < 500; offset += 50) {
     const page = await brevo('/contacts/lists?limit=50&offset=' + offset);
     if (!page || !Array.isArray(page.lists)) throw new Error('Invalid lists response');
     matches.push(...page.lists.filter(list => normalize(list.name || '') === targetListName));
@@ -40,13 +40,18 @@ export default async function handler(req, res) {
   const origin = req.headers.origin;
   if (!origins.has(origin)) return res.status(403).json({ error: 'origin_not_allowed' });
   res.setHeader('Access-Control-Allow-Origin', origin);
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(204).end();
-  if (req.method !== 'POST') return res.status(405).json({ error: 'method_not_allowed' });
   if (!process.env.BREVO_API_KEY || !process.env.RECAPTCHA_SECRET_KEY) {
     return res.status(503).json({ error: 'temporarily_unavailable' });
   }
+  // Readiness exposes no subscriber information and checks only list configuration.
+  if (req.method === 'GET') {
+    try { await listId(); return res.status(200).json({ ready: true }); }
+    catch { return res.status(503).json({ ready: false }); }
+  }
+  if (req.method !== 'POST') return res.status(405).json({ error: 'method_not_allowed' });
   if (!/^application\/json(?:;|$)/i.test(req.headers['content-type'] || '')) {
     return res.status(415).json({ error: 'invalid_content_type' });
   }
