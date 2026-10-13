@@ -21,7 +21,7 @@ html[data-theme=light] .nav-more>summary{color:#20201d}html[data-theme=light] .n
 .polished-home .home-section{padding:64px clamp(20px,5vw,72px)!important}
 .polished-home .home-title{font-size:clamp(1.9rem,3.2vw,3rem)!important;line-height:1.12!important;letter-spacing:-.025em!important;text-transform:none!important}
 .polished-home .home-section-heading{margin-bottom:28px!important}
-.polished-home .portfolio-preview-three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px!important}
+.polished-home .portfolio-preview-three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:20px!important}
 .polished-home .portfolio-home-card{padding:0!important;border:1px solid rgba(212,166,55,.22)!important;border-radius:12px!important;overflow:hidden}
 .polished-home .portfolio-home-visual{height:auto!important;aspect-ratio:1265/712;overflow:hidden}
 .polished-home .portfolio-home-visual img{display:block;width:100%;height:100%;object-fit:contain;object-position:top;filter:none!important;transform:none!important}
@@ -39,8 +39,8 @@ html[data-theme=light] .nav-more>summary{color:#20201d}html[data-theme=light] .n
 .inquiry-preferences .form-group{margin-bottom:20px}.inquiry-preferences .subscription-contact-box{margin:15px 0 20px}
 .contact-form>.quote-next-steps{margin-top:30px}.contact-form>.inquiry-intro{grid-column:1/-1}
 html[data-theme=light] .inquiry-intro,html[data-theme=light] .inquiry-preferences>p{color:#514d44}html[data-theme=light] .inquiry-preferences>summary,html[data-theme=light] .polished-home .project-status-label{color:#765300}
-@media(max-width:1100px){.polished-home .hero>.hero-content{width:100%!important}.polished-home .hero{min-height:500px!important}.polished-home .portfolio-preview-three{grid-template-columns:1fr 1fr}.polished-home .portfolio-home-card:first-child{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;align-items:center}.polished-home .portfolio-home-card:first-child .portfolio-home-visual{height:100%!important;aspect-ratio:auto}}
-@media(max-width:650px){.polished-home .hero{padding:44px 20px!important;min-height:0!important}.polished-home .hero h1{font-size:2.6rem!important}.polished-home .hero .hero-trust{display:flex!important;flex-wrap:wrap;gap:12px!important}.polished-home .home-section{padding:42px 20px!important}.polished-home .portfolio-preview-three,.polished-home .portfolio-home-card:first-child{display:grid;grid-template-columns:1fr}.polished-home .portfolio-home-card:first-child .portfolio-home-visual{height:auto!important;aspect-ratio:1265/712}.polished-home .founder-preview-inner{grid-template-columns:1fr!important}.polished-home .founder-preview-inner>img{height:280px!important}.polished-home .founder-preview-copy{padding:28px 20px!important}.inquiry-preferences{padding:0 15px}}
+@media(max-width:1100px){.polished-home .hero>.hero-content{width:100%!important}.polished-home .hero{min-height:500px!important}.polished-home .portfolio-preview-three{grid-template-columns:1fr 1fr!important}.polished-home .portfolio-home-card:first-child{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;align-items:center}.polished-home .portfolio-home-card:first-child .portfolio-home-visual{height:100%!important;aspect-ratio:auto}}
+@media(max-width:650px){.polished-home .hero{padding:44px 20px!important;min-height:0!important}.polished-home .hero h1{font-size:2.6rem!important}.polished-home .hero .hero-trust{display:flex!important;flex-wrap:wrap;gap:12px!important}.polished-home .home-section{padding:42px 20px!important}.polished-home .portfolio-preview-three,.polished-home .portfolio-home-card:first-child{display:grid;grid-template-columns:1fr!important}.polished-home .portfolio-home-card:first-child .portfolio-home-visual{height:auto!important;aspect-ratio:1265/712}.polished-home .founder-preview-inner{grid-template-columns:1fr!important}.polished-home .founder-preview-inner>img{height:280px!important}.polished-home .founder-preview-copy{padding:28px 20px!important}.inquiry-preferences{padding:0 15px}}
 
 html body .desktop-navigation .nav-more-links a{justify-content:flex-start!important;text-align:left!important}
 .polished-home .hero h1{overflow-wrap:normal!important;word-break:normal!important;hyphens:none!important}
@@ -74,3 +74,6 @@ html[data-theme=light] .plan-essentials>p,html[data-theme=light] .plan-essential
 html[data-theme=light] .plan-essentials-grid article{background:#fffdf8;border-color:rgba(118,83,0,.3)}
 html[data-theme=light] .plan-essentials-grid h3,html[data-theme=light] .plan-essentials .home-button-secondary{color:#765300}
 @media(max-width:650px){.plan-essentials{padding:36px 20px}.plan-essentials-grid{grid-template-columns:1fr}.portfolio-quote-band{flex-direction:column;align-items:stretch;padding:22px}.home-review-widget iframe{height:560px}.plan-essentials .home-actions>a{width:100%}.polished-home .hero-buttons{flex-wrap:wrap}.polished-home .hero .btn{letter-spacing:.05em!important;padding:12px 20px!important}}
+
+.polished-home .portfolio-home-visual{padding:0!important}
+.polished-home .portfolio-home-visual img{max-height:none!important}
