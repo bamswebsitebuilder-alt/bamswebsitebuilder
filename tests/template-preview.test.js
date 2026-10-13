@@ -90,3 +90,11 @@ test('finds a repeated brand color in styles when theme-color is a neutral backg
   const data = extractDetails('<title>Acme</title><meta name="theme-color" content="#090909">', 'https://example.com/', '.button{background:#d4af37}.headline{color:#d4af37}.body{color:#fff}');
   assert.equal(data.color, '#d4af37');
 });
+
+
+test('imports CSS background photos relative to the stylesheet and excludes service section slogans', () => {
+  const data = extractDetails(`<title>Roofing</title><section id="services"><h2>Everything customers need</h2><h3>Roof Repair</h3></section><section style="background-image:url('/work.jpg')"></section>`, 'https://example.com/business/', `.hero{background-image:url('../images/team.webp')}`, 'https://example.com/business/css/style.css');
+  assert.deepEqual(data.services, ['Roof Repair']);
+  assert.ok(data.images.includes('https://example.com/work.jpg'));
+  assert.ok(data.images.includes('https://example.com/business/images/team.webp'));
+});

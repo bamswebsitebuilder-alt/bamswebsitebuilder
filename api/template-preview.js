@@ -81,7 +81,7 @@ function attributes(tag) {
   return attrs;
 }
 
-export function extractDetails(html, sourceURL, css = '') {
+export function extractDetails(html, sourceURL, css = '', cssSourceURL = sourceURL) {
   const metadata = {};
   for (const tag of html.match(/<meta\b(?:[^>"']|"[^"]*"|'[^']*')*>/gi) || []) {
     const attrs = attributes(tag);
@@ -95,9 +95,9 @@ export function extractDetails(html, sourceURL, css = '') {
     description: plain(metadata['og:description'] || metadata.description, 300),
   };
   if (!sourceURL) return details;
-  const asset = value => {
+  const asset = (value, base = sourceURL) => {
     if (!value) return '';
-    try { return websiteURL(new URL(value.replaceAll('&amp;', '&'), sourceURL).href).href; } catch { return ''; }
+    try { return websiteURL(new URL(value.replaceAll('&amp;', '&'), base).href).href; } catch { return ''; }
   };
   const imgs = (clean.match(/<img\b(?:[^>"']|"[^"]*"|'[^']*')*>/gi) || []).map(attributes);
   const logo = imgs.find(img => /logo|brand/i.test(`${img.alt || ''} ${img.class || ''} ${img.id || ''} ${img.src || ''}`));
@@ -109,6 +109,12 @@ export function extractDetails(html, sourceURL, css = '') {
   }
   const image = asset(metadata['og:image'] || metadata['twitter:image']);
   const photos = [...new Set(imgs.filter(img => !/logo|icon|badge|avatar|payment/i.test(`${img.alt || ''} ${img.class || ''} ${img.src || ''}`)).map(img => asset(img.src || img['data-src'])).filter(Boolean))].slice(0, 8);
+  for (const [text, base] of [[html, sourceURL], [css, cssSourceURL]]) {
+    for (const match of text.matchAll(/url\(\s*["']?([^\s"')]+)["']?\s*\)/gi)) {
+      const photo = asset(match[1], base);
+      if (photo && !/logo|icon|favicon|badge/i.test(new URL(photo).pathname) && (/\.(jpe?g|png|webp|avif|gif)(?:\?|$)/i.test(photo) || /images\.unsplash\.com\/photo-/i.test(photo))) photos.push(photo);
+    }
+  }
   if (image && image !== details.logo && !/logo|favicon/i.test(new URL(image).pathname)) photos.unshift(image);
   details.images = [...new Set(photos)].slice(0, 8);
   if (details.images.length) details.image = details.images[0];
@@ -126,7 +132,9 @@ export function extractDetails(html, sourceURL, css = '') {
   if (/^#[0-9a-f]{3}$/i.test(color)) details.color = '#' + [...color.slice(1)].map(c => c + c).join('');
   else if (/^#[0-9a-f]{6}$/i.test(color)) details.color = color;
   const serviceSection = clean.match(/<section\b[^>]*(?:id|class)=["'][^"']*services?[^"']*["'][^>]*>([\s\S]*?)<\/section>/i)?.[1];
-  const services = [...(serviceSection || '').matchAll(/<h[23]\b[^>]*>([\s\S]*?)<\/h[23]>/gi)].map(match => plain(match[1], 100)).filter(text => text && !/^(our |all |nuestros |todos )?services?$/i.test(text));
+  const serviceMarkup = serviceSection || '';
+  const servicePattern = /<h3\b/i.test(serviceMarkup) ? /<h3\b[^>]*>([\s\S]*?)<\/h3>/gi : /<h2\b[^>]*>([\s\S]*?)<\/h2>/gi;
+  const services = [...serviceMarkup.matchAll(servicePattern)].map(match => plain(match[1], 100)).filter(text => text && !/^(our |all |nuestros |todos )?services?$/i.test(text));
   details.services = [...new Set(services)].slice(0, 8);
   const email = clean.match(/href=["']mailto:([^?"']+)/i)?.[1];
   const phone = clean.match(/href=["']tel:([^"']+)/i)?.[1];
@@ -155,6 +163,7 @@ export default async function handler(req, res) {
     const url = websiteURL(body?.url);
     const page = await readWebsite(url, 0, 'html', true);
     let css = '';
+    let cssSourceURL = page.url;
     const sheet = (page.html.match(/<link\b(?:[^>"']|"[^"]*"|'[^']*')*>/gi) || []).map(attributes).find(link => {
       if (!/stylesheet/i.test(link.rel || '') || !link.href) return false;
       try { return websiteURL(new URL(link.href.replaceAll('&amp;', '&'), page.url).href).origin === new URL(page.url).origin; } catch { return false; }
@@ -162,10 +171,10 @@ export default async function handler(req, res) {
     if (sheet) {
       try {
         const cssURL = websiteURL(new URL(sheet.href.replaceAll('&amp;', '&'), page.url).href);
-        if (cssURL.origin === new URL(page.url).origin) css = await readWebsite(cssURL, 0, 'css');
+        if (cssURL.origin === new URL(page.url).origin) { css = await readWebsite(cssURL, 0, 'css'); cssSourceURL = cssURL.href; }
       } catch {}
     }
-    const details = extractDetails(page.html, page.url, css);
+    const details = extractDetails(page.html, page.url, css, cssSourceURL);
     if (!details.name) throw new Error('No business details found');
     return res.status(200).json(details);
   } catch {
