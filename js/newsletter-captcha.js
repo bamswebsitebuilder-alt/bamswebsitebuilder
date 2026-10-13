@@ -49,8 +49,8 @@
     }
     function showError() {
       status.textContent = spanish
-        ? 'No se pudo cargar la verificación. Inténtalo de nuevo o permite reCAPTCHA en tu navegador.'
-        : 'Verification could not load. Please try again or allow reCAPTCHA in your browser.';
+        ? 'No se pudo completar la verificación o comprobar la suscripción. Inténtalo de nuevo.'
+        : 'Verification or the subscription check could not complete. Please try again.';
       status.hidden = false;
     }
     // Load the badge before submission; generate the short-lived token only on submit.
