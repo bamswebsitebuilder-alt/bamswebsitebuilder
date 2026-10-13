@@ -32,3 +32,16 @@ test('handler refuses non-POST requests and returns a manual-entry fallback', as
   assert.equal(post.code, 422);
   assert.match(post.body.error, /enter your business details/);
 });
+
+test('allows the live GitHub Pages origin to preflight the importer and rejects other origins', async () => {
+  const response = () => ({ headers: {}, code: 0, setHeader(key, value) { this.headers[key] = value; }, status(code) { this.code = code; return this; }, json(body) { this.body = body; return this; }, end() { return this; } });
+  const allowed = response();
+  await handler({ method: 'OPTIONS', headers: { origin: 'https://www.bamswebsitebuilder.com' } }, allowed);
+  assert.equal(allowed.code, 204);
+  assert.equal(allowed.headers['Access-Control-Allow-Origin'], 'https://www.bamswebsitebuilder.com');
+  assert.equal(allowed.headers['Access-Control-Allow-Headers'], 'Content-Type');
+  const rejected = response();
+  await handler({ method: 'OPTIONS', headers: { origin: 'https://unrelated.example' } }, rejected);
+  assert.equal(rejected.code, 403);
+  assert.equal(rejected.headers['Access-Control-Allow-Origin'], undefined);
+});

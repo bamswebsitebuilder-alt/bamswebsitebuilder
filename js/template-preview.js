@@ -3,6 +3,9 @@
   'use strict';
   const es = document.documentElement.lang.startsWith('es');
   const t = (en, spanish) => es ? spanish : en;
+  // The public domain uses GitHub Pages; server functions run on the linked Vercel project.
+  const importEndpoint = ['www.bamswebsitebuilder.com', 'bamswebsitebuilder.com', 'bamswebsitebuilder-alt.github.io'].includes(location.hostname)
+    ? 'https://bamswebsitebuilder.vercel.app/api/template-preview' : '/api/template-preview';
   const cards = [...document.querySelectorAll('.template-card')];
   const designs = cards.map(card => ({
     name: card.querySelector('h2')?.textContent.trim(),
@@ -114,7 +117,7 @@
     descriptionInput.value = '';
     status.textContent = t('Reading your business details…', 'Leyendo los datos de tu negocio…');
     try {
-      const response = await fetch('/api/template-preview', {
+      const response = await fetch(importEndpoint, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: urlInput.value.trim() }), signal: controller.signal,
       });

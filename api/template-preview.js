@@ -94,6 +94,18 @@ export function extractDetails(html) {
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
+  res.setHeader('Vary', 'Origin');
+  const origin = req.headers?.origin;
+  if (origin) {
+    if (!['https://www.bamswebsitebuilder.com', 'https://bamswebsitebuilder.com',
+      'https://bamswebsitebuilder-alt.github.io', 'https://bamswebsitebuilder.vercel.app'].includes(origin)) {
+      return res.status(403).json({ error: 'Origin not allowed' });
+    }
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  }
+  if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') { res.setHeader('Allow', 'POST'); return res.status(405).json({ error: 'POST required' }); }
   try {
     const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
