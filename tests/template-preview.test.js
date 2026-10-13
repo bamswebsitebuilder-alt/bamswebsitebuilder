@@ -45,3 +45,15 @@ test('allows the live GitHub Pages origin to preflight the importer and rejects 
   assert.equal(rejected.code, 403);
   assert.equal(rejected.headers['Access-Control-Allow-Origin'], undefined);
 });
+
+
+test('imports public relative images and valid brand colors without inventing missing images', () => {
+  assert.deepEqual(extractDetails('<title>Acme</title><meta property="og:image" content="/photos/team.jpg"><meta name="theme-color" content="#1256ab">', 'https://example.com/'), {
+    name: 'Acme', description: '', image: 'https://example.com/photos/team.jpg', color: '#1256ab'
+  });
+  for (const image of ['javascript:alert(1)', 'http://127.0.0.1/photo.jpg', 'http://169.254.169.254/']) {
+    assert.equal(extractDetails(`<title>Acme</title><meta property="og:image" content="${image}">`, 'https://example.com/').image, undefined);
+  }
+  assert.equal(extractDetails('<title>Acme</title>', 'https://example.com/').image, undefined);
+  assert.equal(extractDetails('<meta name="theme-color" content="red;display:none">', 'https://example.com/').color, undefined);
+});

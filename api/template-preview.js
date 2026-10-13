@@ -75,7 +75,7 @@ function plain(value, limit) {
     .replace(/\s+/g, ' ').trim().slice(0, limit);
 }
 
-export function extractDetails(html) {
+export function extractDetails(html, sourceURL) {
   const metadata = {};
   for (const tag of html.match(/<meta\b(?:[^>"']|"[^"]*"|'[^']*')*>/gi) || []) {
     const attrs = {};
@@ -86,10 +86,17 @@ export function extractDetails(html) {
     if (attrs.content) metadata[key] = attrs.content;
   }
   const title = html.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1];
-  return {
+  const details = {
     name: plain(metadata['og:site_name'] || metadata['og:title'] || title, 100),
     description: plain(metadata['og:description'] || metadata.description, 300),
   };
+  if (sourceURL) {
+    const image = metadata['og:image'] || metadata['twitter:image'];
+    if (image) { try { details.image = websiteURL(new URL(image, sourceURL).href).href; } catch {} }
+    const color = metadata['theme-color'] || '';
+    if (/^#[0-9a-f]{6}$/i.test(color)) details.color = color;
+  }
+  return details;
 }
 
 export default async function handler(req, res) {
@@ -110,7 +117,7 @@ export default async function handler(req, res) {
   try {
     const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
     const url = websiteURL(body?.url);
-    const details = extractDetails(await readWebsite(url));
+    const details = extractDetails(await readWebsite(url), url);
     if (!details.name) throw new Error('No business details found');
     return res.status(200).json(details);
   } catch {
