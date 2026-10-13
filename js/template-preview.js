@@ -1,3 +1,4 @@
+import { previewDestination, sourceWebsite } from './preview-navigation.js?v=20261013-clickable-1';
 /* Optional, temporary personalization of the existing demo layouts. */
 (() => {
   'use strict';
@@ -30,7 +31,7 @@
   dialog.setAttribute('aria-labelledby', 'personal-preview-title');
   dialog.innerHTML = `<div class="preview-dialog-heading"><h2 id="personal-preview-title">${t('Your business, in a new design', 'Tu negocio, con un nuevo diseño')}</h2>
     <button type="button" class="preview-close" aria-label="${t('Close preview', 'Cerrar vista previa')}">×</button></div>
-    <p class="preview-note">${t('Concept preview using your website details. The selected template controls the layout. Imported content and your edits personalize it; remaining sections are illustrative. Preview buttons and forms are inactive.', 'Vista conceptual con los datos de tu sitio. El diseño elegido determina la estructura. Los datos importados y tus cambios lo personalizan; las demás secciones son ilustrativas. Los botones y formularios de la vista previa están desactivados.')}</p>
+    <p class="preview-note">${t('Concept preview using your website details. The selected template controls the layout. Imported content and your edits personalize it; remaining sections are illustrative. Menu links, page navigation, and contact links are clickable. Forms and purchase actions remain demonstrations.', 'Vista conceptual con los datos de tu sitio. El diseño elegido determina la estructura. Los datos importados y tus cambios lo personalizan; las demás secciones son ilustrativas. Los menús, las páginas y los enlaces de contacto se pueden usar. Los formularios y las compras son demostraciones.')}</p>
     <div class="preview-editor"><form class="preview-import"><label for="preview-import-url">${t('Your website URL', 'URL de tu sitio web')}</label>
       <div class="preview-url-row"><input id="preview-import-url" type="text" inputmode="url" autocomplete="url" required maxlength="2048"><button type="submit">${t('Import details', 'Importar datos')}</button></div></form>
       <label for="preview-design">${t('Template', 'Diseño')}</label><select id="preview-design"></select>
@@ -44,6 +45,8 @@
       <label for="preview-color">${t('Brand color', 'Color de la marca')}</label><input id="preview-color" type="color" value="#d6ad50">
       <p class="preview-note">${t('Changes appear automatically. Try another template without importing again.', 'Los cambios aparecen automáticamente. Prueba otro diseño sin volver a importar.')}</p>
       <div class="preview-controls"><button class="preview-update" type="button">${t('Update preview', 'Actualizar vista previa')}</button>
+      <button class="preview-home" type="button">${t('Back to preview home', 'Volver al inicio de la vista')}</button>
+      <a class="preview-original" target="_blank" rel="noopener noreferrer" hidden>${t('Open current website', 'Abrir sitio actual')}</a>
       <button class="preview-mobile" type="button" aria-pressed="false">${t('Mobile view', 'Vista móvil')}</button>
       <a class="preview-quote">${t('Choose this design', 'Elegir este diseño')}</a></div></div>
     <p class="preview-status" role="status" aria-live="polite"></p>
@@ -76,15 +79,20 @@
   const quote = dialog.querySelector('.preview-quote');
   const importButton = dialog.querySelector('.preview-import button');
   let revision = 0;
+  let currentPage = null;
   let importer;
   let lastFocus;
   const setQuote = () => {
     const target = new URL(designs[Number(select.value)].quote);
     if (urlInput.value.trim()) target.searchParams.set('website', urlInput.value.trim());
     quote.href = target.href;
+    const website = sourceWebsite(urlInput.value);
+    const original = dialog.querySelector('.preview-original');
+    original.hidden = !website;
+    if (website) original.href = website; else original.removeAttribute('href');
   };
 
-  async function renderPreview() {
+  async function renderPreview({page, hash} = {}) {
     const current = ++revision;
     wrap.hidden = true;
     setQuote();
@@ -94,13 +102,14 @@
     }
     status.textContent = t('Preparing your preview…', 'Preparando tu vista previa…');
     const design = designs[Number(select.value)];
+    page = page || currentPage || design.demo;
     try {
-      if (!templates.has(design.demo)) {
-        const response = await fetch(design.demo);
+      if (!templates.has(page)) {
+        const response = await fetch(page);
         if (!response.ok) throw new Error('Template unavailable');
-        templates.set(design.demo, await response.text());
+        templates.set(page, await response.text());
       }
-      const doc = new DOMParser().parseFromString(templates.get(design.demo), 'text/html');
+      const doc = new DOMParser().parseFromString(templates.get(page), 'text/html');
       if (current !== revision || !dialog.open) return;
       doc.querySelectorAll('script, iframe, object, embed, base, meta[http-equiv], noscript').forEach(node => node.remove());
       doc.querySelectorAll('*').forEach(node => {
@@ -109,7 +118,7 @@
         });
       });
       const base = doc.createElement('base');
-      base.href = design.demo;
+      base.href = page;
       doc.head.prepend(base);
       const businessName = nameInput.value.trim();
       const heading = doc.querySelector('main h1, h1');
@@ -172,13 +181,13 @@
           card.querySelectorAll('li, .service-meta, .service-price, .service-duration, .price-tag').forEach(node => node.remove());
         });
       }
-      doc.querySelectorAll('a[href^="mailto:"]').forEach(node => node.textContent = emailInput.value.trim() || t('Your business email', 'Correo de tu negocio'));
+      doc.querySelectorAll('a[href^="mailto:"]').forEach(node => { node.textContent = emailInput.value.trim() || t('Your business email', 'Correo de tu negocio'); });
       doc.querySelectorAll('a[href^="tel:"]').forEach(node => node.textContent = phoneInput.value.trim() || t('Your business phone', 'Teléfono de tu negocio'));
       // Sample reviews, outcome figures, and demo addresses do not describe the imported business.
       doc.querySelectorAll('main .stats, main .testimonials, main #testimonials, main #reviews, main .quotes, main .impact-list').forEach(node => node.remove());
       doc.querySelectorAll('address, .demo-bar, .demo-banner, .demo-notice').forEach(node => node.remove());
       const style = doc.createElement('style');
-      style.textContent = 'a,button,input,select,textarea{pointer-events:none!important}[hidden]{display:none!important}body{overflow-x:hidden}.reveal,[data-reveal],.fade-in{opacity:1!important;transform:none!important}header .brand,header .wordmark,header .logo,header .site-brand{font-weight:800;overflow-wrap:anywhere;max-width:320px}';
+      style.textContent = '[hidden]{display:none!important}body{overflow-x:hidden}.reveal,[data-reveal],.fade-in{opacity:1!important;transform:none!important}header .brand,header .wordmark,header .logo,header .site-brand{font-weight:800;overflow-wrap:anywhere;max-width:320px}';
       if (/^#[0-9a-f]{6}$/i.test(colorInput.value)) {
         const rgb = colorInput.value.slice(1).match(/../g).map(hex => parseInt(hex, 16) / 255).map(c => c <= .04045 ? c / 12.92 : ((c + .055) / 1.055) ** 2.4);
         const luminance = .2126 * rgb[0] + .7152 * rgb[1] + .0722 * rgb[2];
@@ -187,12 +196,68 @@
         style.textContent += `:root,body{${variables}}.btn,.button,.cta,.primary,.btn-primary,.button-primary,button[type=submit]{background:${colorInput.value}!important;border-color:${colorInput.value}!important;color:${buttonText}!important}h1 em,h1 span,.eyebrow,.kicker{color:${colorInput.value}!important}`;
       }
       doc.head.append(style);
-      doc.querySelectorAll('a,button,input,select,textarea').forEach(node => node.setAttribute('tabindex', '-1'));
+      doc.querySelectorAll('a,button,input,select,textarea').forEach(node => node.removeAttribute('tabindex'));
+      const details = { website: urlInput.value, email: emailInput.value.trim(), phone: phoneInput.value.trim() };
+      doc.querySelectorAll('a[href]').forEach(link => {
+        const destination = previewDestination(link.getAttribute('href'), page, design.demo, details);
+        link.setAttribute('data-preview-href', link.getAttribute('href'));
+        link.setAttribute('href', destination.href || '#');
+        if (destination.kind === 'section') link.setAttribute('href', destination.hash || '#');
+        link.removeAttribute('target');
+        if (destination.kind === 'unavailable') link.setAttribute('aria-disabled', 'true');
+      });
+      currentPage = page;
+      frame.onload = () => {
+        const preview = frame.contentDocument;
+        if (!preview || current !== revision || !dialog.open) return;
+        const closeMenus = () => {
+          preview.querySelectorAll('header nav').forEach(nav => nav.classList.remove('open', 'is-open', 'active'));
+          preview.querySelectorAll('header button[aria-expanded]').forEach(button => button.setAttribute('aria-expanded', 'false'));
+          preview.body.classList.remove('menu-open', 'nav-open');
+        };
+        const scrollTo = targetHash => {
+          let target;
+          try { target = targetHash ? preview.getElementById(decodeURIComponent(targetHash.slice(1))) : preview.body; } catch {}
+          if (target && !target.hidden) { target.scrollIntoView({behavior:'smooth', block:'start'}); closeMenus(); }
+          else status.textContent = t('This section is not included in this concept preview.', 'Esta sección no está incluida en la vista conceptual.');
+        };
+        preview.addEventListener('submit', event => {
+          event.preventDefault();
+          status.textContent = t('Demo form: no information was sent. Choose this design to request your working website.', 'Formulario de ejemplo: no se envió información. Elige este diseño para solicitar tu sitio funcional.');
+        });
+        preview.addEventListener('click', event => {
+          const link = event.target.closest('a[href]');
+          if (link) {
+            event.preventDefault();
+            const destination = previewDestination(link.getAttribute('data-preview-href'), page, design.demo, details);
+            if (destination.kind === 'section') scrollTo(destination.hash);
+            else if (destination.kind === 'page') renderPreview({page: destination.href, hash: new URL(destination.href).hash});
+            else if (destination.kind === 'quote') window.open(quote.href, '_blank', 'noopener,noreferrer');
+            else if (destination.kind === 'external') window.open(destination.href, '_blank', 'noopener,noreferrer');
+            else status.textContent = t('Add your website or contact details above to activate this link.', 'Añade el sitio o los datos de contacto arriba para activar este enlace.');
+            return;
+          }
+          const button = event.target.closest('button');
+          if (!button) return;
+          if (button.matches('header button[aria-controls], header .menu-button, header .menu-toggle, header .menu')) {
+            const nav = preview.getElementById(button.getAttribute('aria-controls')) || preview.querySelector('header nav');
+            if (!nav) return;
+            const open = button.getAttribute('aria-expanded') !== 'true';
+            button.setAttribute('aria-expanded', String(open));
+            nav.classList.toggle('open', open); nav.classList.toggle('is-open', open); nav.classList.toggle('active', open);
+            preview.body.classList.toggle('menu-open', open); preview.body.classList.toggle('nav-open', open);
+          } else if (button.type !== 'submit') {
+            status.textContent = t('This action is a demonstration. Choose this design to request the working feature.', 'Esta acción es de ejemplo. Elige este diseño para solicitar la función completa.');
+          }
+        });
+        preview.addEventListener('keydown', event => { if (event.key === 'Escape') closeMenus(); });
+        if (hash) scrollTo(hash);
+      };
       frame.srcdoc = '<!doctype html>' + doc.documentElement.outerHTML;
       wrap.hidden = false;
       status.textContent = importSummary || t('Preview ready. Your edits are shown in the selected design.', 'Vista previa lista. Tus cambios aparecen en el diseño elegido.');
     } catch {
-      if (current === revision && dialog.open) status.textContent = t('This preview could not load. Try another template.', 'No se pudo cargar esta vista previa. Prueba otro diseño.');
+      if (current === revision && dialog.open) { wrap.hidden = !frame.hasAttribute('srcdoc'); status.textContent = t('This page could not load. Use Back to preview home or try another design.', 'No se pudo cargar esta página. Vuelve al inicio de la vista o prueba otro diseño.'); }
     }
   }
 
@@ -201,6 +266,7 @@
     const controller = new AbortController();
     importer = controller;
     ++revision;
+    currentPage = null;
     wrap.hidden = true;
     importButton.disabled = true;
     nameInput.value = '';
@@ -247,6 +313,7 @@
   function open(index) {
     lastFocus = document.activeElement;
     select.value = String(index);
+    currentPage = null;
     urlInput.value = section.querySelector('input').value;
     dialog.showModal();
     setQuote();
@@ -276,7 +343,8 @@
   });
   dialog.querySelector('.preview-import').addEventListener('submit', event => { event.preventDefault(); importDetails(); });
   dialog.querySelector('.preview-update').addEventListener('click', renderPreview);
-  select.addEventListener('change', renderPreview);
+  select.addEventListener('change', () => { currentPage = null; renderPreview(); });
+  dialog.querySelector('.preview-home').addEventListener('click', () => { currentPage = null; renderPreview(); });
   [nameInput, descriptionInput, imageInput, colorInput, logoInput, servicesInput, emailInput, phoneInput].forEach(input => input.addEventListener('input', () => {
     importSummary = '';
     clearTimeout(updateTimer);

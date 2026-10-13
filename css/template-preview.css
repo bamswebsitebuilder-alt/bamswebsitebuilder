@@ -23,3 +23,6 @@
 .personal-preview-dialog :focus-visible,.personal-preview-intro :focus-visible,.template-personal-preview:focus-visible { outline:3px solid #fff; outline-offset:3px; }
 .personal-preview-dialog button:disabled { opacity:.6; cursor:wait; }
 @media(max-width:600px) { .personal-preview-intro { margin:20px 12px; padding:20px; } .personal-preview-dialog { padding:16px; } .preview-url-row { flex-direction:column; } .preview-controls>* { width:100%; text-align:center; } .preview-frame-wrap iframe { height:560px; } }
+
+.personal-preview-dialog .preview-home,.preview-original { display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:12px 18px; border:1px solid #d6ad50; border-radius:8px; background:transparent; color:#f4c15d; font:inherit; font-weight:700; text-decoration:none; }
+.preview-original[hidden] { display:none; }
