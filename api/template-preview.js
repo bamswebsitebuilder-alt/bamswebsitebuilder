@@ -155,7 +155,10 @@ export default async function handler(req, res) {
     const url = websiteURL(body?.url);
     const page = await readWebsite(url, 0, 'html', true);
     let css = '';
-    const sheet = (page.html.match(/<link\b(?:[^>"']|"[^"]*"|'[^']*')*>/gi) || []).map(attributes).find(link => /stylesheet/i.test(link.rel || '') && link.href);
+    const sheet = (page.html.match(/<link\b(?:[^>"']|"[^"]*"|'[^']*')*>/gi) || []).map(attributes).find(link => {
+      if (!/stylesheet/i.test(link.rel || '') || !link.href) return false;
+      try { return websiteURL(new URL(link.href.replaceAll('&amp;', '&'), page.url).href).origin === new URL(page.url).origin; } catch { return false; }
+    });
     if (sheet) {
       try {
         const cssURL = websiteURL(new URL(sheet.href.replaceAll('&amp;', '&'), page.url).href);
