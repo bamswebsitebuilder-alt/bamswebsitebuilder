@@ -1,3 +1,3 @@
-/* Set this to the owner's verified GA4 web-stream ID to enable reports.
-   No analytics script or requests are sent while it is blank. */
-window.BAM_ANALYTICS_ID = '';
+/* Owner-verified GA4 web stream for www.bamswebsitebuilder.com.
+   Measurement loads only after analytics consent. */
+window.BAM_ANALYTICS_ID = 'G-QZVKCRRMNN';
