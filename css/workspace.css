@@ -5,6 +5,8 @@ body.client-portal-page, body.admin-dashboard-page {
 
 
 
+  --workspace-gold:#efc66a;
+  --workspace-border:rgba(239,198,106,.24);
   font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   font-size:15px; line-height:1.55;
 }
@@ -36,7 +38,7 @@ body.client-portal-page, body.admin-dashboard-page {
 .admin-page-heading h1 {font-size:30px;font-weight:650}
 .admin-page-heading p:last-child {font-size:14px;margin-top:9px;max-width:70ch}
 .admin-kicker,.card-kicker,.portal-eyebrow {font-size:10px;letter-spacing:.14em;font-weight:700;margin:0 0 9px}
-.admin-sidebar,.portal-sidebar {border:0;box-shadow:none;--portal-gold:var(--workspace-border)}
+.admin-sidebar,.portal-sidebar {border:0;box-shadow:none;--portal-gold:var(--workspace-gold)}
 .admin-sidebar {padding:28px 16px;position:sticky;top:76px;height:calc(100vh - 76px);align-self:start}
 .admin-sidebar-label {font-size:10px;letter-spacing:.15em;margin:0 14px 20px}
 .admin-nav {gap:5px}
@@ -134,3 +136,35 @@ body.admin-dashboard-page{--workspace-bg:var(--admin-bg);--workspace-panel:var(-
 .workspace-header-links a:hover,.workspace-sidebar-note a,.workspace-shortcut b{color:var(--workspace-gold)}
 .workspace-shortcut{background:var(--workspace-panel)}
 .workspace-shortcut:hover{border-color:var(--workspace-gold)}
+
+/* Access feedback and compact, fully visible mobile workspace navigation. */
+.admin-auth-pending .admin-shell { display:none; }
+.admin-access-status { width:min(600px,calc(100% - 32px)); margin:40px auto; padding:24px; border:1px solid var(--workspace-border); border-radius:12px; background:#151515; color:#fff; }
+.admin-access-status a,.admin-access-status button { display:inline-block; margin:8px 12px 0 0; }
+.workspace-header,.admin-header { background:#0b0b0b; }
+.portal-layout,.portal-topbar,.portal-sidebar,.portal-user,.portal-topbar>div { min-width:0; }
+.portal-project-summary { gap:16px; }
+.portal-project-summary .progress-track { margin:0; }
+.portal-nav-link::before { color:var(--workspace-gold); }
+@media(max-width:900px) {
+  .client-portal-page .portal-sidebar { overflow:visible; margin:0; padding:8px; border-radius:12px; }
+  .client-portal-page .portal-nav { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); width:100%; gap:6px; }
+  .client-portal-page .portal-nav-link { width:100%; min-width:0; min-height:62px; padding:30px 4px 8px; white-space:normal; line-height:1.3; text-align:center; font-size:12px; }
+  .client-portal-page .portal-nav-link::before { left:50%; top:8px; transform:translateX(-50%); width:17px; height:17px; }
+  .client-portal-page .portal-nav-link.active { box-shadow:inset 0 -3px var(--workspace-gold); }
+}
+@media(max-width:760px) {
+  .client-portal-page .portal-page { padding:20px 16px 48px; }
+  .client-portal-page .portal-topbar { display:grid; gap:16px; background:transparent; }
+  .client-portal-page .portal-topbar h1 { font-size:clamp(23px,6vw,30px); }
+  .client-portal-page .portal-user { max-width:100%; display:grid; grid-template-columns:40px minmax(0,1fr) auto; gap:10px; }
+  .client-portal-page .portal-user>div:nth-child(2) { min-width:0; }
+  .client-portal-page .portal-user span { max-width:100%; font-size:12px; }
+  .client-portal-page .portal-logout { grid-column:auto; width:auto; font-size:12px; padding:10px; }
+  .client-portal-page .portal-project-title-row { display:flex; align-items:flex-start; flex-wrap:wrap; }
+  .portal-project-title-row>div:first-child { flex:1 1 210px; min-width:0; }
+  .client-portal-page .portal-card h2 { font-size:22px; overflow-wrap:anywhere; }
+  .progress-labels { display:flex; flex-wrap:wrap; gap:6px 16px; }
+  :is(.client-portal-page,.admin-dashboard-page) :is(input,select,textarea) { font-size:16px; }
+  .workspace-header-links,.admin-header-actions { flex-wrap:wrap; }
+}

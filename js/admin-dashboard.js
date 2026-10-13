@@ -1,4 +1,13 @@
-document.documentElement.style.visibility = "hidden";
+import { portalLoginUrl } from "./portal-routing.js?v=2";
+
+// Keep a visible access status while protected workspace panels are loading.
+document.body.classList.add("admin-auth-pending");
+const spanish = document.documentElement.lang.startsWith("es");
+const accessStatus = document.createElement("section");
+accessStatus.className = "admin-access-status";
+accessStatus.setAttribute("role", "status");
+accessStatus.textContent = spanish ? "Verificando acceso de administrador…" : "Checking administrator access…";
+document.querySelector(".admin-header")?.after(accessStatus);
 
 /* =========================================================
    FIREBASE IMPORTS
@@ -1779,9 +1788,7 @@ onAuthStateChanged(
   async (user) => {
     if (!user) {
       window.location.replace(
-        `login.html?next=${encodeURIComponent(
-          "admin-dashboard.html"
-        )}`
+        portalLoginUrl(window.location)
       );
 
       return;
@@ -1821,8 +1828,8 @@ onAuthStateChanged(
           user.email || "Administrator";
       }
 
-      document.documentElement.style.visibility =
-        "visible";
+      document.body.classList.remove("admin-auth-pending");
+      accessStatus.remove();
 
       watchClients();
     } catch (error) {
@@ -1831,9 +1838,21 @@ onAuthStateChanged(
         error
       );
 
-      window.location.replace(
-        "client-portal.html"
-      );
+      accessStatus.replaceChildren();
+      const message = document.createElement("p");
+      message.textContent = spanish
+        ? "No pudimos verificar tu acceso. Vuelve a intentarlo."
+        : "We could not verify your admin access. Please try again.";
+      const retry = document.createElement("button");
+      retry.type = "button";
+      retry.className = "admin-primary-button";
+      retry.textContent = spanish ? "Reintentar" : "Try again";
+      retry.addEventListener("click", () => window.location.reload());
+      const login = document.createElement("a");
+      login.href = portalLoginUrl(window.location);
+      login.className = "admin-secondary-button";
+      login.textContent = spanish ? "Volver a iniciar sesión" : "Return to sign in";
+      accessStatus.append(message, retry, login);
     }
   }
 );

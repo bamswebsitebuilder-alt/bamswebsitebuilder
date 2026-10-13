@@ -1,4 +1,4 @@
-import { portalLoginUrl } from "./portal-routing.js?v=1";
+import { portalLoginUrl } from "./portal-routing.js?v=2";
 import { auth, db, storage } from "./firebase-config.js";
 
 import {
@@ -241,6 +241,17 @@ const loadProfile = async (user) => {
     }
   } catch (error) {
     console.error("Unable to load profile:", error);
+  }
+
+  // Administrators may visit the client workspace to review an agreement.
+  // Offer a route back without changing their stored role.
+  if (profile.role === "admin" && !document.getElementById("portal-admin-link")) {
+    const link = document.createElement("a");
+    link.id = "portal-admin-link";
+    const spanish = document.documentElement.lang.startsWith("es");
+    link.href = spanish ? "/es/admin-dashboard" : "/admin-dashboard";
+    link.textContent = spanish ? "Administración" : "Admin dashboard";
+    document.querySelector(".workspace-header-links")?.prepend(link);
   }
 
   const displayName =
@@ -937,9 +948,10 @@ onAuthStateChanged(auth, async (user) => {
     }
   }
 
-  await loadClientFiles(user);
+  // Independent services must not delay the project and invoice subscriptions.
   watchClientInvoices(user);
   watchClientProject(user);
+  void loadClientFiles(user);
 });
 
 /* =========================================================
@@ -1023,14 +1035,12 @@ accountForm?.addEventListener(
       await setDoc(
         doc(db, "users", currentUser.uid),
         {
-          uid: currentUser.uid,
           firstName,
           lastName,
           fullName,
           businessName,
           phone,
           email: currentUser.email || "",
-          role: "client",
           updatedAt: serverTimestamp()
         },
         {
