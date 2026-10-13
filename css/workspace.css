@@ -168,3 +168,54 @@ body.admin-dashboard-page{--workspace-bg:var(--admin-bg);--workspace-panel:var(-
   :is(.client-portal-page,.admin-dashboard-page) :is(input,select,textarea) { font-size:16px; }
   .workspace-header-links,.admin-header-actions { flex-wrap:wrap; }
 }
+
+/* Desktop workspaces: keep navigation vertical at laptop widths. */
+.client-portal-page .portal-nav { min-width:0; }
+@media(min-width:901px) {
+  .client-portal-page .portal-topbar { display:grid; grid-template-columns:minmax(0,1fr) minmax(280px,380px); align-items:center; gap:28px; background:transparent; }
+  .client-portal-page .portal-topbar h1 { font-size:30px; }
+  .client-portal-page .portal-user { display:grid; grid-template-columns:40px minmax(0,1fr) auto; width:100%; max-width:none; gap:12px; }
+  .client-portal-page .portal-user>div:nth-child(2) { min-width:0; }
+  .client-portal-page .portal-user span { max-width:100%; }
+  .client-portal-page .portal-logout { margin:0; white-space:nowrap; }
+  .client-portal-page .portal-layout { grid-template-columns:224px minmax(0,1fr); align-items:start; gap:28px; }
+  .client-portal-page .portal-sidebar { position:sticky; top:96px; max-height:calc(100dvh - 116px); overflow-y:auto; padding:20px 12px; }
+  .client-portal-page .portal-nav { display:grid; grid-template-columns:minmax(0,1fr); width:100%; min-width:0; gap:6px; }
+  .client-portal-page .portal-nav-link { width:100%; min-width:0; min-height:46px; padding:12px 12px 12px 42px; white-space:normal; text-align:left; }
+  .client-portal-page .portal-card { padding:26px; }
+  .client-portal-page .portal-project-title-row { display:flex; flex-wrap:nowrap; align-items:flex-start; }
+  .client-portal-page .portal-project-title-row>div:first-child { min-width:0; }
+  .client-portal-page .portal-project-title-row h2 { font-size:25px; overflow-wrap:anywhere; }
+  .client-portal-page .portal-progress-number { flex-shrink:0; font-size:36px; }
+  .client-portal-page .progress-labels { display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 20px; }
+  .client-portal-page .portal-stage-grid { grid-template-columns:repeat(7,minmax(0,1fr)); overflow:visible; }
+  .client-portal-page .portal-stage { min-width:0; overflow-wrap:anywhere; padding:10px 4px; font-size:11px; }
+  .client-portal-page .workspace-shortcuts { grid-template-columns:repeat(3,minmax(0,1fr)); }
+}
+@media(min-width:761px) {
+  .admin-dashboard-page .admin-shell { grid-template-columns:238px minmax(0,1fr); align-items:start; }
+  .admin-dashboard-page .admin-sidebar { position:sticky; top:76px; height:calc(100dvh - 76px); overflow-y:auto; transform:none; }
+  .admin-dashboard-page .admin-nav { display:grid; grid-template-columns:minmax(0,1fr); }
+  .admin-dashboard-page .admin-content { width:100%; min-width:0; max-width:1400px; margin:0 auto; }
+  .admin-dashboard-page .admin-header-actions { display:flex; align-items:center; flex-wrap:wrap; justify-content:flex-end; }
+  .admin-dashboard-page .admin-card { min-width:0; }
+  .admin-dashboard-page .admin-form-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .admin-dashboard-page .admin-action-row { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .admin-dashboard-page .admin-nav-button { white-space:normal; }
+  .portal-brand .brand-text strong { font-size:1.5rem; }
+  .portal-brand .brand-text small { font-size:.65rem; }
+}
+@media(min-width:761px) and (max-width:1000px) {
+  .admin-dashboard-page .admin-shell { grid-template-columns:200px minmax(0,1fr); }
+  .admin-dashboard-page .admin-content { padding:24px; }
+  .admin-dashboard-page .admin-header-actions #admin-email { max-width:140px; }
+}
+@media(min-width:1101px) {
+  .login-page .auth-page { padding:48px 6% 56px!important; min-height:calc(100vh - var(--header-height)); }
+  .login-page .auth-shell { width:min(1100px,100%); grid-template-columns:minmax(0,1fr) minmax(0,480px); gap:48px!important; }
+  .login-page .auth-intro h1 { font-size:clamp(42px,4vw,58px); line-height:1.1; margin-bottom:18px; }
+  .login-page .auth-intro>p:not(.auth-kicker) { font-size:16px; max-width:46ch; }
+  .login-page .auth-card { padding:30px; }
+  .login-page .auth-card h2 { font-size:30px; }
+  .login-page .auth-feature-list { margin-top:24px; gap:12px; }
+}
