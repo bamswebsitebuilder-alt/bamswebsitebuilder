@@ -219,3 +219,21 @@ body.admin-dashboard-page{--workspace-bg:var(--admin-bg);--workspace-panel:var(-
   .login-page .auth-card h2 { font-size:30px; }
   .login-page .auth-feature-list { margin-top:24px; gap:12px; }
 }
+
+/* Bound nested project grids to the available column; wrap content instead of clipping. */
+.client-portal-page .portal-page { width:100%; max-width:100%; }
+.client-portal-page :is(.portal-content,.portal-panel,#portal-dashboard-project,#portal-project-details,.portal-card,.portal-project-summary,.portal-project-summary>*,.workspace-shortcut) { min-width:0; max-width:100%; }
+.client-portal-page .portal-project-summary { grid-template-columns:minmax(0,1fr); }
+.client-portal-page .portal-project-title-row { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:16px; }
+.client-portal-page .portal-project-title-row>div:first-child { min-width:0; }
+.client-portal-page :is(.portal-project-title-row h2,.portal-project-meta,.portal-project-update,.progress-labels strong,.workspace-shortcut) { white-space:normal; overflow-wrap:anywhere; }
+.client-portal-page .portal-project-update { width:100%; }
+.client-portal-page .progress-labels>* { min-width:0; max-width:100%; }
+.client-portal-page .workspace-shortcuts { grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr)); }
+@media(min-width:901px) {
+  .client-portal-page .portal-layout { grid-template-columns:clamp(180px,18vw,224px) minmax(0,1fr); gap:24px; }
+  .client-portal-page .portal-topbar { grid-template-columns:minmax(0,1fr) minmax(260px,340px); }
+}
+@media(max-width:620px) {
+  .client-portal-page .portal-project-title-row { grid-template-columns:minmax(0,1fr); }
+}
