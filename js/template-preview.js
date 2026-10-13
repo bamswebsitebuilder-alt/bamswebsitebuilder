@@ -127,6 +127,7 @@
       const hero = heading.closest('section, .hero') || heading.parentElement;
       const description = hero.querySelector('p.lead, p.hero-description, p.hero-subtitle, p.subtitle') || [...hero.querySelectorAll('p')].find(p => !p.matches('.eyebrow, .kicker, .hero-eyebrow, .note'));
       if (description) description.textContent = descriptionInput.value.trim();
+      hero.querySelectorAll('.eyebrow, .kicker, .hero-eyebrow').forEach(node => node.textContent = t('Your business, redesigned', 'Tu negocio, rediseñado'));
       const logo = safeImage(logoInput.value.trim());
       for (const node of brands) {
         node.replaceChildren();
@@ -161,6 +162,8 @@
       const services = servicesInput.value.split('\n').map(s => s.trim()).filter(Boolean).slice(0, 8);
       const serviceSection = doc.querySelector('main #services, main .services, main [id*="service"]');
       if (serviceSection) {
+        const title = serviceSection.querySelector('h2');
+        if (title) title.textContent = t('Our services', 'Nuestros servicios');
         const cards = [...serviceSection.querySelectorAll('article, .service-card, .service')].filter(node => node.querySelector('h3, h2'));
         cards.forEach((card, index) => {
           if (!services[index]) { card.hidden = true; return; }
