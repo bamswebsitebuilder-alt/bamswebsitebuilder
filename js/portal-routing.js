@@ -1,3 +1,4 @@
+const adminPaths = new Set(['/admin-dashboard', '/admin-dashboard.html', '/es/admin-dashboard', '/es/admin-dashboard.html']);
 const clientPaths = new Set(['/client-portal', '/client-portal.html', '/es/client-portal', '/es/client-portal.html']);
 
 export function portalLoginUrl(location) {
@@ -10,7 +11,7 @@ export function loginDestination({ origin, requestedPage, role, spanish }) {
   if (requestedPage) {
     try {
       const requested = new URL(requestedPage, origin);
-      if (requested.origin === origin && clientPaths.has(requested.pathname)) {
+      if (requested.origin === origin && (clientPaths.has(requested.pathname) || (role === 'admin' && adminPaths.has(requested.pathname)))) {
         return `${requested.pathname}${requested.search}${requested.hash}`;
       }
     } catch {}

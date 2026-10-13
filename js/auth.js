@@ -1,4 +1,4 @@
-import { loginDestination } from "./portal-routing.js?v=1";
+import { loginDestination } from "./portal-routing.js?v=2";
 import { auth, db } from "./firebase-config.js";
 
 import {

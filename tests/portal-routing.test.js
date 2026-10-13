@@ -17,9 +17,26 @@ test('agreement links survive login in both languages and for either role', () =
 });
 test('ordinary login defaults and unsafe next URLs stay within the proper portal', () => {
   for (const role of ['client', 'admin']) {
-    for (const requestedPage of [null, 'https://evil.example/client-portal#agreements', '//evil.example/client-portal', '/admin-dashboard', '/contact']) {
+    for (const requestedPage of [null, 'https://evil.example/client-portal#agreements', '//evil.example/client-portal', '/contact']) {
       assert.equal(loginDestination({origin, requestedPage, role, spanish:true}), `/es/${role === 'admin' ? 'admin-dashboard' : 'client-portal'}`);
     }
+  }
+});
+
+test('admin return links preserve language and panel only for administrator accounts', () => {
+  for (const prefix of ['', '/es']) {
+    for (const suffix of ['', '.html']) {
+      const requestedPage = `${prefix}/admin-dashboard${suffix}?view=clients#projects`;
+      assert.equal(loginDestination({origin, requestedPage, role:'admin', spanish:!!prefix}), requestedPage);
+      assert.equal(loginDestination({origin, requestedPage, role:'client', spanish:!!prefix}), `${prefix}/client-portal`);
+    }
+    const location = new URL(`${origin}${prefix}/admin-dashboard#projects`);
+    const login = new URL(portalLoginUrl(location), origin);
+    assert.equal(login.pathname, `${prefix}/login`);
+    assert.equal(login.searchParams.get('next'), `${prefix}/admin-dashboard#projects`);
+  }
+  for (const requestedPage of ['https://evil.example/admin-dashboard', '//evil.example/admin-dashboard', '/contact', '/admin-dashboard/other']) {
+    assert.equal(loginDestination({origin, requestedPage, role:'admin', spanish:false}), '/admin-dashboard');
   }
 });
 
