@@ -1,0 +1,20 @@
+/* Grouped website navigation, with compact mobile rows. */
+.mobile-nav-group{display:grid;margin:14px 0 4px;min-width:0}
+.mobile-nav-group-title{margin:8px 0 4px;padding:8px 12px;color:#f0c45a;font:800 .68rem/1.5 Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid rgba(212,166,55,.25)}
+.mobile-navigation a{grid-template-columns:42px minmax(0,1fr)!important;min-height:56px!important;padding:8px 12px!important;letter-spacing:.02em!important;font-size:.88rem!important}
+.mobile-navigation .mobile-link-icon{width:34px!important;height:34px!important}
+.mobile-navigation .mobile-link-icon svg{width:21px!important;height:21px!important}
+.nav-more-links{max-height:calc(100dvh - 100px);overflow-y:auto;overscroll-behavior:contain}
+html[data-theme=light] .mobile-nav-group-title{color:#765300;border-color:rgba(118,83,0,.25)}
+html[data-theme=light] .nav-more[open]>summary,html[data-theme=light] .nav-more:has(a[aria-current=page])>summary{color:#765300!important}
+/* The booking page keeps its existing page layout and drawer controls. */
+.booking-header .desktop-navigation{display:flex;align-items:center;margin-left:auto}
+.booking-header .nav-more>summary{min-height:44px;letter-spacing:.04em;font-size:.72rem;white-space:nowrap}
+.booking-header .nav-more-links{top:100%;min-width:225px;text-align:left}
+.booking-header .desktop-navigation>a{font-size:.72rem;text-transform:uppercase}
+.booking-mobile-links .mobile-nav-group{display:grid}
+.booking-mobile-links a{display:grid;grid-template-columns:42px minmax(0,1fr);gap:12px;align-items:center;min-height:56px;padding:8px 12px;color:#fff;text-decoration:none;border-bottom:1px solid #303030;font-weight:700;font-size:.88rem;letter-spacing:.02em}
+.booking-mobile-links .drawer-icon{width:34px;height:34px}
+.booking-mobile-links .drawer-icon svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8}
+.booking-mobile-links a[aria-current=page]{color:#f0c45a;background:rgba(212,166,55,.08)}
+@media(max-width:1000px){.booking-header .desktop-navigation{display:none!important}.booking-menu-toggle{display:flex!important}}
