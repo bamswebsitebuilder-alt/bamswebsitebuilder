@@ -200,10 +200,11 @@
 
 
     /* BAM site-wide purchase path */
-    const publicPath = location.pathname.replace(/\/+$/, '') || '/';
+    const publicPath = location.pathname.replace(/\/+$/, '').replace(/\.html$/, '') || '/';
+    const localPath = publicPath.replace(/^\/es(?=\/|$)/, '') || '/';
     const skipPurchasePath = ['/', '/contact', '/booking', '/login', '/register', '/forgot-password', '/client-portal', '/admin-dashboard'];
     const publicPages = ['/services','/prices','/subscriptions','/portfolio','/templates','/reviews','/about'];
-    if (publicPages.includes(publicPath) && !skipPurchasePath.includes(publicPath) && !document.querySelector('.bam-next-step')) {
+    if (publicPages.includes(localPath) && !skipPurchasePath.includes(localPath) && !document.querySelector('.bam-next-step')) {
       const spanishPage = document.documentElement.lang.toLowerCase().startsWith('es') || publicPath.startsWith('/es/');
       const band = document.createElement('section');
       band.className = 'bam-next-step';
@@ -212,7 +213,7 @@
         <div class="bam-next-step-inner">
           <div><span>¿LISTO PARA EMPEZAR?</span><h2>Elige el siguiente paso que mejor te convenga.</h2></div>
           <div class="bam-next-step-actions">
-            <a class="bam-next-primary" href="/es/contact">Cotización gratis</a>
+            <a class="bam-next-primary" href="/es/contact">Solicitar cotización web</a>
             <a href="/es/subscriptions">Planes mensuales</a>
             <a href="/es/prices">Precios de pago único</a>
           </div>
@@ -221,7 +222,7 @@
         <div class="bam-next-step-inner">
           <div><span>READY TO GET STARTED?</span><h2>Choose the next step that fits your business.</h2></div>
           <div class="bam-next-step-actions">
-            <a class="bam-next-primary" href="/contact">Get a Free Quote</a>
+            <a class="bam-next-primary" href="/contact">Request a Website Quote</a>
             <a href="/subscriptions">Monthly Plans</a>
             <a href="/prices">One-Time Pricing</a>
           </div>
@@ -252,6 +253,7 @@
     if (!toggle || !menu || !overlay) return;
 
     let lastFocusedElement = null;
+    menu.inert = true;
 
     const setOpen = (open) => {
       toggle.classList.toggle('active', open);
@@ -263,6 +265,7 @@
 
       toggle.setAttribute('aria-expanded', String(open));
       menu.setAttribute('aria-hidden', String(!open));
+      menu.inert = !open;
 
       if (open) {
         lastFocusedElement = document.activeElement;
@@ -292,7 +295,18 @@
     });
 
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && isOpen()) closeMenu();
+      if (!isOpen()) return;
+      if (event.key === 'Escape') { closeMenu(); return; }
+      if (event.key !== 'Tab') return;
+      const focusable = Array.from(menu.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'))
+        .filter(element => element.getClientRects().length && !element.hidden);
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (!first) return;
+      if (event.shiftKey && (document.activeElement === first || !menu.contains(document.activeElement))) {
+        event.preventDefault(); last.focus();
+      } else if (!event.shiftKey && (document.activeElement === last || !menu.contains(document.activeElement))) {
+        event.preventDefault(); first.focus();
+      }
     });
 
     window.addEventListener('resize', () => {
