@@ -1,0 +1,25 @@
+.personal-preview-intro { max-width:1180px; margin:32px auto; padding:28px; border:1px solid #cda54b; border-radius:16px; background:#111; color:#fff; }
+.personal-preview-intro h2 { font-size:clamp(1.4rem,3vw,2rem); margin:0 0 12px; }
+.personal-preview-intro p,.preview-note { color:#d4d4d4; line-height:1.6; }
+.personal-preview-intro label,.preview-editor label { display:block; margin:12px 0 6px; font-weight:700; color:#fff!important; }
+.preview-url-row,.preview-controls { display:flex; gap:12px; flex-wrap:wrap; }
+.preview-url-row input { flex:1; min-width:180px; }
+.personal-preview-intro input,.preview-editor input,.preview-editor textarea,.preview-editor select { width:100%; padding:12px; min-height:48px; background:#202020; color:#fff; border:1px solid #777; border-radius:8px; font:inherit; }
+.personal-preview-intro button,.personal-preview-dialog button,.preview-quote,.template-personal-preview { min-height:48px; padding:12px 18px; border:1px solid #d6ad50; border-radius:8px; background:#d6ad50; color:#111; font:inherit; font-weight:700; cursor:pointer; text-decoration:none; }
+.template-personal-preview { flex:1 0 100%; background:transparent; color:#f4c15d; }
+.template-actions { flex-wrap:wrap; }
+.personal-preview-dialog { width:calc(100% - 24px); max-width:1240px; max-height:94dvh; overflow:auto; padding:24px; border:1px solid #d6ad50; border-radius:16px; background:#111; color:#fff; }
+.personal-preview-dialog::backdrop { background:#000b; }
+.preview-dialog-heading { display:flex; align-items:center; justify-content:space-between; gap:16px; }
+.preview-dialog-heading h2 { margin:0; font-size:clamp(1.3rem,3vw,1.8rem); }
+.personal-preview-dialog .preview-close { font-size:1.6rem; background:transparent; color:#fff; flex-shrink:0; }
+.preview-controls { margin-top:16px; align-items:center; }
+.personal-preview-dialog .preview-mobile { background:transparent; color:#f4c15d; }
+.preview-mobile[aria-pressed=true] { outline:2px solid #f4c15d; }
+.preview-status { min-height:1.5em; line-height:1.5; }
+.preview-frame-wrap { background:#262626; padding:8px; border-radius:8px; }
+.preview-frame-wrap iframe { display:block; border:0; width:100%; height:650px; background:#fff; margin:auto; }
+.preview-frame-wrap.is-mobile iframe { max-width:390px; }
+.personal-preview-dialog :focus-visible,.personal-preview-intro :focus-visible,.template-personal-preview:focus-visible { outline:3px solid #fff; outline-offset:3px; }
+.personal-preview-dialog button:disabled { opacity:.6; cursor:wait; }
+@media(max-width:600px) { .personal-preview-intro { margin:20px 12px; padding:20px; } .personal-preview-dialog { padding:16px; } .preview-url-row { flex-direction:column; } .preview-controls>* { width:100%; text-align:center; } .preview-frame-wrap iframe { height:560px; } }
