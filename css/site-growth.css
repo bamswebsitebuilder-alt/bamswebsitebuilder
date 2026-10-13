@@ -1,0 +1,37 @@
+/* Resource pages share the business site's existing light and dark themes. */
+.growth-page{padding-top:clamp(48px,7vw,90px);padding-bottom:64px}
+.growth-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin:32px 0}
+.growth-grid-three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.growth-card{display:flex;flex-direction:column;gap:14px;min-width:0;padding:26px;border:1px solid rgba(212,166,55,.3);border-radius:14px;background:#111;color:#f4efe5}
+.growth-card h2,.growth-card h3{margin:0;font-size:1.3rem;line-height:1.35;letter-spacing:normal;text-transform:none}
+.growth-card p{margin:0;line-height:1.75;color:#bcb6aa}
+.growth-card .growth-button{margin-top:auto;align-self:flex-start}
+.growth-button,.design-choice{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 20px;border:1px solid #d4a637;border-radius:8px;background:#efc66a;color:#111!important;text-decoration:none!important;font:700 .92rem/1.45 Arial,sans-serif;text-align:center;cursor:pointer;white-space:normal}
+.growth-button:hover,.design-choice:hover{background:#f5d78f}
+.growth-button:focus-visible,.design-choice:focus-visible,.case-story-link:focus-visible{outline:3px solid #d4a637;outline-offset:4px}
+.portfolio-card>.design-choice,.portfolio-home-card>.design-choice{margin:0 24px 24px;align-self:stretch}
+.case-story-link{display:inline-block;margin:16px 20px;text-decoration:underline;text-underline-offset:4px}
+.growth-kicker{color:#f0c45a!important;font-size:.72rem;letter-spacing:.09em;font-weight:700}
+.growth-article{max-width:78ch;margin:30px 0}
+.growth-article section{margin:0 0 32px}
+.growth-article h2{font-size:1.45rem;line-height:1.35;margin:0 0 14px}
+.growth-article p{line-height:1.8;color:#bcb6aa}
+.growth-cta{border-top:1px solid rgba(212,166,55,.3);margin:36px 0 0;padding-top:28px;display:flex;align-items:center;flex-wrap:wrap;gap:18px}
+.growth-cta h2,.growth-cta p{flex-basis:100%;margin:0;line-height:1.5}
+.growth-cta p{color:#bcb6aa}.growth-back{display:inline-block;margin:14px 0;text-underline-offset:4px}
+.growth-review-form{display:grid;gap:18px;margin-top:24px;max-width:720px}
+.growth-review-form label{display:block;font-weight:700;margin-bottom:10px}
+.growth-review-form input,.growth-review-form textarea{box-sizing:border-box;width:100%;min-height:48px;padding:14px;border:1px solid #68604f;border-radius:8px;background:#090909;color:#fff;font:inherit;line-height:1.5}
+.growth-review-form input:focus,.growth-review-form textarea:focus{outline:3px solid #d4a637;outline-offset:2px}
+.growth-review-form .growth-button{justify-self:start}.growth-honeypot{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.quote-field-help{font-size:.9rem;line-height:1.65;color:#bcb6aa;margin:10px 0 20px}
+.quote-field-help a{color:#f0c45a;text-decoration:underline;text-underline-offset:3px}
+.growth-story-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin:32px 0}
+.growth-story-gallery figure{margin:0;min-width:0}.growth-story-gallery img{display:block;width:100%;height:auto;border:1px solid rgba(212,166,55,.3);border-radius:10px}
+.growth-story-gallery figcaption{margin-top:10px;font-size:.9rem;line-height:1.6;color:#bcb6aa}
+html[data-theme=light] .growth-card{background:#fffdf8;color:#20201d;border-color:rgba(118,83,0,.3)}
+html[data-theme=light] .growth-card p,html[data-theme=light] .growth-article p,html[data-theme=light] .growth-cta p,html[data-theme=light] .quote-field-help,html[data-theme=light] .growth-story-gallery figcaption{color:#514d44!important}
+html[data-theme=light] .growth-kicker,html[data-theme=light] .quote-field-help a{color:#765300!important}
+html[data-theme=light] .growth-review-form input,html[data-theme=light] .growth-review-form textarea{background:#fffdf8;color:#20201d;border-color:#a38a51}
+@media(max-width:900px){.growth-grid-three{grid-template-columns:1fr}.growth-story-gallery{grid-template-columns:1fr}}
+@media(max-width:650px){.growth-grid{grid-template-columns:1fr}.growth-card{padding:22px}.growth-review-form .growth-button{width:100%;justify-self:stretch}.design-choice{padding:12px 16px}}

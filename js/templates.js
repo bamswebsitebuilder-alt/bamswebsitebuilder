@@ -3,33 +3,38 @@
 'use strict';
 
 /* Split the AFTERHOURS clothing demo into a base option and a premium option. */
+const spanishTemplates = document.documentElement.lang.toLowerCase().startsWith('es');
+const designLabel = spanishTemplates ? 'Elegir este diseño' : 'Choose this design';
+const quotePath = spanishTemplates ? '/es/contact' : '/contact';
+const localizeTemplateMarkup = markup => Object.entries({"New Demo": "Nueva demostración", "Clothing Brand / Streetwear": "Marca de ropa / Streetwear", "Mobile-friendly clothing brand layout": "Diseño de ropa adaptable a móviles", "Collection showcase": "Presentación de colección", "Product detail previews": "Vista previa de productos", "Brand story section": "Historia de la marca", "Base Template": "Diseño inicial", "starting price": "precio inicial", "Live Demo": "Ver demostración", "Clothing Brand / Premium Store": "Marca de ropa / Tienda premium", "Up to 10 website pages": "Hasta 10 páginas web", "Full online store experience": "Experiencia de tienda en línea", "Product pages and shopping cart": "Páginas de productos y carrito", "Advanced contact forms": "Formularios avanzados de contacto", "Booking integration": "Integración de reservas", "Search engine optimization": "Optimización para buscadores", "Premium Template": "Diseño premium"}).reduce((text, [en, es]) => text.replaceAll(en, es), markup);
 const afterhoursCard = document.querySelector('#afterhours-template');
 if (afterhoursCard) {
   afterhoursCard.innerHTML = `
-    <span class="template-badge">New Demo</span>
+    <span class="template-badge">${spanishTemplates ? 'Nueva demostración' : 'New Demo'}</span>
     <div class="template-preview industry-photo-preview">
       <img src="/afterhours/campaign.png" alt="AFTERHOURS streetwear campaign" loading="lazy" class="industry-project-photo">
     </div>
     <div class="template-card-body">
-      <p class="template-category">Clothing Brand / Streetwear</p>
+      <p class="template-category">${spanishTemplates ? 'Marca de ropa / Streetwear' : 'Clothing Brand / Streetwear'}</p>
       <h2>AFTERHOURS Starter</h2>
       <ul>
-        <li>Mobile-friendly clothing brand layout</li>
-        <li>Collection showcase</li>
-        <li>Product detail previews</li>
-        <li>Brand story section</li>
+        <li>${spanishTemplates ? 'Diseño de ropa adaptable a móviles' : 'Mobile-friendly clothing brand layout'}</li>
+        <li>${spanishTemplates ? 'Presentación de colección' : 'Collection showcase'}</li>
+        <li>${spanishTemplates ? 'Vista previa de productos' : 'Product detail previews'}</li>
+        <li>${spanishTemplates ? 'Historia de la marca' : 'Brand story section'}</li>
       </ul>
       <p class="template-price">
-        <span>Base Template</span>
+        <span>${spanishTemplates ? 'Diseño inicial' : 'Base Template'}</span>
         <strong>$250</strong>
-        <small>starting price</small>
+        <small>${spanishTemplates ? 'precio inicial' : 'starting price'}</small>
       </p>
       <div class="template-actions">
-        <a class="template-demo" href="/afterhours/" target="_blank" rel="noopener">Live Demo</a>
-        <a class="template-select" data-package="starter" data-template="AFTERHOURS Starter" href="/contact?template=AFTERHOURS%20Starter&amp;package=starter">Use This Template</a>
+        <a class="template-demo" href="/afterhours/" target="_blank" rel="noopener">${spanishTemplates ? 'Ver demostración' : 'Live Demo'}</a>
+        <a class="template-select" data-package="starter" data-template="AFTERHOURS Starter" href="${quotePath}?template=AFTERHOURS%20Starter&amp;package=starter">${designLabel}</a>
       </div>
     </div>`;
 
+  if (spanishTemplates) afterhoursCard.innerHTML = localizeTemplateMarkup(afterhoursCard.innerHTML);
   const premiumCard = afterhoursCard.cloneNode(true);
   premiumCard.id = 'afterhours-premium-template';
   premiumCard.innerHTML = `
@@ -38,26 +43,27 @@ if (afterhoursCard) {
       <img src="/afterhours/campaign.png" alt="AFTERHOURS premium streetwear ecommerce website" loading="lazy" class="industry-project-photo">
     </div>
     <div class="template-card-body">
-      <p class="template-category">Clothing Brand / Premium Store</p>
+      <p class="template-category">${spanishTemplates ? 'Marca de ropa / Tienda premium' : 'Clothing Brand / Premium Store'}</p>
       <h2>AFTERHOURS Premium</h2>
       <ul>
-        <li>Up to 10 website pages</li>
-        <li>Full online store experience</li>
-        <li>Product pages and shopping cart</li>
-        <li>Advanced contact forms</li>
-        <li>Booking integration</li>
-        <li>Search engine optimization</li>
+        <li>${spanishTemplates ? 'Hasta 10 páginas web' : 'Up to 10 website pages'}</li>
+        <li>${spanishTemplates ? 'Experiencia de tienda en línea' : 'Full online store experience'}</li>
+        <li>${spanishTemplates ? 'Páginas de productos y carrito' : 'Product pages and shopping cart'}</li>
+        <li>${spanishTemplates ? 'Formularios avanzados de contacto' : 'Advanced contact forms'}</li>
+        <li>${spanishTemplates ? 'Integración de reservas' : 'Booking integration'}</li>
+        <li>${spanishTemplates ? 'Optimización para buscadores' : 'Search engine optimization'}</li>
       </ul>
       <p class="template-price">
-        <span>Premium Template</span>
+        <span>${spanishTemplates ? 'Diseño premium' : 'Premium Template'}</span>
         <strong>$850</strong>
-        <small>starting price</small>
+        <small>${spanishTemplates ? 'precio inicial' : 'starting price'}</small>
       </p>
       <div class="template-actions">
-        <a class="template-demo" href="/afterhours-premium/" target="_blank" rel="noopener">Live Demo</a>
-        <a class="template-select" data-package="premium" data-template="AFTERHOURS Premium" href="/contact?template=AFTERHOURS%20Premium&amp;package=premium">Use This Template</a>
+        <a class="template-demo" href="/afterhours-premium/" target="_blank" rel="noopener">${spanishTemplates ? 'Ver demostración' : 'Live Demo'}</a>
+        <a class="template-select" data-package="premium" data-template="AFTERHOURS Premium" href="${quotePath}?template=AFTERHOURS%20Premium&amp;package=premium">${designLabel}</a>
       </div>
     </div>`;
+  if (spanishTemplates) premiumCard.innerHTML = localizeTemplateMarkup(premiumCard.innerHTML);
   afterhoursCard.insertAdjacentElement('afterend', premiumCard);
 }
 

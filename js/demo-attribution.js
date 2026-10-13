@@ -1,7 +1,10 @@
 (() => {
   'use strict';
   const spanish = document.documentElement.lang.toLowerCase().startsWith('es') || location.pathname.includes('/es/');
-  const contactUrl = spanish ? 'https://www.bamswebsitebuilder.com/es/contact' : 'https://www.bamswebsitebuilder.com/contact';
+  const demoDesigns = {"/afterhours": "AFTERHOURS", "/bams-original": "BAM Classic", "/titan-athletics": "Titan Athletics", "/ember-sage-kitchen": "Ember Sage", "/blend-lab": "G3 Blend Lab", "/blush-bloom": "Blush Bloom", "/rainforest-glow": "Rainforest Glow", "/connectsphere": "ConnectSphere", "/velocity-drive-rentals": "Velocity Drive Rentals", "/fleetflow": "FleetFlow", "/gulf-coast-pro-wash": "Gulf Coast Pro Wash", "/evergreen-lawn-care": "EverGreen Lawn Care", "/roofing-starter": "Summit Roofing Co.", "/roofing-premium": "IronPeak Roofing", "/hvac-starter": "Coastal Air Comfort", "/hvac-premium": "Precision Climate", "/medical-office-starter": "Harbor Health Clinic", "/medical-office-premium": "Everwell Medical", "/dentist-office-starter": "BrightBay Dental", "/dentist-office-premium": "Pearl & Pine Dentistry", "/construction-starter": "StoneLine Construction", "/construction-premium": "Forge & Frame Builders", "/fitness-starter": "CoreRise Fitness", "/fitness-premium": "Forge Athletics Club", "/coffee-shop-starter": "Ember Cup Coffee", "/coffee-shop-premium": "Juniper & Roast", "/auto-repair-starter": "Bayline Auto Care", "/auto-repair-premium": "TorqueWorks Garage", "/afterhours-premium": "AFTERHOURS Premium"};
+  const demoPath = '/' + location.pathname.replace(/^\/es(?=\/)/, '').split('/').filter(Boolean)[0];
+  const design = demoDesigns[demoPath];
+  const contactUrl = (spanish ? 'https://www.bamswebsitebuilder.com/es/contact' : 'https://www.bamswebsitebuilder.com/contact') + (design ? '?template=' + encodeURIComponent(design) : '');
   const canonicalUrl = `https://www.bamswebsitebuilder.com${location.pathname.endsWith('/') ? location.pathname : `${location.pathname}/`}`;
 
   if (!document.querySelector('link[rel="canonical"]')) {
@@ -60,7 +63,7 @@
   if (!document.querySelector('.bam-demo-credit')) {
     const credit = document.createElement('div');
     credit.className = 'bam-demo-credit';
-    credit.innerHTML = `<span>${spanish ? 'Sitio de demostración ficticio' : 'Fictional demo website'}</span><a href="https://www.bamswebsitebuilder.com/">${spanish ? 'Sitio creado por' : 'Website created by'} BAM's Website Builder</a><a href="${contactUrl}">${spanish ? 'Solicita una cotización' : 'Request a website like this'}</a>`;
+    credit.innerHTML = `<span>${spanish ? 'Sitio de demostración ficticio' : 'Fictional demo website'}</span><a href="https://www.bamswebsitebuilder.com/">${spanish ? 'Sitio creado por' : 'Website created by'} BAM's Website Builder</a><a href="${contactUrl}">${spanish ? 'Elegir este diseño' : 'Choose this design'}</a>`;
     document.body.append(credit);
   }
   const style = document.createElement('style');

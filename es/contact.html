@@ -136,14 +136,14 @@
 </style>
 <link rel="stylesheet" href="/css/responsive-fixes.css">
 <link rel="stylesheet" href="/css/client-guide.css?v=20261010-1">
-<link rel="stylesheet" href="/css/accessibility.css?v=1"><link rel="stylesheet" href="/css/public-polish.css?v=1"></head>
+<link rel="stylesheet" href="/css/accessibility.css?v=1"><link rel="stylesheet" href="/css/public-polish.css?v=1"><link rel="stylesheet" href="/css/site-growth.css?v=20261013-growth-1"></head>
  <body><a class="site-skip-link" href="#main-content">Saltar al contenido</a>
   <header class="site-header" id="site-header">
    <div class="header-container">
     <a aria-label="Inicio de BAM's Website Builder" class="site-brand" href="/es/">
      <span class="brand-text"><strong>BAM'S</strong><small>WEBSITE BUILDER</small></span>
     </a>
-    <nav aria-label="Navegaci&oacute;n principal" class="desktop-navigation"><a data-page="home" href="/es/">Inicio</a><a data-page="services" href="/es/services">Servicios</a><a data-page="prices" href="/es/prices">Precios</a><a data-page="portfolio" href="/es/portfolio">Portafolio</a><a data-page="contact" href="/es/contact" class="active" aria-current="page">Contacto</a><details class="nav-more"><summary>Más</summary><div class="nav-more-links"><a data-page="about" href="/es/about">Nosotros</a><a data-page="subscriptions" href="/es/subscriptions">Planes web</a><a data-page="templates" href="/es/templates">Plantillas</a><a data-page="reviews" href="/es/reviews">Reseñas</a><a data-page="booking" href="/es/booking">Reservar llamada</a><a data-page="faq" href="/es/faq">Preguntas frecuentes</a></div></details><a data-page="login" href="/es/login">Acceso</a></nav>
+    <nav aria-label="Navegaci&oacute;n principal" class="desktop-navigation"><a data-page="home" href="/es/">Inicio</a><a data-page="services" href="/es/services">Servicios</a><a data-page="prices" href="/es/prices">Precios</a><a data-page="portfolio" href="/es/portfolio">Portafolio</a><a data-page="contact" href="/es/contact" class="active" aria-current="page">Contacto</a><details class="nav-more"><summary>Más</summary><div class="nav-more-links"><a data-page="about" href="/es/about">Nosotros</a><a data-page="subscriptions" href="/es/subscriptions">Planes web</a><a data-page="templates" href="/es/templates">Plantillas</a><a data-page="reviews" href="/es/reviews">Reseñas</a><a data-page="booking" href="/es/booking">Reservar llamada</a><a data-page="faq" href="/es/faq">Preguntas frecuentes</a><a data-page="website-tips" href="/es/website-tips">Consejos web</a><a data-page="website-review" href="/es/website-review">Revisión gratuita</a><a data-page="project-stories" href="/es/project-stories">Historias de proyectos</a></div></details><a data-page="login" href="/es/login">Acceso</a></nav>
     <div class="desktop-language">
      <a href="/contact">
       English
@@ -307,7 +307,7 @@
       Iniciar sesi&oacute;n
      </span>
     </a>
-   </nav>
+   <a data-page="website-tips" href="/es/website-tips">Consejos web</a><a data-page="website-review" href="/es/website-review">Revisión gratuita</a><a data-page="project-stories" href="/es/project-stories">Historias de proyectos</a></nav>
    <div class="mobile-language-section">
     <p>
      Idioma
@@ -416,7 +416,7 @@
       </div>
       <!-- SUBMIT BUTTON -->
       <details class="inquiry-preferences" id="inquiry-preferences"><summary>Preferencias del proyecto (opcional)</summary><p>Puedes dejar estas opciones en blanco; te ayudaremos a elegir.</p><div class="form-group">
-       <label for="payment-option">
+       <div class="form-group"><label for="existing-website">Tu sitio actual (opcional)</label><input id="existing-website" name="Current Website" type="url" placeholder="https://example.com" autocomplete="url" maxlength="2048"><p class="quote-field-help">Incluye https:// al comienzo. Puedes dejarlo en blanco si aún no tienes un sitio.</p></div><div class="form-group"><label for="project-budget">Presupuesto del proyecto (USD, opcional)</label><select id="project-budget" name="Project Budget"><option value="">Ayúdame a elegir</option><option value="Under $500">Menos de $500</option><option value="$500–$1,000">$500–$1,000</option><option value="$1,000–$2,500">$1,000–$2,500</option><option value="$2,500+">$2,500+</option></select></div><div class="form-group"><label for="launch-timing">Plazo deseado (opcional)</label><select id="launch-timing" name="Preferred Launch Timing"><option value="">Aún no lo sé</option><option value="Within 1 month">Dentro de 1 mes</option><option value="Within 1–3 months">Dentro de 1–3 meses</option><option value="More than 3 months">En más de 3 meses</option></select></div><p class="quote-field-help">El presupuesto y el plazo son preferencias; confirmaremos el precio y la fecha en tu cotización.</p><label for="payment-option">
         Opci&oacute;n de pago
        </label>
        <select id="payment-option" name="Payment Option">
@@ -489,7 +489,7 @@
         <option value="EverGreen Lawn Care">
          EverGreen Lawn Care
         </option>
-       </select>
+       <option value="Titan Athletics">Titan Athletics</option><option value="BAM Classic">BAM Classic</option><option value="AFTERHOURS Starter">AFTERHOURS Starter</option><option value="AFTERHOURS Premium">AFTERHOURS Premium</option></select>
       </div><div class="form-group">
        <label for="package">
         Paquete web
@@ -639,7 +639,7 @@
      <h4>
       Enlaces r&aacute;pidos
      </h4>
-     <div class="footer-links">
+     <div class="footer-links"><a href="/es/website-tips">Consejos web</a><a href="/es/website-review">Revisión gratuita</a><a href="/es/project-stories">Historias de proyectos</a>
 <a href="/es/#email-updates">Novedades por correo</a>
       <a href="/es/services">
        Servicios
@@ -713,8 +713,8 @@
    </div>
   <nav class="client-resource-links" aria-label="Recursos para clientes"><a href="/es/service-terms">Términos del Servicio</a><a href="/es/cancellation-policy">Cancelaciones y Reembolsos</a><a href="/es/faq">Preguntas Frecuentes</a><a href="/es/project-checklist">Preparar tu Proyecto</a></nav>
 </footer>
-  <script src="/js/quote-inquiry.js?v=2" defer></script>
-  <script src="/js/navigation.js?v=20261013-2">
+  <script src="/js/quote-inquiry.js?v=20261013-growth-1" defer></script>
+  <script src="/js/navigation.js?v=20261013-growth-1">
   </script>
 <script src="/js/animations.js?v=1">
   </script>

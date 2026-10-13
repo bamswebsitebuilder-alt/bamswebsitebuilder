@@ -203,7 +203,7 @@
     const publicPath = location.pathname.replace(/\/+$/, '').replace(/\.html$/, '') || '/';
     const localPath = publicPath.replace(/^\/es(?=\/|$)/, '') || '/';
     const skipPurchasePath = ['/', '/contact', '/booking', '/login', '/register', '/forgot-password', '/client-portal', '/admin-dashboard'];
-    const publicPages = ['/services','/prices','/subscriptions','/portfolio','/templates','/reviews','/about'];
+    const publicPages = ['/services','/prices','/subscriptions','/portfolio','/templates','/reviews','/about','/website-tips','/project-stories'];
     if (publicPages.includes(localPath) && !skipPurchasePath.includes(localPath) && !document.querySelector('.bam-next-step')) {
       const spanishPage = document.documentElement.lang.toLowerCase().startsWith('es') || publicPath.startsWith('/es/');
       const band = document.createElement('section');
