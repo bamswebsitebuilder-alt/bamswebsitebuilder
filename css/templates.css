@@ -21,7 +21,7 @@
 .templates-page .template-card { display:flex; flex-direction:column; }
 .templates-page .template-card[hidden] { display:none; }
 .templates-page .template-card-body { display:flex; flex-direction:column; flex:1; min-width:0; }
-.templates-page .template-card-body > ul { flex:1; }
+.templates-page .template-card-body > ul { flex:1; align-content:start; }
 .templates-page .template-actions {
   display:grid;
   grid-template-columns:minmax(0,1fr);
