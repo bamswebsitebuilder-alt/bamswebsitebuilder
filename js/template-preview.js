@@ -112,6 +112,7 @@
         const heroSection = heading.closest('section') || hero;
         const heroImage = heroSection.querySelector('img:not([class*=logo])');
         if (heroImage) {
+          heroImage.closest('picture')?.querySelectorAll('source').forEach(source => source.remove());
           heroImage.removeAttribute('srcset');
           heroImage.removeAttribute('sizes');
           heroImage.src = image;
@@ -129,7 +130,10 @@
       const style = doc.createElement('style');
       style.textContent = 'a,button,input,select,textarea{pointer-events:none!important}body{overflow-x:hidden}.reveal,[data-reveal],.fade-in{opacity:1!important;transform:none!important}header .brand,header .wordmark,header .logo,header .site-brand{font-weight:800;overflow-wrap:anywhere;max-width:320px}';
       if (/^#[0-9a-f]{6}$/i.test(colorInput.value)) {
-        style.textContent += `:root{--accent:${colorInput.value}!important;--gold:${colorInput.value}!important;--brand:${colorInput.value}!important;--primary:${colorInput.value}!important}.btn.primary,.btn:not(.outline),.button-primary{background:${colorInput.value}!important;border-color:${colorInput.value}!important;color:#111!important}`;
+        const rgb = colorInput.value.slice(1).match(/../g).map(hex => parseInt(hex, 16) / 255).map(c => c <= .04045 ? c / 12.92 : ((c + .055) / 1.055) ** 2.4);
+        const luminance = .2126 * rgb[0] + .7152 * rgb[1] + .0722 * rgb[2];
+        const buttonText = luminance > .179 ? '#000' : '#fff';
+        style.textContent += `:root{--accent:${colorInput.value}!important;--gold:${colorInput.value}!important;--brand:${colorInput.value}!important;--primary:${colorInput.value}!important}.btn.primary,.btn:not(.outline),.button-primary{background:${colorInput.value}!important;border-color:${colorInput.value}!important;color:${buttonText}!important}`;
       }
       doc.head.append(style);
       doc.querySelectorAll('a,button,input,select,textarea').forEach(node => node.setAttribute('tabindex', '-1'));
