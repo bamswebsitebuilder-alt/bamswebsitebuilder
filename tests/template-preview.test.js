@@ -83,3 +83,9 @@ test('real business fixture keeps logo separate from photos and extracts availab
   assert.ok(data.logo);
   assert.ok(!data.images.includes(data.logo));
 });
+
+
+test('finds a repeated brand color in styles when theme-color is a neutral background', () => {
+  const data = extractDetails('<title>Acme</title><meta name="theme-color" content="#090909">', 'https://example.com/', '.button{background:#d4af37}.headline{color:#d4af37}.body{color:#fff}');
+  assert.equal(data.color, '#d4af37');
+});

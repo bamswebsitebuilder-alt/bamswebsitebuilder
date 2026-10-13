@@ -114,7 +114,15 @@ export function extractDetails(html, sourceURL, css = '') {
   if (details.images.length) details.image = details.images[0];
   const styles = css + (html.match(/<style\b[^>]*>[\s\S]*?<\/style>/gi) || []).join(' ');
   const accent = styles.match(/--(?:accent|brand|primary|gold)(?:-color)?\s*:\s*(#[0-9a-f]{6}|#[0-9a-f]{3})\b/i)?.[1];
-  const color = accent || metadata['theme-color'] || '';
+  const counts = new Map();
+  for (const match of styles.matchAll(/#[0-9a-f]{6}\b|#[0-9a-f]{3}\b/gi)) {
+    const hex = match[0].length === 4 ? '#' + [...match[0].slice(1)].map(c => c + c).join('') : match[0];
+    const channels = hex.slice(1).match(/../g).map(c => parseInt(c, 16));
+    if (Math.max(...channels) - Math.min(...channels) < 45) continue;
+    counts.set(hex.toLowerCase(), (counts.get(hex.toLowerCase()) || 0) + 1);
+  }
+  const paletteColor = [...counts.entries()].sort((a, b) => b[1] - a[1])[0]?.[0];
+  const color = accent || paletteColor || metadata['theme-color'] || '';
   if (/^#[0-9a-f]{3}$/i.test(color)) details.color = '#' + [...color.slice(1)].map(c => c + c).join('');
   else if (/^#[0-9a-f]{6}$/i.test(color)) details.color = color;
   const serviceSection = clean.match(/<section\b[^>]*(?:id|class)=["'][^"']*services?[^"']*["'][^>]*>([\s\S]*?)<\/section>/i)?.[1];

@@ -125,7 +125,7 @@
       heading.textContent = businessName;
       doc.title = businessName + ' — ' + t('design preview', 'vista del diseño');
       const hero = heading.closest('section, .hero') || heading.parentElement;
-      const description = [...hero.querySelectorAll('p')].find(p => !p.matches('.eyebrow, .kicker, .subtitle, .hero-eyebrow, .note'));
+      const description = hero.querySelector('p.lead, p.hero-description, p.hero-subtitle, p.subtitle') || [...hero.querySelectorAll('p')].find(p => !p.matches('.eyebrow, .kicker, .hero-eyebrow, .note'));
       if (description) description.textContent = descriptionInput.value.trim();
       const logo = safeImage(logoInput.value.trim());
       for (const node of brands) {
@@ -166,7 +166,7 @@
           if (!services[index]) { card.hidden = true; return; }
           card.querySelector('h3, h2').textContent = services[index];
           card.querySelectorAll('p').forEach(p => p.textContent = t('Contact us to discuss this service.', 'Contáctanos para hablar sobre este servicio.'));
-          card.querySelectorAll('li').forEach(li => li.remove());
+          card.querySelectorAll('li, .service-meta, .service-price, .service-duration, .price-tag').forEach(node => node.remove());
         });
       }
       doc.querySelectorAll('a[href^="mailto:"]').forEach(node => node.textContent = emailInput.value.trim() || t('Your business email', 'Correo de tu negocio'));
