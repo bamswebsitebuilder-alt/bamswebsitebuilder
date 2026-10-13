@@ -30,12 +30,16 @@
   dialog.setAttribute('aria-labelledby', 'personal-preview-title');
   dialog.innerHTML = `<div class="preview-dialog-heading"><h2 id="personal-preview-title">${t('Your business, in a new design', 'Tu negocio, con un nuevo diseño')}</h2>
     <button type="button" class="preview-close" aria-label="${t('Close preview', 'Cerrar vista previa')}">×</button></div>
-    <p class="preview-note">${t('Concept preview using your website details. Other photos, services, and content remain template examples. Preview buttons and forms are inactive.', 'Vista conceptual con los datos de tu sitio. Las demás fotos, servicios y contenidos son ejemplos del diseño. Los botones y formularios de la vista previa están desactivados.')}</p>
+    <p class="preview-note">${t('Concept preview using your website details. The selected template controls the layout. Imported content and your edits personalize it; remaining sections are illustrative. Preview buttons and forms are inactive.', 'Vista conceptual con los datos de tu sitio. El diseño elegido determina la estructura. Los datos importados y tus cambios lo personalizan; las demás secciones son ilustrativas. Los botones y formularios de la vista previa están desactivados.')}</p>
     <div class="preview-editor"><form class="preview-import"><label for="preview-import-url">${t('Your website URL', 'URL de tu sitio web')}</label>
       <div class="preview-url-row"><input id="preview-import-url" type="text" inputmode="url" autocomplete="url" required maxlength="2048"><button type="submit">${t('Import details', 'Importar datos')}</button></div></form>
       <label for="preview-design">${t('Template', 'Diseño')}</label><select id="preview-design"></select>
       <label for="preview-name">${t('Business name', 'Nombre del negocio')}</label><input id="preview-name" maxlength="100">
       <label for="preview-description">${t('Business description', 'Descripción del negocio')}</label><textarea id="preview-description" maxlength="300" rows="2"></textarea>
+      <label for="preview-logo">${t('Logo URL (optional)', 'URL del logo (opcional)')}</label><input id="preview-logo" type="url" maxlength="2048" placeholder="https://…">
+      <label for="preview-services">${t('Services (one per line)', 'Servicios (uno por línea)')}</label><textarea id="preview-services" maxlength="1000" rows="3"></textarea>
+      <label for="preview-email">${t('Business email', 'Correo del negocio')}</label><input id="preview-email" type="email" maxlength="100">
+      <label for="preview-phone">${t('Business phone', 'Teléfono del negocio')}</label><input id="preview-phone" maxlength="50">
       <label for="preview-image">${t('Main image URL (optional)', 'URL de la imagen principal (opcional)')}</label><input id="preview-image" type="url" maxlength="2048" placeholder="https://…">
       <label for="preview-color">${t('Brand color', 'Color de la marca')}</label><input id="preview-color" type="color" value="#d6ad50">
       <p class="preview-note">${t('Changes appear automatically. Try another template without importing again.', 'Los cambios aparecen automáticamente. Prueba otro diseño sin volver a importar.')}</p>
@@ -52,6 +56,12 @@
   const descriptionInput = dialog.querySelector('textarea');
   const imageInput = dialog.querySelector('#preview-image');
   const colorInput = dialog.querySelector('#preview-color');
+  const logoInput = dialog.querySelector('#preview-logo');
+  const servicesInput = dialog.querySelector('#preview-services');
+  const emailInput = dialog.querySelector('#preview-email');
+  const phoneInput = dialog.querySelector('#preview-phone');
+  let importedImages = [];
+  let importSummary = '';
   const safeImage = value => {
     try {
       const url = new URL(value);
@@ -101,45 +111,83 @@
       const base = doc.createElement('base');
       base.href = design.demo;
       doc.head.prepend(base);
+      const businessName = nameInput.value.trim();
       const heading = doc.querySelector('main h1, h1');
       if (!heading) throw new Error('No heading');
-      heading.textContent = nameInput.value.trim();
-      const hero = heading.closest('section, .hero, .hero-copy') || heading.parentElement;
-      const description = [...hero.querySelectorAll('p')].find(p => !p.matches('.eyebrow, .kicker, .subtitle, .hero-eyebrow'));
-      if (description && descriptionInput.value.trim()) description.textContent = descriptionInput.value.trim();
-      const image = safeImage(imageInput.value.trim());
-      if (image) {
-        const heroSection = heading.closest('section') || hero;
-        const heroImage = heroSection.querySelector('img:not([class*=logo])');
-        if (heroImage) {
-          heroImage.closest('picture')?.querySelectorAll('source').forEach(source => source.remove());
-          heroImage.removeAttribute('srcset');
-          heroImage.removeAttribute('sizes');
-          heroImage.src = image;
-          heroImage.alt = nameInput.value.trim();
-        } else {
-          const visual = heroSection.querySelector('.hero-image, .hero-media, .hero-art, .hero-visual') || heroSection;
-          visual.style.backgroundImage = `linear-gradient(90deg,rgba(0,0,0,.7),rgba(0,0,0,.2)),url("${image.replaceAll('"', '%22')}")`;
-          visual.style.backgroundSize = 'cover';
-          visual.style.backgroundPosition = 'center';
-        }
+      const brands = [...doc.querySelectorAll('header .brand, header .wordmark, header .logo, header .site-brand, header .navbar-brand, header .logo-text')];
+      const oldNames = [design.name.replace(/ (Starter|Premium)$/, ''), ...brands.map(node => node.querySelector('img')?.alt?.replace(/\blogo\b/gi, '').trim() || node.textContent.trim())].filter(name => name && name.length > 3);
+      const walker = doc.createTreeWalker(doc.body, 4);
+      while (walker.nextNode()) {
+        const node = walker.currentNode;
+        if (node.parentElement.closest('style, script')) continue;
+        for (const name of oldNames) node.textContent = node.textContent.split(name).join(businessName);
       }
-      doc.querySelectorAll('header .brand, header .wordmark, header .logo, header .site-brand, header .navbar-brand, header .logo-text').forEach(node => {
-        node.textContent = nameInput.value.trim();
+      heading.textContent = businessName;
+      doc.title = businessName + ' — ' + t('design preview', 'vista del diseño');
+      const hero = heading.closest('section, .hero') || heading.parentElement;
+      const description = [...hero.querySelectorAll('p')].find(p => !p.matches('.eyebrow, .kicker, .subtitle, .hero-eyebrow, .note'));
+      if (description) description.textContent = descriptionInput.value.trim();
+      const logo = safeImage(logoInput.value.trim());
+      for (const node of brands) {
+        node.replaceChildren();
+        if (logo) {
+          const img = doc.createElement('img'); img.src = logo; img.alt = businessName;
+          img.style.cssText = 'width:auto;max-width:240px;max-height:70px;object-fit:contain';
+          node.append(img);
+        } else node.textContent = businessName;
+      }
+      doc.querySelectorAll('img').forEach(img => {
+        if (!/logo|brand/i.test(`${img.className} ${img.alt} ${img.getAttribute('src')}`) || img.closest('header')) return;
+        if (logo) { img.src = logo; img.alt = businessName; img.removeAttribute('srcset'); }
+        else { const text = doc.createElement('strong'); text.textContent = businessName; img.replaceWith(text); }
       });
+      const image = safeImage(imageInput.value.trim());
+      const photos = [...new Set([image, ...importedImages.map(safeImage)].filter(Boolean))];
+      let photoIndex = 0;
+      const nextPhoto = () => photos[photoIndex++ % photos.length];
+      doc.querySelectorAll('main img').forEach(img => {
+        if (/logo|icon|badge|avatar|payment/i.test(`${img.className} ${img.alt} ${img.getAttribute('src')}`)) return;
+        img.closest('picture')?.querySelectorAll('source').forEach(source => source.remove());
+        img.removeAttribute('srcset'); img.removeAttribute('sizes');
+        if (photos.length) { img.src = nextPhoto(); img.alt = businessName; img.style.objectFit = 'cover'; }
+        else { img.removeAttribute('src'); img.alt = t('Add your business photo', 'Añade una foto de tu negocio'); }
+      });
+      const visuals = new Set(doc.querySelectorAll('main [style*="background-image"], main .hero-image, main .hero-media, main .hero-art, main .hero-visual, main .project-image, main .gallery-image'));
+      if (!hero.querySelector('img')) visuals.add(hero);
+      for (const visual of visuals) {
+        visual.style.backgroundImage = photos.length ? `linear-gradient(90deg,rgba(0,0,0,.65),rgba(0,0,0,.15)),url("${nextPhoto().replaceAll('"', '%22')}")` : 'linear-gradient(135deg,#222,#444)';
+        visual.style.backgroundSize = 'cover'; visual.style.backgroundPosition = 'center';
+      }
+      const services = servicesInput.value.split('\n').map(s => s.trim()).filter(Boolean).slice(0, 8);
+      const serviceSection = doc.querySelector('main #services, main .services, main [id*="service"]');
+      if (serviceSection) {
+        const cards = [...serviceSection.querySelectorAll('article, .service-card, .service')].filter(node => node.querySelector('h3, h2'));
+        cards.forEach((card, index) => {
+          if (!services[index]) { card.hidden = true; return; }
+          card.querySelector('h3, h2').textContent = services[index];
+          card.querySelectorAll('p').forEach(p => p.textContent = t('Contact us to discuss this service.', 'Contáctanos para hablar sobre este servicio.'));
+          card.querySelectorAll('li').forEach(li => li.remove());
+        });
+      }
+      doc.querySelectorAll('a[href^="mailto:"]').forEach(node => node.textContent = emailInput.value.trim() || t('Your business email', 'Correo de tu negocio'));
+      doc.querySelectorAll('a[href^="tel:"]').forEach(node => node.textContent = phoneInput.value.trim() || t('Your business phone', 'Teléfono de tu negocio'));
+      // Sample reviews, outcome figures, and demo addresses do not describe the imported business.
+      doc.querySelectorAll('main .stats, main .testimonials, main #testimonials, main #reviews, main .quotes, main .impact-list').forEach(node => node.remove());
+      doc.querySelectorAll('address, .demo-bar, .demo-banner, .demo-notice').forEach(node => node.remove());
       const style = doc.createElement('style');
-      style.textContent = 'a,button,input,select,textarea{pointer-events:none!important}body{overflow-x:hidden}.reveal,[data-reveal],.fade-in{opacity:1!important;transform:none!important}header .brand,header .wordmark,header .logo,header .site-brand{font-weight:800;overflow-wrap:anywhere;max-width:320px}';
+      style.textContent = 'a,button,input,select,textarea{pointer-events:none!important}[hidden]{display:none!important}body{overflow-x:hidden}.reveal,[data-reveal],.fade-in{opacity:1!important;transform:none!important}header .brand,header .wordmark,header .logo,header .site-brand{font-weight:800;overflow-wrap:anywhere;max-width:320px}';
       if (/^#[0-9a-f]{6}$/i.test(colorInput.value)) {
         const rgb = colorInput.value.slice(1).match(/../g).map(hex => parseInt(hex, 16) / 255).map(c => c <= .04045 ? c / 12.92 : ((c + .055) / 1.055) ** 2.4);
         const luminance = .2126 * rgb[0] + .7152 * rgb[1] + .0722 * rgb[2];
         const buttonText = luminance > .179 ? '#000' : '#fff';
-        style.textContent += `:root{--accent:${colorInput.value}!important;--gold:${colorInput.value}!important;--brand:${colorInput.value}!important;--primary:${colorInput.value}!important}.btn.primary,.btn:not(.outline),.button-primary{background:${colorInput.value}!important;border-color:${colorInput.value}!important;color:${buttonText}!important}`;
+        const variables = ['accent','gold','brand','primary','green','g','gold-light','color-primary','brand-color','accent-color'].map(key => `--${key}:${colorInput.value}!important`).join(';');
+        style.textContent += `:root,body{${variables}}.btn,.button,.cta,.primary,.btn-primary,.button-primary,button[type=submit]{background:${colorInput.value}!important;border-color:${colorInput.value}!important;color:${buttonText}!important}h1 em,h1 span,.eyebrow,.kicker{color:${colorInput.value}!important}`;
       }
       doc.head.append(style);
       doc.querySelectorAll('a,button,input,select,textarea').forEach(node => node.setAttribute('tabindex', '-1'));
       frame.srcdoc = '<!doctype html>' + doc.documentElement.outerHTML;
       wrap.hidden = false;
-      status.textContent = t('Preview ready. You can change your details or try another template.', 'Vista previa lista. Puedes cambiar los datos o probar otro diseño.');
+      status.textContent = importSummary || t('Preview ready. Your edits are shown in the selected design.', 'Vista previa lista. Tus cambios aparecen en el diseño elegido.');
     } catch {
       if (current === revision && dialog.open) status.textContent = t('This preview could not load. Try another template.', 'No se pudo cargar esta vista previa. Prueba otro diseño.');
     }
@@ -155,6 +203,12 @@
     nameInput.value = '';
     descriptionInput.value = '';
     imageInput.value = '';
+    logoInput.value = '';
+    servicesInput.value = '';
+    emailInput.value = '';
+    phoneInput.value = '';
+    importedImages = [];
+    importSummary = '';
     colorInput.value = '#d6ad50';
     status.textContent = t('Reading your business details…', 'Leyendo los datos de tu negocio…');
     try {
@@ -168,6 +222,13 @@
       nameInput.value = details.name || '';
       descriptionInput.value = details.description || '';
       imageInput.value = safeImage(details.image);
+      logoInput.value = safeImage(details.logo);
+      servicesInput.value = (details.services || []).join('\n');
+      emailInput.value = details.email || '';
+      phoneInput.value = details.phone || '';
+      importedImages = details.images || [];
+      const missing = [!details.logo && t('logo', 'logo'), !details.image && t('photos', 'fotos'), !details.services?.length && t('services', 'servicios'), !details.color && t('brand color', 'color de marca')].filter(Boolean);
+      importSummary = missing.length ? t('Preview updated. Not found on this website: ', 'Vista actualizada. No se encontraron: ') + missing.join(', ') + t('. Add these in the fields above.', '. Añádelos en los campos de arriba.') : t('Preview updated with your business details, logo, photos, services, and brand color.', 'Vista actualizada con los datos, logo, fotos, servicios y color de tu negocio.');
       colorInput.value = /^#[0-9a-f]{6}$/i.test(details.color || '') ? details.color : '#d6ad50';
       await renderPreview();
     } catch {
@@ -213,7 +274,8 @@
   dialog.querySelector('.preview-import').addEventListener('submit', event => { event.preventDefault(); importDetails(); });
   dialog.querySelector('.preview-update').addEventListener('click', renderPreview);
   select.addEventListener('change', renderPreview);
-  [nameInput, descriptionInput, imageInput, colorInput].forEach(input => input.addEventListener('input', () => {
+  [nameInput, descriptionInput, imageInput, colorInput, logoInput, servicesInput, emailInput, phoneInput].forEach(input => input.addEventListener('input', () => {
+    importSummary = '';
     clearTimeout(updateTimer);
     updateTimer = setTimeout(renderPreview, 350);
   }));

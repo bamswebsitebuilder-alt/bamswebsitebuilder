@@ -25,7 +25,7 @@ export function websiteURL(input) {
   return url;
 }
 
-export async function readWebsite(url, redirects = 0) {
+export async function readWebsite(url, redirects = 0, contentType = 'html', returnURL = false) {
   // Resolve and pin a public address for every request, including redirects.
   const addresses = isIP(url.hostname) ? [url.hostname] : await resolve4(url.hostname);
   if (!addresses.length || !addresses.every(publicIPv4)) throw new Error('Private address');
@@ -43,7 +43,7 @@ export async function readWebsite(url, redirects = 0) {
         resolve({ redirect: response.headers.location });
         return;
       }
-      if (response.statusCode !== 200 || !/text\/html/i.test(response.headers['content-type'] || '')) {
+      if (response.statusCode !== 200 || !(contentType === 'css' ? /text\/css/i : /text\/html/i).test(response.headers['content-type'] || '')) {
         response.resume();
         reject(new Error('Website unavailable'));
         return;
@@ -64,9 +64,9 @@ export async function readWebsite(url, redirects = 0) {
   });
   if ('redirect' in result) {
     if (!result.redirect || redirects >= 3) throw new Error('Too many redirects');
-    return readWebsite(websiteURL(new URL(result.redirect, url).href), redirects + 1);
+    return readWebsite(websiteURL(new URL(result.redirect, url).href), redirects + 1, contentType, returnURL);
   }
-  return result.html;
+  return returnURL ? { html: result.html, url: url.href } : result.html;
 }
 
 function plain(value, limit) {
@@ -75,27 +75,55 @@ function plain(value, limit) {
     .replace(/\s+/g, ' ').trim().slice(0, limit);
 }
 
-export function extractDetails(html, sourceURL) {
+function attributes(tag) {
+  const attrs = {};
+  for (const match of tag.matchAll(/([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/g)) attrs[match[1].toLowerCase()] = match[2] ?? match[3];
+  return attrs;
+}
+
+export function extractDetails(html, sourceURL, css = '') {
   const metadata = {};
   for (const tag of html.match(/<meta\b(?:[^>"']|"[^"]*"|'[^']*')*>/gi) || []) {
-    const attrs = {};
-    for (const match of tag.matchAll(/([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/g)) {
-      attrs[match[1].toLowerCase()] = match[2] ?? match[3];
-    }
+    const attrs = attributes(tag);
     const key = (attrs.property || attrs.name || '').toLowerCase();
     if (attrs.content) metadata[key] = attrs.content;
   }
+  const clean = html.replace(/<(script|style|nav|noscript)\b[^>]*>[\s\S]*?<\/\1>/gi, '');
   const title = html.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1];
   const details = {
     name: plain(metadata['og:site_name'] || metadata['og:title'] || title, 100),
     description: plain(metadata['og:description'] || metadata.description, 300),
   };
-  if (sourceURL) {
-    const image = metadata['og:image'] || metadata['twitter:image'];
-    if (image) { try { details.image = websiteURL(new URL(image, sourceURL).href).href; } catch {} }
-    const color = metadata['theme-color'] || '';
-    if (/^#[0-9a-f]{6}$/i.test(color)) details.color = color;
+  if (!sourceURL) return details;
+  const asset = value => {
+    if (!value) return '';
+    try { return websiteURL(new URL(value.replaceAll('&amp;', '&'), sourceURL).href).href; } catch { return ''; }
+  };
+  const imgs = (clean.match(/<img\b(?:[^>"']|"[^"]*"|'[^']*')*>/gi) || []).map(attributes);
+  const logo = imgs.find(img => /logo|brand/i.test(`${img.alt || ''} ${img.class || ''} ${img.id || ''} ${img.src || ''}`));
+  if (logo) {
+    const src = asset(logo.src || logo['data-src']);
+    if (src) details.logo = src;
+    const brand = plain((logo.alt || '').replace(/\blogo\b/gi, ''), 100);
+    if (!metadata['og:site_name'] && brand && !/^(brand|company|site|website)$/i.test(brand)) details.name = brand;
   }
+  const image = asset(metadata['og:image'] || metadata['twitter:image']);
+  const photos = [...new Set(imgs.filter(img => !/logo|icon|badge|avatar|payment/i.test(`${img.alt || ''} ${img.class || ''} ${img.src || ''}`)).map(img => asset(img.src || img['data-src'])).filter(Boolean))].slice(0, 8);
+  if (image && image !== details.logo) photos.unshift(image);
+  details.images = [...new Set(photos)].slice(0, 8);
+  if (details.images.length) details.image = details.images[0];
+  const styles = css + (html.match(/<style\b[^>]*>[\s\S]*?<\/style>/gi) || []).join(' ');
+  const accent = styles.match(/--(?:accent|brand|primary|gold)(?:-color)?\s*:\s*(#[0-9a-f]{6}|#[0-9a-f]{3})\b/i)?.[1];
+  const color = accent || metadata['theme-color'] || '';
+  if (/^#[0-9a-f]{3}$/i.test(color)) details.color = '#' + [...color.slice(1)].map(c => c + c).join('');
+  else if (/^#[0-9a-f]{6}$/i.test(color)) details.color = color;
+  const serviceSection = clean.match(/<section\b[^>]*(?:id|class)=["'][^"']*services?[^"']*["'][^>]*>([\s\S]*?)<\/section>/i)?.[1];
+  const services = [...(serviceSection || '').matchAll(/<h[23]\b[^>]*>([\s\S]*?)<\/h[23]>/gi)].map(match => plain(match[1], 100)).filter(text => text && !/^(our |all |nuestros |todos )?services?$/i.test(text));
+  details.services = [...new Set(services)].slice(0, 8);
+  const email = clean.match(/href=["']mailto:([^?"']+)/i)?.[1];
+  const phone = clean.match(/href=["']tel:([^"']+)/i)?.[1];
+  if (email) details.email = plain(email, 100);
+  if (phone) details.phone = plain(phone, 50);
   return details;
 }
 
@@ -117,7 +145,16 @@ export default async function handler(req, res) {
   try {
     const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
     const url = websiteURL(body?.url);
-    const details = extractDetails(await readWebsite(url), url);
+    const page = await readWebsite(url, 0, 'html', true);
+    let css = '';
+    const sheet = (page.html.match(/<link\b(?:[^>"']|"[^"]*"|'[^']*')*>/gi) || []).map(attributes).find(link => /stylesheet/i.test(link.rel || '') && link.href);
+    if (sheet) {
+      try {
+        const cssURL = websiteURL(new URL(sheet.href.replaceAll('&amp;', '&'), page.url).href);
+        if (cssURL.origin === new URL(page.url).origin) css = await readWebsite(cssURL, 0, 'css');
+      } catch {}
+    }
+    const details = extractDetails(page.html, page.url, css);
     if (!details.name) throw new Error('No business details found');
     return res.status(200).json(details);
   } catch {

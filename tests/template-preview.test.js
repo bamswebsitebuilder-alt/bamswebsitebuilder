@@ -49,11 +49,37 @@ test('allows the live GitHub Pages origin to preflight the importer and rejects 
 
 test('imports public relative images and valid brand colors without inventing missing images', () => {
   assert.deepEqual(extractDetails('<title>Acme</title><meta property="og:image" content="/photos/team.jpg"><meta name="theme-color" content="#1256ab">', 'https://example.com/'), {
-    name: 'Acme', description: '', image: 'https://example.com/photos/team.jpg', color: '#1256ab'
+    name: 'Acme', description: '', image: 'https://example.com/photos/team.jpg', images: ['https://example.com/photos/team.jpg'], services: [], color: '#1256ab'
   });
   for (const image of ['javascript:alert(1)', 'http://127.0.0.1/photo.jpg', 'http://169.254.169.254/']) {
     assert.equal(extractDetails(`<title>Acme</title><meta property="og:image" content="${image}">`, 'https://example.com/').image, undefined);
   }
   assert.equal(extractDetails('<title>Acme</title>', 'https://example.com/').image, undefined);
   assert.equal(extractDetails('<meta name="theme-color" content="red;display:none">', 'https://example.com/').color, undefined);
+});
+
+
+test('imports business identity, photographs, services, contact details, and stylesheet color', () => {
+  const html = `<title>Home | Example Plumbing</title><header><img class="brand-logo" src="/logo.svg" alt="Example Plumbing logo"></header>
+    <img src="/team.jpg" alt="Our team"><img src="http://127.0.0.1/private.jpg" alt="blocked">
+    <section id="services"><h2>Our Services</h2><article><h3>Drain Cleaning</h3></article><article><h3>Leak Repair</h3></article></section>
+    <a href="mailto:hello@example.com">Email</a><a href="tel:+15555555555">Phone</a>`;
+  const data = extractDetails(html, 'https://example.com/start/', ':root{--accent:#1a7}');
+  assert.equal(data.name, 'Example Plumbing');
+  assert.equal(data.logo, 'https://example.com/logo.svg');
+  assert.deepEqual(data.images, ['https://example.com/team.jpg']);
+  assert.deepEqual(data.services, ['Drain Cleaning', 'Leak Repair']);
+  assert.equal(data.color, '#11aa77');
+  assert.equal(data.email, 'hello@example.com');
+  assert.equal(data.phone, '+15555555555');
+});
+
+test('real business fixture keeps logo separate from photos and extracts available services', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+  const css = await readFile(new URL('../css/style.css', import.meta.url), 'utf8');
+  const data = extractDetails(html, 'https://www.bamswebsitebuilder.com/', css);
+  assert.ok(data.name.includes('BAM'));
+  assert.ok(data.logo);
+  assert.ok(!data.images.includes(data.logo));
 });
