@@ -82,6 +82,7 @@ test('real business fixture keeps logo separate from photos and extracts availab
   assert.ok(data.name.includes('BAM'));
   assert.ok(data.logo);
   assert.ok(!data.images.includes(data.logo));
+  assert.ok(data.images.every(image => !/logo/i.test(new URL(image).pathname)));
 });
 
 

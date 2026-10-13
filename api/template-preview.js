@@ -109,7 +109,7 @@ export function extractDetails(html, sourceURL, css = '') {
   }
   const image = asset(metadata['og:image'] || metadata['twitter:image']);
   const photos = [...new Set(imgs.filter(img => !/logo|icon|badge|avatar|payment/i.test(`${img.alt || ''} ${img.class || ''} ${img.src || ''}`)).map(img => asset(img.src || img['data-src'])).filter(Boolean))].slice(0, 8);
-  if (image && image !== details.logo) photos.unshift(image);
+  if (image && image !== details.logo && !/logo|favicon/i.test(new URL(image).pathname)) photos.unshift(image);
   details.images = [...new Set(photos)].slice(0, 8);
   if (details.images.length) details.image = details.images[0];
   const styles = css + (html.match(/<style\b[^>]*>[\s\S]*?<\/style>/gi) || []).join(' ');
