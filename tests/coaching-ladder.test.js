@@ -102,3 +102,18 @@ test('public updates use literal text and clearing a section removes stale conte
   assert.equal(f.element('announcements').children.length,1);
   assert.equal(f.element('announcements').children[0].textContent,'No updates published yet.');
 });
+
+
+test('clean and legacy login pages load fresh redirect code from the same module', async()=>{
+  const base=new URL('../coaching-ladder/',import.meta.url);
+  for(const path of ['admin-login.html','admin-login/index.html','admin-dashboard.html','admin-dashboard/index.html']){
+    const html=readFileSync(new URL(path,base),'utf8');
+    const src=html.match(/<script type="module" src="([^"]+)"/)[1];
+    const moduleURL=new URL(src,'https://www.bamswebsitebuilder.com/coaching-ladder/'+path.replace('index.html',''));
+    assert.equal(moduleURL.pathname,'/coaching-ladder/admin.js');
+    assert.ok(moduleURL.searchParams.get('v'),'cached modules must be invalidated after changing redirect paths');
+  }
+  const f=fixture('login');f.run('admin.js');await f.submit('login-form');
+  const destination=new URL(f.state.redirect,'https://www.bamswebsitebuilder.com/coaching-ladder/admin-login/');
+  assert.equal(destination.pathname,'/coaching-ladder/admin-dashboard/');
+});
