@@ -142,3 +142,50 @@
 .desktop-screen b,.phone-screen b{margin-top:0}
 .header-book{position:fixed!important;left:max(18px,env(safe-area-inset-left))!important;bottom:max(18px,env(safe-area-inset-bottom))!important;top:auto!important;right:auto!important;z-index:9970!important;min-width:150px!important;min-height:50px!important;justify-content:center!important;box-shadow:0 12px 32px rgba(0,0,0,.42),0 0 22px rgba(216,169,40,.18)!important}
 @media(max-width:700px){.header-book{display:none!important}}
+
+/* Keep booking cards readable independently of the surrounding page theme. */
+html body .booking-section .booking-handoff .panel,
+html body .booking-section .booking-promises {
+  background: #fff;
+  color: #20201d;
+}
+html body .booking-section .booking-handoff h2,
+html body .booking-section .booking-promises b {
+  color: #20201d !important;
+}
+html body .booking-section .booking-handoff p,
+html body .booking-section .booking-promises p,
+html body .booking-section .booking-promises small {
+  color: #454545 !important;
+}
+html body .booking-section .booking-handoff p {
+  font-size: 1rem;
+  line-height: 1.65;
+}
+html body .booking-section .booking-handoff .secure-note {
+  font-size: .875rem;
+}
+html body .booking-section .booking-handoff a:not(.confirm-button) {
+  color: #6f4d00;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+html body .booking-section .booking-handoff a:not(.confirm-button):hover {
+  color: #20201d;
+}
+html body .booking-section .booking-handoff .confirm-button {
+  background: #111;
+  color: #fff !important;
+  line-height: 1.5;
+}
+html body .booking-section .booking-handoff .confirm-button:hover {
+  background: #303030;
+}
+html body .booking-section .booking-promises > div > span {
+  color: #6f4d00;
+}
+html body .booking-section .booking-promises b,
+html body .booking-section .booking-promises small {
+  font-size: .8125rem;
+  line-height: 1.5;
+}
