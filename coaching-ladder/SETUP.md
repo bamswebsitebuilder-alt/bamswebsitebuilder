@@ -17,7 +17,9 @@ firebase deploy --only firestore:rules --project bam-client-portal
 ```
 Review the current Firestore rules and test access before deploying.
 
-1. In Firebase Authentication, create or identify a league commissioner's email/password user (do not share passwords).
+The commissioner login is sign-in only. There is no public account-creation form or registration call in the league login module. Only trusted Firebase project administrators provision league accounts and approve staff access; the commissioner editor does not grant account-management privileges.
+
+1. A trusted Firebase project administrator creates or identifies the league commissioner's email/password user in Firebase Authentication (do not share passwords). Have the account owner use Reset Password on the commissioner login to set their own password.
 2. Copy the user's Firebase Authentication UID.
 3. In Firestore, using the Firebase Console or trusted Admin SDK (not the browser), create document `coachingLadderStaff/{UID}` with:
    - `active`: boolean `true`
@@ -27,6 +29,8 @@ Review the current Firestore rules and test access before deploying.
 6. Verify the public page shows the published data.
 
 Staff membership documents are not writable from the public browser; granting and revoking access requires a trusted Firebase administrator. Do not add private Discord channel messages or credentials to the public editor.
+
+Firebase Authentication is shared with the BAM client portal, so this change does not disable project-wide end-user signup. An Auth account alone never grants league access: the UID must also have an active `commissioner` or `staff` record as described above. Removing the league signup UI is not an Auth-provider registration restriction.
 
 ## Scope and limits
 - Selected Discord channels can be mirrored through the read-only Vercel API described below.

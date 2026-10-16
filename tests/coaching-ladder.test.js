@@ -55,50 +55,58 @@ test('commissioner loads published content and publishes all sections with attri
   assert.equal(f.element('save').disabled,false);
 });
 
-test('account creation registers email, signs out, and grants no staff permissions',async()=>{
+test('public commissioner login cannot create accounts or grant staff roles',async()=>{
   const f=fixture('login',{exists:false});f.run('admin.js');
-  f.element('account-toggle').handlers.click();
-  assert.equal(f.element('confirm-password').required,true);
-  assert.equal(f.element('password').autocomplete,'new-password');
-  f.element('email').value=' new@example.test ';
-  f.element('password').value='Example-test-123!';
-  f.element('confirm-password').value='Example-test-123!';
+  f.element('email').value='new@example.test';f.element('password').value='Example-test-123!';
   await f.submit('login-form');
-  assert.equal(f.state.registrations.length,1);
-  assert.equal(f.state.registrations[0].email,'new@example.test');
+  assert.equal(f.state.registrations,undefined);
   assert.equal(f.state.writes.length,0);
   assert.equal(f.state.redirect,null);
   assert.equal(f.state.user,null);
-  assert.match(f.element('status').textContent,/Account created.*approve staff access/);
-  assert.equal(f.element('password').value,'');
-  assert.equal(f.element('confirm-password').value,'');
-  assert.equal(f.element('confirm-field').hidden,true);
-});
-
-test('mismatched or short passwords never call registration and allow retry',async()=>{
-  for(const [password,confirm] of [['Example-test-123!','different'],['short','short']]){
-    const f=fixture('login');f.run('admin.js');f.element('account-toggle').handlers.click();
-    f.element('password').value=password;f.element('confirm-password').value=confirm;
-    await f.submit('login-form');
-    assert.equal(f.state.registrations,undefined);
-    assert.equal(f.element('login-btn').disabled,false);
-    assert.equal(f.element('account-toggle').disabled,false);
-    assert.equal(f.element('confirm-password').value,'');
+  assert.equal(f.element('account-toggle').handlers.click,undefined);
+  assert.match(f.element('status').textContent,/not approved/);
+  for(const path of ['admin-login.html','admin-login/index.html']){
+    const html=readFileSync(new URL('../coaching-ladder/'+path,import.meta.url),'utf8');
+    assert.doesNotMatch(html,/account-toggle|confirm-password|Create Account|Create an account/);
+    assert.match(html,/Admin accounts are created by a league administrator/);
   }
 });
 
-test('duplicate email and network errors show recovery guidance without claiming success',async()=>{
-  for(const [code,message] of [['auth/email-already-in-use',/already exists/],['auth/network-request-failed',/connection/]]){
-    const f=fixture('login');f.run('admin.js');f.element('account-toggle').handlers.click();
-    f.state.registrationError=code;
-    f.element('password').value='Example-test-123!';f.element('confirm-password').value='Example-test-123!';
+test('inactive and unrelated roles cannot sign in',async()=>{
+  for(const options of [{active:false},{role:'admin'},{role:'client'}]){
+    const f=fixture('login',options);f.run('admin.js');
     await f.submit('login-form');
-    assert.match(f.element('status').textContent,message);
-    assert.equal(f.element('login-btn').disabled,false);
-    assert.equal(f.element('account-toggle').disabled,false);
-    assert.equal(f.state.writes.length,0);
     assert.equal(f.state.redirect,null);
+    assert.equal(f.state.user,null);
+    assert.equal(f.state.writes.length,0);
   }
+});
+
+test('failed staff verification signs out and keeps the dashboard closed',async()=>{
+  const f=fixture('login');f.context.getDoc=async()=>{throw Error('permission-denied')};
+  f.run('admin.js');f.element('password').value='test-only-placeholder';
+  await f.submit('login-form');
+  assert.equal(f.state.user,null);
+  assert.equal(f.state.redirect,null);
+  assert.equal(f.state.writes.length,0);
+  assert.equal(f.element('password').value,'');
+  assert.equal(f.element('login-btn').disabled,false);
+  assert.match(f.element('status').textContent,/Unable to verify staff access/);
+});
+
+test('password reset remains available and never grants staff access',async()=>{
+  const f=fixture('login',{exists:false});let requestedEmail;
+  f.context.sendPasswordResetEmail=async(_auth,email)=>{requestedEmail=email};
+  f.run('admin.js');
+  await f.element('reset-btn').handlers.click();
+  assert.equal(requestedEmail,undefined);
+  f.element('email').value=' staff@example.test ';
+  await f.element('reset-btn').handlers.click();
+  assert.equal(requestedEmail,'staff@example.test');
+  assert.match(f.element('status').textContent,/If an account exists/);
+  assert.equal(f.state.writes.length,0);
+  assert.equal(f.state.redirect,null);
+  assert.equal(f.state.registrations,undefined);
 });
 
 test('signed-out, inactive, missing and BAM-admin-only accounts cannot open editor',async()=>{
