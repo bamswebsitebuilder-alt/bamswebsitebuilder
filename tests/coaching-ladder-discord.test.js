@@ -47,3 +47,47 @@ test('website safely renders Discord text and clears deleted posts',async()=>{
   payload.sections.announcements=[];await tick();assert.equal(list.children.length,0);
   payload={configured:true,partial:false,sections:{}};await tick();assert.equal(list.removed,true);
 });
+
+test('forum feed includes active and archived starters, titles and links; excludes private/unselected threads and replies',async()=>{
+  const forum='1514117624861167776', first='1514117624861167780', second='1514117624861167781', deleted='1514117624861167782';
+  configure({breaking:forum});
+  const thread=(id,extra={})=>({id,parent_id:forum,guild_id:guild,type:11,name:id===first?'ESPN':'Upset Alert',...extra});
+  let text='Mississippi State update';let removed=false;const calls=[];
+  globalThis.fetch=async url=>{
+    calls.push(url);let value;
+    if(url.endsWith('/channels/'+forum)) value={guild_id:guild,type:15};
+    else if(url.endsWith('/threads/active')) value={threads:removed?[]:[thread(first),thread(first),thread('1514117624861167783',{type:12}),thread('1514117624861167784',{parent_id:channel})]};
+    else if(url.includes('/threads/archived/public')) value={threads:[thread(second),thread(deleted)]};
+    else {
+      const id=url.split('/').at(-1);
+      if(id===deleted)return {ok:false,status:404};
+      assert([first,second].includes(id));
+      value={id,channel_id:id,type:0,content:text,timestamp:'2026-10-16T03:00:00Z',attachments:[],embeds:[]};
+    }
+    return {ok:true,json:async()=>value};
+  };
+  async function read(){const res=response();await handler({method:'GET'},res);return res}
+  let res=await read();assert.equal(res.code,200);assert.equal(res.data.partial,false);
+  assert.deepEqual(res.data.sections.breaking.map(p=>p.id),[second,first]);
+  assert.equal(res.data.sections.breaking[1].text,'ESPN\n\nMississippi State update');
+  assert.equal(res.data.sections.breaking[1].url,`https://discord.com/channels/${guild}/${first}/${first}`);
+  assert.equal(calls.filter(u=>u.endsWith('/messages/'+first)).length,1);
+  assert(!calls.some(u=>u.includes('/channels/'+forum+'/messages')));
+  text='Edited original post';res=await read();assert.match(res.data.sections.breaking[0].text,/Edited original post/);
+  removed=true;res=await read();assert.deepEqual(res.data.sections.breaking.map(p=>p.id),[second]);
+});
+
+test('forum starter permission failure keeps the failed section out of the partial response',async()=>{
+  const forum='1514117624861167776',thread='1514117624861167780';configure({announcements:channel,breaking:forum});
+  globalThis.fetch=async url=>{
+    if(url.endsWith('/messages/'+thread))return {ok:false,status:403};
+    let value;
+    if(url.endsWith('/channels/'+forum))value={guild_id:guild,type:15};
+    else if(url.endsWith('/channels/'+channel))value={guild_id:guild,type:0};
+    else if(url.endsWith('/threads/active'))value={threads:[{id:thread,parent_id:forum,guild_id:guild,type:11,name:'Post'}]};
+    else if(url.includes('/threads/archived/public'))value={threads:[]};
+    else value=[];
+    return {ok:true,json:async()=>value};
+  };
+  const res=response();await handler({method:'GET'},res);assert.equal(res.data.partial,true);assert.deepEqual(res.data.sections,{announcements:[]});
+});
