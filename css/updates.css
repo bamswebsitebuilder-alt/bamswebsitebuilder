@@ -21,6 +21,8 @@
 .updates-feed-heading>a{flex-shrink:0}
 .updates-widget{min-width:0;width:100%;background:transparent;border:0;padding:0}
 .updates-widget iframe{display:block;width:100%;height:1000px;border:0;outline:0;box-shadow:none;background:transparent}
+#bam-instagram-frame iframe{height:700px}
+@media(max-width:650px){#bam-instagram-frame iframe{height:800px}}
 .updates-placeholder{padding:32px;background:rgba(212,166,55,.04);border:1px solid var(--updates-line);border-radius:8px}
 .updates-placeholder p{max-width:65ch;line-height:1.7;margin:0 0 20px;color:var(--updates-muted)}
 .updates-followup{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:center;padding-top:48px}
