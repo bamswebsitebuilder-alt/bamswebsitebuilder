@@ -57,7 +57,7 @@ test('signed-out, inactive, missing and BAM-admin-only accounts cannot open edit
     await f.submit('editor');assert.equal(f.state.writes.length,0);
   }
   const f=fixture();f.state.user=null;f.run('admin.js');await f.state.authChanged(null);
-  assert.equal(f.state.redirect,'./admin-login.html');
+  assert.equal(f.state.redirect,'/coaching-ladder/admin-login/');
 });
 
 test('failed content load keeps Publish disabled and cannot overwrite the website',async()=>{
@@ -87,7 +87,7 @@ test('login admits a commissioner and rejects a user with no staff record',async
   for(const exists of [true,false]){
     const f=fixture('login',{exists});f.run('admin.js');f.element('password').value='test-only-placeholder';
     await f.submit('login-form');
-    assert.equal(f.state.redirect,exists?'./admin-dashboard.html':null);
+    assert.equal(f.state.redirect,exists?'/coaching-ladder/admin-dashboard/':null);
     assert.equal(f.element('password').value,'');
     if(!exists)assert.equal(f.state.user,null);
   }
