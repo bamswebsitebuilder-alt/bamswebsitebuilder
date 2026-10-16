@@ -27,6 +27,7 @@ function render(id,items){
   if(!el.children.length){
     const li=document.createElement("li");
     li.textContent="No updates published yet.";
+    li.className="empty";
     el.append(li);
   }
 }
