@@ -106,6 +106,28 @@ test('forum starter permission failure keeps the failed section out of the parti
   const res=response();await handler({method:'GET'},res);assert.equal(res.data.partial,true);assert.deepEqual(res.data.sections,{announcements:[]});
 });
 
+test('explicit forum thread publishes its current messages once without the missing starter placeholder',async()=>{
+  const forum='1514117624861167776',thread='1541250754692784240',message='1541250754692784241';
+  configure({breaking:[forum,thread]});const calls=[];
+  globalThis.fetch=async url=>{
+    calls.push(url);let value;
+    if(url.endsWith('/channels/'+forum))value={guild_id:guild,type:15};
+    else if(url.endsWith('/channels/'+thread))value={guild_id:guild,type:11,name:'ESPN'};
+    else if(url.endsWith('/threads/active'))value={threads:[]};
+    else if(url.includes('/threads/archived/public'))value={threads:[{id:thread,parent_id:forum,type:11,name:'ESPN'}]};
+    else if(url.endsWith('/channels/'+thread+'/messages?limit=40'))value=[{id:message,channel_id:thread,type:0,content:'Visible ESPN update',timestamp:'2026-10-16T03:00:00Z',attachments:[{filename:'score.png',url:'https://cdn.discordapp.com/score.png',content_type:'image/png'}]}];
+    else throw Error('Unexpected Discord request: '+url);
+    return {ok:true,json:async()=>value};
+  };
+  const res=response();await handler({method:'GET'},res);
+  assert.equal(res.data.partial,false);
+  assert.equal(res.data.sections.breaking.length,1);
+  assert.equal(res.data.sections.breaking[0].text,'ESPN\n\nVisible ESPN update');
+  assert.equal(res.data.sections.breaking[0].url,`https://discord.com/channels/${guild}/${thread}/${message}`);
+  assert.equal(res.data.sections.breaking[0].attachments[0].image,true);
+  assert(!calls.some(url=>url.endsWith('/messages/'+thread)));
+});
+
 test('multiple configured channels merge newest first with source links and no duplicate reads',async()=>{
   const waiting='1515022127307427931', newer='1515022127307427933', older='1514409835242852473';
   configure({taken:[channel,waiting,channel]});const calls=[];

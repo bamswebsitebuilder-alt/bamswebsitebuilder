@@ -21,13 +21,13 @@ async function discord(path, token, allowMissing = false) {
 }
 
 // Forums store each post as a public thread. Read only the starter post, not its discussion replies.
-async function forumMessages(channelId, guild, token, activeThreads) {
+async function forumMessages(channelId, guild, token, activeThreads, directChannels = []) {
   const [active, archived] = await Promise.all([
     activeThreads(), discord('/channels/' + channelId + '/threads/archived/public?limit=40', token)
   ]);
   if (!Array.isArray(active.threads) || !Array.isArray(archived.threads)) throw Error('invalid_threads');
   const selected = [...new Map([...active.threads,...archived.threads]
-    .filter(t=>snowflake(t.id) && t.parent_id === channelId && (!t.guild_id || t.guild_id === guild) && t.type === 11)
+    .filter(t=>snowflake(t.id) && t.parent_id === channelId && (!t.guild_id || t.guild_id === guild) && t.type === 11 && !directChannels.includes(t.id))
     .map(t=>[t.id,t])).values()]
     .sort((a,b)=>BigInt(a.id)>BigInt(b.id)?-1:1).slice(0,20);
   const messages = new Array(selected.length);
@@ -80,12 +80,12 @@ export default async function handler(req, res) {
     // Reject DMs, other servers, private threads and unsupported channel types.
     if (channel.guild_id !== guild || ![0,5,11,15,16].includes(channel.type)) throw Error('invalid_channel');
     const messages = [15,16].includes(channel.type)
-      ? await forumMessages(channelId,guild,token,activeThreads)
+      ? await forumMessages(channelId,guild,token,activeThreads,channelIds(configuredChannels))
       : await discord('/channels/' + channelId + '/messages?limit=40', token);
     if (!Array.isArray(messages)) throw Error('invalid_messages');
     const posts = messages.filter(m=>snowflake(m.id) && [0,19].includes(m.type)).map(m=>({
       id:m.id,
-      text: [m.forumTitle, typeof m.content === 'string'?m.content.slice(0,4000):''].filter(Boolean).join('\n\n'),
+      text: [m.forumTitle || (channel.type === 11 ? channel.name : ''), typeof m.content === 'string'?m.content.slice(0,4000):''].filter(Boolean).join('\n\n'),
       date: typeof m.timestamp === 'string' ? m.timestamp : '',
       url:'https://discord.com/channels/' + guild + '/' + (m.sourceChannel || channelId) + '/' + m.id,
       attachments:(Array.isArray(m.attachments)?m.attachments:[]).slice(0,10).map(a=>({
