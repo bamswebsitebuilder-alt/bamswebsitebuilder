@@ -137,6 +137,26 @@
     const aboutLabel = spanish ? 'Nosotros' : 'About';
     const iconMarkup = (name) => `<span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#${name}"></use></svg></span>`;
 
+    // Keep the Updates resource consistent across the shared desktop and mobile menus.
+    const updatesHref = spanish ? '/es/updates' : '/updates';
+    const updatesLabel = spanish ? 'Últimas novedades' : 'Latest Updates';
+    const updatesCurrent = location.pathname.replace(/\/+$/, '').replace(/\.html$/, '') === updatesHref;
+    document.querySelectorAll('.desktop-navigation, .mobile-navigation, .booking-mobile-links').forEach((nav) => {
+      if (nav.querySelector('[data-page="updates"]')) return;
+      const tips = nav.querySelector('[data-page="website-tips"]');
+      if (!tips) return;
+      const link = document.createElement('a');
+      link.dataset.page = 'updates';
+      link.href = updatesHref;
+      if (nav.classList.contains('desktop-navigation')) link.textContent = updatesLabel;
+      else link.innerHTML = `${iconMarkup('services')}<span>${updatesLabel}</span>`;
+      if (updatesCurrent) {
+        link.classList.add('active');
+        link.setAttribute('aria-current', 'page');
+      }
+      tips.insertAdjacentElement('afterend', link);
+    });
+
     document.querySelectorAll('a[href="/booking.html"], a[href="/es/booking.html"]').forEach((link) => {
       link.href = spanish ? '/es/booking' : '/booking';
     });
