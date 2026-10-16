@@ -57,7 +57,7 @@ test('forum feed includes active and archived starters, titles and links; exclud
     calls.push(url);let value;
     if(url.endsWith('/channels/'+forum)) value={guild_id:guild,type:15};
     else if(url.endsWith('/threads/active')) value={threads:removed?[]:[thread(first),thread(first),thread('1514117624861167783',{type:12}),thread('1514117624861167784',{parent_id:channel})]};
-    else if(url.includes('/threads/archived/public')) value={threads:[thread(second),thread(deleted)]};
+    else if(url.includes('/threads/archived/public')) value={threads:[thread(second,{guild_id:undefined}),thread(deleted,{guild_id:undefined})]};
     else {
       const id=url.split('/').at(-1);
       if(id===deleted)return {ok:false,status:404};

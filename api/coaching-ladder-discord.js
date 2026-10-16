@@ -25,7 +25,7 @@ async function forumMessages(channelId, guild, token, activeThreads) {
   ]);
   if (!Array.isArray(active.threads) || !Array.isArray(archived.threads)) throw Error('invalid_threads');
   const selected = [...new Map([...active.threads,...archived.threads]
-    .filter(t=>snowflake(t.id) && t.parent_id === channelId && t.guild_id === guild && t.type === 11)
+    .filter(t=>snowflake(t.id) && t.parent_id === channelId && (!t.guild_id || t.guild_id === guild) && t.type === 11)
     .map(t=>[t.id,t])).values()]
     .sort((a,b)=>BigInt(a.id)>BigInt(b.id)?-1:1).slice(0,20);
   const messages = new Array(selected.length);
