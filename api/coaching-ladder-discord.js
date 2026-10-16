@@ -16,6 +16,8 @@ async function discord(path, token) {
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
+  // These are deliberately public posts, also consumed by the GitHub Pages custom domain.
+  res.setHeader('Access-Control-Allow-Origin', '*');
   if (req.method !== 'GET') {
     res.setHeader('Allow', 'GET');
     return res.status(405).json({error:'method_not_allowed'});

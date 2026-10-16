@@ -45,7 +45,7 @@ async function refresh() {
   if (busy || document.hidden) return;
   busy = true;
   try {
-    const response = await fetch('/api/coaching-ladder-discord', {signal:AbortSignal.timeout(15000)});
+    const response = await fetch('https://bamswebsitebuilder.vercel.app/api/coaching-ladder-discord', {signal:AbortSignal.timeout(15000)});
     if (!response.ok) return;
     const data = await response.json();
     if (!data.configured) {

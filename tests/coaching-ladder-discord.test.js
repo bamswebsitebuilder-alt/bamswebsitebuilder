@@ -14,6 +14,7 @@ test('unconfigured feed makes no Discord requests and does not expose credential
   delete process.env.COACHING_DISCORD_BOT_TOKEN;
   globalThis.fetch=()=>{throw Error('must not fetch')};const res=response();await handler({method:'GET'},res);
   assert.deepEqual(res.data,{configured:false,sections:{}});
+  assert.equal(res.headers['Access-Control-Allow-Origin'],'*');
 });
 test('explicit channel selection strips credentials and unsafe links; edits and deletes refresh',async()=>{
   configure();let messages=[{id:'1499838116255633513',type:0,content:'Original',timestamp:'2026-10-16T02:00:00Z',attachments:[{filename:'bad',url:'javascript:alert(1)'}],embeds:[{title:'Example',url:'javascript:alert(1)'}]}];
