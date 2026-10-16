@@ -218,5 +218,47 @@ service cloud.firestore {
         allow delete: if isAdmin();
       }
     }
+    // Climb the Coaching Ladder: separate staff roles and public league content.
+    // Staff records must be provisioned by a trusted Firebase administrator.
+    function isLeagueStaff() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/coachingLadderStaff/$(request.auth.uid))
+        && get(/databases/$(database)/documents/coachingLadderStaff/$(request.auth.uid)).data.active == true
+        && get(/databases/$(database)/documents/coachingLadderStaff/$(request.auth.uid)).data.role in ["commissioner", "staff"];
+    }
+
+    match /coachingLadderStaff/{staffUid} {
+      allow read: if request.auth != null && request.auth.uid == staffUid;
+      allow write: if false;
+    }
+
+    match /coachingLadder/{scope}/site/{documentId} {
+      allow read: if scope == "public" && documentId == "content";
+      allow create, update: if scope == "public" && documentId == "content"
+        && isLeagueStaff()
+        && request.resource.data.keys().hasOnly([
+          "announcements", "breaking", "advancement", "scores", "champions",
+          "format", "available", "taken", "recruiting", "rules", "tips",
+          "playbooks", "creators", "highlights", "updatedAt", "updatedBy"
+        ])
+        && request.resource.data.updatedBy == request.auth.uid
+        && request.resource.data.updatedAt == request.time
+        && request.resource.data.announcements is list && request.resource.data.announcements.size() <= 40
+        && request.resource.data.breaking is list && request.resource.data.breaking.size() <= 40
+        && request.resource.data.advancement is list && request.resource.data.advancement.size() <= 40
+        && request.resource.data.scores is list && request.resource.data.scores.size() <= 40
+        && request.resource.data.champions is list && request.resource.data.champions.size() <= 40
+        && request.resource.data.format is list && request.resource.data.format.size() <= 40
+        && request.resource.data.available is list && request.resource.data.available.size() <= 40
+        && request.resource.data.taken is list && request.resource.data.taken.size() <= 40
+        && request.resource.data.recruiting is list && request.resource.data.recruiting.size() <= 40
+        && request.resource.data.rules is list && request.resource.data.rules.size() <= 40
+        && request.resource.data.tips is list && request.resource.data.tips.size() <= 40
+        && request.resource.data.playbooks is list && request.resource.data.playbooks.size() <= 40
+        && request.resource.data.creators is list && request.resource.data.creators.size() <= 40
+        && request.resource.data.highlights is list && request.resource.data.highlights.size() <= 40;
+      allow delete: if false;
+    }
+
   }
 }
