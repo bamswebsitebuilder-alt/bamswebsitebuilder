@@ -1,6 +1,8 @@
 // Only explicitly configured public publishing channels are exposed. Never accept channel IDs from a request.
 const sections = new Set(['announcements','breaking','advancement','scores','champions','format','available','taken','recruiting','rules','tips','playbooks','creators','highlights']);
 const snowflake = value => typeof value === 'string' && /^\d{17,20}$/.test(value);
+const channelIds = value => Array.isArray(value) ? value : [value];
+const validChannels = value => channelIds(value).length > 0 && channelIds(value).length <= 4 && channelIds(value).every(snowflake);
 const safeUrl = value => {
   try { const url = new URL(value); return url.protocol === 'https:' ? url.href : null; }
   catch { return null; }
@@ -67,12 +69,13 @@ export default async function handler(req, res) {
   try {
     mapping = JSON.parse(process.env.COACHING_DISCORD_CHANNELS);
     if (!mapping || Array.isArray(mapping) || typeof mapping !== 'object' ||
-        !Object.keys(mapping).length || Object.entries(mapping).some(([key,id])=>!sections.has(key)||!snowflake(id))) throw Error();
+        !Object.keys(mapping).length || Object.entries(mapping).some(([key,id])=>!sections.has(key)||!validChannels(id))) throw Error();
   } catch { return res.status(503).json({error:'configuration_unavailable'}); }
 
   let active;
   const activeThreads = ()=>active ||= discord('/guilds/' + guild + '/threads/active',token);
-  const results = await Promise.allSettled(Object.entries(mapping).map(async ([section, channelId])=>{
+  const results = await Promise.allSettled(Object.entries(mapping).map(async ([section, configuredChannels])=>{
+    const batches = await Promise.all([...new Set(channelIds(configuredChannels))].map(async channelId=>{
     const channel = await discord('/channels/' + channelId, token);
     // Reject DMs, other servers, private threads and unsupported channel types.
     if (channel.guild_id !== guild || ![0,5,11,15,16].includes(channel.type)) throw Error('invalid_channel');
@@ -96,6 +99,10 @@ export default async function handler(req, res) {
       }))
     })).filter(m=>m.text || m.attachments.length || m.embeds.some(e=>e.title||e.description||e.url));
     if (messages.length && !posts.length) throw Error('message_content_unavailable');
+    return posts;
+    }));
+    const posts = [...new Map(batches.flat().map(post=>[post.id,post])).values()]
+      .sort((a,b)=>BigInt(a.id)>BigInt(b.id)?-1:1).slice(0,40);
     return [section,posts];
   }));
   const data = Object.fromEntries(results.filter(r=>r.status==='fulfilled').map(r=>r.value));

@@ -69,3 +69,7 @@ The GitHub Pages website calls `https://bamswebsitebuilder.vercel.app/api/coachi
 | highlights | Clips & Highlights |
 
 Example shape only: `{"announcements":"YOUR_ANNOUNCEMENTS_CHANNEL_ID","scores":"YOUR_SCORES_CHANNEL_ID"}`. Unknown keys, non-string IDs and channels from other servers are rejected. Channel IDs in query parameters are ignored. The endpoint never sends Discord messages or changes server content. Removing a mapping removes its feed after the next complete refresh. Remove the token and redeploy to disable the integration.
+
+
+### Multiple channels in one section
+A section can map to one channel ID string or an array of up to four channel ID strings. For example: `{"taken":["TEAMS_TAKEN_CHANNEL_ID","WAITING_LIST_CHANNEL_ID"]}`. Posts are combined, deduplicated by Discord message ID and sorted newest first, capped at 40 entries. Each post links to its source channel. If any source fails, the section preserves its prior successful display until all its sources can be refreshed. All mapped channels are intended for public publication.

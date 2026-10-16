@@ -105,3 +105,32 @@ test('forum starter permission failure keeps the failed section out of the parti
   };
   const res=response();await handler({method:'GET'},res);assert.equal(res.data.partial,true);assert.deepEqual(res.data.sections,{announcements:[]});
 });
+
+test('multiple configured channels merge newest first with source links and no duplicate reads',async()=>{
+  const waiting='1515022127307427931', newer='1515022127307427933', older='1514409835242852473';
+  configure({taken:[channel,waiting,channel]});const calls=[];
+  globalThis.fetch=async url=>{
+    calls.push(url);const id=url.split('/channels/')[1].split('/')[0];
+    const value=url.includes('/messages?')?[{id:id===waiting?newer:older,type:0,content:id===waiting?'Waiting list':'Teams taken',timestamp:'2026-10-16T03:00:00Z'}]:{guild_id:guild,type:0};
+    return {ok:true,json:async()=>value};
+  };
+  const res=response();await handler({method:'GET'},res);
+  assert.equal(res.code,200);assert.equal(res.data.partial,false);
+  assert.deepEqual(res.data.sections.taken.map(p=>p.id),[newer,older]);
+  assert.equal(res.data.sections.taken[0].url,`https://discord.com/channels/${guild}/${waiting}/${newer}`);
+  assert.equal(calls.filter(u=>u.endsWith('/channels/'+channel)).length,1);
+});
+
+test('empty, malformed or oversized multi-channel lists never trigger upstream requests',async()=>{
+  globalThis.fetch=()=>{throw Error('must not fetch')};
+  for(const value of [[],[123],[channel,'invalid'],Array(5).fill(channel)]){
+    configure({taken:value});const res=response();await handler({method:'GET'},res);assert.equal(res.code,503);
+  }
+});
+
+test('one failed source prevents a partial multi-channel section from erasing its successful history',async()=>{
+  const waiting='1515022127307427931';configure({taken:[channel,waiting],announcements:channel});
+  globalThis.fetch=async url=>({ok:!url.includes(waiting),status:url.includes(waiting)?403:200,json:async()=>url.includes('/messages?')?[]:{guild_id:guild,type:0}});
+  const res=response();await handler({method:'GET'},res);
+  assert.equal(res.data.partial,true);assert.deepEqual(res.data.sections,{announcements:[]});
+});
