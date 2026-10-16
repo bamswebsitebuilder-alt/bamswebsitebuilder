@@ -1,0 +1,14 @@
+.admin-login-page{min-height:100vh;display:flex;flex-direction:column;background:#08090c}
+.reference-home.admin-login-page::before{display:block;position:fixed;inset:0;z-index:-1;background:linear-gradient(90deg,#07080cda,#07080c99),url('./gaming-room.png') center/cover no-repeat}
+.admin-login-page main{flex:1}.admin-login-page .auth-shell{max-width:1050px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin:55px auto 65px}
+.login-intro{text-align:center}.login-intro img{display:block;width:235px;height:265px;object-fit:contain;margin:0 auto 18px;filter:drop-shadow(0 10px 25px #0008)}
+.login-intro h2{font-family:Impact,'Arial Narrow',sans-serif;font-weight:400;font-size:38px;line-height:1.15;text-transform:uppercase;margin:15px 0 12px}.login-intro h2 span{color:var(--gold)}.login-intro p{color:var(--muted);font-size:14px}
+.admin-login-page .form-card{background:linear-gradient(145deg,#1b1b20f5,#0d0e12f5);border:1px solid #75602d;border-radius:10px;padding:32px;box-shadow:0 20px 65px #0008,inset 0 1px 0 #ffe48712}
+.admin-login-page .form-card h1{font-family:Impact,'Arial Narrow',sans-serif;font-weight:400;text-transform:uppercase;font-size:38px;letter-spacing:.3px;margin:7px 0 10px}
+.admin-login-page .form-card p{font-size:13px;line-height:1.6;color:#bfc0c6}.admin-login-page label{font-size:13px;color:#e7e4db;font-weight:600;margin-top:18px}
+.admin-login-page input{border:1px solid #49463d;background:#090a0e;border-radius:6px;padding:13px 14px;color:#f6f5f0}.admin-login-page input:focus{outline-color:var(--gold);border-color:var(--gold)}
+.admin-login-page .form-card .btn{width:100%;min-height:45px;font-size:14px}.admin-login-page #reset-btn{margin-top:10px;border-color:#64532b}.admin-login-page .status{min-height:24px;margin:12px 0;color:#f6cd59}.admin-login-page .status.ok{color:#9ae5af}
+.admin-login-page .btn:disabled{opacity:.6;cursor:wait;transform:none}.admin-login-page .form-card>p:last-child{border-top:1px solid #ffffff16;padding-top:18px;margin-bottom:0;font-size:12px}
+.admin-login-page .footer{border-color:#49402a;font-size:12px}.admin-login-page .footer>.wrap{display:flex;justify-content:center;gap:10px}
+@media(max-width:970px){.admin-login-page .auth-shell{gap:35px;margin:35px auto 45px}.login-intro h2{font-size:30px}.login-intro img{width:190px;height:220px}.admin-login-page .form-card{padding:25px}}
+@media(max-width:680px){.admin-login-page .nav{flex-wrap:nowrap;gap:10px;padding:8px 0}.admin-login-page .nav-actions{width:auto;flex-shrink:1}.admin-login-page .nav-actions .btn{font-size:10px;padding:9px}.admin-login-page .auth-shell{display:block;max-width:460px;margin:30px auto 40px}.login-intro{display:none}.admin-login-page .form-card{padding:24px}.admin-login-page .form-card h1{font-size:32px}.admin-login-page .footer>.wrap{flex-wrap:wrap}}
