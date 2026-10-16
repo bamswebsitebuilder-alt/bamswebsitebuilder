@@ -40,6 +40,7 @@ async function forumMessages(channelId, guild, token, activeThreads) {
       messages[i] = {...message, forumTitle:typeof thread.name === 'string'?thread.name.slice(0,100):'', sourceChannel:thread.id};
     }
   }));
+  console.info('Coaching forum sync counts', JSON.stringify({active:active.threads.length,archived:archived.threads.length,matchingParents:[...active.threads,...archived.threads].filter(t=>t.parent_id===channelId).length,types:[...new Set([...active.threads,...archived.threads].filter(t=>t.parent_id===channelId).map(t=>t.type))],selected:selected.length,starters:messages.filter(Boolean).length,messageTypes:[...new Set(messages.filter(Boolean).map(m=>m.type))]}));
   return messages.filter(Boolean);
 }
 
