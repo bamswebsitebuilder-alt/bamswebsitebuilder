@@ -208,18 +208,7 @@
     "https://x.com/bamswebsite"
   ]
 }
-</script><link rel="stylesheet" href="/css/portal-brand.css?v=20261013-brand-4"><style id="bam-facebook-styles">
-.bam-facebook-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:40px;align-items:start}
-.bam-facebook-grid>div{min-width:0}
-.bam-social-intro{grid-column:1/-1}.bam-facebook-grid h3{margin:0 0 20px}.bam-facebook-frame{width:100%;min-width:0;margin:0 auto}
-.bam-facebook-frame iframe{display:block;width:100%;height:1000px;border:0;background:transparent}
-#bam-instagram-frame iframe{height:700px}
-@media(max-width:650px){#bam-instagram-frame iframe{height:800px}}
-.bam-facebook-placeholder{padding:28px;border:1px solid currentColor}
-.bam-facebook-placeholder p{line-height:1.7}
-.bam-facebook-placeholder button{font:inherit;cursor:pointer;white-space:normal}
-@media(max-width:850px){.bam-facebook-grid{grid-template-columns:minmax(0,1fr);gap:28px}}
-</style>
+</script><link rel="stylesheet" href="/css/portal-brand.css?v=20261013-brand-4">
 </head>
  <body class="polished-home"><a class="site-skip-link" href="#main-content">Saltar al contenido</a>
   <header class="site-header" id="site-header">
@@ -306,12 +295,7 @@
 <input type="hidden" name="locale" value="es">
 <small id="bam-newsletter-consent">Al suscribirte, aceptas recibir correos de marketing de BAM’s Website Builder. Puedes cancelar tu suscripción mediante el enlace incluido en cada correo.</small>
 <small class="bam-newsletter-captcha-notice">Este formulario está protegido por reCAPTCHA. Se aplican la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Política de Privacidad</a> y los <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">Términos del Servicio</a> de Google.</small></form></div></section><section class="home-section" aria-labelledby="local-service-title"><div class="home-container"><p class="home-eyebrow">CLEARWATER Y TAMPA BAY</p><h2 class="home-title" id="local-service-title">Un diseñador web que entiende tu pequeño negocio.</h2><p class="home-intro">BAM’s Website Builder ayuda a pequeñas empresas de Clearwater y Tampa Bay con diseño web adaptable, actualizaciones y orientación práctica. Trabaja directamente con Braion para definir tus páginas y los próximos pasos.</p><div class="home-actions"><a class="home-button" href="/es/contact">Habla sobre tu sitio web</a><a class="home-button-secondary" href="https://g.page/r/CRUlCdxVT-K3EBM/review" target="_blank" rel="noopener noreferrer">¿Trabajaste con BAM? Comparte tu experiencia</a></div></div></section>
-<section class="home-section" id="bam-facebook-feed" aria-labelledby="bam-facebook-title">
-<div class="home-container bam-facebook-grid">
-<div class="bam-social-intro"><p class="home-eyebrow">FACEBOOK &amp; INSTAGRAM</p><h2 class="home-title" id="bam-facebook-title">Lo último de BAM’s</h2><p class="home-intro">Descubre nuestros proyectos recientes, consejos de diseño web y novedades en Facebook e Instagram.</p></div>
-<div id="bam-facebook-feed-card"><h3>Facebook</h3><div class="bam-facebook-frame" id="bam-facebook-frame"><div class="bam-facebook-placeholder" id="bam-facebook-placeholder"><p>Para mostrar las publicaciones de Facebook aquí, permite las cookies de marketing en tus preferencias de privacidad.</p><button class="home-button-secondary" type="button">Preferencias de privacidad</button></div></div><div class="home-actions"><a class="home-button-secondary" href="https://www.facebook.com/bamswebsitebuilder" target="_blank" rel="noopener noreferrer">Visítanos en Facebook</a></div></div>
-<div id="bam-instagram-feed-card"><h3>Instagram</h3><div class="bam-facebook-frame" id="bam-instagram-frame"><div class="bam-facebook-placeholder" id="bam-instagram-placeholder"><p>Para mostrar las publicaciones de Instagram aquí, permite las cookies de marketing en tus preferencias de privacidad.</p><button class="home-button-secondary" type="button">Preferencias de privacidad</button></div></div><div class="home-actions"><a class="home-button-secondary" href="https://www.instagram.com/bamswebsitebuilder" target="_blank" rel="noopener noreferrer">Visítanos en Instagram</a></div></div>
-</div></section>
+<section class="home-section" id="bam-facebook-feed" aria-labelledby="bam-facebook-title"><div class="home-container"><p class="home-eyebrow">NOVEDADES DE BAM’S</p><h2 class="home-title" id="bam-facebook-title">Lo último de BAM’s</h2><p class="home-intro">Explora nuestros proyectos recientes, consejos y publicaciones de Facebook e Instagram.</p><div class="home-actions"><a class="home-button" href="/es/updates">Ver todas las novedades <span aria-hidden="true">→</span></a></div></div></section>
 </main>
 <footer class="home-footer">
    <div class="footer-grid">
@@ -411,40 +395,6 @@
 <noscript><a href="https://www.livechat.com/chat-with/19864799/" rel="nofollow">Chatea con nosotros</a>, con tecnología de <a href="https://www.livechat.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a></noscript>
 <script src="/js/cookie-consent.js?v=20260928-3"></script>
 <script src="/js/newsletter-captcha.js?v=20261013-growth-2" defer></script>
-<script src="/js/navigation.js?v=20261013-consistency-1"></script><script src="/js/analytics-config.js?v=20261013-growth-2" defer></script><script src="/js/site-analytics.js?v=20261013-growth-2" defer></script><script id="bam-social-feed-script">
-(() => {
-  const spanish = document.documentElement.lang.startsWith('es');
-  const feeds = [
-    ['facebook', 'Facebook', 'facebook-page-posts/iframe/25722530'],
-    ['instagram', 'Instagram', 'instagram-feed/iframe/25722532']
-  ];
-  feeds.forEach(([id, name, path]) => {
-    const host = document.getElementById('bam-' + id + '-frame');
-    const placeholder = document.getElementById('bam-' + id + '-placeholder');
-    if (!host || !placeholder) return;
-    let frame;
-    function sync() {
-      const allowed = Boolean(window.BAMCookieConsent?.marketing);
-      placeholder.hidden = allowed;
-      if (!allowed) {
-        if (frame) frame.remove();
-        frame = null;
-        return;
-      }
-      if (frame) return;
-      frame = document.createElement('iframe');
-      frame.title = spanish ? 'Publicaciones de BAM’s Website Builder en ' + name : 'Latest ' + name + ' posts from BAM’s Website Builder';
-      frame.src = 'https://widgets.sociablekit.com/' + path;
-      frame.width = '100%';
-      frame.height = '1000';
-      frame.loading = 'lazy';
-      host.appendChild(frame);
-    }
-    placeholder.querySelector('button').addEventListener('click', () => window.BAMOpenCookieSettings?.());
-    window.addEventListener('bam:consent-changed', sync);
-    sync();
-  });
-})();
-</script>
+<script src="/js/navigation.js?v=20261013-consistency-1"></script><script src="/js/analytics-config.js?v=20261013-growth-2" defer></script><script src="/js/site-analytics.js?v=20261013-growth-2" defer></script>
 </body>
 </html>
