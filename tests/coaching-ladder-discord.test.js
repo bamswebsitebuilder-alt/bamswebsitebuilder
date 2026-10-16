@@ -68,13 +68,14 @@ test('forum feed includes active and archived starters, titles and links; exclud
   };
   async function read(){const res=response();await handler({method:'GET'},res);return res}
   let res=await read();assert.equal(res.code,200);assert.equal(res.data.partial,false);
-  assert.deepEqual(res.data.sections.breaking.map(p=>p.id),[second,first]);
-  assert.equal(res.data.sections.breaking[1].text,'ESPN\n\nMississippi State update');
-  assert.equal(res.data.sections.breaking[1].url,`https://discord.com/channels/${guild}/${first}/${first}`);
+  assert.deepEqual(res.data.sections.breaking.map(p=>p.id),[deleted,second,first]);
+  assert.equal(res.data.sections.breaking[2].text,'ESPN\n\nMississippi State update');
+  assert.equal(res.data.sections.breaking[2].url,`https://discord.com/channels/${guild}/${first}/${first}`);
   assert.equal(calls.filter(u=>u.endsWith('/messages/'+first)).length,1);
   assert(!calls.some(u=>u.includes('/channels/'+forum+'/messages')));
-  text='Edited original post';res=await read();assert.match(res.data.sections.breaking[0].text,/Edited original post/);
-  removed=true;res=await read();assert.deepEqual(res.data.sections.breaking.map(p=>p.id),[second]);
+  text='Edited original post';res=await read();assert.match(res.data.sections.breaking[1].text,/Edited original post/);
+  removed=true;res=await read();assert.deepEqual(res.data.sections.breaking.map(p=>p.id),[deleted,second]);
+  assert.match(res.data.sections.breaking[0].text,/Original post unavailable/);
 });
 
 test('forum starter permission failure keeps the failed section out of the partial response',async()=>{

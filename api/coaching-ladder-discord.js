@@ -35,7 +35,13 @@ async function forumMessages(channelId, guild, token, activeThreads) {
     while (index < selected.length) {
       const i = index++, thread = selected[i];
       const message = await discord('/channels/' + thread.id + '/messages/' + thread.id,token,true);
-      if (!message) continue; // Deleted starter posts must disappear from the public feed.
+      if (!message) {
+        // A deleted original message does not delete its forum thread. Keep only public thread metadata.
+        messages[i] = {id:thread.id,type:0,content:'Original post unavailable. Open the discussion on Discord.',
+          timestamp:new Date(Number((BigInt(thread.id)>>22n)+1420070400000n)).toISOString(),
+          forumTitle:typeof thread.name==='string'?thread.name.slice(0,100):'',sourceChannel:thread.id};
+        continue;
+      }
       if (message.id !== thread.id || message.channel_id !== thread.id) throw Error('invalid_starter');
       messages[i] = {...message, forumTitle:typeof thread.name === 'string'?thread.name.slice(0,100):'', sourceChannel:thread.id};
     }
