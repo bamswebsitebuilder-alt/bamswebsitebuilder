@@ -37,15 +37,28 @@ test('partial failure does not clear a healthy channel or expose upstream errors
   globalThis.fetch=async url=>({ok:!url.includes('1499838116255633514'),json:async()=>url.includes('/messages?')?[]:{guild_id:guild,type:0}});
   const res=response();await handler({method:'GET'},res);assert.equal(res.code,200);assert.equal(res.data.partial,true);assert.deepEqual(res.data.sections,{announcements:[]});assert.equal(res.headers['Cache-Control'],'no-store');
 });
-test('website safely renders Discord text and clears deleted posts',async()=>{
-  const elements=new Map();function node(){return {children:[],classList:{toggle(){}},setAttribute(){},append(...items){this.children.push(...items)},replaceChildren(...items){this.children=items},after(n){this.next=n},remove(){this.removed=true}}}
+test('website safely renders Discord text, paginates independently, and clears deleted feeds',async()=>{
+  const elements=new Map();function node(){return {nodeType:1,children:[],events:{},classList:{toggle(){},add(){},remove(){}},closest(){return null},setAttribute(){},addEventListener(type,fn){this.events[type]=fn},focus(){},append(...items){this.children.push(...items)},replaceChildren(...items){this.children=items},after(n){this.next=n},remove(){this.removed=true}}}
   elements.set('announcements',node());let payload={configured:true,partial:false,sections:{announcements:[{text:'<img onerror=alert(1)>',date:'2026-10-16',url:'https://discord.com/channels/1/2/3',attachments:[],embeds:[]}]}};
   let tick;const document={hidden:false,getElementById:id=>elements.get(id),createElement:node,createTextNode:t=>({textContent:t}),addEventListener(){}};
-  vm.runInNewContext(readFileSync(new URL('../coaching-ladder/discord-feed.js',import.meta.url),'utf8'),{document,Date,Map,AbortSignal,fetch:async()=>({ok:true,json:async()=>payload}),setInterval:fn=>tick=fn});
+  vm.runInNewContext(readFileSync(new URL('../coaching-ladder/discord-feed.js',import.meta.url),'utf8'),{document,Date,Map,URL,AbortSignal,fetch:async()=>({ok:true,json:async()=>payload}),setInterval:fn=>tick=fn});
   await new Promise(resolve=>setImmediate(resolve));
-  const list=elements.get('announcements').next;assert.equal(list.children[0].children[0].textContent,'<img onerror=alert(1)>');
-  payload.sections.announcements=[];await tick();assert.equal(list.children.length,0);
-  payload={configured:true,partial:false,sections:{}};await tick();assert.equal(list.removed,true);
+  const list=elements.get('announcements').next;
+  const excerpt=()=>list.children[0].children[0].children[0].children[0].textContent;
+  assert.equal(excerpt(),'<img onerror=alert(1)>');
+  payload.sections.announcements=Array.from({length:7},(_,i)=>({...payload.sections.announcements[0],text:'Post '+i}));
+  await tick();assert.equal(list.children.length,3);assert.equal(excerpt(),'Post 0');
+  const pager=list.next;const [previous,status,next]=pager.children;
+  assert.equal(previous.disabled,true);assert.equal(status.textContent,'1 / 3');
+  next.events.click();assert.equal(excerpt(),'Post 3');assert.equal(status.textContent,'2 / 3');
+  await tick();assert.equal(excerpt(),'Post 3'); // An unchanged refresh preserves the current page.
+  next.events.click();assert.equal(list.children.length,1);assert.equal(next.disabled,true);
+  previous.events.click();assert.equal(excerpt(),'Post 3');
+  payload={configured:true,partial:true,sections:{}};await tick();assert(!list.removed);
+  payload.sections.announcements=[];await tick();assert.equal(list.removed,true);assert.equal(pager.removed,true);
+  payload.sections.announcements=[{text:'New post',date:'2026-10-16',url:'https://discord.com/channels/1/2/3'}];
+  await tick();const replacement=elements.get('announcements').next;assert.equal(replacement.children.length,1);
+  payload={configured:true,partial:false,sections:{}};await tick();assert.equal(replacement.removed,true);
 });
 
 test('forum feed includes active and archived starters, titles and links; excludes private/unselected threads and replies',async()=>{

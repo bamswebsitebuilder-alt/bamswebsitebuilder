@@ -1,0 +1,31 @@
+/* Load after the existing style.css. Scoped to Discord feed cards. */
+.entries.has-discord-posts:has(> .empty:only-child){display:none}
+.card:has(.discord-posts)>.discord-posts{min-height:456px}
+.card:has(.discord-posts){border-color:#405261;background:linear-gradient(145deg,#202b36f5,#141c25f5);box-shadow:0 10px 30px #00000018}
+.card:has(.discord-posts) .icon{display:inline-grid;place-items:center;width:34px;height:34px;border:1px solid #92c9ed30;border-radius:9px;background:#92c9ed0a;font-size:1.05rem;margin:0 10px 18px 0;vertical-align:middle}
+.card:has(.discord-posts) h3{display:inline;font-size:1.05rem;vertical-align:middle}
+.card .discord-posts{margin:0}
+.card .discord-posts>li{padding:16px 0;min-height:152px;border-top:1px solid #ffffff12}
+.discord-posts summary{cursor:pointer;list-style:none;border-radius:4px}
+.discord-posts summary::-webkit-details-marker{display:none}
+.post-excerpt{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;font-size:.9rem;line-height:1.55;color:#e0e7ee;overflow-wrap:anywhere}
+.post-open{display:inline-block;margin-top:6px;color:var(--gold,#92c9ed);font-size:.75rem;font-weight:700}
+.post-open::after{content:' +'}
+.discord-posts details[open] .post-excerpt{display:none}
+.discord-posts details[open] .post-open{font-size:0}
+.discord-posts details[open] .post-open::after{content:'Close post −';font-size:.75rem}
+.post-body{padding-top:10px;max-height:300px;overflow:auto;scrollbar-width:thin}
+.card .post-body p{white-space:pre-wrap;color:#e0e7ee;font-size:.9rem}
+.card .discord-posts img{width:auto;max-width:100%;max-height:180px;object-fit:contain;border-radius:8px;margin:10px 0}
+.card .discord-posts small{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:12px;opacity:1;font-size:.69rem;color:#9eafbf}
+.card .discord-posts a{font-weight:600;margin:0;color:var(--gold,#92c9ed)}
+.post-pagination{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:16px;border-top:1px solid #ffffff18;margin-top:2px}
+.post-pagination button{border:1px solid #4a6072;background:#92c9ed09;color:#b7dcf5;border-radius:7px;padding:8px 10px;font-size:.74rem;font-weight:700;min-height:36px}
+.post-pagination button:hover:not(:disabled){background:#92c9ed20;border-color:#92c9ed}
+.post-pagination button:disabled{opacity:.35;cursor:default}
+.post-pagination span{font-size:.7rem;color:#a6b4c3;font-variant-numeric:tabular-nums}
+.discord-posts summary:focus-visible,.post-pagination button:focus-visible{outline:2px solid #92c9ed;outline-offset:4px}
+.discord-posts:focus-visible{outline:2px solid #92c9ed;outline-offset:4px;border-radius:4px}
+
+section.content[id]{scroll-margin-top:110px}
+
