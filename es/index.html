@@ -211,7 +211,7 @@
 </script><link rel="stylesheet" href="/css/portal-brand.css?v=20261013-brand-4"><style id="bam-facebook-styles">
 .bam-facebook-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,500px);gap:40px;align-items:start}
 .bam-facebook-frame{width:100%;max-width:500px;min-width:0;margin:0 auto}
-.bam-facebook-frame iframe{display:block;width:100%;height:600px;border:0;background:#fff}
+.bam-facebook-frame iframe{display:block;width:100%;height:1000px;border:0;background:#fff}
 .bam-facebook-placeholder{padding:28px;border:1px solid currentColor}
 .bam-facebook-placeholder p{line-height:1.7}
 .bam-facebook-placeholder button{font:inherit;cursor:pointer;white-space:normal}
@@ -425,42 +425,25 @@
   if (!host || !placeholder) return;
   const spanish = document.documentElement.lang.startsWith('es');
   let frame;
-  let frameWidth = 0;
   function sync() {
-    if (!window.BAMCookieConsent?.marketing) {
+    const allowed = Boolean(window.BAMCookieConsent?.marketing);
+    placeholder.hidden = allowed;
+    if (!allowed) {
       if (frame) frame.remove();
       frame = null;
-      placeholder.hidden = false;
       return;
     }
-    placeholder.hidden = true;
-    const width = Math.min(500, Math.floor(host.getBoundingClientRect().width));
-    if (width < 180) return;
-    if (!frame) {
-      frame = document.createElement('iframe');
-      frame.title = spanish ? 'Publicaciones de BAM’s Website Builder en Facebook' : 'Latest Facebook posts from BAM’s Website Builder';
-      frame.height = '600';
-      frame.loading = 'lazy';
-      frame.allowFullscreen = true;
-      host.appendChild(frame);
-      frameWidth = 0;
-    }
-    if (width === frameWidth) return;
-    frameWidth = width;
-    frame.width = String(width);
-    const params = new URLSearchParams({
-      href: 'https://www.facebook.com/bamswebsitebuilder',
-      tabs: 'timeline', show_posts: 'true', width: String(width), height: '600',
-      small_header: 'true', adapt_container_width: 'true',
-      hide_cover: 'false', show_facepile: 'false',
-      locale: spanish ? 'es_ES' : 'en_US'
-    });
-    frame.src = 'https://www.facebook.com/plugins/page.php?' + params;
+    if (frame) return;
+    frame = document.createElement('iframe');
+    frame.title = spanish ? 'Publicaciones de BAM’s Website Builder en Facebook' : 'Latest Facebook posts from BAM’s Website Builder';
+    frame.src = 'https://widgets.sociablekit.com/facebook-page-posts/iframe/25722530';
+    frame.width = '100%';
+    frame.height = '1000';
+    frame.loading = 'lazy';
+    host.appendChild(frame);
   }
   placeholder.querySelector('button').addEventListener('click', () => window.BAMOpenCookieSettings?.());
   window.addEventListener('bam:consent-changed', sync);
-  if ('ResizeObserver' in window) new ResizeObserver(sync).observe(host);
-  else window.addEventListener('resize', sync);
   sync();
 })();
 </script>
