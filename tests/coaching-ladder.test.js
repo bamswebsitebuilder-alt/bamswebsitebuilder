@@ -29,6 +29,11 @@ function fixture(view='dashboard', {role='commissioner',active=true,exists=true,
     setDoc:async(path,data)=>state.writes.push({path,data}),serverTimestamp:()=> 'SERVER_TIMESTAMP',
     onAuthStateChanged:(_auth,fn)=>state.authChanged=fn,
     onSnapshot:(_path,fn,error)=>{state.snapshot=fn;state.snapshotError=error;return ()=>{}},
+    createUserWithEmailAndPassword:async(_auth,email,password)=>{
+      state.registrations??=[];state.registrations.push({email,password});
+      if(state.registrationError)throw {code:state.registrationError};
+      state.user={uid:'new-user',email};return {user:state.user};
+    },
     signInWithEmailAndPassword:async()=>({user:state.user}),sendPasswordResetEmail:async()=>{},signOut:async()=>{state.user=null}
   };
   const run=file=>vm.runInNewContext(readFileSync(new URL('../coaching-ladder/'+file,import.meta.url),'utf8').replace(/import\s*\{[^}]+\}\s*from\s*"[^"]+";/g,''),context);
@@ -48,6 +53,52 @@ test('commissioner loads published content and publishes all sections with attri
   assert.equal(data.updatedBy,'commissioner-uid');
   assert.equal(data.updatedAt,'SERVER_TIMESTAMP');
   assert.equal(f.element('save').disabled,false);
+});
+
+test('account creation registers email, signs out, and grants no staff permissions',async()=>{
+  const f=fixture('login',{exists:false});f.run('admin.js');
+  f.element('account-toggle').handlers.click();
+  assert.equal(f.element('confirm-password').required,true);
+  assert.equal(f.element('password').autocomplete,'new-password');
+  f.element('email').value=' new@example.test ';
+  f.element('password').value='Example-test-123!';
+  f.element('confirm-password').value='Example-test-123!';
+  await f.submit('login-form');
+  assert.equal(f.state.registrations.length,1);
+  assert.equal(f.state.registrations[0].email,'new@example.test');
+  assert.equal(f.state.writes.length,0);
+  assert.equal(f.state.redirect,null);
+  assert.equal(f.state.user,null);
+  assert.match(f.element('status').textContent,/Account created.*approve staff access/);
+  assert.equal(f.element('password').value,'');
+  assert.equal(f.element('confirm-password').value,'');
+  assert.equal(f.element('confirm-field').hidden,true);
+});
+
+test('mismatched or short passwords never call registration and allow retry',async()=>{
+  for(const [password,confirm] of [['Example-test-123!','different'],['short','short']]){
+    const f=fixture('login');f.run('admin.js');f.element('account-toggle').handlers.click();
+    f.element('password').value=password;f.element('confirm-password').value=confirm;
+    await f.submit('login-form');
+    assert.equal(f.state.registrations,undefined);
+    assert.equal(f.element('login-btn').disabled,false);
+    assert.equal(f.element('account-toggle').disabled,false);
+    assert.equal(f.element('confirm-password').value,'');
+  }
+});
+
+test('duplicate email and network errors show recovery guidance without claiming success',async()=>{
+  for(const [code,message] of [['auth/email-already-in-use',/already exists/],['auth/network-request-failed',/connection/]]){
+    const f=fixture('login');f.run('admin.js');f.element('account-toggle').handlers.click();
+    f.state.registrationError=code;
+    f.element('password').value='Example-test-123!';f.element('confirm-password').value='Example-test-123!';
+    await f.submit('login-form');
+    assert.match(f.element('status').textContent,message);
+    assert.equal(f.element('login-btn').disabled,false);
+    assert.equal(f.element('account-toggle').disabled,false);
+    assert.equal(f.state.writes.length,0);
+    assert.equal(f.state.redirect,null);
+  }
 });
 
 test('signed-out, inactive, missing and BAM-admin-only accounts cannot open editor',async()=>{
