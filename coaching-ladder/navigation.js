@@ -6,31 +6,27 @@
     window.location.replace(cleanPath + url.search + url.hash);
     return;
   }
-
-  function scrollToSection(hash) {
-    if (!hash || hash === '#') return false;
-    let id;
-    try { id = decodeURIComponent(hash.slice(1)); } catch { return false; }
-    const target = document.getElementById(id);
-    if (!target) return false;
-    target.scrollIntoView({ block: 'start' });
-    target.setAttribute('tabindex', '-1');
-    target.focus({ preventScroll: true });
-    return true;
+  // Keep navigation independent of Firebase and its CDN.
+  const menu = document.getElementById('menu');
+  const links = document.getElementById('links');
+  const header = document.querySelector('.top');
+  function updateOffset() {
+    if (header) document.documentElement.style.setProperty('--header-offset', (header.getBoundingClientRect().height + 16) + 'px');
   }
-
-  // Honor existing section links before removing the fragment from the address.
-  if (url.hash) {
-    scrollToSection(url.hash);
-    history.replaceState(history.state, '', url.pathname + url.search);
+  function setOpen(open) {
+    links?.classList.toggle('open', open);
+    menu?.setAttribute('aria-expanded', String(open));
+    updateOffset();
   }
-
-  document.addEventListener('click', event => {
-    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    const link = event.target.closest('a[href]');
-    if (!link || link.hasAttribute('download') || (link.target && link.target !== '_self')) return;
-    const destination = new URL(link.href, window.location.href);
-    if (destination.origin !== url.origin || destination.pathname !== url.pathname || destination.search !== url.search || !destination.hash) return;
-    if (scrollToSection(destination.hash)) event.preventDefault();
+  menu?.addEventListener('click', () => setOpen(menu.getAttribute('aria-expanded') !== 'true'));
+  links?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && menu?.getAttribute('aria-expanded') === 'true') {
+      setOpen(false);
+      menu.focus();
+    }
   });
+  updateOffset();
+  if (header && typeof ResizeObserver !== 'undefined') new ResizeObserver(updateOffset).observe(header);
+  // Native anchors preserve section URLs, bookmarks and Back/Forward navigation.
 })();

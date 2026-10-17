@@ -8,6 +8,16 @@ function link(url, label) {
   a.href = url; a.textContent = label; a.target = '_blank'; a.rel = 'noopener noreferrer';
   return a;
 }
+function appendTextLinks(target, text) {
+  let end = 0;
+  for (const match of text.matchAll(/https?:\/\/[^\s<>]+/g)) {
+    // Keep closing punctuation outside shared URLs.
+    const url = match[0].replace(/[.,!?;:)\]}]+$/, '');
+    target.append(document.createTextNode(text.slice(end, match.index)), link(url, url));
+    end = match.index + url.length;
+  }
+  target.append(document.createTextNode(text.slice(end)));
+}
 function display(feed, focus = false) {
   const {list, posts, pager} = feed;
   const pages = Math.max(1, Math.ceil(posts.length / PAGE_SIZE));
@@ -24,7 +34,7 @@ function display(feed, focus = false) {
     const hint = document.createElement('span'); hint.className = 'post-open'; hint.textContent = 'Read post';
     summary.append(excerpt, hint); details.append(summary);
     const body = document.createElement('div'); body.className = 'post-body';
-    const full = document.createElement('p'); full.textContent = text; body.append(full);
+    const full = document.createElement('p'); appendTextLinks(full, text); body.append(full);
     (post.embeds || []).forEach(e => { if (e.url) body.append(link(e.url, 'Open shared link ↗')); });
     (post.attachments || []).forEach(file => {
       const a = link(file.url, file.name || 'Attachment');

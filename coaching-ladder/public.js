@@ -2,16 +2,6 @@ import {db} from "../js/firebase-config.js";
 import {doc,onSnapshot} from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
 const keys=["announcements","breaking","advancement","scores","champions","format","available","taken","recruiting","rules","tips","playbooks","creators","highlights"];
-const menu=document.getElementById("menu");
-menu?.addEventListener("click",()=>{
-  const l=document.getElementById("links");
-  const open=l.classList.toggle("open");
-  menu.setAttribute("aria-expanded",String(open));
-});
-document.querySelectorAll(".links a").forEach(a=>a.addEventListener("click",()=>{
-  document.getElementById("links").classList.remove("open");
-  menu?.setAttribute("aria-expanded","false");
-}));
 document.getElementById("year").textContent=new Date().getFullYear();
 
 function render(id,items){
