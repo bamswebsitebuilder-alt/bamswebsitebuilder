@@ -11,9 +11,8 @@ export default async function handler(req,res){
   const base=live?'https://api.resellerclub.com/v2':'https://api.sandbox.resellerclub.com/v2';
   try{
     const parts=domain.split('.');
-    const tld=parts.pop();
-    const name=parts.join('.');
-    const params=new URLSearchParams({domainName:name,tlds:tld});
+    const tld=parts[parts.length-1];
+    const params=new URLSearchParams({domainName:domain,tlds:tld});
     const upstream=await fetch(base+'/domains/available?'+params.toString(),{headers:{Authorization:'ApiKey '+key,'X-User-Id':user,Accept:'application/json'},signal:AbortSignal.timeout(8000)});
     if(!upstream.ok)return res.status(502).json({available:null,message:'Registrar could not verify this domain right now.'});
     const data=await upstream.json();
