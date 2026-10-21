@@ -7,8 +7,8 @@ export default async function handler(req,res){
     return res.status(400).json({message:'Enter a valid domain name such as yourbusiness.com.'});
   const key=process.env.RESELLERCLUB_API_KEY,user=process.env.RESELLERCLUB_USER_ID;
   if(!key||!user)return res.status(503).json({available:null,message:'Live domain lookup is not activated yet. Please contact us for assistance.'});
-  const live=process.env.RESELLERCLUB_ENV==='live';
-  const base=live?'https://api.resellerclub.com/v2':'https://api.sandbox.resellerclub.com/v2';
+  if(process.env.RESELLERCLUB_ENV!=='sandbox')return res.status(503).json({available:null,message:'Domain search is not activated.'});
+  const base='https://api.sandbox.resellerclub.com/v2';
   try{
     const parts=domain.split('.');
     const tld=parts[parts.length-1];
