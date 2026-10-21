@@ -7,9 +7,9 @@ const create=process.argv.includes('--create');
 if(process.env.PAYPAL_ENV!=='sandbox')throw Error('Only PayPal Sandbox is supported');
 if(!url)throw Error('Set PAYPAL_WEBHOOK_URL to the stable deployed public endpoint');
 const endpoint=new URL(url);
-if(endpoint.protocol!=='https:'||endpoint.hostname!=='www.bamswebsitebuilder.com'||
+if(endpoint.protocol!=='https:'||!['www.bamswebsitebuilder.com','bamswebsitebuilder.vercel.app'].includes(endpoint.hostname)||
   endpoint.pathname!=='/api/domain-paypal-webhook'||endpoint.search||endpoint.hash)
-  throw Error('Expected stable https://www.bamswebsitebuilder.com/api/domain-paypal-webhook');
+  throw Error('Expected stable, verified HTTPS domain-paypal-webhook endpoint');
 const types=['PAYMENT.CAPTURE.COMPLETED','PAYMENT.CAPTURE.DENIED',
   'PAYMENT.CAPTURE.REFUNDED','PAYMENT.CAPTURE.REVERSED'];
 if(!create){
