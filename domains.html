@@ -102,6 +102,15 @@ html[data-theme="light"] .domain-page-main .price-table caption{color:#514d44}
 html[data-theme="light"] .domain-page-main .domain-result .button{background:#8a6200;color:#fff}
 html[data-theme="light"] .domain-page-main .domain-result .outline-button{background:transparent;border-color:#8a6200;color:#654700}
 @media(max-width:480px){.domain-page-main{padding:40px 18px 24px}}
+
+.domain-page-main .domain-store-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:center;margin-top:16px}
+.domain-page-main .domain-store-actions .store-primary{display:inline-flex;align-items:center;justify-content:center;min-height:48px;background:#e5bd67;color:#1d1609;font-weight:750;text-align:center;text-decoration:none}
+.domain-page-main .domain-store-actions .store-secondary{display:inline-flex;align-items:center;min-height:48px;text-decoration:underline;text-underline-offset:4px}
+.domain-page-main .domain-store-hint{max-width:690px;margin:12px auto 0;text-align:center;font-size:.94rem;line-height:1.6;color:var(--bam-text)}
+.domain-page-main .domain-result-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end;flex-shrink:0}
+.domain-page-main .domain-help-link{font-size:.91rem;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.domain-page-main .domain-result>div:first-child{min-width:0}
+@media(max-width:550px){.domain-page-main .domain-store-actions>*{width:100%;justify-content:center}.domain-page-main .domain-result{align-items:flex-start;flex-direction:column}.domain-page-main .domain-result-actions{width:100%;justify-content:space-between}.domain-page-main .domain-result-actions .button{flex:1}}
 </style></head><body class="domain-page"><a class="site-skip-link" href="#main-content">Skip to main content</a><header class="site-header" id="site-header">
 <div class="header-container">
 <a aria-label="BAM's Website Builder home" class="site-brand" href="/">
@@ -153,13 +162,13 @@ html[data-theme="light"] .domain-page-main .domain-result .outline-button{backgr
 <main id="main-content" class="domain-page-main" tabindex="-1"><section class="domain-hero" aria-labelledby="domain-title">
 <p class="eyebrow">DOMAIN SERVICES</p>
 <h1 id="domain-title">Find Your Perfect Domain Name</h1>
-<p class="lead">Your business deserves a professional online address. Search for yours today.</p>
+<p class="lead">Explore the right domain for your business, compare extensions, and continue to our secure registrar-hosted domain store when you are ready to check availability.</p>
 <form class="domain-search" id="domain-search">
 <label class="sr-only" for="domain-query">Your business name or domain name</label>
 <input id="domain-query" name="domain" placeholder="Enter your business or domain name" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="253" required aria-describedby="domain-search-note">
 <button type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="7.5"/><path d="m16 16 5 5"/></svg>Search Domain</button>
 </form>
-<div class="extension-list" aria-label="Featured domain extensions"><span>.com</span><span>.net</span><span>.org</span><span>.co</span></div>
+<div class="domain-store-actions"><a class="button store-primary" href="https://braionmoreland.supersite2.myorderbox.com/" target="_blank" rel="noopener noreferrer">Search &amp; buy in our domain store ↗</a><a class="store-secondary" href="/contact?service=domain-registration">Get domain assistance</a></div><p class="domain-store-hint">Domain purchases open ResellerClub’s hosted storefront in a new tab. Check the final price, renewal terms, and availability there before paying.</p><div class="extension-list" aria-label="Featured domain extensions"><span>.com</span><span>.net</span><span>.org</span><span>.co</span></div>
 <section class="search-results" aria-labelledby="domain-results-title">
 <div class="results-heading"><h2 id="domain-results-title">Example search results</h2><span class="preview-badge" id="results-badge">Preview</span></div>
 <div id="domain-results" aria-live="polite">
@@ -172,8 +181,8 @@ html[data-theme="light"] .domain-page-main .domain-result .outline-button{backgr
 <a href="/contact?service=domain-transfer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 7l4-4M4 7l4 4M20 17H4m16 0-4-4m4 4-4 4"/></svg><h2>Transfer a Domain</h2><p>Move your domain</p></a>
 </div>
 <p class="domain-tagline">Building Your Business, One Website at a Time.</p>
-<p class="domain-search-note" id="domain-search-note">Search to prepare a domain availability request. Live availability and online purchases are not active yet. Registration and renewal prices require confirmation.</p>
-</section><section class="panel" id="domain-pricing" aria-labelledby="domain-pricing-heading"><p class="eyebrow">Balanced pricing</p><h2 id="domain-pricing-heading">Proposed domain registration prices</h2><p class="lead">Straightforward yearly pricing for standard, non-premium domains. These prices are estimates for planning, not confirmed offers.</p><div class="price-notice" role="note"><strong>Pricing is not active.</strong> Every registration and renewal rate must be checked against current ResellerClub wholesale costs and fees before purchase is enabled. You cannot pay or register a domain here yet.</div><div style="overflow-x:auto"><table class="price-table"><caption>Proposed USD prices for one year of registration and one year of renewal</caption><thead><tr><th scope="col">Extension</th><th scope="col">First year</th><th scope="col">Yearly renewal</th></tr></thead><tbody><tr><th scope="row">.com</th><td>$19.99</td><td>$21.99</td></tr><tr><th scope="row">.net</th><td>$22.99</td><td>$24.99</td></tr><tr><th scope="row">.org</th><td>$24.99</td><td>$22.99</td></tr><tr><th scope="row">.co</th><td>$49.99</td><td>$54.99</td></tr></tbody></table></div><p class="small-print">Renewal prices are shown separately because they may differ from first-year registration prices. Premium domains, transfers, taxes, registrar surcharges and special registry requirements are not covered by the table; an individual quote is required. Availability results are not reservations. Domain registration is separate from monthly website plans.</p><h3>Optional domain services</h3><div class="cards"><article><h3>Connect an existing domain</h3><p><strong>$24.99 one time</strong> (proposed). Included at no additional charge with a qualifying BAM's website project.</p></article><article><h3>Domain transfer assistance</h3><p><strong>$19.99 plus registrar transfer cost</strong> (proposed). Eligibility and any renewal included in a transfer are confirmed before payment.</p></article><article><h3>DNS configuration</h3><p><strong>$19.99 one time</strong> (proposed), for standalone setup assistance.</p></article></div><p class="small-print">All figures on this page are preliminary and subject to verification. Please contact BAM's Website Builder for a confirmed quote.</p></section><section class="panel"><h2>Need assistance now?</h2><p class="lead">Contact BAM's Website Builder for domain help and setup options.</p><a class="button" href="/contact">Contact us</a></section></main><footer class="home-footer">
+<p class="domain-search-note" id="domain-search-note">The suggestions above are not a live availability check. Use the hosted domain store to check availability and purchase, or request assistance from BAM’s Website Builder.</p>
+</section><section class="panel" id="domain-pricing" aria-labelledby="domain-pricing-heading"><p class="eyebrow">Balanced pricing</p><h2 id="domain-pricing-heading">Domain pricing guide</h2><p class="lead">Straightforward yearly pricing for standard, non-premium domains. These prices are estimates for planning, not confirmed offers.</p><div class="price-notice" role="note"><strong>Pricing guide only.</strong> Prices shown are BAM’s proposed standard-domain rates. The ResellerClub storefront displays its own current checkout prices and terms, which may differ. Always review the final total there before purchase. Automated checkout on this page is not available yet.</div><div style="overflow-x:auto"><table class="price-table"><caption>Proposed USD prices for one year of registration and one year of renewal</caption><thead><tr><th scope="col">Extension</th><th scope="col">First year</th><th scope="col">Yearly renewal</th></tr></thead><tbody><tr><th scope="row">.com</th><td>$19.99</td><td>$21.99</td></tr><tr><th scope="row">.net</th><td>$22.99</td><td>$24.99</td></tr><tr><th scope="row">.org</th><td>$24.99</td><td>$22.99</td></tr><tr><th scope="row">.co</th><td>$49.99</td><td>$54.99</td></tr></tbody></table></div><p class="small-print">Renewal prices are shown separately because they may differ from first-year registration prices. Premium domains, transfers, taxes, registrar surcharges and special registry requirements are not covered by the table; an individual quote is required. Availability results are not reservations. Domain registration is separate from monthly website plans.</p><h3>Optional domain services</h3><div class="cards"><article><h3>Connect an existing domain</h3><p><strong>$24.99 one time</strong> (proposed). Included at no additional charge with a qualifying BAM's website project.</p></article><article><h3>Domain transfer assistance</h3><p><strong>$19.99 plus registrar transfer cost</strong> (proposed). Eligibility and any renewal included in a transfer are confirmed before payment.</p></article><article><h3>DNS configuration</h3><p><strong>$19.99 one time</strong> (proposed), for standalone setup assistance.</p></article></div><p class="small-print">All figures on this page are preliminary and subject to verification. For a current domain purchase price, use the hosted storefront; contact BAM’s Website Builder for a service quote.</p></section><section class="panel"><h2>Need assistance now?</h2><p class="lead">Contact BAM's Website Builder for domain help and setup options.</p><a class="button" href="/contact">Contact us</a></section></main><footer class="home-footer">
     <div class="footer-grid">
         <div>
             <h3>BAM'S WEBSITE BUILDER</h3>
@@ -231,7 +240,7 @@ document.getElementById('domain-search').addEventListener('submit', function(eve
  event.preventDefault();
  const input = document.getElementById('domain-query');
  input.setCustomValidity('');
- let query = input.value.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/\/$/, '');
+ let query = input.value.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/[/?#].*$/, '').replace(/:\d+$/, '');
  const supported = ['com', 'net', 'org', 'co'];
  const parts = query.split('.');
  const suppliedExtension = parts.length > 1 ? parts.pop() : '';
@@ -249,13 +258,18 @@ document.getElementById('domain-search').addEventListener('submit', function(eve
    const details = document.createElement('div');
    const title = document.createElement('h3'); title.textContent = domain;
    const note = document.createElement('p'); note.textContent = 'Availability not checked';
+   const actions=document.createElement('div');actions.className='domain-result-actions';
    const link = document.createElement('a'); link.className = 'button' + (index ? ' outline-button' : '');
-   link.href = '/contact?service=domain-registration&domain=' + encodeURIComponent(domain);
-   link.textContent = 'Request check';
-   details.append(title, note); row.append(details, link); results.append(row);
+   link.href = 'https://braionmoreland.supersite2.myorderbox.com/';
+   link.target='_blank';link.rel='noopener noreferrer';link.textContent = 'Check in store ↗';
+   link.setAttribute('aria-label','Check '+domain+' in our external domain store');
+   const help=document.createElement('a');help.className='domain-help-link';
+   help.href='/contact?service=domain-registration&domain='+encodeURIComponent(domain);help.textContent='Ask for help';
+   actions.append(link,help); details.append(title, note); row.append(details, actions); results.append(row);
  }
  document.getElementById('domain-results-title').textContent = 'Your domain options';
- document.getElementById('results-badge').textContent = 'Unverified';
+ document.getElementById('results-badge').textContent = 'Suggested · not checked';
+ document.querySelector('.search-results').scrollIntoView({behavior:'smooth',block:'nearest'});
 });
 document.getElementById('domain-query').addEventListener('input', function() { this.setCustomValidity(''); });
 </script><script src="/js/navigation.js?v=20261021-domains-menu-1"></script><script src="/js/cookie-consent.js?v=20260928-3"></script></body></html>
