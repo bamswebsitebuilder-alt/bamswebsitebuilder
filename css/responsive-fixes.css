@@ -378,6 +378,13 @@ textarea,
         padding: 20px !important;
     }
 
+    /* Cards already supply the side inset; do not add button margins to 100% width. */
+    .pricing-grid > .price-card > .price-button {
+        width: 100%;
+        max-width: 100%;
+        margin-inline: 0;
+    }
+
     .portfolio-card-content h2,
     .template-card h2,
     .price-card h2,
