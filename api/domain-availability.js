@@ -1,25 +1,19 @@
-// Registrar availability lookup. Never display guessed prices or treat availability as a reservation.
+// Public, read-only domain lookup with safe failure behavior.
+import {checkSandboxAvailability} from '../lib/domain-registrar.js';
 export default async function handler(req,res){
   res.setHeader('Cache-Control','no-store');
-  if(req.method!=='GET')return res.status(405).json({message:'Method not allowed'});
+  if(req.method!=='GET'){res.setHeader('Allow','GET');return res.status(405).json({message:'Method not allowed'});}
+  if(process.env.VERCEL_ENV==='production'||process.env.RESELLERCLUB_ENV!=='sandbox')
+    return res.status(503).json({available:null,message:'Domain search is not enabled on the live website yet.'});
   const domain=String(req.query?.domain||'').trim().toLowerCase();
   if(!/^(?=.{4,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$/.test(domain))
-    return res.status(400).json({message:'Enter a valid domain name such as yourbusiness.com.'});
-  const key=process.env.RESELLERCLUB_API_KEY,user=process.env.RESELLERCLUB_USER_ID;
-  if(!key||!user)return res.status(503).json({available:null,message:'Live domain lookup is not activated yet. Please contact us for assistance.'});
-  if(process.env.RESELLERCLUB_ENV!=='sandbox')return res.status(503).json({available:null,message:'Domain search is not activated.'});
-  const base='https://api.sandbox.resellerclub.com/v2';
+    return res.status(400).json({available:null,message:'Enter a valid domain, such as yourbusiness.com.'});
   try{
-    const parts=domain.split('.');
-    const tld=parts[parts.length-1];
-    const params=new URLSearchParams({domainName:domain,tlds:tld});
-    const upstream=await fetch(base+'/domains/available?'+params.toString(),{headers:{Authorization:'ApiKey '+key,'X-User-Id':user,Accept:'application/json'},signal:AbortSignal.timeout(8000)});
-    if(!upstream.ok)return res.status(502).json({available:null,message:'Registrar could not verify this domain right now.'});
-    const data=await upstream.json();
-    const entry=(data && typeof data==='object' && (data[domain]||data.result?.[domain]||data));
-    const available=entry?.available===true||entry?.status==='available';
-    const unavailable=entry?.available===false||['unavailable','taken','regthroughus','regthroughothers'].includes(entry?.status);
-    if(!available&&!unavailable)return res.status(502).json({available:null,message:'Registrar returned an unrecognized availability status. Please contact us.'});
-    return res.status(200).json({available,message:available?domain+' appears available. Checkout is not enabled yet; contact us for a confirmed quote.':domain+' is not available. Try another name.'});
-  }catch{return res.status(502).json({available:null,message:'Domain lookup could not be completed. Please try again later.'})}
+    const available=await checkSandboxAvailability(domain);
+    return res.status(200).json({domain,available,message:available?
+      domain+' appears available. Registration is not enabled; contact us for a verified quote.':
+      domain+' is already registered. Try a different name.'});
+  }catch{
+    return res.status(502).json({available:null,message:'Registrar could not verify availability. Please try again or contact us.'});
+  }
 }
