@@ -1,15 +1,13 @@
 # Balanced domain pricing — release validation
 
-The Domains page lists PROPOSED customer-facing prices. They are not an offer, confirmed quote, or checkout amount.
+The Domains page lists PROPOSED customer-facing prices for four selected extensions; .io and .dev are omitted because they were not located in the user's reseller panel. They are not an offer, confirmed quote, or checkout amount.
 
 | TLD | Proposed registration USD | Proposed annual renewal USD |
 | --- | ---: | ---: |
 | .com | 19.99 | 21.99 |
 | .net | 22.99 | 24.99 |
-| .org | 19.99 | 22.99 |
-| .co | 29.99 | 34.99 |
-| .io | 54.99 | 64.99 |
-| .dev | 27.99 | 29.99 |
+| .org | 24.99 | 22.99 |
+| .co | 49.99 | 54.99 |
 
 Before enabling sales:
 1. In the authorized ResellerClub account, find the wholesale cost *for your reseller tier* of both one-year new registration and one-year renewal for each TLD.
