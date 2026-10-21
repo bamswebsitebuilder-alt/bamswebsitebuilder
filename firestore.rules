@@ -260,5 +260,12 @@ service cloud.firestore {
       allow delete: if false;
     }
 
+    // Payment and registrar state is exclusively managed through Firebase Admin.
+    // Owners may read their own orders; no client SDK writes are permitted.
+    match /domainOrders/{orderId} {
+      allow read: if signedIn() && (resource.data.uid == request.auth.uid || isAdmin());
+      allow create, update, delete: if false;
+    }
+
   }
 }
