@@ -236,40 +236,59 @@ html[data-theme="light"] .domain-page-main .domain-result .outline-button{backgr
     </div>
 <nav class="client-resource-links" aria-label="Client resources"><a href="/service-terms">Service Terms</a><a href="/cancellation-policy">Cancellation &amp; Refund Policy</a><a href="/faq">FAQ</a><a href="/project-checklist">Project Checklist</a></nav>
 </footer><script>
-document.getElementById('domain-search').addEventListener('submit', function(event) {
+const domainForm=document.getElementById('domain-search');
+const domainInput=document.getElementById('domain-query');
+const domainResults=document.getElementById('domain-results');
+const domainBadge=document.getElementById('results-badge');
+const tlds=['com','net','org','co'];
+function makeResult(domain,index,status){
+ const row=document.createElement('article');row.className='domain-result';
+ const details=document.createElement('div'),title=document.createElement('h3'),note=document.createElement('p');
+ title.textContent=domain;
+ note.textContent=status==='available'?'Available according to registrar — not reserved':
+  status==='regthroughus'||status==='regthroughothers'?'Already registered':
+  'Availability not verified';
+ const actions=document.createElement('div');actions.className='domain-result-actions';
+ const store=document.createElement('a');store.className='button'+(index?' outline-button':'');
+ store.href='https://braionmoreland.supersite2.myorderbox.com/';
+ store.target='_blank';store.rel='noopener noreferrer';store.textContent='Check in store ↗';
+ store.setAttribute('aria-label','Check '+domain+' in the external domain store');
+ const help=document.createElement('a');help.className='domain-help-link';
+ help.href='/contact?service=domain-registration&domain='+encodeURIComponent(domain);
+ help.textContent='Ask for help';
+ actions.append(store,help);details.append(title,note);row.append(details,actions);
+ return row;
+}
+domainForm.addEventListener('submit',async function(event){
  event.preventDefault();
- const input = document.getElementById('domain-query');
- input.setCustomValidity('');
- let query = input.value.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/[/?#].*$/, '').replace(/:\d+$/, '');
- const supported = ['com', 'net', 'org', 'co'];
- const parts = query.split('.');
- const suppliedExtension = parts.length > 1 ? parts.pop() : '';
- const name = parts.join('.');
- if (!/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/.test(name) || (suppliedExtension && !supported.includes(suppliedExtension))) {
-   input.setCustomValidity('Enter a business name or a .com, .net, .org, or .co domain using letters, numbers, and hyphens.');
-   input.reportValidity(); return;
+ domainInput.setCustomValidity('');
+ const query=domainInput.value.trim().toLowerCase().replace(/^https?:\/\//,'').replace(/^www\./,'').replace(/[/?#].*$/,'').replace(/:\d+$/,'');
+ const parts=query.split('.'),extension=parts.length>1?parts.pop():'',name=parts.join('.');
+ if(!/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/.test(name)||(extension&&!tlds.includes(extension))){
+  domainInput.setCustomValidity('Enter a business name or a .com, .net, .org, or .co domain using letters, numbers, and hyphens.');
+  domainInput.reportValidity();return;
  }
- const extensions = suppliedExtension ? [suppliedExtension, ...supported.filter(x => x !== suppliedExtension)] : supported;
- const results = document.getElementById('domain-results');
- results.replaceChildren();
- for (const [index, extension] of extensions.entries()) {
-   const domain = name + '.' + extension;
-   const row = document.createElement('article'); row.className = 'domain-result';
-   const details = document.createElement('div');
-   const title = document.createElement('h3'); title.textContent = domain;
-   const note = document.createElement('p'); note.textContent = 'Availability not checked';
-   const actions=document.createElement('div');actions.className='domain-result-actions';
-   const link = document.createElement('a'); link.className = 'button' + (index ? ' outline-button' : '');
-   link.href = 'https://braionmoreland.supersite2.myorderbox.com/';
-   link.target='_blank';link.rel='noopener noreferrer';link.textContent = 'Check in store ↗';
-   link.setAttribute('aria-label','Check '+domain+' in our external domain store');
-   const help=document.createElement('a');help.className='domain-help-link';
-   help.href='/contact?service=domain-registration&domain='+encodeURIComponent(domain);help.textContent='Ask for help';
-   actions.append(link,help); details.append(title, note); row.append(details, actions); results.append(row);
+ const extensions=extension?[extension,...tlds.filter(t=>t!==extension)]:tlds;
+ domainResults.replaceChildren();
+ const heading=document.getElementById('domain-results-title');
+ heading.textContent='Your domain options';
+ domainBadge.textContent='Checking…';
+ const submit=domainForm.querySelector('button[type="submit"]');submit.disabled=true;
+ const loading=document.createElement('p');loading.textContent='Checking registrar availability securely…';domainResults.append(loading);
+ let verified=null;
+ try{
+  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),11000);
+  try{
+   const response=await fetch('/api/domain-legacy-availability?name='+encodeURIComponent(name),{cache:'no-store',signal:controller.signal});
+   if(response.ok){const data=await response.json();if(data.verified&&Array.isArray(data.domains))verified=new Map(data.domains.map(d=>[d.domain,d.status]));}
+  }finally{clearTimeout(timeout);}
+ }catch(_error){}finally{submit.disabled=false;}
+ domainResults.replaceChildren();
+ for(const [index,tld] of extensions.entries()){
+  const domain=name+'.'+tld;domainResults.append(makeResult(domain,index,verified?.get(domain)||'unknown'));
  }
- document.getElementById('domain-results-title').textContent = 'Your domain options';
- document.getElementById('results-badge').textContent = 'Suggested · not checked';
+ domainBadge.textContent=verified?'Registrar response':'Not verified';
  document.querySelector('.search-results').scrollIntoView({behavior:'smooth',block:'nearest'});
 });
-document.getElementById('domain-query').addEventListener('input', function() { this.setCustomValidity(''); });
+domainInput.addEventListener('input',function(){this.setCustomValidity('');});
 </script><script src="/js/navigation.js?v=20261021-domains-menu-1"></script><script src="/js/cookie-consent.js?v=20260928-3"></script></body></html>
