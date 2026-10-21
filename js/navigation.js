@@ -137,6 +137,25 @@
     const aboutLabel = spanish ? 'Nosotros' : 'About';
     const iconMarkup = (name) => `<span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#${name}"></use></svg></span>`;
 
+
+    // Keep Domain Services in the Services group on every shared navigation.
+    document.querySelectorAll('.desktop-navigation, .mobile-navigation, .booking-mobile-links').forEach((nav) => {
+      if (nav.querySelector('[data-page="domains"]')) return;
+      const anchor = nav.querySelector('[data-page="subscriptions"]') || nav.querySelector('[data-page="prices"]') || nav.querySelector('[data-page="services"]');
+      if (!anchor) return;
+      const link = document.createElement('a');
+      link.dataset.page = 'domains';
+      link.href = '/domains';
+      const label = spanish ? 'Servicios de dominio' : 'Domain Services';
+      if (nav.classList.contains('desktop-navigation')) link.textContent = label;
+      else link.innerHTML = `${iconMarkup('services')}<span>${label}</span>`;
+      if (['/domains', '/domains/', '/domains.html'].includes(location.pathname)) {
+        link.classList.add('active');
+        link.setAttribute('aria-current', 'page');
+      }
+      anchor.insertAdjacentElement('afterend', link);
+    });
+
     // Keep the Updates resource consistent across the shared desktop and mobile menus.
     const updatesHref = spanish ? '/es/updates' : '/updates';
     const updatesLabel = spanish ? 'Últimas novedades' : 'Latest Updates';
