@@ -13,8 +13,9 @@ export default async function handler(req,res){
     const upstream=await fetch(base+'/domains/available?domainName='+encodeURIComponent(domain),{headers:{Authorization:'ApiKey '+key,'X-User-Id':user,Accept:'application/json'},signal:AbortSignal.timeout(8000)});
     if(!upstream.ok)return res.status(502).json({available:null,message:'Registrar could not verify this domain right now.'});
     const data=await upstream.json();
-    const available=data?.available===true||data?.status==='available';
-    const unavailable=data?.available===false||data?.status==='unavailable'||data?.status==='taken';
+    const entry=(data && typeof data==='object' && (data[domain]||data.result?.[domain]||data));
+    const available=entry?.available===true||entry?.status==='available';
+    const unavailable=entry?.available===false||['unavailable','taken','regthroughus','regthroughothers'].includes(entry?.status);
     if(!available&&!unavailable)return res.status(502).json({available:null,message:'Registrar returned an unrecognized availability status. Please contact us.'});
     return res.status(200).json({available,message:available?domain+' appears available. Checkout is not enabled yet; contact us for a confirmed quote.':domain+' is not available. Try another name.'});
   }catch{return res.status(502).json({available:null,message:'Domain lookup could not be completed. Please try again later.'})}
