@@ -11,11 +11,11 @@ export default async function handler(req,res){
   if(process.env.VERCEL_ENV!=='preview')return res.status(404).json({error:'Not found'});
   const key=process.env.RESELLERCLUB_API_KEY;
   const uid=process.env.RESELLERCLUB_USER_ID;
-  const checks=key&&uid?[...hosts,['v2-sandbox-auth','https://api.sandbox.resellerclub.com/v2/domains/available?domainName=example.com&tlds=com']]:hosts;
+  const checks=key&&uid?[...hosts,['v2-sandbox-auth','https://api.sandbox.resellerclub.com/v2/domains/available?domainName=example.com&tlds=com'],['v2-sandbox-invalid-auth','https://api.sandbox.resellerclub.com/v2/domains/available?domainName=example.com&tlds=com']]:hosts;
   const results=await Promise.all(checks.map(async ([name,url])=>{
     const started=Date.now();
     try{
-      const headers=name==='v2-sandbox-auth'?{Accept:'application/json',Authorization:'ApiKey '+key,'X-User-Id':uid}:{Accept:'application/json'};
+      const headers=name==='v2-sandbox-auth'?{Accept:'application/json',Authorization:'ApiKey '+key,'X-User-Id':uid}:name==='v2-sandbox-invalid-auth'?{Accept:'application/json',Authorization:'ApiKey intentionally-invalid-test','X-User-Id':'1'}:{Accept:'application/json'};
       const response=await fetch(url,{headers,redirect:'manual',signal:AbortSignal.timeout(6500)});
       await response.body?.cancel();
       return {name,httpStatus:response.status,elapsedMs:Date.now()-started,network:'reachable'};
