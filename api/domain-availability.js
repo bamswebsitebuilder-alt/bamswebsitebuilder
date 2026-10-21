@@ -13,7 +13,10 @@ export default async function handler(req,res){
     return res.status(200).json({domain,available,message:available?
       domain+' appears available. Registration is not enabled; contact us for a verified quote.':
       domain+' is already registered. Try a different name.'});
-  }catch{
+  }catch(error){
+    // Log only server-controlled error classes/status; never credentials or provider payloads.
+    const reason=String(error?.message||'').match(/^(ResellerClub HTTP [0-9]{3}|ResellerClub credentials missing|Unknown availability response|Only listed domain extensions are supported|ResellerClub sandbox only)$/)?.[0]||'Unknown registrar failure';
+    console.error('[domain-availability]',reason);
     return res.status(502).json({available:null,message:'Registrar could not verify availability. Please try again or contact us.'});
   }
 }
