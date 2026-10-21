@@ -1,5 +1,5 @@
-// Preview-only, credential-free connectivity probe for registrar hosts.
-// Do not send API credentials or domain customer information.
+// Preview-only, limited registrar connectivity probe. An authenticated sandbox
+// request uses the Vercel environment secret and never returns headers or body.
 const hosts=[
   ['v2-sandbox','https://api.sandbox.resellerclub.com/v2/domains/available?domainName=example.com'],
   ['v2-live','https://api.resellerclub.com/v2/domains/available?domainName=example.com'],
@@ -9,10 +9,14 @@ export default async function handler(req,res){
   res.setHeader('Cache-Control','no-store');
   if(req.method!=='GET')return res.status(405).json({error:'Method not allowed'});
   if(process.env.VERCEL_ENV!=='preview')return res.status(404).json({error:'Not found'});
-  const results=await Promise.all(hosts.map(async ([name,url])=>{
+  const key=process.env.RESELLERCLUB_API_KEY;
+  const uid=process.env.RESELLERCLUB_USER_ID;
+  const checks=key&&uid?[...hosts,['v2-sandbox-auth','https://api.sandbox.resellerclub.com/v2/domains/available?domainName=example.com&tlds=com']]:hosts;
+  const results=await Promise.all(checks.map(async ([name,url])=>{
     const started=Date.now();
     try{
-      const response=await fetch(url,{headers:{Accept:'application/json'},redirect:'manual',signal:AbortSignal.timeout(6500)});
+      const headers=name==='v2-sandbox-auth'?{Accept:'application/json',Authorization:'ApiKey '+key,'X-User-Id':uid}:{Accept:'application/json'};
+      const response=await fetch(url,{headers,redirect:'manual',signal:AbortSignal.timeout(6500)});
       await response.body?.cancel();
       return {name,httpStatus:response.status,elapsedMs:Date.now()-started,network:'reachable'};
     }catch(error){
