@@ -5,5 +5,8 @@
   "dependencies": {
     "googleapis": "^144.0.0",
     "firebase-admin": "^13.5.0"
+  },
+  "scripts": {
+    "test": "node --test tests/domain-paypal-orders.test.js"
   }
 }
