@@ -10,7 +10,11 @@ export default async function handler(req,res){
   const live=process.env.RESELLERCLUB_ENV==='live';
   const base=live?'https://api.resellerclub.com/v2':'https://api.sandbox.resellerclub.com/v2';
   try{
-    const upstream=await fetch(base+'/domains/available?domainName='+encodeURIComponent(domain),{headers:{Authorization:'ApiKey '+key,'X-User-Id':user,Accept:'application/json'},signal:AbortSignal.timeout(8000)});
+    const parts=domain.split('.');
+    const tld=parts.pop();
+    const name=parts.join('.');
+    const params=new URLSearchParams({domainName:name,tlds:tld});
+    const upstream=await fetch(base+'/domains/available?'+params.toString(),{headers:{Authorization:'ApiKey '+key,'X-User-Id':user,Accept:'application/json'},signal:AbortSignal.timeout(8000)});
     if(!upstream.ok)return res.status(502).json({available:null,message:'Registrar could not verify this domain right now.'});
     const data=await upstream.json();
     const entry=(data && typeof data==='object' && (data[domain]||data.result?.[domain]||data));
