@@ -53,6 +53,6 @@ export default async function handler(req,res){
     costValidated:true,checkoutEnabled:false,message:'Registrar premium classification and wholesale price confirmed'});
  }catch(e){
   console.error('[domain-pricing-check]',String(e?.name||'error').replace(/[^A-Za-z]/g,'').slice(0,25));
-  return res.status(502).json({error:'Registrar pricing lookup unavailable. No payment was taken.',testStage:process.env.VERCEL_ENV==='preview'?stage:undefined,testFailure:process.env.VERCEL_ENV==='preview'?String(e?.message||e?.name||'unknown').replace(/[^a-zA-Z-]/g,'').slice(0,25):undefined});
+  return res.status(502).json({error:'Registrar pricing lookup unavailable. No payment was taken.',testStage:process.env.VERCEL_ENV==='preview'?stage:undefined,testFailure:process.env.VERCEL_ENV==='preview'?String(e?.message||e?.name||'unknown').replace(/[^a-zA-Z0-9-]/g,'').slice(0,25):undefined});
  }
 }
