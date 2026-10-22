@@ -312,17 +312,18 @@ async function selectDomain(domain){
 }
 function makeResult(domain,index,result){
  const status=result?.status||'unknown';
- const specialPricing=result?.specialPricing===true;
+ const specialPricing=result?.premium===true||result?.specialPricing===true;
  const trademarkClaim=result?.trademarkClaim===true;
  const row=document.createElement('article');row.className='domain-result';
  const details=document.createElement('div'),title=document.createElement('h3'),note=document.createElement('p');
  title.textContent=domain;
  note.textContent=specialPricing?'Special pricing or early-access domain — standard checkout unavailable':
   trademarkClaim?'Trademark claim requires review — please contact us':
-  status==='available'?'Available according to registrar — not reserved':
+  status==='available'&&result?.eligible===true?'Available standard domain — not reserved':
+  status==='available'?'Premium classification unverified — checkout unavailable':
   status==='regthroughus'||status==='regthroughothers'?'Already registered':'Availability not verified';
  const actions=document.createElement('div');actions.className='domain-result-actions';
- if(status==='available'&&!specialPricing&&!trademarkClaim){
+ if(status==='available'&&result?.eligible===true&&!specialPricing&&!trademarkClaim){
   const select=document.createElement('button');select.type='button';
   select.className='button';select.textContent='Select domain';
   select.addEventListener('click',()=>selectDomain(domain));actions.append(select);
@@ -353,7 +354,7 @@ domainForm.addEventListener('submit',async function(event){
  const loading=document.createElement('p');loading.textContent='Checking availability securely…';domainResults.append(loading);
  let verified=null;
  try{
-  const response=await fetch('/api/domain-legacy-availability?name='+encodeURIComponent(name),
+  const response=await fetch('/api/domain-openprovider-availability?name='+encodeURIComponent(name),
    {cache:'no-store',signal:AbortSignal.timeout(11000)});
   if(response.ok){const data=await response.json();if(data.verified&&Array.isArray(data.domains))
    verified=new Map(data.domains.map(d=>[d.domain,d]));}
@@ -362,7 +363,7 @@ domainForm.addEventListener('submit',async function(event){
  for(const [index,tld] of extensions.entries()){
   const domain=name+'.'+tld;domainResults.append(makeResult(domain,index,verified?.get(domain)||{status:'unknown'}));
  }
- domainBadge.textContent=verified?'Registrar response':'Not verified';
+ domainBadge.textContent=verified?'Openprovider preview':'Openprovider not connected';
  document.querySelector('.search-results').scrollIntoView({behavior:'smooth',block:'nearest'});
 });
 domainInput.addEventListener('input',function(){this.setCustomValidity('');});
