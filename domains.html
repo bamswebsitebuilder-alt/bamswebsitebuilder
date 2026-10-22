@@ -140,6 +140,12 @@ html[data-theme="light"] .domain-page-main .domain-result .outline-button{backgr
 .domain-page-main .domain-assistance-panel .lead{line-height:1.65!important;overflow-wrap:break-word!important}
 .domain-page-main .domain-assistance-panel .domain-contact-button{grid-column:1!important;position:static!important;inset:auto!important;display:inline-flex!important;align-self:start!important;justify-self:start!important;float:none!important;clear:both!important;margin:4px 0 0!important;transform:none!important;width:auto!important;min-height:52px!important;padding:14px 26px!important}
 @media(max-width:550px){.domain-page-main .domain-assistance-panel{padding:28px 20px!important;row-gap:18px!important}}
+
+.domain-page-main .domain-paypal-checkout{margin-top:24px;padding:20px;border:1px solid var(--bam-border);border-radius:14px;background:var(--bam-panel)}
+.domain-page-main .domain-paypal-checkout h3{margin:0 0 8px}
+.domain-page-main .domain-paypal-checkout button{display:block;background:#f3c548;color:#1a1b1e;min-height:52px;margin:16px 0;width:100%;max-width:360px}
+.domain-page-main .domain-paypal-checkout button:disabled{opacity:.64;cursor:not-allowed}
+.domain-page-main .domain-paypal-checkout p{line-height:1.6}
 </style></head><body class="domain-page"><a class="site-skip-link" href="#main-content">Skip to main content</a><header class="site-header" id="site-header">
 <div class="header-container">
 <a aria-label="BAM's Website Builder home" class="site-brand" href="/">
@@ -211,7 +217,7 @@ html[data-theme="light"] .domain-page-main .domain-result .outline-button{backgr
 </div>
 <p class="domain-tagline">Building Your Business, One Website at a Time.</p>
 <p class="domain-search-note" id="domain-search-note">Availability results are requested directly from ResellerClub. Selecting a name prepares an order review; final prices and payment remain disabled until verification.</p>
-</section><section class="panel" id="domain-on-site-checkout" aria-labelledby="domain-checkout-heading"><p class="eyebrow">DOMAIN ORDER REVIEW</p><h2 id="domain-checkout-heading">Your domain checkout</h2><p class="lead">Select an available domain above to prepare your order on BAM’s Website Builder.</p><div class="domain-checkout-review" id="domain-checkout-review" aria-live="polite"><p id="domain-selected-name">No domain selected yet.</p><p id="domain-selected-price" class="small-print">First-year pricing and renewals must be confirmed before payment.</p></div><p class="price-notice"><strong>Secure checkout is being finalized.</strong> No payment is collected and no domain is reserved by selecting a name. Final availability, registrar costs, registration eligibility and PayPal payment processing must pass testing first.</p><div class="domain-checkout-actions"><button id="domain-request-help" type="button" disabled>Request help with this domain</button><span class="small-print">PayPal checkout will appear here after verification.</span></div></section><section class="panel" id="domain-pricing" aria-labelledby="domain-pricing-heading"><p class="eyebrow">Balanced pricing</p><h2 id="domain-pricing-heading">Domain pricing guide</h2><p class="lead">Straightforward yearly pricing for standard, non-premium domains. These prices are estimates for planning, not confirmed offers.</p><div class="price-notice" role="note"><strong>Pricing guide only.</strong> Prices shown are BAM’s proposed standard-domain rates. The ResellerClub storefront displays its own current checkout prices and terms, which may differ. Always review the final total there before purchase. Automated checkout on this page is not available yet.</div><div style="overflow-x:auto"><table class="price-table"><caption>Proposed USD prices for one year of registration and one year of renewal</caption><thead><tr><th scope="col">Extension</th><th scope="col">First year</th><th scope="col">Yearly renewal</th></tr></thead><tbody><tr><th scope="row">.com</th><td>$19.99</td><td>$21.99</td></tr><tr><th scope="row">.net</th><td>$22.99</td><td>$24.99</td></tr><tr><th scope="row">.org</th><td>$24.99</td><td>$22.99</td></tr><tr><th scope="row">.co</th><td>$49.99</td><td>$54.99</td></tr></tbody></table></div><p class="small-print">Renewal prices are shown separately because they may differ from first-year registration prices. Premium domains, transfers, taxes, registrar surcharges and special registry requirements are not covered by the table; an individual quote is required. Availability results are not reservations. Domain registration is separate from monthly website plans.</p><h3>Optional domain services</h3><div class="cards"><article><h3>Connect an existing domain</h3><p><strong>$24.99 one time</strong> (proposed). Included at no additional charge with a qualifying BAM's website project.</p></article><article><h3>Domain transfer assistance</h3><p><strong>$19.99 plus registrar transfer cost</strong> (proposed). Eligibility and any renewal included in a transfer are confirmed before payment.</p></article><article><h3>DNS configuration</h3><p><strong>$19.99 one time</strong> (proposed), for standalone setup assistance.</p></article></div><p class="small-print">All figures on this page are preliminary and subject to verification. For a current domain purchase price, use the hosted storefront; contact BAM’s Website Builder for a service quote.</p></section><section class="panel domain-assistance-panel" aria-labelledby="domain-assistance-heading"><h2 id="domain-assistance-heading">Need assistance now?</h2><p class="lead">Contact BAM's Website Builder for domain help and setup options.</p><a class="button domain-contact-button" href="/contact">Contact us</a></section></main><footer class="home-footer">
+</section><section class="panel" id="domain-on-site-checkout" aria-labelledby="domain-checkout-heading"><p class="eyebrow">DOMAIN ORDER REVIEW</p><h2 id="domain-checkout-heading">Your domain checkout</h2><p class="lead">Select an available domain above to prepare your order on BAM’s Website Builder.</p><div class="domain-checkout-review" id="domain-checkout-review" aria-live="polite"><p id="domain-selected-name">No domain selected yet.</p><p id="domain-selected-price" class="small-print">First-year pricing and renewals must be confirmed before payment.</p></div><p class="price-notice"><strong>Secure checkout is being finalized.</strong> No payment is collected and no domain is reserved by selecting a name. Final availability, registrar costs, registration eligibility and PayPal payment processing must pass testing first.</p><div class="domain-checkout-actions"><button id="domain-request-help" type="button" disabled>Request help with this domain</button></div><div class="domain-paypal-checkout" aria-labelledby="domain-paypal-heading"><h3 id="domain-paypal-heading">Secure checkout with PayPal</h3><p class="small-print">PayPal will process payments securely on this website once the domain registration system is ready.</p><button type="button" id="domain-paypal-button" disabled aria-describedby="domain-checkout-status">Pay with PayPal · Not available yet</button><p id="domain-checkout-status" role="status" aria-live="polite" class="small-print">Payments are disabled until registrar pricing, premium checks and automatic registration pass verification.</p></div></section><section class="panel" id="domain-pricing" aria-labelledby="domain-pricing-heading"><p class="eyebrow">Balanced pricing</p><h2 id="domain-pricing-heading">Domain pricing guide</h2><p class="lead">Straightforward yearly pricing for standard, non-premium domains. These prices are estimates for planning, not confirmed offers.</p><div class="price-notice" role="note"><strong>Pricing guide only.</strong> Prices shown are BAM’s proposed standard-domain rates. The ResellerClub storefront displays its own current checkout prices and terms, which may differ. Always review the final total there before purchase. Automated checkout on this page is not available yet.</div><div style="overflow-x:auto"><table class="price-table"><caption>Proposed USD prices for one year of registration and one year of renewal</caption><thead><tr><th scope="col">Extension</th><th scope="col">First year</th><th scope="col">Yearly renewal</th></tr></thead><tbody><tr><th scope="row">.com</th><td>$19.99</td><td>$21.99</td></tr><tr><th scope="row">.net</th><td>$22.99</td><td>$24.99</td></tr><tr><th scope="row">.org</th><td>$24.99</td><td>$22.99</td></tr><tr><th scope="row">.co</th><td>$49.99</td><td>$54.99</td></tr></tbody></table></div><p class="small-print">Renewal prices are shown separately because they may differ from first-year registration prices. Premium domains, transfers, taxes, registrar surcharges and special registry requirements are not covered by the table; an individual quote is required. Availability results are not reservations. Domain registration is separate from monthly website plans.</p><h3>Optional domain services</h3><div class="cards"><article><h3>Connect an existing domain</h3><p><strong>$24.99 one time</strong> (proposed). Included at no additional charge with a qualifying BAM's website project.</p></article><article><h3>Domain transfer assistance</h3><p><strong>$19.99 plus registrar transfer cost</strong> (proposed). Eligibility and any renewal included in a transfer are confirmed before payment.</p></article><article><h3>DNS configuration</h3><p><strong>$19.99 one time</strong> (proposed), for standalone setup assistance.</p></article></div><p class="small-print">All figures on this page are preliminary and subject to verification. For a current domain purchase price, use the hosted storefront; contact BAM’s Website Builder for a service quote.</p></section><section class="panel domain-assistance-panel" aria-labelledby="domain-assistance-heading"><h2 id="domain-assistance-heading">Need assistance now?</h2><p class="lead">Contact BAM's Website Builder for domain help and setup options.</p><a class="button domain-contact-button" href="/contact">Contact us</a></section></main><footer class="home-footer">
     <div class="footer-grid">
         <div>
             <h3>BAM'S WEBSITE BUILDER</h3>
@@ -269,141 +275,49 @@ const domainForm=document.getElementById('domain-search');
 const domainInput=document.getElementById('domain-query');
 const domainResults=document.getElementById('domain-results');
 const domainBadge=document.getElementById('results-badge');
-const tlds=['com','net','org','co'];
 const checkoutSection=document.getElementById('domain-on-site-checkout');
 const checkoutName=document.getElementById('domain-selected-name');
 const checkoutPrice=document.getElementById('domain-selected-price');
 const checkoutHelp=document.getElementById('domain-request-help');
-let selectedDomain=null;
+const paypalButton=document.getElementById('domain-paypal-button');
+const checkoutNotice=document.getElementById('domain-checkout-status');
+const tlds=['com','net','org','co'];
 const proposedPrices={com:[19.99,21.99],net:[22.99,24.99],org:[24.99,22.99],co:[49.99,54.99]};
-checkoutHelp.addEventListener('click',()=>{if(selectedDomain)window.location.href='/contact?service=domain-registration&domain='+encodeURIComponent(selectedDomain);});
-function selectDomain(domain){selectedDomain=domain;const tld=domain.split('.').pop(),amount=proposedPrices[tld];
+let selectedDomain=null;
+checkoutHelp.addEventListener('click',()=>{
+ if(selectedDomain)window.location.href='/contact?service=domain-registration&domain='+encodeURIComponent(selectedDomain);
+});
+function resetSelection(){
+ selectedDomain=null;checkoutName.textContent='No domain selected yet.';
+ checkoutPrice.textContent='First-year pricing and renewals must be confirmed before payment.';
+ checkoutHelp.disabled=true;
+ checkoutNotice.textContent='Payments are disabled until registrar pricing, premium checks and automatic registration pass verification.';
+ paypalButton.disabled=true;
+}
+function selectDomain(domain){
+ selectedDomain=domain;
+ const tld=domain.split('.').pop(),amount=proposedPrices[tld];
  checkoutName.textContent=domain;
- checkoutPrice.textContent=amount?'Proposed first-year price: 
-function makeResult(domain,index,status){
- const row=document.createElement('article');row.className='domain-result';
- const details=document.createElement('div'),title=document.createElement('h3'),note=document.createElement('p');
- title.textContent=domain;
- note.textContent=status==='available'?'Available according to registrar — not reserved':
-  status==='regthroughus'||status==='regthroughothers'?'Already registered':
-  'Availability not verified';
- const actions=document.createElement('div');actions.className='domain-result-actions';
- const store=document.createElement('a');store.className='button'+(index?' outline-button':'');
- store.href='https://braionmoreland.supersite2.myorderbox.com/';
- store.target='_blank';store.rel='noopener noreferrer';store.textContent='Check in store ↗';
- store.setAttribute('aria-label','Check '+domain+' in the external domain store');
- const help=document.createElement('a');help.className='domain-help-link';
- help.href='/contact?service=domain-registration&domain='+encodeURIComponent(domain);
- help.textContent='Ask for help';
- if(status==='available'){
-  const select=document.createElement('button');select.type='button';select.className='button';select.textContent='Select domain';select.setAttribute('aria-label','Select '+domain+' for order review');select.addEventListener('click',()=>selectDomain(domain));actions.append(select);
- }else if(status==='unknown'){
-  const pending=document.createElement('span');pending.className='domain-unverified';pending.textContent='Verification required';actions.append(pending);
- }
- actions.append(store,help);details.append(title,note);row.append(details,actions);
- return row;
-}
-domainForm.addEventListener('submit',async function(event){
- event.preventDefault();
- domainInput.setCustomValidity('');
- const query=domainInput.value.trim().toLowerCase().replace(/^https?:\/\//,'').replace(/^www\./,'').replace(/[/?#].*$/,'').replace(/:\d+$/,'');
- const parts=query.split('.'),extension=parts.length>1?parts.pop():'',name=parts.join('.');
- if(!/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/.test(name)||(extension&&!tlds.includes(extension))){
-  domainInput.setCustomValidity('Enter a business name or a .com, .net, .org, or .co domain using letters, numbers, and hyphens.');
-  domainInput.reportValidity();return;
- }
- const extensions=extension?[extension,...tlds.filter(t=>t!==extension)]:tlds;
- selectedDomain=null;checkoutName.textContent='No domain selected yet.';checkoutPrice.textContent='First-year pricing and renewals must be confirmed before payment.';checkoutHelp.disabled=true;
- domainResults.replaceChildren();
- const heading=document.getElementById('domain-results-title');
- heading.textContent='Your domain options';
- domainBadge.textContent='Checking…';
- const submit=domainForm.querySelector('button[type="submit"]');submit.disabled=true;
- const loading=document.createElement('p');loading.textContent='Checking registrar availability securely…';domainResults.append(loading);
- let verified=null;
- try{
-  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),11000);
-  try{
-   const response=await fetch('/api/domain-legacy-availability?name='+encodeURIComponent(name),{cache:'no-store',signal:controller.signal});
-   if(response.ok){const data=await response.json();if(data.verified&&Array.isArray(data.domains))verified=new Map(data.domains.map(d=>[d.domain,d.status]));}
-  }finally{clearTimeout(timeout);}
- }catch(_error){}finally{submit.disabled=false;}
- domainResults.replaceChildren();
- for(const [index,tld] of extensions.entries()){
-  const domain=name+'.'+tld;domainResults.append(makeResult(domain,index,verified?.get(domain)||'unknown'));
- }
- domainBadge.textContent=verified?'Registrar response':'Not verified';
- document.querySelector('.search-results').scrollIntoView({behavior:'smooth',block:'nearest'});
-});
-domainInput.addEventListener('input',function(){this.setCustomValidity('');});
-</script><script src="/js/navigation.js?v=20261021-domains-menu-1"></script><script src="/js/cookie-consent.js?v=20260928-3"></script></body></html>+amount[0].toFixed(2)+' · Proposed yearly renewal: 
-function makeResult(domain,index,status){
- const row=document.createElement('article');row.className='domain-result';
- const details=document.createElement('div'),title=document.createElement('h3'),note=document.createElement('p');
- title.textContent=domain;
- note.textContent=status==='available'?'Available according to registrar — not reserved':
-  status==='regthroughus'||status==='regthroughothers'?'Already registered':
-  'Availability not verified';
- const actions=document.createElement('div');actions.className='domain-result-actions';
- const store=document.createElement('a');store.className='button'+(index?' outline-button':'');
- store.href='https://braionmoreland.supersite2.myorderbox.com/';
- store.target='_blank';store.rel='noopener noreferrer';store.textContent='Check in store ↗';
- store.setAttribute('aria-label','Check '+domain+' in the external domain store');
- const help=document.createElement('a');help.className='domain-help-link';
- help.href='/contact?service=domain-registration&domain='+encodeURIComponent(domain);
- help.textContent='Ask for help';
- actions.append(store,help);details.append(title,note);row.append(details,actions);
- return row;
-}
-domainForm.addEventListener('submit',async function(event){
- event.preventDefault();
- domainInput.setCustomValidity('');
- const query=domainInput.value.trim().toLowerCase().replace(/^https?:\/\//,'').replace(/^www\./,'').replace(/[/?#].*$/,'').replace(/:\d+$/,'');
- const parts=query.split('.'),extension=parts.length>1?parts.pop():'',name=parts.join('.');
- if(!/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/.test(name)||(extension&&!tlds.includes(extension))){
-  domainInput.setCustomValidity('Enter a business name or a .com, .net, .org, or .co domain using letters, numbers, and hyphens.');
-  domainInput.reportValidity();return;
- }
- const extensions=extension?[extension,...tlds.filter(t=>t!==extension)]:tlds;
- domainResults.replaceChildren();
- const heading=document.getElementById('domain-results-title');
- heading.textContent='Your domain options';
- domainBadge.textContent='Checking…';
- const submit=domainForm.querySelector('button[type="submit"]');submit.disabled=true;
- const loading=document.createElement('p');loading.textContent='Checking registrar availability securely…';domainResults.append(loading);
- let verified=null;
- try{
-  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),11000);
-  try{
-   const response=await fetch('/api/domain-legacy-availability?name='+encodeURIComponent(name),{cache:'no-store',signal:controller.signal});
-   if(response.ok){const data=await response.json();if(data.verified&&Array.isArray(data.domains))verified=new Map(data.domains.map(d=>[d.domain,d.status]));}
-  }finally{clearTimeout(timeout);}
- }catch(_error){}finally{submit.disabled=false;}
- domainResults.replaceChildren();
- for(const [index,tld] of extensions.entries()){
-  const domain=name+'.'+tld;domainResults.append(makeResult(domain,index,verified?.get(domain)||'unknown'));
- }
- domainBadge.textContent=verified?'Registrar response':'Not verified';
- document.querySelector('.search-results').scrollIntoView({behavior:'smooth',block:'nearest'});
-});
-domainInput.addEventListener('input',function(){this.setCustomValidity('');});
-</script><script src="/js/navigation.js?v=20261021-domains-menu-1"></script><script src="/js/cookie-consent.js?v=20260928-3"></script></body></html>+amount[1].toFixed(2)+' (subject to registrar verification).':'Final pricing requires verification.';
+ checkoutPrice.textContent=amount?'Proposed first-year price: $'+amount[0].toFixed(2)+' · Proposed annual renewal: $'+amount[1].toFixed(2)+' (not a verified purchase quote).':'Final pricing requires verification.';
  checkoutHelp.disabled=false;
+ checkoutNotice.textContent='Your domain selection is ready for review. PayPal checkout is not active yet; no payment can be taken.';
  checkoutSection.scrollIntoView({behavior:'smooth',block:'start'});
 }
-
 function makeResult(domain,index,status){
  const row=document.createElement('article');row.className='domain-result';
  const details=document.createElement('div'),title=document.createElement('h3'),note=document.createElement('p');
  title.textContent=domain;
  note.textContent=status==='available'?'Available according to registrar — not reserved':
-  status==='regthroughus'||status==='regthroughothers'?'Already registered':
-  'Availability not verified';
+  status==='regthroughus'||status==='regthroughothers'?'Already registered':'Availability not verified';
  const actions=document.createElement('div');actions.className='domain-result-actions';
- const store=document.createElement('a');store.className='button'+(index?' outline-button':'');
+ if(status==='available'){
+  const select=document.createElement('button');select.type='button';
+  select.className='button';select.textContent='Select domain';
+  select.addEventListener('click',()=>selectDomain(domain));actions.append(select);
+ }
+ const store=document.createElement('a');store.className='button outline-button';
  store.href='https://braionmoreland.supersite2.myorderbox.com/';
- store.target='_blank';store.rel='noopener noreferrer';store.textContent='Check in store ↗';
- store.setAttribute('aria-label','Check '+domain+' in the external domain store');
+ store.target='_blank';store.rel='noopener noreferrer';store.textContent='Hosted store ↗';
  const help=document.createElement('a');help.className='domain-help-link';
  help.href='/contact?service=domain-registration&domain='+encodeURIComponent(domain);
  help.textContent='Ask for help';
@@ -411,28 +325,26 @@ function makeResult(domain,index,status){
  return row;
 }
 domainForm.addEventListener('submit',async function(event){
- event.preventDefault();
- domainInput.setCustomValidity('');
- const query=domainInput.value.trim().toLowerCase().replace(/^https?:\/\//,'').replace(/^www\./,'').replace(/[/?#].*$/,'').replace(/:\d+$/,'');
+ event.preventDefault();domainInput.setCustomValidity('');
+ const query=domainInput.value.trim().toLowerCase()
+  .replace(/^https?:\/\//,'').replace(/^www\./,'').replace(/[/?#].*$/,'').replace(/:\d+$/,'');
  const parts=query.split('.'),extension=parts.length>1?parts.pop():'',name=parts.join('.');
  if(!/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/.test(name)||(extension&&!tlds.includes(extension))){
-  domainInput.setCustomValidity('Enter a business name or a .com, .net, .org, or .co domain using letters, numbers, and hyphens.');
+  domainInput.setCustomValidity('Enter a business name or a .com, .net, .org or .co domain.');
   domainInput.reportValidity();return;
  }
  const extensions=extension?[extension,...tlds.filter(t=>t!==extension)]:tlds;
- domainResults.replaceChildren();
- const heading=document.getElementById('domain-results-title');
- heading.textContent='Your domain options';
+ resetSelection();domainResults.replaceChildren();
+ document.getElementById('domain-results-title').textContent='Your domain options';
  domainBadge.textContent='Checking…';
  const submit=domainForm.querySelector('button[type="submit"]');submit.disabled=true;
- const loading=document.createElement('p');loading.textContent='Checking registrar availability securely…';domainResults.append(loading);
+ const loading=document.createElement('p');loading.textContent='Checking availability securely…';domainResults.append(loading);
  let verified=null;
  try{
-  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),11000);
-  try{
-   const response=await fetch('/api/domain-legacy-availability?name='+encodeURIComponent(name),{cache:'no-store',signal:controller.signal});
-   if(response.ok){const data=await response.json();if(data.verified&&Array.isArray(data.domains))verified=new Map(data.domains.map(d=>[d.domain,d.status]));}
-  }finally{clearTimeout(timeout);}
+  const response=await fetch('/api/domain-legacy-availability?name='+encodeURIComponent(name),
+   {cache:'no-store',signal:AbortSignal.timeout(11000)});
+  if(response.ok){const data=await response.json();if(data.verified&&Array.isArray(data.domains))
+   verified=new Map(data.domains.map(d=>[d.domain,d.status]));}
  }catch(_error){}finally{submit.disabled=false;}
  domainResults.replaceChildren();
  for(const [index,tld] of extensions.entries()){
