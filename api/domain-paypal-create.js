@@ -20,7 +20,7 @@ export default async function handler(req,res){
       const snap=await tx.get(ref);
       if(!snap.exists)throw Error('Quote not found');
       quote=snap.data();
-      if(quote.uid!==uid||quote.state!==STATES.QUOTED||!isServerVerifiedQuote({id,...quote}))
+      if(quote.uid!==uid||quote.state!==STATES.QUOTED||quote.premium!==false||!isServerVerifiedQuote({id,...quote}))
         throw Error('Quote must be reverified');
       tx.update(ref,{state:'paypal_creating',updatedAt:FieldValue.serverTimestamp()});
     });
