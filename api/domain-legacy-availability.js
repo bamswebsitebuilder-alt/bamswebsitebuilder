@@ -31,7 +31,12 @@ export default async function handler(req,res){
    const domain=name+'.'+tld;
    const entry=body[domain];
    const status=typeof entry==='object'&&entry!==null?String(entry.status||'').toLowerCase():'';
-   return {domain,status:statuses.has(status)?status:'unknown',available:status==='available'?true:['regthroughus','regthroughothers'].includes(status)?false:null};
+   const specialPricing=Boolean(entry&&typeof entry==='object'&&Object.prototype.hasOwnProperty.call(entry,'costHash'));
+   const trademarkClaim=Boolean(entry&&typeof entry==='object'&&(entry['tm-claims-key']||entry.tmClaimsKey));
+   // ResellerClub documents costHash for premium and early-access names; omit amounts.
+   // Absence of costHash is NOT affirmative proof of standard pricing.
+   return {domain,status:statuses.has(status)?status:'unknown',available:status==='available'?true:['regthroughus','regthroughothers'].includes(status)?false:null,
+    specialPricing,trademarkClaim};
   });
   if(domains.every(item=>item.status==='unknown'))
    return res.status(502).json({error:'Availability was not confirmed. Please check the hosted domain store.'});
