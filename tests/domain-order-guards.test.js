@@ -22,3 +22,17 @@ test('reject missing consent and unpaid orders',()=>{
   assert.equal(canSubmitRegistration({...paid,state:STATES.CAPTURE_PENDING}),false);
 });
 test('unknown states require manual review',()=>assert.equal(sanitizeOrderStatus({state:'unknown'}),'manual_review'));
+
+for(const value of [null,undefined,'false']){
+ test('reject ambiguous premium classification: '+String(value),()=>{
+  assert.equal(isServerVerifiedQuote({...quote,premium:value},now),false);
+  assert.equal(canSubmitRegistration({...paid,premium:value}),false);
+ });
+}
+for(const domain of ['-invalid.com','invalid-.com','two.parts.com','a'.repeat(64)+'.com']){
+ test('reject malformed domain: '+domain,()=>assert.equal(isServerVerifiedQuote({...quote,domain},now),false));
+}
+test('reject registration when payment verification is missing',()=>{
+ assert.equal(canSubmitRegistration({...paid,paymentVerified:false}),false);
+ assert.equal(canSubmitRegistration({...paid,paypalCaptureId:''}),false);
+});
