@@ -33,7 +33,8 @@ export default async function handler(req,res){
    const auth=new URLSearchParams({'auth-userid':uid,'api-key':key});
    const costs=await fetchRegistrar('products/reseller-cost-price.json',auth,20000);
    const groups=Object.entries(productKeys).map(([tld,aliases])=>({tld,mappedProducts:aliases.filter(k=>costs[k]&&typeof costs[k]==='object').length}));
-   return res.status(200).json({wholesaleReached:true,productGroups:groups,checkoutEnabled:false});
+   const comProductKeys=Object.keys(costs).filter(k=>/^[a-z0-9]{3,20}$/.test(k)&&(/com|domc/.test(k))).slice(0,12);
+   return res.status(200).json({wholesaleReached:true,productGroups:groups,comProductKeys,checkoutEnabled:false});
   }
   const premium=await fetchRegistrar('domains/premium-check.json',p);
   // Fail closed on ambiguous or unavailable premium status.
