@@ -2,7 +2,7 @@
 // Never returns wholesale amounts, API credentials, or upstream errors to the browser.
 // No payments or registrar writes.
 const DOMAIN=/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.(?:com|net|org|co)$/;
-const productKeys={com:['dotcom','domcom'],net:['dotnet','domnet'],org:['dotorg','domorg'],co:['dotco','domco']};
+const productKeys={com:['domcno'],net:['dotnet','domnet'],org:['dotorg','domorg'],co:['dotco','domco']};
 let cachedCosts=null,cachedAt=0;
 function dollars(value){
  const s=String(value??'');
