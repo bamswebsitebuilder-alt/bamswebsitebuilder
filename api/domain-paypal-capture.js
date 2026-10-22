@@ -26,7 +26,7 @@ export default async function handler(req,res){
          !/^[A-Z0-9]{8,32}$/.test(quote.paypalOrderId||'')||
          !Number.isSafeInteger(quote.amountCents)||quote.amountCents<=0||
          quote.currency!=='USD'||!quote.registrarVerified||quote.registrantConsent!==true||
-         quote.premium===true||!quote.expiresAt||quote.expiresAt<=Date.now())
+         quote.premium!==false||!quote.expiresAt||quote.expiresAt<=Date.now())
         throw Error('Order needs review');
       tx.update(ref,{state:STATES.CAPTURE_PENDING,updatedAt:FieldValue.serverTimestamp()});
     });
