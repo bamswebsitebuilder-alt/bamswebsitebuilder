@@ -29,6 +29,12 @@ export default async function handler(req,res){
  const p=new URLSearchParams({'auth-userid':uid,'api-key':key,'domain-name':domain});
  let stage='premium';
  try{
+  if(process.env.VERCEL_ENV==='preview'&&req.query?.check==='wholesale'){
+   const auth=new URLSearchParams({'auth-userid':uid,'api-key':key});
+   const costs=await fetchRegistrar('products/reseller-cost-price.json',auth,20000);
+   const groups=Object.entries(productKeys).map(([tld,aliases])=>({tld,mappedProducts:aliases.filter(k=>costs[k]&&typeof costs[k]==='object').length}));
+   return res.status(200).json({wholesaleReached:true,productGroups:groups,checkoutEnabled:false});
+  }
   const premium=await fetchRegistrar('domains/premium-check.json',p);
   // Fail closed on ambiguous or unavailable premium status.
   if(typeof premium.premium!=='boolean')
