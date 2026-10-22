@@ -310,14 +310,19 @@ async function selectDomain(domain){
  }catch(_error){if(selectedDomain===domain)checkoutNotice.textContent='Eligibility lookup is unavailable. Payment is disabled.';}
 
 }
-function makeResult(domain,index,status){
+function makeResult(domain,index,result){
+ const status=result?.status||'unknown';
+ const specialPricing=result?.specialPricing===true;
+ const trademarkClaim=result?.trademarkClaim===true;
  const row=document.createElement('article');row.className='domain-result';
  const details=document.createElement('div'),title=document.createElement('h3'),note=document.createElement('p');
  title.textContent=domain;
- note.textContent=status==='available'?'Available according to registrar — not reserved':
+ note.textContent=specialPricing?'Special pricing or early-access domain — standard checkout unavailable':
+  trademarkClaim?'Trademark claim requires review — please contact us':
+  status==='available'?'Available according to registrar — not reserved':
   status==='regthroughus'||status==='regthroughothers'?'Already registered':'Availability not verified';
  const actions=document.createElement('div');actions.className='domain-result-actions';
- if(status==='available'){
+ if(status==='available'&&!specialPricing&&!trademarkClaim){
   const select=document.createElement('button');select.type='button';
   select.className='button';select.textContent='Select domain';
   select.addEventListener('click',()=>selectDomain(domain));actions.append(select);
@@ -351,11 +356,11 @@ domainForm.addEventListener('submit',async function(event){
   const response=await fetch('/api/domain-legacy-availability?name='+encodeURIComponent(name),
    {cache:'no-store',signal:AbortSignal.timeout(11000)});
   if(response.ok){const data=await response.json();if(data.verified&&Array.isArray(data.domains))
-   verified=new Map(data.domains.map(d=>[d.domain,d.status]));}
+   verified=new Map(data.domains.map(d=>[d.domain,d]));}
  }catch(_error){}finally{submit.disabled=false;}
  domainResults.replaceChildren();
  for(const [index,tld] of extensions.entries()){
-  const domain=name+'.'+tld;domainResults.append(makeResult(domain,index,verified?.get(domain)||'unknown'));
+  const domain=name+'.'+tld;domainResults.append(makeResult(domain,index,verified?.get(domain)||{status:'unknown'}));
  }
  domainBadge.textContent=verified?'Registrar response':'Not verified';
  document.querySelector('.search-results').scrollIntoView({behavior:'smooth',block:'nearest'});
