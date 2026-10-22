@@ -13,7 +13,7 @@ function dollars(value){
 async function fetchRegistrar(path,params,timeout=9000){
  const response=await fetch('https://httpapi.com/api/'+path+'?'+params.toString(),{
   headers:{Accept:'application/json'},redirect:'error',signal:AbortSignal.timeout(timeout)});
- if(!response.ok)throw Error('upstream-status');
+ if(!response.ok)throw Error('upstream-status-'+response.status);
  const body=await response.json();
  if(!body||typeof body!=='object'||Array.isArray(body)||body.status==='ERROR')throw Error('upstream-shape');
  return body;
