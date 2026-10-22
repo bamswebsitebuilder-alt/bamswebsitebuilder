@@ -126,6 +126,13 @@ html[data-theme="light"] .domain-page-main .domain-result .outline-button{backgr
 .domain-page-main .domain-assistance-panel .lead{display:block;margin:0 0 24px;max-width:100%;line-height:1.65}
 .domain-page-main .domain-assistance-panel .domain-contact-button{position:static!important;display:inline-flex;justify-content:center;align-items:center;flex:none;align-self:flex-start;margin:0!important;min-height:50px;line-height:1.3;text-align:center;transform:none!important}
 @media(max-width:480px){.domain-page-main .domain-assistance-panel{padding:24px 20px}.domain-page-main .domain-assistance-panel .lead{margin-bottom:26px}.domain-page-main .domain-assistance-panel .domain-contact-button{width:auto;max-width:100%;padding:14px 25px}}
+
+/* Mobile CTA: content-sized rows prevent the contact button from overlapping wrapped copy. */
+.domain-page-main .domain-assistance-panel{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:max-content!important;align-content:start!important;align-items:start!important;row-gap:16px!important;height:auto!important;min-height:0!important;overflow:visible!important}
+.domain-page-main .domain-assistance-panel h2,.domain-page-main .domain-assistance-panel p{position:static!important;grid-column:1!important;display:block!important;float:none!important;clear:both!important;width:auto!important;height:auto!important;min-height:0!important;max-height:none!important;margin:0!important;padding:0!important;transform:none!important}
+.domain-page-main .domain-assistance-panel .lead{line-height:1.65!important;overflow-wrap:break-word!important}
+.domain-page-main .domain-assistance-panel .domain-contact-button{grid-column:1!important;position:static!important;inset:auto!important;display:inline-flex!important;align-self:start!important;justify-self:start!important;float:none!important;clear:both!important;margin:4px 0 0!important;transform:none!important;width:auto!important;min-height:52px!important;padding:14px 26px!important}
+@media(max-width:550px){.domain-page-main .domain-assistance-panel{padding:28px 20px!important;row-gap:18px!important}}
 </style></head><body class="domain-page"><a class="site-skip-link" href="#main-content">Skip to main content</a><header class="site-header" id="site-header">
 <div class="header-container">
 <a aria-label="BAM's Website Builder home" class="site-brand" href="/">
