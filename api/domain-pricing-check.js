@@ -27,6 +27,7 @@ export default async function handler(req,res){
  if(process.env.RESELLERCLUB_LEGACY_AVAILABILITY!=='true'||!/^\d+$/.test(uid||'')||!key)
   return res.status(503).json({error:'Registrar pricing lookup is not configured'});
  const p=new URLSearchParams({'auth-userid':uid,'api-key':key,'domain-name':domain});
+ let stage='premium';
  try{
   const premium=await fetchRegistrar('domains/premium-check.json',p);
   // Fail closed on ambiguous or unavailable premium status.
@@ -35,6 +36,7 @@ export default async function handler(req,res){
   const tld=domain.split('.').pop();
   if(premium.premium===true)return res.status(200).json({domain,verified:true,premium:true,
    standardPricing:false,checkoutEnabled:false,message:'Premium domain requires a custom quote'});
+  stage='wholesale';
   let costs=cachedCosts;
   if(!costs||Date.now()-cachedAt>600000){
    const auth=new URLSearchParams({'auth-userid':uid,'api-key':key});
@@ -51,6 +53,6 @@ export default async function handler(req,res){
     costValidated:true,checkoutEnabled:false,message:'Registrar premium classification and wholesale price confirmed'});
  }catch(e){
   console.error('[domain-pricing-check]',String(e?.name||'error').replace(/[^A-Za-z]/g,'').slice(0,25));
-  return res.status(502).json({error:'Registrar pricing lookup unavailable. No payment was taken.'});
+  return res.status(502).json({error:'Registrar pricing lookup unavailable. No payment was taken.',testStage:process.env.VERCEL_ENV==='preview'?stage:undefined,testFailure:process.env.VERCEL_ENV==='preview'?String(e?.message||e?.name||'unknown').replace(/[^a-zA-Z-]/g,'').slice(0,25):undefined});
  }
 }
