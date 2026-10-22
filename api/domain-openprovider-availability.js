@@ -8,13 +8,13 @@ async function token(){
  const username=process.env.OPENPROVIDER_USERNAME,password=process.env.OPENPROVIDER_PASSWORD;
  if(!username||!password)throw Error('missing-credentials');
  if(cachedToken&&Date.now()-tokenAt<30*60*1000)return cachedToken;
- const r=await fetch('https://api.openprovider.eu/v1/auth/login',{
+ const r=await fetch('https://api.openprovider.eu/v1beta/auth/login',{
   method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
   body:JSON.stringify({username,password,ip:'0.0.0.0'}),redirect:'error',
   signal:AbortSignal.timeout(9000)});
  if(!r.ok)throw Error('auth-failed');
  const d=await r.json();
- if(d?.code!==0||typeof d?.data?.token!=='string'||!d.data.token)throw Error('auth-invalid');
+ if((d?.code!==undefined&&d.code!==0)||typeof d?.data?.token!=='string'||!d.data.token)throw Error('auth-invalid');
  cachedToken=d.data.token;tokenAt=Date.now();return cachedToken;
 }
 export default async function handler(req,res){
@@ -28,7 +28,7 @@ export default async function handler(req,res){
   return res.status(503).json({verified:false,provider:'openprovider',error:'Openprovider API access is not configured yet. No payments are available.'});
  try{
   const bearer=await token();
-  const upstream=await fetch('https://api.openprovider.eu/v1/domains/check',{
+  const upstream=await fetch('https://api.openprovider.eu/v1beta/domains/check',{
    method:'POST',headers:{Authorization:'Bearer '+bearer,'Content-Type':'application/json',Accept:'application/json'},
    body:JSON.stringify({domains:TLD.map(extension=>({name,extension})),with_price:true}),
    redirect:'error',signal:AbortSignal.timeout(11000)});
