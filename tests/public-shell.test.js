@@ -10,7 +10,7 @@ test('every public page uses the current shared header, footer, CSS, and navigat
    const html=fs.readFileSync(new URL(folder+file,root),'utf8');if(!html.includes('class="site-header"'))continue;count++;
    assert.equal(html.match(/<footer\b[\s\S]*?<\/footer>/)[0],footer,folder+file);
    for(const asset of ['style','page-theme','footer-fix','site-upgrades','responsive-fixes','client-guide','accessibility','public-polish','menu-organization','public-shell']) {
-    assert.equal([...html.matchAll(new RegExp('/css/'+asset+'\\.css\\?v='+ (asset==='public-shell'?'20261023-sleek-menu-2':'20261013-consistency-1'),'g'))].length,1,folder+file+' '+asset);
+    assert.equal([...html.matchAll(new RegExp('/css/'+asset+'\\.css\\?v='+ (asset==='public-shell'?'20261023-sleek-menu-3':'20261013-consistency-1'),'g'))].length,1,folder+file+' '+asset);
    }
    assert.ok(html.includes('/js/navigation.js?v=20261023-sleek-menu-2'),folder+file);
    assert.ok(!html.includes('/js/booking-menu.js'),folder+file);
