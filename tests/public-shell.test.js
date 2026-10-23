@@ -12,7 +12,7 @@ test('every public page uses the current shared header, footer, CSS, and navigat
    for(const asset of ['style','page-theme','footer-fix','site-upgrades','responsive-fixes','client-guide','accessibility','public-polish','menu-organization','public-shell']) {
     assert.equal([...html.matchAll(new RegExp('/css/'+asset+'\\.css\\?v=20261013-consistency-1','g'))].length,1,folder+file+' '+asset);
    }
-   assert.ok(html.includes('/js/navigation.js?v=20261013-consistency-1'),folder+file);
+   assert.ok(html.includes('/js/navigation.js?v=20261023-polish-1'),folder+file);
    assert.ok(!html.includes('/js/booking-menu.js'),folder+file);
   }
  }

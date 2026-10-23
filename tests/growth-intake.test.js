@@ -31,3 +31,12 @@ function templateCards(es) {
 test('generated starter and premium designs keep the correct language and quote destination',()=>{
   for (const es of [false,true]) for(const card of templateCards(es)) {assert.ok(card.includes(es?'href="/es/contact?template=':'href="/contact?template='));assert.ok(card.includes(es?'Elegir diseño':'Choose Design'));assert.ok(card.includes(es?'Ver demo':'View Demo'));if(es)assert.ok(!card.includes('Up to 10 website pages'))}
 });
+
+test('domain assistance preserves the selected name in English and Spanish inquiries without replacing a draft',()=>{
+ for(const es of [false,true]) {
+  const fields=intake('?service=domain-registration&domain=example.com',es);
+  assert.match(fields.message.value,/example\.com/);
+  assert.match(fields.message.value,/domain-registration/);
+  assert.equal(intake('?service=domain-registration&domain=example.com',es,'My draft').message.value,'My draft');
+ }
+});

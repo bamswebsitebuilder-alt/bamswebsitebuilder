@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (selectedDesign) details.push(`${spanish ? 'Diseño elegido' : 'Selected design'}: ${selectedDesign}`);
   const demo = (params.get('demo') || '').trim();
   if (demo) details.push(spanish ? `Me interesa la demostración web ${demo}.` : `I am interested in the ${demo} website demo.`);
-  for (const [key, en, es] of [['service','Requested service','Servicio solicitado'],['date','Preferred date','Fecha preferida'],['zip','ZIP code','Código postal']]) {
+  for (const [key, en, es] of [['service','Requested service','Servicio solicitado'],['domain','Requested domain','Dominio solicitado'],['date','Preferred date','Fecha preferida'],['zip','ZIP code','Código postal']]) {
     const value = (params.get(key) || '').trim();
     if (value) details.push(`${spanish ? es : en}: ${value}`);
   }

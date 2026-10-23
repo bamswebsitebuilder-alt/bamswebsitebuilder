@@ -5,7 +5,7 @@ import path from 'node:path';
 const root=new URL('../',import.meta.url);
 const paths=[];
 for(const folder of ['', 'es/']) for(const f of fs.readdirSync(new URL(folder,root))) if(f.endsWith('.html')) paths.push(folder+f);
-const expected=['home','services','prices','subscriptions','website-review','portfolio','templates','project-stories','reviews','website-tips','faq','about','email-updates','contact','booking','login'];
+const expected=['home','services','prices','subscriptions','domains','website-review','portfolio','templates','project-stories','reviews','website-tips','updates','faq','about','email-updates','contact','booking','login'];
 test('business menus have matching destinations and order in desktop and mobile, in both languages',()=>{
  let checked=0;
  for(const file of paths){
@@ -17,7 +17,7 @@ test('business menus have matching destinations and order in desktop and mobile,
    const pages=[...menu.matchAll(/<a data-page="([^"]+)"/g)].map(m=>m[1]);assert.deepEqual(pages,expected,file);
    assert.ok(pages.indexOf('portfolio')<pages.indexOf('templates'),file);
    const urls=[...menu.matchAll(/<a[^>]*href="([^"]+)"/g)].map(m=>m[1]);
-   for(const href of urls){assert.ok(file.startsWith('es/')?href.startsWith('/es/'):!href.startsWith('/es/'),file+' '+href);const clean=href.split('#')[0].replace(/^\//,'');assert.ok(clean===''||clean==='es/'||fs.existsSync(new URL(clean+'.html',root)),file+' '+href)}
+   for(const href of urls){assert.ok(file.startsWith('es/')?(href.startsWith('/es/')||href==='/domains'):!href.startsWith('/es/'),file+' '+href);const clean=href.split('#')[0].replace(/^\//,'');assert.ok(clean===''||clean==='es/'||fs.existsSync(new URL(clean+'.html',root)),file+' '+href)}
   }
   assert.equal([...desktop[1].matchAll(/data-menu-group=/g)].length,4,file);
   assert.equal([...mobile[1].matchAll(/class="mobile-nav-group"/g)].length,4,file);
