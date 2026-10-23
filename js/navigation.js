@@ -180,23 +180,8 @@
       link.href = spanish ? '/es/booking' : '/booking';
     });
 
-    const bookingLink = document.querySelector('.desktop-navigation > a[data-page="booking"]');
-    const desktopBookingLayout = window.matchMedia('(min-width: 1281px)');
-    const syncFloatingBooking = () => {
-      const currentButton = document.querySelector('.floating-booking-button');
-      if (!desktopBookingLayout.matches) {
-        currentButton?.remove();
-        return;
-      }
-      if (bookingLink && !currentButton) {
-        const floatingBooking = bookingLink.cloneNode(true);
-        floatingBooking.className = 'floating-booking-button';
-        floatingBooking.removeAttribute('aria-current');
-        document.body.append(floatingBooking);
-      }
-    };
-    syncFloatingBooking();
-    desktopBookingLayout.addEventListener('change', syncFloatingBooking);
+    // Booking lives in the header and mobile drawer.
+    document.querySelectorAll('.floating-booking-button').forEach(button => button.remove());
 
     applyTheme(getSavedTheme());
 

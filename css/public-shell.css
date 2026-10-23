@@ -24,3 +24,11 @@ html[data-theme=light] body .home-footer a{color:#514d44!important}
 @media(max-width:1100px){html body .desktop-navigation,html body .desktop-language{display:none!important}html body .menu-toggle{display:flex!important;margin-left:auto!important}}
 @media(max-width:900px){html body .home-footer .footer-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:650px){html body .brand-text strong{font-size:1.35rem!important}html body .home-footer .footer-grid{grid-template-columns:1fr!important;gap:24px!important}}
+
+/* A single desktop booking action complements the three menu groups. */
+html body .desktop-navigation>a.nav-book-call{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 14px!important;border:1px solid #efc66a!important;border-radius:7px;background:#efc66a!important;color:#111!important;white-space:nowrap;text-decoration:none!important}
+html body .desktop-navigation>a.nav-book-call:hover{background:#f4d58c!important}
+html body .desktop-navigation>a.nav-book-call:focus-visible{outline:3px solid #efc66a;outline-offset:4px}
+html body .desktop-navigation>a.nav-book-call[hidden]{display:none!important}
+html[data-theme=light] body .desktop-navigation>a.nav-book-call{background:#765300!important;border-color:#765300!important;color:#fff!important}
+@media(min-width:1101px) and (max-width:1280px){html body .desktop-navigation{gap:12px!important}html body .desktop-navigation>a,html body .desktop-navigation .nav-more>summary{font-size:.65rem!important;letter-spacing:0!important}html body .desktop-language{margin-left:12px!important;gap:6px!important}html body .desktop-navigation>a.nav-book-call{padding:10px!important}}
