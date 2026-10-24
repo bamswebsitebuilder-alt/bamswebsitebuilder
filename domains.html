@@ -99,7 +99,7 @@
 <p class="lead">Find a domain, connect one you already own, or ask about a transfer. We’ll confirm availability, registration options, and costs with you before any purchase.</p>
 <form class="domain-search" id="domain-search">
 <label class="sr-only" for="domain-query">Your business name or domain name</label>
-<input id="domain-query" name="domain" placeholder="Enter your business or domain name" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="253" required aria-describedby="domain-search-note">
+<input id="domain-query" name="domain" placeholder="Enter a business name, e.g. Sunshine Bakery" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="253" required aria-describedby="domain-search-note">
 <button type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="7.5"/><path d="m16 16 5 5"/></svg>Search Domain</button>
 </form>
 <div class="domain-store-actions"><a class="button store-primary" href="/contact?service=domain-registration">Get domain assistance</a></div><p class="domain-store-hint">Domain registration and renewals are separate from website packages. Contact us to arrange registration; this page does not collect payments.</p><div class="extension-list" aria-label="Featured domain extensions"><span>.com</span><span>.net</span><span>.org</span><span>.co</span></div>
@@ -194,33 +194,69 @@ function makeResult(domain,index,result){
  actions.append(help);details.append(title,note);row.append(details,actions);
  return row;
 }
+let latestDomainSearch=0;
+function businessNameVariants(raw){
+ const cleaned=raw.toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'')
+  .replace(/&/g,' and ').replace(/[^a-z0-9]+/g,' ').trim();
+ const words=cleaned.split(/\s+/).filter(Boolean);
+ const result=[];
+ const add=value=>{if(/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/.test(value)&&!result.includes(value))result.push(value);};
+ add(words.join('')); // Sunshine Bakery -> sunshinebakery
+ if(words.length>1)add(words.join('-')); // sunshine-bakery
+ // Skip weak single-word suggestions. Every variant still requires registrar verification.
+ if(words.length>2)add(words.slice(0,2).join(''));
+ return result.slice(0,3);
+}
 domainForm.addEventListener('submit',async function(event){
  event.preventDefault();domainInput.setCustomValidity('');
- const query=domainInput.value.trim().toLowerCase()
-  .replace(/^https?:\/\//,'').replace(/^www\./,'').replace(/[/?#].*$/,'').replace(/:\d+$/,'');
- const parts=query.split('.'),extension=parts.length>1?parts.pop():'',name=parts.join('.');
- if(!/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/.test(name)||(extension&&!tlds.includes(extension))){
-  domainInput.setCustomValidity('Enter a business name or a .com, .net, .org or .co domain.');
+ const raw=domainInput.value.trim();
+ const query=raw.toLowerCase().replace(/^https?:\/\//,'').replace(/^www\./,'')
+  .replace(/[/?#].*$/,'').replace(/:\d+$/,'').trim();
+ const domainMatch=query.match(/^([a-z0-9-]+)\.(com|net|org|co)$/);
+ const unsupportedExtension=/^[a-z0-9-]+\.[a-z]{2,}$/i.test(query)&&!domainMatch;
+ const candidates=domainMatch?[domainMatch[1]]:unsupportedExtension?[]:businessNameVariants(query);
+ if(!candidates.length){
+  domainInput.setCustomValidity('Enter a business name (such as Sunshine Bakery) or a .com, .net, .org, or .co domain.');
   domainInput.reportValidity();return;
  }
- const extensions=extension?[extension,...tlds.filter(t=>t!==extension)]:tlds;
+ const searchId=++latestDomainSearch;
+ const extensions=domainMatch?[domainMatch[2],...tlds.filter(ext=>ext!==domainMatch[2])]:tlds;
  domainResults.replaceChildren();
- document.getElementById('domain-results-title').textContent='Your domain options';
+ document.getElementById('domain-results-title').textContent='Domain ideas for '+raw;
  domainBadge.textContent='Checking…';
  const submit=domainForm.querySelector('button[type="submit"]');submit.disabled=true;
- const loading=document.createElement('p');loading.textContent='Checking availability securely…';domainResults.append(loading);
- let verified=null;
- try{
-  const response=await fetch('/api/domain-legacy-availability?name='+encodeURIComponent(name),
-   {cache:'no-store',signal:AbortSignal.timeout(11000)});
-  if(response.ok){const data=await response.json();if(data.verified&&Array.isArray(data.domains))
-   verified=new Map(data.domains.map(d=>[d.domain,d]));}
- }catch(_error){}finally{submit.disabled=false;}
+ const loading=document.createElement('p');
+ loading.textContent='Generating domain ideas and checking registrar availability…';
+ domainResults.append(loading);
+ const verified=new Map();
+ let successfulChecks=0;
+ await Promise.all(candidates.map(async name=>{
+  try{
+   const response=await fetch('/api/domain-legacy-availability?name='+encodeURIComponent(name),
+    {cache:'no-store',signal:AbortSignal.timeout(11000)});
+   if(!response.ok)return;
+   const data=await response.json();
+   if(data.verified===true&&Array.isArray(data.domains)){
+    successfulChecks++;
+    data.domains.forEach(item=>{if(item&&typeof item.domain==='string')verified.set(item.domain,item);});
+   }
+  }catch(_error){}
+ }));
+ if(searchId!==latestDomainSearch)return;
+ submit.disabled=false;
  domainResults.replaceChildren();
- for(const [index,tld] of extensions.entries()){
-  const domain=name+'.'+tld;domainResults.append(makeResult(domain,index,verified?.get(domain)||{status:'unknown'}));
+ const note=document.createElement('p');
+ note.textContent=successfulChecks?'These are name ideas with registrar availability statuses. No domain is reserved.':
+  'Here are possible domain names. Live availability could not be confirmed; contact us before purchasing.';
+ domainResults.append(note);
+ let count=0;
+ for(const name of candidates){
+  for(const ext of extensions){
+   const domain=name+'.'+ext;
+   domainResults.append(makeResult(domain,count++,verified.get(domain)||{status:'unknown'}));
+  }
  }
- domainBadge.textContent=verified?'Registrar response':'Not verified';
+ domainBadge.textContent=successfulChecks?'Availability checked':'Suggestions only';
  document.querySelector('.search-results').scrollIntoView({behavior:'smooth',block:'nearest'});
 });
 domainInput.addEventListener('input',function(){this.setCustomValidity('');});
