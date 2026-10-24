@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0d0d0d">
+  <title>Temporarily Unavailable | BAM's Website Builder</title>
+  <style>
+    :root { color-scheme: dark; font-family: Arial, Helvetica, sans-serif; color: #fff; background: #0d0d0d; }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body { margin: 0; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; }
+    a { color: inherit; }
+    a:focus-visible, button:focus-visible { outline: 3px solid #efc66a; outline-offset: 5px; }
+    header, footer { padding: 28px max(24px, calc((100% - 1120px) / 2)); }
+    header { border-bottom: 1px solid #ffffff18; }
+    .brand { display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 10px; text-decoration: none; }
+    .brand strong { font: 900 1.2rem Georgia, 'Times New Roman', serif; color: #efc66a; letter-spacing: .045em; }
+    .brand span { font-size: .65rem; font-weight: 700; letter-spacing: .16em; }
+    main { width: min(100%, 800px); margin: auto; padding: 64px 24px 72px; text-align: center; }
+    .code { margin: 0; color: #efc66a; font-size: clamp(6rem, 22vw, 10rem); font-weight: 900; line-height: 1; letter-spacing: -.07em; }
+    .eyebrow { margin: 20px 0 16px; color: #efc66a; font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+    h1 { margin: 0 0 20px; font-size: clamp(2rem, 6vw, 3.2rem); line-height: 1.12; letter-spacing: -.035em; }
+    .message { max-width: 500px; margin: 0 auto; color: #c1c1c1; font-size: 1.05rem; line-height: 1.7; }
+    .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 32px 0; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; min-width: 150px; padding: 13px 23px; border: 1px solid #efc66a; border-radius: 8px; background: #efc66a; color: #0d0d0d; font: 700 .95rem Arial, Helvetica, sans-serif; text-decoration: none; cursor: pointer; }
+    .button:hover { background: #f6d58f; }
+    .secondary { background: transparent; color: #efc66a; border-color: #efc66a66; }
+    .secondary:hover { background: #efc66a12; }
+    .help { padding-top: 28px; border-top: 1px solid #ffffff18; color: #b9b9b9; font-size: .9rem; line-height: 1.8; }
+    .help p { margin: 0 0 8px; }
+    .contacts { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 24px; }
+    .contacts a { color: #efc66a; overflow-wrap: anywhere; text-underline-offset: 4px; }
+    footer { border-top: 1px solid #ffffff18; color: #999; font-size: .75rem; line-height: 1.6; text-align: center; }
+    noscript p { color: #b9b9b9; font-size: .85rem; line-height: 1.6; }
+    @media (max-width: 420px) { main { padding-top: 40px; padding-bottom: 40px; } .actions { flex-direction: column; } .contacts { flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="brand" href="/" aria-label="BAM's Website Builder home"><strong>BAM'S</strong><span>WEBSITE BUILDER</span></a>
+  </header>
+  <main>
+    <p class="code" aria-hidden="true">502</p>
+    <p class="eyebrow">Bad Gateway</p>
+    <h1>A brief interruption.</h1>
+    <p class="message">We couldn't connect to a service needed to load this page. Please wait a moment and try again.</p>
+    <div class="actions">
+      <button class="button" type="button" id="retry" hidden>Try again</button>
+      <a class="button secondary" href="/">Return home</a>
+    </div>
+    <noscript><p>Use your browser's refresh button to try loading the page again.</p></noscript>
+    <div class="help">
+      <p>Need help now? Get in touch directly.</p>
+      <div class="contacts">
+        <a href="tel:+17274178762">727-417-8762</a>
+        <a href="mailto:bamswebsitebuilder@gmail.com">bamswebsitebuilder@gmail.com</a>
+      </div>
+    </div>
+  </main>
+  <footer>&copy; 2026 BAM's Website Builder. All rights reserved.</footer>
+  <script>
+    const retry = document.getElementById('retry');
+    retry.hidden = false;
+    retry.addEventListener('click', () => window.location.reload());
+  </script>
+</body>
+</html>
