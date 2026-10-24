@@ -81,23 +81,35 @@ document.querySelectorAll('.template-card').forEach((card) => {
   }
 });
 
-const filterButtons = document.querySelectorAll('.template-filter');
+const filterButtons = [...document.querySelectorAll('.template-filter')];
+const templateCards = [...document.querySelectorAll('.template-card')];
+const filterSummary = document.createElement('p');
+filterSummary.className = 'template-filter-summary';
+filterSummary.setAttribute('role', 'status');
+filterSummary.setAttribute('aria-live', 'polite');
+document.querySelector('.template-filters')?.after(filterSummary);
+
+function applyTemplateFilter(button) {
+  const selectedFilter = button.dataset.filter;
+  filterButtons.forEach((item) => {
+    const selected = item === button;
+    item.classList.toggle('active', selected);
+    item.setAttribute('aria-pressed', String(selected));
+  });
+  let visible = 0;
+  templateCards.forEach((card) => {
+    card.hidden = selectedFilter !== 'all' && card.dataset.category !== selectedFilter;
+    if (!card.hidden) visible += 1;
+  });
+  filterSummary.textContent = spanishTemplates
+    ? `${visible} ${visible === 1 ? 'diseño disponible' : 'diseños disponibles'}`
+    : `${visible} ${visible === 1 ? 'design available' : 'designs available'}`;
+}
 filterButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-        filterButtons.forEach((item) => item.classList.remove('active'));
-        button.classList.add('active');
-
-        const selectedFilter = button.dataset.filter;
-
-        document.querySelectorAll('.template-card').forEach((card) => {
-            const matchesFilter =
-                selectedFilter === 'all' ||
-                card.dataset.category === selectedFilter;
-
-            card.hidden = !matchesFilter;
-        });
-    });
+  button.addEventListener('click', () => applyTemplateFilter(button));
 });
+const initialFilter = filterButtons.find(button => button.classList.contains('active')) || filterButtons[0];
+if (initialFilter) applyTemplateFilter(initialFilter);
 
 /* Accessible feedback while the contact page opens. */
 document.querySelectorAll('.template-select').forEach((link) => {
