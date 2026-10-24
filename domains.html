@@ -196,31 +196,36 @@ function makeResult(domain,index,result){
 }
 let latestDomainSearch=0;
 function businessNameVariants(raw){
+ // Accept everyday company names, existing domains, punctuation and pasted URLs.
  const cleaned=raw.toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'')
   .replace(/&/g,' and ').replace(/[^a-z0-9]+/g,' ').trim();
  const words=cleaned.split(/\s+/).filter(Boolean);
  const result=[];
- const add=value=>{if(/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/.test(value)&&!result.includes(value))result.push(value);};
+ const add=value=>{
+  const safe=value.slice(0,63).replace(/^-+|-+$/g,'');
+  if(/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/.test(safe)&&!result.includes(safe))result.push(safe);
+ };
  add(words.join('')); // Sunshine Bakery -> sunshinebakery
  if(words.length>1)add(words.join('-')); // sunshine-bakery
- // Skip weak single-word suggestions. Every variant still requires registrar verification.
  if(words.length>2)add(words.slice(0,2).join(''));
  return result.slice(0,3);
 }
 domainForm.addEventListener('submit',async function(event){
  event.preventDefault();domainInput.setCustomValidity('');
  const raw=domainInput.value.trim();
+ // Strip schemes and common pasted URL components without treating business punctuation as an error.
  const query=raw.toLowerCase().replace(/^https?:\/\//,'').replace(/^www\./,'')
-  .replace(/[/?#].*$/,'').replace(/:\d+$/,'').trim();
- const domainMatch=query.match(/^([a-z0-9-]+)\.(com|net|org|co)$/);
- const unsupportedExtension=/^[a-z0-9-]+\.[a-z]{2,}$/i.test(query)&&!domainMatch;
- const candidates=domainMatch?[domainMatch[1]]:unsupportedExtension?[]:businessNameVariants(query);
+  .split(/[/?#]/)[0].replace(/:\d+$/,'').trim();
+ const domainMatch=query.match(/^([a-z0-9-]+)\.([a-z]{2,63})$/i);
+ const desiredExtension=domainMatch?domainMatch[2]:null;
+ const supportedExtension=desiredExtension&&tlds.includes(desiredExtension);
+ const candidates=businessNameVariants(domainMatch?domainMatch[1]:query);
  if(!candidates.length){
-  domainInput.setCustomValidity('Enter a business name (such as Sunshine Bakery) or a .com, .net, .org, or .co domain.');
+  domainInput.setCustomValidity('Please enter a business name containing at least one letter or number.');
   domainInput.reportValidity();return;
  }
  const searchId=++latestDomainSearch;
- const extensions=domainMatch?[domainMatch[2],...tlds.filter(ext=>ext!==domainMatch[2])]:tlds;
+ const extensions=supportedExtension?[desiredExtension,...tlds.filter(ext=>ext!==desiredExtension)]:tlds;
  domainResults.replaceChildren();
  document.getElementById('domain-results-title').textContent='Domain ideas for '+raw;
  domainBadge.textContent='Checking…';
@@ -249,6 +254,12 @@ domainForm.addEventListener('submit',async function(event){
  note.textContent=successfulChecks?'These are name ideas with registrar availability statuses. No domain is reserved.':
   'Here are possible domain names. Live availability could not be confirmed; contact us before purchasing.';
  domainResults.append(note);
+ if(desiredExtension&&!supportedExtension){
+  const unsupported=document.createElement('p');
+  unsupported.textContent='You entered .'+desiredExtension+'. We can help with that extension too, but live availability checks currently cover .com, .net, .org and .co only.';
+  domainResults.append(unsupported);
+  domainResults.append(makeResult(candidates[0]+'.'+desiredExtension,0,{status:'unknown'}));
+ }
  let count=0;
  for(const name of candidates){
   for(const ext of extensions){
