@@ -213,6 +213,28 @@
       });
     });
 
+    // Give conversion and account actions their own section instead of placing
+    // them visually beneath Resources. This works for both language menus.
+    document.querySelectorAll('.mobile-navigation').forEach((nav) => {
+      const actions = ['booking', 'contact', 'login']
+        .map(page => nav.querySelector('a[data-page="' + page + '"]'))
+        .filter(Boolean);
+      if (!actions.length || nav.querySelector('.mobile-nav-get-started')) return;
+      const group = document.createElement('div');
+      group.className = 'mobile-nav-group mobile-nav-get-started';
+      const heading = document.createElement('p');
+      heading.className = 'mobile-nav-group-title';
+      heading.id = 'mobile-group-get-started';
+      heading.textContent = spanish ? 'Empezar' : 'Get Started';
+      group.setAttribute('aria-labelledby', heading.id);
+      group.append(heading, ...actions);
+      const resources = nav.querySelector('.mobile-nav-group[aria-labelledby="mobile-group-resources"]');
+      if (resources) resources.insertAdjacentElement('afterend', group);
+      else nav.append(group);
+      const booking = group.querySelector('a[data-page="booking"]');
+      if (booking) booking.classList.add('mobile-booking-action');
+    });
+
     document.querySelectorAll('.footer-links').forEach((links) => {
       if (!links.querySelector(`a[href="${aboutHref}"]`) && links.querySelector('a[href$="services"], a[href="/services"]')) {
         const link = document.createElement('a');
