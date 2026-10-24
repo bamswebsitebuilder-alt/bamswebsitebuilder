@@ -68,3 +68,52 @@ html[data-theme=light] .templates-page .template-actions > :focus-visible { outl
 @media(prefers-reduced-motion:reduce) {
   .templates-page .template-actions > a,.templates-page .template-actions > button { transition:none; }
 }
+
+/* Gallery spacing and hierarchy, scoped to the Templates page. */
+.templates-page .templates-hero { padding:clamp(64px,8vw,104px) 24px 52px; }
+.templates-page .templates-hero h1 { max-width:820px; font-size:clamp(2.25rem,5vw,4rem); line-height:1.12; }
+.templates-page .templates-hero h1 span { display:block; }
+.templates-page .template-benefits { gap:8px 20px; }
+.templates-page .template-benefits span { padding:0; border:0; background:none; font-size:.875rem; }
+.templates-page .templates-content { padding:48px 24px 64px; }
+.templates-page .template-heading { margin-bottom:24px; }
+.templates-page .template-filters { gap:8px; margin-bottom:16px; }
+.templates-page .template-filter { min-height:44px; padding:10px 16px; font:inherit; font-size:.875rem; }
+.templates-page .template-filter:focus-visible { outline:3px solid #f4c15d; outline-offset:3px; }
+.templates-page .template-filter-summary { margin:0 0 24px; color:#bbb; font-size:.875rem; text-align:center; }
+.templates-page .template-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; align-items:stretch; }
+.templates-page .template-card { transition:border-color .2s ease; }
+.templates-page .template-card:hover { transform:none; }
+.templates-page .template-preview { height:220px; }
+.templates-page .template-preview:not(.industry-photo-preview) img { object-fit:contain; padding:20px; box-sizing:border-box; }
+.templates-page .template-card-body { padding:24px; gap:16px; }
+.templates-page .template-card-body > * { margin:0; }
+.templates-page .template-card-body h2 { font-size:1.4rem; line-height:1.25; overflow-wrap:anywhere; }
+.templates-page .template-category { line-height:1.5; letter-spacing:.08em; }
+.templates-page .template-card-body > p:not(.template-category):not(.template-price) { color:#bbb; line-height:1.6; font-size:.92rem; }
+.templates-page .template-card-body li { line-height:1.55; }
+.templates-page .template-price { gap:4px; }
+.templates-page .template-actions { padding-top:4px; }
+.templates-page .payment-box { margin-top:48px; padding:32px; }
+.templates-page .payment-box > p:not(.templates-eyebrow) { max-width:65ch; margin:16px auto; line-height:1.7; }
+.templates-page .process-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
+.templates-page .process-step p { margin:12px 0 0; line-height:1.6; color:#bbb; }
+.templates-page .personal-preview-intro { width:min(1200px,calc(100% - 48px)); margin:32px auto 0; padding:24px; box-sizing:border-box; }
+.templates-page .personal-preview-intro > p { max-width:80ch; margin:12px 0 20px; }
+html[data-theme=light] .templates-page :is(.template-filter-summary,.template-card-body > p:not(.template-category):not(.template-price),.process-step p) { color:#514632; }
+@media(max-width:1000px) {
+  .templates-page .template-grid,.templates-page .process-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:620px) {
+  .templates-page .templates-hero { padding:56px 20px 36px; }
+  .templates-page .templates-content,.templates-page .template-process { padding:36px 20px; }
+  .templates-page .template-grid,.templates-page .process-grid { grid-template-columns:minmax(0,1fr); gap:20px; }
+  .templates-page .template-filters { justify-content:flex-start; }
+  .templates-page .template-filter { flex:0 1 auto; max-width:100%; }
+  .templates-page .template-preview { height:220px; }
+  .templates-page .personal-preview-intro { width:calc(100% - 40px); padding:20px; }
+  .templates-page .preview-url-row input { min-width:0; }
+  .templates-page .payment-box { padding:24px 20px; }
+  .templates-page .payment-options { flex-direction:column; }
+}
+@media(prefers-reduced-motion:reduce) { .templates-page .template-card { transition:none; } }
