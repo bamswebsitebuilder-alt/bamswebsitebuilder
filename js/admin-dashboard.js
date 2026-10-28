@@ -17,6 +17,7 @@ import { auth, db, storage } from "./firebase-config.js";
 import { onboardingProject, projectAlerts } from "./project-workflow.js?v=1";
 import { createAdminAgreements } from "./agreements-admin.js?v=3";
 import { createWorkflowEditor } from "./project-workflow-editor.js?v=1";
+import { createAdminRequests } from "./change-requests-admin.js?v=1";
 
 import {
   onAuthStateChanged,
@@ -142,6 +143,28 @@ const projectsByClient = new Map();
 const invoicesByClient = new Map();
 
 let firstClientSnapshotLoaded = false;
+const attentionErrors = new Set();
+const requestsUI = createAdminRequests((kind, userId) => {
+  setActivePanel(kind);
+  if (kind === 'projects' && projectClientSelect) {
+    projectClientSelect.value = userId;
+    projectClientSelect.dispatchEvent(new Event('change'));
+    projectClientSelect.focus();
+  } else if (kind === 'invoices' && invoiceClientSelect) {
+    invoiceClientSelect.value = userId;
+    invoiceClientSelect.focus();
+  } else if (kind === 'messages') {
+    const clientButton = [...document.querySelectorAll('[data-client-id]')].find(button => button.dataset.clientId === userId);
+    clientButton?.click();
+  }
+});
+function syncAttention() {
+  if (!currentAdmin) return;
+  requestsUI?.update({clients:clientRecords, projects:projectRecords, invoices:invoiceRecords,
+    loading:!firstClientSnapshotLoaded || invoicesByClient.size < clientRecords.length,
+    warning:attentionErrors.size > 0});
+}
+window.addEventListener('beforeunload', () => requestsUI?.reset());
 
 
 /* =========================================================
@@ -769,6 +792,7 @@ const renderInvoices = () => {
 ========================================================= */
 
 const updateStats = () => {
+  syncAttention();
   const unpaidInvoices = invoiceRecords.filter(
     (invoice) => invoice.status !== "paid"
   );
@@ -1027,6 +1051,7 @@ const publishProjects = () => {
   renderProjects();
   projectRecords.forEach(project => agreementUI?.project(project));
   renderNotifications();
+  syncAttention();
 };
 
 const watchProjects = () => {
@@ -1050,6 +1075,7 @@ const watchProjects = () => {
     const unsubscribe = onSnapshot(
       projectReference,
       (snapshot) => {
+        attentionErrors.delete('project-' + client.id);
         if (snapshot.exists()) {
           projectsByClient.set(client.id, {
             id: snapshot.id,
@@ -1071,6 +1097,7 @@ const watchProjects = () => {
           `Unable to load project for ${client.id}:`,
           error
         );
+        attentionErrors.add('project-' + client.id);
 
         projectsByClient.delete(client.id);
         publishProjects();
@@ -1132,6 +1159,7 @@ const watchInvoices = () => {
     const unsubscribe = onSnapshot(
       invoiceCollection,
       (snapshot) => {
+        attentionErrors.delete('invoice-' + client.id);
         const records = snapshot.docs.map(
           (invoiceDocument) => ({
             id: invoiceDocument.id,
@@ -1148,6 +1176,7 @@ const watchInvoices = () => {
           `Unable to load invoices for ${client.id}:`,
           error
         );
+        attentionErrors.add('invoice-' + client.id);
 
         invoicesByClient.set(client.id, []);
         publishInvoices();
@@ -1176,8 +1205,8 @@ const watchClients = () => {
 
       clientRecords = snapshot.docs
         .map((clientDocument) => ({
-          id: clientDocument.id,
-          ...clientDocument.data()
+          ...clientDocument.data(),
+          id: clientDocument.id
         }))
         .filter((record) => {
           return (
@@ -1212,6 +1241,7 @@ const watchClients = () => {
       }
 
       firstClientSnapshotLoaded = true;
+      syncAttention();
 
       renderNotifications();
     },
@@ -1787,6 +1817,8 @@ onAuthStateChanged(
   auth,
   async (user) => {
     if (!user) {
+      currentAdmin = null;
+      requestsUI?.reset();
       window.location.replace(
         portalLoginUrl(window.location)
       );

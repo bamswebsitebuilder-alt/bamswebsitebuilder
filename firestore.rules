@@ -1,5 +1,11 @@
 rules_version = '2';
 
+// Change requests: users/{clientUid}/changeRequests/{id}.
+// Immutable: clientUid, title (3..150), pageUrl (HTTP/S, <=2048), description
+// (10..4000), screenshotPath (empty or owned uploads path, <=512), createdAt.
+// Admin review: status enum, scope enum, adminNote (<=2000), updatedAt.
+// Owners may only cancel unstarted requests. No deletes. Other rules retained.
+
 service cloud.firestore {
   match /databases/{database}/documents {
 
@@ -17,7 +23,65 @@ service cloud.firestore {
         && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
     }
 
+    function validChangeRequest(d, userId) {
+      return d.keys().hasAll(['clientUid','title','pageUrl','description','screenshotPath','status','scope','adminNote','createdAt','updatedAt'])
+        && d.keys().hasOnly(['clientUid','title','pageUrl','description','screenshotPath','status','scope','adminNote','createdAt','updatedAt'])
+        && d.clientUid == userId
+        && d.title is string && d.title.size() >= 3 && d.title.size() <= 150
+        && d.description is string && d.description.size() >= 10 && d.description.size() <= 4000
+        && d.pageUrl is string && d.pageUrl.size() <= 2048
+        && d.pageUrl.matches('https?://[^ /]+(/.*)?')
+        && !d.pageUrl.matches('https?://[^/]*@.*')
+        && d.screenshotPath is string && d.screenshotPath.size() <= 512
+        && (d.screenshotPath == '' || (
+          d.screenshotPath.split('/').size() == 4
+          && d.screenshotPath.split('/')[0] == 'users'
+          && d.screenshotPath.split('/')[1] == userId
+          && d.screenshotPath.split('/')[2] == 'uploads'
+          && d.screenshotPath.split('/')[3].matches('change-request_[A-Za-z0-9]+[.](jpg|png|webp)')))
+        && d.status in ['submitted','in-review','waiting-on-client','in-progress','completed','declined','cancelled']
+        && d.scope in ['unreviewed','included','extra']
+        && (!(d.status in ['in-progress','completed']) || d.scope != 'unreviewed')
+        && d.adminNote is string && d.adminNote.size() <= 2000
+        && d.createdAt is timestamp && d.updatedAt is timestamp;
+    }
+    function validRequestTransition(before, after) {
+      return before == after
+        || (before == 'submitted' && after in ['in-review','declined','cancelled'])
+        || (before == 'in-review' && after in ['waiting-on-client','in-progress','declined','cancelled'])
+        || (before == 'waiting-on-client' && after in ['in-review','in-progress','declined','cancelled'])
+        || (before == 'in-progress' && after in ['waiting-on-client','completed']);
+    }
+
     match /users/{userId} {
+
+      match /changeRequests/{requestId} {
+        allow read: if signedIn()
+          && exists(/databases/$(database)/documents/users/$(userId))
+          && (request.auth.uid == userId || isAdmin());
+        allow create: if signedIn() && request.auth.uid == userId
+          && request.auth.token.email_verified == true
+          && userDocumentExists()
+          && get(/databases/$(database)/documents/users/$(userId)).data.role == 'client'
+          && validChangeRequest(request.resource.data, userId)
+          && request.resource.data.status == 'submitted'
+          && request.resource.data.scope == 'unreviewed'
+          && request.resource.data.adminNote == ''
+          && request.resource.data.createdAt == request.time
+          && request.resource.data.updatedAt == request.time;
+        allow update: if signedIn() && request.auth.token.email_verified == true
+          && exists(/databases/$(database)/documents/users/$(userId))
+          && validChangeRequest(request.resource.data, userId)
+          && request.resource.data.updatedAt == request.time
+          && ((isAdmin()
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status','scope','adminNote','updatedAt'])
+            && validRequestTransition(resource.data.status, request.resource.data.status))
+          || (request.auth.uid == userId
+            && resource.data.status in ['submitted','in-review','waiting-on-client']
+            && request.resource.data.status == 'cancelled'
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status','updatedAt'])));
+        allow delete: if false;
+      }
 
       // =====================================================
       // USER PROFILE

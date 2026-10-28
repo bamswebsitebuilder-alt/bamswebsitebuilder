@@ -83,7 +83,7 @@
   </style>
  <link rel="stylesheet" href="/css/responsive-fixes.css">
 <link rel="stylesheet" href="/css/project-workflow.css?v=1"><link rel="stylesheet" href="/css/agreements.css?v=1"><meta name="robots" content="noindex, nofollow"><link rel="stylesheet" href="/css/accessibility.css?v=1"><link rel="stylesheet" href="/css/workspace.css?v=20261013-overflow-3"><link rel="stylesheet" href="/css/portal-brand.css?v=20261013-brand-4"><link rel="stylesheet" href="/css/light-theme.css?v=20261028-1">
-</head>
+<link rel="stylesheet" href="/css/change-requests.css?v=1"></head>
  <body class="admin-dashboard-page"><a class="site-skip-link" href="#main-content">Saltar al contenido</a>
   <header class="admin-header">
    <button aria-controls="admin-sidebar" aria-expanded="false" aria-label="Abrir men&uacute; de administraci&oacute;n" class="admin-menu-toggle" id="admin-menu-toggle" type="button">
@@ -149,12 +149,12 @@
        0
       </span>
      </button>
-    </nav><div class="workspace-sidebar-note"><strong>Un espacio para tu negocio</strong><p>Gestiona proyectos, acuerdos y conversaciones con tus clientes.</p></div>
+    <button class="admin-nav-button" type="button" data-panel="requests">Solicitudes de cambio</button></nav><div class="workspace-sidebar-note"><strong>Un espacio para tu negocio</strong><p>Gestiona proyectos, acuerdos y conversaciones con tus clientes.</p></div>
    </aside>
    <button aria-label="Cerrar men&uacute; de administraci&oacute;n" class="admin-sidebar-overlay" hidden="" id="admin-sidebar-overlay" type="button">
    </button>
    <main class="admin-content" id="main-content" tabindex="-1">
-    <section class="admin-panel active" id="overview">
+    <section class="admin-panel" id="requests"><div class="admin-page-heading"><h1>Solicitudes de cambio</h1><p>Revisa las solicitudes, clasifica el alcance y publica una actualización. El trabajo extra requiere una cotización aceptada por separado.</p></div><article class="admin-card"><div class="request-filters"><label>Cliente<select id="request-client-filter"><option value="">Todos los clientes</option></select></label><label>Mostrar<select id="request-state-filter"><option value="open">Solicitudes abiertas</option><option value="all">Todas las solicitudes</option></select></label></div><p id="admin-request-status" role="status"></p><div id="admin-change-requests" aria-live="polite"></div></article></section><section class="admin-panel active" id="overview">
      <div class="admin-page-heading">
       <p class="admin-kicker">
        PANEL
@@ -166,7 +166,7 @@
        Administra clientes, proyectos, facturas, archivos y actividad reciente.
       </p>
      </div>
-     <div class="admin-stat-grid">
+     <article class="admin-card attention-card" aria-labelledby="attention-title"><div class="admin-card-heading"><h2 id="attention-title">Requiere tu atención <span id="attention-count" class="request-badge">0</span></h2></div><label>Filtrar<select id="attention-filter"><option value="">Todo</option><option value="requests">Solicitudes de cambio</option><option value="messages">Mensajes sin leer</option><option value="projects">Proyectos y aprobaciones</option><option value="invoices">Facturas pendientes</option></select></label><p id="attention-status" role="status">Cargando actividad de los clientes…</p><ul id="attention-list" class="attention-list" aria-live="polite"></ul></article><div class="admin-stat-grid">
       <article class="admin-stat-card">
        <span>
         Total Clientes
@@ -727,7 +727,7 @@
     </section>
    </main>
   </div>
-  <script src="/js/admin-dashboard.js?v=20261013-access-1" type="module">
+  <script src="/js/admin-dashboard.js?v=20261029-requests-1" type="module">
   </script>
   <script src="/js/admin-messages.js?v=1" type="module">
   </script>
