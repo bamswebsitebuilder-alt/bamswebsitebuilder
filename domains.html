@@ -45,6 +45,45 @@
 .domain-page-main :is(th,td):nth-child(n+2){text-align:right;font-variant-numeric:tabular-nums}
 .domain-page-main .domain-assistance-panel .lead{margin:0 0 24px}
 @media(max-width:600px){.domain-page-main{padding:32px 18px 40px}.domain-page-main .panel,.domain-page-main .search-results{padding:22px 18px}.domain-page-main .domain-search>*{width:100%}.domain-page-main .domain-result{align-items:flex-start;flex-direction:column;gap:14px}.domain-page-main .domain-result-actions,.domain-page-main .domain-result-actions a{width:100%}.domain-page-main .domain-service-shortcuts{grid-template-columns:1fr}.domain-page-main :is(th,td){padding:12px 5px;font-size:.92rem}}
+/* Keep the domain page's surfaces and text in the same theme. */
+html[data-theme="light"] .domain-page-main{
+ --bam-text:#20201d;
+ --bam-muted:#514d44;
+ --bam-gold:#765300;
+ --bam-panel:#fffdf8;
+ --bam-border:#b7a57c;
+ color:var(--bam-text);
+ background:#fbf7ef!important;
+ color-scheme:light;
+}
+html[data-theme="light"] .domain-page-main :is(h1,h2,h3){color:var(--bam-text);text-shadow:none}
+html[data-theme="light"] .domain-page-main .domain-search{align-items:stretch}
+html[data-theme="light"] .domain-page-main .domain-search label{
+ display:block;position:static;width:100%;height:auto;flex:0 0 100%;
+ margin:0;padding:0;overflow:visible;clip:auto;clip-path:none;white-space:normal;
+ font-weight:700;line-height:1.5;
+}
+html[data-theme="light"] .domain-page-main input{border-color:#8b806a}
+html[data-theme="light"] .domain-page-main :is(button,.button){
+ background:#765300;border-color:#765300;color:#fff!important;
+ white-space:normal;overflow-wrap:anywhere;
+}
+html[data-theme="light"] .domain-page-main :is(button,.button):hover{
+ background:#5f4300;border-color:#5f4300;color:#fff!important;
+}
+html[data-theme="light"] .domain-page-main .outline-button{background:#fffdf8;color:#765300!important}
+html[data-theme="light"] .domain-page-main .outline-button:hover{background:#f3e7cc;color:#5f4300!important}
+html[data-theme="light"] .domain-page-main .extension-list{flex-wrap:wrap}
+html[data-theme="light"] .domain-page-main .domain-service-shortcuts>a:hover{
+ background:#f3ead8;border-color:#765300;
+}
+html[data-theme="light"] .domain-page-main :is(.results-heading h2,.preview-badge){overflow-wrap:anywhere}
+html[data-theme="light"] .domain-page .home-footer :is(p,.footer-bottom){color:#514d44!important}
+html[data-theme="light"] .domain-page .home-footer a:focus-visible{outline:3px solid #765300;outline-offset:4px}
+@media(max-width:600px){
+ html[data-theme="light"] .domain-page-main :is(.domain-search button,.domain-store-actions .button,.domain-contact-button){width:100%}
+ html[data-theme="light"] .domain-page-main .domain-result-actions{flex-shrink:1;max-width:100%}
+}
 </style></head><body class="domain-page"><a class="site-skip-link" href="#main-content">Skip to main content</a><header class="site-header" id="site-header">
 <div class="header-container">
 <a aria-label="BAM's Website Builder home" class="site-brand" href="/">
