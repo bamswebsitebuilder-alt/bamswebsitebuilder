@@ -1,3 +1,4 @@
+import { renderProfileAvatar } from "./profile-avatar.js?v=1";
 import { auth, db } from "./firebase-config.js";
 
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
@@ -42,23 +43,9 @@ const showStatus = (message, success = false) => {
   status.classList.toggle("error", !success);
 };
 
-const renderPhoto = (photoURL, displayName = "") => {
-  const initial = (displayName || currentUser?.email || "A").trim().charAt(0).toUpperCase();
-
-  targets.forEach((target) => {
-    target.replaceChildren();
-    target.classList.toggle("has-photo", Boolean(photoURL));
-
-    if (photoURL) {
-      const image = document.createElement("img");
-      image.src = photoURL;
-      image.alt = "";
-      image.referrerPolicy = "no-referrer";
-      target.appendChild(image);
-    } else {
-      target.textContent = initial;
-    }
-  });
+const renderPhoto = (sources, displayName = "") => {
+  const name = displayName || currentUser?.email || "A";
+  targets.forEach(target => renderProfileAvatar(target, sources, name));
 };
 
 const loadPhoto = async (user) => {
@@ -71,8 +58,9 @@ const loadPhoto = async (user) => {
     console.error("Unable to load profile picture:", error);
   }
 
+  if (currentUser?.uid !== user.uid) return;
   renderPhoto(
-    profile.photoDataUrl || profile.photoURL || user.photoURL || "",
+    [profile.photoDataUrl, profile.photoURL, user.photoURL],
     profile.fullName || user.displayName || ""
   );
 };
@@ -132,6 +120,20 @@ const resetButton = () => {
 };
 
 button?.addEventListener("click", () => input?.click());
+const adminPhoto = document.getElementById("admin-profile-photo");
+if (adminPhoto && input) {
+  adminPhoto.setAttribute("role", "button");
+  adminPhoto.setAttribute("tabindex", "0");
+  adminPhoto.setAttribute("aria-label", copy.choose);
+  adminPhoto.style.cursor = "pointer";
+  adminPhoto.addEventListener("click", () => input.click());
+  adminPhoto.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      input.click();
+    }
+  });
+}
 
 input?.addEventListener("change", async () => {
   const file = input.files?.[0];
@@ -168,7 +170,7 @@ input?.addEventListener("change", async () => {
       updatedAt: serverTimestamp()
     }, { merge: true });
 
-    renderPhoto(photoDataUrl, currentUser.displayName || "");
+    renderPhoto([photoDataUrl], currentUser.displayName || "");
     showStatus(copy.success, true);
   } catch (error) {
     console.error("Profile picture save failed:", error);
@@ -182,4 +184,5 @@ input?.addEventListener("change", async () => {
 onAuthStateChanged(auth, (user) => {
   currentUser = user;
   if (user) loadPhoto(user);
+  else renderPhoto([], "A");
 });
