@@ -1,3 +1,4 @@
+import { renderProfileAvatar } from "./profile-avatar.js?v=1";
 import { portalLoginUrl } from "./portal-routing.js?v=2";
 import { auth, db, storage } from "./firebase-config.js";
 
@@ -204,20 +205,8 @@ const validateFile = (file) => {
   };
 };
 
-const renderAvatar = (photoURL, displayName) => {
-  if (!avatar) return;
-  avatar.replaceChildren();
-  avatar.classList.toggle("has-photo", Boolean(photoURL));
-
-  if (photoURL) {
-    const image = document.createElement("img");
-    image.src = photoURL;
-    image.alt = "";
-    image.referrerPolicy = "no-referrer";
-    avatar.appendChild(image);
-  } else {
-    avatar.textContent = (displayName || "Cliente").charAt(0).toUpperCase();
-  }
+const renderAvatar = (sources, displayName) => {
+  renderProfileAvatar(avatar, sources, displayName || "Cliente");
 };
 
 /* =========================================================
@@ -276,7 +265,7 @@ const loadProfile = async (user) => {
     userEmail.textContent = email;
   }
 
-  renderAvatar(profile.photoDataUrl || profile.photoURL || user.photoURL || "", displayName);
+  renderAvatar([profile.photoDataUrl, profile.photoURL, user.photoURL], displayName);
 
   if (accountName) {
     accountName.value = displayName;
