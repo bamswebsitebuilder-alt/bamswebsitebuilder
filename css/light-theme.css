@@ -1,0 +1,147 @@
+/* Complete cream-theme surfaces and readable gold accents, shared by EN and ES. */
+html[data-theme="light"] {
+  color-scheme: light;
+  --bam-bg: #fbf7ef;
+  --bam-panel: #fffdf8;
+  --bam-panel-2: #f6efe2;
+  --bam-text: #20201d;
+  --bam-muted: #514d44;
+  --bam-gold: #765300;
+  --bam-gold-light: #765300;
+  --bam-border: #b7a57c;
+  --bam-line: #c6b99e;
+}
+
+/* Shared navigation, footer, and keyboard focus. */
+html[data-theme="light"] body .site-header { background: #fff8e8 !important; }
+html[data-theme="light"] body .desktop-navigation .nav-more-links a { color: #20201d !important; }
+html[data-theme="light"] body .desktop-navigation .nav-more-links a:is(:hover,:focus-visible,[aria-current="page"]) {
+  color: #654700 !important;
+  background: #f3e7cc !important;
+}
+html[data-theme="light"] body .home-footer :is(p,.footer-bottom,a) { color: #514d44 !important; }
+html[data-theme="light"] body .home-footer a:is(:hover,:focus-visible) { color: #654700 !important; text-decoration: underline; }
+html[data-theme="light"] body :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline: 3px solid #765300 !important;
+  outline-offset: 4px;
+}
+
+/* Components added after the original theme was built. */
+html[data-theme="light"] body :is(.plan-preview-card,.buying-path-card,.payment-plan-note,.client-guide-card,.client-case-study,.personal-preview-intro,.personal-preview-dialog) {
+  background: #fffdf8 !important;
+  color: #20201d !important;
+  border-color: #b7a57c !important;
+}
+html[data-theme="light"] body .plan-preview-card.featured { background: #f3e7cc !important; }
+html[data-theme="light"] body :is(.home-link,.process-number,.about-value>span,.about-process-step>span,.service-step>span,.service-category-heading>span,.pricing-heading h1 span,.templates-hero h1 span,.dollar-sign,.bam-next-step span,.benefit-icon) {
+  color: #765300 !important;
+}
+html[data-theme="light"] body :is(.plan-label,.plan-badge,.buying-path-number,.plan-term-note,.plan-price span) { color: #514d44 !important; }
+html[data-theme="light"] body :is(.template-meta span,.template-price>span,.auth-feature-list span,.personal-preview-intro p,.preview-note,.preview-status) { color: #514d44 !important; }
+html[data-theme="light"] body :is(.personal-preview-intro,.preview-editor) label { color: #20201d !important; }
+html[data-theme="light"] body .password-toggle { color: #765300 !important; background: transparent !important; }
+html[data-theme="light"] body .case-study-kicker { color: #765300 !important; }
+html[data-theme="light"] body .client-case-study figcaption { color: #514d44 !important; }
+html[data-theme="light"] body.polished-home .hero .hero-content>p.home-eyebrow { color: #765300 !important; }
+html[data-theme="light"] body.polished-home .hero .hero-content>p:not(.home-eyebrow) { color: #514d44 !important; }
+html[data-theme="light"] body .contact-form button[type="submit"] { background: #765300 !important; color: #fff !important; }
+
+/* Solid buttons need their own text color, independent of ordinary links. */
+html[data-theme="light"] body :is(.btn,.primary-button,.home-button,.price-button,.portfolio-button,.auth-submit,.template-plan-button,.plan-request-button,.pay-deposit,.client-guide-cta>a,.updates-button.primary,.personal-preview-intro button,.preview-quote,.personal-preview-dialog button:not(.preview-close):not(.preview-mobile)) {
+  background: #765300 !important;
+  border-color: #765300 !important;
+  color: #fff !important;
+}
+html[data-theme="light"] body :is(.btn,.primary-button,.home-button,.price-button,.portfolio-button,.auth-submit,.template-plan-button,.plan-request-button,.pay-deposit,.client-guide-cta>a,.updates-button.primary,.personal-preview-intro button,.preview-quote):hover {
+  background: #5f4300 !important;
+  border-color: #5f4300 !important;
+  color: #fff !important;
+}
+html[data-theme="light"] body :is(.template-personal-preview,.personal-preview-dialog .preview-mobile,.personal-preview-dialog .preview-close,.personal-preview-dialog .preview-home,.preview-original) {
+  background: #fffdf8 !important;
+  border-color: #765300 !important;
+  color: #765300 !important;
+}
+html[data-theme="light"] body .preview-mobile[aria-pressed="true"] { outline-color: #765300; background: #f3e7cc !important; }
+html[data-theme="light"] body .preview-frame-wrap { background: #e8dfcc; }
+html[data-theme="light"] body .personal-preview-dialog :is(input,textarea,select) { background: #fffdf8 !important; color: #20201d !important; border-color: #8b806a; }
+html[data-theme="light"] body .bam-build-video { color: #fff; }
+
+/* Client and administrator workspaces inherit the saved public-site appearance. */
+html[data-theme="light"] body:is(.client-portal-page,.admin-dashboard-page) {
+  --portal-bg: #fbf7ef;
+  --portal-panel: #fffdf8;
+  --portal-panel-light: #f6efe2;
+  --portal-text: #20201d;
+  --portal-muted: #514d44;
+  --portal-gold: #765300;
+  --portal-gold-dark: #5f4300;
+  --portal-border: #b7a57c;
+  --portal-success: #15613a;
+  --portal-danger: #9e2639;
+  --portal-warning: #765300;
+  --admin-bg: #fbf7ef;
+  --admin-panel: #fffdf8;
+  --admin-panel-soft: #f6efe2;
+  --admin-text: #20201d;
+  --admin-muted: #514d44;
+  --admin-gold: #765300;
+  --admin-gold-light: #765300;
+  --admin-border: #b7a57c;
+  --admin-danger: #9e2639;
+  --admin-success: #15613a;
+  --workspace-bg: #fbf7ef;
+  --workspace-panel: #fffdf8;
+  --workspace-text: #20201d;
+  --workspace-muted: #514d44;
+  --workspace-border: #b7a57c;
+  --workspace-gold: #765300;
+  background: #fbf7ef;
+  color: #20201d;
+  color-scheme: light;
+}
+html[data-theme="light"] body:is(.client-portal-page,.admin-dashboard-page) :is(.workspace-header,.admin-header,.portal-sidebar,.admin-sidebar,.portal-card,.stat-card,.admin-card,.admin-stat-card,.workspace-shortcut,.portal-user,.admin-access-status) {
+  background: #fffdf8 !important;
+  color: #20201d !important;
+  border-color: #b7a57c !important;
+}
+html[data-theme="light"] body :is(.portal-brand,.workspace-brand,.admin-brand)>:is(span,strong),
+html[data-theme="light"] body .portal-brand>span strong { color: #765300 !important; }
+html[data-theme="light"] body .portal-brand>span small { color: #20201d !important; }
+html[data-theme="light"] body:is(.client-portal-page,.admin-dashboard-page) :is(.portal-nav-link,.admin-nav-button,.admin-secondary-button,.admin-small-button,.portal-secondary-button,.file-row button) {
+  color: #20201d !important;
+  background: #fffdf8 !important;
+  border-color: #b7a57c !important;
+}
+html[data-theme="light"] body:is(.client-portal-page,.admin-dashboard-page) :is(.portal-nav-link,.admin-nav-button):is(.active,:hover,:focus-visible) {
+  background: #f3e7cc !important;
+  color: #654700 !important;
+}
+html[data-theme="light"] body:is(.client-portal-page,.admin-dashboard-page) :is(.portal-avatar,.admin-primary-button,.portal-primary-button,.small-gold-button,.portal-form button[type="submit"],#admin-logout) {
+  background: #765300 !important;
+  color: #fff !important;
+  border-color: #765300 !important;
+}
+html[data-theme="light"] body.client-portal-page>footer:not(.home-footer) { background: #f3ead8; color: #514d44; }
+html[data-theme="light"] body.client-portal-page>footer:not(.home-footer) :is(p,a) { color: #514d44; }
+html[data-theme="light"] body.client-portal-page .portal-upload-box { background: #f6efe2; color: #20201d; }
+html[data-theme="light"] body.client-portal-page .portal-file-picker { background: #fffdf8; color: #20201d; border-color: #8b806a; }
+html[data-theme="light"] body:is(.client-portal-page,.admin-dashboard-page) :is(.portal-project-box,.portal-stage,.agreement-card,.message-sidebar,.message-chat,.message-thread,.portal-message-thread,.portal-message-bubble,.message-bubble) {
+  background: #fffdf8;
+  color: #20201d;
+  border-color: #b7a57c;
+}
+html[data-theme="light"] body:is(.client-portal-page,.admin-dashboard-page) :is(.message-bubble,.portal-message-bubble) p { color: #20201d !important; }
+
+/* Small standalone recovery pages also honor the saved appearance. */
+html[data-theme="light"] body.recovery-page { background: #fbf7ef; color: #20201d; }
+html[data-theme="light"] body.recovery-page :is(.card,main) { background: #fffdf8; color: #20201d; border-color: #b7a57c; box-shadow: none; }
+html[data-theme="light"] body.recovery-page :is(.mark,.code,.eyebrow,.brand strong,h1,.contacts a) { color: #765300; }
+html[data-theme="light"] body.recovery-page :is(p,.message,.help,footer) { color: #514d44; }
+html[data-theme="light"] body.recovery-page :is(button,.button) { background: #765300; color: #fff; border-color: #765300; }
+html[data-theme="light"] body.recovery-page .secondary { background: #fffdf8; color: #765300; }
+
+@media (max-width: 650px) {
+  html[data-theme="light"] body .personal-preview-dialog .preview-controls>* { min-width: 0; white-space: normal; overflow-wrap: anywhere; }
+  html[data-theme="light"] body .personal-preview-intro .preview-url-row input { min-width: 0; }
+}

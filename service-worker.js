@@ -1,7 +1,9 @@
-const CACHE_NAME = 'bams-app-v12';
+const CACHE_NAME = 'bams-app-v13';
 const APP_SHELL = [
   '/',
   '/offline.html',
+  '/css/light-theme.css?v=20261028-1',
+  '/js/theme-init.js?v=20261028-1',
   '/site.webmanifest',
   '/css/style.css',
   '/images/app-icon-192.png',
