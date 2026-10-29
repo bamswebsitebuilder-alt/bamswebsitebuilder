@@ -5,7 +5,7 @@ import path from 'node:path';
 const root=new URL('../',import.meta.url);
 const paths=[];
 for(const folder of ['', 'es/']) for(const f of fs.readdirSync(new URL(folder,root))) if(f.endsWith('.html')) paths.push(folder+f);
-const expected=['home','services','prices','subscriptions','domains','portfolio','templates','project-stories','reviews','about','website-tips','website-review','faq','updates','email-updates','contact','login','booking'];
+const expected=['home','services','prices','subscriptions','domains','hosting','portfolio','templates','project-stories','reviews','about','website-tips','website-review','faq','updates','email-updates','contact','login','booking'];
 test('business menus have matching destinations and order in desktop and mobile, in both languages',()=>{
  let checked=0;
  for(const file of paths){

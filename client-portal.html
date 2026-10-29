@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="/css/responsive-fixes.css">
 <link rel="stylesheet" href="/css/client-guide.css?v=20261010-1">
 <link rel="stylesheet" href="/css/agreements.css?v=20261010-layout-1"><meta name="robots" content="noindex, nofollow"><link rel="stylesheet" href="/css/accessibility.css?v=1"><link rel="stylesheet" href="/css/workspace.css?v=20261013-overflow-3"><link rel="stylesheet" href="/css/portal-brand.css?v=20261013-brand-4"><link rel="stylesheet" href="/css/light-theme.css?v=20261028-1">
-</head>
+<link rel="stylesheet" href="/css/hosting.css?v=1"></head>
 
 <body
   class="client-portal-page"
@@ -130,7 +130,7 @@
             Invoices
           </button>
 
-          <button class="portal-nav-link" data-panel="billing" type="button">Billing</button>
+          <button class="portal-nav-link" data-panel="hosting" type="button">Hosting</button><button class="portal-nav-link" data-panel="billing" type="button">Billing</button>
 
           <button
             class="portal-nav-link"
@@ -162,7 +162,7 @@
       </aside>
 
       <!-- PORTAL CONTENT -->
-      <div class="portal-content">
+      <div class="portal-content"><section class="portal-panel hosting-workspace" id="hosting" aria-labelledby="hosting-title"><article class="portal-card"><p class="card-kicker">HOSTING</p><h2 id="hosting-title">Your hosting &amp; maintenance</h2><div id="client-hosting" aria-live="polite"><p>Loading hosting details…</p></div></article></section>
 
         <!-- DASHBOARD -->
         <section class="portal-panel active" id="dashboard">
@@ -187,7 +187,7 @@
         </section>
 
 
-        <section class="portal-panel" id="billing">
+        <section class="portal-panel" id="billing"><p>Hosting is separate from payments for building your website. <a href="#hosting">Hosting →</a></p>
           <article class="portal-card">
             <div class="card-heading"><div><p class="card-kicker">PAYPAL BILLING</p><h2>Website plan & billing</h2><p>Your PayPal subscription details, invoices, and next payment will be available here when connected to your client profile.</p></div></div>
             <a class="portal-primary-button" href="/subscriptions">View Website Plans</a>
@@ -541,5 +541,5 @@
   <script type="module" src="/js/profile-picture.js?v=3"></script>
   <script src="/js/animations.js?v=1"></script>
 <script src="/js/site-upgrades.js?v=1" defer></script>
-<script type="module" src="/js/agreements-client.js?v=1"></script></body>
+<script type="module" src="/js/agreements-client.js?v=1"></script><script type="module" src="/js/hosting-client.js?v=1"></script></body>
 </html>

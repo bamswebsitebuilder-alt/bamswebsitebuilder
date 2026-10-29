@@ -13,6 +13,7 @@ document.querySelector(".admin-header")?.after(accessStatus);
    FIREBASE IMPORTS
 ========================================================= */
 
+import { createAdminHosting } from "./hosting-admin.js?v=1";
 import { auth, db, storage } from "./firebase-config.js";
 import { onboardingProject, projectAlerts } from "./project-workflow.js?v=1";
 import { createAdminAgreements } from "./agreements-admin.js?v=3";
@@ -129,6 +130,13 @@ const statBalance = document.getElementById("stat-balance");
 ========================================================= */
 
 let currentAdmin = null;
+const hostingUI = createAdminHosting(() => currentAdmin);
+const hostingLoaded = new Set();
+const hostingErrors = new Set();
+function syncHosting() {
+  if(currentAdmin)hostingUI?.update(clientRecords,projectRecords,{loading:!firstClientSnapshotLoaded || hostingLoaded.size < clientRecords.length,error:hostingErrors.size > 0});
+}
+window.addEventListener("beforeunload", () => hostingUI?.reset());
 const agreementUI = createAdminAgreements(() => currentAdmin, userId => projectRecords.find(project => project.userId === userId) || {});
 
 let clientRecords = [];
@@ -1010,6 +1018,8 @@ const stopProjectListeners = () => {
 
   projectListeners = [];
   projectsByClient.clear();
+  hostingLoaded.clear();
+  hostingErrors.clear();
 };
 
 const publishProjects = () => {
@@ -1025,6 +1035,7 @@ const publishProjects = () => {
     });
 
   renderProjects();
+  syncHosting();
   projectRecords.forEach(project => agreementUI?.project(project));
   renderNotifications();
 };
@@ -1050,6 +1061,8 @@ const watchProjects = () => {
     const unsubscribe = onSnapshot(
       projectReference,
       (snapshot) => {
+        hostingLoaded.add(client.id);
+        hostingErrors.delete(client.id);
         if (snapshot.exists()) {
           projectsByClient.set(client.id, {
             id: snapshot.id,
@@ -1072,6 +1085,8 @@ const watchProjects = () => {
           error
         );
 
+        hostingLoaded.add(client.id);
+        hostingErrors.add(client.id);
         projectsByClient.delete(client.id);
         publishProjects();
       }
@@ -1171,13 +1186,14 @@ const watchClients = () => {
     clientsCollection,
 
     (snapshot) => {
+      hostingErrors.delete("clients");
       const previousClientIds =
         new Set(clientRecords.map((client) => client.id));
 
       clientRecords = snapshot.docs
         .map((clientDocument) => ({
-          id: clientDocument.id,
-          ...clientDocument.data()
+          ...clientDocument.data(),
+          id: clientDocument.id
         }))
         .filter((record) => {
           return (
@@ -1212,6 +1228,7 @@ const watchClients = () => {
       }
 
       firstClientSnapshotLoaded = true;
+      syncHosting();
 
       renderNotifications();
     },
@@ -1222,6 +1239,8 @@ const watchClients = () => {
         error
       );
 
+      hostingErrors.add("clients");
+      syncHosting();
       if (clientList) {
         clientList.innerHTML = `
           <p class="admin-status error">
@@ -1787,6 +1806,8 @@ onAuthStateChanged(
   auth,
   async (user) => {
     if (!user) {
+      currentAdmin = null;
+      hostingUI?.reset();
       window.location.replace(
         portalLoginUrl(window.location)
       );
