@@ -33,3 +33,22 @@ test('client view renders user content literally and exposes no recurring checko
   renderHosting(host,record,{accepted:true});assert.ok(host.querySelector('a[href^="https://www.paypal.com"]'));renderHosting(host,{...record,billingStatus:'active'},{accepted:true});assert.equal(host.querySelector('a[href^="https://www.paypal.com"]'),null);
   delete globalThis.document;dom.window.close();
 });
+test('standard hosting plan fills future-client drafts without saving or resetting existing billing',async()=>{
+  for(const lang of ['en','es']){
+    const dom=new JSDOM(`<html lang="${lang}"><div id="admin-hosting"></div></html>`);globalThis.document=dom.window.document;
+    let source=await readFile(new URL('../js/hosting-admin.js',import.meta.url),'utf8');source=source.replace("import {hostingStore} from './hosting-store.js?v=1';",'const hostingStore={};').replace('./hosting-model.js?v=1',new URL('../js/hosting-model.js',import.meta.url).href).replace('./hosting-view.js?v=1',new URL('../js/hosting-view.js',import.meta.url).href);
+    const {createAdminHosting}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
+    let saves=0;const ui=createAdminHosting(()=>({uid:'admin'}),{async save(){saves++;return 1;}});
+    ui.update([{id:'new'},{id:'existing'}],[{userId:'existing',hosting:{plan:'Existing',provider:'Provider',billingStatus:'active',status:'active'}}]);
+    const select=document.getElementById('hosting-client'),form=document.getElementById('hosting-form'),preset=document.getElementById('hosting-standard-plan');
+    select.value='new';select.dispatchEvent(new dom.window.Event('change'));preset.click();
+    const field=name=>form.elements.namedItem(name).value;
+    assert.equal(field('fee'),'39.00');assert.equal(field('cadence'),'monthly');assert.equal(field('paypalPlanId'),'P-61X62492NG9864027NLRJU6A');assert.equal(field('billingMode'),'paypal');assert.equal(field('billingStatus'),'awaiting-approval');assert.equal(field('agreementNumber'),'');assert.equal(field('provider'),'');assert.equal(saves,0);
+    form.elements.namedItem('provider').value='Provider';form.elements.namedItem('agreementNumber').value='1001';form.dispatchEvent(new dom.window.Event('input'));
+    const record={...Object.fromEntries([...form.elements].filter(e=>e.name).map(e=>[e.name,e.value])),feeCents:3900,agreementId:'accepted-quote'};
+    const {paypalHostingLink}=await import('../js/hosting-model.js');assert.equal(paypalHostingLink(record,false),'');assert.equal(paypalHostingLink(record,true),'https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-61X62492NG9864027NLRJU6A');
+    select.value='existing';select.dispatchEvent(new dom.window.Event('change'));preset.click();assert.equal(field('billingStatus'),'active');assert.equal(field('status'),'active');assert.equal(saves,0);
+    select.value='new';select.dispatchEvent(new dom.window.Event('change'));assert.equal(field('agreementNumber'),'1001');
+    ui.reset();delete globalThis.document;dom.window.close();
+  }
+});

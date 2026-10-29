@@ -13,7 +13,7 @@ document.querySelector(".admin-header")?.after(accessStatus);
    FIREBASE IMPORTS
 ========================================================= */
 
-import { createAdminHosting } from "./hosting-admin.js?v=1";
+import { createAdminHosting } from "./hosting-admin.js?v=2";
 import { auth, db, storage } from "./firebase-config.js";
 import { onboardingProject, projectAlerts } from "./project-workflow.js?v=1";
 import { createAdminAgreements } from "./agreements-admin.js?v=3";
