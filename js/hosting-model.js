@@ -1,6 +1,6 @@
 export const HOSTING_STATES=['setup','active','attention','paused','ending','ended'];
 export const BILLING_STATES=['not-configured','awaiting-approval','active','past-due','cancelled'];
-export const HOSTING_FIELDS=['plan','siteUrl','provider','status','nextRenewal','fee','cadence','billingMode','billingStatus','paypalPlanId','agreementNumber','domainOwner','hostingOwner','supportDetails','handoverDetails','issues','serviceEnds','lastReviewed'];
+export const HOSTING_FIELDS=['plan','siteUrl','provider','status','nextRenewal','fee','cadence','billingMode','billingStatus','paypalPlanId','agreementNumber','domainOwner','domainName','domainRegistrar','domainRenewal','domainManageUrl','hostingOwner','supportDetails','handoverDetails','issues','serviceEnds','lastReviewed'];
 export function safeHostingUrl(value) {
   if(!value)return '';
   try { const url=new URL(value);return url.protocol==='https:'&&!url.username&&!url.password?url.href:''; } catch { return ''; }
@@ -20,11 +20,14 @@ export function hostingInput(values) {
     feeCents:fee===''?null:Math.round(Number(fee)*100),cadence:choice('cadence',['monthly','yearly']),
     billingMode:choice('billingMode',['direct','invoice','paypal']),billingStatus:choice('billingStatus',BILLING_STATES),
     paypalPlanId:text('paypalPlanId',64),agreementNumber:text('agreementNumber',20),
+    domainName:text('domainName',253).toLowerCase(),domainRegistrar:text('domainRegistrar'),domainRenewal:date(text('domainRenewal')),domainManageUrl:text('domainManageUrl',2048),
     domainOwner:choice('domainOwner',['unconfirmed','client','bam','other']),hostingOwner:choice('hostingOwner',['unconfirmed','client','bam','other']),
     supportDetails:text('supportDetails',2000),handoverDetails:text('handoverDetails',2000),issues:text('issues',2000),
     serviceEnds:date(text('serviceEnds')),lastReviewed:date(text('lastReviewed'))};
   if(!result.plan||!result.provider)throw Error('required');
   if(result.siteUrl&&!safeHostingUrl(result.siteUrl))throw Error('url');
+  if(result.domainName&&!/^(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+(?:[a-z]{2,63}|xn--[a-z0-9-]{2,59})$/.test(result.domainName))throw Error('domain');
+  if(result.domainManageUrl&&!safeHostingUrl(result.domainManageUrl))throw Error('url');
   if(result.agreementNumber&&!/^[0-9]{1,20}$/.test(result.agreementNumber))throw Error('agreement');
   if(result.paypalPlanId&&!/^P-[A-Z0-9]{5,60}$/.test(result.paypalPlanId))throw Error('paypal');
   if(result.billingMode==='paypal'&&result.paypalPlanId&&(!result.agreementNumber||result.feeCents===null))throw Error('agreement');
@@ -33,12 +36,15 @@ export function hostingInput(values) {
   return result;
 }
 export function hostingValues(record={}) {
-  return {plan:'',siteUrl:'',provider:'',status:'setup',nextRenewal:'',fee:'',cadence:'monthly',billingMode:'direct',billingStatus:'not-configured',paypalPlanId:'',agreementNumber:'',domainOwner:'unconfirmed',hostingOwner:'unconfirmed',supportDetails:'',handoverDetails:'',issues:'',serviceEnds:'',lastReviewed:'',...record,fee:record.feeCents==null?'':(record.feeCents/100).toFixed(2)};
+  return {plan:'',siteUrl:'',provider:'',status:'setup',nextRenewal:'',fee:'',cadence:'monthly',billingMode:'direct',billingStatus:'not-configured',paypalPlanId:'',agreementNumber:'',domainOwner:'unconfirmed',domainName:'',domainRegistrar:'',domainRenewal:'',domainManageUrl:'',hostingOwner:'unconfirmed',supportDetails:'',handoverDetails:'',issues:'',serviceEnds:'',lastReviewed:'',...record,fee:record.feeCents==null?'':(record.feeCents/100).toFixed(2)};
 }
 export function hostingDue(record,now=new Date()) {
   if(!record||record.status==='ended'||!record.nextRenewal)return null;
   const days=Math.ceil((new Date(record.nextRenewal+'T23:59:59')-now)/86400000);
   return Number.isFinite(days)&&days<=30?{days,overdue:new Date(record.nextRenewal+'T23:59:59')<now}:null;
+}
+export function domainDue(record,now=new Date()) {
+  return record?.domainRenewal?hostingDue({nextRenewal:record.domainRenewal},now):null;
 }
 export function paypalHostingLink(record,accepted) {
   if(!accepted||record?.billingMode!=='paypal'||record.billingStatus!=='awaiting-approval'||!['setup','active'].includes(record.status)||!/^P-[A-Z0-9]{5,60}$/.test(record.paypalPlanId||'')||!record.agreementId||!(record.feeCents>0))return '';

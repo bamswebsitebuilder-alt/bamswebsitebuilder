@@ -11,13 +11,13 @@ const other=env.authenticatedContext('other-client',{email_verified:true}).fires
 const admin=env.authenticatedContext('hosting-admin',{email_verified:true}).firestore();
 const anon=env.unauthenticatedContext().firestore();
 const ref=db=>doc(db,'users','hosting-client','projects','current');
-const values={...hostingValues(),plan:'Managed hosting',provider:'Test provider',siteUrl:'https://example.test',fee:'25'};
+const values={...hostingValues(),plan:'Managed hosting',provider:'Test provider',siteUrl:'https://example.test',fee:'25',domainName:'client.example',domainRegistrar:'Example registrar',domainRenewal:'2027-10-28',domainManageUrl:'https://registrar.example/account'};
 async function loadStore(db){
   globalThis.__hostingTestDb=db;
   let source=await readFile(new URL('../js/hosting-store.js',import.meta.url),'utf8');
   source=source.replace("import {db} from './firebase-config.js';",'const db=globalThis.__hostingTestDb;')
     .replace('https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js',import.meta.resolve('firebase/firestore'))
-    .replace('./hosting-model.js?v=1',new URL('../js/hosting-model.js',import.meta.url).href);
+    .replace('./hosting-model.js?v=3',new URL('../js/hosting-model.js',import.meta.url).href);
   return (await import('data:text/javascript;base64,'+Buffer.from(source+'\n// '+Math.random()).toString('base64'))).hostingStore;
 }
 try{
@@ -27,7 +27,7 @@ try{
   });
   const store=await loadStore(admin);
   assert.equal(await store.save('hosting-client',values,0,'hosting-admin'),1);pass();
-  const saved=(await assertSucceeds(getDoc(ref(client)))).data();assert.equal(saved.hosting.feeCents,2500);assert.equal(saved.title,'Existing site');assert.equal(saved.workflow.preserved,true);assert.ok(saved.hosting.updatedAt.toMillis());pass();
+  const saved=(await assertSucceeds(getDoc(ref(client)))).data();assert.equal(saved.hosting.feeCents,2500);assert.equal(saved.hosting.domainName,'client.example');assert.equal(saved.hosting.domainRenewal,'2027-10-28');assert.equal(saved.hosting.domainManageUrl,'https://registrar.example/account');assert.equal(saved.title,'Existing site');assert.equal(saved.workflow.preserved,true);assert.ok(saved.hosting.updatedAt.toMillis());pass();
   await assertFails(getDoc(ref(other)));pass();await assertFails(getDoc(ref(anon)));pass();
   await assertFails(updateDoc(ref(client),{hosting:{status:'active'}}));pass();
   await assertFails(updateDoc(ref(other),{hosting:{status:'active'}}));pass();

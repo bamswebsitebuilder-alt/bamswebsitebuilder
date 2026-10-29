@@ -1,8 +1,8 @@
 import {auth,db} from './firebase-config.js';
 import {onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js';
 import {doc,getDoc} from 'https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js';
-import {hostingStore} from './hosting-store.js?v=1';
-import {renderHosting} from './hosting-view.js?v=1';
+import {hostingStore} from './hosting-store.js?v=3';
+import {renderHosting} from './hosting-view.js?v=3';
 const host=document.getElementById('client-hosting');
 const es=document.documentElement.lang.startsWith('es');
 let generation=0,stop=()=>{},stopReceipt=()=>{};

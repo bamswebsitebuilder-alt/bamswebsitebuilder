@@ -1,6 +1,6 @@
 import {db} from './firebase-config.js';
 import {doc,onSnapshot,runTransaction,serverTimestamp} from 'https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js';
-import {hostingInput,hostingAgreementId} from './hosting-model.js?v=1';
+import {hostingInput,hostingAgreementId} from './hosting-model.js?v=3';
 
 // Uses the existing admin-written project document; clients retain read-only access.
 export const hostingStore={
