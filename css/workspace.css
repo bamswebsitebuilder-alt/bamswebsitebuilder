@@ -237,3 +237,9 @@ body.admin-dashboard-page{--workspace-bg:var(--admin-bg);--workspace-panel:var(-
 @media(max-width:620px) {
   .client-portal-page .portal-project-title-row { grid-template-columns:minmax(0,1fr); }
 }
+
+/* Hosting uses the same server icon in both workspace navigation menus. */
+:is(.portal-nav-link,.admin-nav-button)[data-panel="hosting"] {
+  --portal-nav-icon:url("data:image/svg+xml,%3Csvg%20xmlns='http%3A//www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cg%20fill='none'%20stroke='black'%20stroke-width='1.8'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Crect%20x='3'%20y='3'%20width='18'%20height='7'%20rx='2'/%3E%3Crect%20x='3'%20y='14'%20width='18'%20height='7'%20rx='2'/%3E%3Cpath%20d='M7%206.5h.01M7%2017.5h.01M11%206.5h6M11%2017.5h6'/%3E%3C/g%3E%3C/svg%3E");
+  --admin-nav-icon:var(--portal-nav-icon);
+}
