@@ -37,3 +37,5 @@
 @media(max-width:1000px){.contact-layout{gap:30px}.contact-details-card,.business-hours-card,.contact-right .demo-form{padding:24px}}
 @media(max-width:760px){.contact-layout{grid-template-columns:1fr;gap:28px}.contact-intro h1{font-size:46px}.contact-lead{max-width:none}.contact-availability{margin-bottom:24px}}
 @media(max-width:360px){.contact-details-card,.business-hours-card,.contact-right .demo-form{padding:20px}.hours-heading{gap:10px}.hours-heading h2{font-size:24px}.hours-heading .contact-clock{width:38px;height:38px}.hours-badge{font-size:12px;padding:4px 9px}.business-hours>div{font-size:13px}}
+
+.contact-actions{border:1px solid #dce3ef;border-radius:12px;background:#fff;padding:30px;box-shadow:0 8px 28px #172d5210}.contact-actions .actions{flex-direction:column;align-items:stretch;gap:12px}.contact-actions h2{font-size:30px}.contact-actions p{overflow-wrap:anywhere}@media(max-width:600px){.contact-actions{padding:24px}}
