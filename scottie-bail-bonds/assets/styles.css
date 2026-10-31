@@ -14,3 +14,26 @@
 @media(max-width:1100px){.hero .service-highlights{font-size:14px}.service-highlights>span+span{margin-left:12px;padding-left:12px}.trust>div:nth-child(-n+2) h2{font-size:18px}}
 @media(max-width:850px){.hero .service-highlights{flex-direction:column;align-items:flex-start;gap:7px}.service-highlights>span+span{border-left:0;margin-left:0;padding-left:0}}
 @media(max-width:600px){.contact-bar a[href$="counties-served.html"]{font-size:11px}.hero .service-highlights{font-size:15px;padding-top:16px;margin-top:23px}.trust>div:nth-child(-n+2) h2{font-size:18px}}
+
+/* Contact layout: introduction and details alongside hours and the demo form. */
+.scottie-contact{background:#f5f7fb}
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;align-items:start;gap:64px}
+.contact-intro h1{font-family:Georgia,serif;font-size:clamp(40px,4.5vw,60px);line-height:1.12;font-weight:400;letter-spacing:-1.8px;margin:0 0 24px}
+.contact-lead{font-size:16px;line-height:1.85;color:var(--muted);max-width:470px;margin:0 0 28px}
+.contact-availability{display:flex;align-items:center;gap:16px;margin-bottom:30px}
+.contact-clock{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:46px;height:46px;border-radius:10px;background:#e6edfc;color:#1754d8}
+.contact-clock svg{width:25px;height:25px}
+.contact-availability strong,.contact-availability div>span{display:block}
+.contact-availability strong{font-size:15px}.contact-availability div>span{font-size:14px;color:var(--muted);margin-top:3px}
+.contact-details-card,.business-hours-card,.contact-right .demo-form{border:1px solid #dce3ef;border-radius:12px;background:#fff;padding:30px;box-shadow:0 8px 28px #172d5210}
+.contact-details-card h2,.hours-heading h2{font-family:Georgia,serif;font-weight:400;font-size:27px;line-height:1.25;margin:0}
+.contact-details-card .contact-list{margin:10px 0 0}.contact-details-card .contact-list>div:last-child{border-bottom:0;padding-bottom:0}
+.contact-details-card dd{overflow-wrap:anywhere}.contact-details-card dd a{font-weight:600;color:#1749ad}
+.contact-right{display:grid;gap:26px;min-width:0}.contact-intro{min-width:0}
+.hours-heading{display:flex;align-items:center;gap:14px;margin-bottom:20px}.hours-heading .eyebrow{margin:0 0 5px;font-size:9px;letter-spacing:1.5px}
+.hours-badge{margin-left:auto;flex-shrink:0;border:1px solid #b7cbed;border-radius:20px;background:#edf3ff;color:#1749ad;font-size:13px;font-weight:700;padding:5px 12px}
+.business-hours{margin:0}.business-hours>div{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid #e5eaf3;font-size:14px}.business-hours dd{margin:0;font-weight:600;color:#1749ad}.business-hours>div:last-child{border-bottom:0}
+.business-hours-card .text-link{margin-top:18px;font-size:13px}.contact-right .demo-form .eyebrow{margin-bottom:12px}.contact-right .demo-form h2{font-size:30px}
+@media(max-width:1000px){.contact-layout{gap:30px}.contact-details-card,.business-hours-card,.contact-right .demo-form{padding:24px}}
+@media(max-width:760px){.contact-layout{grid-template-columns:1fr;gap:28px}.contact-intro h1{font-size:46px}.contact-lead{max-width:none}.contact-availability{margin-bottom:24px}}
+@media(max-width:360px){.contact-details-card,.business-hours-card,.contact-right .demo-form{padding:20px}.hours-heading{gap:10px}.hours-heading h2{font-size:24px}.hours-heading .contact-clock{width:38px;height:38px}.hours-badge{font-size:12px;padding:4px 9px}.business-hours>div{font-size:13px}}
