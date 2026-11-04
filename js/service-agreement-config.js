@@ -2,6 +2,6 @@
 export const serviceAgreementConfig = Object.freeze({
   // Optional generic Jotform Sign template link. Prefer a recipient-specific link on each assignment.
   defaultSigningUrl: 'https://form.jotform.com/263058308288060',
-  // Keep link mode for recipient-based signing unless the actual Jotform document supports embedding.
+  // Controls the optional administrative preview. Clients always sign inside the portal.
   displayMode: 'embed'
 });

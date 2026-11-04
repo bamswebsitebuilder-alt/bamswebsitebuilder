@@ -30,11 +30,21 @@ function renderCard(host,record,user,admin){
   if(['assigned','client_signed'].includes(record.status)){
     let url='';try{url=signingUrl(record.signingUrl);}catch{}
     if(url){
-      const link=element('a','Open agreement in Jotform','portal-secondary-button');link.href=url;link.target='_blank';link.rel='noopener noreferrer';card.append(link);
-      if(config.displayMode==='embed')button(card,'Show signing document',()=>{
+      const showSigningDocument=()=>{
         if(card.querySelector('iframe'))return;
-        const frame=element('iframe');frame.id='JotFormIFrame-'+record.id;frame.src=url;frame.title="Bam's Website Builder Agreement";frame.referrerPolicy='no-referrer';frame.className='service-sign-frame';card.append(frame);
-      });
+        const frame=element('iframe');frame.id='JotFormIFrame-'+record.id;frame.src=url;frame.title="Bam's Website Builder Agreement";frame.referrerPolicy='no-referrer';frame.className='service-sign-frame';
+        frame.loading='lazy';
+        // Keep form submission, its thank-you screen and links inside the portal.
+        // The frame cannot navigate the parent page or open another browser tab.
+        frame.setAttribute('sandbox','allow-forms allow-scripts allow-same-origin allow-downloads');card.append(frame);
+      };
+      if(admin){
+        const link=element('a','Open agreement in Jotform','portal-secondary-button');link.href=url;link.target='_blank';link.rel='noopener noreferrer';card.append(link);
+        if(config.displayMode==='embed')button(card,'Show signing document',showSigningDocument);
+      }else{
+        card.append(element('h4','Complete your agreement below'),element('p','Fill out and sign the form here in your client portal. Your confirmation will appear in this same space.'));
+        showSigningDocument();
+      }
     }else card.append(element('p','Signing is not configured for this agreement. Contact BAM for your signing invitation.'));
     card.append(element('p','BAM reviews submitted signatures and publishes the completed copy after confirming both parties signed.'));
   }

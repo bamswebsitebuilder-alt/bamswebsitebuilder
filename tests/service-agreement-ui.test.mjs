@@ -47,7 +47,7 @@ try{
   let completed;
   const page=await browser.newPage({viewport:{width:1280,height:1000}});const errors=[];page.on('pageerror',error=>errors.push(error.message));
   await page.route('https://www.gstatic.com/firebasejs/**',route=>route.fulfill({contentType:'text/javascript',body:`export * from '${url}/mock-firebase.js';`}));
-  await page.route('https://form.jotform.com/**',route=>route.fulfill({contentType:'text/html',body:'<p>Signing form placeholder for isolated UI test</p>'}));
+  await page.route('https://form.jotform.com/**',route=>route.fulfill({contentType:'text/html',body:route.request().method()==='POST'?'<p>TEST ONLY: Your submission has been received.</p>':'<form method="POST" action="https://form.jotform.com/test-submit"><label>Test name<input name="testName" required></label><button type="submit">Submit test agreement</button></form>'}));
   for(const prefix of ['','/es']){
     await page.goto(url+prefix+'/admin-dashboard.html');
     await page.waitForFunction(()=>document.getElementById('service-agreement-fields').disabled===false);
@@ -103,6 +103,29 @@ try{
   assert.equal((await readFile(await signedCopy.path())).toString(),'%PDF-1.7 TEST ONLY');
   await page.setViewportSize({width:390,height:844});
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),'client view fits mobile width');
+  let popups=0;page.on('popup',()=>popups++);
+  for(const prefix of ['','/es'])for(const width of [1280,390]){
+    await page.setViewportSize({width,height:844});
+    await page.goto(url+prefix+'/client-portal.html');await page.waitForFunction(()=>window.__authAs);
+    await page.evaluate(async record=>{
+      window.__records.set('users/client/serviceAgreements/pending-test',{...record,status:'assigned'});
+      await window.__authAs('client');
+      document.querySelectorAll('.portal-panel').forEach(p=>p.classList.toggle('active',p.id==='agreements'));
+    },completed);
+    await page.locator('#service-agreement-client iframe').waitFor();
+    assert.equal(await page.getByRole('link',{name:'Open agreement in Jotform'}).count(),0,'clients have no offsite signing link');
+    assert.equal(await page.getByRole('button',{name:'Show signing document'}).count(),0,'client forms open inline automatically');
+    const frame=page.frameLocator('#service-agreement-client iframe');
+    await frame.getByLabel('Test name').fill('TEST ONLY');const portalUrl=page.url();
+    const cannotNavigate=await page.locator('iframe').evaluate(async node=>{
+      const allowed=node.sandbox;return !allowed.contains('allow-top-navigation')&&!allowed.contains('allow-top-navigation-by-user-activation')&&!allowed.contains('allow-popups');
+    });assert.ok(cannotNavigate);
+    await frame.getByRole('button',{name:'Submit test agreement'}).click();
+    await frame.getByText('TEST ONLY: Your submission has been received.').waitFor();
+    assert.equal(page.url(),portalUrl,'submission confirmation stays inside the portal');
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),'inline form fits the viewport');
+  }
+  assert.equal(popups,0,'embedded submission never opens another tab');
   assert.deepEqual(errors,[]);
-  console.log('PASS: English and Spanish admin assignment, unresolved-placeholder guard, uncertain-commit retry, configured Jotform embed, PDF validation/completion, sign-out cleanup, existing client quote host and mobile layout. Firebase mocked; no real signing or production writes.');
+  console.log('PASS: English/Spanish admin assignment and lookup; private PDF completion; automatic client embedding and contained submission/confirmation on desktop/mobile; no offsite client link, new tab or portal navigation. Firebase/Jotform mocked; no real signing or production writes.');
 }finally{await browser.close();await new Promise(resolve=>server.close(resolve));}
