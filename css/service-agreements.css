@@ -2,3 +2,38 @@
 .service-status-form{display:grid;gap:1rem;margin-top:1rem}.service-status-form label{display:grid;gap:.4rem}.service-status-form input,.service-status-form select{max-width:100%;padding:.65rem;font:inherit}.service-status-form input[type=checkbox]{justify-self:start}.service-sign-frame{display:block;width:100%;max-width:100%;height:clamp(540px,75vh,850px);min-height:540px;box-sizing:border-box;border:1px solid var(--workspace-border,#888);border-radius:8px;background:#fff;margin-top:1rem}.service-error{color:#b22222}.service-agreement-notice{padding:1rem;border-inline-start:4px solid #9165db}.service-agreement-notice:empty{display:none}
 
 .service-jotform-review{display:grid;gap:.75rem;margin:1rem 0;padding:1rem;border:1px solid var(--workspace-border);border-radius:8px}.service-jotform-review label{display:grid;gap:.4rem}.service-jotform-review input{padding:.65rem;font:inherit;width:100%;max-width:100%}
+
+
+/* Shared agreement layout for desktop, tablet and mobile */
+#client-service-agreements .admin-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;align-items:start}
+#client-service-agreements .admin-field{min-width:0}
+#client-service-agreements .service-full-width,
+#client-service-agreements .admin-field:has(#service-terms){grid-column:1/-1}
+#client-service-agreements .admin-field input,
+#client-service-agreements .admin-field select,
+#client-service-agreements .admin-field textarea{width:100%;max-width:100%;box-sizing:border-box}
+#client-service-agreements #service-details{min-height:6.5rem;height:auto;resize:vertical}
+#client-service-agreements .service-price-field input{min-height:44px}
+#client-service-agreements .service-price-field input[readonly]{opacity:.85;cursor:default}
+#client-service-agreements .service-review-check{display:flex;align-items:flex-start;gap:.65rem;line-height:1.5;margin:1.25rem 0 .5rem}
+#client-service-agreements .service-review-check input{flex:0 0 20px;width:20px;height:20px;margin:.15rem 0 0}
+#client-service-agreements .service-admin-hint{font-size:.9rem;line-height:1.5;opacity:.82;margin:.5rem 0 1rem}
+#service-agreement-admin>section{min-width:0;margin:1.4rem 0;padding:1rem;border:1px solid var(--workspace-border,#645738);border-radius:12px}
+#service-agreement-admin>section>h3{margin:.1rem 0 .7rem;overflow-wrap:anywhere;font-size:1.05rem}
+#service-agreement-admin .agreement-card,#service-agreement-client .agreement-card{min-width:0;max-width:100%;box-sizing:border-box;padding:clamp(1rem,2.5vw,1.5rem);border-radius:14px}
+.service-agreement-summary{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem 1rem;margin:.65rem 0}
+.service-client-name{font-weight:600;overflow-wrap:anywhere}
+.service-status-pill{display:inline-block;font-weight:700;font-size:.82rem;padding:.3rem .7rem;border:1px solid #b58b29;border-radius:999px;color:var(--bam-gold,#d4a637)}
+.service-muted{font-size:.9rem;opacity:.8}
+.service-price-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem;margin:1rem 0}
+.service-price-item{display:flex;flex-direction:column;gap:.25rem;padding:.8rem 1rem;border:1px solid var(--workspace-border,#645738);border-radius:10px;min-width:0}
+.service-price-item span{font-size:.8rem;opacity:.8}
+.service-price-item strong{font-size:1.05rem;overflow-wrap:anywhere}
+#service-agreement-client .agreement-card button,#service-agreement-admin .agreement-card button{max-width:100%;white-space:normal}
+@media(max-width:700px){
+ #client-service-agreements .admin-form-grid{grid-template-columns:minmax(0,1fr);gap:.8rem}
+ #client-service-agreements .service-full-width,#client-service-agreements .admin-field:has(#service-terms){grid-column:auto}
+ #service-agreement-admin>section{padding:.8rem}
+ .service-price-summary{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:420px){.service-price-summary{grid-template-columns:minmax(0,1fr)}}
