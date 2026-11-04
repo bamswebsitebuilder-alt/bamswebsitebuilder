@@ -140,6 +140,7 @@ window.addEventListener("beforeunload", () => hostingUI?.reset());
 const agreementUI = createAdminAgreements(() => currentAdmin, userId => projectRecords.find(project => project.userId === userId) || {});
 
 let clientRecords = [];
+let serviceAgreementActivities = [];
 let projectRecords = [];
 let invoiceRecords = [];
 
@@ -824,7 +825,12 @@ const getLastNotificationSeenTime = () => {
 };
 
 const buildActivityRecords = () => {
-  const activities = [];
+  const activities = serviceAgreementActivities.map(record => ({
+    title: record.status === 'completed' ? 'Client agreement completed — staff confirmed' : 'Client agreement update',
+    detail: `${record.clientName}: ${record.title} — ${record.status.replaceAll('_', ' ')}.`,
+    createdAt: record.updatedAt,
+    time: getTimestampNumber(record.updatedAt)
+  }));
 
   clientRecords.forEach((client) => {
     activities.push({
@@ -948,6 +954,11 @@ const renderNotifications = () => {
     notificationList.appendChild(item);
   });
 };
+
+window.addEventListener('bam:service-agreements-updated', event => {
+  serviceAgreementActivities = event.detail || [];
+  renderNotifications();
+});
 
 const markNotificationsSeen = () => {
   localStorage.setItem(

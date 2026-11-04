@@ -1,0 +1,235 @@
+# BAM’S WEBSITE BUILDER LLC
+## Website Design & Development Client Service Agreement
+
+**Building Your Business, One Website at a Time.**
+
+Website: www.bamswebsitebuilder.com
+
+**Effective Date:** [Date]
+
+### 1. Parties
+
+This Client Service Agreement ("Agreement") is entered into between **BAM’S Website Builder LLC**, a Florida limited liability company ("Provider"), and the individual or business identified below ("Client").
+
+**Client Information**
+
+- Full Legal Name: [Client Name]
+- Business Name: [Business Name]
+- Email Address: [Email]
+- Phone Number: [Phone]
+- Business Address: [Address]
+
+### 2. Services Provided
+
+BAM’S Website Builder LLC agrees to provide website design, website development, or related digital services as specified in the client's approved project proposal, invoice, or statement of work.
+
+Services may include:
+
+- Custom website design and development
+- Mobile-responsive layouts
+- Website pages and navigation
+- Contact forms and business integrations
+- Domain connection and configuration
+- Website hosting setup
+- Website maintenance and updates
+- Additional approved digital services
+
+Only services expressly included in the approved project scope are covered by the agreed price.
+
+### 3. Project Details and Pricing
+
+**Selected Service:** [Service Package]
+
+**Project Description:** [Project Description]
+
+**Number of Website Pages:** [Page Count]
+
+**Total Project Cost:** $[Amount]
+
+**Initial Payment:** $[Amount]
+
+**Remaining Balance:** $[Amount]
+
+**Recurring Hosting or Maintenance Fee:** $[Amount] per [Billing Period], if applicable.
+
+**Estimated Completion Date:** [Date]
+
+The project proposal or statement of work, when accepted by both parties, becomes part of this Agreement.
+
+### 4. Payments and Billing
+
+The Client agrees to pay the amounts and follow the payment schedule documented in the approved invoice or proposal.
+
+Unless otherwise agreed in writing:
+
+- Work begins after any required initial payment is received.
+- Remaining balances must be paid before final website handoff or transfer.
+- Additional services require separate pricing and Client approval.
+- Recurring services are billed according to the applicable subscription terms.
+- If payment becomes overdue, the Provider may suspend further work after providing written notice and a reasonable opportunity to resolve the balance.
+
+The Client is responsible for applicable taxes and approved third-party charges disclosed before purchase.
+
+### 5. Website Revisions
+
+The Provider will complete revisions included in the selected package or project proposal.
+
+Additional revisions, new pages, major design changes, or features outside the approved scope may incur additional charges.
+
+The Provider will disclose the price and obtain Client approval before performing additional billable work.
+
+### 6. Client Responsibilities
+
+The Client agrees to:
+
+- Provide accurate business information.
+- Supply logos, photographs, content, and other required materials.
+- Confirm that provided materials may legally be used.
+- Review drafts and provide feedback within a reasonable timeframe.
+- Provide necessary access to third-party services through secure methods.
+- Make payments according to the agreed schedule.
+
+Delays in receiving required materials, feedback, approvals, or payments may affect the project timeline.
+
+### 7. Project Completion and Approval
+
+The Provider will notify the Client when the website is ready for final review.
+
+The Client will have five (5) business days to submit final feedback or request corrections to work that does not match the approved scope, unless another review period is agreed upon.
+
+Final project acceptance will be recorded in writing.
+
+Website publication, ownership transfer, and final delivery are subject to the agreed payment and project requirements.
+
+### 8. Website Ownership and Intellectual Property
+
+After full payment, the Client receives ownership of the original, client-specific website content and custom deliverables created exclusively for the Client under the approved scope, to the extent the Provider owns and can transfer those rights.
+
+The Provider assigns those transferable rights to the Client upon full payment.
+
+BAM’S Website Builder LLC retains ownership of pre-existing tools, reusable code, templates, internal systems, proprietary components, and development methods.
+
+The Client receives a nonexclusive, perpetual license to use Provider-owned components incorporated into the fully paid website, solely as part of the delivered website, unless otherwise agreed.
+
+Third-party software, fonts, photographs, plugins, and services remain subject to their respective licenses.
+
+The Client retains ownership of its previously existing logos, trademarks, content, and business materials.
+
+### 9. Domain Names and Website Hosting
+
+Domain registration, renewal, DNS management, hosting, and website maintenance are separate services unless specifically included in the selected package.
+
+The Client understands that:
+
+- Domain names may require separate annual renewal payments.
+- Hosting services may involve recurring fees.
+- Third-party providers may have separate terms and conditions.
+- Failure to renew a domain or hosting service may cause website or email interruptions.
+
+Unless expressly agreed otherwise, domain registrations purchased for the Client will list the Client as the registrant.
+
+If the Client discontinues hosting with the Provider, the Provider will reasonably cooperate with an authorized transfer of Client-owned content and transferable assets, subject to payment of outstanding undisputed fees and applicable third-party restrictions.
+
+### 10. Website Maintenance and Support
+
+Ongoing maintenance is provided only when included in an active service plan or separately purchased.
+
+Maintenance may cover updates, troubleshooting, content changes, or technical support as specifically described in the applicable plan.
+
+New pages, major redesigns, third-party subscription charges, and new functionality are not included unless expressly stated.
+
+The Provider cannot guarantee uninterrupted operation of third-party services or platforms.
+
+### 11. Cancellation and Refunds
+
+Either party may request cancellation in writing.
+
+If the Client cancels a project after work has started, the Provider may retain payment for work actually performed and documented, plus approved nonrefundable third-party expenses.
+
+Any unearned prepaid project fees will be refunded within fourteen (14) business days following reconciliation, unless applicable law requires a different timeframe.
+
+For recurring subscriptions, cancellation takes effect according to the disclosed subscription terms. Charges already incurred remain payable.
+
+The Provider may terminate the Agreement for material breach if the breach is not corrected within ten (10) business days after written notice, unless immediate action is reasonably required for unlawful use or a security threat.
+
+### 12. Confidentiality and Security
+
+Both parties agree to protect confidential business information, credentials, and nonpublic project materials received during their working relationship.
+
+The Provider will use reasonable safeguards for credentials and information under its control.
+
+Neither party may intentionally disclose confidential information to unauthorized parties, except where required by law or necessary to perform agreed services through authorized providers.
+
+### 13. Warranties and Limitations
+
+The Provider agrees to perform services with reasonable professional care.
+
+The Provider does not guarantee specific sales, search engine rankings, customer traffic, revenue, or uninterrupted availability.
+
+To the extent permitted by applicable law, the Provider's total liability arising out of a project will not exceed the amount paid by the Client for that project during the twelve (12) months preceding the event giving rise to the claim.
+
+Neither party will be liable for indirect or consequential damages to the extent permitted by applicable law.
+
+These limitations do not exclude liability that cannot lawfully be limited.
+
+### 14. Portfolio and Marketing Permission
+
+The Provider may request permission to display the completed website, business name, or project screenshots in its portfolio and promotional materials.
+
+The Client may approve or decline this permission separately. Declining permission will not affect the services purchased.
+
+### 15. Changes to This Agreement
+
+Any material changes to project scope, fees, deadlines, or contractual terms must be documented and accepted by both parties.
+
+A revised agreement or signed change order may be required for additional work.
+
+### 16. Governing Law and Disputes
+
+This Agreement will be governed by the laws of the State of Florida.
+
+The parties agree to attempt to resolve disputes in good faith through written communication before initiating legal proceedings, except where urgent relief or applicable law requires otherwise.
+
+### 17. Electronic Signatures
+
+Both parties consent to conducting this transaction electronically.
+
+Electronic signatures are intended to have the same legal effect as handwritten signatures to the extent permitted by applicable law.
+
+Each party will receive or be able to retain a copy of the completed Agreement.
+
+### 18. Agreement and Acceptance
+
+By signing below, both parties acknowledge that they have read and understood this Agreement and agree to its terms.
+
+**CLIENT**
+
+Printed Name: [Client Full Name]
+
+Business Name: [Business Name]
+
+Electronic Signature: [Client Signature]
+
+Date: [Date Signed]
+
+**BAM’S WEBSITE BUILDER LLC**
+
+Authorized Representative: [Representative Name]
+
+Electronic Signature: [Provider Signature]
+
+Date: [Date Signed]
+
+---
+
+**Optional Portfolio Permission**
+
+[ ] I authorize BAM’S Website Builder LLC to showcase my completed website in its portfolio and marketing materials.
+
+[ ] I do not authorize portfolio or marketing use.
+
+**Electronic Records Consent**
+
+[ ] I agree to receive and sign this Agreement electronically and acknowledge that I can save or print a copy.
+
+© 2026 BAM’S Website Builder LLC. All rights reserved.

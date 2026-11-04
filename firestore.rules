@@ -60,6 +60,60 @@ service cloud.firestore {
       allow delete: if isAdmin();
 
 
+      // Client service agreements: immutable assignment text and recipient link;
+      // status/evidence maintained by staff. PDFs are separate protected byte records.
+      // Required assignment fields are enumerated below; no arbitrary fields are accepted.
+      match /serviceAgreements/{agreementId} {
+        function validText(value, max) { return value is string && value.size() > 0 && value.size() <= max; }
+        function isValidServiceAgreement(data) {
+          return data.keys().hasAll(['title','clientName','termsVersion','termsText','signingUrl','status','evidence','createdBy','createdAt','updatedBy','updatedAt'])
+            && data.keys().hasOnly(['title','clientName','termsVersion','termsText','signingUrl','status','evidence','createdBy','createdAt','updatedBy','updatedAt'])
+            && validText(data.title,200) && validText(data.clientName,300)
+            && data.termsVersion == 'bam-client-service-2026-11-02-v1'
+            && validText(data.termsText,60000)
+            && data.signingUrl is string && data.signingUrl.size() <= 2000
+            && (data.signingUrl == '' || data.signingUrl.matches('https://([a-zA-Z0-9-]+[.])*jotform[.]com/[^\\s]*'))
+            && data.status in ['assigned','client_signed','completed','cancelled']
+            && data.evidence is string && data.evidence.size() <= 500
+            && validText(data.createdBy,128) && validText(data.updatedBy,128)
+            && data.createdAt is timestamp && data.updatedAt is timestamp;
+        }
+        function serviceOwnerOrAdmin() {
+          return signedIn() && (isAdmin() || (request.auth.uid == userId && request.auth.token.email_verified == true));
+        }
+        allow read: if serviceOwnerOrAdmin();
+        allow create: if isAdmin() && isValidServiceAgreement(request.resource.data)
+          && exists(/databases/$(database)/documents/users/$(userId))
+          && get(/databases/$(database)/documents/users/$(userId)).data.role == 'client'
+          && request.resource.data.createdBy == request.auth.uid
+          && request.resource.data.updatedBy == request.auth.uid
+          && request.resource.data.createdAt == request.time && request.resource.data.updatedAt == request.time
+          && request.resource.data.status == 'assigned' && request.resource.data.evidence == '';
+        allow update: if isAdmin() && isValidServiceAgreement(request.resource.data)
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status','evidence','updatedAt','updatedBy'])
+          && request.resource.data.updatedBy == request.auth.uid && request.resource.data.updatedAt == request.time
+          && request.resource.data.evidence.size() > 0
+          && ((resource.data.status == 'assigned' && request.resource.data.status in ['client_signed','completed','cancelled'])
+            || (resource.data.status == 'client_signed' && request.resource.data.status in ['completed','cancelled']))
+          && (request.resource.data.status != 'completed'
+            || getAfter(/databases/$(database)/documents/users/$(userId)/serviceAgreements/$(agreementId)/documents/signed).data.uploadedBy == request.auth.uid);
+        allow delete: if false;
+        match /documents/{documentId} {
+          function isValidSignedPdf(data) {
+            return data.keys().hasAll(['content','uploadedAt','uploadedBy'])
+              && data.keys().hasOnly(['content','uploadedAt','uploadedBy'])
+              && data.content is bytes && data.content.size() >= 5 && data.content.size() <= 716800
+              && data.uploadedAt == request.time && data.uploadedBy == request.auth.uid;
+          }
+          allow read: if serviceOwnerOrAdmin()
+            && get(/databases/$(database)/documents/users/$(userId)/serviceAgreements/$(agreementId)).data.status == 'completed';
+          allow create: if isAdmin() && documentId == 'signed' && isValidSignedPdf(request.resource.data)
+            && get(/databases/$(database)/documents/users/$(userId)/serviceAgreements/$(agreementId)).data.status in ['assigned','client_signed']
+            && getAfter(/databases/$(database)/documents/users/$(userId)/serviceAgreements/$(agreementId)).data.status == 'completed';
+          allow update, delete: if false;
+        }
+      }
+
       match /agreements/{agreementId} {
         allow read: if signedIn() && (request.auth.uid == userId || isAdmin());
         allow create: if isAdmin()

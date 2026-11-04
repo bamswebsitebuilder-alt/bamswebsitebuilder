@@ -1,0 +1,44 @@
+import fs from 'node:fs/promises';
+import {initializeTestEnvironment,assertFails,assertSucceeds} from '@firebase/rules-unit-testing';
+import {doc,setDoc,getDoc,updateDoc,deleteDoc,serverTimestamp,collection,getDocs,writeBatch,Bytes,Timestamp} from 'firebase/firestore';
+import {SERVICE_VERSION,MAX_PDF_BYTES} from '../js/service-agreement-model.js';
+const environment=await initializeTestEnvironment({projectId:'demo-bam-service-agreements',firestore:{host:'127.0.0.1',port:8088,rules:await fs.readFile('firestore.rules','utf8')}});
+const database=(id,verified=true)=>environment.authenticatedContext(id,{email_verified:verified}).firestore();
+const admin=database('admin'),client=database('client'),other=database('other'),unverified=database('client',false),anonymous=environment.unauthenticatedContext().firestore();
+const ref=(db,id='one')=>doc(db,'users/client/serviceAgreements/'+id);
+const pdf=(db,id='one')=>doc(ref(db,id),'documents/signed');
+const data={title:'TEST ONLY',clientName:'Test Client',termsVersion:SERVICE_VERSION,termsText:'Nonbinding emulator fixture',signingUrl:'https://www.jotform.com/sign/test',status:'assigned',evidence:'',createdBy:'admin',createdAt:serverTimestamp(),updatedBy:'admin',updatedAt:serverTimestamp()};
+const content=Bytes.fromUint8Array(new TextEncoder().encode('%PDF-test-only'));
+const pdfData={content,uploadedBy:'admin',uploadedAt:serverTimestamp()};
+const change=status=>({status,evidence:'TEST reviewed signing record',updatedAt:serverTimestamp(),updatedBy:'admin'});
+let checks=0;const pass=async operation=>{await assertSucceeds(operation);checks++;};const deny=async operation=>{await assertFails(operation);checks++;};
+function complete(db,id='one',bytes=content){const batch=writeBatch(db);batch.set(pdf(db,id),{...pdfData,content:bytes});batch.update(ref(db,id),change('completed'));return batch.commit();}
+try{
+  await environment.withSecurityRulesDisabled(async context=>{for(const [id,role] of [['admin','admin'],['client','client'],['other','client']])await setDoc(doc(context.firestore(),'users',id),{role});});
+  await deny(setDoc(ref(client),data));await deny(setDoc(ref(anonymous),data));
+  await deny(setDoc(ref(admin),{...data,arbitrary:'bad'}));await deny(setDoc(ref(admin),{...data,title:'x'.repeat(201)}));
+  await deny(setDoc(ref(admin),{...data,termsText:'x'.repeat(60001)}));await deny(setDoc(ref(admin),{...data,status:'completed'}));
+  await deny(setDoc(ref(admin),{...data,signingUrl:'https://jotform.com.evil.test/sign'}));
+  await deny(setDoc(ref(admin),{...data,signingUrl:'javascript:alert(1)'}));
+  await deny(setDoc(ref(admin),{...data,createdBy:'other'}));await deny(setDoc(ref(admin),{...data,createdAt:Timestamp.fromMillis(1)}));
+  const missing={...data};delete missing.termsText;await deny(setDoc(ref(admin),missing));
+  await deny(setDoc(doc(admin,'users/missing/serviceAgreements/one'),data));
+  await pass(setDoc(ref(admin),data));await pass(getDoc(ref(client)));await pass(getDoc(ref(admin)));
+  await deny(getDoc(ref(other)));await deny(getDoc(ref(unverified)));await deny(getDoc(ref(anonymous)));
+  await pass(getDocs(collection(client,'users/client/serviceAgreements')));await deny(getDocs(collection(other,'users/client/serviceAgreements')));await deny(getDocs(collection(anonymous,'users/client/serviceAgreements')));
+  await deny(updateDoc(ref(client),change('client_signed')));await deny(updateDoc(ref(admin),{...change('client_signed'),termsText:'replaced'}));
+  await deny(updateDoc(ref(admin),{...change('client_signed'),createdBy:'other'}));await deny(updateDoc(ref(admin),{...change('client_signed'),evidence:''}));
+  await deny(updateDoc(ref(admin),{...change('client_signed'),evidence:'x'.repeat(501)}));await deny(updateDoc(ref(admin),{...change('client_signed'),updatedAt:Timestamp.fromMillis(1)}));
+  await deny(updateDoc(ref(admin),change('completed')));await deny(setDoc(pdf(admin),pdfData));await deny(complete(client));
+  await deny(complete(admin,'one',Bytes.fromUint8Array(new Uint8Array(MAX_PDF_BYTES+1))));
+  await pass(updateDoc(ref(admin),change('client_signed')));await deny(updateDoc(ref(admin),change('assigned')));
+  await pass(complete(admin));await pass(getDoc(pdf(client)));await pass(getDoc(pdf(admin)));
+  await deny(getDoc(pdf(other)));await deny(getDoc(pdf(unverified)));await deny(getDoc(pdf(anonymous)));
+  await deny(updateDoc(pdf(admin),{content}));await deny(deleteDoc(pdf(admin)));await deny(deleteDoc(ref(admin)));
+  await deny(updateDoc(ref(admin),change('cancelled')));await deny(updateDoc(ref(admin),{termsText:'tamper'}));
+  await pass(setDoc(ref(admin,'cancel'),data));await pass(updateDoc(ref(admin,'cancel'),change('cancelled')));await deny(complete(admin,'cancel'));
+  await deny(setDoc(doc(admin,'users/client/serviceAgreements/orphan/documents/signed'),pdfData));
+  await deny(updateDoc(doc(client,'users/client'),{role:'admin'}));
+  await deny(setDoc(doc(database('attacker'),'users/attacker'),{role:'admin'}));
+  console.log(`PASS: ${checks} service agreement security checks. No production records used.`);
+}finally{await environment.cleanup();}
