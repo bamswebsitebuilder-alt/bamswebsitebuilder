@@ -3,6 +3,7 @@ import {onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/12.11.0/fir
 import {collection,doc,getDoc,onSnapshot,runTransaction,serverTimestamp,Bytes} from 'https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js';
 import {SERVICE_VERSION,STATUS_LABELS,signingUrl,canTransition,pdfBytes} from './service-agreement-model.js';
 import {serviceAgreementConfig as config} from './service-agreement-config.js';
+import {showJotformConnection,addJotformReview} from './jotform-admin.js?v=1';
 
 const adminHost=document.getElementById('service-agreement-admin');
 const clientHost=document.getElementById('service-agreement-client');
@@ -22,7 +23,7 @@ function renderCard(host,record,user,admin){
   const card=element('article','','agreement-card');host.append(card);
   card.append(element('h3',record.title),element('p',`${record.clientName} · ${STATUS_LABELS[record.status] || 'Unknown status'}`));
   const updated=record.updatedAt?.toDate?.();
-  card.append(element('p',`${updated?updated.toLocaleString()+' · ':''}Status source: staff review. Automatic Jotform verification is not connected.`));
+  card.append(element('p',`${updated?updated.toLocaleString()+' · ':''}Final signing status is confirmed by BAM staff.`));
   if(record.evidence)card.append(element('p','Signing reference: '+record.evidence));
   const details=element('details');details.append(element('summary','Read agreement and project details'),element('pre',record.termsText,'service-agreement-text'));card.append(details);
   button(card,'Download agreement text',()=>download(record.termsText,`BAM-agreement-${record.id}.txt`,'text/plain;charset=utf-8'));
@@ -35,7 +36,7 @@ function renderCard(host,record,user,admin){
         const frame=element('iframe');frame.id='JotFormIFrame-'+record.id;frame.src=url;frame.title="Bam's Website Builder Agreement";frame.referrerPolicy='no-referrer';frame.className='service-sign-frame';card.append(frame);
       });
     }else card.append(element('p','Signing is not configured for this agreement. Contact BAM for your signing invitation.'));
-    card.append(element('p','Signing in Jotform does not automatically change this status. BAM will review both signatures and publish the completed copy.'));
+    card.append(element('p','BAM reviews submitted signatures and publishes the completed copy after confirming both parties signed.'));
   }
   const reference=doc(db,'users',record.uid,'serviceAgreements',record.id);
   if(record.status==='completed')button(card,'Download signed PDF',async()=>{
@@ -54,6 +55,7 @@ function renderCard(host,record,user,admin){
     const confirmLabel=element('label');const confirm=element('input');confirm.type='checkbox';confirm.required=true;confirmLabel.append(confirm,document.createTextNode(' I reviewed the signing record. For completion, I verified both the client and BAM representative signatures, dates, and agreement text.'));
     const submit=element('button','Save reviewed status','admin-primary-button');submit.type='submit';const status=element('p');status.setAttribute('role','status');
     form.append(label,evidenceLabel,fileLabel,confirmLabel,submit,status);card.append(form);
+    addJotformReview(form,record,user,evidence,()=>auth.currentUser?.uid===user.uid&&currentUser?.uid===user.uid);
     form.addEventListener('submit',async event=>{
       event.preventDefault();submit.disabled=true;
       try{
@@ -96,6 +98,7 @@ async function setupAdmin(user,epoch){
   const templateResponse=await fetch('/js/client-service-agreement-v1.txt');
   if(!templateResponse.ok)throw new Error('Agreement template could not be loaded.');
   const template=await templateResponse.text();if(epoch!==generation)return;
+  void showJotformConnection(form,user,()=>epoch===generation&&currentUser?.uid===user.uid);
   form.elements.terms.value=template;
   document.getElementById('service-agreement-fields').disabled=false;
   stops.push(onSnapshot(collection(db,'users'),snapshot=>{
@@ -146,6 +149,7 @@ onAuthStateChanged(auth,async user=>{
   if(adminHost)message(adminHost,'Sign in as an administrator to manage agreements.');
   if(clientHost)message(clientHost,'Sign in with your verified account to view agreements.');
   if(notices)notices.textContent='';
+  document.getElementById('jotform-connection-status')?.remove();
   if(!user)return;
   try{
     if(adminHost){const profile=await getDoc(doc(db,'users',user.uid));if(epoch!==generation)return;if(profile.data()?.role==='admin')await setupAdmin(user,epoch);}

@@ -1,2 +1,4 @@
 .service-agreement-text{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;max-height:32rem;overflow:auto;padding:1rem;background:var(--surface,#f5f5f5);color:var(--text,#202020)}
 .service-status-form{display:grid;gap:1rem;margin-top:1rem}.service-status-form label{display:grid;gap:.4rem}.service-status-form input,.service-status-form select{max-width:100%;padding:.65rem;font:inherit}.service-status-form input[type=checkbox]{justify-self:start}.service-sign-frame{width:100%;min-height:650px;border:1px solid #888;margin-top:1rem}.service-error{color:#b22222}.service-agreement-notice{padding:1rem;border-inline-start:4px solid #9165db}.service-agreement-notice:empty{display:none}
+
+.service-jotform-review{display:grid;gap:.75rem;margin:1rem 0;padding:1rem;border:1px solid var(--workspace-border);border-radius:8px}.service-jotform-review label{display:grid;gap:.4rem}.service-jotform-review input{padding:.65rem;font:inherit;width:100%;max-width:100%}

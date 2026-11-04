@@ -1,5 +1,7 @@
 # Agreement verification
 
+Jotform API review: `node --test tests/jotform-agreements.test.js` covers the administrator gate, forwarding the original Firebase token for Firestore authorization, form/client/assignment checks, redaction, upstream failures, request validation and mandatory staff review. The browser flow also checks that a successful lookup fills a reference without changing the assigned status. Production credentials are never test fixtures.
+
 Client service agreements are separate from legacy quotes. See `SERVICE_AGREEMENTS.md` for configuration, operating steps and deployment boundaries. Run `node --test tests/service-agreement-model.test.js` for link/PDF/status validation. Run `firebase emulators:exec --only firestore --project demo-bam-service-agreements "node tests/service-agreement-rules.test.mjs"` for access and integrity checks. `node tests/service-agreement-ui.test.mjs` requires Playwright and Edge (or `BROWSER_EXECUTABLE`); it exercises the actual module and portal HTML with isolated Firebase doubles. `PLAYWRIGHT_MODULE` may specify a module URL for an existing Playwright installation. It never submits a real Jotform document. The original quote tests must continue to pass.
 
 The agreement rules use a separate `users/{uid}/agreements/{id}` collection. Issued quotes are fixed records. Only the assigned verified account may create its single acceptance receipt, and that receipt cannot be edited or deleted. Admins may withdraw an unaccepted quote but cannot rewrite it or fabricate a client acceptance.

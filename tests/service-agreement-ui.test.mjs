@@ -8,7 +8,7 @@ import assert from 'node:assert/strict';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const root=fileURLToPath(new URL('../',import.meta.url));
 const mock=`
-export const auth={currentUser:{uid:'admin',emailVerified:true}},db={};
+export const auth={currentUser:{uid:'admin',emailVerified:true,getIdToken:async()=>'test-id-token'}},db={};
 const records=new Map([['users/admin',{role:'admin'}],['users/client',{role:'client',fullName:'Test Client',email:'client@example.test'}]]);
 const listeners=new Map();let authCallback;window.__records=records;window.__failOnce=false;
 export function onAuthStateChanged(_auth,callback){authCallback=callback;queueMicrotask(()=>callback(auth.currentUser));}
@@ -27,6 +27,10 @@ const server=createServer(async(req,res)=>{
   res.setHeader('Access-Control-Allow-Origin','*');
   try{
     const pathname=new URL(req.url,'http://localhost').pathname;
+    if(pathname==='/api/jotform-agreements'){
+      let body='';for await(const chunk of req)body+=chunk;const action=JSON.parse(body).action;
+      res.setHeader('Content-Type','application/json');res.end(JSON.stringify(action==='connection'?{connected:true,formEnabled:true,requiresStaffReview:true}:{submissionId:'1234567890123456789',clientSignaturePresent:true,providerSignaturePresent:false,submittedAt:'TEST ONLY',requiresStaffReview:true}));return;
+    }
     if(pathname==='/mock-firebase.js'){res.setHeader('Content-Type','text/javascript');res.end(mock);return;}
     if(pathname==='/js/firebase-config.js'){res.setHeader('Content-Type','text/javascript');res.end("export {auth,db} from '/mock-firebase.js';");return;}
     const filename=path.resolve(root,'.'+decodeURIComponent(pathname));if(!filename.startsWith(root))throw Error('bad path');
@@ -65,6 +69,10 @@ try{
     assert.equal(await page.getByRole('link',{name:'Open agreement in Jotform'}).getAttribute('href'),'https://form.jotform.com/263058308288060');
     await page.getByRole('button',{name:'Show signing document'}).click();
     assert.equal(await page.locator('iframe').getAttribute('src'),'https://form.jotform.com/263058308288060');
+    await page.getByLabel('Jotform submission ID').fill('1234567890123456789');
+    await page.getByRole('button',{name:'Check Jotform submission'}).click();
+    await page.waitForFunction(()=>document.querySelector('.service-jotform-review [role=status]').textContent.includes('Submission found'));
+    assert.equal(await page.evaluate(()=>[...window.__records].find(([p])=>p.split('/').length===4&&p.includes('/serviceAgreements/'))[1].status),'assigned','API review must not automatically mark the agreement signed');
     const statusForm=page.locator('.service-status-form');await statusForm.locator('select').selectOption('completed');
     await statusForm.locator('input:not([type])').fill('TEST document ID');await statusForm.locator('input[type=checkbox]').check();
     await statusForm.locator('input[type=file]').setInputFiles({name:'invalid.pdf',mimeType:'application/pdf',buffer:Buffer.from('this is not a PDF')});
