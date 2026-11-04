@@ -21,9 +21,9 @@ function userStillActive(user){if(auth.currentUser?.uid!==user.uid||currentUser?
 
 function renderCard(host,record,user,admin){
   const card=element('article','','agreement-card');host.append(card);
-  card.append(element('h3',record.title),element('p',`${record.clientName} · ${STATUS_LABELS[record.status] || 'Unknown status'}`));
+  card.append(element('h3',record.title));const summary=element('div','','service-agreement-summary');summary.append(element('span',record.clientName,'service-client-name'),element('span',STATUS_LABELS[record.status] || 'Unknown status','service-status-pill'));card.append(summary);if(record.projectPricing){const price=element('div','','service-price-summary');for(const [label,value] of [['Project total',record.projectPricing.total],['Initial payment',record.projectPricing.initial],['Remaining balance',record.projectPricing.remaining],['Recurring fee',record.projectPricing.recurring]]){if(value===null||value===undefined)continue;const item=element('div','','service-price-item');item.append(element('span',label),element('strong',new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(value)));price.append(item);}card.append(price);}
   const updated=record.updatedAt?.toDate?.();
-  card.append(element('p',`${updated?updated.toLocaleString()+' · ':''}Final signing status is confirmed by BAM staff.`));
+  card.append(element('p',`${updated?'Updated '+updated.toLocaleDateString()+'. ':''}Signing status is confirmed after BAM verifies the signatures.`,'service-muted'));
   if(record.evidence)card.append(element('p','Signing reference: '+record.evidence));
   const details=element('details');details.append(element('summary','Read agreement and project details'),element('pre',record.termsText,'service-agreement-text'));card.append(details);
   button(card,'Download agreement text',()=>download(record.termsText,`BAM-agreement-${record.id}.txt`,'text/plain;charset=utf-8'));
@@ -42,7 +42,7 @@ function renderCard(host,record,user,admin){
         const link=element('a','Open agreement in Jotform','portal-secondary-button');link.href=url;link.target='_blank';link.rel='noopener noreferrer';card.append(link);
         if(config.displayMode==='embed')button(card,'Show signing document',showSigningDocument);
       }else{
-        card.append(element('h4','Complete your agreement below'),element('p','Fill out and sign the form here in your client portal. Your confirmation will appear in this same space.'));
+        card.append(element('h4','Review and sign'),element('p','Review the agreement and sign below. BAM will verify the signatures before marking it complete.'));
         showSigningDocument();
       }
     }else card.append(element('p','Signing is not configured for this agreement. Contact BAM for your signing invitation.'));
@@ -88,7 +88,7 @@ function watchRecords(uid,host,user,admin,epoch){
     if(epoch!==generation)return;
     host.replaceChildren();
     if(admin){activityByClient.set(uid,snapshot.docs.map(item=>({id:item.id,uid,...item.data()})));publishActivity();}
-    if(snapshot.empty)message(host,'No client service agreements assigned.');
+    if(snapshot.empty)message(host,admin?'No agreements yet.':'No agreements assigned yet. You will see them here when they are ready.');
     snapshot.docs.sort((a,b)=>(b.data().createdAt?.seconds||0)-(a.data().createdAt?.seconds||0)).forEach(item=>{
       const record={...item.data(),id:item.id,uid};
       renderCard(host,record,user,admin);
@@ -123,6 +123,9 @@ async function setupAdmin(user,epoch){
     });select.value=old;
   },()=>message(adminHost,'Client list could not be loaded. Check administrator access.')));
   const id=()=>crypto.randomUUID();let assignmentId=id();let issuing=false;
+  const totalInput=form.elements.projectTotal,initialInput=form.elements.initialPayment,balanceInput=form.elements.remainingBalance;
+  function updateBalance(){const total=Number(totalInput.value),initial=Number(initialInput.value);balanceInput.value=totalInput.value!==''&&initialInput.value!==''&&Number.isFinite(total)&&Number.isFinite(initial)?Math.max(0,Math.round((total-initial)*100)/100).toFixed(2):'';}
+  totalInput.addEventListener('input',updateBalance);initialInput.addEventListener('input',updateBalance);
   form.onsubmit=async event=>{
     event.preventDefault();if(issuing)return;issuing=true;
     const controls=[...form.querySelectorAll('input,select,textarea,button')];controls.forEach(c=>c.disabled=true);
@@ -131,22 +134,28 @@ async function setupAdmin(user,epoch){
       const profile=await getDoc(doc(db,'users',uid));if(!profile.exists()||profile.data().role!=='client')throw new Error('Client account is unavailable.');
       const title=form.elements.title.value.trim(),details=form.elements.details.value.trim();
       if(!title||!details)throw new Error('Enter the title and finalized project details.');
+      const total=Number(totalInput.value),initial=Number(initialInput.value),recurring=form.elements.recurringFee.value===''?null:Number(form.elements.recurringFee.value);
+      if(totalInput.value===''||initialInput.value===''||![total,initial].every(Number.isFinite)||total<0||initial<0||initial>total||recurring!==null&&(!Number.isFinite(recurring)||recurring<0))throw new Error('Enter valid pricing. Initial payment cannot exceed the project total.');
+      const projectPricing={total:Math.round(total*100)/100,initial:Math.round(initial*100)/100,remaining:Math.round((total-initial)*100)/100,recurring:recurring===null?null:Math.round(recurring*100)/100};
+      const projectMeta=form.elements.projectMeta.value.trim();
       const text=form.elements.terms.value.trim();
       if(!form.elements.reviewed.checked)throw new Error('Confirm that you reviewed the agreement.');
       if(!text || /\[(?!(?:Client Signature|Provider Signature|Date Signed)\])[^\]\n]*[A-Za-z][^\]\n]*\]/.test(text))throw new Error('Complete the client, project, price and date placeholders in the agreement text before assigning. Signature fields may remain for Jotform.');
-      const termsText=text+'\n\nASSIGNED PROJECT DETAILS / STATEMENT OF WORK\n'+details;
+      const money=value=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(value);
+      const priceDetails=`Project total: ${money(projectPricing.total)}\nInitial payment: ${money(projectPricing.initial)}\nRemaining balance: ${money(projectPricing.remaining)}\nRecurring fee (if applicable): ${projectPricing.recurring===null?'Not specified':money(projectPricing.recurring)}${projectMeta?'\nAdditional terms: '+projectMeta:''}`;
+      const termsText=text+'\n\nASSIGNED PROJECT DETAILS / STATEMENT OF WORK\n'+details+'\n\nPROJECT PRICING\n'+priceDetails;
       if(termsText.length>60000)throw new Error('Agreement text is too long.');
       const signing=signingUrl(form.elements.signing.value||config.defaultSigningUrl);
       const reference=doc(db,'users',uid,'serviceAgreements',assignmentId);
-      const record={title,clientName:profile.data().fullName||profile.data().email||uid,termsVersion:SERVICE_VERSION,termsText,signingUrl:signing,status:'assigned',evidence:'',createdBy:user.uid,createdAt:serverTimestamp(),updatedBy:user.uid,updatedAt:serverTimestamp()};
+      const record={title,clientName:profile.data().fullName||profile.data().email||uid,projectPricing,termsVersion:SERVICE_VERSION,termsText,signingUrl:signing,status:'assigned',evidence:'',createdBy:user.uid,createdAt:serverTimestamp(),updatedBy:user.uid,updatedAt:serverTimestamp()};
       await runTransaction(db,async transaction=>{
         const existing=await transaction.get(reference);
         if(existing.exists()){
-          const saved=existing.data();if(['title','clientName','termsVersion','termsText','signingUrl'].some(key=>saved[key]!==record[key]))throw new Error('An earlier assignment may have saved. Reload before assigning different details.');
+          const saved=existing.data();if(['title','clientName','projectPricing','termsVersion','termsText','signingUrl'].some(key=>JSON.stringify(saved[key])!==JSON.stringify(record[key])))throw new Error('An earlier assignment may have saved. Reload before assigning different details.');
           return;
         }transaction.set(reference,record);
       });
-      assignmentId=id();form.reset();form.elements.terms.value=template;status.textContent='Agreement assigned. The client can now review it in My Agreements. Signing status requires staff review.';
+      assignmentId=id();form.reset();updateBalance();form.elements.terms.value=template;status.textContent='Agreement assigned. The client can now review it in My Agreements. Signing status requires staff review.';
     }catch(error){status.textContent=error.message;}finally{issuing=false;controls.forEach(c=>c.disabled=false);}
   };
   stops.push(()=>{form.onsubmit=event=>event.preventDefault();document.getElementById('service-agreement-fields').disabled=true;form.reset();});
