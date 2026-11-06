@@ -1,0 +1,95 @@
+/* Portal-only refinements. Keep public pages and service-specific layouts intact. */
+body:is(.client-portal-page, .admin-dashboard-page) {
+  --workspace-gold: #efc66a;
+  --workspace-border: rgba(239, 198, 106, .18);
+  --portal-gold: #efc66a;
+  --portal-border: var(--workspace-border);
+  --admin-border: var(--workspace-border);
+  --workspace-surface: #141414;
+  --workspace-soft: #1c1b18;
+}
+html[data-theme="light"] body:is(.client-portal-page, .admin-dashboard-page) {
+  --workspace-gold: #765300;
+  --portal-gold: #765300;
+  --workspace-border: #c8baa0;
+  --workspace-surface: #fffdf8;
+  --workspace-soft: #f3e7cc;
+}
+body:is(.client-portal-page, .admin-dashboard-page) :is(button, input, select, textarea) {
+  font-family: inherit;
+}
+:is(.admin-header, .workspace-header) { min-height: 76px; }
+:is(.admin-sidebar, .portal-sidebar) { background: var(--workspace-surface); }
+:is(.admin-nav-button, .portal-nav-link) {
+  color: var(--workspace-muted);
+  transition: background-color .15s, color .15s;
+}
+:is(.admin-nav-button, .portal-nav-link):hover {
+  color: var(--workspace-text);
+  background: var(--workspace-soft);
+}
+:is(.admin-nav-button, .portal-nav-link).active {
+  color: var(--workspace-gold);
+  background: var(--workspace-soft);
+  box-shadow: inset 3px 0 var(--workspace-gold);
+  font-weight: 700;
+}
+:is(.admin-nav-count, .portal-message-count) { margin-left: auto; }
+:is(.admin-card, .portal-card, .admin-stat-card, .workspace-shortcut) {
+  background: var(--workspace-surface);
+  box-shadow: none;
+}
+:is(.admin-card, .portal-card):hover { transform: none; box-shadow: none; }
+:is(.admin-page-heading h1, .portal-topbar h1) { letter-spacing: -.035em; }
+.admin-stat-card { min-height: 126px; display: flex; flex-direction: column; justify-content: space-between; }
+.admin-stat-card strong { overflow-wrap: anywhere; }
+.admin-action-row { align-items: stretch; }
+.admin-action-row > button { width: 100%; padding: 14px 16px; text-align: left; }
+.workspace-shortcut { display: flex; flex-direction: column; }
+.workspace-shortcut b { margin-top: auto; padding-top: 16px; }
+:is(.admin-field, .portal-form) :is(input, select, textarea):focus {
+  border-color: var(--workspace-gold);
+}
+:is(.admin-list-item, .portal-file-item) { overflow-wrap: anywhere; }
+.workspace-menu-toggle { display: none; }
+@media (min-width: 761px) {
+  .admin-sidebar { border-right: 1px solid var(--workspace-border); }
+}
+@media (max-width: 900px) {
+  .client-portal-page .portal-sidebar { padding: 8px; }
+  .workspace-menu-toggle {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    width: 100%; min-height: 48px; padding: 12px 14px;
+    border: 0; border-radius: 8px;
+    background: var(--workspace-soft); color: var(--workspace-text);
+    font-size: 14px; font-weight: 650; text-align: left;
+  }
+  .workspace-menu-toggle::after { content: "+"; font-size: 22px; line-height: 1; color: var(--workspace-gold); }
+  .workspace-menu-toggle[aria-expanded="true"]::after { content: "−"; }
+  .client-portal-page .portal-sidebar.workspace-menu-ready:not(.workspace-menu-open) .portal-nav { display: none; }
+  .client-portal-page .portal-sidebar.workspace-menu-open .portal-nav { margin-top: 8px; }
+  .client-portal-page .portal-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .client-portal-page .portal-nav-link {
+    min-height: 48px; padding: 12px 10px 12px 36px; font-size: 13px; text-align: left;
+  }
+  .client-portal-page .portal-nav-link::before {
+    left: 11px; top: 50%; transform: translateY(-50%);
+  }
+  .client-portal-page .portal-nav-link.active { box-shadow: inset 3px 0 var(--workspace-gold); }
+  .client-portal-page .portal-message-count { position: static; margin-left: 4px; }
+}
+@media (max-width: 760px) {
+  .admin-header { column-gap: 10px; }
+  .admin-header .portal-brand { flex: 1 1 auto; }
+  .admin-header-actions { margin-left: auto; }
+  .admin-header-actions .admin-profile-photo { width: 32px; height: 32px; flex-basis: 32px; }
+  .admin-action-row { grid-template-columns: 1fr; }
+  .admin-action-row .admin-primary-button { grid-column: auto; }
+  .portal-topbar > div:first-child > p:last-child { margin-bottom: 0; }
+  .portal-user { background: var(--workspace-surface); }
+  :is(.admin-card, .portal-card) { padding: 20px; }
+  .portal-message-card { padding: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.admin-nav-button, .portal-nav-link) { transition: none; }
+}

@@ -36,31 +36,30 @@ document.addEventListener("DOMContentLoaded", () => {
   const portalButtons = document.querySelectorAll(".portal-nav-link[data-panel]");
   const portalPanels = document.querySelectorAll(".portal-panel");
 
-  const openPanel = (panelId) => {
+  const openPanel = (panelId, updateUrl = true) => {
     const targetPanel = document.getElementById(panelId);
     if (!targetPanel?.classList.contains("portal-panel")) return;
 
     portalButtons.forEach((button) => {
       const active = button.dataset.panel === panelId;
       button.classList.toggle("active", active);
-      button.setAttribute("aria-selected", active ? "true" : "false");
+      button.setAttribute("aria-current", active ? "page" : "false");
     });
 
     portalPanels.forEach((panel) => {
       panel.classList.toggle("active", panel.id === panelId);
     });
 
-    history.replaceState(null, "", `#${panelId}`);
+    if (updateUrl) history.replaceState(null, "", `#${panelId}`);
   };
 
   portalButtons.forEach((button) => {
-    button.setAttribute("role", "tab");
     button.addEventListener("click", () => openPanel(button.dataset.panel));
   });
 
   if (portalButtons.length && portalPanels.length) {
     const openRequestedPanel = () => openPanel(location.hash.slice(1));
-    openRequestedPanel();
+    openPanel(location.hash.slice(1) || "dashboard", false);
     window.addEventListener("hashchange", openRequestedPanel);
   }
 
