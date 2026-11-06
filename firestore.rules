@@ -66,9 +66,18 @@ service cloud.firestore {
       match /serviceAgreements/{agreementId} {
         function validText(value, max) { return value is string && value.size() > 0 && value.size() <= max; }
         function isValidServiceAgreement(data) {
-          return data.keys().hasAll(['title','clientName','termsVersion','termsText','signingUrl','status','evidence','createdBy','createdAt','updatedBy','updatedAt'])
-            && data.keys().hasOnly(['title','clientName','termsVersion','termsText','signingUrl','status','evidence','createdBy','createdAt','updatedBy','updatedAt'])
+          return data.keys().hasAll(['title','clientName','projectPricing','termsVersion','termsText','signingUrl','status','evidence','createdBy','createdAt','updatedBy','updatedAt'])
+            && data.keys().hasOnly(['title','clientName','projectPricing','termsVersion','termsText','signingUrl','status','evidence','createdBy','createdAt','updatedBy','updatedAt'])
             && validText(data.title,200) && validText(data.clientName,300)
+            && data.projectPricing is map
+            && data.projectPricing.keys().hasAll(['total','initial','remaining','recurring'])
+            && data.projectPricing.keys().hasOnly(['total','initial','remaining','recurring'])
+            && data.projectPricing.total is number && data.projectPricing.total >= 0
+            && data.projectPricing.initial is number && data.projectPricing.initial >= 0
+            && data.projectPricing.initial <= data.projectPricing.total
+            && data.projectPricing.remaining is number && data.projectPricing.remaining >= 0
+            && data.projectPricing.remaining == data.projectPricing.total - data.projectPricing.initial
+            && (data.projectPricing.recurring == null || (data.projectPricing.recurring is number && data.projectPricing.recurring >= 0))
             && data.termsVersion == 'bam-client-service-2026-11-02-v1'
             && validText(data.termsText,60000)
             && data.signingUrl is string && data.signingUrl.size() <= 2000
