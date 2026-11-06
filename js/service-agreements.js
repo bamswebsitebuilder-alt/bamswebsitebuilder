@@ -40,7 +40,9 @@ function renderCard(host,record,user,admin){
       };
       if(admin){
         const link=element('a','Open agreement in Jotform','portal-secondary-button');link.href=url;link.target='_blank';link.rel='noopener noreferrer';card.append(link);
-        if(config.displayMode==='embed')button(card,'Show signing document',showSigningDocument);
+        // Show the same assigned Jotform inside the admin portal as in the client portal.
+        // An external Jotform review link remains available for staff.
+        if(config.displayMode==='embed')showSigningDocument();
       }else{
         card.append(element('h4','Review and sign'),element('p','Review the agreement and sign below. BAM will verify the signatures before marking it complete.'));
         showSigningDocument();
