@@ -82,12 +82,17 @@ service cloud.firestore {
         }
         function isValidServiceAgreement(data) {
           return data.keys().hasAll(['title','clientName','termsVersion','termsText','signingUrl','status','evidence','createdBy','createdAt','updatedBy','updatedAt'])
-            && data.keys().hasOnly(['title','clientName','projectPricing','termsVersion','termsText','signingUrl','status','evidence','createdBy','createdAt','updatedBy','updatedAt'])
+            && data.keys().hasOnly(['assignmentType','title','clientName','projectPricing','termsVersion','termsText','signingUrl','status','evidence','createdBy','createdAt','updatedBy','updatedAt'])
             && validText(data.title,200) && validText(data.clientName,300)
+            && (!('assignmentType' in data) || data.assignmentType == 'jotform')
             // Legacy records predate projectPricing. Updates cannot add, remove,
             // or change it; new assignments must include validated pricing.
-            && (!('projectPricing' in data) || isValidProjectPricing(data.projectPricing))
-            && data.termsVersion == 'bam-client-service-2026-11-02-v1'
+            && (!('projectPricing' in data) || (data.get('assignmentType','') == 'jotform' ? data.projectPricing == null : isValidProjectPricing(data.projectPricing)))
+            && (data.get('assignmentType','') == 'jotform'
+              ? (data.termsVersion == 'bam-jotform-assignment-2026-11-05-v1'
+                && data.signingUrl != ''
+                && data.termsText == 'This record assigns the linked Jotform for the client to complete. The agreement terms, project scope, pricing and signatures are contained in that form. Assignment alone does not sign or accept the agreement. BAM must review the completed signing record before updating its status.')
+              : data.termsVersion == 'bam-client-service-2026-11-02-v1')
             && validText(data.termsText,60000)
             && data.signingUrl is string && data.signingUrl.size() <= 2000
             && (data.signingUrl == '' || data.signingUrl.matches('https://([a-zA-Z0-9-]+[.])*jotform[.]com/[^\\s]*'))

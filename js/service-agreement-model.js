@@ -1,4 +1,6 @@
 export const SERVICE_VERSION = 'bam-client-service-2026-11-02-v1';
+export const JOTFORM_ASSIGNMENT_VERSION = 'bam-jotform-assignment-2026-11-05-v1';
+export const JOTFORM_ASSIGNMENT_NOTICE = 'This record assigns the linked Jotform for the client to complete. The agreement terms, project scope, pricing and signatures are contained in that form. Assignment alone does not sign or accept the agreement. BAM must review the completed signing record before updating its status.';
 export const MAX_PDF_BYTES = 700 * 1024;
 export const STATUS_LABELS = {
   assigned: 'Assigned — awaiting signatures',

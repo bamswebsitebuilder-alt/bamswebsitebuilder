@@ -56,7 +56,7 @@ try{
     const preview=page.locator('#service-agreement-preview iframe');
     await preview.waitFor();
     assert.equal(await preview.getAttribute('src'),'https://form.jotform.com/263058308288060');
-    assert.equal(await page.locator('.service-template-review').getAttribute('open'),null,'text-only draft starts collapsed');
+    assert.equal(await page.locator('#service-terms,#service-details,#service-total,#service-initial,#service-project-meta,.service-template-review').count(),0,'only the actual form is assigned; no duplicate agreement/scope/pricing controls');
     await page.locator('#service-signing').fill('https://form.jotform.com/recipient-test');
     await page.locator('#service-signing').press('Tab');
     assert.equal(await preview.getAttribute('src'),'https://form.jotform.com/recipient-test','preview follows the chosen invitation');
@@ -67,19 +67,14 @@ try{
     await page.locator('#service-signing').press('Tab');
     assert.equal(await preview.getAttribute('src'),'https://form.jotform.com/263058308288060');
     await page.locator('#service-agreement-assignee').selectOption('client');
-    await page.locator('#service-details').fill('Nonbinding UI fixture only — no live agreement');
-    await page.locator('#service-total').fill('100.10');
-    await page.locator('#service-initial').fill('0.20');
-    await page.locator('[name=reviewed]').check();
-    await page.getByRole('button',{name:'Assign agreement',exact:true}).click();
-    await page.waitForFunction(()=>document.getElementById('service-agreement-form-status').textContent.includes('Complete the client'));
-    const draft=await page.locator('#service-terms').inputValue();
-    await page.locator('#service-terms').fill(draft.replace(/\[[^\]\n]*[A-Za-z][^\]\n]*\]/g,'TEST ONLY'));
     await page.evaluate(()=>window.__failOnce=true);
-    await page.getByRole('button',{name:'Assign agreement',exact:true}).click();
+    await page.getByRole('button',{name:'Assign form',exact:true}).click();
     await page.waitForFunction(()=>document.getElementById('service-agreement-form-status').textContent.includes('Connection lost'));
-    await page.getByRole('button',{name:'Assign agreement',exact:true}).click();
-    await page.waitForFunction(()=>document.getElementById('service-agreement-form-status').textContent.includes('Agreement assigned'));
+    await page.getByRole('button',{name:'Assign form',exact:true}).click();
+    await page.waitForFunction(()=>document.getElementById('service-agreement-form-status').textContent.includes('Form assigned'));
+    const assigned=await page.evaluate(()=>[...window.__records].find(([p])=>p.split('/').length===4&&p.includes('/serviceAgreements/'))[1]);
+    assert.equal(assigned.assignmentType,'jotform');assert.equal(assigned.projectPricing,null);
+    assert.equal(await page.getByText('Read agreement and project details',{exact:true}).count(),0,'form-only cards do not display a second agreement');
     assert.equal(await page.evaluate(()=>[...window.__records.keys()].filter(p=>p.includes('/serviceAgreements/')).length),1,'retry must not duplicate assignment');
     assert.equal(await page.getByRole('link',{name:'Open agreement in Jotform'}).getAttribute('href'),'https://form.jotform.com/263058308288060');
     assert.equal(await page.locator('#service-agreement-admin iframe').getAttribute('src'),'https://form.jotform.com/263058308288060');
@@ -132,6 +127,7 @@ try{
     assert.equal(await page.getByRole('button',{name:'Show signing document'}).count(),0,'client forms open inline automatically');
     const frame=page.frameLocator('#service-agreement-client iframe');
     await frame.getByLabel('Test name').fill('TEST ONLY');const portalUrl=page.url();
+    assert.equal(await page.getByText('Read agreement and project details',{exact:true}).count(),0,'clients see the actual form instead of duplicate text');
     const cannotNavigate=await page.locator('iframe').evaluate(async node=>{
       const allowed=node.sandbox;return !allowed.contains('allow-top-navigation')&&!allowed.contains('allow-top-navigation-by-user-activation')&&!allowed.contains('allow-popups');
     });assert.ok(cannotNavigate);

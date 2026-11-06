@@ -1,7 +1,7 @@
 import {auth,db} from './firebase-config.js';
 import {onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js';
 import {collection,doc,getDoc,onSnapshot,runTransaction,serverTimestamp,Bytes} from 'https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js';
-import {SERVICE_VERSION,STATUS_LABELS,signingUrl,canTransition,pdfBytes} from './service-agreement-model.js';
+import {JOTFORM_ASSIGNMENT_VERSION,JOTFORM_ASSIGNMENT_NOTICE,STATUS_LABELS,signingUrl,canTransition,pdfBytes} from './service-agreement-model.js?v=20261105-form-only-1';
 import {serviceAgreementConfig as config} from './service-agreement-config.js';
 import {showJotformConnection,addJotformReview} from './jotform-admin.js?v=1';
 
@@ -25,8 +25,10 @@ function renderCard(host,record,user,admin){
   const updated=record.updatedAt?.toDate?.();
   card.append(element('p',`${updated?'Updated '+updated.toLocaleDateString()+'. ':''}Signing status is confirmed after BAM verifies the signatures.`,'service-muted'));
   if(record.evidence)card.append(element('p','Signing reference: '+record.evidence));
-  const details=element('details');details.append(element('summary','Read agreement and project details'),element('pre',record.termsText,'service-agreement-text'));card.append(details);
-  button(card,'Download agreement text',()=>download(record.termsText,`BAM-agreement-${record.id}.txt`,'text/plain;charset=utf-8'));
+  if(record.assignmentType!=='jotform'){
+    const details=element('details');details.append(element('summary','Read agreement and project details'),element('pre',record.termsText,'service-agreement-text'));card.append(details);
+    button(card,'Download agreement text',()=>download(record.termsText,`BAM-agreement-${record.id}.txt`,'text/plain;charset=utf-8'));
+  }
   if(['assigned','client_signed'].includes(record.status)){
     let url='';try{url=signingUrl(record.signingUrl);}catch{}
     if(url){
@@ -107,11 +109,7 @@ function watchRecords(uid,host,user,admin,epoch){
 async function setupAdmin(user,epoch){
   const form=document.getElementById('service-agreement-form'),select=document.getElementById('service-agreement-assignee'),status=document.getElementById('service-agreement-form-status');
   let clientStops=[];stops.push(()=>clientStops.splice(0).forEach(stop=>stop()));
-  const templateResponse=await fetch('/js/client-service-agreement-v1.txt');
-  if(!templateResponse.ok)throw new Error('Agreement template could not be loaded.');
-  const template=await templateResponse.text();if(epoch!==generation)return;
   void showJotformConnection(form,user,()=>epoch===generation&&currentUser?.uid===user.uid);
-  form.elements.terms.value=template;
   const preview=document.getElementById('service-agreement-preview');
   function refreshPreview(){
     if(!preview)return;
@@ -138,42 +136,26 @@ async function setupAdmin(user,epoch){
     });select.value=old;
   },()=>message(adminHost,'Client list could not be loaded. Check administrator access.')));
   const id=()=>crypto.randomUUID();let assignmentId=id();let issuing=false;
-  const totalInput=form.elements.projectTotal,initialInput=form.elements.initialPayment,balanceInput=form.elements.remainingBalance;
-  function updateBalance(){const total=Number(totalInput.value),initial=Number(initialInput.value);balanceInput.value=totalInput.value!==''&&initialInput.value!==''&&Number.isFinite(total)&&Number.isFinite(initial)?Math.max(0,Math.round((total-initial)*100)/100).toFixed(2):'';}
-  totalInput.addEventListener('input',updateBalance);initialInput.addEventListener('input',updateBalance);
   form.onsubmit=async event=>{
     event.preventDefault();if(issuing)return;issuing=true;
     const controls=[...form.querySelectorAll('input,select,textarea,button')];controls.forEach(c=>c.disabled=true);
     try{
       userStillActive(user);const uid=select.value;if(!uid)throw new Error('Choose a client.');
       const profile=await getDoc(doc(db,'users',uid));if(!profile.exists()||profile.data().role!=='client')throw new Error('Client account is unavailable.');
-      const title=form.elements.title.value.trim(),details=form.elements.details.value.trim();
-      if(!title||!details)throw new Error('Enter the title and finalized project details.');
-      const total=Number(totalInput.value),initial=Number(initialInput.value),recurring=form.elements.recurringFee.value===''?null:Number(form.elements.recurringFee.value);
-      if(totalInput.value===''||initialInput.value===''||![total,initial].every(Number.isFinite)||total<0||initial<0||initial>total||recurring!==null&&(!Number.isFinite(recurring)||recurring<0))throw new Error('Enter valid pricing. Initial payment cannot exceed the project total.');
-      const projectPricing={total:Math.round(total*100)/100,initial:Math.round(initial*100)/100,remaining:Math.round((total-initial)*100)/100,recurring:recurring===null?null:Math.round(recurring*100)/100};
-      const projectMeta=form.elements.projectMeta.value.trim();
-      const text=form.elements.terms.value.trim();
-      if(!form.elements.reviewed.checked)throw new Error('Confirm that you reviewed the agreement.');
-      if(!text || /\[(?!(?:Client Signature|Provider Signature|Date Signed)\])[^\]\n]*[A-Za-z][^\]\n]*\]/.test(text)){
-        const review=form.querySelector('.service-template-review');if(review)review.open=true;
-        throw new Error('Complete the client, project, price and date placeholders in the agreement text before assigning. Signature fields may remain for Jotform.');
-      }
-      const money=value=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(value);
-      const priceDetails=`Project total: ${money(projectPricing.total)}\nInitial payment: ${money(projectPricing.initial)}\nRemaining balance: ${money(projectPricing.remaining)}\nRecurring fee (if applicable): ${projectPricing.recurring===null?'Not specified':money(projectPricing.recurring)}${projectMeta?'\nAdditional terms: '+projectMeta:''}`;
-      const termsText=text+'\n\nASSIGNED PROJECT DETAILS / STATEMENT OF WORK\n'+details+'\n\nPROJECT PRICING\n'+priceDetails;
-      if(termsText.length>60000)throw new Error('Agreement text is too long.');
+      const title=form.elements.title.value.trim();
+      if(!title)throw new Error('Enter a form title.');
       const signing=signingUrl(form.elements.signing.value||config.defaultSigningUrl);
+      if(!signing)throw new Error('Add the Jotform link before assigning.');
       const reference=doc(db,'users',uid,'serviceAgreements',assignmentId);
-      const record={title,clientName:profile.data().fullName||profile.data().email||uid,projectPricing,termsVersion:SERVICE_VERSION,termsText,signingUrl:signing,status:'assigned',evidence:'',createdBy:user.uid,createdAt:serverTimestamp(),updatedBy:user.uid,updatedAt:serverTimestamp()};
+      const record={assignmentType:'jotform',title,clientName:profile.data().fullName||profile.data().email||uid,projectPricing:null,termsVersion:JOTFORM_ASSIGNMENT_VERSION,termsText:JOTFORM_ASSIGNMENT_NOTICE,signingUrl:signing,status:'assigned',evidence:'',createdBy:user.uid,createdAt:serverTimestamp(),updatedBy:user.uid,updatedAt:serverTimestamp()};
       await runTransaction(db,async transaction=>{
         const existing=await transaction.get(reference);
         if(existing.exists()){
-          const saved=existing.data();if(['title','clientName','projectPricing','termsVersion','termsText','signingUrl'].some(key=>JSON.stringify(saved[key])!==JSON.stringify(record[key])))throw new Error('An earlier assignment may have saved. Reload before assigning different details.');
+          const saved=existing.data();if(['assignmentType','title','clientName','projectPricing','termsVersion','termsText','signingUrl'].some(key=>JSON.stringify(saved[key])!==JSON.stringify(record[key])))throw new Error('An earlier assignment may have saved. Reload before assigning different details.');
           return;
         }transaction.set(reference,record);
       });
-      assignmentId=id();form.reset();updateBalance();form.elements.terms.value=template;refreshPreview();status.textContent='Agreement assigned. The client can now review it in My Agreements. Signing status requires staff review.';
+      assignmentId=id();form.reset();refreshPreview();status.textContent='Form assigned. The client can complete it in My Agreements. Signing status requires staff review.';
     }catch(error){status.textContent=error.message;}finally{issuing=false;controls.forEach(c=>c.disabled=false);}
   };
   stops.push(()=>{form.onsubmit=event=>event.preventDefault();document.getElementById('service-agreement-fields').disabled=true;form.reset();});

@@ -10,7 +10,7 @@ The owner prepares actual project details under Admin → Projects → Client qu
 
 The security tests require Node, Java 21+, Firebase CLI, `firebase`, and `@firebase/rules-unit-testing`. Run them against an isolated demo project with the Firestore emulator, never against production:
 
-Service agreement assignments require validated `projectPricing` (`total`, `initial`, `remaining`, and nullable `recurring`, in dollars). Balance validation compares rounded integer cents, including decimal prices such as $100.10 minus $0.20. Existing records created before pricing was added can still receive reviewed status updates; assignment terms and pricing remain immutable. The service agreement emulator suite covers decimal transactions, malformed/negative/nonfinite pricing, missing pricing on new records, and legacy cancellation/PDF completion.
+Form-only assignments use a validated Jotform URL, a fixed assignment notice/version, `assignmentType: 'jotform'` and explicit `projectPricing: null`; no extra agreement/scope/pricing input is required. Existing text/pricing assignments retain their validation, with balance comparisons in rounded integer cents. Legacy records without pricing can still receive reviewed status updates. The emulator suite covers both assignment types, decimal prices, invalid data, immutable fields, ownership isolation, status changes and PDF completion. Browser tests cover direct form assignment and client embedding on both language routes without real Jotform submissions.
 
 ```
 firebase emulators:exec --only firestore --project demo-bam-agreements "node tests/agreement-rules.test.mjs"

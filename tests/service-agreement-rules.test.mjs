@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import {initializeTestEnvironment,assertFails,assertSucceeds} from '@firebase/rules-unit-testing';
 import {doc,setDoc,getDoc,updateDoc,deleteDoc,deleteField,serverTimestamp,collection,getDocs,writeBatch,Bytes,Timestamp,runTransaction} from 'firebase/firestore';
-import {SERVICE_VERSION,MAX_PDF_BYTES} from '../js/service-agreement-model.js';
+import {SERVICE_VERSION,MAX_PDF_BYTES,JOTFORM_ASSIGNMENT_VERSION,JOTFORM_ASSIGNMENT_NOTICE} from '../js/service-agreement-model.js';
 const environment=await initializeTestEnvironment({projectId:'demo-bam-service-agreements',firestore:{host:'127.0.0.1',port:8088,rules:await fs.readFile('firestore.rules','utf8')}});
 const database=(id,verified=true)=>environment.authenticatedContext(id,{email_verified:verified}).firestore();
 const admin=database('admin'),client=database('client'),other=database('other'),unverified=database('client',false),anonymous=environment.unauthenticatedContext().firestore();
@@ -76,5 +76,17 @@ try{
   await deny(setDoc(doc(admin,'users/client/serviceAgreements/orphan/documents/signed'),pdfData));
   await deny(updateDoc(doc(client,'users/client'),{role:'admin'}));
   await deny(setDoc(doc(database('attacker'),'users/attacker'),{role:'admin'}));
+  const formData={...data,assignmentType:'jotform',projectPricing:null,termsVersion:JOTFORM_ASSIGNMENT_VERSION,termsText:JOTFORM_ASSIGNMENT_NOTICE};
+  await pass(runTransaction(admin,async transaction=>{const reference=ref(admin,'form-only');await transaction.get(reference);transaction.set(reference,formData);}));
+  await pass(getDoc(ref(client,'form-only')));
+  await deny(getDoc(ref(other,'form-only')));await deny(getDoc(ref(unverified,'form-only')));
+  await deny(setDoc(ref(client,'form-client'),formData));await deny(setDoc(ref(anonymous,'form-anonymous'),formData));
+  for(const invalid of [{...formData,assignmentType:'arbitrary'},{...formData,signingUrl:''},{...formData,termsVersion:SERVICE_VERSION},{...formData,termsText:'pretend agreement'},{...formData,projectPricing:data.projectPricing},{...formData,unexpected:'extra'}])await deny(setDoc(ref(admin,'invalid-form'),invalid));
+  await deny(updateDoc(ref(admin,'form-only'),{...change('client_signed'),signingUrl:'https://www.jotform.com/sign/replaced'}));
+  await deny(updateDoc(ref(admin,'form-only'),{...change('client_signed'),assignmentType:deleteField()}));
+  await deny(updateDoc(ref(admin,'form-only'),{...change('client_signed'),termsText:'replaced'}));
+  await deny(updateDoc(ref(admin,'form-only'),change('completed')));
+  await pass(updateDoc(ref(admin,'form-only'),change('client_signed')));
+  await pass(complete(admin,'form-only'));await pass(getDoc(pdf(client,'form-only')));
   console.log(`PASS: ${checks} service agreement security checks. No production records used.`);
 }finally{await environment.cleanup();}
