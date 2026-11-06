@@ -112,6 +112,19 @@ async function setupAdmin(user,epoch){
   const template=await templateResponse.text();if(epoch!==generation)return;
   void showJotformConnection(form,user,()=>epoch===generation&&currentUser?.uid===user.uid);
   form.elements.terms.value=template;
+  const preview=document.getElementById('service-agreement-preview');
+  function refreshPreview(){
+    if(!preview)return;
+    let url='';try{url=signingUrl(form.elements.signing.value||config.defaultSigningUrl);}catch{message(preview,'Enter a valid HTTPS Jotform invitation link to preview the form.');return;}
+    if(!url){message(preview,'Add a Jotform invitation link to display the agreement form.');return;}
+    if(preview.querySelector('iframe')?.getAttribute('src')===url)return;
+    const frame=element('iframe');frame.src=url;frame.title='Agreement form preview';frame.referrerPolicy='no-referrer';frame.className='service-sign-frame';
+    frame.setAttribute('sandbox','allow-forms allow-scripts allow-same-origin allow-downloads');
+    preview.replaceChildren(frame);
+  }
+  refreshPreview();
+  form.elements.signing.addEventListener('change',refreshPreview);
+  stops.push(()=>{form.elements.signing.removeEventListener('change',refreshPreview);preview?.replaceChildren();});
   document.getElementById('service-agreement-fields').disabled=false;
   stops.push(onSnapshot(collection(db,'users'),snapshot=>{
     if(epoch!==generation)return;
@@ -142,7 +155,10 @@ async function setupAdmin(user,epoch){
       const projectMeta=form.elements.projectMeta.value.trim();
       const text=form.elements.terms.value.trim();
       if(!form.elements.reviewed.checked)throw new Error('Confirm that you reviewed the agreement.');
-      if(!text || /\[(?!(?:Client Signature|Provider Signature|Date Signed)\])[^\]\n]*[A-Za-z][^\]\n]*\]/.test(text))throw new Error('Complete the client, project, price and date placeholders in the agreement text before assigning. Signature fields may remain for Jotform.');
+      if(!text || /\[(?!(?:Client Signature|Provider Signature|Date Signed)\])[^\]\n]*[A-Za-z][^\]\n]*\]/.test(text)){
+        const review=form.querySelector('.service-template-review');if(review)review.open=true;
+        throw new Error('Complete the client, project, price and date placeholders in the agreement text before assigning. Signature fields may remain for Jotform.');
+      }
       const money=value=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(value);
       const priceDetails=`Project total: ${money(projectPricing.total)}\nInitial payment: ${money(projectPricing.initial)}\nRemaining balance: ${money(projectPricing.remaining)}\nRecurring fee (if applicable): ${projectPricing.recurring===null?'Not specified':money(projectPricing.recurring)}${projectMeta?'\nAdditional terms: '+projectMeta:''}`;
       const termsText=text+'\n\nASSIGNED PROJECT DETAILS / STATEMENT OF WORK\n'+details+'\n\nPROJECT PRICING\n'+priceDetails;
@@ -157,7 +173,7 @@ async function setupAdmin(user,epoch){
           return;
         }transaction.set(reference,record);
       });
-      assignmentId=id();form.reset();updateBalance();form.elements.terms.value=template;status.textContent='Agreement assigned. The client can now review it in My Agreements. Signing status requires staff review.';
+      assignmentId=id();form.reset();updateBalance();form.elements.terms.value=template;refreshPreview();status.textContent='Agreement assigned. The client can now review it in My Agreements. Signing status requires staff review.';
     }catch(error){status.textContent=error.message;}finally{issuing=false;controls.forEach(c=>c.disabled=false);}
   };
   stops.push(()=>{form.onsubmit=event=>event.preventDefault();document.getElementById('service-agreement-fields').disabled=true;form.reset();});

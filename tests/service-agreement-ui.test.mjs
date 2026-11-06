@@ -53,8 +53,23 @@ try{
     await page.waitForFunction(()=>document.getElementById('service-agreement-fields').disabled===false);
     await page.evaluate(()=>{document.body.classList.remove('admin-auth-pending');document.querySelectorAll('.admin-panel').forEach(p=>p.classList.toggle('active',p.id==='client-service-agreements'));});
     assert.equal(await page.locator('[data-panel="client-service-agreements"]').count(),1);
+    const preview=page.locator('#service-agreement-preview iframe');
+    await preview.waitFor();
+    assert.equal(await preview.getAttribute('src'),'https://form.jotform.com/263058308288060');
+    assert.equal(await page.locator('.service-template-review').getAttribute('open'),null,'text-only draft starts collapsed');
+    await page.locator('#service-signing').fill('https://form.jotform.com/recipient-test');
+    await page.locator('#service-signing').press('Tab');
+    assert.equal(await preview.getAttribute('src'),'https://form.jotform.com/recipient-test','preview follows the chosen invitation');
+    await page.locator('#service-signing').fill('https://evil.test/sign');
+    await page.locator('#service-signing').press('Tab');
+    assert.equal(await page.locator('#service-agreement-preview iframe').count(),0,'invalid invitation cannot load an iframe');
+    await page.locator('#service-signing').fill('');
+    await page.locator('#service-signing').press('Tab');
+    assert.equal(await preview.getAttribute('src'),'https://form.jotform.com/263058308288060');
     await page.locator('#service-agreement-assignee').selectOption('client');
     await page.locator('#service-details').fill('Nonbinding UI fixture only — no live agreement');
+    await page.locator('#service-total').fill('100.10');
+    await page.locator('#service-initial').fill('0.20');
     await page.locator('[name=reviewed]').check();
     await page.getByRole('button',{name:'Assign agreement',exact:true}).click();
     await page.waitForFunction(()=>document.getElementById('service-agreement-form-status').textContent.includes('Complete the client'));
@@ -67,8 +82,7 @@ try{
     await page.waitForFunction(()=>document.getElementById('service-agreement-form-status').textContent.includes('Agreement assigned'));
     assert.equal(await page.evaluate(()=>[...window.__records.keys()].filter(p=>p.includes('/serviceAgreements/')).length),1,'retry must not duplicate assignment');
     assert.equal(await page.getByRole('link',{name:'Open agreement in Jotform'}).getAttribute('href'),'https://form.jotform.com/263058308288060');
-    await page.getByRole('button',{name:'Show signing document'}).click();
-    assert.equal(await page.locator('iframe').getAttribute('src'),'https://form.jotform.com/263058308288060');
+    assert.equal(await page.locator('#service-agreement-admin iframe').getAttribute('src'),'https://form.jotform.com/263058308288060');
     await page.getByLabel('Jotform submission ID').fill('1234567890123456789');
     await page.getByRole('button',{name:'Check Jotform submission'}).click();
     await page.waitForFunction(()=>document.querySelector('.service-jotform-review [role=status]').textContent.includes('Submission found'));
@@ -83,6 +97,7 @@ try{
     await page.getByRole('button',{name:'Download signed PDF'}).waitFor();
     completed=await page.evaluate(()=>[...window.__records].find(([p])=>p.split('/').length===4&&p.includes('/serviceAgreements/'))[1]);
     await page.evaluate(()=>window.__authAs(null));
+    assert.equal(await page.locator('#service-agreement-preview iframe').count(),0,'preview clears on sign-out');
     assert.equal(await page.locator('#service-agreement-assignee').isDisabled(),true);
     assert.equal(await page.locator('#service-agreement-admin .agreement-card').count(),0);
   }

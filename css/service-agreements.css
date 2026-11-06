@@ -2,6 +2,7 @@
 .service-status-form{display:grid;gap:1rem;margin-top:1rem}.service-status-form label{display:grid;gap:.4rem}.service-status-form input,.service-status-form select{max-width:100%;padding:.65rem;font:inherit}.service-status-form input[type=checkbox]{justify-self:start}.service-sign-frame{display:block;width:100%;max-width:100%;height:clamp(540px,75vh,850px);min-height:540px;box-sizing:border-box;border:1px solid var(--workspace-border,#888);border-radius:8px;background:#fff;margin-top:1rem}.service-error{color:#b22222}.service-agreement-notice{padding:1rem;border-inline-start:4px solid #9165db}.service-agreement-notice:empty{display:none}
 
 .service-jotform-review{display:grid;gap:.75rem;margin:1rem 0;padding:1rem;border:1px solid var(--workspace-border);border-radius:8px}.service-jotform-review label{display:grid;gap:.4rem}.service-jotform-review input{padding:.65rem;font:inherit;width:100%;max-width:100%}
+.service-assignment-preview{min-width:0}.service-assignment-preview h3{margin:0 0 .5rem}.service-assignment-preview p{margin:.5rem 0}.service-template-review{min-width:0;border:1px solid var(--workspace-border,#888);border-radius:8px;padding:1rem}.service-template-review summary{cursor:pointer;font-weight:600}.service-template-review[open] summary{margin-bottom:1rem}
 
 
 /* Shared agreement layout for desktop, tablet and mobile */
