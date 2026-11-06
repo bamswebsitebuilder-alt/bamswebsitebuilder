@@ -52,6 +52,25 @@ body:is(.client-portal-page, .admin-dashboard-page) :is(button, input, select, t
 }
 :is(.admin-list-item, .portal-file-item) { overflow-wrap: anywhere; }
 .workspace-menu-toggle { display: none; }
+/* Both agreement systems need their own readable row, including empty states. */
+.client-portal-page #agreements.active {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
+  min-height: 0;
+}
+.client-portal-page #agreements > .portal-card {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+.client-portal-page #agreements > .portal-card > :is(.card-kicker, h2, p) {
+  text-align: left;
+}
+.client-portal-page #agreements > .portal-card > p:not(.card-kicker) {
+  margin: 12px 0 0;
+}
 @media (min-width: 761px) {
   .admin-sidebar { border-right: 1px solid var(--workspace-border); }
 }
