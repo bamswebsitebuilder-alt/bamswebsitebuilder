@@ -368,6 +368,7 @@ if (sidebar) {
 ========================================================= */
 
 const setActivePanel = (panelId) => {
+  if (!panels.some(panel => panel.id === panelId)) return;
   panels.forEach((panel) => {
     panel.classList.toggle(
       "active",
@@ -376,20 +377,17 @@ const setActivePanel = (panelId) => {
   });
 
   navigationButtons.forEach((button) => {
-    button.classList.toggle(
-      "active",
-      button.dataset.panel === panelId
-    );
+    const active = button.dataset.panel === panelId;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-current", active ? "page" : "false");
   });
 
   if (panelId === "notifications") {
     markNotificationsSeen();
   }
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+  history.replaceState(null, "", `#${panelId}`);
+  window.scrollTo({ top: 0, behavior: "instant" });
 };
 
 navigationButtons.forEach((button) => {
@@ -1863,6 +1861,7 @@ onAuthStateChanged(
       document.body.classList.remove("admin-auth-pending");
       accessStatus.remove();
 
+      setActivePanel(location.hash.slice(1) || "overview");
       watchClients();
     } catch (error) {
       console.error(
@@ -1888,3 +1887,8 @@ onAuthStateChanged(
     }
   }
 );
+
+// Keep direct section links and browser hash navigation in sync with the menu.
+window.addEventListener("hashchange", () => {
+  setActivePanel(location.hash.slice(1) || "overview");
+});
