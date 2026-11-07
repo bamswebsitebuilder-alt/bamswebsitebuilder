@@ -612,6 +612,15 @@ progress {
 }
 
 
+.invoice-price-editor { max-width: 260px; }
+.invoice-price-editor [hidden] { display: none !important; }
+.invoice-price-editor form:not([hidden]) { display: flex; flex-wrap: wrap; gap: 8px; }
+.invoice-price-editor label { width: 100%; }
+.invoice-price-editor input { display: block; width: 100%; margin-top: 6px; }
+.invoice-price-editor .admin-status:empty { display: none; }
+.invoice-price-editor button:disabled { opacity: .6; cursor: wait; }
+@media (max-width: 760px) { .invoice-price-editor { width: 100%; max-width: none; } }
+
 /* MOBILE OVERLAY VISIBILITY FIX */
 .admin-sidebar-overlay[hidden] {
   display: none !important;

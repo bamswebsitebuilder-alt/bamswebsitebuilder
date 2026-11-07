@@ -1,4 +1,5 @@
 import { portalLoginUrl } from "./portal-routing.js?v=2";
+import { createInvoicePriceEditor } from "./invoice-price-editor.js?v=1";
 
 // Keep a visible access status while protected workspace panels are loading.
 document.body.classList.add("admin-auth-pending");
@@ -763,7 +764,20 @@ const renderInvoices = () => {
       }
     });
 
-    actions.append(statusBadge, statusButton);
+    const priceEditor = createInvoicePriceEditor(invoice, async amount => {
+      if (!currentAdmin) throw new Error("Please sign in as an administrator.");
+      const invoiceRef = doc(db, "users", invoice.userId, "invoices", invoice.id);
+      await runTransaction(db, async transaction => {
+        const snapshot = await transaction.get(invoiceRef);
+        if (!snapshot.exists()) throw new Error("This invoice no longer exists.");
+        if (Number(snapshot.data().amount) !== Number(invoice.amount)) {
+          throw new Error("This price changed. Reopen the editor to use the latest price.");
+        }
+        transaction.update(invoiceRef, { amount, updatedAt: serverTimestamp() });
+      });
+      showStatus(invoiceFormStatus, spanish ? "Precio guardado." : "Invoice price saved successfully.", "success");
+    }, spanish);
+    actions.append(statusBadge, priceEditor, statusButton);
 
     item.append(information, actions);
     invoiceList.appendChild(item);
