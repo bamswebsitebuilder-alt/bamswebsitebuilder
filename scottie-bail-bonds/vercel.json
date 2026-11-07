@@ -1,0 +1,21 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "node build-site.mjs",
+  "installCommand": "echo 'Static website: no dependencies'",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/scottie-bail-bonds",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/scottie-bail-bonds/:path*",
+      "destination": "/:path*",
+      "permanent": true
+    }
+  ]
+}
