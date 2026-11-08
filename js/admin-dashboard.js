@@ -1682,6 +1682,11 @@ fileForm?.addEventListener(
     event.preventDefault();
     hideStatus(fileFormStatus);
 
+    if (!currentAdmin) {
+      showStatus(fileFormStatus, "Please sign in as an administrator before uploading.", "error");
+      return;
+    }
+
     const userId = fileClientSelect.value;
 
     const fileInput =
@@ -1699,10 +1704,10 @@ fileForm?.addEventListener(
       return;
     }
 
-    if (file.size > 15 * 1024 * 1024) {
+    if (file.size === 0 || file.size > 15 * 1024 * 1024) {
       showStatus(
         fileFormStatus,
-        "The file must be 15 MB or smaller.",
+        "Choose a nonempty file that is 15 MB or smaller.",
         "error"
       );
 
@@ -1774,8 +1779,9 @@ fileForm?.addEventListener(
 
         showStatus(
           fileFormStatus,
-          error.message ||
-            "The file could not be uploaded.",
+          error.code === "storage/unauthorized"
+            ? "Upload permission was denied. The Firebase Storage rules must allow administrators to upload to client folders. Contact BAM support if this continues."
+            : "The file could not be uploaded. Please check your connection and try again.",
           "error"
         );
       },
