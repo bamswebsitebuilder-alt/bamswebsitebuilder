@@ -381,7 +381,7 @@ select:focus-visible {
     width: 100%;
     max-width: 280px;
     height: 410px;
-    object-fit: cover;
+    object-fit: contain;
     box-shadow: 0 18px 35px rgba(0, 0, 0, 0.7);
 }
 
@@ -971,4 +971,33 @@ select:focus-visible {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
     }
+}
+
+/* Author layout safeguards, independent of the BAM public-site stylesheet. */
+.skip-link { position: fixed; top: 8px; left: 8px; z-index: 1300; padding: 12px 18px; background: #fff; color: #080808; transform: translateY(-160%); }
+.skip-link:focus { transform: translateY(0); }
+section { padding-inline: max(6%, calc((100% - 1280px) / 2)); }
+.site-header { padding-inline: max(5%, calc((100% - 1360px) / 2)); }
+.book-cover img { height: auto; max-height: 410px; aspect-ratio: 2 / 3; }
+.site-footer a { text-decoration: underline; text-underline-offset: 4px; }
+@media (min-width: 781px) and (max-width: 1100px) {
+    .site-header { gap: 16px; padding-inline: 3%; }
+    .author-logo { font-size: 23px; letter-spacing: 1px; }
+    .nav-links { gap: 16px; }
+    .main-nav .nav-links a { font-size: 14px; }
+    .desktop-language-switcher { font-size: 13px; }
+}
+@media (max-width: 780px) {
+    .site-header { padding-inline: 5%; }
+    .hero { padding-top: calc(var(--header-height) + 46px); }
+    .main-nav { padding-bottom: calc(38px + env(safe-area-inset-bottom)); }
+    section { padding-inline: 6%; }
+    .book-cover { min-height: 0; }
+    .book-cover img { max-width: 270px; }
+}
+@media (max-width: 480px) {
+    .hero h1 { font-size: clamp(36px, 11vw, 46px); }
+    .hero-buttons { width: 100%; }
+    .book-button { max-width: 100%; }
+    section { padding-inline: 5%; }
 }
