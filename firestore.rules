@@ -17,6 +17,17 @@ service cloud.firestore {
         && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
     }
 
+    // Profile photos are optimized by profile-picture.js to a 512px JPEG.
+    // Only the account owner may update these fields through the client rule.
+    function isValidProfilePhoto(data) {
+      return (!('photoDataUrl' in data) && !('photoUpdatedAt' in data))
+        || (data.keys().hasAll(['photoDataUrl', 'photoUpdatedAt'])
+          && data.photoDataUrl is string
+          && data.photoDataUrl.size() <= 400000
+          && data.photoDataUrl.matches('data:image/jpeg;base64,/9j/[A-Za-z0-9+/=]+')
+          && data.photoUpdatedAt is timestamp);
+    }
+
     match /users/{userId} {
 
       // =====================================================
@@ -34,12 +45,18 @@ service cloud.firestore {
           signedIn()
           && request.auth.uid == userId
           && request.resource.data.role == "client"
+          && isValidProfilePhoto(request.resource.data)
+          && (!('photoUpdatedAt' in request.resource.data)
+            || request.resource.data.photoUpdatedAt == request.time)
         );
 
       allow update: if isAdmin()
         || (
           signedIn()
           && request.auth.uid == userId
+          && isValidProfilePhoto(request.resource.data)
+          && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(["photoDataUrl", "photoUpdatedAt"])
+            || request.resource.data.photoUpdatedAt == request.time)
           && request.resource.data.diff(resource.data)
             .affectedKeys()
             .hasOnly([
@@ -50,6 +67,8 @@ service cloud.firestore {
               "phone",
               "email",
               "updatedAt",
+              "photoDataUrl",
+              "photoUpdatedAt",
               "lastMessage",
               "lastMessageAt",
               "unreadByAdmin",
