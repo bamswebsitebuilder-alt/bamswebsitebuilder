@@ -1,0 +1,27 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    function verifiedUser() {
+      return request.auth != null && request.auth.token.email_verified == true;
+    }
+
+    // Use the same protected role record as the admin dashboard and Firestore.
+    // No client UID allowlist: this applies to existing and future clients.
+    function isAdmin() {
+      return verifiedUser()
+        && firestore.exists(/databases/(default)/documents/users/$(request.auth.uid))
+        && firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    match /users/{userId}/uploads/{filePath=**} {
+      allow read: if verifiedUser() && (request.auth.uid == userId || isAdmin());
+      // Check existing objects explicitly for resumable-upload overwrite requests.
+      allow create, update: if verifiedUser()
+        && ((request.auth.uid == userId && resource == null) || isAdmin())
+        && request.resource.size > 0
+        && request.resource.size <= 15 * 1024 * 1024;
+      allow delete: if isAdmin();
+    }
+  }
+}
