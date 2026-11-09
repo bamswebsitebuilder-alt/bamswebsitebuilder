@@ -1,5 +1,5 @@
 /* One public website shell, independent of page-specific stylesheets. */
-html body .site-header{position:sticky!important;top:0!important;height:74px!important;min-height:74px!important;padding:0!important;z-index:5000!important;background:#090909!important;border-bottom:1px solid rgba(212,166,55,.25)!important;font-family:Arial,Helvetica,sans-serif!important}
+html body .site-header{position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;height:74px!important;min-height:74px!important;padding:0!important;z-index:5000!important;background:#090909!important;border-bottom:1px solid rgba(212,166,55,.25)!important;font-family:Arial,Helvetica,sans-serif!important}
 html body .header-container{box-sizing:border-box;display:flex!important;align-items:center!important;width:100%!important;max-width:1500px!important;height:74px!important;margin:0 auto!important;padding:0 clamp(20px,3vw,48px)!important;gap:0!important}
 html body .site-brand{display:flex!important;flex-shrink:0!important;text-decoration:none!important}
 html body .brand-text{display:flex!important;flex-direction:column!important;line-height:1!important}
@@ -22,3 +22,8 @@ html body .desktop-navigation>a.nav-book-call:focus-visible{outline:3px solid #e
 html body .desktop-navigation>a.nav-book-call[hidden]{display:none!important}
 html[data-theme=light] body .desktop-navigation>a.nav-book-call{background:#765300!important;border-color:#765300!important;color:#fff!important}
 @media(min-width:1101px) and (max-width:1280px){html body .desktop-navigation{gap:12px!important}html body .desktop-navigation>a,html body .desktop-navigation .nav-more>summary{font-size:.65rem!important;letter-spacing:0!important}html body .desktop-language{margin-left:12px!important;gap:6px!important}html body .desktop-navigation>a.nav-book-call{padding:10px!important}}
+
+/* Match the fixed 74px public header with its document offset on all core pages. */
+html body:has(> .site-header){padding-top:74px!important}
+html{scroll-padding-top:90px}
+@media(max-width:1100px){html body .menu-toggle{position:relative;z-index:1}}
