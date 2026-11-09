@@ -670,3 +670,83 @@ body.admin-dashboard-page{background:radial-gradient(circle at 92% 0%,rgba(212,1
 .admin-nav-button[data-panel="files"] { --admin-nav-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z' fill='none' stroke='black' stroke-width='1.8' stroke-linejoin='round'/%3E%3C/svg%3E"); }
 .admin-nav-button[data-panel="messages"] { --admin-nav-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Cpath d='m4 7 8 6 8-6'/%3E%3C/g%3E%3C/svg%3E"); }
 .admin-nav-button[data-panel="notifications"] { --admin-nav-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9'/%3E%3Cpath d='M10 21h4'/%3E%3C/g%3E%3C/svg%3E"); }
+
+
+/* Keep upload labels and controls aligned even when only one field has help text. */
+#admin-file-form .admin-form-grid {
+  align-items: start;
+}
+
+#admin-file-form .admin-field {
+  min-width: 0;
+  align-content: start;
+  grid-template-rows: auto 52px auto;
+}
+
+#admin-file-form .admin-field label {
+  margin: 0;
+  line-height: 20px;
+}
+
+#admin-file-form :is(select, input[type="file"]) {
+  box-sizing: border-box;
+  height: 52px;
+  min-height: 52px;
+  min-width: 0;
+  width: 100%;
+  margin: 0;
+}
+
+#admin-file-form input[type="file"] {
+  padding: 8px 12px;
+  line-height: 34px;
+  overflow: hidden;
+}
+
+#admin-file-form input[type="file"]::file-selector-button {
+  height: 34px;
+  margin: 0 12px 0 0;
+  padding: 0 12px;
+  border: 1px solid var(--admin-border);
+  border-radius: 6px;
+  background: var(--admin-gold);
+  color: #111;
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+#admin-file-form .admin-field small {
+  margin: 0;
+  line-height: 1.5;
+}
+
+#admin-file-form .admin-form-actions {
+  justify-content: flex-end;
+  margin-top: 22px;
+}
+
+#admin-file-form .admin-status {
+  flex: 1 1 240px;
+  margin: 0;
+}
+
+#admin-file-form .admin-form-actions > button {
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+
+@media (max-width: 760px) {
+  #admin-file-form .admin-form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #admin-file-form .admin-status {
+    flex: 0 1 auto;
+  }
+
+  #admin-file-form .admin-form-actions > button {
+    width: 100%;
+    margin-left: 0;
+  }
+}
