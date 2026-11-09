@@ -17,7 +17,7 @@
   text-align: left;
   animation: bam-quote-appear .25s ease-out both;
 }
-.bam-quote-popup .bam-quote-eyebrow { margin: 0 28px 14px 0; color: #e7b653; font-size: 10px; font-weight: 700; letter-spacing: .14em; line-height: 1.5; }
+.bam-quote-popup .bam-quote-logo { display: block; width: 180px; max-width: calc(100% - 28px); height: auto; margin: 0 28px 18px 0; object-fit: contain; mix-blend-mode: screen; }
 .bam-quote-popup h2 { margin: 0 0 12px; color: #fff9ec; font-size: 26px; line-height: 1.15; font-weight: 700; letter-spacing: -.025em; }
 .bam-quote-popup .bam-quote-copy { margin: 0 0 20px; color: #d1cabc; font-size: 14px; line-height: 1.65; }
 .bam-quote-popup .bam-quote-close { position: absolute; top: 8px; right: 8px; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: #e7dcc5; font: inherit; font-size: 28px; line-height: 1; cursor: pointer; }

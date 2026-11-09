@@ -15,7 +15,7 @@
   const spanish = document.documentElement.lang.toLowerCase().startsWith('es');
   const stylesheet = document.createElement('link');
   stylesheet.rel = 'stylesheet';
-  stylesheet.href = '/css/quote-popup.css?v=20261108-1';
+  stylesheet.href = '/css/quote-popup.css?v=20261108-2';
   document.head.append(stylesheet);
 
   let popup;
@@ -54,7 +54,7 @@
     popup.setAttribute('aria-labelledby', 'bam-quote-title');
     popup.innerHTML = `
       <button class="bam-quote-close" type="button" aria-label="${spanish ? 'Cerrar invitación' : 'Close quote invitation'}">&times;</button>
-      <p class="bam-quote-eyebrow">BAM’S WEBSITE BUILDER</p>
+      <img class="bam-quote-logo" src="/images/logo-header.jpg" alt="BAM’s Website Builder" width="960" height="426" decoding="async">
       <h2 id="bam-quote-title">${spanish ? '¿Necesitas un sitio web?' : 'Need a website?'}</h2>
       <p class="bam-quote-copy">${spanish ? 'Cuéntanos tu idea. Te ayudaremos a dar el siguiente paso con una cotización gratis y sin compromiso.' : 'Tell us what you have in mind. Let’s find your next step with a free, no-obligation quote.'}</p>
       <a class="bam-quote-cta" href="${spanish ? '/es/contact' : '/contact'}">${spanish ? 'Solicitar cotización gratis' : 'Get a free quote'} <span aria-hidden="true">↗</span></a>
