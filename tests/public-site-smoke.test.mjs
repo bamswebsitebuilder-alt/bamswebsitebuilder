@@ -44,3 +44,14 @@ test('analytics and consent scripts do not automatically record sensitive portal
   assert.match(tracking, /BAMCookieConsent/);
   assert.match(tracking, /globalPrivacyControl/);
 });
+
+test('Spanish public pages link to the available English-language policies transparently', () => {
+  for (const file of ['es/index.html','es/about.html','es/services.html','es/prices.html',
+    'es/contact.html','es/portfolio.html','es/reviews.html','es/booking.html',
+    'es/project-stories.html','es/templates.html','es/faq.html',
+    'es/hosting.html','es/website-review.html','es/subscriptions.html']) {
+    const page = read(file);
+    assert.match(page, /href="\/cookie-policy" lang="en"/, file + ': cookie policy link');
+    assert.match(page, /href="\/accessibility" lang="en"/, file + ': accessibility link');
+  }
+});
