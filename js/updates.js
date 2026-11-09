@@ -24,7 +24,7 @@
       frame.title = spanish ? 'Publicaciones de BAM’s Website Builder en ' + name : 'Latest ' + name + ' posts from BAM’s Website Builder';
       frame.src = 'https://widgets.sociablekit.com/' + path;
       frame.width = '100%';
-      frame.height = id === 'twitter' ? '700' : '1000';
+      frame.height = '1000';
       frame.loading = 'lazy';
       host.appendChild(frame);
     }
