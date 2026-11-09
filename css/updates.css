@@ -32,3 +32,8 @@
 html[data-theme=light] .updates-page{--updates-ink:#242017;--updates-muted:#625744;--updates-gold:#765300;--updates-line:rgba(118,83,0,.26);background:#fff8e8}
 html[data-theme=light] .updates-page .updates-button.primary{background:#765300;color:#fffdf8}
 @media(max-width:650px){.updates-hero{padding-top:48px}.updates-feed{padding:36px 0}.updates-feed-heading{flex-direction:column;align-items:flex-start;gap:20px}.updates-followup{grid-template-columns:1fr}.updates-index{gap:12px 22px}.updates-hero h1{font-size:clamp(2.6rem,11vw,4rem)}.updates-placeholder{padding:24px}.updates-feed-heading .updates-button{width:100%}}
+
+/* Official X timeline: aligned with Facebook and Instagram on both themes. */
+.updates-x-widget{min-height:160px}
+.updates-x-widget .twitter-timeline{display:inline-flex;align-items:center;min-height:52px;padding:12px 18px;border:1px solid var(--updates-line);border-radius:8px;color:var(--updates-gold);text-decoration:none}
+.updates-x-widget iframe{min-height:450px;max-width:100%;border-radius:12px}
