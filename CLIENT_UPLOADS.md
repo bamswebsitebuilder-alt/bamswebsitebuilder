@@ -7,6 +7,14 @@ own files and add nonempty files up to 15 MiB. Clients cannot access another
 client's folder or replace/delete staff deliverables. No per-client rule changes
 are needed when new clients are added.
 
+Administrator uploads have no application-defined size cap. Empty files are
+still rejected by the admin form. Firebase Storage's platform limits still apply.
+
+The live Storage rules differ from this versioned rules file. The November 8,
+2026 admin size-limit release patches only the live size condition to exempt
+admins, preserving existing live permissions and file-type restrictions. A full
+deployment of this rules file is a separate change requiring review of that drift.
+
 ## Publish the backend rules
 
 Website deployments to Vercel do not deploy Firebase rules. From a Firebase CLI

@@ -1704,10 +1704,10 @@ fileForm?.addEventListener(
       return;
     }
 
-    if (file.size === 0 || file.size > 15 * 1024 * 1024) {
+    if (file.size === 0) {
       showStatus(
         fileFormStatus,
-        "Choose a nonempty file that is 15 MB or smaller.",
+        "Choose a nonempty file.",
         "error"
       );
 

@@ -38,7 +38,8 @@ try {
   await deny(uploadBytes(file(client, 'client'), new Uint8Array([9, 8, 7, 6])));
   await deny(deleteObject(file(client, 'client')));
   await allow(uploadBytes(file(admin, 'client'), bytes));
-  await deny(uploadBytes(file(admin, 'client', 'large.bin'), new Uint8Array(15 * 1024 * 1024 + 1)));
+  await allow(uploadBytes(file(admin, 'client', 'large.bin'), new Uint8Array(15 * 1024 * 1024 + 1)));
+  await deny(uploadBytes(file(client, 'client', 'large-client.bin'), new Uint8Array(15 * 1024 * 1024 + 1)));
   await deny(uploadBytes(file(client, 'client', 'empty.txt'), new Uint8Array(0)));
   await deny(uploadBytes(ref(admin.storage(), 'unrelated/test.txt'), bytes));
   await deny(updateDoc(doc(client.firestore(), 'users/client'), { role: 'admin' }));
