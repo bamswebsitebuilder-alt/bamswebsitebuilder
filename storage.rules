@@ -19,8 +19,7 @@ service firebase.storage {
       // Check existing objects explicitly for resumable-upload overwrite requests.
       allow create, update: if verifiedUser()
         && ((request.auth.uid == userId && resource == null) || isAdmin())
-        && request.resource.size > 0
-        && (isAdmin() || request.resource.size <= 15 * 1024 * 1024);
+        && request.resource.size > 0;
       allow delete: if isAdmin();
     }
   }

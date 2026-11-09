@@ -3,14 +3,14 @@
 Both portal languages use `users/{clientUid}/uploads/`. The versioned
 `storage.rules` grants verified administrators access using the existing protected
 Firestore `users/{adminUid}.role == 'admin'` record. Clients can read/list their
-own files and add nonempty files up to 15 MiB. Clients cannot access another
+own files and add nonempty files without a portal-defined size limit. Clients cannot access another
 client's folder or replace/delete staff deliverables. No per-client rule changes
 are needed when new clients are added.
 
-Administrator uploads have no application-defined size cap. Empty files are
+Administrator and client uploads have no application-defined size cap. ZIP and 7z archives are accepted by both portal languages. Empty files are
 still rejected by the admin form. Firebase Storage's platform limits still apply.
 
-The live Storage rules differ from this versioned rules file. The November 8,
+The live Storage rules differ from this versioned rules file. The November 8 client archive update removes the live size condition and permits ZIP/7z MIME types (including the browser binary fallback), while retaining the live owner/admin access checks and document/image types. The November 8,
 2026 admin size-limit release patches only the live size condition to exempt
 admins, preserving existing live permissions and file-type restrictions. A full
 deployment of this rules file is a separate change requiring review of that drift.

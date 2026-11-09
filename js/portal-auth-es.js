@@ -62,8 +62,6 @@ const portalProjectDetails = document.getElementById("portal-project-details");
    SETTINGS
 ========================================================= */
 
-const MAX_FILE_SIZE = 15 * 1024 * 1024;
-
 const allowedExtensions = [
   "jpg",
   "jpeg",
@@ -74,7 +72,8 @@ const allowedExtensions = [
   "doc",
   "docx",
   "txt",
-  "zip"
+  "zip",
+  "7z"
 ];
 
 let currentUser = null;
@@ -182,10 +181,10 @@ const validateFile = (file) => {
     };
   }
 
-  if (file.size > MAX_FILE_SIZE) {
+  if (file.size === 0) {
     return {
       valid: false,
-      message: "This file is larger than the 15 MB limit."
+      message: "Please choose a nonempty file."
     };
   }
 
@@ -195,7 +194,7 @@ const validateFile = (file) => {
     return {
       valid: false,
       message:
-        "This file type is not allowed. Please upload an image, PDF, Word document, text file, or ZIP file."
+        "This file type is not allowed. Please upload an image, PDF, Word document, text file, ZIP, or 7z archive."
     };
   }
 
