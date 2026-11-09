@@ -35,7 +35,12 @@
 .domain-page-main .preview-badge{font-size:.85rem;color:var(--bam-muted,#bcb6aa)}
 .domain-page-main .domain-result{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 0;border-top:1px solid var(--bam-border,#74603a)}
 .domain-page-main .domain-result>div{min-width:0}.domain-page-main .domain-result h3{overflow-wrap:anywhere;margin:0 0 6px}.domain-page-main .domain-result p{margin:0}
-.domain-page-main .domain-result-actions{flex-shrink:0}
+.domain-page-main .domain-result-actions{display:flex;flex-shrink:0;gap:10px;align-items:center}
+.domain-page-main .domain-result-actions :is(button,a){min-height:44px;padding:10px 14px;font-size:.94rem}
+.domain-page-main .domain-results-intro{margin:0 0 18px;color:var(--bam-muted,#bcb6aa);font-size:.96rem;line-height:1.55}
+.domain-page-main .search-results{scroll-margin-top:150px}
+.domain-page-main .domain-result h3{font-size:clamp(1.06rem,2.7vw,1.25rem);line-height:1.35}
+.domain-page-main .domain-result p{font-size:.91rem;line-height:1.45;color:var(--bam-muted,#bcb6aa)}
 .domain-page-main .domain-service-shortcuts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:24px}
 .domain-page-main .domain-service-shortcuts>a{display:block;padding:24px;border:1px solid var(--bam-border,#74603a);border-radius:12px;text-decoration:none;background:var(--bam-panel,#171717)}
 .domain-page-main .domain-service-shortcuts h2{margin:12px 0 6px}.domain-page-main .domain-service-shortcuts p{margin:0;color:var(--bam-text,#eee)}
@@ -45,7 +50,22 @@
 .domain-page-main :is(th,td){padding:14px 10px;text-align:left;border-bottom:1px solid var(--bam-border,#74603a)}
 .domain-page-main :is(th,td):nth-child(n+2){text-align:right;font-variant-numeric:tabular-nums}
 .domain-page-main .domain-assistance-panel .lead{margin:0 0 24px}
-@media(max-width:600px){.domain-page-main{padding:32px 18px 40px}.domain-page-main .panel,.domain-page-main .search-results{padding:22px 18px}.domain-page-main .domain-search>*{width:100%}.domain-page-main .domain-result{align-items:flex-start;flex-direction:column;gap:14px}.domain-page-main .domain-result-actions,.domain-page-main .domain-result-actions a{width:100%}.domain-page-main .domain-service-shortcuts{grid-template-columns:1fr}.domain-page-main :is(th,td){padding:12px 5px;font-size:.92rem}}
+@media(max-width:600px){
+ .domain-page-main{padding:32px 16px 40px}
+ .domain-page-main .panel,.domain-page-main .search-results{padding:20px 16px}
+ .domain-page-main .domain-search>*{width:100%}
+ .domain-page-main .results-heading{align-items:flex-start;gap:4px;margin-bottom:12px}
+ .domain-page-main .results-heading h2{font-size:clamp(1.2rem,5vw,1.5rem);overflow-wrap:anywhere;margin:0}
+ .domain-page-main .preview-badge{font-size:.8rem}
+ .domain-page-main .domain-result{display:block;padding:17px 15px;margin:12px 0 0;border:1px solid var(--bam-border,#74603a);border-radius:12px;background:color-mix(in srgb,var(--bam-panel,#171717) 90%,var(--bam-gold,#efc66a) 10%)}
+ .domain-page-main .domain-result h3{font-size:1.06rem;margin:0 0 4px}
+ .domain-page-main .domain-result p{font-size:.85rem}
+ .domain-page-main .domain-result-actions{display:grid;grid-template-columns:minmax(0,0.8fr) minmax(0,1.2fr);gap:8px;width:100%;max-width:100%;margin-top:14px}
+ .domain-page-main .domain-result-actions :is(button,a){width:100%;min-width:0;min-height:44px;padding:10px 7px;font-size:.81rem;line-height:1.25;white-space:normal;overflow-wrap:normal}
+ .domain-page-main .domain-service-shortcuts{grid-template-columns:1fr}
+ .domain-page-main :is(th,td){padding:12px 5px;font-size:.92rem}
+}
+@media(max-width:360px){.domain-page-main .domain-result-actions{grid-template-columns:1fr}}
 /* Keep the domain page's surfaces and text in the same theme. */
 html[data-theme="light"] .domain-page-main{
  --bam-text:#20201d;
@@ -250,7 +270,7 @@ function addDomainIdea(domain){
  });
  const link=document.createElement('a');link.className='button';
  link.href=squarespaceSearchUrl;link.target='_blank';link.rel='noopener noreferrer';
- link.textContent='Check & buy on Squarespace';
+ link.textContent='Check on Squarespace';
  link.setAttribute('aria-label','Search for '+domain+' at Squarespace Domains (opens a new tab)');
  actions.append(copy,link);row.append(details,actions);return row;
 }
@@ -273,10 +293,11 @@ domainForm.addEventListener('submit',function(event){
  domainBadge.textContent='Check on Squarespace';
  domainResults.replaceChildren();
  const note=document.createElement('p');
- note.textContent='Copy a domain idea and follow its Squarespace link to check live availability, see pricing and purchase. Enter or paste the copied name into Squarespace search.';
+ note.className='domain-results-intro';
+  note.textContent='Choose a name below. Copy it, then check availability and pricing on Squarespace before purchasing.';
  domainResults.append(note);
  for(const domain of domains)domainResults.append(addDomainIdea(domain));
- document.querySelector('.search-results').scrollIntoView({behavior:'smooth',block:'nearest'});
+ document.querySelector('.search-results').scrollIntoView({behavior:'smooth',block:'start'});
 });
 domainInput.addEventListener('input',function(){this.setCustomValidity('');});
 </script><script src="/js/navigation.js?v=20261023-sleek-menu-2"></script><script src="/js/cookie-consent.js?v=20260928-3"></script><script src="/js/quote-popup.js?v=20261108-2" defer></script></body></html>
