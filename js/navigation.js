@@ -369,4 +369,24 @@
     updateHeader();
     window.addEventListener('scroll', updateHeader, { passive: true });
   });
+
+  // Keep the public footer's policy and learning links consistent across pages.
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('footer.home-footer').forEach(footer => {
+      const legal = footer.querySelector('.client-resource-links');
+      const resources = footer.querySelector('.footer-grid .footer-links') ||
+        footer.querySelector('.footer-grid nav[aria-label="Resources"]');
+      const add = (parent, href, label) => {
+        if (!parent || parent.querySelector('a[href="' + href + '"]')) return;
+        const link = document.createElement('a');
+        link.href = href;
+        link.textContent = label;
+        parent.appendChild(link);
+      };
+      add(legal, '/cookie-policy', 'Cookie policy');
+      add(legal, '/accessibility', 'Accessibility');
+      // Add the blog to existing resource navigation, without duplicating it.
+      if (resources && !footer.querySelector('a[href="/blog"]')) add(resources, '/blog', 'Business blog');
+    });
+  });
 })();
