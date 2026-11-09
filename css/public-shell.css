@@ -161,3 +161,28 @@ html body .home-footer .footer-bottom { max-width: 1280px; margin: 0 auto; paddi
 @media (max-width:350px) {
   html body .home-footer .footer-grid { grid-template-columns: minmax(0,1fr) !important; }
 }
+
+/* Override legacy mobile footer nav rules: social links stay in one row. */
+html body .home-footer nav.bam-social-links {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+html body .home-footer nav.bam-social-links a {
+  flex: 0 0 auto;
+  width: auto !important;
+  min-height: 40px;
+  padding: 8px 12px;
+}
+@media (max-width:600px) {
+  html body .home-footer .footer-grid { gap: 24px 20px !important; }
+  html body .home-footer .footer-brand-column p { margin: 14px 0 16px; }
+  html body .home-footer .footer-links { gap: 0; }
+  html body .home-footer .footer-links a { padding: 8px 0; min-height: 44px; }
+}
