@@ -1,8 +1,7 @@
 // Static checks that do not need production credentials or network access.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, existsSync } from 'node:fs';
-import { join } from 'node:path';
+import { readFileSync } from 'node:fs';
 
 const root = new URL('../', import.meta.url);
 const read = (name) => readFileSync(new URL(name, root), 'utf8');
@@ -21,7 +20,7 @@ test('public business pages exist and expose navigable policy links', () => {
 test('sitemap and robots file are aligned', () => {
   const sitemap = read('sitemap.xml');
   const robots = read('robots.txt');
-  assert.match(sitemap, /<urlset[\\s>]/);
+  assert.ok(sitemap.includes('<urlset '), 'sitemap root missing');
   assert.match(robots, /Sitemap: https:\/\/www\.bamswebsitebuilder\.com\/sitemap\.xml/);
   for (const privateUrl of ['login','client-portal','admin-dashboard','register']) {
     assert.doesNotMatch(sitemap, new RegExp('https://www\\.bamswebsitebuilder\\.com/' + privateUrl + '(?:<|/)'));
@@ -41,7 +40,7 @@ test('production response headers include defensive baseline', () => {
 });
 test('analytics and consent scripts do not automatically record sensitive portal visits', () => {
   const tracking = read('js/site-analytics.js');
-  assert.match(tracking, /admin-dashboard\|client-portal/);
+  assert.ok(tracking.includes('admin-dashboard|client-portal'), 'portal analytics exclusion missing');
   assert.match(tracking, /BAMCookieConsent/);
   assert.match(tracking, /globalPrivacyControl/);
 });
