@@ -104,7 +104,7 @@ html[data-theme="light"] .hero-gold-motion .hero-motion-toggle { background: #ff
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-gold-motion:not([data-motion-paused="false"]) .hero-atmosphere * { animation: none !important; }
-  /* Restore only this decoration after the visitor explicitly chooses Resume. */
+  /* Keep the requested automatic homepage motion scoped to this decoration. */
   .hero-gold-motion[data-motion-paused="false"] .hero-gold-glow { animation-duration: 12s !important; animation-iteration-count: infinite !important; }
   .hero-gold-motion[data-motion-paused="false"] .hero-gold-particles span { animation-duration: 9s !important; animation-iteration-count: infinite !important; }
 }
