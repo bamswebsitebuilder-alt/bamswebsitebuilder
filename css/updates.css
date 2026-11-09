@@ -37,3 +37,19 @@ html[data-theme=light] .updates-page .updates-button.primary{background:#765300;
 .updates-x-widget{min-height:160px}
 .updates-x-widget .twitter-timeline{display:inline-flex;align-items:center;min-height:52px;padding:12px 18px;border:1px solid var(--updates-line);border-radius:8px;color:var(--updates-gold);text-decoration:none}
 .updates-x-widget iframe{min-height:450px;max-width:100%;border-radius:12px}
+
+/* Stable X profile card: no empty auto-sized widget region on mobile. */
+.updates-x-widget{min-height:0!important}
+.bam-x-profile-card{padding:clamp(20px,4vw,32px);border:1px solid var(--updates-line);border-radius:14px;background:rgba(212,166,55,.035)}
+.bam-x-profile-heading{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.bam-x-mark{display:grid;place-items:center;width:58px;height:58px;flex:0 0 58px;font-size:2.15rem;color:var(--updates-ink);border:1px solid var(--updates-line);border-radius:13px}
+.bam-x-profile-heading div{display:grid;gap:4px;min-width:0;overflow-wrap:anywhere}
+.bam-x-profile-heading strong{font-size:clamp(1.05rem,3vw,1.3rem);color:var(--updates-ink)}
+.bam-x-profile-heading div span{font-size:.9rem;color:var(--updates-muted)}
+.bam-x-profile-card>p{max-width:65ch;color:var(--updates-muted);line-height:1.75;margin:0 0 18px}
+.bam-x-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.bam-x-status{font-size:.89rem!important;line-height:1.6!important;margin:16px 0 0!important;color:var(--updates-muted)!important}
+.bam-x-embed{min-width:0;max-width:100%;margin:22px 0 0}
+.bam-x-embed iframe{height:480px!important;min-height:0!important;max-width:100%!important}
+.bam-x-embed .twitter-timeline{margin-top:0}
+@media(max-width:650px){.bam-x-actions{display:grid;grid-template-columns:1fr}.bam-x-actions>*{width:100%}.bam-x-profile-card{padding:22px 18px}.bam-x-mark{width:48px;height:48px;flex-basis:48px}}
