@@ -26,7 +26,7 @@ html[data-theme="light"] body.polished-home .hero.hero-gold-motion {
   inset: -10%;
   background: radial-gradient(ellipse at 80% 34%, rgba(var(--glow-rgb), .27), transparent 42%),
     radial-gradient(ellipse at 32% 95%, rgba(var(--glow-rgb), .14), transparent 45%);
-  animation: bam-gold-drift 18s ease-in-out infinite alternate;
+  animation: bam-gold-drift 12s ease-in-out infinite alternate;
 }
 .hero-gold-motion .hero-gold-glow::before,
 .hero-gold-motion .hero-gold-glow::after {
@@ -60,7 +60,7 @@ html[data-theme="light"] body.polished-home .hero.hero-gold-motion {
   background: var(--particle-color);
   opacity: .6;
   box-shadow: 0 0 6px rgba(var(--glow-rgb), .5);
-  animation: bam-gold-float 12s ease-in-out infinite alternate;
+  animation: bam-gold-float 9s ease-in-out infinite alternate;
   animation-delay: var(--delay);
 }
 html body.polished-home .hero-gold-motion > .hero-logo-bg { z-index: 1; }
@@ -90,12 +90,12 @@ html[data-theme="light"] body.polished-home .hero-gold-motion .secondary-button 
 html[data-theme="light"] .hero-gold-motion .hero-motion-toggle { background: #fffaf0; color: #604719; }
 .hero-gold-motion[data-motion-paused="true"] .hero-atmosphere * { animation-play-state: paused; }
 @keyframes bam-gold-drift {
-  from { transform: translate3d(-1%, 1%, 0) rotate(-1deg); }
-  to { transform: translate3d(2%, -2%, 0) rotate(1deg); }
+  from { transform: translate3d(-4%, 3%, 0) rotate(-2deg); }
+  to { transform: translate3d(4%, -4%, 0) rotate(2deg); }
 }
 @keyframes bam-gold-float {
-  from { transform: translate3d(0, 8px, 0); }
-  to { transform: translate3d(10px, -14px, 0); }
+  from { transform: translate3d(-6px, 14px, 0); }
+  to { transform: translate3d(16px, -26px, 0); }
 }
 @media (max-width: 650px) {
   html body.polished-home .hero.hero-gold-motion { --atmosphere-opacity: .55; }
@@ -103,6 +103,8 @@ html[data-theme="light"] .hero-gold-motion .hero-motion-toggle { background: #ff
   .hero-gold-motion .hero-gold-particles span:nth-child(even) { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-gold-motion .hero-atmosphere * { animation: none !important; }
-  .hero-gold-motion .hero-motion-toggle { display: none; }
+  .hero-gold-motion:not([data-motion-paused="false"]) .hero-atmosphere * { animation: none !important; }
+  /* Restore only this decoration after the visitor explicitly chooses Resume. */
+  .hero-gold-motion[data-motion-paused="false"] .hero-gold-glow { animation-duration: 12s !important; animation-iteration-count: infinite !important; }
+  .hero-gold-motion[data-motion-paused="false"] .hero-gold-particles span { animation-duration: 9s !important; animation-iteration-count: infinite !important; }
 }
