@@ -33,3 +33,14 @@ body{background:#f5f1e5;font-size:16px;line-height:1.75}h1,h2,h3{font-family:Geo
 @media(prefers-reduced-motion:reduce){.cuff-art{will-change:auto;opacity:1!important;transform:none!important}}
 
 /* Handcuff photo selected by the client from fancynancybailbonds.com. */
+
+/* Keep the mobile menu available while scrolling on every Scottie page. */
+@media(max-width:850px){
+  .header{position:sticky;top:0;z-index:20;box-shadow:0 3px 14px #10244012}
+  .header nav{max-height:calc(100svh - 90px);max-height:calc(100dvh - 90px);overflow-y:auto;overscroll-behavior:contain}
+  html{scroll-padding-top:105px}
+}
+@media(max-width:600px){
+  .header nav{max-height:calc(100svh - 82px);max-height:calc(100dvh - 82px)}
+  html{scroll-padding-top:97px}
+}
