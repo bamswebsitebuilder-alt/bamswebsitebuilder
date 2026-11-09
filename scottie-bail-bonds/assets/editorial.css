@@ -25,9 +25,11 @@ body{background:#f5f1e5;font-size:16px;line-height:1.75}h1,h2,h3{font-family:Geo
 .cuff-scene h2{font-size:clamp(40px,4.8vw,65px);line-height:1.12;letter-spacing:-1.5px;margin:0 0 24px}
 .cuff-scene-copy>p:not(.eyebrow){color:var(--muted);max-width:380px}
 .cuff-art{padding:20px 0 35px;display:flex;justify-content:center;opacity:1;transform-origin:50% 30%;will-change:transform,opacity}
-.cuff-art img{display:block;width:min(100%,350px);height:auto;max-height:620px;object-fit:contain}
+.cuff-art img{display:block;width:min(100%,450px);height:auto;max-height:620px;object-fit:contain}
 .services-with-cuffs{position:relative;isolation:isolate;overflow:hidden}
-.services-with-cuffs::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.09;background:url('handcuffs.svg') right 10% center/auto 120% no-repeat;transform:rotate(-14deg) scale(1.2);pointer-events:none}
+.services-with-cuffs::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.09;background:url('handcuffs-photo.avif') right 10% center/auto 120% no-repeat;transform:rotate(-14deg) scale(1.2);pointer-events:none}
 @media(max-width:850px){.cuff-scene-inner{min-height:560px;gap:24px}.cuff-scene-copy{padding-top:75px}.cuff-art img{max-height:530px}}
-@media(max-width:600px){.cuff-scene-inner{min-height:760px;grid-template-columns:1fr;gap:0}.cuff-scene-copy{padding-top:50px;padding-bottom:12px;max-width:none}.cuff-scene h2{font-size:43px}.cuff-scene-copy>p:not(.eyebrow){font-size:15px}.cuff-art{padding:0 0 30px}.cuff-art img{width:235px;max-height:405px}.cuff-scene::after{top:82%}.services-with-cuffs::before{background-size:auto 85%;background-position:center bottom}}
+@media(max-width:600px){.cuff-scene-inner{min-height:760px;grid-template-columns:1fr;gap:0}.cuff-scene-copy{padding-top:50px;padding-bottom:12px;max-width:none}.cuff-scene h2{font-size:43px}.cuff-scene-copy>p:not(.eyebrow){font-size:15px}.cuff-art{padding:0 0 30px}.cuff-art img{width:300px;max-height:405px}.cuff-scene::after{top:82%}.services-with-cuffs::before{background-size:auto 85%;background-position:center bottom}}
 @media(prefers-reduced-motion:reduce){.cuff-art{will-change:auto;opacity:1!important;transform:none!important}}
+
+/* Handcuff photo selected by the client from fancynancybailbonds.com. */
