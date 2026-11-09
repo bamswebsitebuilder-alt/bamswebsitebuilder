@@ -16,3 +16,18 @@ body{background:#f5f1e5;font-size:16px;line-height:1.75}h1,h2,h3{font-family:Geo
 .popup-kicker{margin:0 0 16px;font-size:9px;letter-spacing:2.6px;color:#d5e2f3}.popup-headline{font-family:Georgia,serif;font-size:66px;line-height:.95;letter-spacing:-2px;text-transform:uppercase;margin:0}.popup-script{font-family:Georgia,serif;font-style:italic;font-size:26px;color:#bdd2ee;margin:14px 0}.popup-poster img{width:180px;max-width:80%;height:auto;display:block}.popup-poster-footer{font-size:9px;letter-spacing:2px;color:#d5e2f3;margin:18px 0 0}
 .popup-copy{padding:75px 40px 50px 25px;align-self:center}.popup-copy .eyebrow{font-size:9px;letter-spacing:1.5px;line-height:1.8}.popup-copy h2{font-size:36px;line-height:1.2;letter-spacing:-.8px;margin:0 0 22px}.popup-copy>p:not(.eyebrow){font-size:14px;line-height:1.8;color:#59616a;margin-bottom:25px}.popup-call{width:100%;min-height:50px}.popup-number{display:block;text-align:center;font-size:18px;margin-top:15px;color:#204f83}
 @media(max-width:600px){.scottie-popup{width:calc(100vw - 28px);max-height:calc(100dvh - 28px)}.popup-grid{grid-template-columns:1fr;min-height:0}.popup-close{right:8px;top:8px;width:40px;height:40px;font-size:36px}.popup-poster{margin:14px 14px 0;padding:22px 20px 15px;position:relative;min-height:200px;align-items:flex-start;text-align:left}.popup-kicker{max-width:65%;font-size:7px;letter-spacing:1.4px;margin-bottom:15px}.popup-headline{font-size:43px;letter-spacing:-1px}.popup-script{font-size:19px;margin:9px 0}.popup-poster img{position:absolute;right:13px;top:63px;width:108px;max-width:34%}.popup-poster-footer{font-size:7px;letter-spacing:1.2px;margin-top:8px}.popup-copy{padding:26px 25px 25px}.popup-copy .eyebrow{font-size:8px;margin-bottom:12px}.popup-copy h2{font-size:29px;margin-bottom:13px}.popup-copy>p:not(.eyebrow){font-size:13px;line-height:1.6;margin-bottom:19px}.popup-number{font-size:17px;margin-top:10px}}
+
+/* Silver handcuffs cross the ivory-to-blue transition; motion follows scrolling. */
+.cuff-scene{position:relative;isolation:isolate;background:#f5f1e5;overflow:hidden}
+.cuff-scene::after{content:"";position:absolute;inset:78% 0 0;background:#173657;z-index:-1}
+.cuff-scene-inner{position:relative;display:grid;grid-template-columns:1fr 1fr;align-items:start;min-height:660px;gap:60px}
+.cuff-scene-copy{padding-top:95px;padding-bottom:180px;max-width:500px}
+.cuff-scene h2{font-size:clamp(40px,4.8vw,65px);line-height:1.12;letter-spacing:-1.5px;margin:0 0 24px}
+.cuff-scene-copy>p:not(.eyebrow){color:var(--muted);max-width:380px}
+.cuff-art{padding:20px 0 35px;display:flex;justify-content:center;opacity:1;transform-origin:50% 30%;will-change:transform,opacity}
+.cuff-art img{display:block;width:min(100%,350px);height:auto;max-height:620px;object-fit:contain}
+.services-with-cuffs{position:relative;isolation:isolate;overflow:hidden}
+.services-with-cuffs::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.09;background:url('handcuffs.svg') right 10% center/auto 120% no-repeat;transform:rotate(-14deg) scale(1.2);pointer-events:none}
+@media(max-width:850px){.cuff-scene-inner{min-height:560px;gap:24px}.cuff-scene-copy{padding-top:75px}.cuff-art img{max-height:530px}}
+@media(max-width:600px){.cuff-scene-inner{min-height:760px;grid-template-columns:1fr;gap:0}.cuff-scene-copy{padding-top:50px;padding-bottom:12px;max-width:none}.cuff-scene h2{font-size:43px}.cuff-scene-copy>p:not(.eyebrow){font-size:15px}.cuff-art{padding:0 0 30px}.cuff-art img{width:235px;max-height:405px}.cuff-scene::after{top:82%}.services-with-cuffs::before{background-size:auto 85%;background-position:center bottom}}
+@media(prefers-reduced-motion:reduce){.cuff-art{will-change:auto;opacity:1!important;transform:none!important}}

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 620" fill="none">
+<defs>
+<linearGradient id="steel" x1="45" y1="0" x2="290" y2="90" gradientUnits="userSpaceOnUse"><stop stop-color="#5a6674"/><stop offset=".19" stop-color="#eaf0f5"/><stop offset=".4" stop-color="#aab7c4"/><stop offset=".61" stop-color="#fafcff"/><stop offset=".84" stop-color="#7d8b9b"/><stop offset="1" stop-color="#d7e0e9"/></linearGradient>
+<linearGradient id="edge" x2="1" y2="1"><stop stop-color="#dce4ed"/><stop offset=".5" stop-color="#667584"/><stop offset="1" stop-color="#263a50"/></linearGradient>
+<filter id="shadow" x="-40%" y="-20%" width="180%" height="150%"><feDropShadow dx="5" dy="12" stdDeviation="9" flood-color="#07192b" flood-opacity=".25"/></filter>
+</defs>
+<g filter="url(#shadow)">
+<!-- Upper cuff: open swinging arm and reinforced lock housing. -->
+<g transform="translate(50 25) rotate(19 125 125)">
+<path d="M70 220C13 189 4 100 44 49C76 8 137 8 171 38" stroke="#415365" stroke-width="31" stroke-linecap="round"/>
+<path d="M70 216C20 186 12 103 50 55C79 18 132 17 166 43" stroke="url(#steel)" stroke-width="25" stroke-linecap="round"/>
+<path d="M42 152C20 95 52 30 107 27" stroke="#fff" stroke-opacity=".65" stroke-width="2"/>
+<path d="M166 43C201 18 242 33 261 70C282 110 269 151 245 179" stroke="#35495d" stroke-width="24" stroke-linecap="square"/>
+<path d="M166 41C202 20 237 37 253 74C269 109 260 144 239 170" stroke="url(#steel)" stroke-width="18"/>
+<path d="M246 166l10 5m-4-17l10 4m-5-17l10 3m-6-17l10 2m-8-17l10 1" stroke="#3e5265" stroke-width="3"/>
+<path d="M48 174L104 170Q118 170 121 188L126 232Q127 246 109 251L71 256Q54 256 51 240Z" fill="url(#steel)" stroke="#536677" stroke-width="3"/>
+<path d="M57 182L101 179L114 233L66 242Z" stroke="#f6faff" stroke-opacity=".7"/>
+<circle cx="66" cy="190" r="4" fill="#596d80"/><circle cx="107" cy="231" r="4" fill="#596d80"/>
+<path d="M82 205a6 6 0 1 1 5 0l2 14h-9Z" fill="#283f55"/>
+<path d="M153 30L169 20L186 46L176 61Q166 67 157 56Z" fill="url(#steel)" stroke="#586b7c" stroke-width="2"/>
+<circle cx="169" cy="46" r="6" fill="#596d80" stroke="#eaf3fc" stroke-width="2"/>
+<ellipse cx="91" cy="260" rx="13" ry="17" stroke="#455b70" stroke-width="11"/><ellipse cx="91" cy="258" rx="13" ry="17" stroke="url(#steel)" stroke-width="7"/>
+</g>
+<!-- Short articulated steel chain. -->
+<g stroke-linecap="round">
+<ellipse cx="133" cy="319" rx="17" ry="28" transform="rotate(-35 133 319)" stroke="#364b61" stroke-width="12"/>
+<ellipse cx="133" cy="317" rx="17" ry="28" transform="rotate(-35 133 317)" stroke="url(#steel)" stroke-width="8"/>
+<ellipse cx="156" cy="353" rx="15" ry="29" transform="rotate(27 156 353)" stroke="#364b61" stroke-width="12"/>
+<ellipse cx="156" cy="351" rx="15" ry="29" transform="rotate(27 156 351)" stroke="url(#steel)" stroke-width="8"/>
+<ellipse cx="148" cy="387" rx="16" ry="26" transform="rotate(-25 148 387)" stroke="#364b61" stroke-width="12"/>
+<ellipse cx="148" cy="385" rx="16" ry="26" transform="rotate(-25 148 385)" stroke="url(#steel)" stroke-width="8"/>
+</g>
+<!-- Lower cuff: closed oval, hinge and lock. -->
+<g transform="translate(48 408) rotate(-20 115 85)">
+<ellipse cx="114" cy="90" rx="78" ry="94" stroke="#384d62" stroke-width="33"/>
+<ellipse cx="112" cy="87" rx="78" ry="94" stroke="url(#steel)" stroke-width="26"/>
+<path d="M58 145C20 102 45 20 92 2" stroke="#fff" stroke-opacity=".7" stroke-width="2"/>
+<path d="M137-9L181 8Q191 12 191 27L184 71Q181 84 167 80L125 63Q115 58 120 43Z" fill="url(#steel)" stroke="#536677" stroke-width="3"/>
+<path d="M139 1L180 17L173 69L131 53Z" stroke="#fff" stroke-opacity=".65"/>
+<circle cx="145" cy="12" r="4" fill="#596d80"/><circle cx="171" cy="60" r="4" fill="#596d80"/>
+<path d="M151 33a6 6 0 1 1 5 2l-3 12-8-3Z" fill="#283f55"/>
+<path d="M128-9L132-26L153-20L151 0" stroke="url(#steel)" stroke-width="10"/>
+</g></g></svg>

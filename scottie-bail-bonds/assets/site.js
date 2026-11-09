@@ -59,3 +59,44 @@ document.addEventListener('click',event=>{const more=document.querySelector('.mo
     else document.addEventListener('visibilitychange', show);
   }, 900);
 })();
+
+// Fade the decorative cuffs in and out on every scroll pass. No content depends on motion.
+(() => {
+  const scene = document.querySelector('[data-cuff-scene]');
+  if (!scene) return;
+  const art = scene.querySelector('.cuff-art');
+  const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let scheduled = false;
+  let nearViewport = true;
+  const clamp = value => Math.max(0, Math.min(1, value));
+  const paint = () => {
+    scheduled = false;
+    if (preference.matches) {
+      art.style.removeProperty('opacity');
+      art.style.removeProperty('transform');
+      return;
+    }
+    if (!nearViewport) return;
+    const bounds = scene.getBoundingClientRect();
+    const height = window.innerHeight;
+    const enter = clamp((height * .95 - bounds.top) / (height * .4));
+    const leave = clamp(bounds.bottom / (height * .4));
+    const progress = clamp((height - bounds.top) / (height + bounds.height));
+    art.style.opacity = String(Math.min(enter, leave));
+    art.style.transform = 'translate3d(0,' + ((.5 - progress) * 70).toFixed(1) + 'px,0) rotate(' + ((progress - .5) * 7).toFixed(2) + 'deg)';
+  };
+  const schedule = () => {
+    if (!scheduled) { scheduled = true; window.requestAnimationFrame(paint); }
+  };
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      nearViewport = entries[0].isIntersecting;
+      if (nearViewport) schedule();
+    }, {rootMargin: '100px'});
+    observer.observe(scene);
+  }
+  window.addEventListener('scroll', schedule, {passive: true});
+  window.addEventListener('resize', schedule, {passive: true});
+  preference.addEventListener('change', schedule);
+  schedule();
+})();
