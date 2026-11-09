@@ -31,4 +31,44 @@
     window.addEventListener('bam:consent-changed', sync);
     sync();
   });
+  // X's official timeline is only requested after optional marketing consent.
+  // Keep the direct profile link available if the embed is blocked or rate-limited.
+  const twitterHost = document.getElementById('bam-twitter-frame');
+  const twitterPlaceholder = document.getElementById('bam-twitter-placeholder');
+  if (twitterHost && twitterPlaceholder) {
+    let timelineLink = null;
+    let widgetScript = null;
+    const syncTwitter = () => {
+      const allowed = Boolean(window.BAMCookieConsent?.marketing);
+      twitterPlaceholder.hidden = allowed;
+      if (!allowed) {
+        timelineLink?.remove();
+        timelineLink = null;
+        widgetScript?.remove();
+        widgetScript = null;
+        return;
+      }
+      if (timelineLink) return;
+      timelineLink = document.createElement('a');
+      timelineLink.className = 'twitter-timeline';
+      timelineLink.href = 'https://x.com/bamswebsite';
+      timelineLink.textContent = spanish ? 'Publicaciones de BAM en X' : 'Posts by BAM on X';
+      timelineLink.setAttribute('data-height', '700');
+      timelineLink.setAttribute('data-dnt', 'true');
+      timelineLink.setAttribute('data-theme', document.documentElement.dataset.theme === 'light' ? 'light' : 'dark');
+      twitterHost.appendChild(timelineLink);
+      // Loading the script after consent avoids third-party requests beforehand.
+      widgetScript = document.createElement('script');
+      widgetScript.async = true;
+      widgetScript.src = 'https://platform.x.com/widgets.js';
+      widgetScript.onerror = () => {
+        // The visible profile link is the reliable fallback.
+        if (timelineLink) timelineLink.textContent = spanish ? 'Ver publicaciones en X' : 'View posts on X';
+      };
+      twitterHost.appendChild(widgetScript);
+    };
+    twitterPlaceholder.querySelector('button')?.addEventListener('click', () => window.BAMOpenCookieSettings?.());
+    window.addEventListener('bam:consent-changed', syncTwitter);
+    syncTwitter();
+  }
 })();
