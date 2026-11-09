@@ -138,17 +138,17 @@ html[data-theme="light"] .domain-page .home-footer a:focus-visible{outline:3px s
 <main id="main-content" class="domain-page-main" tabindex="-1"><section class="domain-hero" aria-labelledby="domain-title">
 <p class="eyebrow">DOMAIN SERVICES</p>
 <h1 id="domain-title">Domain help for your business</h1>
-<p class="lead">Find a domain, connect one you already own, or ask about a transfer. We’ll confirm availability, registration options, and costs with you before any purchase.</p>
+<p class="lead">Find a domain, connect one you already own, or ask about a transfer. Search domain ideas here, then continue to Squarespace Domains to check live availability, view prices, and purchase your domain.</p>
 <form class="domain-search" id="domain-search">
 <label class="sr-only" for="domain-query">Your business name or domain name</label>
-<input id="domain-query" name="domain" placeholder="Enter a business name, e.g. Sunshine Bakery" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="253" required aria-describedby="domain-search-note">
-<button type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="7.5"/><path d="m16 16 5 5"/></svg>Search Domain</button>
+<input id="domain-query" name="domain" placeholder="Enter a business name or domain, e.g. sunshinebakery.com" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="253" required aria-describedby="domain-search-note">
+<button type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="7.5"/><path d="m16 16 5 5"/></svg>Find Domain Options</button>
 </form>
-<div class="domain-store-actions"><a class="button store-primary" href="/contact?service=domain-registration">Get domain assistance</a></div><p class="domain-store-hint">Domain registration and renewals are separate from website packages. Contact us to arrange registration; this page does not collect payments.</p><div class="extension-list" aria-label="Featured domain extensions"><span>.com</span><span>.net</span><span>.org</span><span>.co</span></div>
+<div class="domain-store-actions"><a class="button store-primary" href="/contact?service=domain-registration">Get domain assistance</a></div><p class="domain-store-hint">Domain purchases and renewals are handled by Squarespace Domains. BAM’s can help connect your purchased domain to your website.</p><div class="extension-list" aria-label="Featured domain extensions"><span>.com</span><span>.net</span><span>.org</span><span>.co</span></div>
 <section class="search-results" aria-labelledby="domain-results-title">
-<div class="results-heading"><h2 id="domain-results-title">Domain availability</h2><span class="preview-badge" id="results-badge">Not checked</span></div>
+<div class="results-heading"><h2 id="domain-results-title">Domain ideas</h2><span class="preview-badge" id="results-badge">Squarespace checkout</span></div>
 <div id="domain-results" aria-live="polite">
-<p>Enter a name above to check domain options. Search results do not reserve a domain.</p>
+<p>Enter a business name or domain above, then continue to Squarespace to check availability and buy.</p>
 </div>
 </section>
 <div class="domain-service-shortcuts">
@@ -156,8 +156,8 @@ html[data-theme="light"] .domain-page .home-footer a:focus-visible{outline:3px s
 <a href="/contact?service=domain-transfer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 7l4-4M4 7l4 4M20 17H4m16 0-4-4m4 4-4 4"/></svg><h2>Transfer a Domain</h2><p>Move your domain</p></a>
 </div>
 <p class="domain-tagline">Building Your Business, One Website at a Time.</p>
-<p class="domain-search-note" id="domain-search-note">Search .com, .net, .org and .co domains, then contact us for help registering and connecting your choice.</p>
-</section><section class="panel" id="domain-pricing" aria-labelledby="domain-pricing-heading"><p class="eyebrow">DOMAIN REGISTRATION &amp; PRICING</p><h2 id="domain-pricing-heading">Find the Right Domain for Your Business</h2><p class="lead">Domain registration pricing varies depending on the extension, availability, and registrar. BAM's Website Builder helps you find the right domain, review registration costs, and connect it to your website.</p><p class="small-print">All registration and renewal pricing will be confirmed before purchase. Domain registration is separate from website design and monthly website plans. Search results do not reserve a domain.</p><a class="button domain-contact-button" href="/contact?service=domain-registration">Request Domain Assistance</a></section><section class="panel domain-assistance-panel" aria-labelledby="domain-assistance-heading"><h2 id="domain-assistance-heading">Need assistance now?</h2><p class="lead">Contact BAM's Website Builder for domain help and setup options.</p><a class="button domain-contact-button" href="/contact?service=domain-registration">Get domain assistance</a></section></main><footer class="home-footer">
+<p class="domain-search-note" id="domain-search-note">Explore .com, .net, .org and .co ideas. Squarespace confirms availability and handles checkout; BAM’s can connect your domain afterward.</p>
+</section><section class="panel" id="domain-pricing" aria-labelledby="domain-pricing-heading"><p class="eyebrow">DOMAIN REGISTRATION &amp; PRICING</p><h2 id="domain-pricing-heading">Find the Right Domain for Your Business</h2><p class="lead">Domain registration pricing varies depending on the extension, availability, and registrar. BAM's Website Builder helps you explore domain ideas and connect purchased domains to your website. Check availability and buy through Squarespace.</p><p class="small-print">Squarespace displays its registration and renewal pricing during checkout. Domain purchases are billed by Squarespace separately from BAM’s website services.</p><a class="button domain-contact-button" href="/contact?service=domain-registration">Request Domain Assistance</a></section><section class="panel domain-assistance-panel" aria-labelledby="domain-assistance-heading"><h2 id="domain-assistance-heading">Need assistance now?</h2><p class="lead">Contact BAM's Website Builder for domain help and setup options.</p><a class="button domain-contact-button" href="/contact?service=domain-registration">Get domain assistance</a></section></main><footer class="home-footer">
   <div class="footer-grid">
     <div class="footer-brand-column">
       <a class="footer-brand" href="/" aria-label="BAM’s Website Builder"><strong>BAM’S</strong><span>WEBSITE BUILDER</span></a>
@@ -219,29 +219,8 @@ const domainInput=document.getElementById('domain-query');
 const domainResults=document.getElementById('domain-results');
 const domainBadge=document.getElementById('results-badge');
 const tlds=['com','net','org','co'];
-
-function makeResult(domain,index,result){
- const status=result?.status||'unknown';
- const specialPricing=result?.specialPricing===true;
- const trademarkClaim=result?.trademarkClaim===true;
- const row=document.createElement('article');row.className='domain-result';
- const details=document.createElement('div'),title=document.createElement('h3'),note=document.createElement('p');
- title.textContent=domain;
- note.textContent=specialPricing?'Special pricing or early-access domain — contact us for pricing':
-  trademarkClaim?'Trademark claim requires review — please contact us':
-  status==='available'?'Available according to registrar — not reserved':
-  status==='regthroughus'||status==='regthroughothers'?'Already registered':'Availability not verified';
- const actions=document.createElement('div');actions.className='domain-result-actions';
-
- const help=document.createElement('a');help.className='button outline-button';
- help.href='/contact?service=domain-registration&domain='+encodeURIComponent(domain);
- help.textContent='Ask about this domain';
- actions.append(help);details.append(title,note);row.append(details,actions);
- return row;
-}
-let latestDomainSearch=0;
+const squarespaceSearchUrl='https://domains.squarespace.com/domain-search';
 function businessNameVariants(raw){
- // Accept everyday company names, existing domains, punctuation and pasted URLs.
  const cleaned=raw.toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'')
   .replace(/&/g,' and ').replace(/[^a-z0-9]+/g,' ').trim();
  const words=cleaned.split(/\s+/).filter(Boolean);
@@ -250,69 +229,50 @@ function businessNameVariants(raw){
   const safe=value.slice(0,63).replace(/^-+|-+$/g,'');
   if(/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/.test(safe)&&!result.includes(safe))result.push(safe);
  };
- add(words.join('')); // Sunshine Bakery -> sunshinebakery
- if(words.length>1)add(words.join('-')); // sunshine-bakery
- if(words.length>2)add(words.slice(0,2).join(''));
- return result.slice(0,3);
+ add(words.join(''));
+ if(words.length>1)add(words.join('-'));
+ return result.slice(0,2);
 }
-domainForm.addEventListener('submit',async function(event){
+function addDomainIdea(domain){
+ const row=document.createElement('article');row.className='domain-result';
+ const details=document.createElement('div'),title=document.createElement('h3'),note=document.createElement('p');
+ title.textContent=domain;note.textContent='Check availability and pricing on Squarespace.';
+ details.append(title,note);
+ const actions=document.createElement('div');actions.className='domain-result-actions';
+ const copy=document.createElement('button');copy.type='button';copy.className='outline-button';
+ copy.textContent='Copy domain';copy.setAttribute('aria-label','Copy '+domain);
+ copy.addEventListener('click',async()=>{
+  try{await navigator.clipboard.writeText(domain);copy.textContent='Copied!';}
+  catch(_error){copy.textContent='Select domain name to copy';}
+ });
+ const link=document.createElement('a');link.className='button';
+ link.href=squarespaceSearchUrl;link.target='_blank';link.rel='noopener noreferrer';
+ link.textContent='Check & buy on Squarespace';
+ link.setAttribute('aria-label','Search for '+domain+' at Squarespace Domains (opens a new tab)');
+ actions.append(copy,link);row.append(details,actions);return row;
+}
+domainForm.addEventListener('submit',function(event){
  event.preventDefault();domainInput.setCustomValidity('');
  const raw=domainInput.value.trim();
- // Strip schemes and common pasted URL components without treating business punctuation as an error.
  const query=raw.toLowerCase().replace(/^https?:\/\//,'').replace(/^www\./,'')
   .split(/[/?#]/)[0].replace(/:\d+$/,'').trim();
  const domainMatch=query.match(/^([a-z0-9-]+)\.([a-z]{2,63})$/i);
- const desiredExtension=domainMatch?domainMatch[2]:null;
- const supportedExtension=desiredExtension&&tlds.includes(desiredExtension);
+ const requested=domainMatch?query:null;
  const candidates=businessNameVariants(domainMatch?domainMatch[1]:query);
  if(!candidates.length){
-  domainInput.setCustomValidity('Please enter a business name containing at least one letter or number.');
+  domainInput.setCustomValidity('Please enter a business name or valid domain.');
   domainInput.reportValidity();return;
  }
- const searchId=++latestDomainSearch;
- const extensions=supportedExtension?[desiredExtension,...tlds.filter(ext=>ext!==desiredExtension)]:tlds;
- domainResults.replaceChildren();
- document.getElementById('domain-results-title').textContent='Domain ideas for '+raw;
- domainBadge.textContent='Checking…';
- const submit=domainForm.querySelector('button[type="submit"]');submit.disabled=true;
- const loading=document.createElement('p');
- loading.textContent='Generating domain ideas and checking registrar availability…';
- domainResults.append(loading);
- const verified=new Map();
- let successfulChecks=0;
- await Promise.all(candidates.map(async name=>{
-  try{
-   const response=await fetch('/api/domain-legacy-availability?name='+encodeURIComponent(name),
-    {cache:'no-store',signal:AbortSignal.timeout(11000)});
-   if(!response.ok)return;
-   const data=await response.json();
-   if(data.verified===true&&Array.isArray(data.domains)){
-    successfulChecks++;
-    data.domains.forEach(item=>{if(item&&typeof item.domain==='string')verified.set(item.domain,item);});
-   }
-  }catch(_error){}
- }));
- if(searchId!==latestDomainSearch)return;
- submit.disabled=false;
+ const domains=[];const add=d=>{if(!domains.includes(d))domains.push(d);};
+ if(requested)add(requested);
+ for(const name of candidates)for(const tld of tlds)add(name+'.'+tld);
+ document.getElementById('domain-results-title').textContent='Domain options for '+raw;
+ domainBadge.textContent='Check on Squarespace';
  domainResults.replaceChildren();
  const note=document.createElement('p');
- note.textContent=successfulChecks?'These are name ideas with registrar availability statuses. No domain is reserved.':
-  'Here are possible domain names. Live availability could not be confirmed; contact us before purchasing.';
+ note.textContent='Copy a domain idea and follow its Squarespace link to check live availability, see pricing and purchase. Enter or paste the copied name into Squarespace search.';
  domainResults.append(note);
- if(desiredExtension&&!supportedExtension){
-  const unsupported=document.createElement('p');
-  unsupported.textContent='You entered .'+desiredExtension+'. We can help with that extension too, but live availability checks currently cover .com, .net, .org and .co only.';
-  domainResults.append(unsupported);
-  domainResults.append(makeResult(candidates[0]+'.'+desiredExtension,0,{status:'unknown'}));
- }
- let count=0;
- for(const name of candidates){
-  for(const ext of extensions){
-   const domain=name+'.'+ext;
-   domainResults.append(makeResult(domain,count++,verified.get(domain)||{status:'unknown'}));
-  }
- }
- domainBadge.textContent=successfulChecks?'Availability checked':'Suggestions only';
+ for(const domain of domains)domainResults.append(addDomainIdea(domain));
  document.querySelector('.search-results').scrollIntoView({behavior:'smooth',block:'nearest'});
 });
 domainInput.addEventListener('input',function(){this.setCustomValidity('');});
