@@ -41,6 +41,9 @@
     if (link.classList.contains('template-select')) track('template_select');
     else if (link.classList.contains('template-demo')) track('template_demo_click');
     else if (url.hostname === 'calendar.app.google') track('booking_calendar_open');
+    else if (url.hostname === 'domains.squarespace.com') track('domain_purchase_outbound');
+    else if (url.hostname === 'g.page' && url.pathname.includes('/review')) track('google_review_outbound');
+    else if (url.pathname === '/blog') track('blog_open');
     else if (url.protocol === 'tel:') track('phone_click');
     else if (url.protocol === 'mailto:') track('email_click');
     else if (/\/(?:es\/)?contact(?:\.html)?$/.test(url.pathname)) track('quote_click');
