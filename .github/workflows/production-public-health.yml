@@ -1,6 +1,11 @@
 name: Production public health
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/production-public-health.yml'
+      - 'tests/production-public-health.test.mjs'
   schedule:
     - cron: '17 12 * * 1'
 
