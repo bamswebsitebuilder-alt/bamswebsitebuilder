@@ -196,3 +196,9 @@ html[data-theme=light] .templates-page .template-card-body h2{color:#221a0d}
 html[data-theme=light] .templates-page .template-catalog-sidebar{background:#fffaf0;border-color:#decba5}
 html[data-theme=light] .templates-page .template-catalog-search{background:#fff;color:#241c10;border-color:#bea56f}
 html[data-theme=light] .templates-page .template-catalog-search::placeholder{color:#655c50}
+
+/* Category dropdown replaces the search field. */
+.templates-page select.template-catalog-search{appearance:auto;cursor:pointer;max-width:420px;font-weight:650}
+.templates-page select.template-catalog-search option{background:#171717;color:#fff}
+html[data-theme=light] .templates-page select.template-catalog-search option{background:#fff;color:#241c10}
+@media(max-width:760px){.templates-page select.template-catalog-search{max-width:none}}
