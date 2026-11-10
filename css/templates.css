@@ -117,3 +117,51 @@ html[data-theme=light] .templates-page :is(.template-filter-summary,.template-ca
   .templates-page .payment-options { flex-direction:column; }
 }
 @media(prefers-reduced-motion:reduce) { .templates-page .template-card { transition:none; } }
+
+
+/* November 2026: polished, consistent template gallery */
+.templates-page .templates-wrap{width:min(1180px,100%)}
+.templates-page .templates-hero{padding:clamp(64px,8vw,100px) 20px 48px;background:radial-gradient(ellipse at 50% 0%,rgba(212,166,55,.13),transparent 62%),#0b0b0b}
+.templates-page .templates-hero h1{letter-spacing:-.035em;text-wrap:balance}
+.templates-page .templates-hero> .templates-wrap > p:not(.templates-eyebrow){line-height:1.65}
+.templates-page .templates-content{padding:52px 20px 80px}
+.templates-page .template-heading h2{letter-spacing:-.025em}
+.templates-page .template-filters{justify-content:center;gap:9px;margin-bottom:26px}
+.templates-page .template-filter{border:1px solid rgba(212,166,55,.25);border-radius:12px;padding:10px 15px;background:#171717;line-height:1.25;transition:background .2s,border-color .2s,color .2s}
+.templates-page .template-filter.active{background:#d4a637;color:#111;border-color:#d4a637;font-weight:750}
+.templates-page .template-filter:not(.active):hover{background:#242017;border-color:#d4a637;color:#f4c15d}
+.templates-page .template-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.templates-page .template-card{border-radius:16px;background:#151515;border:1px solid rgba(212,166,55,.18);box-shadow:0 8px 24px rgba(0,0,0,.13);min-width:0}
+.templates-page .template-card:hover{border-color:rgba(212,166,55,.5);box-shadow:0 14px 32px rgba(0,0,0,.2)}
+.templates-page .template-preview{height:auto;aspect-ratio:16/10;min-height:0;overflow:hidden}
+.templates-page .template-preview.industry-photo-preview{min-height:0}
+.templates-page .template-preview img{width:100%;height:100%;object-fit:cover}
+.templates-page .template-card-body{padding:20px;gap:12px}
+.templates-page .template-card-body h2{font-size:1.22rem;line-height:1.3;letter-spacing:-.012em}
+.templates-page .template-card-body ul{font-size:.87rem;gap:6px}
+.templates-page .template-category{font-size:.68rem;letter-spacing:.07em}
+.templates-page .template-badge{top:12px;left:12px;border-radius:7px;padding:7px 10px;font-size:.65rem}
+.templates-page .template-price{margin-top:4px}
+.templates-page .template-actions{gap:8px;padding-top:8px}
+.templates-page .template-actions>a,.templates-page .template-actions>button{min-height:44px;border-radius:9px;font-size:.85rem}
+.templates-page .template-process{padding:64px 20px}
+.templates-page .process-step{border-radius:14px}
+@media(max-width:1000px){.templates-page .template-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){
+ .templates-page .templates-hero{padding:52px 18px 36px}
+ .templates-page .templates-hero h1{font-size:clamp(2rem,9vw,2.8rem)}
+ .templates-page .templates-content{padding:36px 16px 56px}
+ .templates-page .template-filters{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;padding:2px 2px 12px;margin-bottom:16px;-webkit-overflow-scrolling:touch}
+ .templates-page .template-filter{flex:0 0 auto;scroll-snap-align:start;white-space:nowrap}
+ .templates-page .template-grid{grid-template-columns:minmax(0,1fr);gap:18px}
+ .templates-page .template-card-body{padding:18px;gap:11px}
+ .templates-page .template-preview{aspect-ratio:16/10;height:auto}
+ .templates-page .template-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .templates-page .template-actions>.template-personal-preview{grid-column:1/-1}
+ .templates-page .template-actions>a,.templates-page .template-actions>button{padding:10px 8px;font-size:.8rem;overflow-wrap:anywhere}
+}
+@media(max-width:360px){.templates-page .template-actions{grid-template-columns:1fr}}
+html[data-theme=light] .templates-page .template-card{background:#fff;border-color:#d9c8a3;box-shadow:0 6px 20px rgba(43,31,8,.07)}
+html[data-theme=light] .templates-page .template-filter:not(.active){background:#fff;color:#3b3020;border-color:#d9c8a3}
+html[data-theme=light] .templates-page .template-filter:not(.active):hover{background:#f7ecd5}
+html[data-theme=light] .templates-page .template-card-body h2{color:#221a0d}
