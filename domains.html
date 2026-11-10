@@ -111,6 +111,36 @@ html[data-theme="light"] .domain-page .home-footer a:focus-visible{outline:3px s
  html[data-theme="light"] .domain-page-main :is(.domain-search button,.domain-store-actions .button,.domain-contact-button){width:100%}
  html[data-theme="light"] .domain-page-main .domain-result-actions{flex-shrink:1;max-width:100%}
 }
+
+/* Domain marketplace refresh — scoped to the domains page */
+.domain-page-main{max-width:1200px;padding:70px 24px 90px}
+.domain-page-main .domain-hero{text-align:center;position:relative;padding:65px clamp(18px,5vw,80px) 32px;border-radius:28px;background:radial-gradient(ellipse at 50% 0%,rgba(219,170,64,.18),transparent 65%),linear-gradient(145deg,rgba(40,34,22,.75),rgba(15,15,15,.35));border:1px solid var(--bam-border,#74603a)}
+.domain-page-main .domain-hero>.eyebrow{font-size:.82rem;font-weight:800}
+.domain-page-main .domain-hero h1{max-width:850px;margin:15px auto 20px;font-size:clamp(2.5rem,6vw,4.8rem);letter-spacing:-.045em;line-height:1.08}
+.domain-page-main .domain-hero>.lead{max-width:650px;margin:0 auto 32px;font-size:1.1rem}
+.domain-page-main .domain-search{max-width:850px;margin:0 auto 16px;display:flex;flex-wrap:nowrap;gap:8px;padding:8px;border:1px solid var(--bam-border,#74603a);border-radius:18px;background:var(--bam-panel,#171717);box-shadow:0 18px 50px rgba(0,0,0,.14)}
+.domain-page-main .domain-search input{border:0;background:transparent;min-height:55px;padding:14px 18px;flex:1 1 auto}
+.domain-page-main .domain-search button{border-radius:12px;white-space:nowrap;padding:14px 26px}
+.domain-page-main .domain-store-actions{margin:18px 0 8px}
+.domain-page-main .domain-store-actions .store-primary{background:transparent;color:var(--bam-gold,#efc66a);border-color:var(--bam-border,#74603a);min-height:40px;padding:8px 18px}
+.domain-page-main .domain-store-hint{max-width:650px;margin:10px auto;font-size:.87rem}
+.domain-page-main .extension-list{justify-content:center;flex-wrap:wrap;gap:10px;margin:25px auto}
+.domain-page-main .extension-list span{padding:10px 20px;border:1px solid var(--bam-border,#74603a);border-radius:999px;background:var(--bam-panel,#171717);font-size:1rem}
+.domain-page-main .search-results{text-align:left;margin:42px auto 0;max-width:920px;border-radius:20px}
+.domain-page-main .domain-service-shortcuts{max-width:920px;margin:22px auto 0;text-align:left}
+.domain-page-main .domain-service-shortcuts>a{border-radius:18px;transition:transform .2s,border-color .2s}
+.domain-page-main .domain-service-shortcuts>a:hover{transform:translateY(-3px);border-color:var(--bam-gold,#efc66a)}
+.domain-page-main .domain-tagline{margin-top:32px}
+.domain-page-main .domain-search-note{max-width:780px;margin:10px auto}
+.domain-page-main>.panel{border-radius:22px;margin-top:32px;padding:38px}
+.domain-page-main .domain-extension-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:25px 0}
+.domain-page-main .domain-extension-grid>div{display:flex;flex-direction:column;gap:8px;border:1px solid var(--bam-border,#74603a);padding:22px 15px;border-radius:16px}
+.domain-page-main .domain-extension-grid strong{font-size:2rem;color:var(--bam-gold,#efc66a)}
+.domain-page-main .domain-extension-grid span{font-size:.87rem;color:var(--bam-muted,#bcb6aa)}
+html[data-theme="light"] .domain-page-main .domain-hero{background:radial-gradient(ellipse at 50% 0%,#f6e5bb,#fffdf8 72%)}
+html[data-theme="light"] .domain-page-main .domain-search{background:#fff}
+html[data-theme="light"] .domain-page-main .domain-search input{background:transparent}
+@media(max-width:700px){.domain-page-main{padding:28px 14px 55px}.domain-page-main .domain-hero{padding:40px 16px 25px;border-radius:20px}.domain-page-main .domain-hero h1{font-size:clamp(2.1rem,9vw,3.2rem)}.domain-page-main .domain-search{flex-direction:column;padding:8px}.domain-page-main .domain-search input{width:100%;flex:auto;min-height:54px}.domain-page-main .domain-search button{width:100%}.domain-page-main .domain-extension-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.domain-page-main>.panel{padding:24px 18px}.domain-page-main .domain-service-shortcuts{gap:12px}.domain-page-main .extension-list{gap:7px}.domain-page-main .extension-list span{padding:8px 13px}.domain-page-main .search-results{margin-top:28px}}
 </style><link rel="stylesheet" href="/css/light-theme.css?v=20261028-1">
 <link rel="stylesheet" href="/css/site-footer.css?v=20261109-sitewide-1">
 </head><body class="domain-page"><a class="site-skip-link" href="#main-content">Skip to main content</a><header class="site-header" id="site-header">
@@ -163,16 +193,16 @@ html[data-theme="light"] .domain-page .home-footer a:focus-visible{outline:3px s
 </aside>
 <main id="main-content" class="domain-page-main" tabindex="-1"><section class="domain-hero" aria-labelledby="domain-title">
 <p class="eyebrow">DOMAIN SERVICES</p>
-<h1 id="domain-title">Domain help for your business</h1>
-<p class="lead">Find a domain, connect one you already own, or ask about a transfer. Search domain ideas here, then continue to Squarespace Domains to check live availability, view prices, and purchase your domain.</p>
+<h1 id="domain-title">Find a domain name that fits your big idea.</h1>
+<p class="lead">Your next great website starts with the perfect name. Explore domain options in seconds, then verify availability and registration pricing with our domain partner.</p>
 <form class="domain-search" id="domain-search">
 <label class="sr-only" for="domain-query">Your business name or domain name</label>
-<input id="domain-query" name="domain" placeholder="Enter a business name or domain, e.g. sunshinebakery.com" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="253" required aria-describedby="domain-search-note">
-<button type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="7.5"/><path d="m16 16 5 5"/></svg>Find Domain Options</button>
+<input id="domain-query" name="domain" placeholder="Search your business name or dream domain" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="253" required aria-describedby="domain-search-note">
+<button type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="7.5"/><path d="m16 16 5 5"/></svg>Search Domains</button>
 </form>
-<div class="domain-store-actions"><a class="button store-primary" href="/contact?service=domain-registration">Get domain assistance</a></div><p class="domain-store-hint">Domain purchases and renewals are handled by Squarespace Domains. BAM’s can help connect your purchased domain to your website.</p><div class="extension-list" aria-label="Featured domain extensions"><span>.com</span><span>.net</span><span>.org</span><span>.co</span></div>
+<div class="domain-store-actions"><a class="button store-primary" href="/contact?service=domain-registration">Get domain assistance</a></div><p class="domain-store-hint">Domain purchases and renewals are handled by Squarespace Domains. BAM’s can help connect your purchased domain to your website.</p><div class="extension-list" aria-label="Featured domain extensions"><span>.com</span><span>.net</span><span>.org</span><span>.co</span><span>.io</span></div>
 <section class="search-results" aria-labelledby="domain-results-title">
-<div class="results-heading"><h2 id="domain-results-title">Domain ideas</h2><span class="preview-badge" id="results-badge">Squarespace checkout</span></div>
+<div class="results-heading"><h2 id="domain-results-title">Your domain search results</h2><span class="preview-badge" id="results-badge">Squarespace checkout</span></div>
 <div id="domain-results" aria-live="polite">
 <p>Enter a business name or domain above, then continue to Squarespace to check availability and buy.</p>
 </div>
@@ -183,7 +213,7 @@ html[data-theme="light"] .domain-page .home-footer a:focus-visible{outline:3px s
 </div>
 <p class="domain-tagline">Building Your Business, One Website at a Time.</p>
 <p class="domain-search-note" id="domain-search-note">Explore .com, .net, .org and .co ideas. Squarespace confirms availability and handles checkout; BAM’s can connect your domain afterward.</p>
-</section><section class="panel" id="domain-pricing" aria-labelledby="domain-pricing-heading"><p class="eyebrow">DOMAIN REGISTRATION &amp; PRICING</p><h2 id="domain-pricing-heading">Find the Right Domain for Your Business</h2><p class="lead">Domain registration pricing varies depending on the extension, availability, and registrar. BAM's Website Builder helps you explore domain ideas and connect purchased domains to your website. Check availability and buy through Squarespace.</p><p class="small-print">Squarespace displays its registration and renewal pricing during checkout. Domain purchases are billed by Squarespace separately from BAM’s website services.</p><a class="button domain-contact-button" href="/contact?service=domain-registration">Request Domain Assistance</a></section><section class="panel domain-assistance-panel" aria-labelledby="domain-assistance-heading"><h2 id="domain-assistance-heading">Need assistance now?</h2><p class="lead">Contact BAM's Website Builder for domain help and setup options.</p><a class="button domain-contact-button" href="/contact?service=domain-registration">Get domain assistance</a></section></main><footer class="home-footer">
+</section><section class="panel" id="domain-pricing" aria-labelledby="domain-pricing-heading"><p class="eyebrow">DOMAIN REGISTRATION &amp; PRICING</p><h2 id="domain-pricing-heading">Popular domain extensions</h2><p class="lead">Domain registration pricing varies depending on the extension, availability, and registrar. BAM's Website Builder helps you explore domain ideas and connect purchased domains to your website. Check availability and buy through Squarespace.</p><div class="domain-extension-grid"><div><strong>.com</strong><span>For businesses and brands</span></div><div><strong>.net</strong><span>For networks and technology</span></div><div><strong>.org</strong><span>For organizations and communities</span></div><div><strong>.co</strong><span>For startups and creators</span></div></div><p class="small-print">Registration and renewal prices are confirmed by Squarespace before checkout. Domain purchases are billed separately from BAM’s website services.</p><a class="button domain-contact-button" href="/contact?service=domain-registration">Request Domain Assistance</a></section><section class="panel domain-assistance-panel" aria-labelledby="domain-assistance-heading"><h2 id="domain-assistance-heading">Need assistance now?</h2><p class="lead">Contact BAM's Website Builder for domain help and setup options.</p><a class="button domain-contact-button" href="/contact?service=domain-registration">Get domain assistance</a></section></main><footer class="home-footer">
   <div class="footer-grid">
     <div class="footer-brand-column">
       <a class="footer-brand" href="/" aria-label="BAM’s Website Builder"><strong>BAM’S</strong><span>WEBSITE BUILDER</span></a>
