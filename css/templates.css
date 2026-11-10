@@ -165,3 +165,34 @@ html[data-theme=light] .templates-page .template-card{background:#fff;border-col
 html[data-theme=light] .templates-page .template-filter:not(.active){background:#fff;color:#3b3020;border-color:#d9c8a3}
 html[data-theme=light] .templates-page .template-filter:not(.active):hover{background:#f7ecd5}
 html[data-theme=light] .templates-page .template-card-body h2{color:#221a0d}
+
+/* Searchable catalog with desktop sidebar, inspired by modern template galleries. */
+.templates-page .template-catalog-layout{display:grid;grid-template-columns:210px minmax(0,1fr);gap:30px;align-items:start}
+.templates-page .template-catalog-sidebar{position:sticky;top:100px;padding:18px 14px;border:1px solid rgba(212,166,55,.18);border-radius:14px;background:#131313}
+.templates-page .template-catalog-sidebar h3{margin:0 0 16px;font-size:1rem;letter-spacing:.01em}
+.templates-page .template-catalog-sidebar .template-filters{display:flex;flex-direction:column;align-items:stretch;gap:5px;margin:0;overflow:visible;padding:0}
+.templates-page .template-catalog-sidebar .template-filter{width:100%;text-align:left;border-radius:8px;background:transparent;border-color:transparent;white-space:normal}
+.templates-page .template-catalog-sidebar .template-filter.active{background:#d4a637;color:#111}
+.templates-page .template-catalog-results{min-width:0}
+.templates-page .template-catalog-search-row{margin-bottom:14px}
+.templates-page .template-catalog-search{box-sizing:border-box;width:100%;min-height:52px;padding:13px 18px;border:1px solid rgba(212,166,55,.35);border-radius:12px;background:#171717;color:#fff;font:inherit;font-size:1rem}
+.templates-page .template-catalog-search::placeholder{color:#a7a7a7}
+.templates-page .template-catalog-search:focus{outline:2px solid #d4a637;outline-offset:2px}
+.templates-page .template-catalog-results .template-filter-summary{text-align:left;margin:0 0 18px}
+.templates-page .template-catalog-results .template-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.templates-page .template-catalog-results .template-card-body{padding:16px;gap:10px}
+.templates-page .template-catalog-results .template-card-body h2{font-size:1.13rem}
+@media(max-width:1150px){.templates-page .template-catalog-results .template-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){
+.templates-page .template-catalog-layout{display:flex;flex-direction:column;gap:16px}
+.templates-page .template-catalog-sidebar{position:static;width:100%;box-sizing:border-box;padding:0;border:0;background:transparent}
+.templates-page .template-catalog-sidebar h3{margin:0 0 10px}
+.templates-page .template-catalog-sidebar .template-filters{flex-direction:row;overflow-x:auto;padding:2px 0 10px;gap:8px;flex-wrap:nowrap}
+.templates-page .template-catalog-sidebar .template-filter{width:auto;flex:0 0 auto;white-space:nowrap;border:1px solid rgba(212,166,55,.25);border-radius:10px;background:#171717}
+.templates-page .template-catalog-results{width:100%}
+.templates-page .template-catalog-results .template-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:600px){.templates-page .template-catalog-results .template-grid{grid-template-columns:minmax(0,1fr)}}
+html[data-theme=light] .templates-page .template-catalog-sidebar{background:#fffaf0;border-color:#decba5}
+html[data-theme=light] .templates-page .template-catalog-search{background:#fff;color:#241c10;border-color:#bea56f}
+html[data-theme=light] .templates-page .template-catalog-search::placeholder{color:#655c50}
