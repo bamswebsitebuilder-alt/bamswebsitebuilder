@@ -134,30 +134,39 @@ if (galleryGrid && galleryFilters) {
   sidebar.append(sidebarTitle, galleryFilters);
   const results = document.createElement('div');
   results.className = 'template-catalog-results';
-  const search = document.createElement('input');
-  search.type = 'search';
-  search.className = 'template-catalog-search';
-  search.placeholder = spanishTemplates ? 'Buscar diseños por nombre o industria...' : 'Search templates by name or industry...';
-  search.setAttribute('aria-label', search.placeholder);
+  const categorySelect = document.createElement('select');
+  categorySelect.className = 'template-catalog-search';
+  categorySelect.setAttribute('aria-label', spanishTemplates ? 'Seleccionar categoría' : 'Select template category');
+  filterButtons.forEach(button => {
+    const option = document.createElement('option');
+    option.value = button.dataset.filter;
+    option.textContent = button.textContent.trim();
+    categorySelect.append(option);
+  });
+  categorySelect.value = filterButtons.find(button => button.classList.contains('active'))?.dataset.filter || 'all';
   const searchRow = document.createElement('div');
   searchRow.className = 'template-catalog-search-row';
-  searchRow.append(search);
+  searchRow.append(categorySelect);
   galleryGrid.before(layout);
   layout.append(sidebar, results);
   results.append(searchRow, filterSummary, galleryGrid);
   function updateCatalog() {
     const selected = filterButtons.find(button => button.classList.contains('active'))?.dataset.filter || 'all';
-    const term = search.value.trim().toLocaleLowerCase();
+
     let count = 0;
     templateCards.forEach(card => {
       const matchesCategory = selected === 'all' || card.dataset.category === selected;
-      const matchesText = !term || [card.querySelector('h2')?.textContent, card.querySelector('.template-category')?.textContent, card.dataset.category, card.querySelector('.template-card-body ul')?.textContent].join(' ').toLocaleLowerCase().includes(term);
-      card.hidden = !(matchesCategory && matchesText);
+
+      card.hidden = !matchesCategory;
       if (!card.hidden) count++;
     });
     filterSummary.textContent = spanishTemplates ? `${count} ${count === 1 ? 'diseño disponible' : 'diseños disponibles'}` : `${count} ${count === 1 ? 'design available' : 'designs available'}`;
   }
-  search.addEventListener('input', updateCatalog);
-  filterButtons.forEach(button => button.addEventListener('click', updateCatalog));
+  categorySelect.addEventListener('change', () => {
+    const button = filterButtons.find(item => item.dataset.filter === categorySelect.value);
+    if (button) applyTemplateFilter(button);
+    updateCatalog();
+  });
+  filterButtons.forEach(button => button.addEventListener('click', () => { categorySelect.value = button.dataset.filter; updateCatalog(); }));
   updateCatalog();
 }
