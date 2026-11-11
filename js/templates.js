@@ -100,6 +100,7 @@ if (catalogGrid) {
   demoCollections.forEach(collection => {
     const cards = collection.names.map(name => byTitle.get(name));
     if (cards.some(card => !card)) return;
+    if (cards.every(card => card.closest('.template-demo-collection'))) return;
     const details = document.createElement('details');
     details.className = 'template-demo-collection';
     details.dataset.category = cards[0].dataset.category;
