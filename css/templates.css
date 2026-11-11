@@ -180,3 +180,20 @@ html[data-theme=light] .templates-page select.template-catalog-search option{bac
 .templates-page .template-card[hidden]{display:none!important}
 @media(max-width:620px){.templates-page .template-catalog-search-row{flex-direction:column;align-items:stretch;padding:16px}.templates-page select.template-catalog-search{width:100%;max-width:none}}
 @media(prefers-reduced-motion:reduce){.templates-page .template-card{transition:none!important}}
+
+/* Compact industry groups keep near-identical demos out of the main gallery. */
+.templates-page .template-demo-collection{min-width:0;align-self:start;border:1px solid rgba(212,166,55,.3);border-radius:16px;background:linear-gradient(145deg,#171717,#101010);overflow:hidden}
+.templates-page .template-demo-collection[hidden]{display:none!important}
+.templates-page .template-demo-collection>summary{cursor:pointer;display:flex;flex-direction:column;justify-content:center;gap:12px;min-height:170px;padding:24px;list-style:none}
+.templates-page .template-demo-collection>summary::-webkit-details-marker{display:none}
+.templates-page .template-demo-collection>summary:focus-visible{outline:3px solid #d4a637;outline-offset:-4px}
+.templates-page .template-collection-name{font-size:1.3rem;font-weight:800;line-height:1.3;color:#f0c45a}
+.templates-page .template-collection-count{font-size:.88rem;color:#ddd}
+.templates-page .template-demo-collection[open]{grid-column:1/-1}
+.templates-page .template-demo-collection[open]>summary{min-height:0;padding:20px 24px;border-bottom:1px solid rgba(212,166,55,.22)}
+.templates-page .template-collection-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;padding:20px}
+.templates-page .template-collection-grid .template-card{min-width:0}
+html[data-theme=light] .templates-page .template-demo-collection{background:#fffaf0;border-color:#d9c8a3}
+html[data-theme=light] .templates-page .template-collection-name{color:#6c4900}
+html[data-theme=light] .templates-page .template-collection-count{color:#514632}
+@media(max-width:600px){.templates-page .template-collection-grid{grid-template-columns:minmax(0,1fr);padding:14px}}
