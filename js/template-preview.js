@@ -21,11 +21,20 @@ import { previewDestination, sourceWebsite } from './preview-navigation.js?v=202
     <p>${t('Enter any public website URL, including Wix or GoDaddy sites. View the full original website first, then compare a concept redesign using your business details.', 'Introduce cualquier URL pública, incluso de Wix o GoDaddy. Consulta primero el sitio original completo y luego compara una propuesta de rediseño.')}</p>
     <form><label for="preview-website">${t('Your website URL', 'URL de tu sitio web')}</label>
     <div class="preview-url-row"><input id="preview-website" name="website" type="text" inputmode="url" autocomplete="url" placeholder="www.yourbusiness.com" required maxlength="2048">
-    <button type="submit">${t('Preview my site', 'Ver mi sitio')}</button></div></form>`;
+    <button type="submit">${t('Compare designs', 'Comparar diseños')}</button></div><a class="preview-direct-original" target="_blank" rel="noopener noreferrer" hidden>${t('Open full original website', 'Abrir sitio original completo')}</a></form>`;
   const main = document.querySelector('main');
   const hero = main.querySelector('section');
   hero ? hero.after(section) : main.prepend(section);
 
+  const websiteField = section.querySelector('#preview-website');
+  const directOriginal = section.querySelector('.preview-direct-original');
+  const updateOriginalLink = () => {
+    const address = sourceWebsite(websiteField.value);
+    directOriginal.hidden = !address;
+    if (address) directOriginal.href = address;
+    else directOriginal.removeAttribute('href');
+  };
+  websiteField.addEventListener('input', updateOriginalLink);
   const dialog = document.createElement('dialog');
   dialog.className = 'personal-preview-dialog';
   dialog.setAttribute('aria-labelledby', 'personal-preview-title');
