@@ -167,6 +167,22 @@ html[data-theme="light"] .domain-page-main .domain-search input{background:trans
 .domain-page-main .domain-final-cta .button{margin:6px}
 @media(max-width:800px){.domain-page-main .domain-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.domain-page-main .domain-steps-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){.domain-page-main .domain-feature-grid,.domain-page-main .domain-steps-grid{grid-template-columns:1fr}.domain-page-main .domain-feature-grid article{padding:20px}.domain-page-main .domain-final-cta .button{width:100%;margin:5px 0}}
+
+/* Search field correction and polished motion */
+.domain-page-main .domain-search label.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;clip-path:inset(50%)!important;white-space:nowrap!important;border:0!important;flex:none!important}
+.domain-page-main .domain-search{position:relative;align-items:center}
+.domain-page-main .domain-search input{display:block;min-width:0;width:100%;flex:1 1 0%;margin:0!important;line-height:1.4;box-shadow:none!important}
+.domain-page-main .domain-search input::placeholder{font-size:clamp(.9rem,1.4vw,1rem);white-space:nowrap;text-overflow:ellipsis}
+.domain-page-main .domain-search button{flex:0 0 auto}
+.domain-page-main .domain-hero h1{font-size:clamp(2.4rem,5.1vw,4.1rem);max-width:850px;line-height:1.12;letter-spacing:-.035em;text-wrap:balance}
+.domain-page-main .domain-hero>.lead{line-height:1.7;text-wrap:pretty}
+.domain-page-main .domain-search-note,.domain-page-main .domain-store-hint{line-height:1.6}
+.domain-page-main .domain-reveal{opacity:0;transform:translate3d(0,28px,0);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.75,.2,1);transition-delay:var(--reveal-delay,0ms)}
+.domain-page-main .domain-reveal.is-visible{opacity:1;transform:none}
+.domain-page-main .domain-feature-grid article,.domain-page-main .domain-extension-grid>div{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+@media(hover:hover){.domain-page-main .domain-feature-grid article:hover,.domain-page-main .domain-extension-grid>div:hover{transform:translateY(-5px);border-color:var(--bam-gold,#efc66a);box-shadow:0 12px 28px rgba(0,0,0,.12)}}
+@media(max-width:700px){.domain-page-main .domain-search{display:flex;flex-direction:column;align-items:stretch}.domain-page-main .domain-search input{flex:0 0 auto;width:100%;min-height:54px}.domain-page-main .domain-search button{width:100%;flex:0 0 auto}.domain-page-main .domain-hero h1{font-size:clamp(2rem,8vw,3.1rem)}}
+@media(prefers-reduced-motion:reduce){.domain-page-main .domain-reveal{opacity:1;transform:none;transition:none}.domain-page-main .domain-feature-grid article,.domain-page-main .domain-extension-grid>div{transition:none}}
 </style><link rel="stylesheet" href="/css/light-theme.css?v=20261028-1">
 <link rel="stylesheet" href="/css/site-footer.css?v=20261109-sitewide-1">
 </head><body class="domain-page"><a class="site-skip-link" href="#main-content">Skip to main content</a><header class="site-header" id="site-header">
@@ -406,4 +422,14 @@ domainForm.addEventListener('submit',function(event){
  document.querySelector('.search-results').scrollIntoView({behavior:'smooth',block:'start'});
 });
 domainInput.addEventListener('input',function(){this.setCustomValidity('');});
+</script><script>
+(function(){
+ const root=document.querySelector('.domain-page-main');
+ if(!root)return;
+ const targets=[...root.querySelectorAll('.domain-hero > .eyebrow,.domain-hero > h1,.domain-hero > .lead,.domain-hero > .domain-search,.domain-hero > .extension-list,.domain-hero > .search-results,.domain-hero > .domain-service-shortcuts,.domain-page-main > .panel,.domain-page-main > .domain-final-cta,.domain-feature-grid article,.domain-extension-grid > div,.domain-steps-grid article')];
+ if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ targets.forEach((el,i)=>{el.classList.add('domain-reveal');el.style.setProperty('--reveal-delay',(i%4)*65+'ms');});
+ const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}});},{threshold:.08,rootMargin:'0px 0px -25px 0px'});
+ targets.forEach(el=>observer.observe(el));
+})();
 </script><script src="/js/navigation.js?v=20261023-sleek-menu-2"></script><script src="/js/cookie-consent.js?v=20260928-3"></script><script src="/js/quote-popup.js?v=20261108-2" defer></script></body></html>
