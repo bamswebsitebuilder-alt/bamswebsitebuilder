@@ -18,7 +18,7 @@ import { previewDestination, sourceWebsite } from './preview-navigation.js?v=202
   const section = document.createElement('section');
   section.className = 'personal-preview-intro';
   section.innerHTML = `<h2>${t('See your business in a new design', 'Ve tu negocio con un nuevo diseño')}</h2>
-    <p>${t('Enter your current website to import your business name, description, website image, and brand color when available. Edit the details and compare designs.', 'Introduce tu sitio actual para importar el nombre, la descripción, una imagen y el color de tu negocio cuando estén disponibles. Edita los datos y compara diseños.')}</p>
+    <p>${t('Enter any public website URL, including Wix or GoDaddy sites. View the full original website first, then compare a concept redesign using your business details.', 'Introduce cualquier URL pública, incluso de Wix o GoDaddy. Consulta primero el sitio original completo y luego compara una propuesta de rediseño.')}</p>
     <form><label for="preview-website">${t('Your website URL', 'URL de tu sitio web')}</label>
     <div class="preview-url-row"><input id="preview-website" name="website" type="text" inputmode="url" autocomplete="url" placeholder="www.yourbusiness.com" required maxlength="2048">
     <button type="submit">${t('Preview my site', 'Ver mi sitio')}</button></div></form>`;
@@ -32,6 +32,11 @@ import { previewDestination, sourceWebsite } from './preview-navigation.js?v=202
   dialog.innerHTML = `<div class="preview-dialog-heading"><h2 id="personal-preview-title">${t('Your business, in a new design', 'Tu negocio, con un nuevo diseño')}</h2>
     <button type="button" class="preview-close" aria-label="${t('Close preview', 'Cerrar vista previa')}">×</button></div>
     <p class="preview-note">${t('Concept preview using your website details. The selected template controls the layout. Imported content and your edits personalize it; remaining sections are illustrative. Menu links, page navigation, and contact links are clickable. Forms and purchase actions remain demonstrations.', 'Vista conceptual con los datos de tu sitio. El diseño elegido determina la estructura. Los datos importados y tus cambios lo personalizan; las demás secciones son ilustrativas. Los menús, las páginas y los enlaces de contacto se pueden usar. Los formularios y las compras son demostraciones.')}</p>
+    <div class="preview-view-switch" role="group" aria-label="${t('Preview mode', 'Modo de vista previa')}">
+      <button type="button" class="preview-show-original" aria-pressed="false">${t('View full original website', 'Ver sitio original completo')}</button>
+      <button type="button" class="preview-show-redesign" aria-pressed="true">${t('View redesign concept', 'Ver propuesta de rediseño')}</button>
+    </div>
+    <p class="preview-original-warning" hidden>${t('Some Wix, GoDaddy and other websites block embedded previews. If the original does not appear, use Open current website to see the complete live site in a new tab.', 'Algunos sitios de Wix, GoDaddy y otros proveedores bloquean las vistas integradas. Si no aparece, abre el sitio original en otra pestaña.')}</p>
     <div class="preview-editor"><form class="preview-import"><label for="preview-import-url">${t('Your website URL', 'URL de tu sitio web')}</label>
       <div class="preview-url-row"><input id="preview-import-url" type="text" inputmode="url" autocomplete="url" required maxlength="2048"><button type="submit">${t('Import details', 'Importar datos')}</button></div></form>
       <label for="preview-design">${t('Template', 'Diseño')}</label><select id="preview-design"></select>
@@ -52,6 +57,31 @@ import { previewDestination, sourceWebsite } from './preview-navigation.js?v=202
     <p class="preview-status" role="status" aria-live="polite"></p>
     <div class="preview-frame-wrap" hidden><iframe title="${t('Personalized template preview', 'Vista previa personalizada')}" sandbox="allow-same-origin" referrerpolicy="no-referrer"></iframe></div>`;
   document.body.append(dialog);
+  const originalButton = dialog.querySelector('.preview-show-original');
+  const redesignButton = dialog.querySelector('.preview-show-redesign');
+  const originalWarning = dialog.querySelector('.preview-original-warning');
+  const originalFrame = document.createElement('iframe');
+  originalFrame.className = 'preview-original-frame';
+  originalFrame.title = t('Full original website', 'Sitio web original completo');
+  originalFrame.referrerPolicy = 'no-referrer';
+  originalFrame.loading = 'lazy';
+  originalFrame.hidden = true;
+  dialog.querySelector('.preview-frame-wrap').after(originalFrame);
+  let showingOriginal = false;
+  const syncPreviewMode = () => {
+    const original = sourceWebsite(dialog.querySelector('#preview-import-url').value);
+    if (showingOriginal && !original) showingOriginal = false;
+    originalButton.setAttribute('aria-pressed', String(showingOriginal));
+    redesignButton.setAttribute('aria-pressed', String(!showingOriginal));
+    originalButton.disabled = !original;
+    originalFrame.hidden = !showingOriginal;
+    originalWarning.hidden = !showingOriginal;
+    dialog.querySelector('.preview-frame-wrap').hidden = showingOriginal || !dialog.querySelector('.preview-frame-wrap iframe').hasAttribute('srcdoc');
+    if (showingOriginal && originalFrame.src !== original) originalFrame.src = original;
+    if (!showingOriginal) originalFrame.removeAttribute('src');
+  };
+  originalButton.addEventListener('click', () => { showingOriginal = true; syncPreviewMode(); });
+  redesignButton.addEventListener('click', () => { showingOriginal = false; syncPreviewMode(); });
   const select = dialog.querySelector('select');
   designs.forEach((design, index) => select.add(new Option(design.name, String(index))));
   const urlInput = dialog.querySelector('#preview-import-url');
@@ -300,6 +330,7 @@ import { previewDestination, sourceWebsite } from './preview-navigation.js?v=202
       importSummary = missing.length ? t('Preview updated. Not found on this website: ', 'Vista actualizada. No se encontraron: ') + missing.join(', ') + t('. Add these in the fields above.', '. Añádelos en los campos de arriba.') : t('Preview updated with your business details, logo, photos, services, and brand color.', 'Vista actualizada con los datos, logo, fotos, servicios y color de tu negocio.');
       colorInput.value = /^#[0-9a-f]{6}$/i.test(details.color || '') ? details.color : '#d6ad50';
       await renderPreview();
+      syncPreviewMode();
     } catch {
       if (!controller.signal.aborted && dialog.open) {
         status.textContent = t('We could not read this website. Enter your business name and description, then choose Update preview.', 'No pudimos leer este sitio. Introduce el nombre y la descripción de tu negocio y pulsa Actualizar vista previa.');
@@ -316,6 +347,8 @@ import { previewDestination, sourceWebsite } from './preview-navigation.js?v=202
     currentPage = null;
     urlInput.value = section.querySelector('input').value;
     dialog.showModal();
+    showingOriginal = !!sourceWebsite(urlInput.value);
+    syncPreviewMode();
     setQuote();
     if (urlInput.value.trim()) importDetails();
     else { status.textContent = t('Enter a website URL, or type your business details below.', 'Introduce una URL o escribe los datos de tu negocio abajo.'); wrap.hidden = true; }
@@ -338,6 +371,8 @@ import { previewDestination, sourceWebsite } from './preview-navigation.js?v=202
     importer?.abort();
     clearTimeout(updateTimer);
     frame.removeAttribute('srcdoc');
+    originalFrame.removeAttribute('src');
+    showingOriginal = false;
     section.querySelector('input').value = urlInput.value;
     lastFocus?.focus();
   });
@@ -350,7 +385,7 @@ import { previewDestination, sourceWebsite } from './preview-navigation.js?v=202
     clearTimeout(updateTimer);
     updateTimer = setTimeout(renderPreview, 350);
   }));
-  urlInput.addEventListener('input', setQuote);
+  urlInput.addEventListener('input', () => { setQuote(); syncPreviewMode(); });
   dialog.querySelector('.preview-mobile').addEventListener('click', event => {
     const mobile = wrap.classList.toggle('is-mobile');
     event.currentTarget.setAttribute('aria-pressed', String(mobile));
