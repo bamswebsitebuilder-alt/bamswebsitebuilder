@@ -81,6 +81,44 @@ document.querySelectorAll('.template-card').forEach((card) => {
   }
 });
 
+/* Pair related demo variations in expandable industry collections. */
+const demoCollections = [
+  { label: 'Roofing', es: 'Techos', names: ['Summit Roofing Co.', 'IronPeak Roofing'] },
+  { label: 'Heating & Air Conditioning', es: 'Climatización', names: ['Coastal Air Comfort', 'Precision Climate'] },
+  { label: 'Medical Clinics', es: 'Clínicas médicas', names: ['Harbor Health Clinic', 'Everwell Medical'] },
+  { label: 'Dental Practices', es: 'Clínicas dentales', names: ['BrightBay Dental', 'Pearl & Pine Dentistry'] },
+  { label: 'Construction', es: 'Construcción', names: ['StoneLine Construction', 'Forge & Frame Builders'] },
+  { label: 'Fitness & Gyms', es: 'Gimnasios', names: ['CoreRise Fitness', 'Forge Athletics Club'] },
+  { label: 'Coffee Shops', es: 'Cafeterías', names: ['Ember Cup Coffee', 'Juniper & Roast'] },
+  { label: 'Auto Repair', es: 'Talleres de autos', names: ['Bayline Auto Care', 'TorqueWorks Garage'] }
+];
+const catalogGrid = document.querySelector('.templates-page .template-grid');
+if (catalogGrid) {
+  const byTitle = new Map([...catalogGrid.querySelectorAll('.template-card')].map(card => [
+    card.querySelector('h2')?.textContent.trim(), card
+  ]));
+  demoCollections.forEach(collection => {
+    const cards = collection.names.map(name => byTitle.get(name));
+    if (cards.some(card => !card)) return;
+    const details = document.createElement('details');
+    details.className = 'template-demo-collection';
+    details.dataset.category = cards[0].dataset.category;
+    const summary = document.createElement('summary');
+    const name = document.createElement('span');
+    name.className = 'template-collection-name';
+    name.textContent = spanishTemplates ? collection.es : collection.label;
+    const count = document.createElement('span');
+    count.className = 'template-collection-count';
+    count.textContent = spanishTemplates ? '2 diseños · Ver opciones' : '2 designs · View options';
+    summary.append(name, count);
+    const inner = document.createElement('div');
+    inner.className = 'template-collection-grid';
+    cards[0].before(details);
+    cards.forEach(card => inner.append(card));
+    details.append(summary, inner);
+  });
+}
+
 const filterButtons = [...document.querySelectorAll('.template-filter')];
 const templateCards = [...document.querySelectorAll('.template-card')];
 const filterSummary = document.createElement('p');
@@ -100,6 +138,10 @@ function applyTemplateFilter(button) {
   templateCards.forEach((card) => {
     card.hidden = selectedFilter !== 'all' && card.dataset.category !== selectedFilter;
     if (!card.hidden) visible += 1;
+  });
+  document.querySelectorAll('.template-demo-collection').forEach(group => {
+    const available = [...group.querySelectorAll('.template-card')].some(card => !card.hidden);
+    group.hidden = !available;
   });
   filterSummary.textContent = spanishTemplates
     ? `${visible} ${visible === 1 ? 'diseño disponible' : 'diseños disponibles'}`
