@@ -202,3 +202,12 @@ html[data-theme=light] .templates-page .template-catalog-search::placeholder{col
 .templates-page select.template-catalog-search option{background:#171717;color:#fff}
 html[data-theme=light] .templates-page select.template-catalog-search option{background:#fff;color:#241c10}
 @media(max-width:760px){.templates-page select.template-catalog-search{max-width:none}}
+
+/* Single clean category selector; suppress legacy duplicate filter controls. */
+.templates-page .template-filters[hidden]{display:none!important}
+.templates-page .template-catalog-search-row{display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:100%;margin:0 0 28px;padding:18px 22px;border:1px solid rgba(212,166,55,.26);border-radius:16px;background:rgba(212,166,55,.045)}
+.templates-page .template-catalog-label{font-size:1rem;font-weight:750;letter-spacing:.01em}
+.templates-page select.template-catalog-search{width:min(100%,380px);min-height:48px;padding:10px 16px;border:1px solid rgba(212,166,55,.55);border-radius:10px;background:#171717;color:#fff;font:inherit;cursor:pointer}
+.templates-page .template-card[hidden]{display:none!important}
+@media(max-width:620px){.templates-page .template-catalog-search-row{flex-direction:column;align-items:stretch;padding:16px}.templates-page select.template-catalog-search{width:100%;max-width:none}}
+@media(prefers-reduced-motion:reduce){.templates-page .template-card{transition:none!important}}
