@@ -133,6 +133,20 @@ if (catalogGrid) {
   });
 }
 
+// Use each collection's actual demo screenshot as its cover, never a blank box.
+document.querySelectorAll('.template-demo-collection').forEach(group => {
+  const cover = group.querySelector('.template-card .template-preview img');
+  const src = cover?.getAttribute('src');
+  if (src) {
+    try {
+      const url = new URL(src, location.href);
+      if (['http:', 'https:'].includes(url.protocol)) {
+        group.querySelector('summary')?.style.setProperty('--collection-cover', 'url("' + url.href.replace(/["\\]/g, '') + '")');
+      }
+    } catch {}
+  }
+});
+
 const filterButtons = [...document.querySelectorAll('.template-filter')];
 const templateCards = [...document.querySelectorAll('.template-card')];
 const filterSummary = document.createElement('p');
