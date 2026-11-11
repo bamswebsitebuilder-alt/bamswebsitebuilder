@@ -15,9 +15,6 @@
     ".review-summary-card",
     ".contact-card",
     ".contact-form",
-    ".portal-card",
-    ".admin-card",
-    ".admin-stat-card",
     ".feature-card",
     ".process-step",
     ".faq-item"
@@ -29,7 +26,7 @@
     const elements = [...document.querySelectorAll(revealSelectors)];
 
     elements.forEach((element, index) => {
-      if (element.closest("header, nav, .mobile-navigation")) return;
+      if (element.closest("header, nav, .mobile-navigation, [hidden], [aria-hidden=\"true\"]")) return;
       if (!element.hasAttribute("data-reveal")) {
         element.setAttribute("data-reveal", revealDirections[index % revealDirections.length]);
       }
@@ -38,7 +35,7 @@
       }
     });
 
-    return elements.filter((element) => !element.closest("header, nav, .mobile-navigation"));
+    return elements.filter((element) => !element.closest("header, nav, .mobile-navigation, [hidden], [aria-hidden=\"true\"]"));
   }
 
   function revealOnScroll(elements) {
