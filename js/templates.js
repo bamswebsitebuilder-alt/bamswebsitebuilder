@@ -65,6 +65,19 @@ if (afterhoursCard) {
     </div>`;
   if (spanishTemplates) premiumCard.innerHTML = localizeTemplateMarkup(premiumCard.innerHTML);
   afterhoursCard.insertAdjacentElement('afterend', premiumCard);
+  // Keep the two pricing variations together rather than repeating the same photo.
+  const collection = document.createElement('details');
+  collection.className = 'template-demo-collection';
+  collection.dataset.category = 'fashion';
+  const summary = document.createElement('summary');
+  summary.innerHTML = '<span class="template-collection-name"></span><span class="template-collection-count"></span>';
+  summary.querySelector('.template-collection-name').textContent = 'AFTERHOURS';
+  summary.querySelector('.template-collection-count').textContent = spanishTemplates ? '2 diseños · Ver opciones' : '2 designs · View options';
+  const inner = document.createElement('div');
+  inner.className = 'template-collection-grid';
+  afterhoursCard.before(collection);
+  inner.append(afterhoursCard, premiumCard);
+  collection.append(summary, inner);
 }
 
 document.querySelectorAll('.template-card').forEach((card) => {
