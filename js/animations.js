@@ -88,12 +88,20 @@
     });
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    document.documentElement.classList.add("motion-enabled");
+  const initializeMotion = () => {
+    if (document.documentElement.dataset.bamMotionInitialized === "true") return;
+    document.documentElement.dataset.bamMotionInitialized = "true";
     const revealElements = prepareReveals();
+    // Only enable reveal opacity after the targets have been registered.
+    document.documentElement.classList.add("motion-enabled");
     prepareHero();
     prepareImages();
     addPointerGlow();
     revealOnScroll(revealElements);
-  });
+  };
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeMotion, { once: true });
+  } else {
+    initializeMotion();
+  }
 })();
