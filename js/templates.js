@@ -120,53 +120,33 @@ document.querySelectorAll('.template-select').forEach((link) => {
 });
 
 
-/* Wix-inspired catalog navigation: search and desktop category sidebar. */
+/* Single, accessible category dropdown — no duplicate sidebar controls. */
 const galleryGrid = document.querySelector('.templates-page .template-grid');
 const galleryFilters = document.querySelector('.templates-page .template-filters');
 if (galleryGrid && galleryFilters) {
-  const layout = document.createElement('div');
-  layout.className = 'template-catalog-layout';
-  const sidebar = document.createElement('aside');
-  sidebar.className = 'template-catalog-sidebar';
-  sidebar.setAttribute('aria-label', spanishTemplates ? 'Categorías de diseños' : 'Template categories');
-  const sidebarTitle = document.createElement('h3');
-  sidebarTitle.textContent = spanishTemplates ? 'Categorías' : 'Categories';
-  sidebar.append(sidebarTitle, galleryFilters);
-  const results = document.createElement('div');
-  results.className = 'template-catalog-results';
+  const toolbar = document.createElement('div');
+  toolbar.className = 'template-catalog-search-row';
+  const label = document.createElement('label');
+  label.className = 'template-catalog-label';
+  label.textContent = spanishTemplates ? 'Filtrar por categoría' : 'Browse by category';
   const categorySelect = document.createElement('select');
   categorySelect.className = 'template-catalog-search';
-  categorySelect.setAttribute('aria-label', spanishTemplates ? 'Seleccionar categoría' : 'Select template category');
+  categorySelect.id = 'template-category-select';
   filterButtons.forEach(button => {
     const option = document.createElement('option');
     option.value = button.dataset.filter;
     option.textContent = button.textContent.trim();
     categorySelect.append(option);
   });
+  label.htmlFor = categorySelect.id;
+  toolbar.append(label, categorySelect);
+  galleryGrid.before(toolbar);
+  galleryFilters.hidden = true;
+  galleryFilters.setAttribute('aria-hidden', 'true');
+  galleryFilters.querySelectorAll('button').forEach(button => button.tabIndex = -1);
   categorySelect.value = filterButtons.find(button => button.classList.contains('active'))?.dataset.filter || 'all';
-  const searchRow = document.createElement('div');
-  searchRow.className = 'template-catalog-search-row';
-  searchRow.append(categorySelect);
-  galleryGrid.before(layout);
-  layout.append(sidebar, results);
-  results.append(searchRow, filterSummary, galleryGrid);
-  function updateCatalog() {
-    const selected = filterButtons.find(button => button.classList.contains('active'))?.dataset.filter || 'all';
-
-    let count = 0;
-    templateCards.forEach(card => {
-      const matchesCategory = selected === 'all' || card.dataset.category === selected;
-
-      card.hidden = !matchesCategory;
-      if (!card.hidden) count++;
-    });
-    filterSummary.textContent = spanishTemplates ? `${count} ${count === 1 ? 'diseño disponible' : 'diseños disponibles'}` : `${count} ${count === 1 ? 'design available' : 'designs available'}`;
-  }
   categorySelect.addEventListener('change', () => {
     const button = filterButtons.find(item => item.dataset.filter === categorySelect.value);
     if (button) applyTemplateFilter(button);
-    updateCatalog();
   });
-  filterButtons.forEach(button => button.addEventListener('click', () => { categorySelect.value = button.dataset.filter; updateCatalog(); }));
-  updateCatalog();
 }
