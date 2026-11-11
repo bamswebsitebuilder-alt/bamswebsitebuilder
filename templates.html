@@ -893,7 +893,7 @@
               params.set('payment', link.dataset.payment);
             }
 
-            window.location.href = '/contact?' + params.toString();
+            window.location.href = (document.documentElement.lang.toLowerCase().startsWith('es') ? '/es/contact' : '/contact') + '?' + params.toString();
           });
         });
     });
