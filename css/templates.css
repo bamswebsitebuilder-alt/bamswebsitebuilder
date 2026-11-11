@@ -197,3 +197,14 @@ html[data-theme=light] .templates-page .template-demo-collection{background:#fff
 html[data-theme=light] .templates-page .template-collection-name{color:#6c4900}
 html[data-theme=light] .templates-page .template-collection-count{color:#514632}
 @media(max-width:600px){.templates-page .template-collection-grid{grid-template-columns:minmax(0,1fr);padding:14px}}
+
+/* Full source website vs personalized concept preview. */
+.personal-preview-dialog .preview-view-switch{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+.personal-preview-dialog .preview-view-switch button{cursor:pointer;border:1px solid rgba(212,166,55,.45);border-radius:9px;padding:11px 16px;background:#1b1b1b;color:#fff;font:inherit;font-weight:700}
+.personal-preview-dialog .preview-view-switch button[aria-pressed=true]{background:#d4a637;color:#111}
+.personal-preview-dialog .preview-view-switch button:disabled{opacity:.5;cursor:not-allowed}
+.personal-preview-dialog .preview-original-warning{font-size:.9rem;line-height:1.6;margin:8px 0;color:inherit}
+.personal-preview-dialog .preview-original-frame{width:100%;height:min(72vh,800px);min-height:420px;border:1px solid rgba(212,166,55,.3);border-radius:10px;background:#fff}
+.personal-preview-dialog .preview-original-frame[hidden]{display:none!important}
+html[data-theme=light] .personal-preview-dialog .preview-view-switch button:not([aria-pressed=true]){background:#fff;color:#241c10}
+@media(max-width:600px){.personal-preview-dialog .preview-view-switch button{flex:1 1 100%}.personal-preview-dialog .preview-original-frame{min-height:460px}}
