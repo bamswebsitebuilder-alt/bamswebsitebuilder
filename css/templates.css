@@ -259,3 +259,22 @@ html[data-theme=light] .templates-page .template-card,html[data-theme=light] .te
 @media(max-width:980px){.templates-page .template-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}}
 @media(max-width:640px){.templates-page .templates-hero{padding:50px 18px 36px}.templates-page .templates-content{padding:28px 15px 58px}.templates-page .template-grid{grid-template-columns:minmax(0,1fr);gap:18px}.templates-page .template-card-body{padding:17px}.templates-page .template-catalog-search-row{padding:14px;gap:10px}.templates-page .template-collection-grid{grid-template-columns:minmax(0,1fr);gap:14px;padding:14px}.templates-page .template-demo-collection>summary{padding:18px}.templates-page .template-actions>a,.templates-page .template-actions>button{min-height:44px}}
 @media(prefers-reduced-motion:reduce){.templates-page .template-card,.templates-page .template-demo-collection{transition:none!important}}
+
+/* Compact collections: expanding a category must not create a full-width gallery row. */
+.templates-page .template-demo-collection,
+.templates-page .template-demo-collection[open]{grid-column:auto!important;align-self:start;min-width:0}
+.templates-page .template-demo-collection>summary,
+.templates-page .template-demo-collection[open]>summary{aspect-ratio:auto;min-height:108px;padding:18px 20px;gap:5px;background:linear-gradient(90deg,rgba(0,0,0,.85),rgba(0,0,0,.36)),linear-gradient(135deg,#242424,#101010)}
+.templates-page .template-demo-collection>summary::before{background-position:center;opacity:.5}
+.templates-page .template-demo-collection[open]>summary{border-bottom:1px solid rgba(212,166,55,.22)}
+.templates-page .template-collection-grid,
+.templates-page .template-demo-collection[open] .template-collection-grid{display:grid;grid-template-columns:minmax(0,1fr)!important;gap:12px;padding:12px}
+.templates-page .template-collection-grid .template-card{width:100%;height:auto}
+.templates-page .template-collection-grid .template-preview{aspect-ratio:16/8}
+.templates-page .template-collection-grid .template-card-body{padding:14px}
+.templates-page .template-collection-grid .template-card-body h2{font-size:1rem}
+.templates-page .template-collection-grid .template-price{margin-top:2px}
+.templates-page .template-collection-grid .template-actions{gap:6px}
+.templates-page .template-collection-grid .template-actions>a,
+.templates-page .template-collection-grid .template-actions>button{font-size:.75rem;padding:9px 6px}
+@media(max-width:640px){.templates-page .template-demo-collection>summary,.templates-page .template-demo-collection[open]>summary{min-height:96px;padding:16px}.templates-page .template-collection-grid{padding:10px;gap:10px}}
