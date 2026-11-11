@@ -53,10 +53,10 @@
 
   const main = document.querySelector('main') || document.querySelector('section');
   if (main && !main.id) main.id = 'main-content';
-  if (main && !document.querySelector('.skip-link, .site-skip-link')) {
+  if (main && !document.querySelector('.skip-link, .site-skip-link, a[href="#main-content"]')) {
     const skip = document.createElement('a');
-    skip.className = 'skip-link';
-    skip.href = '#main-content';
+    skip.className = 'site-skip-link';
+    skip.href = '#' + main.id;
     skip.textContent = spanish ? 'Saltar al contenido principal' : 'Skip to main content';
     document.body.prepend(skip);
   }
