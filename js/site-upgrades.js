@@ -20,9 +20,7 @@
     body.prepend(label);
   };
 
-  document.querySelectorAll('.portfolio-card').forEach((card) => {
-    addLabel(card, 'project-status-label', spanish ? 'Concepto de demostración' : 'Demo Concept');
-  });
+  // Portfolio showcases completed client work; do not mislabel it as demo concepts.
 
   const demos = [
     {name:'Maris & Coast Realty',type:spanish?'Bienes raíces de lujo':'Luxury Real Estate',image:'/images/luxury-real-estate-hero.webp',href:'/luxury-coastal-realty/',tier:'Premium',price:'$1,100',category:'professional',features:spanish?['Galería de propiedades','Solicitudes de consulta','Diseño premium adaptable']:['Property gallery','Consultation requests','Premium responsive design']},
