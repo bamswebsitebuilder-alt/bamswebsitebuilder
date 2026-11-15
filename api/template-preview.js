@@ -131,11 +131,25 @@ export function extractDetails(html, sourceURL, css = '', cssSourceURL = sourceU
   const color = accent || paletteColor || metadata['theme-color'] || '';
   if (/^#[0-9a-f]{3}$/i.test(color)) details.color = '#' + [...color.slice(1)].map(c => c + c).join('');
   else if (/^#[0-9a-f]{6}$/i.test(color)) details.color = color;
+  // Read section headings from semantic service containers, not just <section id="services">.
   const serviceSection = clean.match(/<section\b[^>]*(?:id|class)=["'][^"']*services?[^"']*["'][^>]*>([\s\S]*?)<\/section>/i)?.[1];
   const serviceMarkup = serviceSection || '';
   const servicePattern = /<h3\b/i.test(serviceMarkup) ? /<h3\b[^>]*>([\s\S]*?)<\/h3>/gi : /<h2\b[^>]*>([\s\S]*?)<\/h2>/gi;
   const services = [...serviceMarkup.matchAll(servicePattern)].map(match => plain(match[1], 100)).filter(text => text && !/^(our |all |nuestros |todos )?services?$/i.test(text));
   details.services = [...new Set(services)].slice(0, 8);
+  // Preserve discovered page URLs so callers can distinguish a missing page from an unread page.
+  const links = [...html.matchAll(/<a\\b(?:[^>"']|"[^"]*"|'[^']*')*>/gi)].map(match => attributes(match[0]));
+  const pages = [];
+  for (const link of links) {
+    if (!link.href || /^(mailto:|tel:|javascript:|#)/i.test(link.href)) continue;
+    try {
+      const target = websiteURL(new URL(link.href.replaceAll('&amp;', '&'), sourceURL).href);
+      if (target.origin !== new URL(sourceURL).origin || /\\.(pdf|jpg|png|webp|svg|zip)$/i.test(target.pathname)) continue;
+      const label = plain(link['aria-label'] || link.title || '', 80);
+      if (!pages.some(page => page.url === target.href)) pages.push({ url: target.href, label });
+    } catch {}
+  }
+  details.pages = pages.slice(0, 40);
   const email = clean.match(/href=["']mailto:([^?"']+)/i)?.[1];
   const phone = clean.match(/href=["']tel:([^"']+)/i)?.[1];
   if (email) details.email = plain(email, 100);
@@ -175,6 +189,21 @@ export default async function handler(req, res) {
       } catch {}
     }
     const details = extractDetails(page.html, page.url, css, cssSourceURL);
+    // Inspect a small number of same-origin service pages when the homepage has no services.
+    // Do not assume that every business has a page literally named /services.
+    if (!details.services.length) {
+      const candidates = (details.pages || []).filter(item => /servic|program|offering|what-we-do|solutions|coaches|teams|training/i.test(item.url + ' ' + item.label)).slice(0, 3);
+      for (const candidate of candidates) {
+        try {
+          const subpage = await readWebsite(websiteURL(candidate.url), 0, 'html', true);
+          const found = extractDetails(subpage.html, subpage.url);
+          if (found.services.length) { details.services = found.services; break; }
+          const headings = [...subpage.html.matchAll(/<h[23]\\b[^>]*>([\\s\\S]*?)<\\/h[23]>/gi)]
+            .map(match => plain(match[1], 100)).filter(value => value.length > 3 && !/^(our )?(services|programs|solutions)$/i.test(value));
+          if (headings.length) { details.services = [...new Set(headings)].slice(0, 8); break; }
+        } catch { /* A blocked secondary page does not invalidate the homepage. */ }
+      }
+    }
     if (!details.name) throw new Error('No business details found');
     return res.status(200).json(details);
   } catch {

@@ -226,7 +226,7 @@ import { previewDestination, sourceWebsite } from './preview-navigation.js?v=202
       doc.querySelectorAll('main .stats, main .testimonials, main #testimonials, main #reviews, main .quotes, main .impact-list').forEach(node => node.remove());
       doc.querySelectorAll('address, .demo-bar, .demo-banner, .demo-notice').forEach(node => node.remove());
       const style = doc.createElement('style');
-      style.textContent = '[hidden]{display:none!important}body{overflow-x:hidden}.reveal,[data-reveal],.fade-in{opacity:1!important;transform:none!important}header .brand,header .wordmark,header .logo,header .site-brand{font-weight:800;overflow-wrap:anywhere;max-width:320px}';
+      style.textContent = '[hidden]{display:none!important}body{overflow-x:hidden}main h1,main h2{overflow-wrap:anywhere;max-width:100%}main img{max-width:100%}.reveal,[data-reveal],.fade-in{opacity:1!important;transform:none!important}header .brand,header .wordmark,header .logo,header .site-brand{font-weight:800;overflow-wrap:anywhere;max-width:320px}';
       if (/^#[0-9a-f]{6}$/i.test(colorInput.value)) {
         const rgb = colorInput.value.slice(1).match(/../g).map(hex => parseInt(hex, 16) / 255).map(c => c <= .04045 ? c / 12.92 : ((c + .055) / 1.055) ** 2.4);
         const luminance = .2126 * rgb[0] + .7152 * rgb[1] + .0722 * rgb[2];
@@ -336,7 +336,7 @@ import { previewDestination, sourceWebsite } from './preview-navigation.js?v=202
       phoneInput.value = details.phone || '';
       importedImages = details.images || [];
       const missing = [!details.logo && t('logo', 'logo'), !details.image && t('photos', 'fotos'), !details.services?.length && t('services', 'servicios'), !details.color && t('brand color', 'color de marca')].filter(Boolean);
-      importSummary = missing.length ? t('Preview updated. Not found on this website: ', 'Vista actualizada. No se encontraron: ') + missing.join(', ') + t('. Add these in the fields above.', '. Añádelos en los campos de arriba.') : t('Preview updated with your business details, logo, photos, services, and brand color.', 'Vista actualizada con los datos, logo, fotos, servicios y color de tu negocio.');
+      importSummary = missing.length ? t('Some details could not be extracted automatically: ', 'No se pudieron extraer automáticamente algunos datos: ') + missing.join(', ') + t('. You can add or correct them above.', '. Puedes añadirlos o corregirlos arriba.') : t('Preview updated with your business details, logo, photos, services, and brand color.', 'Vista actualizada con los datos, logo, fotos, servicios y color de tu negocio.');
       colorInput.value = /^#[0-9a-f]{6}$/i.test(details.color || '') ? details.color : '#d6ad50';
       await renderPreview();
       syncPreviewMode();
