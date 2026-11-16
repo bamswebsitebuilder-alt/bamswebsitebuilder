@@ -41,5 +41,15 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/hype7v7",
+      "destination": "https://hype-7v7-sports-demo-braionmoreland-7973s-projects.vercel.app/"
+    },
+    {
+      "source": "/hype7v7/:path*",
+      "destination": "https://hype-7v7-sports-demo-braionmoreland-7973s-projects.vercel.app/:path*"
+    }
   ]
 }
