@@ -138,13 +138,13 @@ export function extractDetails(html, sourceURL, css = '', cssSourceURL = sourceU
   const services = [...serviceMarkup.matchAll(servicePattern)].map(match => plain(match[1], 100)).filter(text => text && !/^(our |all |nuestros |todos )?services?$/i.test(text));
   details.services = [...new Set(services)].slice(0, 8);
   // Preserve discovered page URLs so callers can distinguish a missing page from an unread page.
-  const links = [...html.matchAll(/<a\\b(?:[^>"']|"[^"]*"|'[^']*')*>/gi)].map(match => attributes(match[0]));
+  const links = [...html.matchAll(/<a\b(?:[^>"']|"[^"]*"|'[^']*')*>/gi)].map(match => attributes(match[0]));
   const pages = [];
   for (const link of links) {
     if (!link.href || /^(mailto:|tel:|javascript:|#)/i.test(link.href)) continue;
     try {
       const target = websiteURL(new URL(link.href.replaceAll('&amp;', '&'), sourceURL).href);
-      if (target.origin !== new URL(sourceURL).origin || /\\.(pdf|jpg|png|webp|svg|zip)$/i.test(target.pathname)) continue;
+      if (target.origin !== new URL(sourceURL).origin || /\.(pdf|jpg|png|webp|svg|zip)$/i.test(target.pathname)) continue;
       const label = plain(link['aria-label'] || link.title || '', 80);
       if (!pages.some(page => page.url === target.href)) pages.push({ url: target.href, label });
     } catch {}
@@ -198,7 +198,7 @@ export default async function handler(req, res) {
           const subpage = await readWebsite(websiteURL(candidate.url), 0, 'html', true);
           const found = extractDetails(subpage.html, subpage.url);
           if (found.services.length) { details.services = found.services; break; }
-          const headings = [...subpage.html.matchAll(/<h[23]\\b[^>]*>([\\s\\S]*?)<\\/h[23]>/gi)]
+          const headings = [...subpage.html.matchAll(/<h[23]\b[^>]*>([\s\S]*?)<\/h[23]>/gi)]
             .map(match => plain(match[1], 100)).filter(value => value.length > 3 && !/^(our )?(services|programs|solutions)$/i.test(value));
           if (headings.length) { details.services = [...new Set(headings)].slice(0, 8); break; }
         } catch { /* A blocked secondary page does not invalidate the homepage. */ }
