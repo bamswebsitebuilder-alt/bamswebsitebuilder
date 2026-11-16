@@ -103,6 +103,7 @@ import { previewDestination, sourceWebsite } from './preview-navigation.js?v=202
   const emailInput = dialog.querySelector('#preview-email');
   const phoneInput = dialog.querySelector('#preview-phone');
   let importedImages = [];
+  let importedSections = [];
   let importSummary = '';
   const safeImage = value => {
     try {
@@ -220,13 +221,47 @@ import { previewDestination, sourceWebsite } from './preview-navigation.js?v=202
           card.querySelectorAll('li, .service-meta, .service-price, .service-duration, .price-tag').forEach(node => node.remove());
         });
       }
+      // Replace remaining demo copy with real imported sections, preserving the template's visual shell.
+      if (importedSections.length) {
+        const main = doc.querySelector('main');
+        if (main) {
+          const existing = [...main.querySelectorAll('section')].filter(node => node !== hero && !node.contains(hero) && node !== serviceSection && !node.contains(serviceSection));
+          const used = new Set();
+          for (const section of existing) {
+            const headingNode = section.querySelector('h2, h3');
+            const copyNodes = [...section.querySelectorAll('p')].filter(p => !p.closest('header,nav,footer'));
+            if (!headingNode || !copyNodes.length) continue;
+            const match = importedSections.find((item, index) => !used.has(index) && item.heading && item.paragraphs?.length);
+            if (!match) { section.remove(); continue; }
+            const index = importedSections.indexOf(match);
+            used.add(index);
+            headingNode.textContent = match.heading;
+            copyNodes.forEach((node, i) => { if (match.paragraphs[i]) node.textContent = match.paragraphs[i]; else node.remove(); });
+            section.querySelectorAll('article,li').forEach(node => {
+              if (!node.contains(headingNode) && !copyNodes.some(p => node.contains(p))) node.remove();
+            });
+          }
+          for (const [index, item] of importedSections.entries()) {
+            if (used.has(index) || !item.heading || !item.paragraphs?.length) continue;
+            const section = doc.createElement('section');
+            section.className = 'imported-business-section';
+            const inner = doc.createElement('div');
+            inner.className = 'imported-business-content';
+            const h = doc.createElement('h2'); h.textContent = item.heading; inner.append(h);
+            item.paragraphs.forEach(value => { const p = doc.createElement('p'); p.textContent = value; inner.append(p); });
+            section.append(inner); main.append(section);
+          }
+        }
+      }
+      // Suppress template-specific promotional claims and example pricing.
+      doc.querySelectorAll('main .pricing,main #pricing,main .price-list,main .demo-content').forEach(node => node.remove());
       doc.querySelectorAll('a[href^="mailto:"]').forEach(node => { node.textContent = emailInput.value.trim() || t('Your business email', 'Correo de tu negocio'); });
       doc.querySelectorAll('a[href^="tel:"]').forEach(node => node.textContent = phoneInput.value.trim() || t('Your business phone', 'Teléfono de tu negocio'));
       // Sample reviews, outcome figures, and demo addresses do not describe the imported business.
       doc.querySelectorAll('main .stats, main .testimonials, main #testimonials, main #reviews, main .quotes, main .impact-list').forEach(node => node.remove());
       doc.querySelectorAll('address, .demo-bar, .demo-banner, .demo-notice').forEach(node => node.remove());
       const style = doc.createElement('style');
-      style.textContent = '[hidden]{display:none!important}body{overflow-x:hidden}main h1,main h2{overflow-wrap:anywhere;max-width:100%}main img{max-width:100%}.reveal,[data-reveal],.fade-in{opacity:1!important;transform:none!important}header .brand,header .wordmark,header .logo,header .site-brand{font-weight:800;overflow-wrap:anywhere;max-width:320px}';
+      style.textContent = '.imported-business-section{padding:clamp(3rem,7vw,6rem) 1.5rem}.imported-business-content{max-width:1100px;margin:auto}.imported-business-content p{max-width:75ch;line-height:1.75;margin:1rem 0}[hidden]{display:none!important}body{overflow-x:hidden}main h1,main h2{overflow-wrap:anywhere;max-width:100%}main img{max-width:100%}.reveal,[data-reveal],.fade-in{opacity:1!important;transform:none!important}header .brand,header .wordmark,header .logo,header .site-brand{font-weight:800;overflow-wrap:anywhere;max-width:320px}';
       if (/^#[0-9a-f]{6}$/i.test(colorInput.value)) {
         const rgb = colorInput.value.slice(1).match(/../g).map(hex => parseInt(hex, 16) / 255).map(c => c <= .04045 ? c / 12.92 : ((c + .055) / 1.055) ** 2.4);
         const luminance = .2126 * rgb[0] + .7152 * rgb[1] + .0722 * rgb[2];
@@ -316,6 +351,7 @@ import { previewDestination, sourceWebsite } from './preview-navigation.js?v=202
     emailInput.value = '';
     phoneInput.value = '';
     importedImages = [];
+    importedSections = [];
     importSummary = '';
     colorInput.value = '#d6ad50';
     status.textContent = t('Reading your business details…', 'Leyendo los datos de tu negocio…');
@@ -335,6 +371,7 @@ import { previewDestination, sourceWebsite } from './preview-navigation.js?v=202
       emailInput.value = details.email || '';
       phoneInput.value = details.phone || '';
       importedImages = details.images || [];
+      importedSections = Array.isArray(details.sections) ? details.sections : [];
       const missing = [!details.logo && t('logo', 'logo'), !details.image && t('photos', 'fotos'), !details.services?.length && t('services', 'servicios'), !details.color && t('brand color', 'color de marca')].filter(Boolean);
       importSummary = missing.length ? t('Some details could not be extracted automatically: ', 'No se pudieron extraer automáticamente algunos datos: ') + missing.join(', ') + t('. You can add or correct them above.', '. Puedes añadirlos o corregirlos arriba.') : t('Preview updated with your business details, logo, photos, services, and brand color.', 'Vista actualizada con los datos, logo, fotos, servicios y color de tu negocio.');
       colorInput.value = /^#[0-9a-f]{6}$/i.test(details.color || '') ? details.color : '#d6ad50';
