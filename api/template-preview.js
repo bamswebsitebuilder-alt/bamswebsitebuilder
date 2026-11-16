@@ -150,6 +150,19 @@ export function extractDetails(html, sourceURL, css = '', cssSourceURL = sourceU
     } catch {}
   }
   details.pages = pages.slice(0, 40);
+  // Collect actual section copy instead of relying on template placeholders.
+  const sections = [];
+  const sectionPattern = /<section\\b[^>]*>([\\s\\S]*?)<\\/section>/gi;
+  for (const match of clean.matchAll(sectionPattern)) {
+    const body = match[1];
+    const heading = plain(body.match(/<h[1-3]\\b[^>]*>([\\s\\S]*?)<\\/h[1-3]>/i)?.[1], 120);
+    const paragraphs = [...body.matchAll(/<p\\b[^>]*>([\\s\\S]*?)<\\/p>/gi)]
+      .map(item => plain(item[1], 500)).filter(value => value.length > 25).slice(0, 5);
+    if (heading && paragraphs.length && !sections.some(item => item.heading === heading))
+      sections.push({ heading, paragraphs });
+  }
+  details.sections = sections.slice(0, 16);
+
   const email = clean.match(/href=["']mailto:([^?"']+)/i)?.[1];
   const phone = clean.match(/href=["']tel:([^"']+)/i)?.[1];
   if (email) details.email = plain(email, 100);
@@ -197,6 +210,7 @@ export default async function handler(req, res) {
         try {
           const subpage = await readWebsite(websiteURL(candidate.url), 0, 'html', true);
           const found = extractDetails(subpage.html, subpage.url);
+          if (found.sections?.length) details.sections = [...(details.sections || []), ...found.sections].slice(0, 24);
           if (found.services.length) { details.services = found.services; break; }
           const headings = [...subpage.html.matchAll(/<h[23]\b[^>]*>([\s\S]*?)<\/h[23]>/gi)]
             .map(match => plain(match[1], 100)).filter(value => value.length > 3 && !/^(our )?(services|programs|solutions)$/i.test(value));
