@@ -152,11 +152,11 @@ export function extractDetails(html, sourceURL, css = '', cssSourceURL = sourceU
   details.pages = pages.slice(0, 40);
   // Collect actual section copy instead of relying on template placeholders.
   const sections = [];
-  const sectionPattern = /<section\\b[^>]*>([\\s\\S]*?)<\\/section>/gi;
+  const sectionPattern = /<section\b[^>]*>([\s\S]*?)<\/section>/gi;
   for (const match of clean.matchAll(sectionPattern)) {
     const body = match[1];
-    const heading = plain(body.match(/<h[1-3]\\b[^>]*>([\\s\\S]*?)<\\/h[1-3]>/i)?.[1], 120);
-    const paragraphs = [...body.matchAll(/<p\\b[^>]*>([\\s\\S]*?)<\\/p>/gi)]
+    const heading = plain(body.match(/<h[1-3]\b[^>]*>([\s\S]*?)<\/h[1-3]>/i)?.[1], 120);
+    const paragraphs = [...body.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)]
       .map(item => plain(item[1], 500)).filter(value => value.length > 25).slice(0, 5);
     if (heading && paragraphs.length && !sections.some(item => item.heading === heading))
       sections.push({ heading, paragraphs });
