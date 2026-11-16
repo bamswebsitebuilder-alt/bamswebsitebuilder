@@ -343,24 +343,18 @@ import { previewDestination, sourceWebsite } from './preview-navigation.js?v=202
     currentPage = null;
     wrap.hidden = true;
     importButton.disabled = true;
-    nameInput.value = '';
-    descriptionInput.value = '';
-    imageInput.value = '';
-    logoInput.value = '';
-    servicesInput.value = '';
-    emailInput.value = '';
-    phoneInput.value = '';
-    importedImages = [];
-    importedSections = [];
+    // Keep the last usable preview intact until the new import succeeds.
     importSummary = '';
-    colorInput.value = '#d6ad50';
     status.textContent = t('Reading your business details…', 'Leyendo los datos de tu negocio…');
     try {
       const response = await fetch(importEndpoint, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: urlInput.value.trim() }), signal: controller.signal,
       });
-      if (!response.ok) throw new Error('Import unavailable');
+      if (!response.ok) {
+        const failure = await response.json().catch(() => ({}));
+        throw new Error(failure.error || 'Import unavailable');
+      }
       const details = await response.json();
       if (controller.signal.aborted || !dialog.open) return;
       nameInput.value = details.name || '';
@@ -377,8 +371,9 @@ import { previewDestination, sourceWebsite } from './preview-navigation.js?v=202
       colorInput.value = /^#[0-9a-f]{6}$/i.test(details.color || '') ? details.color : '#d6ad50';
       await renderPreview();
       syncPreviewMode();
-    } catch {
+    } catch (error) {
       if (!controller.signal.aborted && dialog.open) {
+        console.warn('Website import failed:', error);
         status.textContent = t('We could not read this website. Enter your business name and description, then choose Update preview.', 'No pudimos leer este sitio. Introduce el nombre y la descripción de tu negocio y pulsa Actualizar vista previa.');
         nameInput.focus();
       }
