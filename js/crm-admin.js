@@ -1,5 +1,5 @@
 import { auth, db } from "./firebase-config.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+import { onAuthStateChanged, reload, getIdTokenResult } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
 import { addDoc, collection, onSnapshot, serverTimestamp, updateDoc, doc, getDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
 const form = document.getElementById("crm-lead-form");
@@ -13,7 +13,8 @@ const el = (tag, text) => { const node = document.createElement(tag); node.textC
 function render(snapshot) {
   if (!list) return;
   list.replaceChildren();
-  if (snapshot.empty) { list.append(el("p", "No leads yet. Add your first prospect above.")); return; }
+  if (snapshot.empty) { list.append(el("p", "No leads yet. Add your first prospect above.")); setStatus("CRM ready."); return; }
+  setStatus("CRM ready. " + snapshot.size + " lead(s) loaded.");
   snapshot.forEach(item => {
     const lead = item.data();
     const card = document.createElement("article");
@@ -41,14 +42,18 @@ onAuthStateChanged(auth, async user => {
   const revision = ++authRevision;
   if (!form || !list) return;
   if (stop) { stop(); stop = null; }
-  if (!user || !user.emailVerified) { form.hidden = true; list.replaceChildren(); return; }
+  if (!user) { form.hidden = true; list.replaceChildren(); setStatus("Sign in to access CRM leads."); return; }
+  try { await reload(user); await user.getIdToken(true); } catch (error) { console.warn("Could not refresh CRM session", error); }
+  if (revision !== authRevision) return;
+  if (!auth.currentUser?.emailVerified) { form.hidden = true; list.replaceChildren(); setStatus("Verify your email address to access CRM leads."); return; }
   try {
     const profile = await getDoc(doc(db, "users", user.uid));
     if (revision !== authRevision || auth.currentUser?.uid !== user.uid) return;
-    if (profile.data()?.role !== "admin") { form.hidden = true; list.replaceChildren(); return; }
+    if (profile.data()?.role !== "admin") { form.hidden = true; list.replaceChildren(); setStatus("Your account does not have CRM administrator access."); return; }
     form.hidden = false;
+    setStatus("CRM access verified. Loading leads...");
     stop = onSnapshot(query(collection(db, "crmLeads"), orderBy("createdAt", "desc")), render, error => {
-      console.error(error); setStatus("Could not load CRM leads. Verify Firestore rules are deployed.");
+      console.error(error); setStatus(error.code === "permission-denied" ? "Firestore permission denied. The live CRM rules may not be deployed; ask an administrator to deploy them." : "Could not load CRM leads (" + (error.code || "unknown") + ").");
     });
   } catch (error) { if (revision !== authRevision) return; console.error(error); form.hidden = true; setStatus("CRM access could not be verified."); }
 });
@@ -69,6 +74,6 @@ form?.addEventListener("submit", async event => {
       createdAt: serverTimestamp(), updatedAt: serverTimestamp()
     });
     form.reset(); setStatus("Lead saved successfully.");
-  } catch (error) { console.error(error); setStatus("Could not save lead. Verify Firestore permissions."); }
+  } catch (error) { console.error(error); setStatus(error.code === "permission-denied" ? "Firestore permission denied. CRM rules may not be deployed to the live Firebase project." : "Could not save lead (" + (error.code || "unknown") + ")."); }
   finally { submit.disabled = false; }
 });
