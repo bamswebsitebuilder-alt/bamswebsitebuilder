@@ -6,10 +6,12 @@ const form = document.getElementById("crm-lead-form");
 const list = document.getElementById("crm-lead-list");
 const status = document.getElementById("crm-lead-status");
 let stop = null;
+let authRevision = 0;
 const stages = ["new", "contacted", "quoted", "won", "lost"];
-const setStatus = message => { status.textContent = message; };
+const setStatus = message => { if (status) status.textContent = message; };
 const el = (tag, text) => { const node = document.createElement(tag); node.textContent = text; return node; };
 function render(snapshot) {
+  if (!list) return;
   list.replaceChildren();
   if (snapshot.empty) { list.append(el("p", "No leads yet. Add your first prospect above.")); return; }
   snapshot.forEach(item => {
@@ -25,9 +27,10 @@ function render(snapshot) {
     stages.forEach(stage => { const option = document.createElement("option"); option.value = stage; option.textContent = stage[0].toUpperCase() + stage.slice(1); select.append(option); });
     select.value = stages.includes(lead.stage) ? lead.stage : "new";
     select.addEventListener("change", async () => {
+      const previousStage = lead.stage;
       select.disabled = true;
       try { await updateDoc(doc(db, "crmLeads", item.id), { stage: select.value, updatedAt: serverTimestamp() }); setStatus("Lead updated."); }
-      catch (error) { console.error(error); setStatus("Could not update lead. Check permissions."); }
+      catch (error) { console.error(error); select.value = previousStage; setStatus("Could not update lead. Check permissions."); }
       finally { select.disabled = false; }
     });
     card.append(heading, details, notes, select);
@@ -35,16 +38,19 @@ function render(snapshot) {
   });
 }
 onAuthStateChanged(auth, async user => {
+  const revision = ++authRevision;
+  if (!form || !list) return;
   if (stop) { stop(); stop = null; }
   if (!user || !user.emailVerified) { form.hidden = true; list.replaceChildren(); return; }
   try {
     const profile = await getDoc(doc(db, "users", user.uid));
+    if (revision !== authRevision || auth.currentUser?.uid !== user.uid) return;
     if (profile.data()?.role !== "admin") { form.hidden = true; list.replaceChildren(); return; }
     form.hidden = false;
     stop = onSnapshot(query(collection(db, "crmLeads"), orderBy("createdAt", "desc")), render, error => {
       console.error(error); setStatus("Could not load CRM leads. Verify Firestore rules are deployed.");
     });
-  } catch (error) { console.error(error); setStatus("CRM access could not be verified."); }
+  } catch (error) { if (revision !== authRevision) return; console.error(error); form.hidden = true; setStatus("CRM access could not be verified."); }
 });
 form?.addEventListener("submit", async event => {
   event.preventDefault();
@@ -52,6 +58,7 @@ form?.addEventListener("submit", async event => {
   const name = form.elements.namedItem("name").value.trim();
   const email = form.elements.namedItem("email").value.trim();
   if (!name || !email) { setStatus("Name and email are required."); return; }
+  if (!auth.currentUser?.emailVerified || form.hidden) { setStatus("Administrator sign-in required."); return; }
   submit.disabled = true;
   try {
     await addDoc(collection(db, "crmLeads"), {
