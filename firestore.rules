@@ -28,6 +28,36 @@ service cloud.firestore {
           && data.photoUpdatedAt is timestamp);
     }
 
+
+    // CRM leads are private to verified BAM administrators.
+    function crmAdmin() {
+      return isAdmin() && request.auth.token.email_verified == true;
+    }
+    function validLead(data) {
+      return data.keys().hasAll(['name','email','business','phone','notes','source','stage','createdBy','createdAt','updatedAt'])
+        && data.keys().hasOnly(['name','email','business','phone','notes','source','stage','createdBy','createdAt','updatedAt'])
+        && data.name is string && data.name.size() > 0 && data.name.size() <= 120
+        && data.email is string && data.email.size() > 0 && data.email.size() <= 254
+        && data.business is string && data.business.size() <= 150
+        && data.phone is string && data.phone.size() <= 40
+        && data.notes is string && data.notes.size() <= 2000
+        && data.source == 'admin'
+        && data.stage in ['new','contacted','quoted','won','lost']
+        && data.createdBy is string && data.createdAt is timestamp && data.updatedAt is timestamp;
+    }
+    match /crmLeads/{leadId} {
+      allow read: if crmAdmin();
+      allow create: if crmAdmin() && validLead(request.resource.data)
+        && request.resource.data.stage == 'new'
+        && request.resource.data.createdBy == request.auth.uid
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time;
+      allow update: if crmAdmin() && validLead(request.resource.data)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['stage','updatedAt'])
+        && request.resource.data.updatedAt == request.time;
+      allow delete: if false;
+    }
+
     match /users/{userId} {
 
       // =====================================================

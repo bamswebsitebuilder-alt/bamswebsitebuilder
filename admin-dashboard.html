@@ -62,7 +62,8 @@
           Overview
         </button>
 
-        <button class="admin-nav-button" type="button" data-panel="client-service-agreements">Client Agreements</button><button class="admin-nav-button" type="button" data-panel="clients">
+        <button class="admin-nav-button" type="button" data-panel="client-service-agreements">Client Agreements</button><button class="admin-nav-button" type="button" data-panel="crm">CRM Leads</button>
+        <button class="admin-nav-button" type="button" data-panel="clients">
           Clients
         </button>
 
@@ -396,7 +397,24 @@
         </article>
       </section>
 
-      <section class="admin-panel" id="files">
+      <section class="admin-panel" id="crm">
+  <div class="admin-page-heading"><p class="admin-kicker">CUSTOMER RELATIONSHIPS</p><h1>CRM Leads</h1><p>Manage prospective website clients and their sales stages.</p></div>
+  <article class="admin-card"><h2>Add a lead</h2>
+    <form id="crm-lead-form" hidden>
+      <div class="admin-form-grid">
+        <div class="admin-field"><label for="crm-name">Contact name</label><input id="crm-name" name="name" maxlength="120" required></div>
+        <div class="admin-field"><label for="crm-email">Email</label><input id="crm-email" name="email" type="email" maxlength="254" required></div>
+        <div class="admin-field"><label for="crm-business">Business</label><input id="crm-business" name="business" maxlength="150"></div>
+        <div class="admin-field"><label for="crm-phone">Phone</label><input id="crm-phone" name="phone" maxlength="40"></div>
+      </div>
+      <div class="admin-field"><label for="crm-notes">Notes</label><textarea id="crm-notes" name="notes" maxlength="2000"></textarea></div>
+      <button class="admin-primary-button" type="submit">Save Lead</button>
+    </form>
+    <p class="admin-status" id="crm-lead-status" role="status" aria-live="polite"></p>
+  </article>
+  <div id="crm-lead-list" aria-live="polite"><p>Checking CRM access…</p></div>
+</section>
+<section class="admin-panel" id="files">
         <div class="admin-page-heading">
           <p class="admin-kicker">FILES</p>
           <h1>Client File Uploads</h1>
@@ -544,6 +562,7 @@
     </main>
   </div>
 
+  <script type="module" src="/js/crm-admin.js?v=20261119-1"></script>
   <script type="module" src="/js/admin-dashboard.js?v=20261108-1"></script>
   <script type="module" src="/js/admin-messages.js?v=1"></script>
   <script type="module" src="/js/profile-picture.js?v=3"></script>
