@@ -750,3 +750,6 @@ body.admin-dashboard-page{background:radial-gradient(circle at 92% 0%,rgba(212,1
     margin-left: 0;
   }
 }
+
+/* CRM sidebar: use an SVG icon rather than a missing-font square. */
+.admin-nav-button[data-panel="crm"]::before{content:"" !important;display:block;width:22px;height:22px;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23f2c65a%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%229%22%2F%3E%3Cpath%20d%3D%22M12%203v18M3%2012h18%22%2F%3E%3C%2Fsvg%3E") !important;background-position:center;background-size:contain;background-repeat:no-repeat;font-size:0 !important}
