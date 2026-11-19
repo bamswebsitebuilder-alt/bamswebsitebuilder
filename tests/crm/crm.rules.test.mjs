@@ -8,7 +8,7 @@ let env;
 before(async () => {
   env = await initializeTestEnvironment({
     projectId: 'crm-rules-ci',
-    firestore: { host: '127.0.0.1', port: 8088, rules: readFileSync('../firestore.rules', 'utf8') }
+    firestore: { host: '127.0.0.1', port: 8088, rules: readFileSync('../../firestore.rules', 'utf8') }
   });
   await env.withSecurityRulesDisabled(async ctx => {
     const db = ctx.firestore();
