@@ -1,0 +1,27 @@
+name: CRM Firestore rules tests
+on:
+  pull_request:
+    paths:
+      - 'firestore.rules'
+      - 'tests/crm/**'
+      - '.github/workflows/crm-rules.yml'
+  push:
+    branches: ['feature/crm-leads-20261119']
+permissions:
+  contents: read
+jobs:
+  crm-rules:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d682002
+        with:
+          node-version: '22'
+      - uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165
+        with:
+          distribution: temurin
+          java-version: '21'
+      - run: npm install --prefix tests/crm --no-audit --no-fund
+      - run: npx --yes firebase-tools@14.19.1 emulators:exec --only firestore --project crm-rules-ci 'cd tests/crm && npm test'
