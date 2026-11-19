@@ -96,7 +96,7 @@ function render(snapshot) {
       if (!val("name") || !val("email")) { setStatus("Name and email are required."); return; }
       const rawAmount = val("estimate");
       const amount = rawAmount ? Number(rawAmount) : null;
-      if (rawAmount && (!Number.isFinite(amount) || amount < 0 || amount > 1000000 || !/^\\d+(?:\\.\\d{1,2})?$/.test(rawAmount))) {
+      if (rawAmount && (!Number.isFinite(amount) || amount < 0 || amount > 1000000 || !/^\d+(?:\.\d{1,2})?$/.test(rawAmount))) {
         setStatus("Enter a valid estimate in USD with up to two decimal places."); return;
       }
       const updates = {
