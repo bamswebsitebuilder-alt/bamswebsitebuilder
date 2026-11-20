@@ -96,10 +96,12 @@ async function load(user){
    if(acceptance.clientUid!==user.uid||acceptance.quoteId!==item.id||acceptance.termsVersion!==item.quote.termsVersion)continue;
    const original=identify(item.quote);
    if(!original)continue;
-   const choiceDoc=await getDoc(doc(db,...root,item.id,'paymentSelections','current'));
+   let choiceDoc=null;
+   try{choiceDoc=await getDoc(doc(db,...root,item.id,'paymentSelections','current'));}
+   catch(e){if(e.code!=='permission-denied')throw e; /* Firebase rules deployment pending; original quote remains usable. */}
    if(version!==loadingVersion)return;
    verified={...item,original};storedChoice=null;
-   if(choiceDoc.exists()){
+   if(choiceDoc?.exists()){
     const itemChoice=choiceDoc.data();
     const expected=amountsFor(itemChoice.package,itemChoice.method);
     if(itemChoice.package!==original.package||!['full','deposit','monthly'].includes(itemChoice.method)||
