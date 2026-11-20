@@ -370,6 +370,26 @@
     window.addEventListener('scroll', updateHeader, { passive: true });
   });
 
+  // Standardize public quote links and expose the blog in navigation.
+  document.addEventListener('DOMContentLoaded', () => {
+    const desktop = document.querySelector('.desktop-navigation');
+    if (desktop && !desktop.querySelector('a[href="/blog"]')) {
+      const a=document.createElement('a'); a.href='/blog'; a.textContent='Blog'; a.dataset.page='blog';
+      desktop.insertBefore(a,desktop.querySelector('a[href="/contact"]') || null);
+    }
+    const mobile = document.querySelector('.mobile-navigation');
+    if (mobile && !mobile.querySelector('a[href="/blog"]')) {
+      const a=document.createElement('a');a.href='/blog';a.textContent='Blog';
+      const group=mobile.querySelector('.mobile-nav-group:last-of-type');
+      (group || mobile).appendChild(a);
+    }
+    document.querySelectorAll('a[href]').forEach(a => {
+      const url=new URL(a.href, location.href);
+      if (url.origin!==location.origin || url.pathname.replace(/\\/$/,'')!=='/contact') return;
+      const current=a.textContent.trim().replace(/\\s+/g,' ');
+      if (/^(get a quote|request a website quote|request a quote|discuss your website)$/i.test(current)) a.textContent='Get a Free Quote';
+    });
+  });
   // Keep the public footer's policy and learning links consistent across pages.
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('footer.home-footer').forEach(footer => {
