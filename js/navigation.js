@@ -78,6 +78,96 @@
   }
 
   ready(() => {
+    // Initialize the mobile drawer before optional navigation enhancements.
+    // If a later enhancement fails, the hamburger must still work.
+    const toggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    const overlay = document.getElementById('menu-overlay');
+    const closeButton = document.getElementById('mobile-menu-close');
+    const header = document.getElementById('site-header');
+
+    if (!toggle || !menu || !overlay) return;
+
+    let lastFocusedElement = null;
+    menu.inert = true;
+
+    const setOpen = (open) => {
+      if (open === (menu.classList.contains('active') || menu.classList.contains('open'))) return;
+      toggle.classList.toggle('active', open);
+      menu.classList.toggle('active', open);
+      menu.classList.toggle('open', open);
+      overlay.classList.toggle('active', open);
+      overlay.classList.toggle('open', open);
+      document.body.classList.toggle('menu-open', open);
+
+      toggle.setAttribute('aria-expanded', String(open));
+      menu.setAttribute('aria-hidden', String(!open));
+      menu.inert = !open;
+
+      if (open) {
+        lastFocusedElement = document.activeElement;
+        window.requestAnimationFrame(() => {
+          const firstLink = menu.querySelector('a, button');
+          if (firstLink) firstLink.focus({ preventScroll: true });
+        });
+      } else if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+        lastFocusedElement.focus({ preventScroll: true });
+        lastFocusedElement = null;
+      }
+    };
+
+    const isOpen = () => menu.classList.contains('active') || menu.classList.contains('open');
+    const openMenu = () => setOpen(true);
+    const closeMenu = () => setOpen(false);
+
+    // Keep the drawer state consistent when navigating within the same
+    // document, including fragment links and browser back/forward.
+    window.addEventListener('pageshow', () => {
+      if (isOpen()) closeMenu();
+    });
+
+    toggle.addEventListener('click', () => {
+      isOpen() ? closeMenu() : openMenu();
+    });
+
+    closeButton?.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+
+    // Delegate to the drawer so links added after initialization (blog,
+    // checkout, and future navigation entries) also close the menu.
+    menu.addEventListener('click', (event) => {
+      if (event.target.closest('a[href]')) closeMenu();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (!isOpen()) return;
+      if (event.key === 'Escape') { closeMenu(); return; }
+      if (event.key !== 'Tab') return;
+      const focusable = Array.from(menu.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'))
+        .filter(element => element.getClientRects().length && !element.hidden);
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (!first) return;
+      if (event.shiftKey && (document.activeElement === first || !menu.contains(document.activeElement))) {
+        event.preventDefault(); last.focus();
+      } else if (!event.shiftKey && (document.activeElement === last || !menu.contains(document.activeElement))) {
+        event.preventDefault(); first.focus();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (getComputedStyle(toggle).display === 'none' && isOpen()) closeMenu();
+    });
+
+    const updateHeader = () => {
+      if (!header) return;
+      const scrolled = window.scrollY > 12;
+      header.classList.toggle('header-scrolled', scrolled);
+      header.classList.toggle('scrolled', scrolled);
+    };
+
+    updateHeader();
+    window.addEventListener('scroll', updateHeader, { passive: true });
+
     document.querySelectorAll('.header-container > .theme-toggle').forEach((button) => button.remove());
 
     const mobileMenu = document.querySelector('.mobile-menu');
@@ -290,93 +380,7 @@
       });
     });
 
-    const toggle = document.getElementById('menu-toggle');
-    const menu = document.getElementById('mobile-menu');
-    const overlay = document.getElementById('menu-overlay');
-    const closeButton = document.getElementById('mobile-menu-close');
-    const header = document.getElementById('site-header');
 
-    if (!toggle || !menu || !overlay) return;
-
-    let lastFocusedElement = null;
-    menu.inert = true;
-
-    const setOpen = (open) => {
-      if (open === (menu.classList.contains('active') || menu.classList.contains('open'))) return;
-      toggle.classList.toggle('active', open);
-      menu.classList.toggle('active', open);
-      menu.classList.toggle('open', open);
-      overlay.classList.toggle('active', open);
-      overlay.classList.toggle('open', open);
-      document.body.classList.toggle('menu-open', open);
-
-      toggle.setAttribute('aria-expanded', String(open));
-      menu.setAttribute('aria-hidden', String(!open));
-      menu.inert = !open;
-
-      if (open) {
-        lastFocusedElement = document.activeElement;
-        window.requestAnimationFrame(() => {
-          const firstLink = menu.querySelector('a, button');
-          if (firstLink) firstLink.focus({ preventScroll: true });
-        });
-      } else if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
-        lastFocusedElement.focus({ preventScroll: true });
-        lastFocusedElement = null;
-      }
-    };
-
-    const isOpen = () => menu.classList.contains('active') || menu.classList.contains('open');
-    const openMenu = () => setOpen(true);
-    const closeMenu = () => setOpen(false);
-
-    // Keep the drawer state consistent when navigating within the same
-    // document, including fragment links and browser back/forward.
-    window.addEventListener('pageshow', () => {
-      if (isOpen()) closeMenu();
-    });
-
-    toggle.addEventListener('click', () => {
-      isOpen() ? closeMenu() : openMenu();
-    });
-
-    closeButton?.addEventListener('click', closeMenu);
-    overlay.addEventListener('click', closeMenu);
-
-    // Delegate to the drawer so links added after initialization (blog,
-    // checkout, and future navigation entries) also close the menu.
-    menu.addEventListener('click', (event) => {
-      if (event.target.closest('a[href]')) closeMenu();
-    });
-
-    document.addEventListener('keydown', (event) => {
-      if (!isOpen()) return;
-      if (event.key === 'Escape') { closeMenu(); return; }
-      if (event.key !== 'Tab') return;
-      const focusable = Array.from(menu.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'))
-        .filter(element => element.getClientRects().length && !element.hidden);
-      const first = focusable[0], last = focusable[focusable.length - 1];
-      if (!first) return;
-      if (event.shiftKey && (document.activeElement === first || !menu.contains(document.activeElement))) {
-        event.preventDefault(); last.focus();
-      } else if (!event.shiftKey && (document.activeElement === last || !menu.contains(document.activeElement))) {
-        event.preventDefault(); first.focus();
-      }
-    });
-
-    window.addEventListener('resize', () => {
-      if (getComputedStyle(toggle).display === 'none' && isOpen()) closeMenu();
-    });
-
-    const updateHeader = () => {
-      if (!header) return;
-      const scrolled = window.scrollY > 12;
-      header.classList.toggle('header-scrolled', scrolled);
-      header.classList.toggle('scrolled', scrolled);
-    };
-
-    updateHeader();
-    window.addEventListener('scroll', updateHeader, { passive: true });
   });
 
   // Standardize public quote links and expose the blog in navigation.
