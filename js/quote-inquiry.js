@@ -19,9 +19,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const match = Array.from(select.options).find(option => option.value.trim().toLowerCase() === value.trim().toLowerCase());
     if (match) select.value = match.value;
   };
-  const packageKey = (params.get('package') || (monthlyValues[plan] ? plan.split('-')[0] : '')).toLowerCase();
+  // Preferences prefill an inquiry only; they never authorize a payment.
+  const validPackage = value => /^(starter|business|premium)$/.test(value);
+  const requestedPackage = (params.get('package') || '').trim().toLowerCase();
+  const legacyPackage = /^(starter|business|premium)-monthly$/.test(plan) ? plan.split('-')[0] : '';
+  const packageKey = validPackage(requestedPackage) ? requestedPackage : legacyPackage;
+  const payment = (params.get('payment') || '').trim().toLowerCase();
+  const monthly = payment === 'monthly' || (!payment && Boolean(legacyPackage));
   setOption(packageChoice, packages[packageKey]);
-  setOption(paymentOption, monthlyValues[plan]);
+  if (payment === 'full') setOption(paymentOption, 'One-time payment');
+  else if (payment === 'deposit') setOption(paymentOption, '50/50 split');
+  else if (monthly && packageKey) setOption(paymentOption, monthlyValues[packageKey + '-monthly']);
   setOption(templateChoice, params.get('template'));
   const details = [];
   const selectedDesign = (params.get('template') || '').trim();
@@ -32,18 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const value = (params.get(key) || '').trim();
     if (value) details.push(`${spanish ? es : en}: ${value}`);
   }
-  if (monthlyValues[plan]) details.push(spanish
-    ? 'Solicito una cotización escrita para este plan mensual. Quiero revisar el alcance y los términos antes de pagar.'
-    : 'Please send a written quote for this monthly plan. I would like to review the scope and terms before paying.');
-  const payment = (params.get('payment') || '').trim();
-  if (payment) {
-    if (payment === 'full') setOption(paymentOption, 'One-time payment');
-    const preference = payment === 'full' ? (spanish ? 'pago completo' : 'full payment')
-      : payment === 'deposit' ? (spanish ? 'depósito' : 'deposit') : payment;
-    details.push(spanish
-      ? `Preferencia de pago: ${preference}. Solicito una cotización y un enlace de pago después de acordar el proyecto.`
-      : `Payment preference: ${preference}. Please send a written quote and a payment link after we agree on the project.`);
-  }
+  // Do not copy a prefilled choice into Project Details; visitors can still change
+  // the actual submitted payment preference in the dropdown.
+  if (monthly && !packageKey) details.push(spanish
+    ? 'Me interesa una cotización con pagos mensuales.'
+    : 'I am interested in a quote with monthly payments.');
   // A return URL is customer-provided information, not proof from PayPal.
   if ((params.get('subscribed') || '').toLowerCase() === 'yes') {
     const id = document.getElementById('paypal-subscription-id');
