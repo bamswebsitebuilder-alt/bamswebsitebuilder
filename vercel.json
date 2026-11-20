@@ -6,12 +6,12 @@
     {
       "source": "/subscriptions",
       "destination": "/prices#compare",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/subscriptions.html",
       "destination": "/prices#compare",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/booking.html",
