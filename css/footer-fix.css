@@ -270,3 +270,40 @@ body > .admin-shell {
 .home-footer .bam-social-links a:focus-visible {
     color: #f0c45a;
 }
+
+/* Footer booking link: keep it a normal contact link, not a highlighted button. */
+.home-footer .footer-links a.footer-cta,
+.home-footer .footer-links a.footer-cta:link,
+.home-footer .footer-links a.footer-cta:visited {
+  display: inline-flex !important;
+  width: fit-content !important;
+  min-height: 44px;
+  align-items: center;
+  margin: 0 !important;
+  padding: 7px 0 !important;
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: 0;
+  color: #b7b7b7 !important;
+  font-size: inherit;
+  font-weight: 600;
+  text-decoration: none !important;
+  transform: none;
+}
+.home-footer .footer-links a.footer-cta > span[aria-hidden="true"] {
+  display: none !important;
+}
+.home-footer .footer-links a.footer-cta:hover,
+.home-footer .footer-links a.footer-cta:focus-visible {
+  color: #f0c45a !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.home-footer .footer-links a.footer-cta:focus-visible {
+  outline: 2px solid #f0c45a;
+  outline-offset: 3px;
+}
