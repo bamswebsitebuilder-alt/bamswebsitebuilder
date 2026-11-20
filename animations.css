@@ -1,9 +1,9 @@
 /* BAM's Website Builder: subtle animations */
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity .5s ease-out, transform .5s ease-out; }
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .4s ease-out, transform .4s ease-out; }
 .reveal.is-visible { opacity: 1; transform: none; }
 .reveal[data-delay="1"] { transition-delay: .1s; }
 .reveal[data-delay="2"] { transition-delay: .2s; }
-.reveal[data-delay="3"] { transition-delay: .3s; }
+.reveal[data-delay="3"] { transition-delay: .25s; }
 .btn-anim { transition: transform .2s ease, box-shadow .2s ease, filter .2s ease; }
 .btn-anim:hover, .btn-anim:focus-visible { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.18); filter: brightness(1.08); }
 .btn-anim:active { transform: translateY(0); box-shadow: 0 2px 6px rgba(0,0,0,.15); }
