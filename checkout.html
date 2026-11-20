@@ -11,7 +11,7 @@ html[data-theme="light"] .checkout-main{--muted:#615c54;--pane:#fffdfa;--border:
 .ck-payment-verified{font-size:.81rem;font-weight:750;color:var(--gold);margin:10px 0 15px}
 .ck-gate{margin:14px 0}.ck-summary{scroll-margin-bottom:110px}
 @media(max-width:700px){.checkout-main{padding-bottom:180px!important}.ck-summary{padding-bottom:26px}.ck-payment-preview{padding:18px 13px}}
-</style><style id="ck-schedule-consent-style">.ck-schedule-consent{margin:16px 0;padding:18px;border:1px solid var(--gold);border-radius:14px;background:rgba(212,166,55,.065)}.ck-schedule-consent h3{margin:0 0 10px;font-size:1rem}.ck-schedule-consent p{font-size:.83rem;line-height:1.55}.ck-schedule-consent .ck-button{width:100%;font:inherit;cursor:pointer;border:0}.ck-schedule-consent .ck-button:disabled{cursor:not-allowed;opacity:.5}.ck-schedule-consent[hidden]{display:none!important}</style><style id="ck-addendum-styles">
+</style><style id="ck-addendum-styles">
 #ck-payment-addendum{margin:17px 0;padding:18px;border-color:var(--gold);background:rgba(212,166,55,.055)}
 #ck-addendum-heading{font-size:1.05rem;margin:0 0 10px}
 #ck-selected-schedule{display:block;font-size:.9rem;line-height:1.6}
@@ -102,14 +102,7 @@ html[data-theme="light"] .checkout-main{--muted:#615c54;--pane:#fffdfa;--border:
 <div class="ck-sum-divider"></div>
 <label class="ck-terms"><input type="checkbox" id="terms-acknowledged"><span>I have reviewed the <a href="/service-terms">Service Terms</a> and <a href="/cancellation-policy">Cancellation Policy</a>. I understand that a written project quote must be approved before payment.</span></label>
 <section class="ck-subscription-integration" id="ck-subscription-integration" hidden aria-live="polite"><h3>Monthly PayPal plan connected</h3><p id="ck-subscription-message">Your existing monthly plan is linked to this checkout. Before we activate recurring billing, the PayPal plan must be verified to end after 12 payments and match the accepted project quote.</p><a href="/subscriptions" class="ck-subscription-link">Review monthly payment plan details →</a></section>
-<div class="ck-payment-heading"><strong>Secure PayPal payment</strong><span id="ck-selected-payment-label">Business · Pay in full · $500.00</span></div><div class="ck-payment-preview" id="ck-payment-preview"><span aria-hidden="true">🔒</span><strong>Awaiting accepted quote</strong><p>Sign into your Client Portal, accept your quote, and confirm the service terms. Your PayPal option will appear after your approved quote and selected payment schedule are accepted.</p></div><div class="ck-gate" id="ck-verified-quote"><strong>Approved project quote</strong><p class="ck-small" id="ck-quote-status" role="status" aria-live="polite">Checking your signed-in client portal for an accepted quote…</p><div id="ck-quote-details" hidden><p class="ck-small">Quote number: <strong id="ck-quote-number"></strong></p><p class="ck-small">Approved project: <strong id="ck-quote-project"></strong></p><p class="ck-small">Agreed payment schedule: <strong id="ck-quote-schedule"></strong></p></div><div id="ck-schedule-consent" class="ck-schedule-consent" hidden>
-<h3>Confirm your selected payment arrangement</h3>
-<p id="ck-schedule-summary">Review your payment terms before saving your selection.</p>
-<label class="ck-terms"><input type="checkbox" id="ck-schedule-check"><span id="ck-schedule-consent-copy">I accept this payment schedule as an amendment to my approved quote, including the exact total and timing of charges.</span></label>
-<button type="button" class="ck-button" id="ck-save-schedule">Accept Selected Payment Schedule</button>
-<p role="status" aria-live="polite" id="ck-schedule-status"></p>
-</div>
-<a href="/client-portal#agreements" class="ck-quote-portal-link">View and accept your quote in the Client Portal →</a></div><section id="ck-payment-addendum" class="ck-gate" hidden aria-labelledby="ck-addendum-heading">
+<div class="ck-payment-heading"><strong>Secure PayPal payment</strong><span id="ck-selected-payment-label">Business · Pay in full · $500.00</span></div><div class="ck-payment-preview" id="ck-payment-preview"><span aria-hidden="true">🔒</span><strong>Awaiting accepted quote</strong><p>Sign into your Client Portal, accept your quote, and confirm the service terms. Your PayPal option will appear after your approved quote and selected payment schedule are accepted.</p></div><div class="ck-gate" id="ck-verified-quote"><strong>Approved project quote</strong><p class="ck-small" id="ck-quote-status" role="status" aria-live="polite">Checking your signed-in client portal for an accepted quote…</p><div id="ck-quote-details" hidden><p class="ck-small">Quote number: <strong id="ck-quote-number"></strong></p><p class="ck-small">Approved project: <strong id="ck-quote-project"></strong></p><p class="ck-small">Agreed payment schedule: <strong id="ck-quote-schedule"></strong></p></div><a href="/client-portal#agreements" class="ck-quote-portal-link">View and accept your quote in the Client Portal →</a></div><section id="ck-payment-addendum" class="ck-gate" hidden aria-labelledby="ck-addendum-heading">
 <h3 id="ck-addendum-heading">Review your new payment arrangement</h3>
 <p class="ck-small">Your existing project quote remains accepted. To change how you pay, you must also accept the following payment schedule amendment. The website package and deliverables remain unchanged.</p>
 <p class="ck-small"><strong id="ck-selected-schedule"></strong></p>
@@ -243,15 +236,7 @@ function update(){
  $('checkout-quote-link').href='/contact?package='+key+'&payment='+method+(method==='monthly'?'&plan='+key+'-monthly':'');
  const m=$('ck-subscription-integration');if(m){m.hidden=method!=='monthly';}
  const approved=window.bamAcceptedQuote;
- const selection=window.bamPaymentSelection;
- const valid=!!approved&&approved.package===key;
- const selectedAccepted=!!selection&&selection.package===key&&selection.method===method&&selection.quoteId===approved.agreementId;
- const ready=valid&&selectedAccepted&&$('terms-acknowledged').checked;
- $('ck-schedule-consent').hidden=!valid||!!selection;
- const scheduleText=method==='full'?('One payment of '+money(a.price)+'.'):method==='deposit'?('Two payments: '+money(a.deposit)+' after acceptance and '+money(a.deposit)+' after preview approval, before launch.'):('12 monthly payments of '+money(a.monthly)+', total '+money(a.monthly*12)+'. No separate deposit.');
- $('ck-schedule-summary').textContent=scheduleText+' This changes the original quote payment schedule, not the project scope.';
- $('ck-save-schedule').disabled=!valid||!!selection||!$('ck-schedule-check').checked;
- if(selection&&selection.package===key&&selection.method!==method){$('ck-pay-status').textContent='You already accepted a different payment schedule for this quote. Contact BAM to request a revised agreement.';}
+ const ready=!!approved&&approved.package===key&&approved.method===method&&$('terms-acknowledged').checked;
  $('ck-payment-preview').hidden=ready;
  $('ck-selected-payment-label').textContent=a.name+' · '+(method==='full'?'Pay in full':method==='deposit'?'50% deposit':'12 monthly payments')+' · '+money(due)+(method==='monthly'?'/month':'');
  $('ck-paypal-actions').hidden=!ready;
@@ -259,14 +244,13 @@ function update(){
  $('ck-pay-deposit').hidden=!ready||method!=='deposit';
  $('ck-pay-monthly').hidden=!ready||method!=='monthly';
  for(const k of Object.keys(p)){$('ck-paypal-'+k).hidden=!ready||method!=='deposit'||k!==key;$('ck-subscription-'+k).hidden=!ready||method!=='monthly'||k!==key;}
- $('ck-pay-status').textContent=ready?(method==='monthly'?'Confirm the 12-cycle PayPal subscription amount before authorizing.':'Confirm the final price and terms on PayPal before authorizing payment.'):(selection?'This quote is locked to your previously accepted payment schedule. Contact BAM to change it.':(valid?'Review and accept the payment arrangement above, then accept the service terms to unlock PayPal.':'Sign in to your client portal and accept your issued quote to choose a payment arrangement.'));
+ $('ck-pay-status').textContent=ready?(method==='monthly'?'Confirm the 12-cycle PayPal subscription amount before authorizing.':'Confirm the final price and terms on PayPal before authorizing payment.'):'Choose the payment arrangement you want. If it differs from your accepted quote, approve the schedule amendment above before paying.';
  if(ready&&method==='deposit')renderDeposit(key);
  if(ready&&method==='monthly')renderMonthly(key);
 }
 document.querySelectorAll('input[name="ck-package"],input[name="ck-method"]').forEach(el=>el.addEventListener('change',update));
-['terms-acknowledged','ck-schedule-check'].forEach(id=>$(id).addEventListener('input',update));
+['terms-acknowledged'].forEach(id=>$(id).addEventListener('input',update));
 window.addEventListener('bam-quote-verified',update);
-window.addEventListener('bam-payment-selection-verified',update);
 update();
 })();
 </script>
