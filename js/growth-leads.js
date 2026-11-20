@@ -1,0 +1,2 @@
+/* Mobile calls to action for public BAM pages. */
+(()=>{'use strict';const path=location.pathname;if(/\/(admin-dashboard|client-portal|login|register|forgot-password)(?:\/|$)/.test(path))return;if(document.querySelector('.bam-mobile-cta'))return;const nav=document.createElement('nav');nav.className='bam-mobile-cta';nav.setAttribute('aria-label','Quick contact options');nav.innerHTML='<a href="tel:+17274178762" aria-label="Call BAM Website Builder">Call</a><a href="/contact">Get a Quote</a>';document.body.append(nav);})();
