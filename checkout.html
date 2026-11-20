@@ -4,9 +4,39 @@
 <main><p style="letter-spacing:.12em;color:#d4a637;font-weight:800">PAYPAL PAYMENT PREPARATION</p><h1>Review your website payment options</h1><div class="pay-notice" role="status"><strong>Online payment checkout is not active yet.</strong> First request and accept a written quote. PayPal links and finite subscription plans are being configured and verified. You cannot be charged from this page.</div>
 <p>Choose one arrangement: pay in full, pay 50% before work starts and the remaining 50% before launch, or pay in 12 monthly installments. Hosting and ongoing maintenance are separate services. Package prices are starting prices and your signed quote controls the final amount.</p>
 <div class="pay-grid">
-<section class="pay-card"><h2>Starter</h2><p>Up to 3 pages · $250 in full</p><label><input type="radio" name="starter" checked> Pay in full — $250</label><label><input type="radio" name="starter"> 50% deposit — $125, $125 before launch</label><label><input type="radio" name="starter"> 12 payments — $20.83/month ($249.96 total)</label><button class="bam-growth-button" disabled type="button">PayPal checkout pending</button></section>
-<section class="pay-card"><h2>Business</h2><p>Up to 6 pages · $500 in full</p><label><input type="radio" name="business" checked> Pay in full — $500</label><label><input type="radio" name="business"> 50% deposit — $250, $250 before launch</label><label><input type="radio" name="business"> 12 payments — $41.67/month ($500.04 total)</label><button class="bam-growth-button" disabled type="button">PayPal checkout pending</button></section>
-<section class="pay-card"><h2>Premium</h2><p>Up to 10 pages · $850 in full</p><label><input type="radio" name="premium" checked> Pay in full — $850</label><label><input type="radio" name="premium"> 50% deposit — $425, $425 before launch</label><label><input type="radio" name="premium"> 12 payments — $70.83/month ($849.96 total)</label><button class="bam-growth-button" disabled type="button">PayPal checkout pending</button></section></div>
-<label class="pay-agree"><input type="checkbox" disabled> I have reviewed and agree to the <a href="/service-terms">Service Terms</a>, <a href="/cancellation-policy">Cancellation &amp; Refund Policy</a>, and the terms in my approved project quote. <strong>This acknowledgment will be required before any live payment.</strong></label>
-<p><small>Payment confirmation must be verified in PayPal before work begins. A redirect to a booking page is not proof of payment. Monthly website installments must end after exactly 12 successful billing cycles. Deposits are credited against the accepted project price and are not automatically nonrefundable under current BAM terms.</small></p>
-<div class="bam-growth-actions"><a class="bam-growth-button" href="/contact">Get a Free Quote</a><a class="bam-growth-button secondary" href="/booking">Book a Free Consultation</a></div></main><footer style="padding:30px;text-align:center">© 2026 BAM's Website Builder · <a href="/privacy-policy">Privacy</a> · <a href="/service-terms">Service Terms</a></footer></body></html>
+<section class="pay-card" data-package="Starter"><h2>Starter</h2><p>Up to 3 pages · $250 in full</p><label><input type="radio" name="starter" checked> Pay in full — $250</label><label><input type="radio" name="starter"> 50% deposit — $125, $125 before launch</label><label><input type="radio" name="starter"> 12 payments — $20.83/month ($249.96 total)</label><button class="bam-growth-button" disabled type="button">PayPal checkout pending</button></section>
+<section class="pay-card" data-package="Business"><h2>Business</h2><p>Up to 6 pages · $500 in full</p><label><input type="radio" name="business" checked> Pay in full — $500</label><label><input type="radio" name="business"> 50% deposit — $250, $250 before launch</label><label><input type="radio" name="business"> 12 payments — $41.67/month ($500.04 total)</label><button class="bam-growth-button" disabled type="button">PayPal checkout pending</button></section>
+<section class="pay-card" data-package="Premium"><h2>Premium</h2><p>Up to 10 pages · $850 in full</p><label><input type="radio" name="premium" checked> Pay in full — $850</label><label><input type="radio" name="premium"> 50% deposit — $425, $425 before launch</label><label><input type="radio" name="premium"> 12 payments — $70.83/month ($849.96 total)</label><button class="bam-growth-button" disabled type="button">PayPal checkout pending</button></section></div>
+<label class="pay-agree"><input type="checkbox" id="terms-acknowledged"> I have reviewed and agree to the <a href="/service-terms">Service Terms</a>, <a href="/cancellation-policy">Cancellation &amp; Refund Policy</a>, and the terms in my approved project quote. <strong>This acknowledgment will be required before any live payment.</strong></label>
+<p id="checkout-selection" class="pay-notice" aria-live="polite">Select a package and payment option to see the amount that will be included in your quote request.</p><p><small>Payment confirmation must be verified in PayPal before work begins. A redirect to a booking page is not proof of payment. Monthly website installments must end after exactly 12 successful billing cycles. Deposits are credited against the accepted project price and are not automatically nonrefundable under current BAM terms.</small></p>
+<div class="bam-growth-actions"><a class="bam-growth-button" href="/contact">Get a Free Quote</a><a class="bam-growth-button secondary" href="/booking">Book a Free Consultation</a></div></main><footer style="padding:30px;text-align:center">© 2026 BAM's Website Builder · <a href="/privacy-policy">Privacy</a> · <a href="/service-terms">Service Terms</a></footer><script>
+(() => {
+  'use strict';
+  const amounts = {Starter:['$250 in full','$125 deposit and $125 before launch','$20.83 per month for 12 months ($249.96 total)'],Business:['$500 in full','$250 deposit and $250 before launch','$41.67 per month for 12 months ($500.04 total)'],Premium:['$850 in full','$425 deposit and $425 before launch','$70.83 per month for 12 months ($849.96 total)']};
+  const result = document.getElementById('checkout-selection');
+  const agreement = document.getElementById('terms-acknowledged');
+  let selected = null;
+  document.querySelectorAll('.pay-card').forEach(card => {
+    const options = card.querySelectorAll('input[type="radio"]');
+    options.forEach((input,i) => {
+      input.addEventListener('change', () => {
+        if (!input.checked) return;
+        document.querySelectorAll('.pay-card').forEach(other => {
+          if(other !== card) other.querySelectorAll('input[type="radio"]').forEach(x => x.checked = false);
+        });
+        selected = {package:card.dataset.package, option:i};
+        const amount = amounts[selected.package][i];
+        result.textContent = 'Selected: ' + selected.package + ' — ' + amount + '. A written quote and verified PayPal payment link are required; this page cannot accept payments yet.';
+        const quote = document.getElementById('checkout-quote-link');
+        quote.href = '/contact?package=' + encodeURIComponent(selected.package.toLowerCase()) + (i===2?'&plan='+encodeURIComponent(selected.package.toLowerCase()+'-monthly'):'');
+      });
+    });
+  });
+  const quoteButton = document.querySelector('a.bam-growth-button[href="/contact"]');
+  if(quoteButton && quoteButton.parentElement.classList.contains('bam-growth-actions'))quoteButton.id='checkout-quote-link';
+  document.querySelectorAll('.pay-card input[type="radio"]').forEach(x=>x.checked=false);
+  agreement.addEventListener('change', () => {
+    result.setAttribute('data-terms-reviewed',agreement.checked?'yes':'no');
+  });
+})();
+</script></body></html>
