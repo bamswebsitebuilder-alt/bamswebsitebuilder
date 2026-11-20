@@ -302,6 +302,7 @@
     menu.inert = true;
 
     const setOpen = (open) => {
+      if (open === (menu.classList.contains('active') || menu.classList.contains('open'))) return;
       toggle.classList.toggle('active', open);
       menu.classList.toggle('active', open);
       menu.classList.toggle('open', open);
@@ -329,6 +330,12 @@
     const openMenu = () => setOpen(true);
     const closeMenu = () => setOpen(false);
 
+    // Keep the drawer state consistent when navigating within the same
+    // document, including fragment links and browser back/forward.
+    window.addEventListener('pageshow', () => {
+      if (isOpen()) closeMenu();
+    });
+
     toggle.addEventListener('click', () => {
       isOpen() ? closeMenu() : openMenu();
     });
@@ -336,8 +343,10 @@
     closeButton?.addEventListener('click', closeMenu);
     overlay.addEventListener('click', closeMenu);
 
-    menu.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', closeMenu);
+    // Delegate to the drawer so links added after initialization (blog,
+    // checkout, and future navigation entries) also close the menu.
+    menu.addEventListener('click', (event) => {
+      if (event.target.closest('a[href]')) closeMenu();
     });
 
     document.addEventListener('keydown', (event) => {
