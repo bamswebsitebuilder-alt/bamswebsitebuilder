@@ -443,9 +443,9 @@
       if (pricing) pricing.insertAdjacentElement('afterend', a);
       else mobile.appendChild(a);
     }
-    if (location.pathname.replace(/\\.html$/, '').replace(/\\/$/, '') === '/checkout') {
+    if (location.pathname.replace(/\.html$/, '').replace(/\/$/, '') === '/checkout') {
       document.querySelectorAll('.desktop-navigation a[data-page], .mobile-navigation a[data-page]').forEach(a => {
-        const active = new URL(a.href, location.href).pathname.replace(/\\.html$/, '').replace(/\\/$/, '') === '/checkout';
+        const active = new URL(a.href, location.href).pathname.replace(/\.html$/, '').replace(/\/$/, '') === '/checkout';
         a.classList.toggle('active', active);
         if (active) a.setAttribute('aria-current', 'page');
         else a.removeAttribute('aria-current');
