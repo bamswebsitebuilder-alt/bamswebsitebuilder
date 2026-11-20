@@ -1,0 +1,121 @@
+/* The template and portfolio content sections must follow the public theme switch.
+   These overrides do not affect dark mode or the demo websites. */
+html[data-theme="light"] main :is(.bam-templates,.bam-portfolio) {
+  --bg: var(--bam-bg, #fbf7ef);
+  --card: var(--bam-panel, #fffdf8);
+  --border: var(--bam-border, #b7a57c);
+  --text: var(--bam-text, #20201d);
+  --muted: var(--bam-muted, #514d44);
+  color-scheme: light;
+}
+
+html[data-theme="light"] main .bam-templates {
+  --accent: #214d9c;
+  --template-control-border: #6a7894;
+  --template-control-hover: #173974;
+  --template-blue-wash: #e9f0fb;
+}
+
+html[data-theme="light"] main .bam-templates .bt-label {
+  color: var(--accent) !important;
+}
+
+html[data-theme="light"] .bam-templates :is(.bt-chip,.bt-outline) {
+  border-color: var(--template-control-border);
+}
+
+html[data-theme="light"] .bam-templates :is(.bt-chip[aria-pressed="true"],.bt-solid,.bt-client) {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff !important;
+}
+
+html[data-theme="light"] .bam-templates :is(.bt-chip[aria-pressed="true"],.bt-solid):hover {
+  background: var(--template-control-hover);
+  border-color: var(--template-control-hover);
+}
+
+html[data-theme="light"] .bam-templates :is(.bt-chip[aria-pressed="false"],.bt-outline):hover {
+  background: var(--template-blue-wash);
+  border-color: var(--accent);
+}
+
+html[data-theme="light"] .bam-templates :is(.bt-browser,.bt-tier,.bt-cta) {
+  background: var(--template-blue-wash);
+  border-color: var(--border);
+}
+
+html[data-theme="light"] .bam-templates .bt-browser i {
+  background: var(--template-control-border);
+}
+
+/* Keep the intentional dark backgrounds behind dark-mode logos and screenshots.
+   The text-only placeholder can blend into the surrounding light card. */
+html[data-theme="light"] .bam-templates .bt-image-fallback {
+  background: var(--template-blue-wash);
+}
+
+html[data-theme="light"] main .bam-templates .bt-link {
+  color: var(--accent) !important;
+}
+
+html[data-theme="light"] main .bam-portfolio {
+  --accent: var(--bam-gold, #765300);
+}
+
+html[data-theme="light"] .bam-portfolio .browser-bar {
+  background: var(--bam-panel-2, #f6efe2);
+}
+
+html[data-theme="light"] .bam-portfolio .address {
+  color: var(--muted);
+}
+
+html[data-theme="light"] .bam-portfolio :is(.pill.gold,.button.primary) {
+  color: #fff !important;
+}
+
+html[data-theme="light"] .bam-portfolio .button.primary:hover {
+  background: #5f4300;
+  border-color: #5f4300;
+}
+
+html[data-theme="light"] main .bam-portfolio :is(.button:not(.primary),.concept-card) {
+  color: var(--text);
+}
+
+html[data-theme="light"] main .bam-portfolio .text-link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* The Spanish pages still use the legacy layouts. */
+html[data-theme="light"] main .templates-page select.template-catalog-search,
+html[data-theme="light"] main .templates-page .pay-full {
+  background: var(--bam-panel, #fffdf8) !important;
+  border-color: var(--bam-gold, #765300) !important;
+  color: var(--bam-gold, #765300) !important;
+}
+
+html[data-theme="light"] main .templates-page .pay-full:hover {
+  background: var(--bam-panel-2, #f6efe2) !important;
+}
+
+html[data-theme="light"] main .portfolio-page .case-story-link {
+  color: var(--bam-gold, #765300);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* The preview dialog is mounted outside main. Keep selected mode distinct. */
+html[data-theme="light"] body .personal-preview-dialog .preview-view-switch button[aria-pressed="false"] {
+  background: var(--bam-panel, #fffdf8) !important;
+  color: var(--bam-gold, #765300) !important;
+  border-color: var(--bam-gold, #765300) !important;
+}
+
+html[data-theme="light"] body .personal-preview-dialog .preview-view-switch button[aria-pressed="true"] {
+  background: var(--bam-gold, #765300) !important;
+  color: #fff !important;
+}
