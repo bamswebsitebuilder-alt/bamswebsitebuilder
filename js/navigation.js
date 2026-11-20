@@ -424,15 +424,6 @@
         a.innerHTML = '<span class="mobile-link-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3.5h11l3 3v14H5zM16 3.5v4h3M8 11h8M8 15h8M8 18h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"></path></svg></span><span>Blog</span>';
       }
     }
-    // Recompute current-page highlights from the real URL instead of stale copied HTML.
-    const currentPath = location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
-    document.querySelectorAll('.desktop-navigation a[data-page], .mobile-navigation a[data-page]').forEach(link => {
-      const targetPath = new URL(link.getAttribute('href'), location.href).pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
-      const active = targetPath === currentPath;
-      link.classList.toggle('active', active);
-      if (active) link.setAttribute('aria-current', 'page');
-      else link.removeAttribute('aria-current');
-    });
     document.querySelectorAll('a[href]').forEach(a => {
       const url=new URL(a.href, location.href);
       if (url.origin!==location.origin || url.pathname.replace(/\/$/,'')!=='/contact') return;
@@ -463,19 +454,11 @@
         a.innerHTML = '<span class="mobile-link-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"></rect><path d="M2.5 10h19M6.5 15h5M17 15h1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg></span><span>Website checkout</span>';
       }
     }
-    if (location.pathname.replace(/\.html$/, '').replace(/\/$/, '') === '/checkout') {
-      document.querySelectorAll('.desktop-navigation a[data-page], .mobile-navigation a[data-page]').forEach(a => {
-        const active = new URL(a.href, location.href).pathname.replace(/\.html$/, '').replace(/\/$/, '') === '/checkout';
-        a.classList.toggle('active', active);
-        if (active) a.setAttribute('aria-current', 'page');
-        else a.removeAttribute('aria-current');
-      });
-    }
   });
   // Reconcile highlights after all dynamically created links have been inserted.
   // Section links such as /#email-updates must not highlight on every homepage visit.
   const syncMenuCurrentPage = () => {
-    const normalize = path => path.replace(/\\.html$/, '').replace(/\\/+$/, '') || '/';
+    const normalize = path => path.replace(/\.html$/, '').replace(/\/+$/, '') || '/';
     const here = normalize(location.pathname);
     const currentHash = decodeURIComponent(location.hash || '');
     document.querySelectorAll('.desktop-navigation a[data-page], .mobile-navigation a[data-page], .booking-mobile-links a[data-page]').forEach(link => {
