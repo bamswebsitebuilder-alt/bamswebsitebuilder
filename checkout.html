@@ -17,6 +17,12 @@ html[data-theme="light"] .checkout-main{--muted:#615c54;--pane:#fffdfa;--border:
 #ck-selected-schedule{display:block;font-size:.9rem;line-height:1.6}
 #ck-addendum-save{width:100%;font:inherit;cursor:pointer;border:0}
 #ck-addendum-save:disabled{opacity:.5;cursor:not-allowed}
+</style><style id="ck-inapp-browser">
+.ck-browser-help{margin:16px 0;padding:16px;border:1px solid #d4a637;border-radius:12px;background:rgba(212,166,55,.08)}
+.ck-browser-help strong{display:block;font-size:.9rem;margin-bottom:5px}
+.ck-browser-help p{font-size:.83rem;line-height:1.55;margin:6px 0 12px}
+.ck-copy-checkout{display:block;width:100%;min-height:44px;cursor:pointer;border:1px solid #d4a637;border-radius:10px;padding:11px 14px;color:inherit;background:transparent;font:inherit;font-weight:700}
+#ck-copy-feedback{display:block;font-size:.79rem;margin-top:8px}
 </style></head><body><a class="site-skip-link" href="#main-content">Skip to main content</a><header class="site-header" id="site-header">
 <div class="header-container">
 <a aria-label="BAM's Website Builder home" class="site-brand" href="/">
@@ -110,7 +116,12 @@ html[data-theme="light"] .checkout-main{--muted:#615c54;--pane:#fffdfa;--border:
 <label class="ck-terms"><input type="checkbox" id="ck-addendum-checkbox"><span>I have reviewed and accept this payment schedule as an amendment to my existing approved website quote.</span></label>
 <button type="button" id="ck-addendum-save" class="ck-button" disabled>Accept Selected Payment Schedule</button>
 </section>
-<div id="ck-paypal-actions" hidden><div class="ck-payment-verified">Ready for PayPal checkout · Review the final amount before paying</div><a id="ck-pay-full" class="ck-button" href="#" target="_blank" rel="noopener noreferrer" hidden>Continue to PayPal — Pay in Full ↗</a><div id="ck-pay-deposit" hidden><p class="ck-small">Pay your agreed 50% deposit securely through PayPal.</p><div id="ck-paypal-starter" class="ck-paypal-target" hidden></div><div id="ck-paypal-business" class="ck-paypal-target" hidden></div><div id="ck-paypal-premium" class="ck-paypal-target" hidden></div></div><div id="ck-pay-monthly" class="ck-subscription-pending" hidden><strong>Subscribe with PayPal — 12 payments</strong><p class="ck-small">Your plan is configured for 12 monthly billing cycles and no setup fee. Confirm the terms in PayPal before accepting.</p><div id="ck-subscription-starter" class="ck-paypal-target" hidden></div><div id="ck-subscription-business" class="ck-paypal-target" hidden></div><div id="ck-subscription-premium" class="ck-paypal-target" hidden></div></div></div><p class="ck-note" id="ck-pay-status" role="status">Log into your client portal and accept your issued quote to access payment.</p><a class="ck-button ck-quote-secondary" id="checkout-quote-link" href="/contact?package=business&payment=full">Don't have an approved quote? Get one ↗</a>
+<div id="ck-browser-help" class="ck-browser-help" role="note" hidden>
+<strong>PayPal checkout works best in Safari or Chrome</strong>
+<p>If you opened this page inside ChatGPT, Instagram, Facebook, or another app, PayPal may open an empty popup. Open this checkout directly in Safari, then select your payment option again. Do not approve a payment twice.</p>
+<button type="button" id="ck-copy-checkout-url" class="ck-copy-checkout">Copy checkout link for Safari</button>
+<span id="ck-copy-feedback" role="status" aria-live="polite"></span>
+</div><div id="ck-paypal-actions" hidden><div class="ck-payment-verified">Ready for PayPal checkout · Review the final amount before paying</div><a id="ck-pay-full" class="ck-button" href="#" rel="noopener noreferrer" hidden>Continue to PayPal — Pay in Full ↗</a><div id="ck-pay-deposit" hidden><p class="ck-small">Pay your agreed 50% deposit securely through PayPal.</p><div id="ck-paypal-starter" class="ck-paypal-target" hidden></div><div id="ck-paypal-business" class="ck-paypal-target" hidden></div><div id="ck-paypal-premium" class="ck-paypal-target" hidden></div></div><div id="ck-pay-monthly" class="ck-subscription-pending" hidden><strong>Subscribe with PayPal — 12 payments</strong><p class="ck-small">Your plan is configured for 12 monthly billing cycles and no setup fee. Confirm the terms in PayPal before accepting.</p><div id="ck-subscription-starter" class="ck-paypal-target" hidden></div><div id="ck-subscription-business" class="ck-paypal-target" hidden></div><div id="ck-subscription-premium" class="ck-paypal-target" hidden></div></div></div><p class="ck-note" id="ck-pay-status" role="status">Log into your client portal and accept your issued quote to access payment.</p><a class="ck-button ck-quote-secondary" id="checkout-quote-link" href="/contact?package=business&payment=full">Don't have an approved quote? Get one ↗</a>
 <p class="ck-button-sub">Payments are securely processed by PayPal</p>
 <div class="ck-brand">BAM'S WEBSITE BUILDER</div><p class="ck-notice">Package prices shown are starting prices. Your approved written quote controls the final scope and price. Verify your actual PayPal payment amount before authorizing.</p>
 </aside></div>
@@ -188,7 +199,86 @@ html[data-theme="light"] .checkout-main{--muted:#615c54;--pane:#fffdfa;--border:
 const p={starter:{name:'Starter',price:250,pages:3,deposit:125,monthly:20.83,full:'https://www.paypal.com/ncp/payment/MW3U5TAP5PZ82',button:'GUZ4TBCXRDA84'},business:{name:'Business',price:500,pages:6,deposit:250,monthly:41.67,full:'https://www.paypal.com/ncp/payment/RBQ55HGCQXY2A',button:'M453MYHXYUMUG'},premium:{name:'Premium',price:850,pages:10,deposit:425,monthly:70.83,full:'https://www.paypal.com/ncp/payment/5QWFAUSHSB6SG',button:'74N62C7J4EWWU'}};
 const client='BAA6joxBZ6sjxxXUmFgEjcDCIdITuhcl4TrDJzgxMYK_oo4F_Sa1QPAiP08xBd7UyFxIu43PpLazAN0AjY';
 const planIds={starter:'P-2X4855030H9632908NJ47KRQ',business:'P-0A9124042N887170MNJ47NZQ',premium:'P-1DF06614NY927051XNJ47PDA'};
-const $=id=>document.getElementById(id),money=n=>'$'+n.toFixed(2);
+const $=id=>document.getElementById(id),money=n=>'
+let sdkPromise=null,subscriptionSdkPromise=null;const rendered={},subscriptionRendered={};
+function paypalSDK(){if(sdkPromise)return sdkPromise;sdkPromise=new Promise((resolve,reject)=>{const tag=document.createElement('script');tag.src='https://www.paypal.com/sdk/js?client-id='+encodeURIComponent(client)+'&components=hosted-buttons&enable-funding=venmo&currency=USD';tag.setAttribute('data-namespace','bamHostedPayPal');tag.onload=()=>resolve(window.bamHostedPayPal);tag.onerror=()=>reject(new Error('Unable to load PayPal'));document.body.appendChild(tag);});return sdkPromise;}
+function paypalSubscriptionSDK(){
+ if(subscriptionSdkPromise)return subscriptionSdkPromise;
+ subscriptionSdkPromise=new Promise((resolve,reject)=>{
+  const tag=document.createElement('script');
+  tag.src='https://www.paypal.com/sdk/js?client-id='+encodeURIComponent(client)+'&components=buttons&vault=true&intent=subscription&currency=USD';
+  tag.setAttribute('data-namespace','bamSubscriptionPayPal');
+  tag.onload=()=>resolve(window.bamSubscriptionPayPal);
+  tag.onerror=()=>reject(new Error('PayPal subscription SDK unavailable'));
+  document.body.appendChild(tag);
+ });
+ return subscriptionSdkPromise;
+}
+async function renderMonthly(key){
+ if(subscriptionRendered[key])return;
+ try{
+  const sdk=await paypalSubscriptionSDK();
+  if(!sdk?.Buttons)throw new Error('PayPal subscription buttons unavailable');
+  await sdk.Buttons({
+   createSubscription:(data,actions)=>actions.subscription.create({plan_id:planIds[key]}),
+   onApprove:data=>{$('ck-pay-status').textContent='PayPal subscription authorized. Reference: '+(data.subscriptionID||'available in PayPal')+'. Payment status must be verified by BAM before your project is marked paid.';},
+   onCancel:()=>{$('ck-pay-status').textContent='PayPal subscription was canceled.';},
+   onError:()=>{$('ck-pay-status').textContent='Unable to complete PayPal subscription. Please contact BAM for assistance.';}
+  }).render('#ck-subscription-'+key);
+  subscriptionRendered[key]=true;
+ }catch(e){$('ck-pay-status').textContent='PayPal subscription button could not load. Please contact BAM to complete the payment setup.';}
+}
+async function renderDeposit(key){
+ if(rendered[key])return;
+ try{const sdk=await paypalSDK();if(!sdk?.HostedButtons)throw new Error('Hosted Buttons SDK missing');await sdk.HostedButtons({hostedButtonId:p[key].button}).render('#ck-paypal-'+key);rendered[key]=true;}
+ catch(e){$('ck-pay-status').textContent='PayPal could not load the deposit button. Please contact BAM’s for a secure payment request.';}
+}
+function update(){
+ const key=document.querySelector('input[name="ck-package"]:checked').value,method=document.querySelector('input[name="ck-method"]:checked').value,a=p[key];
+ const due=method==='full'?a.price:method==='deposit'?a.deposit:a.monthly;
+ const total=method==='monthly'?a.monthly*12:a.price;
+ $('ck-summary-package').textContent=a.name;$('ck-summary-pages').textContent='Up to '+a.pages;
+ $('ck-summary-method').textContent=method==='full'?'Pay in full':method==='deposit'?'50 / 50 split':'12 monthly payments';
+ $('ck-summary-due').textContent=money(due)+(method==='monthly'?' /mo':'');$('ck-summary-total').textContent=money(total);
+ $('ck-summary-detail').textContent=method==='full'?'One-time website package payment.':method==='deposit'?'Remaining '+money(a.deposit)+' due after design approval and before launch.':'12 payments of '+money(a.monthly)+'. Billed monthly for 12 cycles, per PayPal plan settings.';
+ document.querySelector('[data-method-price="full"]').textContent=money(a.price);
+ document.querySelector('[data-method-price="deposit"]').textContent=money(a.deposit)+' now';
+ document.querySelector('[data-method-price="monthly"]').textContent=money(a.monthly)+'/mo';
+ $('checkout-quote-link').href='/contact?package='+key+'&payment='+method+(method==='monthly'?'&plan='+key+'-monthly':'');
+ const m=$('ck-subscription-integration');if(m){m.hidden=method!=='monthly';}
+ const approved=window.bamAcceptedQuote;
+ const ready=!!approved&&approved.package===key&&approved.method===method&&$('terms-acknowledged').checked;
+ $('ck-payment-preview').hidden=ready;
+ if(browserHelp && ready && inAppBrowser)browserHelp.hidden=false;
+ $('ck-selected-payment-label').textContent=a.name+' · '+(method==='full'?'Pay in full':method==='deposit'?'50% deposit':'12 monthly payments')+' · '+money(due)+(method==='monthly'?'/month':'');
+ $('ck-paypal-actions').hidden=!ready;
+ $('ck-pay-full').hidden=!ready||method!=='full';$('ck-pay-full').href=a.full;
+ $('ck-pay-deposit').hidden=!ready||method!=='deposit';
+ $('ck-pay-monthly').hidden=!ready||method!=='monthly';
+ for(const k of Object.keys(p)){$('ck-paypal-'+k).hidden=!ready||method!=='deposit'||k!==key;$('ck-subscription-'+k).hidden=!ready||method!=='monthly'||k!==key;}
+ $('ck-pay-status').textContent=ready?(method==='monthly'?'Confirm the 12-cycle PayPal subscription amount before authorizing.':'Confirm the final price and terms on PayPal before authorizing payment.'):'Choose the payment arrangement you want. If it differs from your accepted quote, approve the schedule amendment above before paying.';
+ if(ready&&method==='deposit')renderDeposit(key);
+ if(ready&&method==='monthly')renderMonthly(key);
+}
+document.querySelectorAll('input[name="ck-package"],input[name="ck-method"]').forEach(el=>el.addEventListener('change',update));
+['terms-acknowledged'].forEach(id=>$(id).addEventListener('input',update));
+window.addEventListener('bam-quote-verified',update);
+update();
+})();
+</script>
+</body>
+</html>
++n.toFixed(2);
+const agent=navigator.userAgent||'';
+const inAppBrowser=/ChatGPT|Instagram|FBAN|FBAV|FB_IAB|TikTok|Line\//i.test(agent)||
+ (/iP(?:hone|ad|od)/i.test(agent)&&/AppleWebKit/i.test(agent)&&!/Safari/i.test(agent));
+const browserHelp=$('ck-browser-help');
+if(browserHelp)browserHelp.hidden=!inAppBrowser;
+$('ck-copy-checkout-url')?.addEventListener('click',async()=>{
+ const href=location.href;
+ try{await navigator.clipboard.writeText(href);$('ck-copy-feedback').textContent='Copied. Paste this link into Safari to use PayPal checkout.';}
+ catch(e){$('ck-copy-feedback').textContent='Copy the address from your browser and paste it into Safari: '+href;}
+});
 let sdkPromise=null,subscriptionSdkPromise=null;const rendered={},subscriptionRendered={};
 function paypalSDK(){if(sdkPromise)return sdkPromise;sdkPromise=new Promise((resolve,reject)=>{const tag=document.createElement('script');tag.src='https://www.paypal.com/sdk/js?client-id='+encodeURIComponent(client)+'&components=hosted-buttons&enable-funding=venmo&currency=USD';tag.setAttribute('data-namespace','bamHostedPayPal');tag.onload=()=>resolve(window.bamHostedPayPal);tag.onerror=()=>reject(new Error('Unable to load PayPal'));document.body.appendChild(tag);});return sdkPromise;}
 function paypalSubscriptionSDK(){
