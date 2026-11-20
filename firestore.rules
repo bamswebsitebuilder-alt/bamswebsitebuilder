@@ -219,6 +219,47 @@ service cloud.firestore {
           && request.resource.data.diff(resource.data).affectedKeys().hasOnly(["state", "withdrawnAt"])
           && !exists(/databases/$(database)/documents/users/$(userId)/agreements/$(agreementId)/acceptances/client);
         allow delete: if false;
+        // Client-selected payment schedule addendum. Client's accepted project scope stays immutable.
+        // One choice per accepted quote; prevents silently changing schedules after authorization.
+        match /paymentSelections/{selectionId} {
+          allow read: if signedIn() && (request.auth.uid == userId || isAdmin());
+          allow create: if signedIn()
+            && request.auth.uid == userId
+            && request.auth.token.email_verified == true
+            && selectionId == "current"
+            && exists(/databases/$(database)/documents/users/$(userId)/agreements/$(agreementId)/acceptances/client)
+            && get(/databases/$(database)/documents/users/$(userId)/agreements/$(agreementId)).data.state == "issued"
+            && request.resource.data.keys().hasOnly(["clientUid","quoteId","package","method","dueNowCents","totalCents","billingCycles","termsVersion","statement","acceptedAt"])
+            && request.resource.data.keys().hasAll(["clientUid","quoteId","package","method","dueNowCents","totalCents","billingCycles","termsVersion","statement","acceptedAt"])
+            && request.resource.data.clientUid == userId
+            && request.resource.data.quoteId == agreementId
+            && request.resource.data.acceptedAt == request.time
+            && request.resource.data.termsVersion == get(/databases/$(database)/documents/users/$(userId)/agreements/$(agreementId)).data.termsVersion
+            && request.resource.data.statement == "I accept this payment schedule as an amendment to my approved website project quote."
+            && request.resource.data.package in ["starter","business","premium"]
+            && request.resource.data.method in ["full","deposit","monthly"]
+            && request.resource.data.dueNowCents is int
+            && request.resource.data.totalCents is int
+            && request.resource.data.billingCycles is int
+            && (
+              (request.resource.data.package == "starter"
+                && get(/databases/$(database)/documents/users/$(userId)/agreements/$(agreementId)).data.amount in [250,249.96]
+                && ((request.resource.data.method == "full" && request.resource.data.dueNowCents == 25000 && request.resource.data.totalCents == 25000 && request.resource.data.billingCycles == 1)
+                  || (request.resource.data.method == "deposit" && request.resource.data.dueNowCents == 12500 && request.resource.data.totalCents == 25000 && request.resource.data.billingCycles == 2)
+                  || (request.resource.data.method == "monthly" && request.resource.data.dueNowCents == 2083 && request.resource.data.totalCents == 24996 && request.resource.data.billingCycles == 12)))
+              || (request.resource.data.package == "business"
+                && get(/databases/$(database)/documents/users/$(userId)/agreements/$(agreementId)).data.amount in [500,500.04]
+                && ((request.resource.data.method == "full" && request.resource.data.dueNowCents == 50000 && request.resource.data.totalCents == 50000 && request.resource.data.billingCycles == 1)
+                  || (request.resource.data.method == "deposit" && request.resource.data.dueNowCents == 25000 && request.resource.data.totalCents == 50000 && request.resource.data.billingCycles == 2)
+                  || (request.resource.data.method == "monthly" && request.resource.data.dueNowCents == 4167 && request.resource.data.totalCents == 50004 && request.resource.data.billingCycles == 12)))
+              || (request.resource.data.package == "premium"
+                && get(/databases/$(database)/documents/users/$(userId)/agreements/$(agreementId)).data.amount in [850,849.96]
+                && ((request.resource.data.method == "full" && request.resource.data.dueNowCents == 85000 && request.resource.data.totalCents == 85000 && request.resource.data.billingCycles == 1)
+                  || (request.resource.data.method == "deposit" && request.resource.data.dueNowCents == 42500 && request.resource.data.totalCents == 85000 && request.resource.data.billingCycles == 2)
+                  || (request.resource.data.method == "monthly" && request.resource.data.dueNowCents == 7083 && request.resource.data.totalCents == 84996 && request.resource.data.billingCycles == 12)))
+            );
+          allow update, delete: if false;
+        }
         match /acceptances/{acceptanceId} {
           allow read: if signedIn() && (request.auth.uid == userId || isAdmin());
           allow create: if signedIn() && request.auth.uid == userId
