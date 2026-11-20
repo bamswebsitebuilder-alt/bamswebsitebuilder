@@ -28,6 +28,14 @@ onAuthStateChanged(auth,user=>{
             await acceptAgreement(db,user,item.id,name,checked);
           }
         });
+        if (acceptance && quote.state === 'issued') {
+          const checkout=document.createElement('a');
+          checkout.className='portal-primary-button';
+          checkout.style.cssText='display:inline-block;margin:14px 0;text-decoration:none';
+          checkout.href='/checkout?quote='+encodeURIComponent(item.id);
+          checkout.textContent=es?'Continuar al pago aprobado':'Continue to approved checkout';
+          section.append(checkout);
+        }
       },()=>{section.textContent=es?'No se pudo cargar la aceptación. Recarga la página o contacta a BAM.':'Acceptance could not be loaded. Refresh or contact BAM.';}));
     });
   },()=>{host.textContent=es?'No se pudieron cargar los acuerdos. Recarga la página o contacta a BAM.':'Agreements could not be loaded. Refresh or contact BAM.';});
