@@ -20,7 +20,8 @@ function page(path, language='en') {
     querySelectorAll(){return []},createElement(){return element()},addEventListener(k,v){events[k]=v}};
   const window={addEventListener(){},matchMedia(){return {matches:false,addEventListener(){}}},requestAnimationFrame(cb){cb()},scrollY:0};
   vm.runInNewContext(source,{document,window,location:{pathname:path},navigator:{},localStorage:{getItem(){return 'dark'}}});
-  return {document,menu,toggle,overlay,close,first,last,events,bands};
+  const clickToggle = () => toggle.listeners.click({ preventDefault(){}, stopPropagation(){} });
+  return {document,menu,toggle,overlay,close,first,last,events,bands,clickToggle};
 }
 test('quote prompt uses the correct language for English, Spanish, and HTML aliases',()=>{
   for (const [path,lang,target] of [['/portfolio','en','/contact'],['/es/portfolio','es','/es/contact'],['/es/portfolio.html','es','/es/contact'],['/subscriptions.html','en','/contact']]) {
@@ -29,7 +30,7 @@ test('quote prompt uses the correct language for English, Spanish, and HTML alia
   for (const path of ['/','/es/','/contact','/es/contact','/login','/es/client-portal']) assert.equal(page(path).bands.length,0);
 });
 test('closed drawer is inert; open drawer traps keyboard focus and Escape restores the trigger',()=>{
-  const p=page('/');assert.equal(p.menu.inert,true);p.toggle.listeners.click();
+  const p=page('/');assert.equal(p.menu.inert,true);p.clickToggle();
   assert.equal(p.menu.inert,false);assert.equal(p.toggle.attributes['aria-expanded'],'true');assert.equal(p.document.activeElement,p.first);
   let prevented=false;p.events.keydown({key:'Tab',shiftKey:true,preventDefault(){prevented=true}});
   assert.equal(prevented,true);assert.equal(p.document.activeElement,p.last);
@@ -37,5 +38,13 @@ test('closed drawer is inert; open drawer traps keyboard focus and Escape restor
   p.events.keydown({key:'Escape'});assert.equal(p.menu.inert,true);assert.equal(p.toggle.attributes['aria-expanded'],'false');assert.equal(p.document.activeElement,p.toggle);
 });
 test('overlay and close button both close the mobile drawer',()=>{
-  const p=page('/');for (const button of [p.overlay,p.close]) {p.toggle.listeners.click();button.listeners.click();assert.equal(p.menu.inert,true);assert.equal(p.document.activeElement,p.toggle)}
+  const p=page('/');for (const button of [p.overlay,p.close]) {p.clickToggle();button.listeners.click();assert.equal(p.menu.inert,true);assert.equal(p.document.activeElement,p.toggle)}
+});
+
+test('following a link injected into the drawer closes it',()=>{
+  const p=page('/');
+  p.clickToggle();
+  p.menu.listeners.click({target:{closest:(selector)=>selector==='a[href]'?p.first:null}});
+  assert.equal(p.menu.inert,true);
+  assert.equal(p.toggle.attributes['aria-expanded'],'false');
 });
