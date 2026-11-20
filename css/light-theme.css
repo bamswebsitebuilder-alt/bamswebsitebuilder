@@ -26,6 +26,43 @@ html[data-theme="light"] body :is(a,button,input,select,textarea,summary,[tabind
   outline-offset: 4px;
 }
 
+/* Keep cream drawer labels legible even when a phone retains :hover after a tap. */
+html[data-theme="light"] body .mobile-menu {
+  background: #fff8e8 !important;
+  color: var(--bam-text);
+  border-color: var(--bam-border);
+}
+html[data-theme="light"] body .mobile-menu .mobile-navigation a {
+  color: var(--bam-text) !important;
+  border-bottom-color: var(--bam-line) !important;
+}
+html[data-theme="light"] body .mobile-menu .mobile-navigation a:is(.active,[aria-current],:focus-visible) {
+  color: #654700 !important;
+  background: #f3e7cc !important;
+}
+html[data-theme="light"] body .mobile-menu .mobile-navigation a .mobile-link-icon {
+  color: var(--bam-gold) !important;
+  border-color: var(--bam-border) !important;
+  background: var(--bam-panel) !important;
+}
+html[data-theme="light"] body .mobile-menu .mobile-menu-close span,
+html[data-theme="light"] body .site-header .menu-toggle span { background: var(--bam-text) !important; }
+
+@media (hover: none) and (pointer: coarse) {
+  html[data-theme="light"] body .mobile-navigation a:hover:not(.active):not([aria-current]) {
+    color: var(--bam-text) !important;
+    background: transparent !important;
+    border-bottom-color: var(--bam-line) !important;
+  }
+  html[data-theme="light"] body .mobile-navigation a:hover:not(.active):not([aria-current]) .mobile-link-icon {
+    background: var(--bam-panel) !important;
+    border-color: var(--bam-border) !important;
+  }
+}
+
+/* The standard gold accent is too light for small table labels on cream. */
+html[data-theme="light"] body .bam-growth-table th { color: var(--bam-gold) !important; }
+
 /* Components added after the original theme was built. */
 html[data-theme="light"] body :is(.plan-preview-card,.buying-path-card,.payment-plan-note,.client-guide-card,.client-case-study,.personal-preview-intro,.personal-preview-dialog) {
   background: #fffdf8 !important;
