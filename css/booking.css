@@ -189,3 +189,21 @@ html body .booking-section .booking-promises small {
   font-size: .8125rem;
   line-height: 1.5;
 }
+
+/* The hero needs a light surface because global light-mode type is dark. */
+html[data-theme="light"] .booking-hero {
+  background: var(--bam-panel-2);
+  color: var(--bam-text);
+  border-bottom: 1px solid var(--bam-border);
+}
+html[data-theme="light"] .booking-hero .hero-copy .eyebrow {
+  color: var(--bam-gold) !important;
+}
+html[data-theme="light"] .booking-hero .benefit-icon {
+  border-color: var(--bam-gold);
+  color: var(--bam-gold);
+}
+/* The device illustrations are deliberately dark in both themes. */
+html[data-theme="light"] .booking-hero .screen b {
+  color: #f8f8f8;
+}
