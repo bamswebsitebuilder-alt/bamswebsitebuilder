@@ -231,6 +231,8 @@ service cloud.firestore {
             && get(/databases/$(database)/documents/users/$(userId)/agreements/$(agreementId)).data.state == "issued"
             && request.resource.data.keys().hasOnly(["clientUid","quoteId","package","method","dueNowCents","totalCents","billingCycles","termsVersion","statement","acceptedAt"])
             && request.resource.data.keys().hasAll(["clientUid","quoteId","package","method","dueNowCents","totalCents","billingCycles","termsVersion","statement","acceptedAt"])
+            // Custom scope/pricing variations require a new administrator-issued quote.
+            && get(/databases/$(database)/documents/users/$(userId)/agreements/$(agreementId)).data.get("variations", "None.") in ["None.", "None", "", "N/A", "none.", "none", "ninguno"]
             && request.resource.data.clientUid == userId
             && request.resource.data.quoteId == agreementId
             && request.resource.data.acceptedAt == request.time
