@@ -21,11 +21,6 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/prices" />
   </url>
   <url>
-    <loc>https://www.bamswebsitebuilder.com/subscriptions</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/subscriptions" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/subscriptions" />
-  </url>
-  <url>
     <loc>https://www.bamswebsitebuilder.com/templates</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/templates" />
     <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/templates" />
@@ -75,7 +70,6 @@
   </url>
   <url>
     <loc>https://www.bamswebsitebuilder.com/es/subscriptions</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.bamswebsitebuilder.com/subscriptions" />
     <xhtml:link rel="alternate" hreflang="es" href="https://www.bamswebsitebuilder.com/es/subscriptions" />
   </url>
   <url>
