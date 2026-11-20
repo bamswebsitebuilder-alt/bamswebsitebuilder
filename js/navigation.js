@@ -406,10 +406,19 @@
       desktop.insertBefore(a,desktop.querySelector('a[href="/contact"]') || null);
     }
     const mobile = document.querySelector('.mobile-navigation');
-    if (mobile && !mobile.querySelector('a[href="/blog"]')) {
-      const a=document.createElement('a');a.href='/blog';a.textContent='Blog';
-      const group=mobile.querySelector('.mobile-nav-group:last-of-type');
-      (group || mobile).appendChild(a);
+    if (mobile) {
+      let a = mobile.querySelector('a[href="/blog"]');
+      if (!a) {
+        a = document.createElement('a');
+        a.href = '/blog';
+        const group = mobile.querySelector('.mobile-nav-group[aria-labelledby="mobile-group-resources"]')
+          || mobile.querySelector('.mobile-nav-group:last-of-type');
+        (group || mobile).appendChild(a);
+      }
+      a.dataset.page = 'blog';
+      if (!a.querySelector('.mobile-link-icon')) {
+        a.innerHTML = '<span class="mobile-link-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#blog"></use></svg></span><span>Blog</span>';
+      }
     }
     // Recompute current-page highlights from the real URL instead of stale copied HTML.
     const currentPath = location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
@@ -436,12 +445,19 @@
       desktop.appendChild(a);
     }
     const mobile = document.querySelector('.mobile-navigation');
-    if (mobile && !mobile.querySelector('a[href="/checkout"]')) {
-      const pricing = mobile.querySelector('a[href="/prices"]');
-      const a = document.createElement('a');
-      a.href = '/checkout'; a.dataset.page = 'checkout'; a.textContent = 'Website checkout';
-      if (pricing) pricing.insertAdjacentElement('afterend', a);
-      else mobile.appendChild(a);
+    if (mobile) {
+      let a = mobile.querySelector('a[href="/checkout"]');
+      if (!a) {
+        a = document.createElement('a');
+        a.href = '/checkout';
+        const pricing = mobile.querySelector('a[href="/prices"]');
+        if (pricing) pricing.insertAdjacentElement('afterend', a);
+        else mobile.appendChild(a);
+      }
+      a.dataset.page = 'checkout';
+      if (!a.querySelector('.mobile-link-icon')) {
+        a.innerHTML = '<span class="mobile-link-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#checkout"></use></svg></span><span>Website checkout</span>';
+      }
     }
     if (location.pathname.replace(/\.html$/, '').replace(/\/$/, '') === '/checkout') {
       document.querySelectorAll('.desktop-navigation a[data-page], .mobile-navigation a[data-page]').forEach(a => {
