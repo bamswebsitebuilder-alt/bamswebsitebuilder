@@ -8,6 +8,25 @@ const status = document.getElementById("crm-lead-status");
 let stop = null;
 let authRevision = 0;
 const stages = ["new", "contacted", "quoted", "won", "lost"];
+const searchBox = document.getElementById("crm-search");
+const stageFilter = document.getElementById("crm-stage-filter");
+const filterCount = document.getElementById("crm-filter-count");
+const applyFilters = () => {
+  if (!list) return;
+  const query = (searchBox?.value || "").trim().toLocaleLowerCase();
+  const stage = stageFilter?.value || "all";
+  const cards = [...list.querySelectorAll(".crm-lead-card")];
+  let count = 0;
+  cards.forEach(card => {
+    const show = (!query || (card.dataset.search || "").includes(query)) && (stage === "all" || card.dataset.stage === stage);
+    card.hidden = !show;
+    if (show) count++;
+  });
+  if (filterCount) filterCount.textContent = cards.length ? count + " of " + cards.length + " leads shown" : "";
+};
+searchBox?.addEventListener("input", applyFilters);
+stageFilter?.addEventListener("change", applyFilters);
+
 const setStatus = message => { if (status) status.textContent = message; };
 const el = (tag, text) => { const node = document.createElement(tag); node.textContent = text; return node; };
 
@@ -33,13 +52,18 @@ function render(snapshot) {
   if (snapshot.empty) {
     list.append(el("p", "No leads yet. Add your first prospect above."));
     setStatus("CRM ready.");
+    document.dispatchEvent(new CustomEvent("bam:crm-overview", { detail: { leads: [] } }));
+    applyFilters();
     return;
   }
   setStatus("CRM ready. " + snapshot.size + " lead(s) loaded.");
+  document.dispatchEvent(new CustomEvent("bam:crm-overview", { detail: { leads: snapshot.docs.map(item => ({ id: item.id, ...item.data() })) } }));
   snapshot.forEach(item => {
     const lead = item.data();
     const card = document.createElement("article");
     card.className = "admin-card crm-lead-card";
+    card.dataset.search = [lead.name, lead.business, lead.email, lead.phone].filter(Boolean).join(" ").toLocaleLowerCase();
+    card.dataset.stage = lead.stage || "new";
     const heading = el("h3", lead.name || "Unnamed lead");
     const details = el("p", [lead.business, lead.email, lead.phone].filter(Boolean).join(" • "));
     const estimate = Number.isInteger(lead.estimateCents) ? (lead.estimateCents / 100).toLocaleString("en-US", { style: "currency", currency: "USD" }) : "Not set";
@@ -118,20 +142,21 @@ function render(snapshot) {
     card.append(heading, details, info, notes, select, edit);
     list.append(card);
   });
+  applyFilters();
 }
 
 onAuthStateChanged(auth, async user => {
   const revision = ++authRevision;
   if (!form || !list) return;
   if (stop) { stop(); stop = null; }
-  if (!user) { form.hidden = true; list.replaceChildren(); setStatus("Sign in to access CRM leads."); return; }
+  if (!user) { form.hidden = true; list.replaceChildren(); document.dispatchEvent(new CustomEvent("bam:crm-overview", { detail: { leads: [] } })); setStatus("Sign in to access CRM leads."); return; }
   try { await reload(user); await user.getIdToken(true); } catch (error) { console.warn("Could not refresh CRM session", error); }
   if (revision !== authRevision) return;
   if (!auth.currentUser?.emailVerified) { form.hidden = true; list.replaceChildren(); setStatus("Verify your email address to access CRM leads."); return; }
   try {
     const profile = await getDoc(doc(db, "users", user.uid));
     if (revision !== authRevision || auth.currentUser?.uid !== user.uid) return;
-    if (profile.data()?.role !== "admin") { form.hidden = true; list.replaceChildren(); setStatus("Your account does not have CRM administrator access."); return; }
+    if (profile.data()?.role !== "admin") { form.hidden = true; list.replaceChildren(); document.dispatchEvent(new CustomEvent("bam:crm-overview", { detail: { leads: [] } })); setStatus("Your account does not have CRM administrator access."); return; }
     form.hidden = false;
     setStatus("CRM access verified. Loading leads...");
     stop = onSnapshot(query(collection(db, "crmLeads"), orderBy("createdAt", "desc")), render, error => {

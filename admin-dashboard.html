@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="/css/responsive-fixes.css">
 <link rel="stylesheet" href="/css/project-workflow.css?v=1"><link rel="stylesheet" href="/css/agreements.css?v=1"><meta name="robots" content="noindex, nofollow"><link rel="stylesheet" href="/css/accessibility.css?v=1"><link rel="stylesheet" href="/css/workspace.css?v=20261103-agreement-icons-1"><link rel="stylesheet" href="/css/portal-brand.css?v=20261013-brand-4"><link rel="stylesheet" href="/css/light-theme.css?v=20261028-1">
 <link rel="stylesheet" href="/css/hosting.css?v=3"><link rel="stylesheet" href="/css/service-agreements.css?v=20261105-form-only-1"><link rel="stylesheet" href="/css/workspace-refresh.css?v=20261105-1">
+  <link rel="stylesheet" href="/css/admin-ucm.css?v=20261120-1">
 </head>
 
 <body class="admin-dashboard-page"><a class="site-skip-link" href="#main-content">Skip to main content</a>
@@ -102,63 +103,59 @@
 
     <main class="admin-content" id="main-content" tabindex="-1">
 
-      <section class="admin-panel active" id="overview">
-        <div class="admin-page-heading">
-          <p class="admin-kicker">DASHBOARD</p>
-          <h1>Business Overview</h1>
-          <p>Manage your clients, projects, invoices, files, and recent activity.</p>
+      <section class="admin-panel active bam-ucm-overview" id="overview">
+        <div class="admin-page-heading bam-ucm-heading">
+          <div><p class="admin-kicker">BAM'S BUSINESS COMMAND CENTER</p>
+            <h1>Business Overview</h1>
+            <p>Your website projects, clients, and sales pipeline at a glance.</p></div>
+          <button class="admin-secondary-button bam-ucm-header-action" type="button" data-open-panel="crm">+ Add lead</button>
         </div>
 
-        <div class="admin-stat-grid">
-          <article class="admin-stat-card">
-            <span>Total Clients</span>
-            <strong id="stat-clients">—</strong>
-          </article>
-
-          <article class="admin-stat-card">
-            <span>Unpaid Invoices</span>
-            <strong id="stat-unpaid">—</strong>
-          </article>
-
-          <article class="admin-stat-card">
-            <span>Paid Invoices</span>
-            <strong id="stat-paid">—</strong>
-          </article>
-
-          <article class="admin-stat-card">
-            <span>Outstanding Balance</span>
-            <strong id="stat-balance">—</strong>
-          </article>
+        <div class="admin-stat-grid bam-ucm-stats" aria-label="Live business metrics">
+          <button class="admin-stat-card bam-metric bam-metric-gold" type="button" data-open-panel="crm">
+            <span>Current leads</span><strong id="stat-leads">—</strong><small>View CRM leads <span aria-hidden="true">↗</span></small>
+          </button>
+          <button class="admin-stat-card bam-metric bam-metric-blue" type="button" data-open-panel="clients">
+            <span>Registered clients</span><strong id="stat-clients">—</strong><small>View clients <span aria-hidden="true">↗</span></small>
+          </button>
+          <button class="admin-stat-card bam-metric bam-metric-orange" type="button" data-open-panel="projects">
+            <span>Open projects</span><strong id="stat-projects">—</strong><small>View projects <span aria-hidden="true">↗</span></small>
+          </button>
+          <button class="admin-stat-card bam-metric bam-metric-green" type="button" data-open-panel="invoices">
+            <span>Pending invoices</span><strong id="stat-unpaid">—</strong><small>View invoices <span aria-hidden="true">↗</span></small>
+          </button>
         </div>
 
-        <article class="admin-card">
-          <div class="admin-card-heading">
-            <div>
-              <p class="admin-kicker">QUICK ACTIONS</p>
-              <h2>Manage Your Business</h2>
+        <div class="bam-ucm-submetrics" aria-label="Invoice summary">
+          <div><span>Paid invoices</span><strong id="stat-paid">—</strong></div>
+          <div><span>Outstanding balance</span><strong id="stat-balance">—</strong></div>
+        </div>
+
+        <div class="bam-ucm-workspace-grid">
+          <article class="admin-card bam-ucm-module bam-ucm-alerts">
+            <div class="bam-ucm-module-head"><div><p class="admin-kicker">NEEDS YOUR ATTENTION</p><h2>Follow-up alerts</h2></div><button type="button" class="bam-ucm-text-action" data-open-panel="crm">All leads →</button></div>
+            <div id="overview-crm-alerts" class="bam-ucm-alert-list" aria-live="polite"><p class="admin-status">Loading follow-ups…</p></div>
+          </article>
+          <article class="admin-card bam-ucm-module bam-ucm-actions">
+            <div class="bam-ucm-module-head"><div><p class="admin-kicker">WORK FASTER</p><h2>Quick actions</h2></div></div>
+            <div class="bam-ucm-quick-grid">
+              <button type="button" data-open-panel="crm"><span aria-hidden="true">＋</span>Add lead</button>
+              <button type="button" data-open-panel="clients"><span aria-hidden="true">♙</span>Add client</button>
+              <button type="button" data-open-panel="projects"><span aria-hidden="true">▣</span>New project</button>
+              <button type="button" data-open-panel="invoices"><span aria-hidden="true">▤</span>Create invoice</button>
+              <button type="button" data-open-panel="messages"><span aria-hidden="true">✉</span>Messages</button>
+              <button type="button" data-open-panel="hosting"><span aria-hidden="true">◎</span>Hosting</button>
             </div>
-          </div>
+          </article>
+        </div>
 
-          <div class="admin-action-row">
-            <button class="admin-primary-button" type="button" data-open-panel="clients">
-              Add Client
-            </button>
-
-            <button class="admin-secondary-button" type="button" data-open-panel="projects">
-              Update Project
-            </button>
-
-            <button class="admin-secondary-button" type="button" data-open-panel="hosting">Manage Hosting</button><button class="admin-secondary-button" type="button" data-open-panel="invoices">
-              Create Invoice
-            </button>
-
-            <button class="admin-secondary-button" type="button" data-open-panel="files">
-              Upload File
-            </button>
-
-            <button class="admin-secondary-button" type="button" data-open-panel="messages">
-              Message Client
-            </button>
+        <article class="admin-card bam-ucm-module bam-ucm-recent">
+          <div class="bam-ucm-module-head"><div><p class="admin-kicker">YOUR SALES PIPELINE</p><h2>Recent leads</h2></div><button type="button" class="bam-ucm-text-action" data-open-panel="crm">Manage leads →</button></div>
+          <div class="bam-ucm-table-scroll">
+            <table class="bam-ucm-table">
+              <thead><tr><th scope="col">Contact / business</th><th scope="col">Stage</th><th scope="col">Follow-up</th><th scope="col">Estimate</th></tr></thead>
+              <tbody id="overview-crm-leads"><tr><td colspan="4">Loading CRM leads…</td></tr></tbody>
+            </table>
           </div>
         </article>
       </section>
@@ -412,6 +409,11 @@
     </form>
     <p class="admin-status" id="crm-lead-status" role="status" aria-live="polite"></p>
   </article>
+  <div class="bam-crm-toolbar" aria-label="Lead filters">
+    <label>Search leads <input id="crm-search" type="search" placeholder="Name, business or email" autocomplete="off"></label>
+    <label>Sales stage <select id="crm-stage-filter"><option value="all">All stages</option><option value="new">New</option><option value="contacted">Contacted</option><option value="quoted">Quoted</option><option value="won">Won</option><option value="lost">Lost</option></select></label>
+  </div>
+  <p id="crm-filter-count" class="bam-crm-filter-count" aria-live="polite"></p>
   <div id="crm-lead-list" aria-live="polite"><p>Checking CRM access…</p></div>
 </section>
 <section class="admin-panel" id="files">
@@ -562,8 +564,9 @@
     </main>
   </div>
 
-  <script type="module" src="/js/crm-admin.js?v=20261119-1"></script>
-  <script type="module" src="/js/admin-dashboard.js?v=20261108-1"></script>
+  <script type="module" src="/js/admin-ucm.js?v=20261120-1"></script>
+  <script type="module" src="/js/crm-admin.js?v=20261120-ucm1"></script>
+  <script type="module" src="/js/admin-dashboard.js?v=20261120-ucm1"></script>
   <script type="module" src="/js/admin-messages.js?v=1"></script>
   <script type="module" src="/js/profile-picture.js?v=3"></script>
 <script src="/js/animations.js?v=1"></script>

@@ -1,0 +1,154 @@
+
+/* BAM UCM business workspace — scoped to the administrator dashboard. */
+body.admin-dashboard-page {
+  --bam-ucm-bg: #0c0d0f;
+  --bam-ucm-surface: #15171a;
+  --bam-ucm-border: rgba(238,195,99,.17);
+  --bam-ucm-ink: #f8f7f3;
+}
+body.admin-dashboard-page .admin-header {
+  border-bottom-color: rgba(239,195,91,.18);
+  box-shadow: 0 4px 26px rgba(0,0,0,.16);
+}
+body.admin-dashboard-page .admin-sidebar {
+  background: linear-gradient(180deg,#17191d 0%,#111215 100%);
+  border-color: rgba(238,195,99,.15);
+}
+body.admin-dashboard-page .admin-sidebar-label {
+  font-size: .72rem;
+  letter-spacing: .18em;
+}
+body.admin-dashboard-page .admin-nav { gap: 5px; }
+body.admin-dashboard-page .admin-nav-button {
+  border-radius: 10px;
+  font-weight: 700;
+  min-height: 46px;
+}
+body.admin-dashboard-page .admin-nav-button.active {
+  background: rgba(239,195,91,.10);
+  color: #f6ca66;
+}
+body.admin-dashboard-page .admin-content {
+  background: radial-gradient(circle at 90% 0%,rgba(198,144,38,.06),transparent 37%),#0c0d0f;
+  padding: clamp(20px,3vw,42px);
+}
+body.admin-dashboard-page .bam-ucm-overview { max-width: 1560px; }
+.bam-ucm-heading {display:flex;align-items:flex-end;justify-content:space-between;gap:18px;}
+.bam-ucm-heading h1 {font-size:clamp(1.75rem,3.1vw,2.65rem);}
+.bam-ucm-heading .bam-ucm-header-action {flex-shrink:0;}
+.bam-ucm-stats {gap:14px;grid-template-columns:repeat(4,minmax(0,1fr));}
+.bam-ucm-stats .bam-metric {
+  padding:20px 20px 0;
+  border:1px solid rgba(255,255,255,.06);
+  text-align:left;
+  cursor:pointer;
+  min-height:164px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  color:#fff !important;
+  border-radius:13px;
+  box-shadow:0 6px 22px rgba(0,0,0,.14);
+  transition:transform .16s ease,filter .16s ease;
+}
+.bam-ucm-stats .bam-metric:hover,.bam-ucm-stats .bam-metric:focus-visible {transform:translateY(-2px);filter:brightness(1.06);}
+.bam-ucm-stats .bam-metric > span {color:rgba(255,255,255,.95);font-size:.88rem;font-weight:700;margin:0 0 8px;}
+.bam-ucm-stats .bam-metric strong {font-size:clamp(2.1rem,3vw,2.9rem);line-height:1.08;margin-bottom:auto;}
+.bam-ucm-stats .bam-metric small {display:block;margin:16px -20px 0;padding:12px 20px;background:rgba(0,0,0,.13);font-size:.81rem;font-weight:700;color:#fff;}
+.bam-metric-gold {background:linear-gradient(125deg,#c18824,#e7b74a)!important;}
+.bam-metric-blue {background:linear-gradient(125deg,#087aa2,#14aed0)!important;}
+.bam-metric-orange {background:linear-gradient(125deg,#cb7826,#ed9c2d)!important;}
+.bam-metric-green {background:linear-gradient(125deg,#167a56,#20a671)!important;}
+.bam-ucm-submetrics {display:flex;gap:14px;flex-wrap:wrap;margin:-7px 0 22px;}
+.bam-ucm-submetrics > div {display:flex;align-items:center;gap:10px;font-size:.85rem;color:#b8bcc4;}
+.bam-ucm-submetrics strong {color:#eed198;font-size:.95rem;}
+.bam-ucm-workspace-grid {display:grid;grid-template-columns:minmax(0,1.4fr) minmax(280px,.85fr);gap:18px;}
+body.admin-dashboard-page .bam-ucm-module {
+  background:#15171a;
+  border:1px solid rgba(255,255,255,.075);
+  border-radius:14px;
+  padding:clamp(18px,2.4vw,26px);
+  margin-bottom:18px;
+  min-width:0;
+}
+.bam-ucm-module-head {display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;}
+.bam-ucm-module-head h2 {font-size:1.2rem;margin:0;}
+.bam-ucm-module-head .admin-kicker {margin-bottom:6px;font-size:.67rem;}
+.bam-ucm-text-action {background:transparent;border:0;color:#f0c76e;cursor:pointer;font-weight:750;white-space:nowrap;padding:10px 0;}
+.bam-ucm-alert-list {display:grid;gap:10px;}
+.bam-ucm-alert {display:flex;gap:12px;align-items:flex-start;padding:13px;border:1px solid rgba(247,190,85,.14);background:rgba(247,190,85,.045);border-radius:10px;}
+.bam-ucm-alert p {margin:5px 0 0;font-size:.82rem;color:#b8bec9;overflow-wrap:anywhere;}
+.bam-ucm-alert strong {display:block;font-size:.94rem;overflow-wrap:anywhere;}
+.bam-ucm-alert-mark {font-size:1.12rem;color:#ecc066;}
+.bam-ucm-alert-empty {color:#adb3bd;margin:0;padding:12px 0;}
+.bam-ucm-quick-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+.bam-ucm-quick-grid button {
+  display:flex;align-items:center;gap:10px;min-height:50px;padding:10px 12px;
+  text-align:left;background:#202328;color:#f4f4f4;
+  border:1px solid rgba(255,255,255,.08);border-radius:10px;cursor:pointer;font:inherit;font-size:.88rem;font-weight:700;
+}
+.bam-ucm-quick-grid button:hover,.bam-ucm-quick-grid button:focus-visible {border-color:rgba(239,195,91,.6);}
+.bam-ucm-quick-grid button span {display:inline-grid;place-items:center;background:rgba(239,195,91,.12);color:#edc66d;border-radius:8px;width:27px;height:27px;flex-shrink:0;font-size:1.1rem;}
+.bam-ucm-recent {margin-top:0;}
+.bam-ucm-table-scroll {width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.bam-ucm-table {width:100%;border-collapse:collapse;min-width:580px;text-align:left;}
+.bam-ucm-table th {font-size:.73rem;text-transform:uppercase;letter-spacing:.06em;color:#aab0bc;border-bottom:1px solid rgba(255,255,255,.11);padding:12px;}
+.bam-ucm-table td {padding:15px 12px;border-bottom:1px solid rgba(255,255,255,.06);font-size:.88rem;vertical-align:middle;}
+.bam-ucm-table td strong {color:#f6f5f2;display:block;}
+.bam-ucm-table td small {display:block;color:#aeb4bf;margin-top:4px;overflow-wrap:anywhere;}
+.bam-ucm-stage {display:inline-block;border-radius:999px;padding:5px 9px;background:rgba(239,195,91,.13);color:#efc873;font-weight:750;font-size:.75rem;}
+.bam-ucm-stage[data-stage="won"] {background:rgba(32,166,113,.18);color:#83e3aa;}
+.bam-ucm-stage[data-stage="lost"] {background:rgba(200,85,85,.18);color:#ef9999;}
+.bam-ucm-stage[data-stage="quoted"] {background:rgba(20,174,208,.15);color:#80deec;}
+.bam-ucm-empty {padding:20px;color:#b3b9c4;}
+@media (max-width:1080px) {
+  .bam-ucm-stats {grid-template-columns:repeat(2,minmax(0,1fr));}
+  .bam-ucm-workspace-grid {grid-template-columns:1fr;}
+}
+@media (max-width:760px) {
+  body.admin-dashboard-page .admin-content {padding:20px 14px 34px;}
+  .bam-ucm-heading {align-items:flex-start;}
+  .bam-ucm-heading .bam-ucm-header-action {padding:10px 12px;font-size:.82rem;}
+  .bam-ucm-stats {gap:10px;grid-template-columns:repeat(2,minmax(0,1fr));}
+  .bam-ucm-stats .bam-metric {min-height:148px;padding:16px 14px 0;}
+  .bam-ucm-stats .bam-metric small {margin:12px -14px 0;padding:11px 14px;}
+  .bam-ucm-submetrics {margin:2px 0 18px;}
+  .bam-ucm-quick-grid {grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media (max-width:385px) {
+  .bam-ucm-heading {display:block;}
+  .bam-ucm-heading .bam-ucm-header-action {margin-top:12px;}
+  .bam-ucm-stats .bam-metric {min-height:140px;}
+  .bam-ucm-stats .bam-metric > span {font-size:.76rem;}
+}
+@media (prefers-reduced-motion:reduce) {.bam-ucm-stats .bam-metric {transition:none;}}
+/* Preserve the site's established light-mode toggle without changing client portal styling. */
+html[data-theme="light"] body.admin-dashboard-page {--bam-ucm-ink:#17202e;}
+html[data-theme="light"] body.admin-dashboard-page .admin-content {background:#f4f5f6;}
+html[data-theme="light"] body.admin-dashboard-page .bam-ucm-module {background:#fff;color:#17202e;border-color:#dce0e6;}
+html[data-theme="light"] body.admin-dashboard-page .bam-ucm-module-head h2,
+html[data-theme="light"] body.admin-dashboard-page .bam-ucm-table td strong {color:#17202e;}
+html[data-theme="light"] body.admin-dashboard-page .bam-ucm-table td,
+html[data-theme="light"] body.admin-dashboard-page .bam-ucm-table th {border-color:#e5e6e8;color:#3c4654;}
+html[data-theme="light"] body.admin-dashboard-page .bam-ucm-quick-grid button {background:#f5f6f7;color:#17202e;border-color:#e2e4e7;}
+html[data-theme="light"] body.admin-dashboard-page .bam-ucm-alert {background:#fff9eb;}
+html[data-theme="light"] body.admin-dashboard-page .bam-ucm-alert p,
+html[data-theme="light"] body.admin-dashboard-page .bam-ucm-table td small {color:#566170;}
+
+/* Compact, searchable CRM management without replacing existing edit forms. */
+.bam-crm-toolbar {display:grid;grid-template-columns:minmax(0,1.7fr) minmax(170px,.75fr);gap:12px;margin:0 0 12px;padding:16px;border:1px solid rgba(238,195,99,.15);background:#16181b;border-radius:13px;}
+.bam-crm-toolbar label {display:flex;flex-direction:column;gap:7px;color:#d1d3d9;font-size:.83rem;font-weight:700;min-width:0;}
+.bam-crm-toolbar input,.bam-crm-toolbar select {width:100%;min-width:0;box-sizing:border-box;background:#101114;color:#fafafa;border:1px solid #5c4a27;border-radius:9px;padding:11px 12px;min-height:44px;font:inherit;}
+.bam-crm-filter-count {font-size:.78rem;color:#b2b7c0;margin:0 0 12px;}
+.crm-lead-card[hidden] {display:none!important;}
+body.admin-dashboard-page .crm-lead-card {padding:clamp(17px,2vw,25px);border-radius:13px;border-color:rgba(238,195,99,.18);background:#15171a;}
+body.admin-dashboard-page .crm-lead-card h3 {margin:0 0 8px;font-size:1.13rem;}
+body.admin-dashboard-page .crm-lead-card > p {font-size:.87rem;color:#bbc0c8;line-height:1.5;margin:0 0 12px;}
+body.admin-dashboard-page .crm-lead-card > select {border-radius:8px;padding:10px;background:#111215;color:#f5f5f5;border:1px solid rgba(239,195,91,.38);}
+html[data-theme="light"] body.admin-dashboard-page .bam-crm-toolbar {background:#fff;border-color:#ddd;}
+html[data-theme="light"] body.admin-dashboard-page .bam-crm-toolbar label {color:#24303e;}
+html[data-theme="light"] body.admin-dashboard-page .bam-crm-toolbar input,html[data-theme="light"] body.admin-dashboard-page .bam-crm-toolbar select {background:#f7f7f8;color:#17202e;}
+html[data-theme="light"] body.admin-dashboard-page .crm-lead-card {background:#fff;}
+html[data-theme="light"] body.admin-dashboard-page .crm-lead-card > p {color:#4e5968;}
+@media (max-width:600px) {.bam-crm-toolbar {grid-template-columns:minmax(0,1fr);padding:12px;}}
