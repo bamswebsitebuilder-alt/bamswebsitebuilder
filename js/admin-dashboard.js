@@ -1057,6 +1057,13 @@ const publishProjects = () => {
       );
     });
 
+  const openProjects = document.getElementById("stat-projects");
+  if (openProjects) {
+    openProjects.textContent = String(projectRecords.filter(project => {
+      const status = String(project.status || "").trim().toLowerCase();
+      return !["completed", "complete", "finished", "cancelled", "canceled", "archived"].includes(status);
+    }).length);
+  }
   renderProjects();
   syncHosting();
   projectRecords.forEach(project => agreementUI?.project(project));
