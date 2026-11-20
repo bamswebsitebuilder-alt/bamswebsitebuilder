@@ -284,6 +284,13 @@ function update(){
 document.querySelectorAll('input[name="ck-package"],input[name="ck-method"]').forEach(el=>el.addEventListener('change',update));
 ['terms-acknowledged'].forEach(id=>$(id).addEventListener('input',update));
 window.addEventListener('bam-quote-verified',update);
+// URL selections are public preferences. A verified quote can override them.
+const preferences=new URLSearchParams(location.search);
+for(const [group,param] of [['ck-package','package'],['ck-method','payment']]){
+ const value=(preferences.get(param)||'').trim().toLowerCase();
+ const matching=Array.from(document.querySelectorAll('input[name="'+group+'"]')).find(input=>input.value===value);
+ if(matching)matching.checked=true;
+}
 update();
 })();
 </script>
