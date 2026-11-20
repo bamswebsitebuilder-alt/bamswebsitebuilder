@@ -1,0 +1,41 @@
+/* Use the saved BAM light palette on standalone pages without the shared shell. */
+html[data-theme="light"]:has(body:is(.bam-standalone-quiz,.bam-standalone-industry)) {
+  color-scheme: light;
+}
+html[data-theme="light"] body:is(.bam-standalone-quiz,.bam-standalone-industry) {
+  --bam-bg: #fbf7ef;
+  --bam-panel: #fffdf8;
+  --bam-panel-2: #f6efe2;
+  --bam-text: #20201d;
+  --bam-muted: #514d44;
+  --bam-gold: #765300;
+  --bam-gold-light: #765300;
+  --bam-border: #8b806a;
+  background: var(--bam-bg);
+  color: var(--bam-text);
+}
+html[data-theme="light"] body:is(.bam-standalone-quiz,.bam-standalone-industry) :is(h1,h2,h3,legend) {
+  color: var(--bam-text);
+}
+html[data-theme="light"] body:is(.bam-standalone-quiz,.bam-standalone-industry) :is(header,footer) a {
+  color: var(--bam-gold) !important;
+}
+html[data-theme="light"] .bam-standalone-quiz :is(.bam-quiz,.bam-quiz-result),
+html[data-theme="light"] .bam-standalone-industry .features li {
+  background: var(--bam-panel);
+  border-color: var(--bam-border);
+}
+html[data-theme="light"] .bam-standalone-quiz input[type="radio"] { accent-color: var(--bam-gold); }
+html[data-theme="light"] .bam-standalone-quiz .bam-growth-button,
+html[data-theme="light"] .bam-standalone-industry .actions a:first-child {
+  border-color: var(--bam-gold);
+  background: var(--bam-gold);
+  color: #fff !important;
+}
+html[data-theme="light"] .bam-standalone-industry .actions a + a {
+  color: var(--bam-gold);
+}
+html[data-theme="light"] body:is(.bam-standalone-quiz,.bam-standalone-industry) :is(a,button,input):focus-visible {
+  outline: 3px solid var(--bam-gold);
+  outline-offset: 3px;
+}
