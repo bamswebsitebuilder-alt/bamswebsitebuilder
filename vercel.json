@@ -4,6 +4,16 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/subscriptions",
+      "destination": "/prices#compare",
+      "permanent": true
+    },
+    {
+      "source": "/subscriptions.html",
+      "destination": "/prices#compare",
+      "permanent": true
+    },
+    {
       "source": "/booking.html",
       "destination": "/booking",
       "permanent": true
