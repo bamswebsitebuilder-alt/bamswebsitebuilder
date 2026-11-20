@@ -200,75 +200,6 @@ const p={starter:{name:'Starter',price:250,pages:3,deposit:125,monthly:20.83,ful
 const client='BAA6joxBZ6sjxxXUmFgEjcDCIdITuhcl4TrDJzgxMYK_oo4F_Sa1QPAiP08xBd7UyFxIu43PpLazAN0AjY';
 const planIds={starter:'P-2X4855030H9632908NJ47KRQ',business:'P-0A9124042N887170MNJ47NZQ',premium:'P-1DF06614NY927051XNJ47PDA'};
 const $=id=>document.getElementById(id),money=n=>'$'+Number(n).toFixed(2);
-let sdkPromise=null,subscriptionSdkPromise=null;const rendered={},subscriptionRendered={};
-function paypalSDK(){if(sdkPromise)return sdkPromise;sdkPromise=new Promise((resolve,reject)=>{const tag=document.createElement('script');tag.src='https://www.paypal.com/sdk/js?client-id='+encodeURIComponent(client)+'&components=hosted-buttons&enable-funding=venmo&currency=USD';tag.setAttribute('data-namespace','bamHostedPayPal');tag.onload=()=>resolve(window.bamHostedPayPal);tag.onerror=()=>reject(new Error('Unable to load PayPal'));document.body.appendChild(tag);});return sdkPromise;}
-function paypalSubscriptionSDK(){
- if(subscriptionSdkPromise)return subscriptionSdkPromise;
- subscriptionSdkPromise=new Promise((resolve,reject)=>{
-  const tag=document.createElement('script');
-  tag.src='https://www.paypal.com/sdk/js?client-id='+encodeURIComponent(client)+'&components=buttons&vault=true&intent=subscription&currency=USD';
-  tag.setAttribute('data-namespace','bamSubscriptionPayPal');
-  tag.onload=()=>resolve(window.bamSubscriptionPayPal);
-  tag.onerror=()=>reject(new Error('PayPal subscription SDK unavailable'));
-  document.body.appendChild(tag);
- });
- return subscriptionSdkPromise;
-}
-async function renderMonthly(key){
- if(subscriptionRendered[key])return;
- try{
-  const sdk=await paypalSubscriptionSDK();
-  if(!sdk?.Buttons)throw new Error('PayPal subscription buttons unavailable');
-  await sdk.Buttons({
-   createSubscription:(data,actions)=>actions.subscription.create({plan_id:planIds[key]}),
-   onApprove:data=>{$('ck-pay-status').textContent='PayPal subscription authorized. Reference: '+(data.subscriptionID||'available in PayPal')+'. Payment status must be verified by BAM before your project is marked paid.';},
-   onCancel:()=>{$('ck-pay-status').textContent='PayPal subscription was canceled.';},
-   onError:()=>{$('ck-pay-status').textContent='Unable to complete PayPal subscription. Please contact BAM for assistance.';}
-  }).render('#ck-subscription-'+key);
-  subscriptionRendered[key]=true;
- }catch(e){$('ck-pay-status').textContent='PayPal subscription button could not load. Please contact BAM to complete the payment setup.';}
-}
-async function renderDeposit(key){
- if(rendered[key])return;
- try{const sdk=await paypalSDK();if(!sdk?.HostedButtons)throw new Error('Hosted Buttons SDK missing');await sdk.HostedButtons({hostedButtonId:p[key].button}).render('#ck-paypal-'+key);rendered[key]=true;}
- catch(e){$('ck-pay-status').textContent='PayPal could not load the deposit button. Please contact BAM’s for a secure payment request.';}
-}
-function update(){
- const key=document.querySelector('input[name="ck-package"]:checked').value,method=document.querySelector('input[name="ck-method"]:checked').value,a=p[key];
- const due=method==='full'?a.price:method==='deposit'?a.deposit:a.monthly;
- const total=method==='monthly'?a.monthly*12:a.price;
- $('ck-summary-package').textContent=a.name;$('ck-summary-pages').textContent='Up to '+a.pages;
- $('ck-summary-method').textContent=method==='full'?'Pay in full':method==='deposit'?'50 / 50 split':'12 monthly payments';
- $('ck-summary-due').textContent=money(due)+(method==='monthly'?' /mo':'');$('ck-summary-total').textContent=money(total);
- $('ck-summary-detail').textContent=method==='full'?'One-time website package payment.':method==='deposit'?'Remaining '+money(a.deposit)+' due after design approval and before launch.':'12 payments of '+money(a.monthly)+'. Billed monthly for 12 cycles, per PayPal plan settings.';
- document.querySelector('[data-method-price="full"]').textContent=money(a.price);
- document.querySelector('[data-method-price="deposit"]').textContent=money(a.deposit)+' now';
- document.querySelector('[data-method-price="monthly"]').textContent=money(a.monthly)+'/mo';
- $('checkout-quote-link').href='/contact?package='+key+'&payment='+method+(method==='monthly'?'&plan='+key+'-monthly':'');
- const m=$('ck-subscription-integration');if(m){m.hidden=method!=='monthly';}
- const approved=window.bamAcceptedQuote;
- const ready=!!approved&&approved.package===key&&approved.method===method&&$('terms-acknowledged').checked;
- $('ck-payment-preview').hidden=ready;
- if(browserHelp && ready && inAppBrowser)browserHelp.hidden=false;
- $('ck-selected-payment-label').textContent=a.name+' · '+(method==='full'?'Pay in full':method==='deposit'?'50% deposit':'12 monthly payments')+' · '+money(due)+(method==='monthly'?'/month':'');
- $('ck-paypal-actions').hidden=!ready;
- $('ck-pay-full').hidden=!ready||method!=='full';$('ck-pay-full').href=a.full;
- $('ck-pay-deposit').hidden=!ready||method!=='deposit';
- $('ck-pay-monthly').hidden=!ready||method!=='monthly';
- for(const k of Object.keys(p)){$('ck-paypal-'+k).hidden=!ready||method!=='deposit'||k!==key;$('ck-subscription-'+k).hidden=!ready||method!=='monthly'||k!==key;}
- $('ck-pay-status').textContent=ready?(method==='monthly'?'Confirm the 12-cycle PayPal subscription amount before authorizing.':'Confirm the final price and terms on PayPal before authorizing payment.'):'Choose the payment arrangement you want. If it differs from your accepted quote, approve the schedule amendment above before paying.';
- if(ready&&method==='deposit')renderDeposit(key);
- if(ready&&method==='monthly')renderMonthly(key);
-}
-document.querySelectorAll('input[name="ck-package"],input[name="ck-method"]').forEach(el=>el.addEventListener('change',update));
-['terms-acknowledged'].forEach(id=>$(id).addEventListener('input',update));
-window.addEventListener('bam-quote-verified',update);
-update();
-})();
-</script>
-</body>
-</html>
-+n.toFixed(2);
 const agent=navigator.userAgent||'';
 const inAppBrowser=/ChatGPT|Instagram|FBAN|FBAV|FB_IAB|TikTok|Line\//i.test(agent)||
  (/iP(?:hone|ad|od)/i.test(agent)&&/AppleWebKit/i.test(agent)&&!/Safari/i.test(agent));
@@ -328,6 +259,7 @@ function update(){
  const approved=window.bamAcceptedQuote;
  const ready=!!approved&&approved.package===key&&approved.method===method&&$('terms-acknowledged').checked;
  $('ck-payment-preview').hidden=ready;
+ if(browserHelp && ready && inAppBrowser)browserHelp.hidden=false;
  $('ck-selected-payment-label').textContent=a.name+' · '+(method==='full'?'Pay in full':method==='deposit'?'50% deposit':'12 monthly payments')+' · '+money(due)+(method==='monthly'?'/month':'');
  $('ck-paypal-actions').hidden=!ready;
  $('ck-pay-full').hidden=!ready||method!=='full';$('ck-pay-full').href=a.full;
