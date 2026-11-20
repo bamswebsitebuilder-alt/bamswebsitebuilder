@@ -385,8 +385,8 @@
     }
     document.querySelectorAll('a[href]').forEach(a => {
       const url=new URL(a.href, location.href);
-      if (url.origin!==location.origin || url.pathname.replace(/\\/$/,'')!=='/contact') return;
-      const current=a.textContent.trim().replace(/\\s+/g,' ');
+      if (url.origin!==location.origin || url.pathname.replace(/\/$/,'')!=='/contact') return;
+      const current=a.textContent.trim().replace(/\s+/g,' ');
       if (/^(get a quote|request a website quote|request a quote|discuss your website)$/i.test(current)) a.textContent='Get a Free Quote';
     });
   });
