@@ -480,6 +480,16 @@
   }
   window.addEventListener('hashchange', syncMenuCurrentPage);
 
+  // Consolidate legacy pricing links across existing site headers, footers, and page content.
+  const syncPricingLinks = () => {
+    document.querySelectorAll('a[href="/subscriptions"],a[href="/subscriptions.html"]').forEach(link => {
+      link.setAttribute('href', '/prices#compare');
+      if (link.dataset.page === 'subscriptions') link.dataset.page = 'prices';
+    });
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', syncPricingLinks);
+  else syncPricingLinks();
+
   // Keep the public footer's policy and learning links consistent across pages.
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('footer.home-footer').forEach(footer => {
