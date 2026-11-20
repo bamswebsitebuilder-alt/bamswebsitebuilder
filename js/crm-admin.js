@@ -52,6 +52,7 @@ function render(snapshot) {
   if (snapshot.empty) {
     list.append(el("p", "No leads yet. Add your first prospect above."));
     setStatus("CRM ready.");
+    document.dispatchEvent(new CustomEvent("bam:crm-overview", { detail: { leads: [] } }));
     applyFilters();
     return;
   }
