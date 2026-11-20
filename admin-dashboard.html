@@ -409,6 +409,11 @@
     </form>
     <p class="admin-status" id="crm-lead-status" role="status" aria-live="polite"></p>
   </article>
+  <div class="bam-crm-toolbar" aria-label="Lead filters">
+    <label>Search leads <input id="crm-search" type="search" placeholder="Name, business or email" autocomplete="off"></label>
+    <label>Sales stage <select id="crm-stage-filter"><option value="all">All stages</option><option value="new">New</option><option value="contacted">Contacted</option><option value="quoted">Quoted</option><option value="won">Won</option><option value="lost">Lost</option></select></label>
+  </div>
+  <p id="crm-filter-count" class="bam-crm-filter-count" aria-live="polite"></p>
   <div id="crm-lead-list" aria-live="polite"><p>Checking CRM access…</p></div>
 </section>
 <section class="admin-panel" id="files">
