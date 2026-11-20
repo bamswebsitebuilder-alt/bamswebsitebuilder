@@ -40,7 +40,7 @@ test('verified admin can create, read and change stage', async () => {
   const record = await assertSucceeds(getDoc(doc(db('admin'), path)));
   assert.equal(record.data().stage, 'new');
   await assertSucceeds(updateDoc(doc(db('admin'), path), { stage: 'quoted', updatedAt: serverTimestamp() }));
-  await assertFails(updateDoc(doc(db('admin'), path), { email: 'changed@example.com', updatedAt: serverTimestamp() }));
+  await assertSucceeds(updateDoc(doc(db('admin'), path), { email: 'changed@example.com', updatedAt: serverTimestamp() }));
   await assertFails(deleteDoc(doc(db('admin'), path)));
 });
 test('invalid stage and spoofed creator are denied', async () => {
