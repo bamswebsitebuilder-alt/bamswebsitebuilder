@@ -738,7 +738,7 @@ body.menu-open {
    NAVIGATION BREAKPOINTS
 ========================== */
 
-@media (min-width: 901px) {
+@media (min-width: 1101px) {
     .mobile-menu,
     .menu-overlay {
         display: none;
@@ -2973,7 +2973,9 @@ iframe[src*="livechat.com" i] {
   .desktop-navigation { min-width: 0; gap: clamp(10px, 1.25vw, 22px); }
   .desktop-navigation a { font-size: clamp(.64rem, .72vw, .72rem); }
   .desktop-language { margin-left: 12px; }
-  .mobile-menu, .menu-overlay, .menu-toggle { display: none !important; }
+  @media (min-width: 1101px) {
+    .mobile-menu, .menu-overlay, .menu-toggle { display: none !important; }
+  }
 }
 @media (min-width: 901px) and (max-width: 1180px) {
   .header-container { padding-inline: 22px; }
