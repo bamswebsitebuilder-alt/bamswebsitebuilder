@@ -1,0 +1,149 @@
+/* Readable auth and workspace states in the public site's light theme. */
+html[data-theme="light"] .auth-page :is(.auth-form label, .check-label) {
+  color: var(--bam-text, #20201d) !important;
+}
+
+html[data-theme="light"] .auth-page .auth-form :is(input:not([type="checkbox"]), textarea, select),
+html[data-theme="light"] body:is(.client-portal-page, .admin-dashboard-page)
+  main :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), textarea, select) {
+  background: var(--bam-panel, #fffdf8) !important;
+  color: var(--bam-text, #20201d) !important;
+  border-color: #8b806a !important;
+}
+
+html[data-theme="light"] .auth-page :is(input, textarea)::placeholder,
+html[data-theme="light"] body:is(.client-portal-page, .admin-dashboard-page)
+  main :is(input, textarea)::placeholder {
+  color: var(--bam-muted, #514d44) !important;
+  opacity: 1;
+}
+
+html[data-theme="light"] :is(.auth-page, .client-portal-page, .admin-dashboard-page)
+  :is(.form-alert, .portal-file-status, .admin-photo-status, .portal-message-status[data-type], .admin-status[data-type]) {
+  color: var(--bam-muted, #514d44) !important;
+}
+
+html[data-theme="light"] :is(.auth-page, .client-portal-page, .admin-dashboard-page)
+  :is(.form-alert, .admin-photo-status, .portal-message-status[data-type="error"], .admin-status[data-type="error"]) {
+  color: #842636 !important;
+  background: #fae9e9;
+  border-color: #bd737c;
+}
+
+html[data-theme="light"] :is(.auth-page, .client-portal-page, .admin-dashboard-page)
+  :is(.form-alert.success-alert, .portal-file-status.success-alert, .admin-photo-status.success-alert,
+      .portal-message-status[data-type="success"], .admin-status[data-type="success"]) {
+  color: #18563a !important;
+  background: #e6f3eb;
+  border-color: #6b977d;
+}
+
+html[data-theme="light"] .client-portal-page :is(.portal-file-item, .file-row, .invoice-row, .message-row,
+  .support-row, .portal-empty, .message-thread, .profile-photo-editor) {
+  background: var(--bam-panel-2, #f6efe2);
+  color: var(--bam-text, #20201d);
+  border-color: var(--bam-border, #b7a57c);
+}
+
+html[data-theme="light"] .client-portal-page :is(.portal-file-item:hover, .portal-file-picker:hover, .portal-file-picker:focus-within) {
+  background: #f3e7cc;
+  color: var(--bam-text, #20201d);
+  border-color: var(--bam-gold, #765300);
+}
+
+html[data-theme="light"] .client-portal-page
+  :is(.portal-file-name, .portal-file-item strong, .stat-card strong, .section-subtitle),
+html[data-theme="light"] .admin-dashboard-page .admin-stat-card:not(.bam-metric) strong,
+html[data-theme="light"] .admin-dashboard-page .admin-header-actions .admin-photo-button {
+  color: var(--bam-text, #20201d) !important;
+}
+
+html[data-theme="light"] .client-portal-page #upload-file-button:disabled {
+  opacity: 1;
+  background: #eee7da !important;
+  color: #514d44 !important;
+  border-color: #9e937d !important;
+}
+
+html[data-theme="light"] .client-portal-page .portal-toast,
+html[data-theme="light"] .client-portal-page .portal-logout:hover {
+  color: #fff !important;
+}
+
+html[data-theme="light"] body:is(.client-portal-page, .admin-dashboard-page) .hosting-workspace {
+  --hosting-text: var(--bam-text, #20201d);
+  --hosting-muted: var(--bam-muted, #514d44);
+  --hosting-accent: var(--bam-gold, #765300);
+}
+
+html[data-theme="light"] .admin-dashboard-page .admin-menu-toggle span {
+  background: var(--bam-text, #20201d);
+}
+
+html[data-theme="light"] .admin-dashboard-page .bam-ucm-stats .bam-metric {
+  background: var(--metric-surface) !important;
+  color: var(--metric-text) !important;
+  border-color: var(--metric-border) !important;
+}
+
+html[data-theme="light"] .admin-dashboard-page .bam-metric-gold {
+  --metric-surface: #f7ebce;
+  --metric-text: #503700;
+  --metric-border: #a78b49;
+}
+
+html[data-theme="light"] .admin-dashboard-page .bam-metric-blue {
+  --metric-surface: #e5f2f6;
+  --metric-text: #184657;
+  --metric-border: #7198a7;
+}
+
+html[data-theme="light"] .admin-dashboard-page .bam-metric-orange {
+  --metric-surface: #fbeada;
+  --metric-text: #6a3611;
+  --metric-border: #ad845f;
+}
+
+html[data-theme="light"] .admin-dashboard-page .bam-metric-green {
+  --metric-surface: #e4f2e9;
+  --metric-text: #18513a;
+  --metric-border: #779d8b;
+}
+
+html[data-theme="light"] .admin-dashboard-page .bam-metric > :is(span, strong, small) {
+  color: inherit !important;
+}
+
+html[data-theme="light"] .admin-dashboard-page .bam-metric > small {
+  background: rgb(0 0 0 / .045);
+}
+
+html[data-theme="light"] .admin-dashboard-page
+  :is(.bam-ucm-submetrics > div, .bam-ucm-alert-empty, .bam-ucm-empty, .bam-crm-filter-count) {
+  color: var(--bam-muted, #514d44);
+}
+
+html[data-theme="light"] .admin-dashboard-page
+  :is(.bam-ucm-submetrics strong, .bam-ucm-text-action, .bam-ucm-alert-mark, .bam-ucm-quick-grid button span) {
+  color: var(--bam-gold, #765300);
+}
+
+html[data-theme="light"] .admin-dashboard-page .bam-ucm-stage {
+  color: #604400;
+  background: #f4e7c8;
+}
+
+html[data-theme="light"] .admin-dashboard-page .bam-ucm-stage[data-stage="won"] {
+  color: #18563a;
+  background: #e4f2e9;
+}
+
+html[data-theme="light"] .admin-dashboard-page .bam-ucm-stage[data-stage="lost"] {
+  color: #842636;
+  background: #fae9e9;
+}
+
+html[data-theme="light"] .admin-dashboard-page .bam-ucm-stage[data-stage="quoted"] {
+  color: #184657;
+  background: #e5f2f6;
+}
