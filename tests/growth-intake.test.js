@@ -25,8 +25,9 @@ test('ordinary inquiries leave design and payment optional, and monthly choices 
 });
 const templateScript=fs.readFileSync(new URL('../js/templates.js',import.meta.url),'utf8');
 function templateCards(es) {
-  let clone;const card={innerHTML:'',cloneNode(){clone={innerHTML:''};return clone},insertAdjacentElement(){}};
-  vm.runInNewContext(templateScript,{document:{documentElement:{lang:es?'es':'en'},querySelector(){return card},querySelectorAll(){return []}}});return [card.innerHTML,clone.innerHTML];
+  let clone;const card={innerHTML:'',cloneNode(){clone={innerHTML:''};return clone},insertAdjacentElement(){},before(){}};
+  const createElement=()=>({dataset:{},querySelector(){return {textContent:''}},append(){},setAttribute(){}});
+  vm.runInNewContext(templateScript,{document:{documentElement:{lang:es?'es':'en'},querySelector(selector){return selector==='#afterhours-template'?card:null},querySelectorAll(){return []},createElement}});return [card.innerHTML,clone.innerHTML];
 }
 test('generated starter and premium designs keep the correct language and quote destination',()=>{
   for (const es of [false,true]) for(const card of templateCards(es)) {assert.ok(card.includes(es?'href="/es/contact?template=':'href="/contact?template='));assert.ok(card.includes(es?'Elegir diseño':'Choose Design'));assert.ok(card.includes(es?'Ver demo':'View Demo'));if(es)assert.ok(!card.includes('Up to 10 website pages'))}
