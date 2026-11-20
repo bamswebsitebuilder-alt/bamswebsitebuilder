@@ -35,7 +35,7 @@ service cloud.firestore {
     }
     function validLead(data) {
       return data.keys().hasAll(['name','email','business','phone','notes','source','stage','createdBy','createdAt','updatedAt'])
-        && data.keys().hasOnly(['name','email','business','phone','notes','source','stage','createdBy','createdAt','updatedAt'])
+        && data.keys().hasOnly(['name','email','business','phone','notes','source','stage','createdBy','createdAt','updatedAt','followUpDate','estimateCents'])
         && data.name is string && data.name.size() > 0 && data.name.size() <= 120
         && data.email is string && data.email.size() > 0 && data.email.size() <= 254
         && data.business is string && data.business.size() <= 150
@@ -43,7 +43,9 @@ service cloud.firestore {
         && data.notes is string && data.notes.size() <= 2000
         && data.source == 'admin'
         && data.stage in ['new','contacted','quoted','won','lost']
-        && data.createdBy is string && data.createdAt is timestamp && data.updatedAt is timestamp;
+        && data.createdBy is string && data.createdAt is timestamp && data.updatedAt is timestamp
+        && (!('followUpDate' in data) || (data.followUpDate is string && (data.followUpDate == '' || data.followUpDate.matches('[0-9]{4}-[0-9]{2}-[0-9]{2}'))))
+        && (!('estimateCents' in data) || (data.estimateCents is int && data.estimateCents >= 0 && data.estimateCents <= 100000000));
     }
     match /crmLeads/{leadId} {
       allow read: if crmAdmin();
@@ -53,7 +55,10 @@ service cloud.firestore {
         && request.resource.data.createdAt == request.time
         && request.resource.data.updatedAt == request.time;
       allow update: if crmAdmin() && validLead(request.resource.data)
-        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['stage','updatedAt'])
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['name','email','business','phone','notes','stage','followUpDate','estimateCents','updatedAt'])
+        && request.resource.data.createdBy == resource.data.createdBy
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.source == resource.data.source
         && request.resource.data.updatedAt == request.time;
       allow delete: if false;
     }

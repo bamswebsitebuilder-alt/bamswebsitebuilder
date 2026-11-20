@@ -40,10 +40,28 @@ test('verified admin can create, read and change stage', async () => {
   const record = await assertSucceeds(getDoc(doc(db('admin'), path)));
   assert.equal(record.data().stage, 'new');
   await assertSucceeds(updateDoc(doc(db('admin'), path), { stage: 'quoted', updatedAt: serverTimestamp() }));
-  await assertFails(updateDoc(doc(db('admin'), path), { email: 'changed@example.com', updatedAt: serverTimestamp() }));
+  await assertSucceeds(updateDoc(doc(db('admin'), path), { email: 'changed@example.com', updatedAt: serverTimestamp() }));
   await assertFails(deleteDoc(doc(db('admin'), path)));
 });
 test('invalid stage and spoofed creator are denied', async () => {
   await assertFails(setDoc(doc(db('admin'), 'crmLeads/invalid'), { ...lead(), stage: 'invalid' }));
   await assertFails(setDoc(doc(db('admin'), 'crmLeads/spoof'), { ...lead(), createdBy: 'client' }));
+});
+
+test('verified admin can edit lead details, follow-up date and estimate', async () => {
+  const path = 'crmLeads/editable';
+  await assertSucceeds(setDoc(doc(db('admin'), path), lead()));
+  await assertSucceeds(updateDoc(doc(db('admin'), path), {
+    business: 'Updated LLC', notes: 'Follow up on design', followUpDate: '2026-12-01',
+    estimateCents: 85000, updatedAt: serverTimestamp()
+  }));
+  let record = await assertSucceeds(getDoc(doc(db('admin'), path)));
+  assert.equal(record.data().estimateCents, 85000);
+  await assertSucceeds(updateDoc(doc(db('admin'), path), { followUpDate: '', updatedAt: serverTimestamp() }));
+  await assertFails(updateDoc(doc(db('client'), path), { notes: 'tamper', updatedAt: serverTimestamp() }));
+  await assertFails(updateDoc(doc(db('admin'), path), { createdBy: 'client', updatedAt: serverTimestamp() }));
+  await assertFails(updateDoc(doc(db('admin'), path), { source: 'external', updatedAt: serverTimestamp() }));
+  await assertFails(updateDoc(doc(db('admin'), path), { estimateCents: -10, updatedAt: serverTimestamp() }));
+  await assertFails(updateDoc(doc(db('admin'), path), { followUpDate: 'tomorrow', updatedAt: serverTimestamp() }));
+  await assertSucceeds(updateDoc(doc(db('admin'), path), { stage: 'won', updatedAt: serverTimestamp() }));
 });

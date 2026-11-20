@@ -761,3 +761,16 @@ body.admin-dashboard-page{background:radial-gradient(circle at 92% 0%,rgba(212,1
   -webkit-mask: var(--admin-nav-icon) center / contain no-repeat;
   mask: var(--admin-nav-icon) center / contain no-repeat;
 }
+
+/* CRM mobile lead controls */
+.crm-lead-card { margin-bottom: 14px; }
+.crm-lead-card > p { overflow-wrap: anywhere; }
+.crm-lead-card > select { min-height: 44px; max-width: 100%; padding: 8px 12px; }
+.crm-lead-edit { margin-top: 18px; border-top: 1px solid var(--admin-border, #48402c); padding-top: 14px; }
+.crm-lead-edit > summary { cursor: pointer; font-weight: 700; color: var(--admin-gold-light, #f1c75d); padding: 8px 0; }
+.crm-edit-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; padding-top: 14px; }
+.crm-edit-field { display: flex; flex-direction: column; gap: 7px; min-width: 0; font-weight: 650; }
+.crm-edit-field input, .crm-edit-field textarea { box-sizing: border-box; width: 100%; min-height: 46px; background: #101010; color: #fff; border: 1px solid #685321; border-radius: 9px; padding: 12px; font: inherit; }
+.crm-edit-field textarea { min-height: 100px; }
+.crm-edit-form button { min-height: 46px; }
+@media (max-width: 700px) { .crm-edit-form { grid-template-columns: minmax(0, 1fr); } .crm-edit-form button { width: 100%; } }
