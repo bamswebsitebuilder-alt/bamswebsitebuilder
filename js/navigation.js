@@ -98,6 +98,10 @@
         body .menu-overlay.active,body .menu-overlay.open{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important}
         body .mobile-menu.active,body .mobile-menu.open{display:flex!important;visibility:visible!important;opacity:1!important;transform:translate3d(0,0,0)!important;pointer-events:auto!important;z-index:6000!important}
         body .header-container>.menu-toggle{pointer-events:auto!important;cursor:pointer!important}
+      }
+      @media (hover:none) and (pointer:coarse){
+        body .mobile-navigation a:hover:not(.active):not([aria-current]){color:#fff!important;background:transparent!important;border-bottom-color:rgba(255,255,255,.09)!important}
+        body .mobile-navigation a:hover:not(.active):not([aria-current]) .mobile-link-icon{background:transparent!important;border-color:rgba(212,166,55,.55)!important}
       }`;
       document.head.append(style);
     }
