@@ -39,3 +39,7 @@ html[data-theme="light"] body:is(.bam-standalone-quiz,.bam-standalone-industry) 
   outline: 3px solid var(--bam-gold);
   outline-offset: 3px;
 }
+html[data-theme="light"] body:is(.bam-standalone-quiz,.bam-standalone-industry) > footer {
+  background: var(--bam-panel-2);
+  color: var(--bam-text);
+}
