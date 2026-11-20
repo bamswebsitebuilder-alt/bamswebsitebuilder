@@ -383,6 +383,15 @@
       const group=mobile.querySelector('.mobile-nav-group:last-of-type');
       (group || mobile).appendChild(a);
     }
+    // Recompute current-page highlights from the real URL instead of stale copied HTML.
+    const currentPath = location.pathname.replace(/\\.html$/, '').replace(/\\/$/, '') || '/';
+    document.querySelectorAll('.desktop-navigation a[data-page], .mobile-navigation a[data-page]').forEach(link => {
+      const targetPath = new URL(link.getAttribute('href'), location.href).pathname.replace(/\\.html$/, '').replace(/\\/$/, '') || '/';
+      const active = targetPath === currentPath;
+      link.classList.toggle('active', active);
+      if (active) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    });
     document.querySelectorAll('a[href]').forEach(a => {
       const url=new URL(a.href, location.href);
       if (url.origin!==location.origin || url.pathname.replace(/\/$/,'')!=='/contact') return;
