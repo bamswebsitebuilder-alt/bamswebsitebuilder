@@ -378,7 +378,7 @@
           <div><span>READY TO GET STARTED?</span><h2>Choose the next step that fits your business.</h2></div>
           <div class="bam-next-step-actions">
             <a class="bam-next-primary" href="/contact">Request a Website Quote</a>
-            <a href="/subscriptions">Monthly Plans</a>
+            <a href="/prices#compare">Website payment plans</a>
             <a href="/prices">One-Time Pricing</a>
           </div>
         </div>`;
