@@ -5,7 +5,7 @@
 html[data-theme="light"] .checkout-main{--muted:#615c54;--pane:#fffdfa;--border:rgba(134,99,40,.25)}html[data-theme="light"] .ck-choice:has(input:checked),html[data-theme="light"] .ck-method:has(input:checked){background:#fff4dc}
 @media(max-width:880px){.ck-layout{grid-template-columns:1fr}.ck-summary{position:static}.ck-top{align-items:flex-start}.ck-security{display:none}}@media(max-width:610px){.checkout-main{padding:26px 16px 80px}.ck-panel,.ck-summary{padding:19px;border-radius:18px}.ck-options{grid-template-columns:1fr}.ck-choice{min-height:0;padding:15px}.ck-choice:has(input:checked){padding:14px}.ck-choice .ck-price{margin:5px 0}.ck-flow{font-size:.72rem;gap:9px}.ck-flow span{gap:5px}.ck-flow b{width:22px;height:22px}.ck-method{grid-template-columns:20px 1fr;gap:10px}.ck-method-price{grid-column:2}}
 @media(prefers-reduced-motion:reduce){.ck-choice,.ck-button{transition:none}}
-</style></head><body><a class="site-skip-link" href="#main-content">Skip to main content</a><header class="site-header" id="site-header">
+ .ck-subscription-integration{border:1px solid rgba(212,166,55,.38);border-radius:14px;padding:15px;margin:16px 0;background:rgba(212,166,55,.08)}.ck-subscription-integration h3{font-size:1rem;margin:0 0 8px}.ck-subscription-integration p{font-size:.82rem;line-height:1.5}.ck-subscription-link{font-size:.84rem;color:#d5ad57;text-decoration:underline}</style></head><body><a class="site-skip-link" href="#main-content">Skip to main content</a><header class="site-header" id="site-header">
 <div class="header-container">
 <a aria-label="BAM's Website Builder home" class="site-brand" href="/">
 <span class="brand-text">
@@ -60,7 +60,7 @@ html[data-theme="light"] .checkout-main{--muted:#615c54;--pane:#fffdfa;--border:
 
 <!-- MAIN CONTENT -->
 <main id="main-content" class="checkout-main">
-<script type="application/json" id="bam-paypal-hosted-buttons">{"starter":{"deposit":{"hostedButtonId":"GUZ4TBCXRDA84","expectedAmount":"125.00"},"full":{"url":"https://www.paypal.com/ncp/payment/MW3U5TAP5PZ82","expectedAmount":"250.00"}},"business":{"deposit":{"hostedButtonId":"M453MYHXYUMUG","expectedAmount":"250.00"},"full":{"url":"https://www.paypal.com/ncp/payment/RBQ55HGCQXY2A","expectedAmount":"500.00"}},"premium":{"deposit":{"hostedButtonId":"74N62C7J4EWWU","expectedAmount":"425.00"},"full":{"url":"https://www.paypal.com/ncp/payment/5QWFAUSHSB6SG","expectedAmount":"850.00"}}}</script>
+<script type="application/json" id="bam-paypal-hosted-buttons">{"starter":{"deposit":{"hostedButtonId":"GUZ4TBCXRDA84","expectedAmount":"125.00"},"full":{"url":"https://www.paypal.com/ncp/payment/MW3U5TAP5PZ82","expectedAmount":"250.00"},"monthly":{"planId":"P-2X4855030H9632908NJ47KRQ","expectedAmount":"20.83","expectedCycles":12,"verification":"not-confirmed-with-paypal"}},"business":{"deposit":{"hostedButtonId":"M453MYHXYUMUG","expectedAmount":"250.00"},"full":{"url":"https://www.paypal.com/ncp/payment/RBQ55HGCQXY2A","expectedAmount":"500.00"},"monthly":{"planId":"P-0A9124042N887170MNJ47NZQ","expectedAmount":"41.67","expectedCycles":12,"verification":"not-confirmed-with-paypal"}},"premium":{"deposit":{"hostedButtonId":"74N62C7J4EWWU","expectedAmount":"425.00"},"full":{"url":"https://www.paypal.com/ncp/payment/5QWFAUSHSB6SG","expectedAmount":"850.00"},"monthly":{"planId":"P-1DF06614NY927051XNJ47PDA","expectedAmount":"70.83","expectedCycles":12,"verification":"not-confirmed-with-paypal"}}}</script>
 <div class="ck-top"><div><div class="ck-eyebrow">BAM'S WEBSITE BUILDER / CHECKOUT</div><h1>Let's bring your website to life.</h1><p>Choose your website package and preferred payment arrangement. Review everything before requesting your personalized quote.</p></div><div class="ck-security" aria-label="Checkout preparation"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Payment setup in progress</div></div>
 <div class="ck-flow" aria-label="Checkout steps"><span><b>1</b> Choose package</span><span aria-hidden="true">›</span><span><b>2</b> Payment preference</span><span aria-hidden="true">›</span><span><b>3</b> Approved quote</span></div>
 <div class="ck-layout">
@@ -77,7 +77,7 @@ html[data-theme="light"] .checkout-main{--muted:#615c54;--pane:#fffdfa;--border:
 <label class="ck-method"><input name="ck-method" type="radio" value="deposit"><span><strong>50% now, 50% before launch</strong><small>Remaining balance due after design approval.</small></span><span class="ck-method-price" data-method-price="deposit">$250 now</span></label>
 <label class="ck-method"><input name="ck-method" type="radio" value="monthly"><span><strong>12 monthly payments</strong><small>No separate upfront deposit. Ends after 12 payments.</small></span><span class="ck-method-price" data-method-price="monthly">$41.67/mo</span></label>
 </div></section>
-<div class="ck-status" role="status"><strong>Payment activation is being finalized.</strong> Your PayPal options have been collected, but payment amounts, approval requirements, and 12-payment subscriptions still require verification. No payment can be made from this page yet.</div>
+<div class="ck-status" role="status"><strong>Payment activation is being finalized.</strong> Your PayPal options have been collected, but payment amounts, approval requirements, and the monthly plans still require verification. No payment can be made from this page yet.</div>
 </div>
 <aside class="ck-summary" aria-labelledby="ck-summary-title"><h2 id="ck-summary-title">Your order summary</h2>
 <div class="ck-sum-row"><span>Website package</span><strong id="ck-summary-package">Business</strong></div>
@@ -89,6 +89,7 @@ html[data-theme="light"] .checkout-main{--muted:#615c54;--pane:#fffdfa;--border:
 <div class="ck-sum-row"><span>Hosting &amp; maintenance</span><strong>Separate</strong></div>
 <div class="ck-sum-divider"></div>
 <label class="ck-terms"><input type="checkbox" id="terms-acknowledged"><span>I have reviewed the <a href="/service-terms">Service Terms</a> and <a href="/cancellation-policy">Cancellation Policy</a>. I understand that a written project quote must be approved before payment.</span></label>
+<section class="ck-subscription-integration" id="ck-subscription-integration" hidden aria-live="polite"><h3>Monthly PayPal plan connected</h3><p id="ck-subscription-message">Your existing monthly plan is linked to this checkout. Before we activate recurring billing, the PayPal plan must be verified to end after 12 payments and match the accepted project quote.</p><a href="/subscriptions" class="ck-subscription-link">Review monthly payment plan details →</a></section>
 <a class="ck-button" id="checkout-quote-link" href="/contact?package=business&payment=full">Get My Personalized Quote ↗</a>
 <p class="ck-button-sub">No charge today · Payment follows quote approval</p>
 <div class="ck-brand">BAM'S WEBSITE BUILDER</div><p class="ck-notice">Package prices shown are starting prices. Your approved written quote controls the final scope and price. PayPal payments will be enabled only after verification.</p>
@@ -169,6 +170,7 @@ html[data-theme="light"] .checkout-main{--muted:#615c54;--pane:#fffdfa;--border:
     byId('ck-summary-package').textContent=p.name;byId('ck-summary-pages').textContent='Up to '+p.pages;
     byId('ck-summary-method').textContent=methodText;byId('ck-summary-due').textContent=money(due)+(method==='monthly'?' /mo':'');
     byId('ck-summary-detail').textContent=detail;byId('ck-summary-total').textContent=money(total);
+    const subscription=byId('ck-subscription-integration');subscription.hidden=method!=='monthly';if(method==='monthly'){byId('ck-subscription-message').textContent='Your existing '+p.name+' PayPal subscription plan is connected to the checkout configuration. It is awaiting verification of the 12-payment limit and approved quote before billing can start.';}
     document.querySelector('[data-method-price="full"]').textContent=money(p.price);
     document.querySelector('[data-method-price="deposit"]').textContent=money(p.deposit)+' now';
     document.querySelector('[data-method-price="monthly"]').textContent=money(p.monthly)+'/mo';
