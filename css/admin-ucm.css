@@ -135,3 +135,20 @@ html[data-theme="light"] body.admin-dashboard-page .bam-ucm-quick-grid button {b
 html[data-theme="light"] body.admin-dashboard-page .bam-ucm-alert {background:#fff9eb;}
 html[data-theme="light"] body.admin-dashboard-page .bam-ucm-alert p,
 html[data-theme="light"] body.admin-dashboard-page .bam-ucm-table td small {color:#566170;}
+
+/* Compact, searchable CRM management without replacing existing edit forms. */
+.bam-crm-toolbar {display:grid;grid-template-columns:minmax(0,1.7fr) minmax(170px,.75fr);gap:12px;margin:0 0 12px;padding:16px;border:1px solid rgba(238,195,99,.15);background:#16181b;border-radius:13px;}
+.bam-crm-toolbar label {display:flex;flex-direction:column;gap:7px;color:#d1d3d9;font-size:.83rem;font-weight:700;min-width:0;}
+.bam-crm-toolbar input,.bam-crm-toolbar select {width:100%;min-width:0;box-sizing:border-box;background:#101114;color:#fafafa;border:1px solid #5c4a27;border-radius:9px;padding:11px 12px;min-height:44px;font:inherit;}
+.bam-crm-filter-count {font-size:.78rem;color:#b2b7c0;margin:0 0 12px;}
+.crm-lead-card[hidden] {display:none!important;}
+body.admin-dashboard-page .crm-lead-card {padding:clamp(17px,2vw,25px);border-radius:13px;border-color:rgba(238,195,99,.18);background:#15171a;}
+body.admin-dashboard-page .crm-lead-card h3 {margin:0 0 8px;font-size:1.13rem;}
+body.admin-dashboard-page .crm-lead-card > p {font-size:.87rem;color:#bbc0c8;line-height:1.5;margin:0 0 12px;}
+body.admin-dashboard-page .crm-lead-card > select {border-radius:8px;padding:10px;background:#111215;color:#f5f5f5;border:1px solid rgba(239,195,91,.38);}
+html[data-theme="light"] body.admin-dashboard-page .bam-crm-toolbar {background:#fff;border-color:#ddd;}
+html[data-theme="light"] body.admin-dashboard-page .bam-crm-toolbar label {color:#24303e;}
+html[data-theme="light"] body.admin-dashboard-page .bam-crm-toolbar input,html[data-theme="light"] body.admin-dashboard-page .bam-crm-toolbar select {background:#f7f7f8;color:#17202e;}
+html[data-theme="light"] body.admin-dashboard-page .crm-lead-card {background:#fff;}
+html[data-theme="light"] body.admin-dashboard-page .crm-lead-card > p {color:#4e5968;}
+@media (max-width:600px) {.bam-crm-toolbar {grid-template-columns:minmax(0,1fr);padding:12px;}}
