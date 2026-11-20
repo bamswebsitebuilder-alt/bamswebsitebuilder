@@ -108,8 +108,13 @@ body.admin-dashboard-page .bam-ucm-module {
 }
 @media (max-width:760px) {
   body.admin-dashboard-page .admin-content {padding:20px 14px 34px;}
-  .bam-ucm-heading {align-items:flex-start;}
-  .bam-ucm-heading .bam-ucm-header-action {padding:10px 12px;font-size:.82rem;}
+  /* Keep the overview title readable on phones instead of squeezing it
+     beside a wide action button. */
+  .bam-ucm-heading {display:flex;flex-direction:column;align-items:stretch;gap:16px;}
+  .bam-ucm-heading > div {width:100%;min-width:0;}
+  .bam-ucm-heading h1 {font-size:clamp(1.9rem,7vw,2.5rem);line-height:1.12;overflow-wrap:normal;}
+  .bam-ucm-heading > div > p {max-width:34ch;line-height:1.55;}
+  .bam-ucm-heading .bam-ucm-header-action {align-self:stretch;min-height:46px;width:100%;padding:11px 16px;font-size:.9rem;text-align:center;}
   .bam-ucm-stats {gap:10px;grid-template-columns:repeat(2,minmax(0,1fr));}
   .bam-ucm-stats .bam-metric {min-height:148px;padding:16px 14px 0;}
   .bam-ucm-stats .bam-metric small {margin:12px -14px 0;padding:11px 14px;}
