@@ -44,7 +44,7 @@ service cloud.firestore {
         && data.source == 'admin'
         && data.stage in ['new','contacted','quoted','won','lost']
         && data.createdBy is string && data.createdAt is timestamp && data.updatedAt is timestamp
-        && (!('followUpDate' in data) || (data.followUpDate is string && (data.followUpDate == '' || data.followUpDate.matches('([0-9]{4})-([0-9]{2})-([0-9]{2}'))))
+        && (!('followUpDate' in data) || (data.followUpDate is string && (data.followUpDate == '' || data.followUpDate.matches('[0-9]{4}-[0-9]{2}-[0-9]{2}'))))
         && (!('estimateCents' in data) || (data.estimateCents is int && data.estimateCents >= 0 && data.estimateCents <= 100000000));
     }
     match /crmLeads/{leadId} {
