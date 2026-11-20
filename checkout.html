@@ -23,6 +23,14 @@ html[data-theme="light"] .checkout-main{--muted:#615c54;--pane:#fffdfa;--border:
 .ck-browser-help p{font-size:.83rem;line-height:1.55;margin:6px 0 12px}
 .ck-copy-checkout{display:block;width:100%;min-height:44px;cursor:pointer;border:1px solid #d4a637;border-radius:10px;padding:11px 14px;color:inherit;background:transparent;font:inherit;font-weight:700}
 #ck-copy-feedback{display:block;font-size:.79rem;margin-top:8px}
+</style><style id="ck-paypal-button-visibility">
+.ck-payment-preview{gap:13px;padding:20px 16px!important;border:1px solid var(--border)!important;background:var(--pane)!important}
+.ck-paypal-logo{font-size:1.35rem;font-weight:900;font-style:italic;color:#218bdf;letter-spacing:-.05em}
+.ck-paypal-logo span{color:#0a55a1}
+.ck-paypal-locked{width:100%;min-height:50px;border:0;border-radius:999px;background:#ffc439;color:#16253b;font-size:1rem;font-weight:800;opacity:.72;cursor:not-allowed}
+.ck-paypal-help-link{font-size:.83rem;text-decoration:underline!important}
+.ck-paypal-target{min-height:48px;margin:12px 0}
+.ck-paypal-target[hidden]{display:none!important}
 </style></head><body><a class="site-skip-link" href="#main-content">Skip to main content</a><header class="site-header" id="site-header">
 <div class="header-container">
 <a aria-label="BAM's Website Builder home" class="site-brand" href="/">
@@ -108,7 +116,7 @@ html[data-theme="light"] .checkout-main{--muted:#615c54;--pane:#fffdfa;--border:
 <div class="ck-sum-divider"></div>
 <label class="ck-terms"><input type="checkbox" id="terms-acknowledged"><span>I have reviewed the <a href="/service-terms">Service Terms</a> and <a href="/cancellation-policy">Cancellation Policy</a>. I understand that a written project quote must be approved before payment.</span></label>
 <section class="ck-subscription-integration" id="ck-subscription-integration" hidden aria-live="polite"><h3>Monthly PayPal plan connected</h3><p id="ck-subscription-message">Your existing monthly plan is linked to this checkout. Before we activate recurring billing, the PayPal plan must be verified to end after 12 payments and match the accepted project quote.</p><a href="/subscriptions" class="ck-subscription-link">Review monthly payment plan details →</a></section>
-<div class="ck-payment-heading"><strong>Secure PayPal payment</strong><span id="ck-selected-payment-label">Business · Pay in full · $500.00</span></div><div class="ck-payment-preview" id="ck-payment-preview"><span aria-hidden="true">🔒</span><strong>Awaiting accepted quote</strong><p>Sign into your Client Portal, accept your quote, and confirm the service terms. Your PayPal option will appear after your approved quote and selected payment schedule are accepted.</p></div><div class="ck-gate" id="ck-verified-quote"><strong>Approved project quote</strong><p class="ck-small" id="ck-quote-status" role="status" aria-live="polite">Checking your signed-in client portal for an accepted quote…</p><div id="ck-quote-details" hidden><p class="ck-small">Quote number: <strong id="ck-quote-number"></strong></p><p class="ck-small">Approved project: <strong id="ck-quote-project"></strong></p><p class="ck-small">Agreed payment schedule: <strong id="ck-quote-schedule"></strong></p></div><a href="/client-portal#agreements" class="ck-quote-portal-link">View and accept your quote in the Client Portal →</a></div><section id="ck-payment-addendum" class="ck-gate" hidden aria-labelledby="ck-addendum-heading">
+<div class="ck-payment-heading"><strong>Secure PayPal payment</strong><span id="ck-selected-payment-label">Business · Pay in full · $500.00</span></div><div class="ck-payment-preview" id="ck-payment-preview"><div class="ck-paypal-logo" aria-label="PayPal">Pay<span>Pal</span></div><button id="ck-paypal-locked" class="ck-paypal-locked" type="button" disabled aria-describedby="ck-paypal-lock-reason">Pay with PayPal — $500.00</button><p id="ck-paypal-lock-reason">Your PayPal payment button is visible but locked until your approved quote, selected payment schedule and service terms are accepted.</p><a class="ck-paypal-help-link" href="/client-portal#agreements">Review agreement in Client Portal ↗</a></div><div class="ck-gate" id="ck-verified-quote"><strong>Approved project quote</strong><p class="ck-small" id="ck-quote-status" role="status" aria-live="polite">Checking your signed-in client portal for an accepted quote…</p><div id="ck-quote-details" hidden><p class="ck-small">Quote number: <strong id="ck-quote-number"></strong></p><p class="ck-small">Approved project: <strong id="ck-quote-project"></strong></p><p class="ck-small">Agreed payment schedule: <strong id="ck-quote-schedule"></strong></p></div><a href="/client-portal#agreements" class="ck-quote-portal-link">View and accept your quote in the Client Portal →</a></div><section id="ck-payment-addendum" class="ck-gate" hidden aria-labelledby="ck-addendum-heading">
 <h3 id="ck-addendum-heading">Review your new payment arrangement</h3>
 <p class="ck-small">Your existing project quote remains accepted. To change how you pay, you must also accept the following payment schedule amendment. The website package and deliverables remain unchanged.</p>
 <p class="ck-small"><strong id="ck-selected-schedule"></strong></p>
@@ -258,6 +266,9 @@ function update(){
  const m=$('ck-subscription-integration');if(m){m.hidden=method!=='monthly';}
  const approved=window.bamAcceptedQuote;
  const ready=!!approved&&approved.package===key&&approved.method===method&&$('terms-acknowledged').checked;
+ const lockedLabel=method==='full'?'Pay '+money(a.price):method==='deposit'?'Pay '+money(a.deposit)+' deposit':'Subscribe '+money(a.monthly)+'/month';
+ $('ck-paypal-locked').textContent='Pay with PayPal — '+lockedLabel;
+ $('ck-paypal-lock-reason').textContent=approved&&approved.package===key?'Accept the matching payment schedule and service terms to unlock PayPal.':'Sign in and accept an approved '+a.name+' quote to unlock this PayPal button.';
  $('ck-payment-preview').hidden=ready;
  if(browserHelp && ready && inAppBrowser)browserHelp.hidden=false;
  $('ck-selected-payment-label').textContent=a.name+' · '+(method==='full'?'Pay in full':method==='deposit'?'50% deposit':'12 monthly payments')+' · '+money(due)+(method==='monthly'?'/month':'');
