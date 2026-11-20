@@ -90,6 +90,17 @@
 
     let lastFocusedElement = null;
     menu.inert = true;
+    // Ensure drawer visibility is not overridden by legacy responsive rules.
+    if (!document.getElementById('bam-mobile-menu-reliability-style')) {
+      const style = document.createElement('style');
+      style.id = 'bam-mobile-menu-reliability-style';
+      style.textContent = `@media (max-width:1100px){
+        body .menu-overlay.active,body .menu-overlay.open{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important}
+        body .mobile-menu.active,body .mobile-menu.open{display:flex!important;visibility:visible!important;opacity:1!important;transform:translate3d(0,0,0)!important;pointer-events:auto!important;z-index:6000!important}
+        body .header-container>.menu-toggle{pointer-events:auto!important;cursor:pointer!important}
+      }`;
+      document.head.append(style);
+    }
 
     const setOpen = (open) => {
       if (open === (menu.classList.contains('active') || menu.classList.contains('open'))) return;
@@ -126,9 +137,13 @@
       if (isOpen()) closeMenu();
     });
 
-    toggle.addEventListener('click', () => {
+    // A single capture-phase handler keeps other page scripts from
+    // intercepting the mobile toggle or leaving the drawer out of sync.
+    toggle.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
       isOpen() ? closeMenu() : openMenu();
-    });
+    }, true);
 
     closeButton?.addEventListener('click', closeMenu);
     overlay.addEventListener('click', closeMenu);
