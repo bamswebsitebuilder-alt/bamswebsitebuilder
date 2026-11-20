@@ -7,12 +7,19 @@ import { previewDestination, sourceWebsite } from './preview-navigation.js?v=202
   // The public domain uses GitHub Pages; server functions run on the linked Vercel project.
   const importEndpoint = ['www.bamswebsitebuilder.com', 'bamswebsitebuilder.com', 'bamswebsitebuilder-alt.github.io'].includes(location.hostname)
     ? 'https://bamswebsitebuilder.vercel.app/api/template-preview' : '/api/template-preview';
-  const cards = [...document.querySelectorAll('.template-card')];
-  const designs = cards.map(card => ({
+  const grid = document.querySelector('#bt-grid[data-preview-designs]');
+  const cards = grid ? [] : [...document.querySelectorAll('.template-card')];
+  const catalog = grid ? JSON.parse(grid.dataset.previewDesigns) : cards.map(card => ({
     name: card.querySelector('h2')?.textContent.trim(),
     demo: card.querySelector('.template-demo')?.href,
     quote: card.querySelector('.template-select')?.href,
-  })).filter(design => design.name && design.demo && new URL(design.demo).origin === location.origin);
+  }));
+  const designs = catalog.map(({ name, demo, quote }) => ({
+    name,
+    demo: demo && new URL(demo, location.href),
+    quote: quote && new URL(quote, location.href),
+  })).filter(design => design.name && design.demo?.origin === location.origin && design.quote?.origin === location.origin)
+    .map(({name, demo, quote}) => ({ name, demo: demo.href, quote: quote.href }));
   if (!designs.length) return;
 
   const section = document.createElement('section');
@@ -23,7 +30,7 @@ import { previewDestination, sourceWebsite } from './preview-navigation.js?v=202
     <div class="preview-url-row"><input id="preview-website" name="website" type="text" inputmode="url" autocomplete="url" placeholder="www.yourbusiness.com" required maxlength="2048">
     <button type="submit">${t('Compare designs', 'Comparar diseños')}</button></div><a class="preview-direct-original" target="_blank" rel="noopener noreferrer" hidden>${t('Open full original website', 'Abrir sitio original completo')}</a></form>`;
   const main = document.querySelector('main');
-  const hero = main.querySelector('section');
+  const hero = main.querySelector('.bt-hero') || main.querySelector('section');
   hero ? hero.after(section) : main.prepend(section);
 
   const websiteField = section.querySelector('#preview-website');
@@ -406,6 +413,16 @@ import { previewDestination, sourceWebsite } from './preview-navigation.js?v=202
     button.addEventListener('click', () => open(index));
     card.querySelector('.template-actions').append(button);
   });
+  if (grid) {
+    grid.addEventListener('click', event => {
+      const trigger = event.target.closest('button[data-preview-index]');
+      if (!trigger) return;
+      const option = catalog[Number(trigger.dataset.previewIndex)];
+      const index = designs.findIndex(design => design.name === option?.name);
+      if (index >= 0) open(index);
+    });
+    grid.closest('.bam-templates').setAttribute('data-preview-ready', '');
+  }
   dialog.querySelector('.preview-close').addEventListener('click', () => dialog.close());
   dialog.addEventListener('close', () => {
     ++revision;
