@@ -36,6 +36,7 @@ function render(snapshot) {
     return;
   }
   setStatus("CRM ready. " + snapshot.size + " lead(s) loaded.");
+  document.dispatchEvent(new CustomEvent("bam:crm-overview", { detail: { leads: snapshot.docs.map(item => ({ id: item.id, ...item.data() })) } }));
   snapshot.forEach(item => {
     const lead = item.data();
     const card = document.createElement("article");
@@ -124,14 +125,14 @@ onAuthStateChanged(auth, async user => {
   const revision = ++authRevision;
   if (!form || !list) return;
   if (stop) { stop(); stop = null; }
-  if (!user) { form.hidden = true; list.replaceChildren(); setStatus("Sign in to access CRM leads."); return; }
+  if (!user) { form.hidden = true; list.replaceChildren(); document.dispatchEvent(new CustomEvent("bam:crm-overview", { detail: { leads: [] } })); setStatus("Sign in to access CRM leads."); return; }
   try { await reload(user); await user.getIdToken(true); } catch (error) { console.warn("Could not refresh CRM session", error); }
   if (revision !== authRevision) return;
   if (!auth.currentUser?.emailVerified) { form.hidden = true; list.replaceChildren(); setStatus("Verify your email address to access CRM leads."); return; }
   try {
     const profile = await getDoc(doc(db, "users", user.uid));
     if (revision !== authRevision || auth.currentUser?.uid !== user.uid) return;
-    if (profile.data()?.role !== "admin") { form.hidden = true; list.replaceChildren(); setStatus("Your account does not have CRM administrator access."); return; }
+    if (profile.data()?.role !== "admin") { form.hidden = true; list.replaceChildren(); document.dispatchEvent(new CustomEvent("bam:crm-overview", { detail: { leads: [] } })); setStatus("Your account does not have CRM administrator access."); return; }
     form.hidden = false;
     setStatus("CRM access verified. Loading leads...");
     stop = onSnapshot(query(collection(db, "crmLeads"), orderBy("createdAt", "desc")), render, error => {
