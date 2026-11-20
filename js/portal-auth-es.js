@@ -903,6 +903,11 @@ onAuthStateChanged(auth, async (user) => {
 
   currentUser = user;
 
+  // Load the dashboard sections independently of the account profile.
+  watchClientInvoices(user);
+  watchClientProject(user);
+  void loadClientFiles(user);
+
   try {
     await loadProfile(user);
   } catch (error) {
@@ -935,11 +940,6 @@ onAuthStateChanged(auth, async (user) => {
         fallbackName.charAt(0).toUpperCase();
     }
   }
-
-  // Independent services must not delay the project and invoice subscriptions.
-  watchClientInvoices(user);
-  watchClientProject(user);
-  void loadClientFiles(user);
 });
 
 /* =========================================================
