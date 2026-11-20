@@ -104,14 +104,14 @@
       .bam-consent-toggle[disabled]{opacity:.75;cursor:not-allowed}
       .bam-consent-settings-actions{display:grid;gap:12px;margin-top:18px}
       body.bam-consent-open{overflow:hidden}
-      .bam-privacy-reopen{position:fixed;left:14px;bottom:14px;z-index:2147482999;border:1px solid rgba(255,255,255,.28);background:#0a0a0a;color:#fff;border-radius:999px;padding:10px 14px;font:inherit;font-size:.72rem;font-weight:800;letter-spacing:.06em;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.28)}
-      .bam-privacy-reopen:hover{background:#171717}
-      html[data-theme="light"] .bam-privacy-reopen{background:#fffdf8;color:#2b2415;border-color:rgba(90,65,10,.28)}
+      .bam-privacy-reopen{position:static;display:inline-flex;align-items:center;justify-content:center;min-height:44px;margin:8px 0;padding:8px 0;border:0;background:transparent;color:inherit;border-radius:0;font:inherit;font-size:.85rem;font-weight:600;letter-spacing:0;cursor:pointer;box-shadow:none;text-decoration:underline;text-underline-offset:4px}
+      .bam-privacy-reopen:hover{background:transparent;color:#efc66a}
+      html[data-theme="light"] .bam-privacy-reopen{background:transparent;color:#59564f}
       @media(min-width:900px){
         .bam-consent-backdrop{background:rgba(0,0,0,.25)}
         .bam-consent-panel{left:auto;right:26px;bottom:26px;transform:translateY(120%);width:min(470px,calc(100% - 52px));border-radius:18px;padding:30px}
         .bam-consent-panel.is-open{transform:translateY(0)}
-        .bam-privacy-reopen{left:auto;right:28px;bottom:28px}
+
       }
       @media(max-width:520px){
         .bam-consent-panel{padding:28px 22px calc(24px + env(safe-area-inset-bottom));border-radius:0;max-height:92vh}
@@ -182,8 +182,15 @@
       reopenButton.type = 'button';
       reopenButton.textContent = spanish ? 'Privacidad' : 'Privacy Choices';
       reopenButton.setAttribute('aria-label', spanish ? 'Abrir preferencias de privacidad' : 'Open privacy preferences');
-      document.body.appendChild(reopenButton);
+      const footer = document.querySelector('footer.home-footer, footer.site-footer, footer');
+      const footerLinks = footer?.querySelector('.client-resource-links, .footer-account-links, .footer-utility, .footer-links');
+      (footerLinks || footer || document.body).appendChild(reopenButton);
     }
+
+    // Reuse an existing settings button, but never leave it covering mobile page content.
+    const footer = document.querySelector('footer.home-footer, footer.site-footer, footer');
+    const footerLinks = footer?.querySelector('.client-resource-links, .footer-account-links, .footer-utility, .footer-links');
+    if (footer && !footer.contains(reopenButton)) (footerLinks || footer).appendChild(reopenButton);
 
     const main = panel.querySelector('.bam-consent-main');
     const settings = panel.querySelector('.bam-consent-settings');
