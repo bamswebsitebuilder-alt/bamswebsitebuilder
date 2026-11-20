@@ -399,6 +399,31 @@
       if (/^(get a quote|request a website quote|request a quote|discuss your website)$/i.test(current)) a.textContent='Get a Free Quote';
     });
   });
+  // Ensure payment options are discoverable from every page's shared navigation.
+  document.addEventListener('DOMContentLoaded', () => {
+    const desktop = document.querySelector('.desktop-navigation [data-menu-group="services"] .nav-more-links');
+    if (desktop && !desktop.querySelector('a[href="/checkout"]')) {
+      const a = document.createElement('a');
+      a.href = '/checkout'; a.dataset.page = 'checkout'; a.textContent = 'Website checkout';
+      desktop.appendChild(a);
+    }
+    const mobile = document.querySelector('.mobile-navigation');
+    if (mobile && !mobile.querySelector('a[href="/checkout"]')) {
+      const pricing = mobile.querySelector('a[href="/prices"]');
+      const a = document.createElement('a');
+      a.href = '/checkout'; a.dataset.page = 'checkout'; a.textContent = 'Website checkout';
+      if (pricing) pricing.insertAdjacentElement('afterend', a);
+      else mobile.appendChild(a);
+    }
+    if (location.pathname.replace(/\\.html$/, '').replace(/\\/$/, '') === '/checkout') {
+      document.querySelectorAll('.desktop-navigation a[data-page], .mobile-navigation a[data-page]').forEach(a => {
+        const active = new URL(a.href, location.href).pathname.replace(/\\.html$/, '').replace(/\\/$/, '') === '/checkout';
+        a.classList.toggle('active', active);
+        if (active) a.setAttribute('aria-current', 'page');
+        else a.removeAttribute('aria-current');
+      });
+    }
+  });
   // Keep the public footer's policy and learning links consistent across pages.
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('footer.home-footer').forEach(footer => {
