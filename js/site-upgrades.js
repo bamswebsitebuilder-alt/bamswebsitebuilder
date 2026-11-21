@@ -74,3 +74,13 @@
   });
   document.querySelectorAll('[data-current-year], .current-year').forEach(el => el.textContent = new Date().getFullYear());
 })();
+
+/* Load the shared atmosphere on BAM pages, including the workspaces. */
+(() => {
+  const path = location.pathname.replace(/^\/es(?:\/|$)/, '/').replace(/^\/+|\/+$/g, '').replace(/\.html$/, '') || 'index';
+  if (!["404", "502", "about", "admin-dashboard", "booking", "cancellation-policy", "client-portal", "contact", "domains", "faq", "forgot-password", "home", "hosting", "index", "login", "newsletter-thank-you", "offline", "portfolio", "prices", "privacy-policy", "project-checklist", "project-stories", "register", "review-thank-you", "reviews", "service-terms", "services", "subscriptions", "templates", "thank-you", "tips-compare-quotes", "tips-prepare-content", "tips-website-essentials", "updates", "website-review", "website-tips"].includes(path) || document.getElementById('bam-site-atmosphere-script')) return;
+  const script = document.createElement('script');
+  script.id = 'bam-site-atmosphere-script';
+  script.src = '/js/site-atmosphere.js?v=20261106-2';
+  document.head.append(script);
+})();
