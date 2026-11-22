@@ -22,6 +22,21 @@
       "source": "/es/booking.html",
       "destination": "/es/booking",
       "permanent": true
+    },
+    {
+      "source": "/blend-lab.html",
+      "destination": "/blend-lab",
+      "permanent": true
+    },
+    {
+      "source": "/blend-lab/index.html",
+      "destination": "/blend-lab",
+      "permanent": true
+    },
+    {
+      "source": "/blend-lab/es/index.html",
+      "destination": "/blend-lab/es",
+      "permanent": true
     }
   ],
   "headers": [
