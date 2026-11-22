@@ -41,6 +41,10 @@
  .booksy-widget-slot iframe{max-width:100%;}
  .booksy-panel{box-sizing:border-box;}
  @media(max-width:820px){.site-header .logo .blend-brand-logo{width:132px;height:54px;}.booksy-panel{padding:24px 18px;}}
+ </style><style>
+ .booksy-custom-launch{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:14px 24px;align-self:stretch;cursor:pointer}
+ .service-book-button{cursor:pointer;font:inherit;text-align:center;min-height:44px}
+ #booksy-booking-widget .booksy-widget-container{max-width:100%;margin-inline:auto}
  </style></head>
  <body>
   <a class="skip-link" href="#main-content">
@@ -261,9 +265,9 @@
         $36
        </span>
       </div>
-      <a class="book-button service-book-button" data-service="adult-haircut" href="#booking">
+      <button class="book-button service-book-button" type="button" data-service="adult-haircut">
        Reservar servicio
-      </a>
+      </button>
      </article>
      <!-- TEEN HAIRCUT -->
      <article class="service-card">
@@ -284,9 +288,9 @@
         $30
        </span>
       </div>
-      <a class="book-button service-book-button" data-service="teen-haircut" href="#booking">
+      <button class="book-button service-book-button" type="button" data-service="teen-haircut">
        Reservar servicio
-      </a>
+      </button>
      </article>
      <!-- KIDS HAIRCUT -->
      <article class="service-card">
@@ -307,9 +311,9 @@
         $22.50
        </span>
       </div>
-      <a class="book-button service-book-button" data-service="kids-haircut" href="#booking">
+      <button class="book-button service-book-button" type="button" data-service="kids-haircut">
        Reservar servicio
-      </a>
+      </button>
      </article>
      <!-- LINE UP -->
      <article class="service-card">
@@ -330,9 +334,9 @@
         $18
        </span>
       </div>
-      <a class="book-button service-book-button" data-service="line-up" href="#booking">
+      <button class="book-button service-book-button" type="button" data-service="line-up">
        Reservar servicio
-      </a>
+      </button>
      </article>
      <!-- SIGNATURE STEAM AND TOWEL REFRESH -->
      <article class="service-card">
@@ -353,9 +357,9 @@
         $45
        </span>
       </div>
-      <a class="book-button service-book-button" data-service="signature-steam-towel-refresh" href="#booking">
+      <button class="book-button service-book-button" type="button" data-service="signature-steam-towel-refresh">
        Reservar servicio
-      </a>
+      </button>
      </article>
      <!-- FATHER AND SON PACKAGE -->
      <article class="service-card featured-service">
@@ -379,9 +383,9 @@
         $65
        </span>
       </div>
-      <a class="book-button service-book-button" data-service="father-son-package" href="#booking">
+      <button class="book-button service-book-button" type="button" data-service="father-son-package">
        Reservar paquete
-      </a>
+      </button>
      </article>
      <!-- BEARD SHAPING -->
      <article class="service-card">
@@ -402,9 +406,9 @@
         $18
        </span>
       </div>
-      <a class="book-button service-book-button" data-service="beard-shaping" href="#booking">
+      <button class="book-button service-book-button" type="button" data-service="beard-shaping">
        Reservar servicio
-      </a>
+      </button>
      </article>
      <!-- HOT TOWEL -->
      <article class="service-card">
@@ -425,9 +429,9 @@
         $9
        </span>
       </div>
-      <a class="book-button service-book-button" data-service="hot-towel" href="#booking">
+      <button class="book-button service-book-button" type="button" data-service="hot-towel">
        Reservar servicio
-      </a>
+      </button>
      </article>
      <!-- SHAMPOO -->
      <article class="service-card">
@@ -448,9 +452,9 @@
         $18
        </span>
       </div>
-      <a class="book-button service-book-button" data-service="shampoo" href="#booking">
+      <button class="book-button service-book-button" type="button" data-service="shampoo">
        Reservar servicio
-      </a>
+      </button>
      </article>
      <!-- HEAD SHAVE -->
      <article class="service-card">
@@ -471,9 +475,9 @@
         $18
        </span>
       </div>
-      <a class="book-button service-book-button" data-service="head-shave" href="#booking">
+      <button class="book-button service-book-button" type="button" data-service="head-shave">
        Reservar servicio
-      </a>
+      </button>
      </article>
      <!-- HOUSE CALL HAIRCUT -->
      <article class="service-card featured-service">
@@ -497,9 +501,9 @@
         $40+
        </span>
       </div>
-      <a class="book-button service-book-button" data-service="house-call-haircut" href="#booking">
+      <button class="book-button service-book-button" type="button" data-service="house-call-haircut">
        Reservar servicio a domicilio
-      </a>
+      </button>
      </article>
     </div>
    </section>
@@ -686,6 +690,7 @@
  <p class="booksy-intro">Selecciona un servicio arriba. Booksy mostrará los horarios disponibles y te permitirá confirmar tu cita. Confirma el mismo servicio dentro de Booksy.</p>
  <div class="booksy-choice" aria-live="polite"><span>Tu servicio</span><strong data-selected-service>Ningún servicio seleccionado</strong><span data-selected-price>Precio mostrado en servicios</span></div>
  <p class="booksy-status" data-booksy-status aria-live="polite">Selecciona un servicio y luego usa el botón de Booksy.</p>
+ <button type="button" class="primary-button booksy-custom-launch" data-open-booksy>Abrir Booksy</button>
  <div class="booksy-widget-slot" id="booksy-booking-widget">
  <script type="text/javascript" src="https://booksy.com/widget/code.js?id=1461485&amp;country=us&amp;lang=en-US"></script>
  </div>
@@ -789,5 +794,5 @@
     </p>
    </div>
   </footer>
- <script src="/js/demo-attribution.js?v=20261013-growth-1"></script><script defer src="/blend-lab/js/booksy-service.js?v=20261122"></script></body>
+ <script src="/js/demo-attribution.js?v=20261013-growth-1"></script><script defer src="/blend-lab/js/booksy-service.js?v=20261122-2"></script></body>
 </html>
