@@ -41,6 +41,10 @@
  .booksy-widget-slot iframe{max-width:100%;}
  .booksy-panel{box-sizing:border-box;}
  @media(max-width:820px){.site-header .logo .blend-brand-logo{width:132px;height:54px;}.booksy-panel{padding:24px 18px;}}
+ </style><style>
+ .booksy-custom-launch{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:14px 24px;align-self:stretch;cursor:pointer}
+ .service-book-button{cursor:pointer;font:inherit;text-align:center;min-height:44px}
+ #booksy-booking-widget .booksy-widget-container{max-width:100%;margin-inline:auto}
  </style></head>
  <body>
   <a class="skip-link" href="#main-content">
@@ -264,9 +268,9 @@
         $36
        </span>
       </div>
-      <a class="book-button service-book-button" data-service="adult-haircut" href="#booking">
+      <button class="book-button service-book-button" type="button" data-service="adult-haircut">
        Book Service
-      </a>
+      </button>
      </article>
      <!-- TEEN HAIRCUT -->
      <article class="service-card">
@@ -288,9 +292,9 @@
         $30
        </span>
       </div>
-      <a class="book-button service-book-button" data-service="teen-haircut" href="#booking">
+      <button class="book-button service-book-button" type="button" data-service="teen-haircut">
        Book Service
-      </a>
+      </button>
      </article>
      <!-- KIDS HAIRCUT -->
      <article class="service-card">
@@ -312,9 +316,9 @@
         $22.50
        </span>
       </div>
-      <a class="book-button service-book-button" data-service="kids-haircut" href="#booking">
+      <button class="book-button service-book-button" type="button" data-service="kids-haircut">
        Book Service
-      </a>
+      </button>
      </article>
      <!-- LINE UP -->
      <article class="service-card">
@@ -336,9 +340,9 @@
         $18
        </span>
       </div>
-      <a class="book-button service-book-button" data-service="line-up" href="#booking">
+      <button class="book-button service-book-button" type="button" data-service="line-up">
        Book Service
-      </a>
+      </button>
      </article>
      <!-- SIGNATURE STEAM AND TOWEL REFRESH -->
      <article class="service-card">
@@ -360,9 +364,9 @@
         $45
        </span>
       </div>
-      <a class="book-button service-book-button" data-service="signature-steam-towel-refresh" href="#booking">
+      <button class="book-button service-book-button" type="button" data-service="signature-steam-towel-refresh">
        Book Service
-      </a>
+      </button>
      </article>
      <!-- FATHER AND SON PACKAGE -->
      <article class="service-card featured-service">
@@ -387,9 +391,9 @@
         $65
        </span>
       </div>
-      <a class="book-button service-book-button" data-service="father-son-package" href="#booking">
+      <button class="book-button service-book-button" type="button" data-service="father-son-package">
        Book Package
-      </a>
+      </button>
      </article>
      <!-- BEARD SHAPING -->
      <article class="service-card">
@@ -411,9 +415,9 @@
         $18
        </span>
       </div>
-      <a class="book-button service-book-button" data-service="beard-shaping" href="#booking">
+      <button class="book-button service-book-button" type="button" data-service="beard-shaping">
        Book Service
-      </a>
+      </button>
      </article>
      <!-- HOT TOWEL -->
      <article class="service-card">
@@ -435,9 +439,9 @@
         $9
        </span>
       </div>
-      <a class="book-button service-book-button" data-service="hot-towel" href="#booking">
+      <button class="book-button service-book-button" type="button" data-service="hot-towel">
        Book Service
-      </a>
+      </button>
      </article>
      <!-- SHAMPOO -->
      <article class="service-card">
@@ -459,9 +463,9 @@
         $18
        </span>
       </div>
-      <a class="book-button service-book-button" data-service="shampoo" href="#booking">
+      <button class="book-button service-book-button" type="button" data-service="shampoo">
        Book Service
-      </a>
+      </button>
      </article>
      <!-- HEAD SHAVE -->
      <article class="service-card">
@@ -483,9 +487,9 @@
         $18
        </span>
       </div>
-      <a class="book-button service-book-button" data-service="head-shave" href="#booking">
+      <button class="book-button service-book-button" type="button" data-service="head-shave">
        Book Service
-      </a>
+      </button>
      </article>
      <!-- HOUSE CALL HAIRCUT -->
      <article class="service-card featured-service">
@@ -510,9 +514,9 @@
         $40+
        </span>
       </div>
-      <a class="book-button service-book-button" data-service="house-call-haircut" href="#booking">
+      <button class="book-button service-book-button" type="button" data-service="house-call-haircut">
        Book Mobile Service
-      </a>
+      </button>
      </article>
     </div>
    </section>
@@ -707,6 +711,7 @@
  <p class="booksy-intro">Choose a service above. Booksy will show live availability and complete your appointment. Confirm the same service inside Booksy.</p>
  <div class="booksy-choice" aria-live="polite"><span>Your service</span><strong data-selected-service>No service selected yet</strong><span data-selected-price>Price shown under services</span></div>
  <p class="booksy-status" data-booksy-status aria-live="polite">Select a service, then use the Booksy button.</p>
+ <button type="button" class="primary-button booksy-custom-launch" data-open-booksy>Open Booksy Booking</button>
  <div class="booksy-widget-slot" id="booksy-booking-widget">
  <script type="text/javascript" src="https://booksy.com/widget/code.js?id=1461485&amp;country=us&amp;lang=en-US"></script>
  </div>
@@ -812,5 +817,5 @@
    </div>
   </footer>
   <script src="/js/demo-attribution.js?v=20261013-growth-1"></script>
- <script defer src="/blend-lab/js/booksy-service.js?v=20261122"></script></body>
+ <script defer src="/blend-lab/js/booksy-service.js?v=20261122-2"></script></body>
 </html>
