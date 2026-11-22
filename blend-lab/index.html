@@ -18,7 +18,20 @@
  <link rel="stylesheet" href="/css/responsive-fixes.css">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
   <link href="/blend-lab/css/editorial-refresh.css?v=20261122" rel="stylesheet"/>
-<style>.blend-brand-logo{display:block;width:180px;max-width:100%;height:60px;object-fit:contain;object-position:left center}.nav-drawer-logo .blend-brand-logo{width:155px;height:55px}.blend-brand-fallback{display:inline-flex;align-items:center;gap:6px}.hero-logo-bg{object-fit:contain;opacity:.11}@media(max-width:820px){.site-header .blend-brand-logo{width:142px;height:53px}}@media(max-width:420px){.site-header .blend-brand-logo{width:124px;height:48px}}</style></head>
+<style>.blend-brand-logo{display:block;width:180px;max-width:100%;height:60px;object-fit:contain;object-position:left center}.nav-drawer-logo .blend-brand-logo{width:155px;height:55px}.blend-brand-fallback{display:inline-flex;align-items:center;gap:6px}.hero-logo-bg{object-fit:contain;opacity:.11}@media(max-width:820px){.site-header .blend-brand-logo{width:142px;height:53px}}@media(max-width:420px){.site-header .blend-brand-logo{width:124px;height:48px}}</style><style>
+ .booksy-panel{display:flex;flex-direction:column;gap:18px;min-width:0;}
+ .booksy-panel .form-heading{margin-bottom:6px;}
+ .booksy-intro,.booksy-note,.booksy-status{line-height:1.65;color:#d5cdc1;}
+ .booksy-note{font-size:13px;opacity:.86;}
+ .booksy-choice{padding:20px 22px;border:1px solid rgba(228,189,131,.4);background:#161410;display:flex;flex-direction:column;gap:7px;border-radius:3px;}
+ .booksy-choice>span:first-child{text-transform:uppercase;letter-spacing:.13em;color:#e4bd83;font-size:11px;font-weight:800;}
+ .booksy-choice strong{color:#f8f4ed;font-size:clamp(20px,2.4vw,28px);line-height:1.25;}
+ .booksy-choice>span:last-child{color:#e4bd83;font-weight:700;}
+ .service-card.service-is-selected{border-color:#e4bd83!important;box-shadow:0 0 0 2px rgba(228,189,131,.35)!important;}
+ .booksy-widget-slot{min-height:64px;display:flex;align-items:center;justify-content:center;position:relative;}
+ .booksy-widget-slot a,.booksy-widget-slot button{min-height:44px;}
+ @media(max-width:820px){.booksy-panel{width:100%;}.booksy-widget-slot{min-height:72px;}}
+ </style></head>
  <body>
   <a class="skip-link" href="#main-content">
    Skip to content
@@ -237,8 +250,7 @@
       Choose Your Service
      </h2>
      <p>
-      Select your preferred grooming service, then submit an
-            appointment request using the booking form below.
+      Choose a service below, then finish your booking through Booksy.
      </p>
     </div>
     <div class="service-grid">
@@ -653,9 +665,7 @@
       Book Your Appointment
      </h2>
      <p>
-      Choose your preferred service, date, and appointment
-                    time. Your request will be emailed to the barber, who will
-                    contact you to confirm availability.
+      Browse services on this page, then book an available appointment directly with Booksy.
      </p>
      <div class="booking-details">
       <div>
@@ -702,122 +712,16 @@
       </div>
      </div>
     </div>
-    <form action="https://formsubmit.co/G3fade727@gmail.com" class="booking-form" method="POST">
-     <input name="_subject" type="hidden" value="New Blend Lab Appointment Request"/>
-     <input name="_template" type="hidden" value="table"/>
-     <input name="_captcha" type="hidden" value="false"/>
-     <input name="form_source" type="hidden" value="The Blend Lab Website"/>
-     <div class="form-heading">
-      <span>
-       01
-      </span>
-      <div>
-       <small>
-        Appointment Request
-       </small>
-       <h3>
-        Reserve Your Spot
-       </h3>
-      </div>
-     </div>
-     <div class="form-grid">
-      <div class="form-group full-width">
-       <label for="name">
-        Full Name
-       </label>
-       <input id="name" name="name" placeholder="Enter your full name" required="" type="text"/>
-      </div>
-      <div class="form-group">
-       <label for="phone">
-        Phone Number
-       </label>
-       <input id="phone" name="phone" placeholder="(555) 555-5555" required="" type="tel"/>
-      </div>
-      <div class="form-group">
-       <label for="email">
-        Email Address
-       </label>
-       <input id="email" name="email" placeholder="name@email.com" required="" type="email"/>
-      </div>
-      <div class="form-group">
-       <label for="service">
-        Select Service
-       </label>
-       <select id="service" name="service" required="">
-        <option value="">
-         Choose a service
-        </option>
-        <option value="adult-haircut">
-         Adult Haircut — $36
-        </option>
-        <option value="teen-haircut">
-         Teen Haircut — $30
-        </option>
-        <option value="kids-haircut">
-         Kids Haircut — $22.50
-        </option>
-        <option value="line-up">
-         Line Up — $18
-        </option>
-        <option value="signature-steam-towel-refresh">
-         Signature Steam &amp; Towel Refresh — $45
-        </option>
-        <option value="father-son-package">
-         Father &amp; Son Package — $65
-        </option>
-        <option value="beard-shaping">
-         Beard Shaping — $18
-        </option>
-        <option value="hot-towel">
-         Hot Towel — $9
-        </option>
-        <option value="shampoo">
-         Shampoo — $18
-        </option>
-        <option value="head-shave">
-         Head Shave — $18
-        </option>
-        <option value="house-call-haircut">
-         House Call Haircut — $40+
-        </option>
-       </select>
-      </div>
-      <div class="form-group">
-       <label for="barber">
-        Select Barber
-       </label>
-       <select id="barber" name="barber" required="">
-        <option value="">
-         Choose a barber
-        </option>
-        <option value="glenn">
-         Glenn Lee
-        </option>
-       </select>
-      </div>
-      <div class="form-group">
-       <label for="date">
-        Preferred Date
-       </label>
-       <input id="date" name="date" required="" type="date"/>
-      </div>
-      <div class="form-group">
-       <label for="time">
-        Preferred Time
-       </label>
-       <input id="time" name="time" required="" type="time"/>
-      </div>
-      <div class="form-group full-width">
-       <label for="notes">
-        Appointment Notes
-       </label>
-       <textarea id="notes" name="notes" placeholder="Add hairstyle details, special requests, or questions (optional)" rows="5"></textarea>
-      </div>
-     </div>
-     <button class="submit-button form-button" type="submit">
-      Request Appointment
-     </button>
-    </form>
+    <div class="booking-form booksy-panel" data-booksy-panel>
+ <div class="form-heading"><span>01</span><div><small>Online Booking</small><h3>Complete Your Booking with Booksy</h3></div></div>
+ <p class="booksy-intro">Choose a service above. Booksy will show live availability and complete your appointment. Confirm the same service inside Booksy.</p>
+ <div class="booksy-choice" aria-live="polite"><span>Your service</span><strong data-selected-service>No service selected yet</strong><span data-selected-price>Price shown under services</span></div>
+ <p class="booksy-status" data-booksy-status aria-live="polite">Select a service, then use the Booksy button.</p>
+ <div class="booksy-widget-slot" id="booksy-booking-widget">
+ <script type="text/javascript" src="https://booksy.com/widget/code.js?id=1461485&amp;country=us&amp;lang=en-US"></script>
+ </div>
+ <p class="booksy-note">Availability, final service selection, and confirmation are handled securely by Booksy.</p>
+ </div>
    </section>
    <!-- =========================
              CONTACT
@@ -918,5 +822,5 @@
    </div>
   </footer>
   <script src="/js/demo-attribution.js?v=20261013-growth-1"></script>
- </body>
+ <script defer src="/blend-lab/js/booksy-service.js?v=20261122"></script></body>
 </html>
