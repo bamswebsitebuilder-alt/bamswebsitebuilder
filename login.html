@@ -22,6 +22,7 @@
 <meta name="robots" content="noindex, nofollow"><link rel="stylesheet" href="/css/footer-fix.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/responsive-fixes.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/client-guide.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/accessibility.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/public-polish.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/menu-organization.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/public-shell.css?v=20261031-footer-1"><link rel="stylesheet" href="/css/workspace.css?v=20261013-overflow-3"><link rel="stylesheet" href="/css/portal-brand.css?v=20261013-brand-4"><link rel="stylesheet" href="/css/light-theme.css?v=20261028-1">
 <link rel="stylesheet" href="/css/site-footer.css?v=20261109-sitewide-1">
 <link rel="stylesheet" href="/css/portal-light.css?v=20261120-1">
+<link rel="stylesheet" href="/css/login-refresh.css?v=20261123-1">
 </head>
 <body class="login-page"><a class="site-skip-link" href="#main-content">Skip to main content</a><header class="site-header" id="site-header">
 <div class="header-container">
@@ -71,50 +72,50 @@
 <a href="mailto:bamswebsitebuilder@gmail.com">bamswebsitebuilder@gmail.com</a>
 </div>
 </aside>
-<main class="auth-page" id="main-content" tabindex="-1">
-<section class="auth-shell">
-<div class="auth-intro">
-<p class="auth-kicker">ACCOUNT ACCESS</p>
-<h1>Welcome back.</h1>
-<p>Sign in to check your website project, invoices, files, messages, and support updates.</p>
-<div class="auth-feature-list">
-<span>Track project progress</span>
-<span>View and download files</span>
-<span>Review invoices and messages</span>
-</div>
-</div>
-<div class="auth-card">
-<div class="auth-card-header">
-<span class="auth-badge">Client &amp; Admin Access</span>
-<h2>Sign in</h2>
-<p>Sign in with your account. Administrators are directed to the admin dashboard.</p>
-</div>
-<form action="" class="auth-form" method="post" id="login-form" novalidate="">
-<div class="form-group">
-<label for="login-email">Email address</label>
-<input autocomplete="email" id="login-email" name="email" placeholder="name@example.com" required="" type="email"/>
-</div>
-<div class="form-group">
-<label for="login-password">Password</label>
-<div class="password-field">
-<input autocomplete="current-password" id="login-password" name="password" placeholder="Enter your password" required="" type="password"/>
-<button aria-label="Show password" class="password-toggle" data-password-toggle="login-password" type="button">Show</button>
-</div>
-</div>
-<div class="form-options">
-<label class="check-label">
-<input name="remember" type="checkbox"/>
-<span>Remember me</span>
-</label>
-<a href="/forgot-password">Forgot password?</a>
-</div>
-<p class="form-alert" hidden="" id="login-alert" role="alert"></p><button class="auth-submit" id="login-submit" type="submit">Sign In</button>
-<p class="auth-switch">
-          New client? <a href="/register">Create an account</a>
-</p>
-<p class="demo-note">Your account is protected with Firebase Authentication.</p>
-</form>
-</div>
+<main class="auth-page bam-login-refresh" id="main-content" tabindex="-1">
+<section class="auth-shell" aria-label="Sign in to BAM's Website Builder">
+  <div class="auth-intro">
+    <p class="auth-kicker">YOUR WEBSITE. YOUR WORKSPACE.</p>
+    <h1>Welcome back<span class="auth-title-period">.</span></h1>
+    <p>Everything you need to manage your website project, all in one secure place.</p>
+    <div class="auth-feature-list" aria-label="Your client workspace includes">
+      <span>Follow your project from start to launch</span>
+      <span>Access files, invoices, and updates</span>
+      <span>Message your website team directly</span>
+    </div>
+    <p class="auth-intro-footnote">Built for growing businesses. Backed by personal support.</p>
+  </div>
+  <div class="auth-card">
+    <div class="auth-card-header">
+      <span class="auth-badge">BAM'S CLIENT PORTAL</span>
+      <h2>Sign in to your account</h2>
+      <p>Enter your email and password to continue. Admin accounts are routed automatically.</p>
+    </div>
+    <form action="" class="auth-form" method="post" id="login-form" novalidate>
+      <div class="form-group">
+        <label for="login-email">Email address</label>
+        <input autocomplete="email" inputmode="email" id="login-email" name="email" placeholder="you@business.com" required type="email"/>
+      </div>
+      <div class="form-group">
+        <label for="login-password">Password</label>
+        <div class="password-field">
+          <input autocomplete="current-password" id="login-password" name="password" placeholder="Enter your password" required type="password"/>
+          <button aria-label="Show password" class="password-toggle" data-password-toggle="login-password" type="button">Show</button>
+        </div>
+      </div>
+      <div class="form-options">
+        <label class="check-label">
+          <input name="remember" type="checkbox"/>
+          <span>Keep me signed in</span>
+        </label>
+        <a href="/forgot-password">Forgot password?</a>
+      </div>
+      <p class="form-alert" hidden id="login-alert" role="alert"></p>
+      <button class="auth-submit" id="login-submit" type="submit">Sign in securely <span aria-hidden="true" class="auth-submit-arrow">→</span></button>
+      <p class="auth-switch">New to BAM'S? <a href="/register">Create an account</a></p>
+      <p class="demo-note"><span aria-hidden="true">●</span> Secure sign-in powered by Firebase Authentication.</p>
+    </form>
+  </div>
 </section>
 </main>
 <footer class="home-footer">
