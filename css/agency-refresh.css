@@ -31,3 +31,36 @@ body .bam-portfolio .cta{background:linear-gradient(135deg,#191817,#111214);bord
 @media(max-width:1050px){body.polished-home .hero.hero-conversion{grid-template-columns:1fr;gap:48px;padding:90px 28px 75px!important;text-align:center}body.polished-home .hero.hero-conversion .hero-content{max-width:760px;margin-inline:auto;text-align:center}body.polished-home .hero.hero-conversion .hero-buttons,body.polished-home .hero.hero-conversion .hero-trust{justify-content:center}body.polished-home .hero .bam-hero-showcase{max-width:690px}}
 @media(max-width:600px){body.polished-home .hero.hero-conversion{padding:75px 20px 56px!important;gap:38px;min-height:0}body.polished-home .hero.hero-conversion h1{font-size:clamp(2.6rem,11vw,4rem)}body.polished-home .hero .bam-hero-showcase{width:calc(100% - 10px)}.bam-showcase-tag{right:-8px;bottom:-14px;padding:9px 12px;font-size:.72rem}.bam-browser-bar{height:34px}body .bam-portfolio .project{padding-bottom:10px}}
 @media(prefers-reduced-motion:reduce){.bam-hero-browser,body.polished-home .portfolio-home-card,body.polished-home .plan-preview-card,body.polished-home .process-card,body .bam-portfolio .browser,body .bam-portfolio .concept-card,body .bam-portfolio .shot{transition:none!important;transform:none!important}}
+
+
+/* BAM UI 2.1 — intentional white breathing-room sections on the homepage.
+   Keep project cards dark and all interactive behavior unchanged. */
+html:not([data-theme="light"]) body.polished-home section.home-section[aria-labelledby="featured-work-title"],
+html:not([data-theme="light"]) body.polished-home section.home-section[aria-labelledby="home-delivery-title"] {
+  background: #FAFAF8 !important;
+  color: #171717 !important;
+  border-block: 1px solid #E7E5E0;
+}
+html:not([data-theme="light"]) body.polished-home section.home-section[aria-labelledby="featured-work-title"] :is(.home-title,.home-intro),
+html:not([data-theme="light"]) body.polished-home section.home-section[aria-labelledby="home-delivery-title"] :is(.home-title,.home-intro) {
+  color: #171717 !important;
+  text-shadow: none !important;
+}
+html:not([data-theme="light"]) body.polished-home section.home-section[aria-labelledby="featured-work-title"] .home-eyebrow,
+html:not([data-theme="light"]) body.polished-home section.home-section[aria-labelledby="home-delivery-title"] .home-eyebrow {
+  color: #765300 !important;
+}
+html:not([data-theme="light"]) body.polished-home section.home-section[aria-labelledby="home-delivery-title"] a {
+  color: #765300 !important;
+  text-decoration-color: #765300;
+  text-underline-offset: 4px;
+}
+html:not([data-theme="light"]) body.polished-home section.home-section[aria-labelledby="featured-work-title"] .portfolio-home-card {
+  background: #141416 !important;
+  color: #F5F5F5 !important;
+  border-color: #333338 !important;
+  box-shadow: 0 14px 30px rgba(0,0,0,.12);
+}
+html:not([data-theme="light"]) body.polished-home section.home-section[aria-labelledby="featured-work-title"] .portfolio-home-card :is(h3,p) {
+  color: #F5F5F5 !important;
+}
