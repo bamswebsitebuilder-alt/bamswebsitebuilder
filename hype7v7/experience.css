@@ -1,0 +1,50 @@
+/* HYPE 7V7: unified 2026 experience. Intentional overrides of original demo styles. */
+:root{--hype-orange:#ff711d;--hype-amber:#ffad45;--hype-bg:#0b0c0f;--hype-panel:#17191d;--hype-line:#36383e;--hype-copy:#e7e8ec}
+html{scroll-padding-top:90px}
+body{background:var(--hype-bg)!important;color:#fff;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(circle at 70% 20%,rgba(255,113,29,.055),transparent 45%)}
+header{border-bottom:1px solid rgba(255,145,64,.18)!important;box-shadow:0 10px 38px rgba(0,0,0,.27)}
+header .nav-wrap{min-height:66px;max-width:1280px}
+header .brand{gap:13px!important;font-size:clamp(22px,2.5vw,30px)!important;line-height:1.2}
+header .hype-logo{border:2px solid rgba(255,113,29,.5);box-shadow:0 0 0 5px rgba(255,113,29,.065)}
+header nav a{border-radius:6px;transition:color .2s,background .2s;min-height:42px;display:inline-flex;align-items:center}
+header nav a:hover,header nav a[aria-current="page"]{color:#ffac62!important;background:rgba(255,113,29,.085)}
+header nav a[href$="/tryouts"]{padding:10px 16px!important;background:#ff711d;color:#15100a!important;border-radius:7px;font-weight:900!important}
+header nav a[href$="/tryouts"]:hover{background:#ffac62;color:#111!important}
+.wrap{max-width:1220px}
+.hero{min-height:clamp(480px,65vw,680px)!important;padding:80px 0!important;isolation:isolate;background:linear-gradient(95deg,rgba(7,8,10,.97) 0%,rgba(7,8,10,.86) 43%,rgba(7,8,10,.34) 100%),url('https://hype-gridiron-hub.lovable.app/src/assets/hero-action.jpg') center/cover!important}
+.hero::after{content:"";position:absolute;inset:auto 0 0;height:140px;background:linear-gradient(transparent,#0b0c0f);pointer-events:none}
+.hero .wrap{max-width:1220px}
+.hero .eyebrow{display:inline-flex;align-items:center;gap:10px;background:rgba(255,113,29,.10);color:#ffc395!important;border:1px solid rgba(255,113,29,.35);border-radius:40px;padding:9px 16px;letter-spacing:.12em!important;font-size:12px!important}
+.hero h1{font-size:clamp(58px,10vw,134px)!important;max-width:850px;line-height:.93!important;margin:24px 0!important;text-wrap:balance;text-shadow:0 6px 45px rgba(0,0,0,.4)}
+.hero p{color:#e9e9eb;font-size:clamp(17px,2vw,22px);max-width:580px;margin-bottom:26px}
+.hero .button{min-height:50px;display:inline-flex;align-items:center;justify-content:center;padding:14px 24px!important;border-radius:7px!important;margin:8px 10px 8px 0;text-align:center;letter-spacing:.025em}
+.hero .button.secondary{background:rgba(18,18,18,.75)!important;color:#fff!important;border:1px solid rgba(255,135,55,.8)!important}
+.hero .button.secondary:hover{background:rgba(255,113,29,.14)!important}
+section{padding:clamp(60px,7vw,104px) 0}
+section .eyebrow{font-weight:800;color:#ff9d57!important}
+section h2{font-size:clamp(38px,5.3vw,66px)!important;line-height:1!important;margin:15px 0 34px;max-width:850px}
+section#team{background:linear-gradient(180deg,#0b0c0f,#121418)}
+section#team article{border:1px solid var(--hype-line)!important;background:var(--hype-panel)!important;border-radius:14px!important;box-shadow:0 12px 35px rgba(0,0,0,.16);transition:transform .2s,border-color .2s,box-shadow .2s}
+section#team article:hover{transform:translateY(-5px);border-color:#ff711d!important;box-shadow:0 20px 38px rgba(0,0,0,.3)}
+section#team article img{width:100%;aspect-ratio:4/3;height:auto;min-height:220px;max-height:335px;object-fit:cover;object-position:top}
+section#team .detail{padding:24px}
+section#team .detail h3{font-size:clamp(24px,2.6vw,32px)}
+section#team .detail p{color:#ffb77e!important}
+.quick-links{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px!important}
+.quick-links a{min-height:150px;background:linear-gradient(135deg,#1c1f24,#14161a)!important;border:1px solid #393d43!important;border-radius:12px!important;padding:24px!important;transition:transform .2s,border-color .2s,background .2s;position:relative;padding-right:48px!important}
+.quick-links a::after{content:"↗";position:absolute;right:22px;top:22px;font:700 22px Arial;color:#ff8b37}
+.quick-links a:hover{transform:translateY(-4px);border-color:#ff711d!important;background:#232126!important}
+.quick-links a span{color:#c7c9ce!important}
+footer{padding:34px 0!important;font-size:14px;text-align:center;background:#08090b!important}
+.hype-experience-strip{border-top:1px solid rgba(255,113,29,.2);border-bottom:1px solid rgba(255,113,29,.2);background:#161719}
+.hype-experience-strip .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.hype-experience-strip a{display:flex;align-items:center;justify-content:center;gap:12px;padding:21px 12px;font-family:'Barlow Condensed',sans-serif;font-size:clamp(14px,2vw,18px);letter-spacing:.08em;font-weight:800;text-transform:uppercase;color:#f0f0f0;border-right:1px solid rgba(255,255,255,.12)}
+.hype-experience-strip a:last-child{border-right:0}
+.hype-experience-strip a b{font-size:24px;color:#ff8433}
+.hype-experience-strip a:hover{background:rgba(255,113,29,.09);color:#ffad68}
+.hype-section-intro{max-width:680px;color:#bfc1c8;font-size:18px;margin:-14px 0 30px}
+a:focus-visible,button:focus-visible{outline:3px solid #ffb36e!important;outline-offset:4px}
+@media(max-width:900px){header .hype-menu-button{border-radius:8px!important;min-width:48px;min-height:48px}header .nav-wrap>nav.hype-open{background:#141518;border:1px solid #34363b;border-radius:10px;padding:10px 14px;margin-top:8px;box-shadow:0 18px 30px #0008}header .nav-wrap>nav a{min-height:48px;padding:12px!important}header .nav-wrap>nav a[href$="/tryouts"]{margin-top:10px;justify-content:center}.hero{background-position:60% center!important}.quick-links{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){header .nav-wrap{min-height:52px}.hero{min-height:540px!important;background:linear-gradient(90deg,rgba(7,8,10,.94),rgba(7,8,10,.65)),url('https://hype-gridiron-hub.lovable.app/src/assets/hero-action.jpg') 60% center/cover!important;padding:65px 0!important}.hero h1{font-size:clamp(55px,13.4vw,78px)!important}.hero .button{display:flex;width:100%;margin:12px 0 0!important}.hero p{font-size:18px}.hype-experience-strip .wrap{grid-template-columns:1fr}.hype-experience-strip a{justify-content:flex-start;border-right:0;border-bottom:1px solid rgba(255,255,255,.1);padding:15px 22px}.hype-experience-strip a:last-child{border-bottom:0}section#team .grid,.quick-links{grid-template-columns:1fr!important}section#team article img{max-height:390px}.quick-links a{min-height:120px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
