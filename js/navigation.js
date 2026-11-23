@@ -80,7 +80,7 @@
   ready(() => {
     // Keep Prices accessible as a first-level destination across the entire site.
     // Existing Services pricing sublinks remain available for payment-plan anchors.
-    const currentPath = window.location.pathname.replace(/\\/$/, '') || '/';
+    const currentPath = window.location.pathname.replace(/[/]$/, '') || '/';
     const isSpanish = document.documentElement.lang.toLowerCase().startsWith('es') || currentPath.startsWith('/es/');
     const priceHref = isSpanish ? '/es/prices' : '/prices';
     const isPricesPage = currentPath === priceHref;
