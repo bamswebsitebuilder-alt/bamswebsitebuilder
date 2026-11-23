@@ -78,6 +78,48 @@
   }
 
   ready(() => {
+    // Keep Prices accessible as a first-level destination across the entire site.
+    // Existing Services pricing sublinks remain available for payment-plan anchors.
+    const currentPath = window.location.pathname.replace(/\\/$/, '') || '/';
+    const isSpanish = document.documentElement.lang.toLowerCase().startsWith('es') || currentPath.startsWith('/es/');
+    const priceHref = isSpanish ? '/es/prices' : '/prices';
+    const isPricesPage = currentPath === priceHref;
+    const desktopNav = document.querySelector('.desktop-navigation');
+    if (desktopNav && !desktopNav.querySelector(':scope > a[data-bam-prices-direct]')) {
+      const priceLink = document.createElement('a');
+      priceLink.href = priceHref;
+      priceLink.textContent = isSpanish ? 'Precios' : 'Prices';
+      priceLink.dataset.bamPricesDirect = 'true';
+      priceLink.dataset.page = 'prices';
+      if (isPricesPage) {
+        priceLink.classList.add('active');
+        priceLink.setAttribute('aria-current', 'page');
+        desktopNav.querySelectorAll('.nav-more-links a[data-page="prices"]').forEach(link => {
+          link.classList.remove('active');
+          link.removeAttribute('aria-current');
+        });
+      }
+      const contactLink = desktopNav.querySelector(':scope > a[data-page="contact"]');
+      desktopNav.insertBefore(priceLink, contactLink || null);
+    }
+    const mobileNav = document.querySelector('.mobile-navigation');
+    if (mobileNav && !mobileNav.querySelector(':scope > a[data-bam-prices-direct]')) {
+      const priceLink = document.createElement('a');
+      priceLink.href = priceHref;
+      priceLink.dataset.bamPricesDirect = 'true';
+      priceLink.dataset.page = 'prices';
+      priceLink.innerHTML = '<span class="mobile-link-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#prices"></use></svg></span><span>' + (isSpanish ? 'Precios' : 'Prices') + '</span>';
+      if (isPricesPage) {
+        priceLink.classList.add('active');
+        priceLink.setAttribute('aria-current', 'page');
+        mobileNav.querySelectorAll('.mobile-nav-group a[data-page="prices"]').forEach(link => {
+          link.classList.remove('active');
+          link.removeAttribute('aria-current');
+        });
+      }
+      const homeLink = mobileNav.querySelector(':scope > a[data-page="home"]');
+      mobileNav.insertBefore(priceLink, homeLink ? homeLink.nextSibling : mobileNav.firstChild);
+    }
     // Initialize the mobile drawer before optional navigation enhancements.
     // If a later enhancement fails, the hamburger must still work.
     const toggle = document.getElementById('menu-toggle');
