@@ -30,3 +30,10 @@ body .bam-portfolio .portfolio-intro{border-bottom:1px solid rgba(212,175,55,.2)
 body .bam-portfolio .project .content h2{font-size:clamp(1.85rem,3.8vw,2.65rem)}
 body .bam-portfolio .browser{border-color:rgba(212,175,55,.24)}
 @media(max-width:640px){body.polished-home .home-section .home-container{width:100%!important}body .bam-portfolio .project .content h2{font-size:1.85rem}}
+
+/* Matrix-inspired digital rain, confined to the homepage loading screen. */
+body.polished-home #bam-loader .bam-matrix-rain{position:absolute;inset:0;display:block;z-index:0;pointer-events:none;opacity:.82}
+body.polished-home #bam-loader.has-matrix-rain .bam-code-backdrop{display:none}
+body.polished-home #bam-loader.has-matrix-rain::before{background:radial-gradient(ellipse at center,rgba(0,0,0,.9) 0%,rgba(0,0,0,.55) 38%,rgba(0,0,0,.22) 75%,rgba(0,0,0,.5) 100%);z-index:1}
+body.polished-home #bam-loader.has-matrix-rain .bam-loader-inner{z-index:2}
+@media(prefers-reduced-motion:reduce){body.polished-home #bam-loader .bam-matrix-rain{display:none}}
