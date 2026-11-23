@@ -4,7 +4,8 @@
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const revealSelectors = [
-    "main > section",
+    // Never reveal an entire page-height section: IntersectionObserver thresholds
+    // can leave long sections invisible on small screens.
     "main section > .container",
     ".home-card",
     ".service-card",
