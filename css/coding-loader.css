@@ -1,0 +1,32 @@
+/* Homepage-only animated code loading screen. The CSS timeout is a safety net if JS fails. */
+body.polished-home #bam-loader{display:grid;place-items:center;isolation:isolate;background:#040607;animation:bamLoaderEscape 0s linear 3.25s forwards!important}
+body.polished-home #bam-loader.is-hidden{animation:none!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+body.polished-home #bam-loader::before{inset:0;background:radial-gradient(circle at center,rgba(234,183,78,.14),rgba(0,0,0,.65) 55%,rgba(0,0,0,.95));border:0;z-index:1;box-shadow:inset 0 0 100px #000}
+body.polished-home #bam-loader::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,transparent 49.8%,rgba(234,183,78,.055) 50%,transparent 50.2%),linear-gradient(transparent 49.8%,rgba(234,183,78,.055) 50%,transparent 50.2%);background-size:64px 64px;opacity:.4;mask-image:linear-gradient(to bottom,transparent,#000 15%,#000 85%,transparent)}
+.bam-code-backdrop{position:absolute;inset:-15% -20%;z-index:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:clamp(22px,4vw,100px);transform:rotate(-10deg) scale(1.12);overflow:hidden;pointer-events:none;user-select:none}
+.bam-code-stream{margin:0;font:500 clamp(11px,1.05vw,15px)/2.15 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.02em;white-space:pre-wrap;overflow-wrap:anywhere;color:rgba(226,176,78,.48);text-shadow:0 0 16px rgba(212,166,55,.25);animation:bamCodeDrift 9s linear infinite alternate}
+.bam-code-stream:nth-child(2){color:rgba(225,231,231,.31);animation-duration:12s;animation-direction:alternate-reverse}
+.bam-code-stream:nth-child(3){animation-duration:10s;opacity:.7}
+body.polished-home #bam-loader .bam-loader-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;max-width:min(650px,90vw);background:radial-gradient(ellipse,rgba(4,6,7,.82),rgba(4,6,7,0) 73%);padding:32px 16px!important}
+body.polished-home #bam-loader .bam-loader-logo-image{width:min(350px,65vw)!important;max-height:37vh!important;height:auto!important;object-fit:contain;filter:drop-shadow(0 0 32px rgba(222,173,73,.18))}
+.bam-loader-code-label{font:700 clamp(10px,1.3vw,12px)/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.18em;text-transform:uppercase;color:#e9c66b;margin:0 0 18px}
+.bam-loader-code-label::before{content:"> ";color:#9fe4ac}
+body.polished-home #bam-loader .bam-loader-progress{width:min(285px,65vw)!important;margin-top:12px!important}
+body.polished-home #bam-loader .bam-loader-status{color:#c9c6bb!important;font-size:10px!important;letter-spacing:.16em!important}
+@keyframes bamCodeDrift{from{transform:translate3d(0,-10%,0)}to{transform:translate3d(0,10%,0)}}
+@keyframes bamLoaderEscape{to{visibility:hidden;opacity:0;pointer-events:none}}
+@media(max-width:680px){.bam-code-backdrop{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:18px;inset:-10% -15%}.bam-code-stream:nth-child(3){display:none}.bam-code-stream{font-size:10px;line-height:2}.bam-loader-code-label{font-size:9px;letter-spacing:.1em}body.polished-home #bam-loader .bam-loader-logo-image{width:min(290px,70vw)!important}}
+@media(prefers-reduced-motion:reduce){.bam-code-stream{animation:none!important}.bam-code-backdrop{transform:rotate(-10deg) scale(1.12)}body.polished-home #bam-loader{animation:bamLoaderEscape 0s linear 1.2s forwards!important}}
+/* Continued redesign: consistent premium editorial hierarchy without replacing existing sections. */
+body.polished-home .home-section .home-container{max-width:1260px;margin-inline:auto}
+body.polished-home .portfolio-preview{gap:clamp(16px,2vw,24px)!important}
+body.polished-home .portfolio-home-card{background:linear-gradient(160deg,#141416,#0b0b0d)!important}
+body.polished-home .portfolio-home-visual{overflow:hidden}
+body.polished-home .plan-preview-grid{gap:clamp(16px,2vw,24px)!important}
+body.polished-home .plan-preview-card{background:linear-gradient(150deg,#171617,#0b0b0e)!important}
+body.polished-home .home-section-heading{align-items:end}
+body.polished-home :is(.home-button,.home-button-secondary,.btn,.secondary-button):focus-visible{outline:3px solid #f4cc72;outline-offset:3px}
+body .bam-portfolio .portfolio-intro{border-bottom:1px solid rgba(212,175,55,.2);margin-bottom:clamp(36px,5vw,64px)}
+body .bam-portfolio .project .content h2{font-size:clamp(1.85rem,3.8vw,2.65rem)}
+body .bam-portfolio .browser{border-color:rgba(212,175,55,.24)}
+@media(max-width:640px){body.polished-home .home-section .home-container{width:100%!important}body .bam-portfolio .project .content h2{font-size:1.85rem}}
