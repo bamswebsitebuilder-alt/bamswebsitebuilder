@@ -1,38 +1,29 @@
-/* Show the logo briefly once ready, without waiting for chat or other page assets. */
+/* Home loader: always clear quickly, regardless of image/network status. */
 (() => {
   const loader = document.getElementById('bam-loader');
   if (!loader) return;
-  const logo = loader.querySelector('.bam-loader-logo-image');
-  let dismissed = false;
-  let scheduled = false;
-  const hide = () => {
-    if (dismissed) return;
-    dismissed = true;
+  let done = false;
+  function dismiss() {
+    if (done) return;
+    done = true;
     loader.classList.add('is-hidden');
     loader.setAttribute('aria-hidden', 'true');
-    setTimeout(() => loader.remove(), 600);
-  };
-  // Always release the page if the logo is slow or unavailable.
-  const fallback = setTimeout(hide, 3500);
-  const revealAfterLogo = () => {
-    if (scheduled || dismissed) return;
-    scheduled = true;
-    const ready = () => {
-      if (dismissed) return;
-      setTimeout(() => {
-        clearTimeout(fallback);
-        hide();
-      }, 1200);
-    };
-    if (logo && typeof logo.decode === 'function') {
-      logo.decode().then(ready, ready);
-    } else {
-      ready();
-    }
-  };
-  if (!logo || logo.complete) revealAfterLogo();
-  else {
-    logo.addEventListener('load', revealAfterLogo, { once: true });
-    logo.addEventListener('error', revealAfterLogo, { once: true });
+    window.setTimeout(() => loader.remove(), 320);
   }
+  // Hard stop: the overlay must never trap visitors.
+  const timer = window.setTimeout(dismiss, 2500);
+  function begin() {
+    const logo = loader.querySelector('.bam-loader-logo-image');
+    const showBriefly = () => window.setTimeout(() => {
+      window.clearTimeout(timer);
+      dismiss();
+    }, 850);
+    if (!logo || logo.complete) showBriefly();
+    else {
+      logo.addEventListener('load', showBriefly, {once:true});
+      logo.addEventListener('error', showBriefly, {once:true});
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', begin, {once:true});
+  else begin();
 })();
