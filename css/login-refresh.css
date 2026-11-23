@@ -1,0 +1,139 @@
+/* Homepage-matched auth experience. Scoped to /login; existing Firebase form IDs retained. */
+body.login-page .bam-login-refresh {
+  --login-gold:#e3b956;
+  --login-dark:#0b0c0e;
+  --login-text:#f7f7f7;
+  --login-muted:#bfc0c3;
+  box-sizing:border-box;
+  position:relative;
+  min-height:min(800px,calc(100svh - 88px));
+  padding:clamp(54px,7vw,108px) max(22px,calc((100vw - 1240px)/2));
+  background:radial-gradient(ellipse 70% 80% at 12% 35%,rgba(205,160,62,.095),transparent 68%),#0b0c0e!important;
+  color:var(--login-text);
+}
+body.login-page .bam-login-refresh *,body.login-page .bam-login-refresh *::before,body.login-page .bam-login-refresh *::after{box-sizing:border-box}
+body.login-page .bam-login-refresh .auth-shell{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,480px);
+  gap:clamp(38px,7vw,112px);width:100%;max-width:1200px;margin:0 auto;align-items:center;
+}
+body.login-page .bam-login-refresh .auth-intro{max-width:600px;min-width:0;margin:0;text-align:left}
+body.login-page .bam-login-refresh .auth-kicker{
+  font:700 .78rem/1.5 system-ui,sans-serif;letter-spacing:.16em;color:var(--login-gold);margin:0 0 22px;
+}
+body.login-page .bam-login-refresh .auth-intro h1{
+  font-size:clamp(3rem,5.5vw,5.1rem);line-height:1.06;font-weight:750;
+  letter-spacing:-.06em;margin:0 0 22px;color:var(--login-text);
+}
+body.login-page .bam-login-refresh .auth-title-period{color:var(--login-gold)}
+body.login-page .bam-login-refresh .auth-intro>p:not(.auth-kicker){
+  max-width:520px;color:var(--login-muted);font-size:clamp(1rem,1.35vw,1.14rem);line-height:1.65;margin:0;
+}
+body.login-page .bam-login-refresh .auth-feature-list{display:grid;gap:18px;margin:34px 0}
+body.login-page .bam-login-refresh .auth-feature-list span{
+  display:block;position:relative;padding:0 0 0 34px;
+  font-size:.98rem;line-height:1.45;font-weight:550;color:#e5e5e6;
+}
+body.login-page .bam-login-refresh .auth-feature-list span::before{
+  content:"✓";display:grid;place-items:center;position:absolute;top:0;left:0;
+  width:22px;height:22px;font-size:.82rem;color:#18150d;background:var(--login-gold);border-radius:50%;
+}
+body.login-page .bam-login-refresh .auth-intro .auth-intro-footnote{font-size:.88rem!important;color:#a6a6a7!important;margin-top:30px!important}
+body.login-page .bam-login-refresh .auth-card{
+  position:relative;width:100%;min-width:0;max-width:480px;margin:0 auto;
+  padding:clamp(28px,3.1vw,42px);border:1px solid #393735;
+  border-radius:22px;background:linear-gradient(160deg,#1a1a1c,#111113)!important;
+  box-shadow:0 26px 70px rgba(0,0,0,.36);
+}
+body.login-page .bam-login-refresh .auth-card-header{margin:0 0 27px}
+body.login-page .bam-login-refresh .auth-badge{
+  min-height:0;display:inline-block;padding:0;background:transparent;border:0;border-radius:0;
+  color:var(--login-gold);font-size:.7rem;letter-spacing:.14em;font-weight:800;
+}
+body.login-page .bam-login-refresh .auth-card h2{
+  margin:13px 0 10px;color:#f8f8f8;font-size:clamp(1.7rem,2.5vw,2.15rem);letter-spacing:-.045em;line-height:1.16;
+}
+body.login-page .bam-login-refresh .auth-card-header p{font-size:.9rem;line-height:1.6;color:#bfc0c3;margin:0}
+body.login-page .bam-login-refresh .auth-form{display:grid;gap:19px;min-width:0}
+body.login-page .bam-login-refresh .auth-form .form-group{min-width:0}
+body.login-page .bam-login-refresh .auth-form label:not(.check-label){
+  display:block;color:#f0f0f1;font-weight:650;font-size:.87rem;margin-bottom:9px;
+}
+body.login-page .bam-login-refresh .auth-form input:not([type="checkbox"]){
+  display:block;width:100%;height:54px;min-height:54px;padding:13px 15px;
+  border:1px solid #55545a;border-radius:10px;outline:none;
+  background:#0b0c0e!important;color:#fafafa!important;font:500 1rem/1.3 system-ui,sans-serif;
+  box-shadow:none;-webkit-appearance:none;appearance:none;
+}
+body.login-page .bam-login-refresh .auth-form input::placeholder{color:#a4a4ad!important;opacity:1}
+body.login-page .bam-login-refresh .auth-form input:not([type="checkbox"]):focus-visible{
+  border-color:var(--login-gold)!important;box-shadow:0 0 0 3px rgba(227,185,86,.18)!important;
+}
+body.login-page .bam-login-refresh .password-field{position:relative}
+body.login-page .bam-login-refresh .password-field input{padding-right:86px!important}
+body.login-page .bam-login-refresh .password-toggle{
+  position:absolute;top:50%;right:7px;transform:translateY(-50%);
+  min-height:42px;min-width:62px;padding:8px;border-radius:8px;color:var(--login-gold)!important;
+  font-size:.87rem;font-weight:700;background:transparent;border:0;cursor:pointer;
+}
+body.login-page .bam-login-refresh .form-options{
+  display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;
+  font-size:.85rem;margin:0;
+}
+body.login-page .bam-login-refresh .check-label{display:inline-flex!important;align-items:center;gap:9px;color:#e5e5e5!important;margin:0!important;font-weight:500!important;cursor:pointer}
+body.login-page .bam-login-refresh .check-label input{width:19px;height:19px;margin:0;accent-color:var(--login-gold)}
+body.login-page .bam-login-refresh :is(.form-options a,.auth-switch a){color:#f0c970!important;text-decoration:underline;text-underline-offset:3px;font-weight:650}
+body.login-page .bam-login-refresh .auth-submit{
+  display:flex;width:100%;min-height:54px;align-items:center;justify-content:center;gap:12px;
+  border:1px solid var(--login-gold);border-radius:10px;background:var(--login-gold)!important;
+  color:#14110a!important;font-size:1rem;font-weight:800;transition:background .18s ease;
+}
+body.login-page .bam-login-refresh .auth-submit:hover:not(:disabled){background:#f2ca72!important;transform:none}
+body.login-page .bam-login-refresh .auth-submit-arrow{font-size:1.3rem;line-height:1}
+body.login-page .bam-login-refresh .auth-submit:disabled{opacity:.7;cursor:wait}
+body.login-page .bam-login-refresh :is(button,a,input):focus-visible{outline:3px solid var(--login-gold);outline-offset:3px}
+body.login-page .bam-login-refresh .auth-switch{text-align:center;margin:1px 0 0;font-size:.91rem;color:#c6c6cb}
+body.login-page .bam-login-refresh .demo-note{
+  padding:14px 0 0;margin:0;border:0;border-top:1px solid #353438;
+  background:transparent;color:#aeb0b5;text-align:center;font-size:.78rem;line-height:1.45;
+}
+body.login-page .bam-login-refresh .demo-note span{color:#dcb358;padding-right:5px}
+body.login-page .bam-login-refresh .form-alert[hidden]{display:none!important}
+body.login-page .bam-login-refresh .form-alert:not([hidden]){margin:0;border-radius:10px}
+@media(max-width:1000px){
+  body.login-page .bam-login-refresh{padding:54px 26px 70px;min-height:0}
+  body.login-page .bam-login-refresh .auth-shell{grid-template-columns:minmax(0,1fr);gap:33px;max-width:560px}
+  body.login-page .bam-login-refresh .auth-intro{text-align:center;max-width:none}
+  body.login-page .bam-login-refresh .auth-intro h1{font-size:clamp(2.5rem,7vw,3.5rem)}
+  body.login-page .bam-login-refresh .auth-intro>p:not(.auth-kicker){margin-inline:auto}
+  body.login-page .bam-login-refresh .auth-feature-list{display:none}
+  body.login-page .bam-login-refresh .auth-intro .auth-intro-footnote{display:none}
+}
+@media(max-width:580px){
+  body.login-page .bam-login-refresh{padding:36px 16px 54px}
+  body.login-page .bam-login-refresh .auth-shell{gap:25px}
+  body.login-page .bam-login-refresh .auth-kicker{font-size:.68rem;margin-bottom:12px}
+  body.login-page .bam-login-refresh .auth-intro h1{font-size:2.65rem;margin-bottom:12px}
+  body.login-page .bam-login-refresh .auth-intro>p:not(.auth-kicker){font-size:.94rem;line-height:1.55}
+  body.login-page .bam-login-refresh .auth-card{padding:27px 20px;border-radius:17px}
+  body.login-page .bam-login-refresh .auth-card h2{font-size:1.7rem}
+  body.login-page .bam-login-refresh .auth-card-header{margin-bottom:24px}
+  body.login-page .bam-login-refresh .form-options{gap:10px;font-size:.83rem}
+}
+@media(prefers-reduced-motion:reduce){body.login-page .bam-login-refresh *{transition:none!important}}
+/* Match form treatment to the user's light-mode setting without reducing contrast. */
+html[data-theme="light"] body.login-page .bam-login-refresh{background:#f6f3eb!important;color:#1b1b1d}
+html[data-theme="light"] body.login-page .bam-login-refresh .auth-intro h1{color:#1b1b1d}
+html[data-theme="light"] body.login-page .bam-login-refresh .auth-intro>p:not(.auth-kicker){color:#46454a}
+html[data-theme="light"] body.login-page .bam-login-refresh .auth-intro .auth-feature-list span{color:#2b2b2e}
+html[data-theme="light"] body.login-page .bam-login-refresh .auth-card{background:#fff!important;border-color:#d2c9b9;box-shadow:0 18px 45px rgba(25,22,14,.09)}
+html[data-theme="light"] body.login-page .bam-login-refresh .auth-card h2{color:#19191c}
+html[data-theme="light"] body.login-page .bam-login-refresh .auth-card-header p{color:#55515b}
+html[data-theme="light"] body.login-page .bam-login-refresh .auth-form label:not(.check-label){color:#26242b}
+html[data-theme="light"] body.login-page .bam-login-refresh .check-label{color:#27242b!important}
+html[data-theme="light"] body.login-page .bam-login-refresh .auth-form input:not([type="checkbox"]){background:#fff!important;color:#16171a!important;border-color:#807c76!important}
+html[data-theme="light"] body.login-page .bam-login-refresh .auth-form input::placeholder{color:#5c5b61!important}
+html[data-theme="light"] body.login-page .bam-login-refresh .auth-switch{color:#55515b}
+html[data-theme="light"] body.login-page .bam-login-refresh .demo-note{color:#605b60;border-top-color:#d5d0c6}
+html[data-theme="light"] body.login-page .bam-login-refresh :is(.form-options a,.auth-switch a){color:#765300!important}
+html[data-theme="light"] body.login-page .bam-login-refresh .password-toggle{color:#765300!important}
+html[data-theme="light"] body.login-page .bam-login-refresh .auth-submit{background:#d5a52f!important;color:#16100a!important;border-color:#a8760f}
