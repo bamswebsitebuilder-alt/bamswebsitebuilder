@@ -64,3 +64,32 @@ html:not([data-theme="light"]) body.polished-home section.home-section[aria-labe
 html:not([data-theme="light"]) body.polished-home section.home-section[aria-labelledby="featured-work-title"] .portfolio-home-card :is(h3,p) {
   color: #F5F5F5 !important;
 }
+
+
+/* BAM UI 2.2: light FAQ editorial panel, dark navigation and gold CTAs retained. */
+html:not([data-theme="light"]) body.polished-home section.home-section[aria-labelledby="home-faq-title"] {
+  background: #FAFAF8 !important;
+  color: #171717 !important;
+  border-block: 1px solid #E7E5E0;
+}
+html:not([data-theme="light"]) body.polished-home section.home-section[aria-labelledby="home-faq-title"] .home-title {
+  color: #171717 !important;
+  text-shadow: none !important;
+}
+html:not([data-theme="light"]) body.polished-home section.home-section[aria-labelledby="home-faq-title"] .home-eyebrow {
+  color: #765300 !important;
+}
+html:not([data-theme="light"]) body.polished-home section.home-section[aria-labelledby="home-faq-title"] .faq-list {
+  border-top-color: #D9D7D0 !important;
+}
+html:not([data-theme="light"]) body.polished-home section.home-section[aria-labelledby="home-faq-title"] .faq-list details {
+  border-bottom-color: #D9D7D0 !important;
+  background: transparent !important;
+}
+html:not([data-theme="light"]) body.polished-home section.home-section[aria-labelledby="home-faq-title"] .faq-list summary,
+html:not([data-theme="light"]) body.polished-home section.home-section[aria-labelledby="home-faq-title"] .faq-list details p {
+  color: #252525 !important;
+}
+html:not([data-theme="light"]) body.polished-home section.home-section[aria-labelledby="home-faq-title"] .faq-list summary::after {
+  color: #765300 !important;
+}
