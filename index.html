@@ -100,14 +100,56 @@
 <link rel="stylesheet" href="/css/site-footer.css?v=20261109-sitewide-1">
 <link rel="stylesheet" href="/animations.css">
 <link rel="stylesheet" href="/css/growth-leads.css?v=20261120-1"><link rel="stylesheet" href="/css/agency-refresh.css?v=20261123-1">
+<link rel="stylesheet" href="/css/coding-loader.css?v=20261123-2">
 </head>
 <body class="polished-home"><a class="site-skip-link" href="#main-content">Skip to main content</a>
-<div id="bam-loader" role="status" aria-live="polite" aria-label="Loading BAM's Website Builder">
+<div id="bam-loader" role="status" aria-live="polite" aria-label="Loading BAM's Website Builder"><div class="bam-code-backdrop" aria-hidden="true"><span class="bam-code-stream">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;BAM's Website Builder&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;main class="experience"&gt;
+    &lt;section class="hero"&gt;
+      &lt;h1&gt;Built for your business&lt;/h1&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;</span><span class="bam-code-stream">const website = {
+  brand: "BAM'S",
+  responsive: true,
+  design: "premium",
+  pages: ["home", "services", "work"],
+  launch: "ready"
+};
+function buildYourBusiness() {
+  return website.pages.map(page =&gt; {
+    return render(page);
+  });
+}
+// craft. code. launch.
+const result = buildYourBusiness();</span><span class="bam-code-stream">.website {
+  display: grid;
+  gap: clamp(1rem, 3vw, 3rem);
+  background: #090909;
+  color: #f4f4f5;
+}
+.hero { min-height: 85vh; }
+.button {
+  border-radius: 12px;
+  transition: transform .3s ease;
+}
+@media (max-width: 768px) {
+  .website { grid-template-columns: 1fr; }
+}
+/* building your business */</span></div>
   <div class="bam-loader-inner bam-loader-image-layout">
     <img decoding="async" width="1500" height="1500" class="bam-loader-logo-image" fetchpriority="high" src="/images/logo-dark.webp" alt="BAM's Website Builder" />
-    <div class="bam-loader-progress" aria-hidden="true">
+    <p class="bam-loader-code-label">Building your digital presence</p><div class="bam-loader-progress" aria-hidden="true">
       <div class="bam-loader-line"></div>
-      <div class="bam-loader-status" aria-hidden="true"></div>
+      <div class="bam-loader-status" aria-hidden="true">Compiling your next big idea...</div>
     </div>
   </div>
 </div><header class="site-header" id="site-header">
