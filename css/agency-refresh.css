@@ -1,0 +1,33 @@
+/* BAM premium agency refresh | scoped to homepage, portfolio, shared navigation */
+body.polished-home .hero.hero-conversion{position:relative;display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);align-items:center;gap:clamp(28px,4vw,72px);max-width:none;min-height:610px;padding:clamp(90px,9vw,138px) max(24px,calc((100vw - 1240px)/2)) 96px!important;overflow:hidden}
+body.polished-home .hero.hero-conversion .hero-content{position:relative;z-index:2;max-width:690px;text-align:left}
+body.polished-home .hero.hero-conversion h1{font-size:clamp(2.9rem,5.6vw,5.8rem);letter-spacing:-.065em;line-height:1.04;max-width:780px}
+body.polished-home .hero.hero-conversion .hero-content>p:not(.home-eyebrow){max-width:590px;font-size:clamp(1rem,1.5vw,1.18rem);line-height:1.75}
+body.polished-home .hero.hero-conversion .hero-buttons,body.polished-home .hero.hero-conversion .hero-trust{justify-content:flex-start}
+body.polished-home .hero .bam-hero-showcase{position:relative;z-index:2;min-width:0;max-width:610px;width:100%;margin-inline:auto}
+.bam-hero-browser{border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.19);background:#151518;box-shadow:0 42px 90px rgba(0,0,0,.55),0 0 55px rgba(212,175,55,.13);transform:rotate(1.5deg);transition:transform .45s ease,box-shadow .45s ease}
+.bam-hero-browser:hover{transform:translateY(-8px) rotate(0deg);box-shadow:0 50px 100px rgba(0,0,0,.65),0 0 70px rgba(212,175,55,.2)}
+.bam-browser-bar{height:42px;display:flex;align-items:center;gap:12px;padding:0 16px;background:#202025;border-bottom:1px solid #34343a}
+.bam-browser-dots{display:flex;gap:6px}.bam-browser-dots i{display:block;height:9px;width:9px;border-radius:50%;background:#777780}.bam-browser-dots i:first-child{background:#d97878}.bam-browser-dots i:nth-child(2){background:#e2bd64}.bam-browser-dots i:nth-child(3){background:#81ba8a}
+.bam-browser-url{font:500 11px/1.3 system-ui,sans-serif;color:#d4d4d8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bam-hero-browser img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top}
+.bam-showcase-tag{position:absolute;right:-12px;bottom:26px;border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:12px 18px;background:#121316;color:#f4f4f5;box-shadow:0 14px 40px #0009;font:600 .82rem/1.35 system-ui,sans-serif}
+.bam-showcase-tag strong{display:block;color:#e7bf66;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
+body.polished-home .home-section{scroll-margin-top:90px}
+body.polished-home .home-section .home-title{letter-spacing:-.045em}
+body.polished-home .portfolio-home-card,body.polished-home .plan-preview-card,body.polished-home .process-card{border:1px solid rgba(255,255,255,.14);border-radius:20px;overflow:hidden;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+body.polished-home .portfolio-home-card:hover,body.polished-home .plan-preview-card:hover,body.polished-home .process-card:hover{transform:translateY(-5px);border-color:rgba(212,175,55,.5);box-shadow:0 22px 60px rgba(0,0,0,.24)}
+body.polished-home .portfolio-home-visual img{transition:transform .5s ease}
+body.polished-home .portfolio-home-card:hover .portfolio-home-visual img{transform:scale(1.035)}
+body .bam-portfolio{--accent:#D4AF37;background:radial-gradient(ellipse 70% 420px at 75% 0%,rgba(212,175,55,.09),transparent 75%),#090909}
+body .bam-portfolio .hero{padding:clamp(70px,9vw,120px) 0 72px}
+body .bam-portfolio .hero h1{letter-spacing:-.055em;max-width:900px}
+body .bam-portfolio .browser,body .bam-portfolio .thumb,body .bam-portfolio .concept-card{box-shadow:0 18px 45px rgba(0,0,0,.22);transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease}
+body .bam-portfolio .browser:hover,body .bam-portfolio .concept-card:hover{transform:translateY(-5px);border-color:rgba(212,175,55,.55);box-shadow:0 24px 60px rgba(0,0,0,.36)}
+body .bam-portfolio .shot{transition:transform .4s ease}body .bam-portfolio .visual a:hover .shot{transform:scale(1.025)}
+body .bam-portfolio .project{padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.09)}
+body .bam-portfolio .cta{background:linear-gradient(135deg,#191817,#111214);border-color:rgba(212,175,55,.3)}
+.desktop-navigation .nav-more-links{border-radius:14px;box-shadow:0 20px 42px rgba(0,0,0,.26)}
+@media(max-width:1050px){body.polished-home .hero.hero-conversion{grid-template-columns:1fr;gap:48px;padding:90px 28px 75px!important;text-align:center}body.polished-home .hero.hero-conversion .hero-content{max-width:760px;margin-inline:auto;text-align:center}body.polished-home .hero.hero-conversion .hero-buttons,body.polished-home .hero.hero-conversion .hero-trust{justify-content:center}body.polished-home .hero .bam-hero-showcase{max-width:690px}}
+@media(max-width:600px){body.polished-home .hero.hero-conversion{padding:75px 20px 56px!important;gap:38px;min-height:0}body.polished-home .hero.hero-conversion h1{font-size:clamp(2.6rem,11vw,4rem)}body.polished-home .hero .bam-hero-showcase{width:calc(100% - 10px)}.bam-showcase-tag{right:-8px;bottom:-14px;padding:9px 12px;font-size:.72rem}.bam-browser-bar{height:34px}body .bam-portfolio .project{padding-bottom:10px}}
+@media(prefers-reduced-motion:reduce){.bam-hero-browser,body.polished-home .portfolio-home-card,body.polished-home .plan-preview-card,body.polished-home .process-card,body .bam-portfolio .browser,body .bam-portfolio .concept-card,body .bam-portfolio .shot{transition:none!important;transform:none!important}}
