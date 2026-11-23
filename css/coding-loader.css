@@ -1,23 +1,62 @@
-/* Homepage-only animated code loading screen. The CSS timeout is a safety net if JS fails. */
-body.polished-home #bam-loader{display:grid;place-items:center;isolation:isolate;background:#040607;animation:bamLoaderEscape 0s linear 3.25s forwards!important}
-body.polished-home #bam-loader.is-hidden{animation:none!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important}
-body.polished-home #bam-loader::before{display:block!important;inset:0;background:radial-gradient(circle at center,rgba(234,183,78,.14),rgba(0,0,0,.65) 55%,rgba(0,0,0,.95));border:0;z-index:1;box-shadow:inset 0 0 100px #000}
-body.polished-home #bam-loader::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,transparent 49.8%,rgba(234,183,78,.055) 50%,transparent 50.2%),linear-gradient(transparent 49.8%,rgba(234,183,78,.055) 50%,transparent 50.2%);background-size:64px 64px;opacity:.4;mask-image:linear-gradient(to bottom,transparent,#000 15%,#000 85%,transparent)}
-.bam-code-backdrop{position:absolute;inset:-15% -20%;z-index:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:clamp(22px,4vw,100px);transform:rotate(-10deg) scale(1.12);overflow:hidden;pointer-events:none;user-select:none}
-.bam-code-stream{margin:0;font:500 clamp(11px,1.05vw,15px)/2.15 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.02em;white-space:pre-wrap;overflow-wrap:anywhere;color:rgba(226,176,78,.48);text-shadow:0 0 16px rgba(212,166,55,.25);animation:bamCodeDrift 9s linear infinite alternate}
-.bam-code-stream:nth-child(2){color:rgba(225,231,231,.31);animation-duration:12s;animation-direction:alternate-reverse}
-.bam-code-stream:nth-child(3){animation-duration:10s;opacity:.7}
-body.polished-home #bam-loader .bam-loader-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;max-width:min(650px,90vw);background:radial-gradient(ellipse,rgba(4,6,7,.82),rgba(4,6,7,0) 73%);padding:32px 16px!important}
-body.polished-home #bam-loader .bam-loader-logo-image{width:min(350px,65vw)!important;max-height:37vh!important;height:auto!important;object-fit:contain;filter:drop-shadow(0 0 32px rgba(222,173,73,.18))}
-.bam-loader-code-label{font:700 clamp(10px,1.3vw,12px)/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.18em;text-transform:uppercase;color:#e9c66b;margin:0 0 18px}
-.bam-loader-code-label::before{content:"> ";color:#9fe4ac}
-body.polished-home #bam-loader .bam-loader-progress{width:min(285px,65vw)!important;margin-top:12px!important}
-body.polished-home #bam-loader .bam-loader-status{color:#c9c6bb!important;font-size:10px!important;letter-spacing:.16em!important}
-@keyframes bamCodeDrift{from{transform:translate3d(0,-10%,0)}to{transform:translate3d(0,10%,0)}}
-@keyframes bamLoaderEscape{to{visibility:hidden;opacity:0;pointer-events:none}}
-@media(max-width:680px){.bam-code-backdrop{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:18px;inset:-10% -15%}.bam-code-stream:nth-child(3){display:none}.bam-code-stream{font-size:10px;line-height:2}.bam-loader-code-label{font-size:9px;letter-spacing:.1em}body.polished-home #bam-loader .bam-loader-logo-image{width:min(290px,70vw)!important}}
-@media(prefers-reduced-motion:reduce){.bam-code-stream{animation:none!important}.bam-code-backdrop{transform:rotate(-10deg) scale(1.12)}body.polished-home #bam-loader{animation:bamLoaderEscape 0s linear 1.2s forwards!important}}
-/* Continued redesign: consistent premium editorial hierarchy without replacing existing sections. */
+/* BAM homepage loader, single source of truth: simple, accessible, nonblocking. */
+body.polished-home #bam-loader{
+  position:fixed!important;inset:0!important;width:100%!important;height:100dvh!important;
+  z-index:2147483000!important;display:flex!important;flex-direction:column!important;
+  align-items:center!important;justify-content:center!important;
+  padding:24px!important;margin:0!important;box-sizing:border-box!important;
+  background:#0b0b0c!important;color:#f6f4ef!important;
+  opacity:1!important;visibility:visible!important;pointer-events:auto!important;
+  overflow:hidden!important;isolation:isolate!important;
+  animation:bamLoaderRelease 0s linear 2.8s forwards!important;
+}
+body.polished-home #bam-loader::before,body.polished-home #bam-loader::after{content:none!important;display:none!important}
+body.polished-home #bam-loader.is-hidden{
+  opacity:0!important;visibility:hidden!important;pointer-events:none!important;
+  animation:none!important;transition:opacity .28s ease,visibility .28s ease!important;
+}
+body.polished-home #bam-loader .bam-code-backdrop,
+body.polished-home #bam-loader .bam-matrix-rain{display:none!important}
+body.polished-home #bam-loader .bam-loader-inner{
+  position:relative!important;inset:auto!important;transform:none!important;
+  z-index:1!important;box-sizing:border-box!important;display:flex!important;
+  flex-direction:column!important;align-items:center!important;justify-content:center!important;
+  gap:15px!important;max-width:min(440px,100%)!important;width:100%!important;
+  margin:0 auto!important;padding:20px!important;border:0!important;
+  background:transparent!important;box-shadow:none!important;text-align:center!important;
+}
+body.polished-home #bam-loader .bam-loader-logo-image{
+  display:block!important;width:min(300px,72vw)!important;height:auto!important;
+  max-height:32vh!important;object-fit:contain!important;margin:0 auto!important;
+  filter:drop-shadow(0 8px 24px rgba(0,0,0,.2))!important;
+}
+body.polished-home #bam-loader .bam-loader-code-label{
+  margin:0!important;color:#e7c36c!important;letter-spacing:.12em!important;
+  font:600 clamp(11px,2.5vw,13px)/1.5 system-ui,sans-serif!important;
+  text-transform:uppercase!important;
+}
+body.polished-home #bam-loader .bam-loader-code-label::before{content:none!important}
+body.polished-home #bam-loader .bam-loader-progress{
+  display:block!important;position:relative!important;overflow:hidden!important;
+  width:min(250px,68vw)!important;height:3px!important;
+  margin:5px auto 0!important;background:#373333!important;border-radius:9px!important;
+}
+body.polished-home #bam-loader .bam-loader-line{
+  display:block!important;position:absolute!important;inset:0 auto 0 0!important;
+  width:45%!important;height:100%!important;background:#dfb348!important;border-radius:9px!important;
+  animation:bamLoadSweep 1.15s ease-in-out infinite alternate!important;
+}
+body.polished-home #bam-loader .bam-loader-status{
+  display:block!important;position:static!important;margin:15px 0 0!important;
+  color:#b7b5b1!important;font:500 11px/1.5 system-ui,sans-serif!important;
+  letter-spacing:.07em!important;white-space:normal!important;
+}
+@keyframes bamLoadSweep{from{transform:translateX(-100%)}to{transform:translateX(235%)}}
+@keyframes bamLoaderRelease{to{opacity:0;visibility:hidden;pointer-events:none}}
+@media(prefers-reduced-motion:reduce){
+ body.polished-home #bam-loader .bam-loader-line{animation:none!important;width:100%!important;transform:none!important}
+ body.polished-home #bam-loader.is-hidden{transition:none!important}
+}
+/* Existing non-loader polish preserved. */ consistent premium editorial hierarchy without replacing existing sections. */
 body.polished-home .home-section .home-container{max-width:1260px;margin-inline:auto}
 body.polished-home .portfolio-preview{gap:clamp(16px,2vw,24px)!important}
 body.polished-home .portfolio-home-card{background:linear-gradient(160deg,#141416,#0b0b0d)!important}
@@ -31,9 +70,3 @@ body .bam-portfolio .project .content h2{font-size:clamp(1.85rem,3.8vw,2.65rem)}
 body .bam-portfolio .browser{border-color:rgba(212,175,55,.24)}
 @media(max-width:640px){body.polished-home .home-section .home-container{width:100%!important}body .bam-portfolio .project .content h2{font-size:1.85rem}}
 
-/* Matrix-inspired digital rain, confined to the homepage loading screen. */
-body.polished-home #bam-loader .bam-matrix-rain{position:absolute;inset:0;display:block;z-index:0;pointer-events:none;opacity:.82}
-body.polished-home #bam-loader.has-matrix-rain .bam-code-backdrop{display:none}
-body.polished-home #bam-loader.has-matrix-rain::before{background:radial-gradient(ellipse at center,rgba(0,0,0,.9) 0%,rgba(0,0,0,.55) 38%,rgba(0,0,0,.22) 75%,rgba(0,0,0,.5) 100%);z-index:1}
-body.polished-home #bam-loader.has-matrix-rain .bam-loader-inner{z-index:2}
-@media(prefers-reduced-motion:reduce){body.polished-home #bam-loader .bam-matrix-rain{display:none}}
