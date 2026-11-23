@@ -1,0 +1,13 @@
+/* Homepage hero only: animated green code with BAM gold highlights. */
+body.polished-home .hero.hero-conversion{position:relative;isolation:isolate;overflow:hidden}
+body.polished-home .hero.hero-conversion .bam-hero-matrix{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.48;filter:brightness(.85)}
+body.polished-home .hero.hero-conversion::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(7,8,8,.78),rgba(7,8,8,.48) 62%,rgba(7,8,8,.67))}
+body.polished-home .hero.hero-conversion .hero-atmosphere{z-index:1;pointer-events:none}
+body.polished-home .hero.hero-conversion .hero-content,
+body.polished-home .hero.hero-conversion .bam-hero-showcase,
+body.polished-home .hero.hero-conversion .hero-motion-toggle{position:relative;z-index:2}
+@media(max-width:700px){
+ body.polished-home .hero.hero-conversion .bam-hero-matrix{opacity:.34}
+ body.polished-home .hero.hero-conversion::before{background:linear-gradient(90deg,rgba(7,8,8,.82),rgba(7,8,8,.65))}
+}
+@media(prefers-reduced-motion:reduce){body.polished-home .hero.hero-conversion .bam-hero-matrix{display:none}}
