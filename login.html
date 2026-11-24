@@ -23,6 +23,36 @@
 <link rel="stylesheet" href="/css/site-footer.css?v=20261109-sitewide-1">
 <link rel="stylesheet" href="/css/portal-light.css?v=20261120-1">
 <link rel="stylesheet" href="/css/login-refresh.css?v=20261123-compact-2">
+<style id="bam-login-premium">
+body.login-page .bam-login-refresh{background:radial-gradient(ellipse at 15% 15%,#352a15 0,transparent 48%),#0b0b0d!important;padding:76px 24px 28px!important}
+body.login-page .bam-auth-scene{gap:24px}
+body.login-page .bam-auth-frame{width:min(100%,1040px);padding:0;display:grid;grid-template-columns:1fr 1fr;border:1px solid #34302a;border-radius:28px;overflow:hidden;box-shadow:0 28px 90px #0008;background:#141416}
+body.login-page .bam-auth-frame::before,body.login-page .bam-auth-frame-corner{display:none}
+body.login-page .bam-auth-story{padding:clamp(30px,5vw,58px);display:flex;flex-direction:column;justify-content:center;gap:20px;background:radial-gradient(ellipse at 0 0,#493715,transparent 65%),linear-gradient(145deg,#1c1a16,#101012);border-right:1px solid #34302a;color:#fff}
+body.login-page .bam-auth-story .bam-story-label{color:#e7c66e;font-size:12px;font-weight:700;letter-spacing:.16em}
+body.login-page .bam-auth-story h1{font:700 clamp(30px,4vw,49px)/1.08 system-ui,sans-serif;letter-spacing:-.045em;color:#fff;margin:0}
+body.login-page .bam-auth-story p{color:#d0c9bd;font:400 15px/1.65 system-ui,sans-serif;margin:0}
+body.login-page .bam-auth-story ul{list-style:none;padding:0;margin:8px 0;display:grid;gap:13px}
+body.login-page .bam-auth-story li{display:flex;align-items:center;gap:12px;color:#f5f1e8;font:500 14px/1.5 system-ui,sans-serif}
+body.login-page .bam-auth-story li span{display:grid;place-items:center;flex:none;width:32px;height:32px;border:1px solid #806631;background:#292316;color:#f0cd75;border-radius:9px}
+body.login-page .bam-auth-story a{color:#e7c66e;text-decoration:underline;min-height:44px;display:inline-flex;align-items:center;align-self:flex-start}
+body.login-page .bam-auth-panel{padding:clamp(26px,5vw,48px)!important;border:0!important;border-radius:0!important;background:#18181b!important;box-shadow:none!important;align-self:center}
+body.login-page .bam-auth-brand-mark{width:40px;height:40px;flex-basis:40px;border-radius:11px;font-size:26px;background:#e5bb57}
+body.login-page .bam-auth-version{color:#d1bb80;font-size:10px}
+body.login-page .bam-auth-description{margin:14px 0 22px!important;font-size:14px!important;color:#c6c6cc!important}
+body.login-page .bam-auth-form-head strong{font-size:24px;letter-spacing:-.03em}
+body.login-page .bam-login-refresh .auth-form{gap:18px;margin-top:20px}
+body.login-page .bam-login-refresh .auth-form label:not(.check-label){font-size:13px}
+body.login-page .bam-login-refresh .auth-form input:not([type=checkbox]){height:52px!important;background:#101013!important;border-color:#48484e!important;border-radius:12px!important}
+body.login-page .bam-login-refresh .auth-submit{min-height:52px!important;border-radius:12px!important;background:#e5bb57!important;border-color:#e5bb57!important;font-size:15px!important}
+body.login-page .bam-login-refresh .auth-submit:disabled{opacity:.6;cursor:wait!important}
+body.login-page .bam-login-refresh .form-options,body.login-page .bam-login-refresh .check-label{font-size:13px!important}
+body.login-page .bam-login-refresh .auth-switch{font-size:13px}
+body.login-page .bam-auth-footnote,body.login-page .bam-auth-copyright{color:#b0b0b6;font-size:12px}
+body.login-page .bam-auth-home{color:#ddd;font-size:14px;min-height:44px;display:flex;align-items:center;top:12px}
+body.login-page .bam-auth-back,body.login-page .bam-auth-entry{display:none!important}
+@media(max-width:760px){body.login-page .bam-login-refresh{padding:64px 16px 24px!important}body.login-page .bam-auth-frame{grid-template-columns:1fr;max-width:460px;border-radius:22px}body.login-page .bam-auth-story{padding:22px 26px;gap:8px;border-right:0;border-bottom:1px solid #34302a}body.login-page .bam-auth-story h1{font-size:26px}body.login-page .bam-auth-story ul,body.login-page .bam-auth-story a{display:none}body.login-page .bam-auth-story p{font-size:13px}body.login-page .bam-auth-panel{padding:26px!important}body.login-page .bam-auth-scene{min-height:0;justify-content:center}}
+</style>
 </head>
 <body class="login-page"><a class="site-skip-link" href="#main-content">Skip to main content</a><header class="site-header" id="site-header">
 <div class="header-container">
@@ -80,12 +110,13 @@
       <span class="bam-auth-frame-corner bam-auth-frame-corner-tr" aria-hidden="true"></span>
       <span class="bam-auth-frame-corner bam-auth-frame-corner-bl" aria-hidden="true"></span>
       <span class="bam-auth-frame-corner bam-auth-frame-corner-br" aria-hidden="true"></span>
-      <section class="bam-auth-panel" aria-label="BAM'S account access">
+      <aside class="bam-auth-story" aria-label="Client workspace"><span class="bam-story-label">YOUR DIGITAL WORKSPACE</span><h1>Your business.<br>Your website.<br>One place.</h1><p>Stay connected with BAM’S Website Builder throughout your website journey.</p><ul><li><span aria-hidden="true">✓</span>Track your website projects</li><li><span aria-hidden="true">↗</span>Share files and project updates</li><li><span aria-hidden="true">✉</span>Connect with your website builder</li></ul><a href="/contact">Need help accessing your account?</a></aside>
+<section class="bam-auth-panel" aria-label="BAM'S account access">
         <div class="bam-auth-heading">
           <div class="bam-auth-brand"><span class="bam-auth-brand-mark" aria-hidden="true">B</span><span>BAM'S <small>WEBSITE BUILDER</small></span></div>
           <span class="bam-auth-version">CLIENT PORTAL</span>
         </div>
-        <p class="bam-auth-description">Build your business. Manage your website, projects, files, and updates in one place.</p>
+        <p class="bam-auth-description">Sign in to manage your account and access your workspace.</p>
         <div class="bam-auth-entry" id="bam-auth-entry">
           <a class="bam-auth-create" href="/register">Create Account</a>
           <button class="bam-auth-access" id="bam-auth-access" type="button" aria-controls="login-form" aria-expanded="true">Access Account</button>
@@ -111,7 +142,7 @@
           <button class="auth-submit" id="login-submit" type="submit">Sign In</button>
           <p class="auth-switch">New here? <a href="/register">Create an account</a></p>
         </form>
-        <div class="bam-auth-footnote">Secure account access powered by Firebase</div>
+        <div class="bam-auth-footnote">Secure account access · BAM’S Website Builder</div>
       </section>
     </div>
     <p class="bam-auth-copyright">© 2026 BAM’S Website Builder. All rights reserved.</p>
@@ -175,7 +206,7 @@
   <div class="footer-bottom">© 2026 BAM’s Website Builder. All rights reserved.</div>
 </footer>
 
-<script src="/js/portal.js?v=102"></script><script src="/js/login-compact.js?v=20261123-2" defer></script>
+<script src="/js/portal.js?v=102"></script>
 <script src="/js/auth.js?v=20261013-access-1" type="module"></script><script src="/js/animations.js?v=1"></script>
 <script src="/js/site-upgrades.js?v=1" defer></script>
 <script src="/js/cookie-consent.js?v=20260928-1"></script>
