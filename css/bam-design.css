@@ -275,3 +275,34 @@ html body main :is(.booking-section, .content-section, .pricing-section, .review
 html body main :is(.home-section, .pricing-section, .content-section) :is(.home-title, .section-heading h2) {
   color: var(--design-ink) !important;
 }
+
+@media (max-width: 650px) {
+  html body .site-header .header-container {
+    padding-inline: var(--design-gutter) !important;
+    gap: 12px !important;
+  }
+  html body .site-header .header-container > .site-brand {
+    position: static !important;
+    transform: none !important;
+    max-width: calc(100% - 60px);
+  }
+  html body .site-header .site-brand .brand-text {
+    align-items: flex-start;
+    flex-direction: column !important;
+    gap: 0 !important;
+  }
+  html body .site-header .site-brand .brand-text small {
+    margin: 4px 0 0 !important;
+  }
+  html body.polished-home main .home-actions {
+    width: 100%;
+    min-width: 0;
+  }
+  html body.polished-home main .home-actions > :is(.home-button, .home-button-secondary) {
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0 !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+  }
+}
