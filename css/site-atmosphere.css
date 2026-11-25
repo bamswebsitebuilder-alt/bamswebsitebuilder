@@ -1,0 +1,86 @@
+/* Shared background only: content surfaces, dialogs and navigation keep their contrast. */
+html body.bam-motion-site {
+  --site-glow: 231, 182, 83;
+  --site-particle: #efcc80;
+  --site-atmosphere-opacity: .72;
+  isolation: isolate;
+  background: #0b0c0e !important;
+}
+html[data-theme="light"] body.bam-motion-site {
+  --site-glow: 190, 143, 51;
+  --site-particle: #9b711e;
+  --site-atmosphere-opacity: .45;
+  background: #fffaf0 !important;
+}
+.bam-site-atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: var(--site-atmosphere-opacity);
+}
+.bam-site-glow {
+  position: absolute;
+  inset: -10%;
+  background: radial-gradient(ellipse at 80% 34%, rgba(var(--site-glow), .27), transparent 42%),
+    radial-gradient(ellipse at 32% 95%, rgba(var(--site-glow), .14), transparent 45%);
+  animation: bam-site-gold-drift 18s ease-in-out infinite alternate;
+}
+.bam-site-glow::before, .bam-site-glow::after {
+  content: "";
+  position: absolute;
+  width: 120%;
+  height: 66%;
+  left: -10%;
+  top: 56%;
+  border-top: 1px solid rgba(var(--site-glow), .6);
+  border-radius: 50%;
+  box-shadow: 0 -12px 40px rgba(var(--site-glow), .14), inset 0 14px 35px rgba(var(--site-glow), .1);
+  transform: rotate(-16deg);
+}
+.bam-site-glow::after { left: 44%; top: 2%; width: 78%; height: 90%; opacity: .5; transform: rotate(-28deg); }
+.bam-site-particles { position: absolute; inset: 0; }
+.bam-site-particles span {
+  position: absolute; left: var(--x); top: var(--y); width: 2px; height: 2px;
+  border-radius: 50%; background: var(--site-particle); opacity: .6;
+  box-shadow: 0 0 6px rgba(var(--site-glow), .5);
+  animation: bam-site-gold-float 12s ease-in-out infinite alternate;
+  animation-delay: var(--delay);
+}
+/* Expose the background across page wrappers, while preserving card/form surfaces. */
+html:root body.bam-motion-site main,
+html:root body.bam-motion-site main > section:not(.client-guide-card,.panel,.auth-shell,.error-card,.admin-panel,.portal-panel),
+html:root body.bam-motion-site :is(.home-section,.home-section-alt,.founder-preview,.final-cta,.bam-email-updates,.about-page,.about-hero,.about-values,.booking-hero,.booking-section,.contact-section,.domain-page-main,.domain-hero,.portfolio-page,.pricing-section,.pricing-heading,.additional-services,.client-comparison,.plan-essentials,.reviews-page,.reviews-header,.google-reviews-section,.templates-page,.templates-hero,.templates-content,.template-process,.updates-main,.updates-hero,.updates-feed,.updates-followup,.content-section,.service-categories-section,.service-category-group,.portal-page,.portal-layout,.admin-layout,.admin-content,.hero) {
+  background: transparent !important;
+}
+html:root body.bam-motion-site .hero-logo-bg { display: none !important; }
+/* Disable former oversized hero ornaments; the shared layer supplies the gold curves. */
+html:root body.bam-motion-site .hero::before,
+html:root body.bam-motion-site .hero::after { display: none !important; }
+.bam-motion-preferences { padding: 12px 24px 24px; text-align: center; }
+.bam-motion-preferences[hidden] { display: none; }
+.bam-site-motion-toggle {
+  min-height: 44px; padding: 9px 14px; border: 1px solid #857047; border-radius: 6px;
+  background: #15130f; color: #ebd7af; font: 500 12px/1.4 Arial, sans-serif; cursor: pointer;
+}
+html[data-theme="light"] .bam-site-motion-toggle { background: #fffaf0; color: #604719; }
+.bam-site-motion-toggle:focus-visible { outline: 3px solid #d4a637; outline-offset: 4px; }
+.bam-motion-site[data-background-paused="true"] .bam-site-atmosphere * { animation-play-state: paused; }
+@keyframes bam-site-gold-drift {
+  from { transform: translate3d(-1%, 1%, 0) rotate(-1deg); }
+  to { transform: translate3d(2%, -2%, 0) rotate(1deg); }
+}
+@keyframes bam-site-gold-float {
+  from { transform: translate3d(0, 8px, 0); }
+  to { transform: translate3d(10px, -14px, 0); }
+}
+@media (max-width: 650px) {
+  html body.bam-motion-site { --site-atmosphere-opacity: .55; }
+  html[data-theme="light"] body.bam-motion-site { --site-atmosphere-opacity: .35; }
+  .bam-site-particles span:nth-child(even) { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bam-site-atmosphere * { animation: none !important; }
+  .bam-motion-preferences { display: none; }
+}
