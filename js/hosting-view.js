@@ -1,9 +1,9 @@
-import {safeHostingUrl,paypalHostingLink,hostingDue,domainDue} from './hosting-model.js?v=3';
+import {safeHostingUrl,paypalHostingLink,hostingDue,domainDue} from './hosting-model.js?v=4';
 export function hostingLabels(es=false){return es?{
   setup:'En preparación',active:'Activo',attention:'Requiere atención',paused:'Pausado',ending:'Finalizando',ended:'Finalizado',
   'not-configured':'Sin configurar','awaiting-approval':'Pendiente de autorización', 'past-due':'Pago pendiente',cancelled:'Cancelado',
-  client:'Cliente',bam:'BAM',other:'Otro titular',unconfirmed:'Por confirmar',monthly:'al mes',yearly:'al año',direct:'Pago directo al proveedor',invoice:'Factura de BAM',paypal:'Suscripción de PayPal'
-}:{setup:'Setting up',active:'Active',attention:'Needs attention',paused:'Paused',ending:'Ending',ended:'Ended','not-configured':'Not configured','awaiting-approval':'Awaiting authorization','past-due':'Past due',cancelled:'Cancelled',client:'Client',bam:'BAM',other:'Other owner',unconfirmed:'To be confirmed',monthly:'per month',yearly:'per year',direct:'Paid directly to provider',invoice:'BAM invoice',paypal:'PayPal subscription'};}
+  client:'Cliente',bam:'BAM',other:'Otro titular',unconfirmed:'Por confirmar',monthly:'al mes',yearly:'al año',direct:'Pago directo al proveedor',invoice:'Factura de BAM',paypal:'Suscripción de PayPal','paypal-automated':'Suscripción automatizada de PayPal Sandbox'
+}:{setup:'Setting up',active:'Active',attention:'Needs attention',paused:'Paused',ending:'Ending',ended:'Ended','not-configured':'Not configured','awaiting-approval':'Awaiting authorization','past-due':'Past due',cancelled:'Cancelled',client:'Client',bam:'BAM',other:'Other owner',unconfirmed:'To be confirmed',monthly:'per month',yearly:'per year',direct:'Paid directly to provider',invoice:'BAM invoice',paypal:'PayPal subscription','paypal-automated':'Automated PayPal Sandbox subscription'};}
 export function node(tag,text,cls){const el=document.createElement(tag);if(text!=null)el.textContent=text;if(cls)el.className=cls;return el;}
 export function renderHosting(host,record,{es=false,accepted=false}={}){
   host.replaceChildren();const t=hostingLabels(es);
@@ -43,6 +43,6 @@ export function renderHosting(host,record,{es=false,accepted=false}={}){
     else if(record.billingMode==='direct')message=es?'Los pagos se realizan directamente al proveedor de alojamiento según tu acuerdo. Contacta a BAM si deseas consultar otro plan.':'Payments are made directly to the hosting provider under your agreement. Contact BAM to discuss a different plan.';
     else if(record.billingMode==='invoice')message=es?'Paga mediante tu factura de BAM en Facturas, según tu acuerdo.':'Pay using your BAM invoice in Invoices, under your agreement.';
     payment.append(node('p',message));}
-  host.insertBefore(payment,grid);
+  if(record.billingMode!=='paypal-automated')host.insertBefore(payment,grid);
   const links=node('div',null,'hosting-actions');for(const [href,en,label]of [['#agreements','View agreements','Ver acuerdos'],['#invoices','View invoices','Ver facturas'],['#support','Ask about hosting or cancellation','Consultar alojamiento o cancelación']]){const a=node('a',es?label:en);a.href=href;links.append(a);}host.append(links);
 }

@@ -18,7 +18,7 @@ export function hostingInput(values) {
   const result={version:1,plan:text('plan'),siteUrl:text('siteUrl',2048),provider:text('provider'),
     status:choice('status',HOSTING_STATES),nextRenewal:date(text('nextRenewal')),
     feeCents:fee===''?null:Math.round(Number(fee)*100),cadence:choice('cadence',['monthly','yearly']),
-    billingMode:choice('billingMode',['direct','invoice','paypal']),billingStatus:choice('billingStatus',BILLING_STATES),
+    billingMode:choice('billingMode',['direct','invoice','paypal','paypal-automated']),billingStatus:choice('billingStatus',BILLING_STATES),
     paypalPlanId:text('paypalPlanId',64),agreementNumber:text('agreementNumber',20),
     domainName:text('domainName',253).toLowerCase(),domainRegistrar:text('domainRegistrar'),domainRenewal:date(text('domainRenewal')),domainManageUrl:text('domainManageUrl',2048),
     domainOwner:choice('domainOwner',['unconfirmed','client','bam','other']),hostingOwner:choice('hostingOwner',['unconfirmed','client','bam','other']),
@@ -30,8 +30,9 @@ export function hostingInput(values) {
   if(result.domainManageUrl&&!safeHostingUrl(result.domainManageUrl))throw Error('url');
   if(result.agreementNumber&&!/^[0-9]{1,20}$/.test(result.agreementNumber))throw Error('agreement');
   if(result.paypalPlanId&&!/^P-[A-Z0-9]{5,60}$/.test(result.paypalPlanId))throw Error('paypal');
-  if(result.billingMode==='paypal'&&result.paypalPlanId&&(!result.agreementNumber||result.feeCents===null))throw Error('agreement');
-  if(result.billingMode!=='paypal')result.paypalPlanId='';
+  if(['paypal','paypal-automated'].includes(result.billingMode)&&result.paypalPlanId&&(!result.agreementNumber||result.feeCents===null))throw Error('agreement');
+  if(result.billingMode==='paypal-automated'&&!result.paypalPlanId)throw Error('paypal');
+  if(!['paypal','paypal-automated'].includes(result.billingMode))result.paypalPlanId='';
   if(['ending','ended'].includes(result.status)&&!result.serviceEnds)throw Error('end-date');
   return result;
 }
@@ -49,6 +50,15 @@ export function domainDue(record,now=new Date()) {
 export function paypalHostingLink(record,accepted) {
   if(!accepted||record?.billingMode!=='paypal'||record.billingStatus!=='awaiting-approval'||!['setup','active'].includes(record.status)||!/^P-[A-Z0-9]{5,60}$/.test(record.paypalPlanId||'')||!record.agreementId||!(record.feeCents>0))return '';
   return 'https://www.paypal.com/webapps/billing/plans/subscribe?plan_id='+encodeURIComponent(record.paypalPlanId);
+}
+
+// The accepted quote retains this line in its ongoing-costs field.
+export function hasAgreedHostingTerms(agreement, feeCents, cadence) {
+  if (typeof agreement?.ongoingCosts !== 'string' || !Number.isSafeInteger(feeCents) || feeCents <= 0
+      || !['monthly', 'yearly'].includes(cadence)) return false;
+  const terms = 'Managed hosting: USD ' + (feeCents / 100).toFixed(2) + ' / ' +
+    (cadence === 'yearly' ? 'year' : 'month') + ' via PayPal';
+  return agreement.ongoingCosts.split(/\r?\n/).some(line => line.trim() === terms);
 }
 
 export async function hostingAgreementId(number) {

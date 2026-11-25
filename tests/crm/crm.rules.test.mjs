@@ -18,6 +18,27 @@ before(async () => {
 });
 after(async () => { if (env) await env.cleanup(); });
 const db = (uid, verified = true) => env.authenticatedContext(uid, { email_verified: verified }).firestore();
+test('portal editor and billing use server-only Firestore paths', async () => {
+  const paths = [
+    'portalWebsiteEditors/client',
+    'portalWebsiteEditors/client/versions/1',
+    'portalPublishedSites/test-site',
+    'portalHostingSubscriptions/client',
+    'portalPayPalSubscriptions/I-TEST123',
+    'portalPayPalEvents/WH-TEST123'
+  ];
+  await env.withSecurityRulesDisabled(async ctx => {
+    for (const path of paths) await setDoc(doc(ctx.firestore(), path), { serverOnly: true });
+  });
+  for (const client of [env.unauthenticatedContext().firestore(), db('client'), db('other'), db('admin')]) {
+    for (const path of paths) {
+      const ref = doc(client, path);
+      await assertFails(getDoc(ref));
+      await assertFails(setDoc(ref, { serverOnly: false }));
+    }
+  }
+});
+
 const lead = () => ({
   name: 'Example', email: 'example@example.com', business: 'Example LLC',
   phone: '555-0100', notes: '', source: 'admin', stage: 'new',

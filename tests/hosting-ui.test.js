@@ -6,7 +6,7 @@ import {renderHosting} from '../js/hosting-view.js';
 
 test('hosting editor retains failed drafts, prevents duplicate saves, and isolates client drafts',async()=>{
   const dom=new JSDOM('<html lang="en"><div id="admin-hosting"></div></html>');globalThis.document=dom.window.document;
-  let source=await readFile(new URL('../js/hosting-admin.js',import.meta.url),'utf8');source=source.replace("import {hostingStore} from './hosting-store.js?v=3';",'const hostingStore={};').replace('./hosting-model.js?v=3',new URL('../js/hosting-model.js',import.meta.url).href).replace('./hosting-view.js?v=3',new URL('../js/hosting-view.js',import.meta.url).href);
+  let source=await readFile(new URL('../js/hosting-admin.js',import.meta.url),'utf8');source=source.replace("import {hostingStore} from './hosting-store.js?v=4';",'const hostingStore={};').replace('./hosting-model.js?v=4',new URL('../js/hosting-model.js',import.meta.url).href).replace('./hosting-view.js?v=4',new URL('../js/hosting-view.js',import.meta.url).href).replace('./hosting-subscriptions.js',new URL('../js/hosting-subscriptions.js',import.meta.url).href);
   const {createAdminHosting}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
   let calls=0,fail=true,finish;const store={async save(){calls++;if(fail)throw Error('offline');return new Promise(resolve=>{finish=resolve;});}};
   const ui=createAdminHosting(()=>({uid:'admin'}),store);
@@ -38,7 +38,7 @@ test('client view renders user content literally and exposes no recurring checko
 test('standard hosting plan fills future-client drafts without saving or resetting existing billing',async()=>{
   for(const lang of ['en','es']){
     const dom=new JSDOM(`<html lang="${lang}"><div id="admin-hosting"></div></html>`);globalThis.document=dom.window.document;
-    let source=await readFile(new URL('../js/hosting-admin.js',import.meta.url),'utf8');source=source.replace("import {hostingStore} from './hosting-store.js?v=3';",'const hostingStore={};').replace('./hosting-model.js?v=3',new URL('../js/hosting-model.js',import.meta.url).href).replace('./hosting-view.js?v=3',new URL('../js/hosting-view.js',import.meta.url).href);
+    let source=await readFile(new URL('../js/hosting-admin.js',import.meta.url),'utf8');source=source.replace("import {hostingStore} from './hosting-store.js?v=4';",'const hostingStore={};').replace('./hosting-model.js?v=4',new URL('../js/hosting-model.js',import.meta.url).href).replace('./hosting-view.js?v=4',new URL('../js/hosting-view.js',import.meta.url).href).replace('./hosting-subscriptions.js',new URL('../js/hosting-subscriptions.js',import.meta.url).href);
     const {createAdminHosting}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
     let saves=0;const ui=createAdminHosting(()=>({uid:'admin'}),{async save(){saves++;return 1;}});
     ui.update([{id:'new'},{id:'existing'}],[{userId:'existing',hosting:{plan:'Existing',provider:'Provider',billingStatus:'active',status:'active'}}]);

@@ -17,7 +17,7 @@ async function loadStore(db){
   let source=await readFile(new URL('../js/hosting-store.js',import.meta.url),'utf8');
   source=source.replace("import {db} from './firebase-config.js';",'const db=globalThis.__hostingTestDb;')
     .replace('https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js',import.meta.resolve('firebase/firestore'))
-    .replace('./hosting-model.js?v=3',new URL('../js/hosting-model.js',import.meta.url).href);
+    .replace('./hosting-model.js?v=4',new URL('../js/hosting-model.js',import.meta.url).href);
   return (await import('data:text/javascript;base64,'+Buffer.from(source+'\n// '+Math.random()).toString('base64'))).hostingStore;
 }
 try{
