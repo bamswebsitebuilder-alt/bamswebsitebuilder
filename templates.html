@@ -166,7 +166,7 @@ const assets={"Scottie Bonding Agency":"/images/scottie-bonding-home.webp","Kade
 const escapeHTML=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const industryBox=root.querySelector('#bt-industry'),tierBox=root.querySelector('#bt-package'),grid=root.querySelector('#bt-grid'),count=root.querySelector('#bt-count'),empty=root.querySelector('#bt-empty');
 let industry='all',tier='any';const search=root.querySelector('#bt-search'),sort=root.querySelector('#bt-sort');root.querySelector('#bt-total').textContent=templates.length+' designs';const priceRank={starter:250,business:500,premium:850,custom:Infinity};
-const quoteFor=name=>'/contact?template='+encodeURIComponent(name);
+const quoteFor=name=>'/contact?template='+encodeURIComponent(name)+(name==='Gulf Coast Pro Wash'?'&package=premium':'');
 const previewDesigns=templates.filter(t=>t[6]!=='yes').map(([name,,,,,demo])=>({name,demo,quote:quoteFor(name)}));
 const previewIndexes=new Map(previewDesigns.map(({name},index)=>[name,index]));
 grid.dataset.previewDesigns=JSON.stringify(previewDesigns);
