@@ -435,5 +435,67 @@ service cloud.firestore {
       allow delete: if false;
     }
 
+    // Website Studio: one administrator-enabled workspace per client.
+    function studioOwner(uid) {
+      return signedIn() && request.auth.uid == uid
+        && request.auth.token.email_verified == true
+        && userDocumentExists()
+        && get(/databases/$(database)/documents/users/$(uid)).data.role == 'client';
+    }
+    function studioAdmin() { return isAdmin() && request.auth.token.email_verified == true; }
+    function studioText(value, max) { return value is string && value.size() <= max; }
+    function studioContent(d) {
+      return d is map && d.keys().hasAll(['headline','description','hours','services','phone','imageUrl'])
+        && d.keys().hasOnly(['headline','description','hours','services','phone','imageUrl'])
+        && studioText(d.headline,160) && studioText(d.description,4000)
+        && studioText(d.hours,1000) && studioText(d.services,4000)
+        && studioText(d.phone,80) && studioText(d.imageUrl,1000)
+        && (d.imageUrl == '' || d.imageUrl.matches('https://[^ ]+'));
+    }
+    match /websiteStudios/{uid} {
+      allow read: if studioAdmin() || studioOwner(uid);
+      allow create, update: if studioAdmin()
+        && exists(/databases/$(database)/documents/users/$(uid))
+        && get(/databases/$(database)/documents/users/$(uid)).data.role == 'client'
+        && request.resource.data.keys().hasOnly(['enabled','updatedAt'])
+        && request.resource.data.enabled is bool
+        && request.resource.data.updatedAt == request.time;
+      allow delete: if false;
+      match /drafts/{id} {
+        allow read: if studioAdmin() || studioOwner(uid);
+        allow create: if id == 'current' && studioOwner(uid)
+          && get(/databases/$(database)/documents/websiteStudios/$(uid)).data.enabled == true
+          && request.resource.data.keys().hasOnly(['content','state','revision','updatedAt'])
+          && studioContent(request.resource.data.content)
+          && request.resource.data.state in ['draft','submitted']
+          && request.resource.data.revision == 1 && request.resource.data.updatedAt == request.time;
+        allow update: if id == 'current' && request.resource.data.keys().hasOnly(['content','state','revision','updatedAt'])
+          && studioContent(request.resource.data.content)
+          && request.resource.data.revision == resource.data.revision + 1
+          && request.resource.data.updatedAt == request.time
+          && ((studioOwner(uid) && get(/databases/$(database)/documents/websiteStudios/$(uid)).data.enabled == true
+            && resource.data.state != 'submitted' && request.resource.data.state in ['draft','submitted'])
+            || (studioAdmin() && resource.data.state == 'submitted'
+              && request.resource.data.content == resource.data.content
+              && request.resource.data.state in ['approved','returned']
+              && (request.resource.data.state != 'approved' || getAfter(/databases/$(database)/documents/websiteStudios/$(uid)/versions/$(string(resource.data.revision))).data.content == resource.data.content)));
+        allow delete: if false;
+      }
+      match /versions/{id} {
+        allow read: if studioAdmin() || studioOwner(uid);
+        allow create: if studioAdmin()
+          && request.resource.data.keys().hasOnly(['content','revision','approvedAt'])
+          && studioContent(request.resource.data.content)
+          && request.resource.data.revision is int
+          && id == string(request.resource.data.revision)
+          && request.resource.data.approvedAt == request.time
+          && get(/databases/$(database)/documents/websiteStudios/$(uid)/drafts/current).data.state == 'submitted'
+          && get(/databases/$(database)/documents/websiteStudios/$(uid)/drafts/current).data.revision == request.resource.data.revision
+          && get(/databases/$(database)/documents/websiteStudios/$(uid)/drafts/current).data.content == request.resource.data.content
+          && getAfter(/databases/$(database)/documents/websiteStudios/$(uid)/drafts/current).data.state == 'approved';
+        allow update, delete: if false;
+      }
+    }
+
   }
 }
