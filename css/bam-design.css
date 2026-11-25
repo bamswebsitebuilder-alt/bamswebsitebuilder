@@ -215,6 +215,57 @@ html body.polished-home .final-cta {
   color: var(--design-ink);
 }
 
+/* The English homepage uses light portfolio and FAQ surfaces in the dark theme. */
+html[lang="en"]:not([data-theme="light"]) body.polished-home .home-section[aria-labelledby="featured-work-title"] .home-button-secondary,
+html[lang="en"]:not([data-theme="light"]) body.polished-home .home-section[aria-labelledby="home-faq-title"] .home-link {
+  color: #775418 !important;
+  border-color: #775418 !important;
+  outline-color: #775418 !important;
+}
+
+html[data-theme="light"] body.polished-home .hero.hero-conversion .hero-buttons .secondary-button {
+  color: var(--design-ink) !important;
+  border-color: var(--design-gold) !important;
+}
+
+html[data-theme="light"] body.polished-home .hero.hero-conversion .bam-showcase-tag {
+  background: var(--design-panel) !important;
+  border-color: var(--design-line) !important;
+  color: var(--design-ink) !important;
+}
+
+html[data-theme="light"] body.polished-home .hero.hero-conversion .bam-showcase-tag strong {
+  color: var(--design-gold) !important;
+}
+
+html[data-theme="light"] body.polished-home .bam-compare-redesign {
+  background: var(--design-panel);
+  border-color: var(--design-line);
+  color: var(--design-ink);
+}
+
+html[data-theme="light"] body.polished-home .bam-compare-redesign :is(.cmp-topic, .cmp-answer, .cmp-header strong) {
+  background: var(--design-raised);
+  border-color: var(--design-line);
+  color: var(--design-ink) !important;
+}
+
+html[data-theme="light"] body.polished-home .bam-compare-redesign :is(.cmp-answer.bam, .cmp-header strong:first-of-type) {
+  background: #f3ead8;
+}
+
+html[data-theme="light"] body.polished-home .bam-compare-redesign :is(.cmp-eyebrow, .cmp-topic em, .cmp-answer.bam .cmp-mobile) {
+  color: var(--design-gold) !important;
+}
+
+html[data-theme="light"] body.polished-home .bam-compare-redesign :is(.cmp-intro, .cmp-note, .cmp-header span, .cmp-mobile) {
+  color: var(--design-muted) !important;
+}
+
+html[data-theme="light"] body.polished-home .home-footer .footer-links a.footer-cta {
+  color: var(--design-gold) !important;
+}
+
 html body :is(.workspace-header, .admin-header) { border-bottom: 1px solid var(--design-line) !important; }
 html body :is(.portal-topbar, .bam-ucm-module, .portal-card, .admin-card) {
   border-radius: 8px !important;
