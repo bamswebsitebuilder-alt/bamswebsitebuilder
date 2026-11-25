@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "firebase-admin": "^13.10.0",
     "googleapis": "^144.0.0"
   }
 }

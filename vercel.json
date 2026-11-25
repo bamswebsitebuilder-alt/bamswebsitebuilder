@@ -41,6 +41,15 @@
   ],
   "headers": [
     {
+      "source": "/js/(published-site|site-content)\\.js",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         {

@@ -14,7 +14,8 @@ document.querySelector(".admin-header")?.after(accessStatus);
    FIREBASE IMPORTS
 ========================================================= */
 
-import { createAdminHosting } from "./hosting-admin.js?v=3";
+import { createAdminHosting } from "./hosting-admin.js?v=4";
+import { createSiteEditor } from './site-editor-ui.js';
 import { auth, db, storage } from "./firebase-config.js";
 import { onboardingProject, projectAlerts } from "./project-workflow.js?v=1";
 import { createAdminAgreements } from "./agreements-admin.js?v=3";
@@ -132,10 +133,17 @@ const statBalance = document.getElementById("stat-balance");
 
 let currentAdmin = null;
 const hostingUI = createAdminHosting(() => currentAdmin);
+const editorHost = document.createElement('article');
+editorHost.className = 'admin-card bam-portal-tool';
+document.getElementById('projects')?.append(editorHost);
+const siteEditor = createSiteEditor(editorHost, () => currentAdmin, true);
 const hostingLoaded = new Set();
 const hostingErrors = new Set();
 function syncHosting() {
-  if(currentAdmin)hostingUI?.update(clientRecords,projectRecords,{loading:!firstClientSnapshotLoaded || hostingLoaded.size < clientRecords.length,error:hostingErrors.size > 0});
+  if(currentAdmin) {
+    hostingUI?.update(clientRecords,projectRecords,{loading:!firstClientSnapshotLoaded || hostingLoaded.size < clientRecords.length,error:hostingErrors.size > 0});
+    siteEditor?.setClients(clientRecords);
+  }
 }
 window.addEventListener("beforeunload", () => hostingUI?.reset());
 const agreementUI = createAdminAgreements(() => currentAdmin, userId => projectRecords.find(project => project.userId === userId) || {});
@@ -1844,6 +1852,7 @@ onAuthStateChanged(
     if (!user) {
       currentAdmin = null;
       hostingUI?.reset();
+      siteEditor?.reset();
       window.location.replace(
         portalLoginUrl(window.location)
       );

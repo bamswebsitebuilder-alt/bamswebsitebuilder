@@ -1,0 +1,20 @@
+.bam-portal-tool { color: #fff; background: #171717; border: 1px solid #715823; border-radius: 14px; padding: clamp(1rem, 3vw, 1.75rem); margin-block: 1rem; min-width: 0; }
+.bam-portal-tool :is(h2, h3, summary, p, label, span) { color: inherit; }
+.bam-portal-tool :is(a, code) { color: #f0c975; }
+.bam-portal-tool .hosting-button { color: #171717; background: #edc571; }
+.bam-portal-tool .hosting-badge { color: #f0c975; }
+.bam-portal-tool .bam-secondary { color: #fff; background: #292929; font: inherit; padding: .55rem .85rem; border: 1px solid #bd9b5b; border-radius: 8px; cursor: pointer; }
+.bam-portal-tool [aria-pressed="true"] { background: #665022; }
+.bam-portal-tool :is(button, a, input, select, textarea, summary):focus-visible { outline: 2px solid #ffd883; outline-offset: 3px; }
+.bam-portal-tool button:disabled { opacity: .65; cursor: wait; }
+.bam-portal-tool .bam-editor-fields { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,16rem),1fr)); gap: .85rem; margin-block: 1rem; }
+.bam-portal-tool .bam-control { display: grid; gap: .3rem; min-width: 0; }
+.bam-portal-tool .bam-control :is(input, select, textarea) { width: 100%; min-width: 0; padding: .6rem; color: #fff; background: #232323; border: 1px solid #a68a56; border-radius: 6px; font: inherit; }
+.bam-portal-tool .bam-check { display: flex; align-items: center; gap: .4rem; margin-top: .35rem; }
+.bam-site-preview { margin-block: 1rem; }
+.bam-site-preview iframe { display: block; margin: .75rem auto 0; max-width: 100%; width: 100%; height: 24rem; background: #111; border: 1px solid #715823; border-radius: 8px; }
+.bam-published-url { overflow-wrap: anywhere; }
+.bam-versions { padding: 0; list-style: none; }
+.bam-versions li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; padding-block: .5rem; border-bottom: 1px solid #715823; }
+.bam-billing dl { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem 1rem; }
+.bam-billing dd { margin: 0; }
