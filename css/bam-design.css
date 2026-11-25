@@ -1,0 +1,277 @@
+/* Opt-in presentation for BAM pages. The template marketplace uses its own design. */
+:root {
+  --design-canvas: #101010;
+  --design-panel: #181817;
+  --design-raised: #20201f;
+  --design-ink: #faf9f6;
+  --design-muted: #c7c4bd;
+  --design-gold: #e6bf70;
+  --design-on-gold: #17130c;
+  --design-line: #49433a;
+  --design-glow: #e6bf701c;
+  --design-display: Georgia, 'Times New Roman', serif;
+  --design-gutter: clamp(16px, 5vw, 68px);
+}
+
+:root[data-theme="light"] {
+  --design-canvas: #fff;
+  --design-panel: #f7f6f3;
+  --design-raised: #fff;
+  --design-ink: #171613;
+  --design-muted: #514b43;
+  --design-gold: #775418;
+  --design-on-gold: #fff;
+  --design-line: #d1c6b6;
+  --design-glow: #b5893430;
+}
+
+html body {
+  color: var(--design-ink);
+  background: var(--design-canvas);
+}
+
+html body :is(main, .home-footer, .site-header) :is(a, button, input, select, textarea, summary):focus-visible,
+html body .mobile-menu :is(a, button, summary):focus-visible {
+  outline: 2px solid var(--design-gold) !important;
+  outline-offset: 3px;
+}
+
+html body .site-header {
+  background: var(--design-canvas) !important;
+  border-bottom-color: var(--design-line) !important;
+  box-shadow: 0 3px 16px #0002;
+}
+
+html body .header-container .brand-text strong { color: var(--design-gold) !important; }
+html body .header-container .brand-text small { color: var(--design-ink) !important; }
+
+html body .site-header .desktop-navigation :is(a, .nav-more > summary) {
+  letter-spacing: .035em !important;
+}
+
+html body .site-header .desktop-navigation .nav-more-links {
+  background: var(--design-raised);
+  border-color: var(--design-line);
+  border-radius: 4px;
+  padding: 7px;
+}
+
+html body .site-header .desktop-navigation :is(.nav-book-call, a[data-page="contact"].nav-cta) {
+  background: var(--design-gold) !important;
+  border-color: var(--design-gold) !important;
+  color: var(--design-on-gold) !important;
+  border-radius: 4px !important;
+}
+
+html body .site-header .header-container > .menu-toggle {
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 4px;
+}
+
+html body .home-footer {
+  --footer-text: var(--design-muted);
+  --footer-heading: var(--design-ink);
+  --footer-accent: var(--design-gold);
+  --footer-rule: var(--design-line);
+  background: var(--design-panel) !important;
+  border-top-color: var(--design-line) !important;
+}
+
+html body .home-footer .footer-grid { padding-inline: var(--design-gutter) !important; }
+html body .home-footer .footer-grid h2 { color: var(--design-ink) !important; }
+
+/* Display typography and a consistent reading measure across page families. */
+html body:not(.admin-dashboard-page, .client-portal-page) main h1,
+html body.polished-home .hero.hero-conversion h1 {
+  font-family: var(--design-display) !important;
+  font-size: clamp(2.35rem, 5.2vw, 4.65rem) !important;
+  font-weight: 400 !important;
+  letter-spacing: -.045em !important;
+  line-height: 1.05 !important;
+  text-transform: none !important;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+
+html body main :is(.home-title, .section-heading h2, .about-values h2, .bam-info-wrap h2,
+  .guide-hero h2, .content-section > h2, .reviews-header h2, .final-cta h2, .bam-prices .bam-section > h2) {
+  font-family: var(--design-display) !important;
+  font-size: clamp(1.75rem, 3.4vw, 3.15rem) !important;
+  font-weight: 400 !important;
+  letter-spacing: -.035em !important;
+  line-height: 1.12 !important;
+  text-transform: none !important;
+  text-wrap: balance;
+}
+
+html body main :is(.hero, .about-hero, .booking-hero, .hosting-hero, .domain-hero, .guide-hero,
+  .pricing-heading, .portfolio-intro, .portfolio-header, .reviews-header, .updates-hero, .ck-top) {
+  border-bottom: 1px solid var(--design-line);
+  background: radial-gradient(ellipse at 85% 0%, var(--design-glow), transparent 65%), var(--design-canvas) !important;
+  color: var(--design-ink);
+}
+
+html body main :is(.hero, .about-hero, .booking-hero, .hosting-hero, .domain-hero, .guide-hero,
+  .pricing-heading, .portfolio-intro, .portfolio-header, .reviews-header, .updates-hero, .ck-top) h1 {
+  color: var(--design-ink) !important;
+}
+
+html body main :is(.pricing-heading, .portfolio-intro, .portfolio-header, .reviews-header) {
+  max-width: none;
+  padding: clamp(28px, 5vw, 62px) clamp(14px, 4vw, 46px);
+}
+
+html body main :is(.service-card, .service-category-group, .pricing-card, .plan-preview-card, .home-card,
+  .growth-card, .portfolio-card, .bam-portfolio .project, .booking-section .panel, .domain-page-main > .panel,
+  .contact-form, .contact-information, .bam-contact .bc-card, .bam-prices .bam-package,
+  .auth-card, .bam-quiz, .features li, .guide-card, .bam-info-wrap article) {
+  border: 1px solid var(--design-line) !important;
+  border-radius: 8px !important;
+  background: var(--design-panel) !important;
+  box-shadow: none !important;
+  min-width: 0;
+}
+
+html body main :is(.pricing-card.featured, .plan-preview-card:hover, .portfolio-home-card:hover,
+  .service-card:hover, .bam-contact .bc-choice:has(:checked)) { border-color: var(--design-gold) !important; }
+
+html body main :is(.home-eyebrow, .portfolio-eyebrow, .guide-kicker, .bc-kicker, .hosting-eyebrow, .auth-kicker) {
+  color: var(--design-gold) !important;
+}
+
+html body main :is(.home-intro, .section-heading > p, .pricing-intro, .portfolio-intro > p, .portfolio-header > p,
+  .reviews-header > p, .auth-intro > p, .home-card p, .plan-preview-card p, .service-card p, .pricing-card li) {
+  color: var(--design-muted) !important;
+}
+
+html body main :is(.home-button, .home-button-secondary, .hero-buttons a, .primary-button, .secondary-button,
+  .portfolio-button, .bam-btn, .bc-button, .confirm-button, .auth-submit, .bam-growth-button, .button) {
+  min-height: 44px;
+  border-radius: 4px !important;
+}
+
+html body main :is(.home-button, .hero-buttons .btn:not(.secondary-button), .primary-button,
+  .bam-btn.bam-solid, .bc-button:not(.bc-outline), .confirm-button, .auth-submit, .bam-growth-button) {
+  color: var(--design-on-gold) !important;
+  background: var(--design-gold) !important;
+  border: 1px solid var(--design-gold) !important;
+  box-shadow: none !important;
+}
+
+html body main :is(.home-button, .hero-buttons .btn:not(.secondary-button), .primary-button,
+  .bam-btn.bam-solid, .bc-button:not(.bc-outline), .confirm-button, .auth-submit, .bam-growth-button):hover {
+  filter: brightness(1.12);
+}
+
+html body main :is(.home-button-secondary, .hero-buttons .secondary-button, .bam-btn.bam-outline) {
+  color: var(--design-ink) !important;
+  border: 1px solid var(--design-line) !important;
+  background: transparent !important;
+}
+
+html body main :is(.contact-form, .auth-form, .bam-contact .bc-card) :is(input[type="checkbox"], input[type="radio"]) {
+  accent-color: var(--design-gold);
+}
+
+html body main :is(.contact-form, .auth-form, .bam-contact .bc-card)
+  :is(input:not([type="checkbox"], [type="radio"], [type="hidden"], [type="submit"]), select, textarea) {
+  font-size: 1rem;
+  border-radius: 4px !important;
+  border-color: var(--design-line) !important;
+}
+
+/* The homepage uses the existing work image and converts the sections below it into a consistent grid. */
+html body.polished-home .hero.hero-conversion {
+  background: radial-gradient(ellipse at 76% 28%, var(--design-glow), transparent 57%), var(--design-canvas) !important;
+  padding-inline: max(var(--design-gutter), calc((100% - 1240px) / 2)) !important;
+  border-bottom-color: var(--design-line);
+}
+
+html body.polished-home .hero.hero-conversion .hero-content > p:not(.home-eyebrow),
+html body.polished-home .hero.hero-conversion .hero-trust span { color: var(--design-muted) !important; }
+html body.polished-home .hero.hero-conversion .home-eyebrow { color: var(--design-gold) !important; }
+html body.polished-home .hero.hero-conversion .bam-hero-browser {
+  border-radius: 8px !important;
+  border-color: var(--design-line) !important;
+  box-shadow: 0 24px 65px #0004 !important;
+}
+
+html body.polished-home .home-section {
+  border-top: 1px solid var(--design-line);
+  padding: clamp(40px, 6vw, 86px) var(--design-gutter) !important;
+  background: var(--design-canvas) !important;
+}
+
+html body.polished-home .home-section-alt { background: var(--design-panel) !important; }
+html body.polished-home .home-section .home-container { max-width: 1240px; }
+html body.polished-home .home-section .home-section-heading { max-width: 72ch; }
+html body.polished-home .home-section .home-title,
+html body.polished-home .home-section .home-section-heading h2 { color: var(--design-ink) !important; }
+
+html body.polished-home .final-cta {
+  border-block: 1px solid var(--design-line);
+  background: radial-gradient(ellipse at 50% 110%, var(--design-glow), transparent 70%), var(--design-panel) !important;
+  color: var(--design-ink);
+}
+
+html body :is(.workspace-header, .admin-header) { border-bottom: 1px solid var(--design-line) !important; }
+html body :is(.portal-topbar, .bam-ucm-module, .portal-card, .admin-card) {
+  border-radius: 8px !important;
+  border-color: var(--design-line) !important;
+}
+html body :is(.portal-topbar h1, .admin-page-heading h1, .bam-ucm-overview h1) {
+  font-family: var(--design-display);
+  font-weight: 400;
+  letter-spacing: -.025em;
+}
+
+html body.login-page .bam-login-refresh {
+  background: radial-gradient(ellipse at 50% 40%, #e6bf7014, transparent 60%), #101010 !important;
+  --auth-gold: #e6bf70;
+  --auth-card: #181817;
+}
+html body.login-page .bam-auth-panel { border-color: #49433a !important; border-radius: 8px !important; }
+html body.login-page :is(.bam-auth-create, .bam-auth-access) { border-radius: 4px !important; }
+html body.login-page .bam-auth-description { font-size: .95rem !important; }
+
+html body.recovery-page .code { color: var(--design-gold); }
+html body.recovery-page main.card { background: var(--design-panel); border-color: var(--design-line); border-radius: 8px; }
+html body.recovery-page main.card p { color: var(--design-muted); }
+html body.recovery-page main.card button { color: var(--design-on-gold); background: var(--design-gold); border-radius: 4px; }
+
+@media (max-width: 650px) {
+  html body:not(.admin-dashboard-page, .client-portal-page) main h1,
+  html body.polished-home .hero.hero-conversion h1 { font-size: clamp(2rem, 9vw, 3rem) !important; }
+  html body main :is(.pricing-heading, .portfolio-intro, .portfolio-header, .reviews-header) { padding-inline: 14px; }
+  html body main :is(.home-actions, .hero-buttons, .bam-cta-links) { gap: 10px; }
+}
+
+/* Give pricing, forms and long-form resource pages the same visual hierarchy. */
+html body main .bam-prices {
+  --accent: var(--design-gold);
+  --accent-bright: var(--design-gold);
+  --on-accent: var(--design-on-gold);
+  --text: var(--design-ink);
+  --muted: var(--design-muted);
+  --card: var(--design-panel);
+  --panel-alt: var(--design-raised);
+  --featured: var(--design-raised);
+}
+html body main .bam-prices .bam-card {
+  border-color: var(--design-line);
+  border-radius: 8px;
+  box-shadow: none;
+}
+html body main .bam-prices .bam-featured { border-color: var(--design-gold); }
+html body main :is(.bam-info-wrap, .policy-page, .privacy-page) p { line-height: 1.75; }
+html body main.bam-info-wrap h2 { font-family: var(--design-display); font-weight: 400; }
+html body main .bam-contact .bc-intro { border-bottom: 1px solid var(--design-line); }
+html body main .bam-contact .bc-card { padding: clamp(16px, 4vw, 38px); }
+html body main .bam-contact .bc-choice { border-radius: 4px; }
+html body main :is(.booking-section, .content-section, .pricing-section, .reviews-page, .contact-section) {
+  background-color: var(--design-canvas);
+}
+html body main :is(.home-section, .pricing-section, .content-section) :is(.home-title, .section-heading h2) {
+  color: var(--design-ink) !important;
+}
