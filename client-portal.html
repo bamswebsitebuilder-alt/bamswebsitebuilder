@@ -33,7 +33,7 @@
 <link rel="stylesheet" href="/css/hosting.css?v=3"><link rel="stylesheet" href="/css/service-agreements.css?v=20261104-responsive-2"><link rel="stylesheet" href="/css/workspace-refresh.css?v=20261105-1">
 <link rel="stylesheet" href="/css/portal-light.css?v=20261120-1">
 <link rel="stylesheet" href="/css/bam-design.css">
-</head>
+<link rel="stylesheet" href="/css/website-studio.css?v=1"></head>
 
 <body
   class="client-portal-page"
@@ -133,7 +133,7 @@
             Invoices
           </button>
 
-          <button class="portal-nav-link" data-panel="hosting" type="button">Hosting &amp; Domains</button><button class="portal-nav-link" data-panel="billing" type="button">Billing</button>
+          <button class="portal-nav-link" data-panel="website-editor" type="button">My Website</button><button class="portal-nav-link" data-panel="hosting" type="button">Hosting &amp; Domains</button><button class="portal-nav-link" data-panel="billing" type="button">Billing</button>
 
           <button
             class="portal-nav-link"
@@ -165,7 +165,7 @@
       </aside>
 
       <!-- PORTAL CONTENT -->
-      <div class="portal-content"><section class="portal-panel hosting-workspace" id="hosting" aria-labelledby="hosting-title"><article class="portal-card"><p class="card-kicker">HOSTING</p><h2 id="hosting-title">Your hosting &amp; domains</h2><div id="client-hosting" aria-live="polite"><p>Loading hosting details…</p></div></article></section>
+      <div class="portal-content"><section class="portal-panel" id="website-editor"><article class="portal-card"><p class="card-kicker">WEBSITE STUDIO</p><h2>My website</h2><p>Propose website updates and submit them to BAM for review.</p><div id="website-studio" data-mode="client"><p>Loading website editor…</p></div></article></section><section class="portal-panel hosting-workspace" id="hosting" aria-labelledby="hosting-title"><article class="portal-card"><p class="card-kicker">HOSTING</p><h2 id="hosting-title">Your hosting &amp; domains</h2><div id="client-hosting" aria-live="polite"><p>Loading hosting details…</p></div></article></section>
 
         <!-- DASHBOARD -->
         <section class="portal-panel active" id="dashboard">
@@ -545,5 +545,5 @@
   <script src="/js/animations.js?v=1"></script>
 <script src="/js/site-upgrades.js?v=1" defer></script>
 <script type="module" src="/js/agreements-client.js?v=1"></script><script type="module" src="/js/hosting-client.js?v=3"></script><script type="module" src="/js/service-agreements.js?v=20261105-form-only-1"></script><script src="/js/workspace-menu.js?v=20261105-1" defer></script>
-</body>
+<script type="module" src="/js/website-studio.js?v=1"></script></body>
 </html>
