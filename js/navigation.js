@@ -78,48 +78,33 @@
   }
 
   ready(() => {
-    // Keep Prices accessible as a first-level destination across the entire site.
-    // Existing Services pricing sublinks remain available for payment-plan anchors.
-    const currentPath = window.location.pathname.replace(/[/]$/, '') || '/';
-    const isSpanish = document.documentElement.lang.toLowerCase().startsWith('es') || currentPath.startsWith('/es/');
+    // Keep one direct Prices link and preserve the separate payment-plan links.
+    const currentPath = location.pathname.replace(/[/]$/, '') || '/';
+    const isSpanish = document.documentElement.lang.toLowerCase().startsWith('es') || currentPath === '/es' || currentPath.startsWith('/es/');
     const priceHref = isSpanish ? '/es/prices' : '/prices';
-    const isPricesPage = currentPath === priceHref;
+    const pricesLink = `a:is([href="${priceHref}"], [href="${priceHref}.html"])`;
     const desktopNav = document.querySelector('.desktop-navigation');
-    if (desktopNav && !desktopNav.querySelector(':scope > a[data-bam-prices-direct]')) {
+    if (desktopNav && !desktopNav.querySelector(`:scope > ${pricesLink}`)) {
       const priceLink = document.createElement('a');
       priceLink.href = priceHref;
       priceLink.textContent = isSpanish ? 'Precios' : 'Prices';
       priceLink.dataset.bamPricesDirect = 'true';
       priceLink.dataset.page = 'prices';
-      if (isPricesPage) {
-        priceLink.classList.add('active');
-        priceLink.setAttribute('aria-current', 'page');
-        desktopNav.querySelectorAll('.nav-more-links a[data-page="prices"]').forEach(link => {
-          link.classList.remove('active');
-          link.removeAttribute('aria-current');
-        });
-      }
       const contactLink = desktopNav.querySelector(':scope > a[data-page="contact"]');
       desktopNav.insertBefore(priceLink, contactLink || null);
     }
+    desktopNav?.querySelectorAll(`.nav-more-links ${pricesLink}`).forEach(link => link.remove());
     const mobileNav = document.querySelector('.mobile-navigation');
-    if (mobileNav && !mobileNav.querySelector(':scope > a[data-bam-prices-direct]')) {
+    if (mobileNav && !mobileNav.querySelector(`:scope > ${pricesLink}`)) {
       const priceLink = document.createElement('a');
       priceLink.href = priceHref;
       priceLink.dataset.bamPricesDirect = 'true';
       priceLink.dataset.page = 'prices';
       priceLink.innerHTML = '<span class="mobile-link-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#prices"></use></svg></span><span>' + (isSpanish ? 'Precios' : 'Prices') + '</span>';
-      if (isPricesPage) {
-        priceLink.classList.add('active');
-        priceLink.setAttribute('aria-current', 'page');
-        mobileNav.querySelectorAll('.mobile-nav-group a[data-page="prices"]').forEach(link => {
-          link.classList.remove('active');
-          link.removeAttribute('aria-current');
-        });
-      }
       const homeLink = mobileNav.querySelector(':scope > a[data-page="home"]');
       mobileNav.insertBefore(priceLink, homeLink ? homeLink.nextSibling : mobileNav.firstChild);
     }
+    mobileNav?.querySelectorAll(`.mobile-nav-group ${pricesLink}`).forEach(link => link.remove());
     // Initialize the mobile drawer before optional navigation enhancements.
     // If a later enhancement fails, the hamburger must still work.
     const toggle = document.getElementById('menu-toggle');
@@ -140,6 +125,7 @@
         body .menu-overlay.active,body .menu-overlay.open{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important}
         body .mobile-menu.active,body .mobile-menu.open{display:flex!important;visibility:visible!important;opacity:1!important;transform:translate3d(0,0,0)!important;pointer-events:auto!important;z-index:6000!important}
         body .header-container>.menu-toggle{pointer-events:auto!important;cursor:pointer!important}
+        body.menu-open :is(#chat-widget-container,#chat-widget,iframe[title*="LiveChat" i],iframe[src*="livechatinc.com" i],iframe[src*="livechat.com" i]){display:none!important}
       }
       @media (hover:none) and (pointer:coarse){
         body .mobile-navigation a:hover:not(.active):not([aria-current]){color:#fff!important;background:transparent!important;border-bottom-color:rgba(255,255,255,.09)!important}
@@ -347,8 +333,16 @@
     });
 
     document.querySelectorAll('.mobile-navigation').forEach((nav) => {
+      const previewHref = spanish ? '/es/#cinematic-preview' : '/#cinematic-preview';
+      const home = nav.querySelector(':scope > a[data-page="home"]');
+      if (home && !nav.querySelector(`a[href="${previewHref}"]`)) {
+        const preview = document.createElement('a');
+        preview.dataset.page = 'cinematic-preview';
+        preview.href = previewHref;
+        preview.innerHTML = `${iconMarkup('website')}<span>${spanish ? 'Ver el código en acción' : 'Watch the coding reveal'}</span>`;
+        home.insertAdjacentElement('afterend', preview);
+      }
       if (!nav.querySelector('[data-page="about"]')) {
-        const home = nav.querySelector('[data-page="home"]');
         const link = document.createElement('a');
         link.dataset.page = 'about';
         link.href = aboutHref;
@@ -487,7 +481,7 @@
       if (!a) {
         a = document.createElement('a');
         a.href = '/checkout';
-        const pricing = mobile.querySelector('a[href="/prices"]');
+        const pricing = mobile.querySelector(':scope > a[data-page="prices"]');
         if (pricing) pricing.insertAdjacentElement('afterend', a);
         else mobile.appendChild(a);
       }
@@ -509,7 +503,7 @@
       const isSection = Boolean(url.hash);
       const active = samePage && (isSection
         ? url.hash === currentHash
-        : !(here === '/' && currentHash === '#email-updates' && normalize(url.pathname) === '/'));
+        : !((here === '/' || here === '/es') && ['#email-updates', '#cinematic-preview'].includes(currentHash)));
       link.classList.toggle('active', active);
       if (active) link.setAttribute('aria-current', isSection ? 'location' : 'page');
       else link.removeAttribute('aria-current');
