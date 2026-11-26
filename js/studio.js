@@ -1,4 +1,47 @@
 const $ = id => document.getElementById(id);
+const reveal = $('scroll-reveal');
+const revealVisual = reveal.querySelector('.reveal-visual');
+const revealSteps = [...reveal.querySelectorAll('.reveal-steps li')];
+const motion = matchMedia('(prefers-reduced-motion: reduce)');
+const narrowScreen = matchMedia('(max-width: 760px)');
+let revealFrame = 0;
+
+function updateReveal() {
+  revealFrame = 0;
+  if (motion.matches) {
+    delete reveal.dataset.animated;
+    return;
+  }
+
+  if (!reveal.dataset.animated) reveal.dataset.animated = 'true';
+  const first = revealSteps[0].getBoundingClientRect();
+  const last = revealSteps.at(-1).getBoundingClientRect();
+  let marker = innerHeight * .56;
+  if (narrowScreen.matches) {
+    const visualBottom = revealVisual.getBoundingClientRect().height + 12;
+    marker = Math.min(innerHeight * .82, visualBottom + (innerHeight - visualBottom) * .38);
+  }
+  const start = first.top + first.height * .42;
+  const end = last.top + last.height * .42;
+  const progress = Math.min(1, Math.max(0, (marker - start) / Math.max(1, end - start)));
+  const stage = progress < .25 ? 0 : progress < .76 ? 1 : 2;
+
+  reveal.style.setProperty('--reveal-progress', progress.toFixed(3));
+  reveal.style.setProperty('--wireframe-opacity', Math.max(0, 1 - progress * 1.9).toFixed(3));
+  reveal.style.setProperty('--preview-saturation', Math.min(1, Math.max(0, (progress - .28) / .56)).toFixed(3));
+  reveal.style.setProperty('--preview-scale', (1.075 - progress * .075).toFixed(3));
+  revealSteps.forEach((step, index) => step.classList.toggle('is-current', index === stage));
+}
+
+function scheduleReveal() {
+  if (!revealFrame) revealFrame = requestAnimationFrame(updateReveal);
+}
+
+addEventListener('scroll', scheduleReveal, { passive: true });
+addEventListener('resize', scheduleReveal);
+motion.addEventListener('change', scheduleReveal);
+scheduleReveal();
+
 const storageKey = 'bam-studio-drafts-v1';
 const defaultImage = new URL('/images/luxury-real-estate-hero.webp', location.origin).href;
 

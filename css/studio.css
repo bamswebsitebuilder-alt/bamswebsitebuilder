@@ -151,3 +151,105 @@ button { cursor: pointer; }
   .preview-scroll { padding: 6px; }
   .preview-viewport iframe { height: 520px; }
 }
+
+.reveal-section {
+  padding-block: clamp(30px, 5vw, 64px);
+  border-top: 1px solid var(--line);
+}
+.reveal-section h2 {
+  margin-bottom: 8px;
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  line-height: 1;
+  letter-spacing: -.04em;
+}
+.reveal-intro, .reveal-steps p { color: var(--muted); }
+.reveal-story {
+  display: grid;
+  grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr);
+  align-items: start;
+  gap: clamp(24px, 5vw, 70px);
+  margin-top: clamp(20px, 4vw, 44px);
+}
+.reveal-visual { grid-area: 1 / 2; min-width: 0; margin: 0; }
+.reveal-window {
+  overflow: hidden;
+  border: 1px solid #74664b;
+  border-radius: 12px;
+  background: #181714;
+  box-shadow: 0 18px 35px #2b211d26;
+}
+.reveal-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 40px;
+  padding: 7px 12px;
+  color: #f7efdd;
+  font-size: .875rem;
+}
+.reveal-canvas { position: relative; aspect-ratio: 1265 / 712; overflow: hidden; }
+.reveal-canvas img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.reveal-wireframe {
+  display: none;
+  position: absolute;
+  inset: 0;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  align-items: center;
+  gap: 8%;
+  padding: 9%;
+  background: #28251e;
+}
+.wireframe-copy { display: grid; gap: clamp(6px, 1vw, 12px); }
+.wireframe-copy span { display: block; height: clamp(5px, 1.2vw, 11px); border-radius: 5px; background: #a19170; }
+.wireframe-copy span:first-child { width: 80%; height: clamp(13px, 3.1vw, 38px); background: #d8ba7f; }
+.wireframe-copy span:nth-child(3) { width: 68%; }
+.wireframe-copy span:last-child { width: 42%; height: clamp(13px, 2vw, 26px); margin-top: 8%; border: 1px solid #d8ba7f; background: transparent; }
+.wireframe-image {
+  aspect-ratio: 1.3;
+  border: 1px solid #9e8e69;
+  border-radius: 8px;
+  background:
+    linear-gradient(35deg, transparent 49.7%, #9e8e6966 50%, transparent 50.3%),
+    linear-gradient(-35deg, transparent 49.7%, #9e8e6966 50%, transparent 50.3%),
+    #3c3529;
+}
+.reveal-track { display: none; height: 3px; background: #443b2a; }
+.reveal-track span { display: block; height: 100%; background: #edc976; transform-origin: left center; }
+.reveal-visual figcaption { margin-top: 8px; color: var(--muted); font-size: .875rem; }
+.reveal-steps { grid-area: 1 / 1; margin: 0; padding: 0; list-style: none; }
+.reveal-steps li { padding: 16px 16px 16px 18px; border-inline-start: 2px solid var(--line); }
+.reveal-steps h3 { margin: 0 0 8px; font-family: Georgia, serif; font-size: clamp(1.45rem, 3vw, 2.5rem); line-height: 1.05; font-weight: 500; }
+.reveal-steps a { display: inline-flex; align-items: center; min-height: 44px; margin-top: 4px; color: var(--accent); font-weight: 700; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-section[data-animated="true"] .reveal-visual { position: sticky; top: clamp(12px, 10vh, 90px); }
+  .reveal-section[data-animated="true"] .reveal-canvas img {
+    transform: scale(var(--preview-scale, 1));
+    filter: saturate(var(--preview-saturation, 1));
+  }
+  .reveal-section[data-animated="true"] .reveal-wireframe { display: grid; opacity: var(--wireframe-opacity, 0); }
+  .reveal-section[data-animated="true"] .reveal-track { display: block; }
+  .reveal-section[data-animated="true"] .reveal-track span { transform: scaleX(var(--reveal-progress, 0)); }
+  .reveal-section[data-animated="true"] .reveal-steps li {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: clamp(190px, 34vh, 330px);
+  }
+  .reveal-section[data-animated="true"] .reveal-steps .is-current { border-color: #a47720; }
+}
+@media (max-width: 760px) {
+  .reveal-story { display: block; }
+  .reveal-visual { margin-bottom: 14px; }
+  .reveal-section[data-animated="true"] .reveal-visual {
+    z-index: 1;
+    top: 0;
+    padding-block: 8px;
+    background: var(--paper);
+  }
+  .reveal-canvas { max-height: 38dvh; }
+  .reveal-steps { padding-bottom: 8px; }
+  .reveal-section[data-animated="true"] .reveal-steps li { min-height: clamp(176px, 30vh, 265px); }
+}
