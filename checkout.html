@@ -1,40 +1,212 @@
 <!DOCTYPE html>
-<html lang="en"><head><script src="/js/theme-init.js?v=20261028-1"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Website Payment Options | BAM's Website Builder</title><meta name="robots" content="noindex,nofollow"><link rel="canonical" href="https://www.bamswebsitebuilder.com/checkout"><link href="/images/icon-dark.jpg" rel="icon" type="image/jpeg"><link rel="stylesheet" href="/css/style.css?v=20261120-hamburger-breakpoint-4"><link rel="stylesheet" href="/css/page-theme.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/site-upgrades.css?v=20261013-consistency-1"><link href="/css/animations.css?v=2" rel="stylesheet"/><link rel="stylesheet" href="/css/footer-fix.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/responsive-fixes.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/client-guide.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/accessibility.css?v=20261110-skipfix-2"><link rel="stylesheet" href="/css/public-polish.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/menu-organization.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/public-shell.css?v=20261031-footer-1"><link rel="stylesheet" href="/css/portal-brand.css?v=20261013-brand-4"><link rel="stylesheet" href="/css/light-theme.css?v=20261028-1"><link rel="stylesheet" href="/css/site-footer.css?v=20261109-sitewide-1"><link rel="stylesheet" href="/animations.css"><link rel="stylesheet" href="/css/growth-leads.css?v=20261120-1"><style>.checkout-main{max-width:1140px;margin:auto;padding:40px 22px 100px}.checkout-main h1{font-size:clamp(2rem,4vw,3.5rem);line-height:1.15}.pay-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,285px),1fr));gap:20px}.pay-card{padding:24px;border:1px solid rgba(212,166,55,.35);border-radius:18px;background:rgba(145,115,34,.07)}.pay-card label{display:block;margin:14px 0}.pay-card input,.pay-agree input{accent-color:#d4a637}.pay-card button{width:100%;opacity:.65;cursor:not-allowed}.pay-notice{padding:20px;border-left:4px solid #d4a637;background:rgba(175,125,24,.1);margin:22px 0}.pay-agree{display:block;margin:24px 0;line-height:1.6}.bam-growth-actions{display:flex;gap:14px;flex-wrap:wrap}@media(max-width:650px){.checkout-main{padding:28px 18px 95px}.pay-card{padding:19px}}</style><style id="checkout-design-v2">
-.checkout-main{max-width:1180px;margin:0 auto;padding:34px 22px 100px;--gold:#d5ad57;--border:rgba(181,148,85,.28);--pane:rgba(160,140,101,.065);--muted:#b8b6b1}
-.checkout-main *{box-sizing:border-box}.checkout-main h1{font-size:clamp(2.1rem,4.3vw,3.8rem);line-height:1.1;margin:12px 0 12px;letter-spacing:-.04em}.checkout-main p{line-height:1.55}.ck-eyebrow{font-size:.77rem;letter-spacing:.17em;color:var(--gold);font-weight:800}.ck-top{display:flex;justify-content:space-between;gap:22px;align-items:center;margin:0 0 34px}.ck-top p{margin:0;color:var(--muted);max-width:630px}.ck-security{display:inline-flex;gap:9px;align-items:center;border:1px solid var(--border);border-radius:99px;padding:11px 15px;font-size:.83rem;white-space:nowrap}.ck-security svg{width:18px;height:18px;stroke:var(--gold)}.ck-flow{display:flex;gap:16px;align-items:center;margin:14px 0 30px;color:var(--muted);font-size:.82rem}.ck-flow span{display:inline-flex;gap:9px;align-items:center}.ck-flow b{display:grid;place-items:center;border:1px solid var(--border);width:26px;height:26px;border-radius:50%;font-size:.76rem}.ck-flow span:first-child{color:inherit;font-weight:750}.ck-flow span:first-child b{background:var(--gold);color:#161616}.ck-layout{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(300px,1fr);align-items:start;gap:26px}.ck-panel,.ck-summary{border:1px solid var(--border);border-radius:22px;background:var(--pane);padding:26px}.ck-panel+.ck-panel{margin-top:20px}.ck-panel h2,.ck-summary h2{font-size:1.27rem;margin:0 0 5px}.ck-section-sub{font-size:.88rem;color:var(--muted);margin:0 0 19px}.ck-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.ck-choice{display:block;position:relative;cursor:pointer;border:1px solid var(--border);border-radius:15px;padding:18px 15px;min-height:128px;transition:border-color .2s,background .2s,transform .2s}.ck-choice:hover{border-color:var(--gold);transform:translateY(-2px)}.ck-choice:has(input:checked){border:2px solid var(--gold);padding:17px 14px;background:rgba(212,166,55,.10)}.ck-choice input{position:absolute;right:12px;top:13px;accent-color:#c7a04a;width:17px;height:17px}.ck-choice strong{display:block;font-size:1.08rem;padding-right:14px}.ck-choice .ck-price{display:block;font-size:1.3rem;font-weight:800;margin:11px 0 4px}.ck-choice small{display:block;color:var(--muted);font-size:.77rem}.ck-tag{display:inline-block;font-size:.68rem;letter-spacing:.06em;font-weight:800;color:var(--gold);margin-top:8px}.ck-methods{display:grid;gap:10px}.ck-method{position:relative;display:grid;grid-template-columns:20px 1fr auto;align-items:center;gap:12px;border:1px solid var(--border);padding:16px;border-radius:14px;cursor:pointer}.ck-method:has(input:checked){border-color:var(--gold);background:rgba(212,166,55,.09)}.ck-method input{accent-color:#d5ad57}.ck-method strong{display:block}.ck-method small{display:block;color:var(--muted);font-size:.79rem;margin-top:3px}.ck-method-price{font-size:.9rem;font-weight:800;white-space:nowrap}.ck-summary{position:sticky;top:105px}.ck-summary h2{margin-bottom:20px}.ck-sum-row{display:flex;justify-content:space-between;gap:15px;margin:13px 0;font-size:.94rem}.ck-sum-row>span:first-child{color:var(--muted)}.ck-sum-divider{border-top:1px solid var(--border);margin:20px 0}.ck-total-label{font-size:.78rem;color:var(--muted);font-weight:700}.ck-total{font-size:clamp(2.1rem,3.3vw,2.8rem);font-weight:850;letter-spacing:-.035em;margin:4px 0}.ck-total-note{font-size:.8rem;color:var(--muted);margin:0 0 20px}.ck-terms{display:flex;gap:10px;align-items:flex-start;font-size:.82rem;line-height:1.5;margin:18px 0}.ck-terms input{margin-top:4px;accent-color:#d5ad57;flex-shrink:0}.ck-summary a:not(.ck-button){text-decoration:underline}.ck-button{display:block;text-align:center;border-radius:12px;background:var(--gold);color:#171717!important;padding:15px 12px;font-weight:850;text-decoration:none!important;transition:filter .2s}.ck-button:hover{filter:brightness(1.07)}.ck-button-sub{display:block;text-align:center;margin:14px 0 0;font-size:.8rem;color:var(--muted)}.ck-status{border:1px solid var(--border);border-radius:14px;padding:17px 18px;background:rgba(212,166,55,.06);font-size:.86rem;margin-top:20px}.ck-status strong{display:block;margin-bottom:5px}.ck-help{margin-top:25px;display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;font-size:.85rem}.ck-help a{color:var(--gold);font-weight:700}.ck-summary .ck-brand{font-size:.71rem;font-weight:900;letter-spacing:.14em;color:var(--gold);margin-top:24px}.ck-notice{padding:12px 0;font-size:.78rem;color:var(--muted);line-height:1.6}
-html[data-theme="light"] .checkout-main{--gold:var(--bam-gold);--muted:var(--bam-muted);--pane:var(--bam-panel);--border:#8b806a}
-html[data-theme="light"] .ck-choice:has(input:checked),html[data-theme="light"] .ck-method:has(input:checked){background:#fff4dc}
-html[data-theme="light"] .checkout-main .ck-flow span:first-child b,
-html[data-theme="light"] .checkout-main .ck-button:not(.ck-quote-secondary){color:#fff!important}
-html[data-theme="light"] .checkout-main :is(.ck-choice,.ck-method,.ck-terms,.ck-gate) input{accent-color:var(--bam-gold)}
-@media(max-width:880px){.ck-layout{grid-template-columns:1fr}.ck-summary{position:static}.ck-top{align-items:flex-start}.ck-security{display:none}}@media(max-width:610px){.checkout-main{padding:26px 16px 80px}.ck-panel,.ck-summary{padding:19px;border-radius:18px}.ck-options{grid-template-columns:1fr}.ck-choice{min-height:0;padding:15px}.ck-choice:has(input:checked){padding:14px}.ck-choice .ck-price{margin:5px 0}.ck-flow{font-size:.72rem;gap:9px}.ck-flow span{gap:5px}.ck-flow b{width:22px;height:22px}.ck-method{grid-template-columns:20px 1fr;gap:10px}.ck-method-price{grid-column:2}}
-@media(prefers-reduced-motion:reduce){.ck-choice,.ck-button{transition:none}}
- .ck-subscription-integration{border:1px solid rgba(212,166,55,.38);border-radius:14px;padding:15px;margin:16px 0;background:rgba(212,166,55,.08)}.ck-subscription-integration h3{font-size:1rem;margin:0 0 8px}.ck-subscription-integration p{font-size:.82rem;line-height:1.5}.ck-subscription-link{font-size:.84rem;color:#d5ad57;text-decoration:underline}</style><style id="checkout-paypal-live">.ck-gate{padding:16px;border:1px solid var(--border);border-radius:14px;margin:16px 0}.ck-gate label{display:block;font-size:.82rem;font-weight:700;margin-bottom:7px}.ck-gate input[type=text]{width:100%;padding:12px;border:1px solid var(--border);border-radius:9px;background:transparent;color:inherit;font:inherit}.ck-gate .ck-terms{display:flex;font-weight:400;margin:12px 0}.ck-small{font-size:.8rem;color:var(--muted);line-height:1.5}.ck-paypal-target{min-height:45px}.ck-note{font-size:.82rem;padding:10px 0}.ck-subscription-pending{border:1px solid var(--border);padding:12px;border-radius:10px;margin:14px 0}.checkout-main [hidden]{display:none!important}.ck-quote-secondary{display:block;text-align:center;margin-top:12px;color:var(--gold)!important;font-size:.85rem;text-decoration:underline!important;background:transparent!important}</style><style id="ck-visible-payments-fix">
-.ck-payment-heading{display:flex;flex-direction:column;gap:4px;margin:24px 0 11px}.ck-payment-heading strong{font-size:1.04rem}.ck-payment-heading span{font-size:.83rem;color:var(--muted)}
-.ck-payment-preview{display:grid;gap:8px;place-items:center;text-align:center;padding:22px 17px;background:rgba(212,166,55,.07);border:1px dashed var(--gold);border-radius:13px}.ck-payment-preview span{font-size:1.4rem}.ck-payment-preview strong{font-size:.94rem}.ck-payment-preview p{font-size:.8rem;color:var(--muted);margin:0;line-height:1.55}
-.ck-payment-verified{font-size:.81rem;font-weight:750;color:var(--gold);margin:10px 0 15px}
-.ck-gate{margin:14px 0}.ck-summary{scroll-margin-bottom:110px}
-@media(max-width:700px){.checkout-main{padding-bottom:180px!important}.ck-summary{padding-bottom:26px}.ck-payment-preview{padding:18px 13px}}
-</style><style id="ck-addendum-styles">
-#ck-payment-addendum{margin:17px 0;padding:18px;border-color:var(--gold);background:rgba(212,166,55,.055)}
-#ck-addendum-heading{font-size:1.05rem;margin:0 0 10px}
-#ck-selected-schedule{display:block;font-size:.9rem;line-height:1.6}
-#ck-addendum-save{width:100%;font:inherit;cursor:pointer;border:0}
-#ck-addendum-save:disabled{opacity:.5;cursor:not-allowed}
-</style><style id="ck-inapp-browser">
-.ck-browser-help{margin:16px 0;padding:16px;border:1px solid #d4a637;border-radius:12px;background:rgba(212,166,55,.08)}
-.ck-browser-help strong{display:block;font-size:.9rem;margin-bottom:5px}
-.ck-browser-help p{font-size:.83rem;line-height:1.55;margin:6px 0 12px}
-.ck-copy-checkout{display:block;width:100%;min-height:44px;cursor:pointer;border:1px solid #d4a637;border-radius:10px;padding:11px 14px;color:inherit;background:transparent;font:inherit;font-weight:700}
-#ck-copy-feedback{display:block;font-size:.79rem;margin-top:8px}
-</style><style id="ck-paypal-button-visibility">
-.ck-payment-preview{gap:13px;padding:20px 16px!important;border:1px solid var(--border)!important;background:var(--pane)!important}
-.ck-paypal-logo{font-size:1.35rem;font-weight:900;font-style:italic;color:#218bdf;letter-spacing:-.05em}
-.ck-paypal-logo span{color:#0a55a1}
-.ck-paypal-locked{width:100%;min-height:50px;border:0;border-radius:999px;background:#ffc439;color:#16253b;font-size:1rem;font-weight:800;opacity:.72;cursor:not-allowed}
-.ck-paypal-help-link{font-size:.83rem;text-decoration:underline!important}
-.ck-paypal-target{min-height:48px;margin:12px 0}
-.ck-paypal-target[hidden]{display:none!important}
+<html lang="en"><head><script src="/js/theme-init.js?v=20261028-1"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Website Payment Options | BAM's Website Builder</title><meta name="robots" content="noindex,nofollow"><link rel="canonical" href="https://www.bamswebsitebuilder.com/checkout"><link href="/images/icon-dark.jpg" rel="icon" type="image/jpeg"><link rel="stylesheet" href="/css/style.css?v=20261120-hamburger-breakpoint-4"><link rel="stylesheet" href="/css/page-theme.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/site-upgrades.css?v=20261013-consistency-1"><link href="/css/animations.css?v=2" rel="stylesheet"/><link rel="stylesheet" href="/css/footer-fix.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/responsive-fixes.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/client-guide.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/accessibility.css?v=20261110-skipfix-2"><link rel="stylesheet" href="/css/public-polish.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/menu-organization.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/public-shell.css?v=20261031-footer-1"><link rel="stylesheet" href="/css/portal-brand.css?v=20261013-brand-4"><link rel="stylesheet" href="/css/light-theme.css?v=20261028-1"><link rel="stylesheet" href="/css/site-footer.css?v=20261109-sitewide-1"><link rel="stylesheet" href="/animations.css"><link rel="stylesheet" href="/css/growth-leads.css?v=20261120-1"><style id="checkout-layout">
+.checkout-main {
+  --gold: #e4bd69;
+  --on-gold: #181209;
+  --text: #f5f2ec;
+  --muted: #c4beb2;
+  --pane: #151410;
+  --surface: #1c1a15;
+  --border: #59503b;
+  --selected: #302718;
+  box-sizing: border-box;
+  width: min(1180px, 100%);
+  padding: clamp(30px, 6vw, 72px) clamp(16px, 4vw, 44px) 80px;
+  margin-inline: auto;
+  color: var(--text);
+}
+html[data-theme="light"] .checkout-main {
+  --gold: #785407;
+  --on-gold: #fff;
+  --text: #272116;
+  --muted: #625746;
+  --pane: #fffdfa;
+  --surface: #f7f1e6;
+  --border: #ad9b7e;
+  --selected: #fff1cf;
+}
+.checkout-main [hidden] { display: none !important; }
+.checkout-main h1 {
+  margin: 0 0 12px;
+  font-size: clamp(2.15rem, 5vw, 3.6rem);
+  line-height: 1.08;
+}
+.ck-top { margin-bottom: clamp(22px, 4vw, 42px); }
+.ck-top p { max-width: 48ch; margin: 0; color: var(--muted); }
+.ck-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(320px, 1fr);
+  gap: clamp(16px, 2.5vw, 28px);
+  align-items: start;
+}
+.ck-panel,
+.ck-summary {
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--pane);
+  padding: clamp(16px, 2.4vw, 27px);
+}
+.ck-panel + .ck-panel { margin-top: 16px; }
+.ck-panel h2,
+.ck-summary h2 { margin: 0 0 18px; font-size: clamp(1.22rem, 2vw, 1.5rem); }
+.ck-options,
+.ck-methods { display: grid; gap: 10px; }
+.ck-options { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.ck-choice,
+.ck-method {
+  display: grid;
+  min-width: 0;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  cursor: pointer;
+}
+.ck-choice { grid-template-columns: 1fr auto; }
+.ck-choice input { grid-column: 2; grid-row: 1; }
+.ck-method { grid-template-columns: auto minmax(0, 1fr) auto; }
+.ck-choice:hover,
+.ck-method:hover { border-color: var(--gold); }
+.ck-choice:has(input:checked),
+.ck-method:has(input:checked) {
+  border-color: var(--gold);
+  background: var(--selected);
+  box-shadow: inset 0 0 0 1px var(--gold);
+}
+.ck-choice input,
+.ck-method input,
+.ck-terms input { width: 17px; height: 17px; margin: 0; accent-color: var(--gold); }
+.ck-choice:focus-within,
+.ck-method:focus-within,
+.checkout-main :is(a, button, summary):focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+.ck-choice strong { grid-column: 1; grid-row: 1; }
+.ck-choice .ck-price {
+  grid-column: 1 / -1;
+  font-size: 1.32rem;
+  font-weight: 750;
+  line-height: 1.15;
+}
+.ck-choice small { grid-column: 1 / -1; }
+.ck-choice small,
+.ck-method small { color: var(--muted); font-size: .875rem; }
+.ck-method small { display: block; margin-top: 4px; }
+.ck-method-price { font-weight: 750; white-space: nowrap; }
+.ck-summary {
+  position: sticky;
+  top: calc(var(--header-height, 78px) + 16px);
+  scroll-margin-bottom: 24px;
+}
+.ck-cost {
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+.ck-total-label { color: var(--muted); font-size: .875rem; }
+.ck-total {
+  margin: 2px 0;
+  font-size: clamp(2rem, 4vw, 2.7rem);
+  font-weight: 800;
+  line-height: 1.12;
+  font-variant-numeric: tabular-nums;
+}
+.ck-total-note,
+.ck-notice,
+.ck-small,
+.ck-note { color: var(--muted); font-size: .875rem; line-height: 1.5; }
+.ck-total-note { margin: 8px 0 0; }
+.ck-sum-row { display: flex; justify-content: space-between; gap: 12px; margin: 10px 0; }
+.ck-sum-row span { color: var(--muted); }
+.ck-sum-row strong { text-align: right; }
+.ck-sum-divider { border-top: 1px solid var(--border); margin: 17px 0; }
+.ck-gate,
+.ck-browser-help {
+  padding: 14px;
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+.ck-gate .ck-small { margin: 6px 0; }
+.ck-quote-portal-link { display: inline-block; padding: 9px 0; }
+.ck-gate a,
+.ck-terms a,
+.ck-help a { color: var(--gold); text-decoration: underline; }
+.ck-terms {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-block: 16px;
+  padding: 12px 0;
+  font-size: .875rem;
+  line-height: 1.5;
+  cursor: pointer;
+}
+.ck-terms input { flex: 0 0 17px; margin-top: 3px; }
+.ck-button {
+  display: flex;
+  min-height: 48px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border: 1px solid var(--gold);
+  border-radius: 10px;
+  background: var(--gold);
+  color: var(--on-gold) !important;
+  font: inherit;
+  font-weight: 750;
+  text-align: center;
+  text-decoration: none !important;
+  cursor: pointer;
+}
+.ck-button:hover { filter: brightness(1.12); }
+.ck-button:disabled { opacity: .55; cursor: default; }
+.ck-payment-verified { margin: 12px 0; font-weight: 750; }
+.ck-paypal-target { min-height: 48px; margin-block: 12px; }
+.ck-note { margin: 10px 0 0; }
+.ck-notice { margin: 16px 0 0; }
+#ck-addendum-heading { margin: 0 0 8px; font-size: 1rem; }
+.ck-browser-help p { margin: 8px 0 12px; }
+.ck-copy-checkout {
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--gold);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+#ck-copy-feedback { display: block; font-size: .875rem; }
+.ck-help { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 18px; margin-top: 24px; }
+.ck-help a { display: inline-flex; align-items: center; min-height: 44px; }
+@media (max-width: 880px) {
+  .ck-layout { grid-template-columns: minmax(0, 1fr); }
+  .ck-summary { position: static; }
+}
+@media (max-width: 540px) {
+  .ck-options { grid-template-columns: minmax(0, 1fr); }
+  .ck-choice { grid-template-columns: auto minmax(0, 1fr) auto; gap: 3px 10px; min-height: 62px; }
+  .ck-choice input { grid-area: 1 / 1 / 3 / 2; }
+  .ck-choice strong { grid-area: 1 / 2; }
+  .ck-choice small { grid-area: 2 / 2; }
+  .ck-choice .ck-price { grid-area: 1 / 3 / 3 / 4; }
+  .ck-method {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 8px;
+    padding: 10px;
+  }
+  .ck-method-price { font-size: .875rem; }
+}
 </style><link rel="stylesheet" href="/css/bam-design.css">
 </head><body><a class="site-skip-link" href="#main-content">Skip to main content</a><header class="site-header" id="site-header">
 <div class="header-container">
@@ -92,36 +264,55 @@ html[data-theme="light"] .checkout-main :is(.ck-choice,.ck-method,.ck-terms,.ck-
 <!-- MAIN CONTENT -->
 <main id="main-content" class="checkout-main">
 <script type="application/json" id="bam-paypal-hosted-buttons">{"starter":{"deposit":{"hostedButtonId":"GUZ4TBCXRDA84","expectedAmount":"125.00"},"full":{"url":"https://www.paypal.com/ncp/payment/MW3U5TAP5PZ82","expectedAmount":"250.00"},"monthly":{"planId":"P-2X4855030H9632908NJ47KRQ","expectedAmount":"20.83","expectedCycles":12,"verification":"not-confirmed-with-paypal"}},"business":{"deposit":{"hostedButtonId":"M453MYHXYUMUG","expectedAmount":"250.00"},"full":{"url":"https://www.paypal.com/ncp/payment/RBQ55HGCQXY2A","expectedAmount":"500.00"},"monthly":{"planId":"P-0A9124042N887170MNJ47NZQ","expectedAmount":"41.67","expectedCycles":12,"verification":"not-confirmed-with-paypal"}},"premium":{"deposit":{"hostedButtonId":"74N62C7J4EWWU","expectedAmount":"425.00"},"full":{"url":"https://www.paypal.com/ncp/payment/5QWFAUSHSB6SG","expectedAmount":"850.00"},"monthly":{"planId":"P-1DF06614NY927051XNJ47PDA","expectedAmount":"70.83","expectedCycles":12,"verification":"not-confirmed-with-paypal"}}}</script>
-<div class="ck-top"><div><div class="ck-eyebrow">BAM'S WEBSITE BUILDER / CHECKOUT</div><h1>Let's bring your website to life.</h1><p>Choose your website package and preferred payment arrangement. Review everything before requesting your personalized quote.</p></div><div class="ck-security" aria-label="Checkout preparation"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Payment setup in progress</div></div>
-<div class="ck-flow" aria-label="Checkout steps"><span><b>1</b> Choose package</span><span aria-hidden="true">›</span><span><b>2</b> Payment preference</span><span aria-hidden="true">›</span><span><b>3</b> Approved quote</span></div>
+<div class="ck-top">
+  <h1>Website checkout</h1>
+  <p>Choose your package and payment option. Your written quote confirms the price before you pay.</p>
+</div>
 <div class="ck-layout">
 <div>
-<section class="ck-panel" aria-labelledby="ck-packages-title"><h2 id="ck-packages-title">01 / Choose your package</h2><p class="ck-section-sub">A website built around your business.</p>
-<div class="ck-options" role="radiogroup" aria-label="Website package">
-<label class="ck-choice"><input type="radio" name="ck-package" value="starter"><strong>Starter</strong><span class="ck-price">$250</span><small>Up to 3 pages</small><span class="ck-tag">ESSENTIALS</span></label>
-<label class="ck-choice"><input type="radio" name="ck-package" value="business" checked><strong>Business</strong><span class="ck-price">$500</span><small>Up to 6 pages</small><span class="ck-tag">POPULAR CHOICE</span></label>
-<label class="ck-choice"><input type="radio" name="ck-package" value="premium"><strong>Premium</strong><span class="ck-price">$850</span><small>Up to 10 pages</small><span class="ck-tag">ADVANCED</span></label>
-</div></section>
-<section class="ck-panel" aria-labelledby="ck-methods-title"><h2 id="ck-methods-title">02 / How would you like to pay?</h2><p class="ck-section-sub">Flexible options designed for your budget.</p>
-<div class="ck-methods" role="radiogroup" aria-label="Payment arrangement">
-<label class="ck-method"><input name="ck-method" type="radio" value="full" checked><span><strong>Pay in full</strong><small>One payment for your agreed website package.</small></span><span class="ck-method-price" data-method-price="full">$500</span></label>
-<label class="ck-method"><input name="ck-method" type="radio" value="deposit"><span><strong>50% now, 50% before launch</strong><small>Remaining balance due after design approval.</small></span><span class="ck-method-price" data-method-price="deposit">$250 now</span></label>
-<label class="ck-method"><input name="ck-method" type="radio" value="monthly"><span><strong>12 monthly payments</strong><small>No separate upfront deposit. Ends after 12 payments.</small></span><span class="ck-method-price" data-method-price="monthly">$41.67/mo</span></label>
-</div></section>
-<div class="ck-status" role="status"><strong>PayPal checkout is available for approved clients.</strong> Your PayPal options have been collected, but payment amounts, approval requirements, and the monthly plans still require verification. No payment can be made from this page yet.</div>
+<section class="ck-panel" aria-labelledby="ck-packages-title">
+  <h2 id="ck-packages-title">Choose your package</h2>
+  <div class="ck-options" role="radiogroup" aria-labelledby="ck-packages-title">
+    <label class="ck-choice"><input type="radio" name="ck-package" value="starter"><strong>Starter</strong><span class="ck-price">$250</span><small>Up to 3 pages</small></label>
+    <label class="ck-choice"><input type="radio" name="ck-package" value="business" checked><strong>Business</strong><span class="ck-price">$500</span><small>Up to 6 pages</small></label>
+    <label class="ck-choice"><input type="radio" name="ck-package" value="premium"><strong>Premium</strong><span class="ck-price">$850</span><small>Up to 10 pages</small></label>
+  </div>
+</section>
+<section class="ck-panel" aria-labelledby="ck-methods-title">
+  <h2 id="ck-methods-title">Choose how to pay</h2>
+  <div class="ck-methods" role="radiogroup" aria-labelledby="ck-methods-title">
+    <label class="ck-method"><input name="ck-method" type="radio" value="full" checked><span><strong>Pay in full</strong><small>One payment after quote approval.</small></span><span class="ck-method-price" data-method-price="full">$500</span></label>
+    <label class="ck-method"><input name="ck-method" type="radio" value="deposit"><span><strong>50/50 split</strong><small>Half after quote approval, half before launch.</small></span><span class="ck-method-price" data-method-price="deposit">$250 first</span></label>
+    <label class="ck-method"><input name="ck-method" type="radio" value="monthly"><span><strong>12 monthly payments</strong><small>No separate deposit.</small></span><span class="ck-method-price" data-method-price="monthly">$41.67/mo</span></label>
+  </div>
+</section>
 </div>
-<aside class="ck-summary" aria-labelledby="ck-summary-title"><h2 id="ck-summary-title">Your order summary</h2>
-<div class="ck-sum-row"><span>Website package</span><strong id="ck-summary-package">Business</strong></div>
-<div class="ck-sum-row"><span>Included pages</span><strong id="ck-summary-pages">Up to 6</strong></div>
-<div class="ck-sum-row"><span>Payment arrangement</span><strong id="ck-summary-method">Pay in full</strong></div>
-<div class="ck-sum-divider"></div><div class="ck-total-label">ESTIMATED PAYMENT DUE</div><div class="ck-total" id="ck-summary-due">$500.00</div>
-<p class="ck-total-note" id="ck-summary-detail">One-time website package payment.</p>
-<div class="ck-sum-row"><span>Website package total</span><strong id="ck-summary-total">$500.00</strong></div>
-<div class="ck-sum-row"><span>Hosting &amp; maintenance</span><strong>Separate</strong></div>
-<div class="ck-sum-divider"></div>
-<label class="ck-terms"><input type="checkbox" id="terms-acknowledged"><span>I have reviewed the <a href="/service-terms">Service Terms</a> and <a href="/cancellation-policy">Cancellation Policy</a>. I understand that a written project quote must be approved before payment.</span></label>
-<section class="ck-subscription-integration" id="ck-subscription-integration" hidden aria-live="polite"><h3>Monthly PayPal plan connected</h3><p id="ck-subscription-message">Your existing monthly plan is linked to this checkout. Before we activate recurring billing, the PayPal plan must be verified to end after 12 payments and match the accepted project quote.</p><a href="/subscriptions" class="ck-subscription-link">Review monthly payment plan details →</a></section>
-<div class="ck-payment-heading"><strong>Secure PayPal payment</strong><span id="ck-selected-payment-label">Business · Pay in full · $500.00</span></div><div class="ck-payment-preview" id="ck-payment-preview"><div class="ck-paypal-logo" aria-label="PayPal">Pay<span>Pal</span></div><button id="ck-paypal-locked" class="ck-paypal-locked" type="button" disabled aria-describedby="ck-paypal-lock-reason">Pay with PayPal — $500.00</button><p id="ck-paypal-lock-reason">Your PayPal payment button is visible but locked until your approved quote, selected payment schedule and service terms are accepted.</p><a class="ck-paypal-help-link" href="/client-portal#agreements">Review agreement in Client Portal ↗</a></div><div class="ck-gate" id="ck-verified-quote"><strong>Approved project quote</strong><p class="ck-small" id="ck-quote-status" role="status" aria-live="polite">Checking your signed-in client portal for an accepted quote…</p><div id="ck-quote-details" hidden><p class="ck-small">Quote number: <strong id="ck-quote-number"></strong></p><p class="ck-small">Approved project: <strong id="ck-quote-project"></strong></p><p class="ck-small">Agreed payment schedule: <strong id="ck-quote-schedule"></strong></p></div><a href="/client-portal#agreements" class="ck-quote-portal-link">View and accept your quote in the Client Portal →</a></div><section id="ck-payment-addendum" class="ck-gate" hidden aria-labelledby="ck-addendum-heading">
+<aside class="ck-summary" aria-labelledby="ck-summary-title">
+  <h2 id="ck-summary-title">Order summary</h2>
+  <div class="ck-cost" aria-live="polite" aria-atomic="true">
+    <div class="ck-total-label" id="ck-due-label">Estimated first payment</div>
+    <div class="ck-total" id="ck-summary-due">$500.00</div>
+    <p class="ck-total-note" id="ck-summary-detail">One payment after quote approval.</p>
+  </div>
+  <div class="ck-sum-row"><span>Package</span><strong id="ck-summary-package">Business</strong></div>
+  <div class="ck-sum-row"><span>Included pages</span><strong id="ck-summary-pages">Up to 6</strong></div>
+  <div class="ck-sum-row"><span>Payment option</span><strong id="ck-summary-method">Pay in full</strong></div>
+  <div class="ck-sum-divider"></div>
+  <div class="ck-sum-row"><span>Website package total</span><strong id="ck-summary-total">$500.00</strong></div>
+  <div class="ck-sum-row"><span>Hosting &amp; maintenance</span><strong>Separate</strong></div>
+  <div class="ck-sum-divider"></div>
+  <a class="ck-button" id="checkout-quote-link" href="/contact?package=business&amp;payment=full">Request a website quote</a>
+  <div class="ck-gate" id="ck-verified-quote">
+    <strong id="ck-quote-heading">Already have a quote?</strong>
+    <p class="ck-small" id="ck-quote-status" role="status">Review your approved quote and payment schedule in the Client Portal.</p>
+    <div id="ck-quote-details" hidden>
+      <p class="ck-small">Quote number <strong id="ck-quote-number"></strong></p>
+      <p class="ck-small">Project <strong id="ck-quote-project"></strong></p>
+      <p class="ck-small">Agreed payment schedule <strong id="ck-quote-schedule"></strong></p>
+    </div>
+    <a href="/client-portal#agreements" class="ck-quote-portal-link">Open the Client Portal</a>
+  </div>
+<section id="ck-payment-addendum" class="ck-gate" hidden aria-labelledby="ck-addendum-heading">
 <h3 id="ck-addendum-heading">Review your new payment arrangement</h3>
 <p class="ck-small">Your existing project quote remains accepted. To change how you pay, you must also accept the following payment schedule amendment. The website package and deliverables remain unchanged.</p>
 <p class="ck-small"><strong id="ck-selected-schedule"></strong></p>
@@ -129,16 +320,36 @@ html[data-theme="light"] .checkout-main :is(.ck-choice,.ck-method,.ck-terms,.ck-
 <label class="ck-terms"><input type="checkbox" id="ck-addendum-checkbox"><span>I have reviewed and accept this payment schedule as an amendment to my existing approved website quote.</span></label>
 <button type="button" id="ck-addendum-save" class="ck-button" disabled>Accept Selected Payment Schedule</button>
 </section>
+<label class="ck-terms" id="ck-payment-terms" hidden>
+  <input type="checkbox" id="terms-acknowledged">
+  <span>I have reviewed the <a href="/service-terms">Service Terms</a> and <a href="/cancellation-policy">Cancellation Policy</a>. I understand that a written project quote must be approved before payment.</span>
+</label>
 <div id="ck-browser-help" class="ck-browser-help" role="note" hidden>
 <strong>PayPal checkout works best in Safari or Chrome</strong>
 <p>If you opened this page inside ChatGPT, Instagram, Facebook, or another app, PayPal may open an empty popup. Open this checkout directly in Safari, then select your payment option again. Do not approve a payment twice.</p>
 <button type="button" id="ck-copy-checkout-url" class="ck-copy-checkout">Copy checkout link for Safari</button>
 <span id="ck-copy-feedback" role="status" aria-live="polite"></span>
-</div><div id="ck-paypal-actions" hidden><div class="ck-payment-verified">Ready for PayPal checkout · Review the final amount before paying</div><a id="ck-pay-full" class="ck-button" href="#" rel="noopener noreferrer" hidden>Continue to PayPal — Pay in Full ↗</a><div id="ck-pay-deposit" hidden><p class="ck-small">Pay your agreed 50% deposit securely through PayPal.</p><div id="ck-paypal-starter" class="ck-paypal-target" hidden></div><div id="ck-paypal-business" class="ck-paypal-target" hidden></div><div id="ck-paypal-premium" class="ck-paypal-target" hidden></div></div><div id="ck-pay-monthly" class="ck-subscription-pending" hidden><strong>Subscribe with PayPal — 12 payments</strong><p class="ck-small">Your plan is configured for 12 monthly billing cycles and no setup fee. Confirm the terms in PayPal before accepting.</p><div id="ck-subscription-starter" class="ck-paypal-target" hidden></div><div id="ck-subscription-business" class="ck-paypal-target" hidden></div><div id="ck-subscription-premium" class="ck-paypal-target" hidden></div></div></div><p class="ck-note" id="ck-pay-status" role="status">Log into your client portal and accept your issued quote to access payment.</p><a class="ck-button ck-quote-secondary" id="checkout-quote-link" href="/contact?package=business&payment=full">Don't have an approved quote? Get one ↗</a>
-<p class="ck-button-sub">Payments are securely processed by PayPal</p>
-<div class="ck-brand">BAM'S WEBSITE BUILDER</div><p class="ck-notice">Package prices shown are starting prices. Your approved written quote controls the final scope and price. Verify your actual PayPal payment amount before authorizing.</p>
+</div>
+<div id="ck-paypal-actions" hidden>
+  <h3 class="ck-payment-verified">Pay with PayPal</h3>
+  <a id="ck-pay-full" class="ck-button" href="#" rel="noopener noreferrer" hidden>Continue to PayPal</a>
+  <div id="ck-pay-deposit" hidden>
+    <div id="ck-paypal-starter" class="ck-paypal-target" hidden></div>
+    <div id="ck-paypal-business" class="ck-paypal-target" hidden></div>
+    <div id="ck-paypal-premium" class="ck-paypal-target" hidden></div>
+  </div>
+  <div id="ck-pay-monthly" hidden>
+    <div id="ck-subscription-starter" class="ck-paypal-target" hidden></div>
+    <div id="ck-subscription-business" class="ck-paypal-target" hidden></div>
+    <div id="ck-subscription-premium" class="ck-paypal-target" hidden></div>
+  </div>
+  <p class="ck-note" id="ck-pay-status" role="status"></p>
+</div>
+<p class="ck-notice">Your approved quote confirms the scope and final price.</p>
 </aside></div>
-<div class="ck-help">Questions before getting started? <a href="/contact">Contact us</a><span aria-hidden="true">·</span><a href="/booking">Book a free call</a><span aria-hidden="true">·</span><a href="/prices">Compare packages</a></div>
+<nav class="ck-help" aria-label="Checkout help">
+  <a href="/prices">Compare packages</a><a href="/contact">Contact us</a><a href="/booking">Book a free call</a>
+</nav>
 </main><footer class="home-footer">
   <div class="footer-grid">
     <div class="footer-brand-column">
@@ -217,7 +428,6 @@ const agent=navigator.userAgent||'';
 const inAppBrowser=/ChatGPT|Instagram|FBAN|FBAV|FB_IAB|TikTok|Line\//i.test(agent)||
  (/iP(?:hone|ad|od)/i.test(agent)&&/AppleWebKit/i.test(agent)&&!/Safari/i.test(agent));
 const browserHelp=$('ck-browser-help');
-if(browserHelp)browserHelp.hidden=!inAppBrowser;
 $('ck-copy-checkout-url')?.addEventListener('click',async()=>{
  const href=location.href;
  try{await navigator.clipboard.writeText(href);$('ck-copy-feedback').textContent='Copied. Paste this link into Safari to use PayPal checkout.';}
@@ -263,26 +473,25 @@ function update(){
  $('ck-summary-package').textContent=a.name;$('ck-summary-pages').textContent='Up to '+a.pages;
  $('ck-summary-method').textContent=method==='full'?'Pay in full':method==='deposit'?'50 / 50 split':'12 monthly payments';
  $('ck-summary-due').textContent=money(due)+(method==='monthly'?' /mo':'');$('ck-summary-total').textContent=money(total);
- $('ck-summary-detail').textContent=method==='full'?'One-time website package payment.':method==='deposit'?'Remaining '+money(a.deposit)+' due after design approval and before launch.':'12 payments of '+money(a.monthly)+'. Billed monthly for 12 cycles, per PayPal plan settings.';
+ $('ck-summary-detail').textContent=method==='full'?'One payment after quote approval.':method==='deposit'?money(a.deposit)+' after quote approval, then '+money(a.deposit)+' before launch.':'12 monthly payments of '+money(a.monthly)+'.';
  document.querySelector('[data-method-price="full"]').textContent=money(a.price);
- document.querySelector('[data-method-price="deposit"]').textContent=money(a.deposit)+' now';
+ document.querySelector('[data-method-price="deposit"]').textContent=money(a.deposit)+' first';
  document.querySelector('[data-method-price="monthly"]').textContent=money(a.monthly)+'/mo';
  $('checkout-quote-link').href='/contact?package='+key+'&payment='+method+(method==='monthly'?'&plan='+key+'-monthly':'');
- const m=$('ck-subscription-integration');if(m){m.hidden=method!=='monthly';}
  const approved=window.bamAcceptedQuote;
- const ready=!!approved&&approved.package===key&&approved.method===method&&$('terms-acknowledged').checked;
- const lockedLabel=method==='full'?'Pay '+money(a.price):method==='deposit'?'Pay '+money(a.deposit)+' deposit':'Subscribe '+money(a.monthly)+'/month';
- $('ck-paypal-locked').textContent='Pay with PayPal — '+lockedLabel;
- $('ck-paypal-lock-reason').textContent=approved&&approved.package===key?'Accept the matching payment schedule and service terms to unlock PayPal.':'Sign in and accept an approved '+a.name+' quote to unlock this PayPal button.';
- $('ck-payment-preview').hidden=ready;
- if(browserHelp && ready && inAppBrowser)browserHelp.hidden=false;
- $('ck-selected-payment-label').textContent=a.name+' · '+(method==='full'?'Pay in full':method==='deposit'?'50% deposit':'12 monthly payments')+' · '+money(due)+(method==='monthly'?'/month':'');
+ const matching=!!approved&&approved.package===key&&approved.method===method;
+ const ready=matching&&$('terms-acknowledged').checked;
+ $('ck-due-label').textContent=matching?'First payment':'Estimated first payment';
+ $('ck-quote-heading').textContent=window.bamQuoteBase||approved?'Your approved quote':'Already have a quote?';
+ $('checkout-quote-link').hidden=window.bamQuoteBase?.package===key||matching;
+ $('ck-payment-terms').hidden=!matching;
+ if(browserHelp)browserHelp.hidden=!(ready&&inAppBrowser);
  $('ck-paypal-actions').hidden=!ready;
  $('ck-pay-full').hidden=!ready||method!=='full';$('ck-pay-full').href=a.full;
  $('ck-pay-deposit').hidden=!ready||method!=='deposit';
  $('ck-pay-monthly').hidden=!ready||method!=='monthly';
  for(const k of Object.keys(p)){$('ck-paypal-'+k).hidden=!ready||method!=='deposit'||k!==key;$('ck-subscription-'+k).hidden=!ready||method!=='monthly'||k!==key;}
- $('ck-pay-status').textContent=ready?(method==='monthly'?'Confirm the 12-cycle PayPal subscription amount before authorizing.':'Confirm the final price and terms on PayPal before authorizing payment.'):'Choose the payment arrangement you want. If it differs from your accepted quote, approve the schedule amendment above before paying.';
+ $('ck-pay-status').textContent=ready?'Confirm the amount and terms in PayPal before authorizing.':'';
  if(ready&&method==='deposit')renderDeposit(key);
  if(ready&&method==='monthly')renderMonthly(key);
 }
