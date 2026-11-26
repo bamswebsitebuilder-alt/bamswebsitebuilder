@@ -1,0 +1,176 @@
+.bam-cinematic .bam-cinematic-layout {
+  display: grid;
+  align-items: center;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.65fr);
+  gap: clamp(24px, 5vw, 72px);
+}
+
+.bam-cinematic .home-intro {
+  margin-inline: 0;
+}
+
+.bam-cinematic .bam-cinematic-stage {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid #856735;
+  border-radius: clamp(12px, 2vw, 22px);
+  background: #211912;
+  color: #f5ead5;
+  box-shadow: 0 20px 48px #0004;
+}
+
+.bam-cinematic .bam-cinematic-browser {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 38px;
+  padding: 6px 14px;
+  background: #211912;
+  font-size: 0.8125rem;
+  line-height: 1.25;
+}
+
+.bam-cinematic .bam-cinematic-browser::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  margin-inline-end: 16px;
+  border-radius: 50%;
+  background: #b99863;
+  box-shadow: 8px 0 #b99863, 16px 0 #b99863;
+}
+
+.bam-cinematic .bam-cinematic-screen {
+  position: relative;
+  overflow: hidden;
+}
+
+.bam-cinematic .bam-cinematic-screen img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.bam-cinematic .bam-cinematic-editor {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  background: radial-gradient(ellipse at top right, #2a2623, #16171d 70%);
+  color: #f5ead5;
+}
+
+.bam-cinematic .bam-cinematic-editor .bam-cinematic-browser {
+  border-bottom: 1px solid #484039;
+  background: #202127;
+}
+
+.bam-cinematic .bam-cinematic-editor pre {
+  margin: 0;
+  padding: clamp(8px, 2vw, 24px);
+  color: #f4ead9;
+  font: 500 clamp(0.67rem, 1.4vw, 1.05rem)/1.45 ui-monospace, monospace;
+  tab-size: 2;
+}
+
+.bam-cinematic .bam-cinematic-editor code {
+  font: inherit;
+}
+
+.bam-cinematic .bam-code-line {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+}
+
+.bam-cinematic .bam-code-tag { color: #99c9f3; }
+.bam-cinematic .bam-code-accent { color: #f4c775; }
+.bam-cinematic .bam-code-selector { color: #b9db9b; }
+
+.bam-cinematic .bam-cinematic-replay {
+  display: block;
+  margin-block-start: 10px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid currentColor;
+  border-radius: 9px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.bam-cinematic .bam-cinematic-replay:hover {
+  text-decoration: underline;
+}
+
+.bam-cinematic .bam-cinematic-replay:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.bam-cinematic .bam-cinematic-replay[hidden] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .bam-cinematic .is-ready .bam-cinematic-editor,
+  .bam-cinematic .is-playing .bam-cinematic-editor {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .bam-cinematic .is-ready .bam-code-line:not(:first-child) {
+    visibility: hidden;
+  }
+
+  .bam-cinematic .is-playing .bam-code-line {
+    animation: bam-cinematic-type .36s steps(20, end) both;
+  }
+
+  .bam-cinematic .is-playing .bam-code-line:nth-child(2) { animation-delay: .4s; }
+  .bam-cinematic .is-playing .bam-code-line:nth-child(3) { animation-delay: .84s; }
+  .bam-cinematic .is-playing .bam-code-line:nth-child(4) { animation-delay: 1.28s; }
+  .bam-cinematic .is-playing .bam-code-line:nth-child(5) { animation-delay: 1.72s; }
+  .bam-cinematic .is-playing .bam-code-line:nth-child(6) { animation-delay: 2.16s; }
+  .bam-cinematic .is-playing .bam-code-line:nth-child(7) { animation-delay: 2.6s; }
+
+  .bam-cinematic .is-playing .bam-cinematic-editor {
+    animation: bam-cinematic-reveal 4.8s both;
+  }
+
+  .bam-cinematic .is-playing .bam-cinematic-screen img {
+    animation: bam-cinematic-preview 4.8s both;
+  }
+}
+
+@keyframes bam-cinematic-type {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0); }
+}
+
+@keyframes bam-cinematic-reveal {
+  0%, 67% { clip-path: inset(0); }
+  89%, 100% { clip-path: inset(0 0 100% 0); }
+}
+
+@keyframes bam-cinematic-preview {
+  0%, 67% { transform: scale(1.12); }
+  94%, 100% { transform: scale(1); }
+}
+
+@media (max-width: 760px) {
+  .bam-cinematic .bam-cinematic-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bam-cinematic .bam-cinematic-replay {
+    display: none;
+  }
+}
