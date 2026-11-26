@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore work by BAM’s Website Builder and build a responsive website draft in BAM’s Studio.">
+  <title>BAM’s Studio | BAM’s Website Builder</title>
+  <link rel="canonical" href="https://www.bamswebsitebuilder.com/studio">
+  <link rel="icon" href="/images/icon-dark.jpg">
+  <link rel="stylesheet" href="/css/studio.css">
+  <script src="/js/studio.js" type="module"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="studio-header">
+    <div class="shell header-inner">
+      <a class="studio-brand" href="/" aria-label="BAM’s Website Builder home"><b>BAM’S</b><span>STUDIO</span></a>
+      <nav aria-label="Studio navigation">
+        <a href="#work">Our work</a>
+        <a href="#workspace">Workspace</a>
+        <a href="/client-portal#support">Client Portal</a>
+      </nav>
+      <a class="button button-outline header-quote" href="/contact">Get a Quote</a>
+    </div>
+  </header>
+  <main id="main">
+    <section id="work" class="shell studio-hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">BAM’S WEBSITE BUILDER</p>
+        <h1 id="hero-title">See your website <em>take shape.</em></h1>
+        <p>Explore sites we’ve built, then try a layout of your own. Edit your content, preview it on any screen, and save a draft to share.</p>
+        <div class="hero-actions">
+          <a class="button button-gold" href="#workspace">Open the Studio</a>
+          <a class="button button-quiet" href="/portfolio">View portfolio</a>
+        </div>
+      </div>
+      <div class="project-showcase" aria-label="Project showcase">
+        <div class="showcase-frame">
+          <div class="showcase-bar"><span aria-hidden="true" class="window-dots"></span><span id="showcase-type">Client website</span></div>
+          <img id="showcase-image" src="/images/kade-mercer-desktop.webp" width="1265" height="712" alt="Kade Mercer author website" fetchpriority="high">
+        </div>
+        <div class="showcase-caption"><strong id="showcase-name">Kade Mercer</strong><a id="showcase-link" href="/kade-mercer/">Visit site</a></div>
+        <div class="showcase-options" id="showcase-options" aria-label="Choose a project">
+          <button type="button" data-showcase="kade" aria-pressed="true">Kade Mercer</button>
+          <button type="button" data-showcase="scottie" aria-pressed="false">Scottie Bonding</button>
+          <button type="button" data-showcase="titan" aria-pressed="false">Titan Athletics</button>
+        </div>
+      </div>
+    </section>
+    <section id="workspace" class="workspace-section">
+      <div class="shell">
+        <div class="workspace-heading">
+          <div><p class="eyebrow">THE WORKSPACE</p><h2>Build a website draft.</h2></div>
+          <p>Drafts save in this browser. Download your HTML to keep a copy, or use the Client Portal to coordinate an existing project.</p>
+        </div>
+        <noscript><p>Enable JavaScript to use the Studio editor. You can still explore our <a href="/portfolio">portfolio</a>.</p></noscript>
+        <div id="studio-workspace" class="workspace" hidden>
+          <div class="project-bar">
+            <div class="project-picker">
+              <label for="project-select">Project</label>
+              <select id="project-select"></select>
+              <button class="button button-subtle" type="button" id="new-project">New project</button>
+            </div>
+            <div class="project-actions">
+              <p id="project-state" role="status"></p>
+              <button class="button button-outline" type="button" id="review-project">Mark ready for review</button>
+              <button class="button button-outline" type="button" id="copy-review" hidden>Copy review notes</button>
+              <button class="button button-gold" type="button" id="download-project">Download HTML</button>
+            </div>
+          </div>
+          <p id="review-help" class="review-help" hidden>Paste your review notes into a support request in the <a href="/client-portal#support">Client Portal</a>. <span id="review-feedback" role="status"></span></p>
+          <div class="workspace-grid">
+            <div class="controls">
+              <div class="editor-tabs" role="tablist" aria-label="Editor tools">
+                <button role="tab" type="button" id="tab-content" aria-controls="panel-content" aria-selected="true">Content</button>
+                <button role="tab" type="button" id="tab-design" aria-controls="panel-design" aria-selected="false" tabindex="-1">Design</button>
+                <button role="tab" type="button" id="tab-collection" aria-controls="panel-collection" aria-selected="false" tabindex="-1">Collection</button>
+              </div>
+              <section class="editor-panel" role="tabpanel" id="panel-content" aria-labelledby="tab-content">
+                <label for="project-name">Project name</label><input id="project-name" data-field="name" maxlength="70">
+                <label for="business-name">Business name</label><input id="business-name" data-field="business" maxlength="70">
+                <label for="hero-heading">Hero heading</label><input id="hero-heading" data-field="heading" maxlength="105">
+                <label for="hero-description">Hero description</label><textarea id="hero-description" data-field="description" rows="3" maxlength="240"></textarea>
+                <label for="action-label">Button label</label><input id="action-label" data-field="action" maxlength="45">
+                <label for="action-url">Button link</label><input id="action-url" data-field="link" maxlength="500" type="url" placeholder="https://example.com">
+                <label for="image-url">Image URL</label><input id="image-url" data-field="image" maxlength="500" type="url" placeholder="https://example.com/photo.jpg">
+                <label for="image-alt">Image description</label><input id="image-alt" data-field="alt" maxlength="140">
+                <details class="search-fields">
+                  <summary>Search settings</summary>
+                  <label for="seo-title">Page title</label><input id="seo-title" data-field="seoTitle" maxlength="70">
+                  <label for="seo-description">Meta description</label><textarea id="seo-description" data-field="seoDescription" rows="2" maxlength="160"></textarea>
+                </details>
+              </section>
+              <section class="editor-panel" role="tabpanel" id="panel-design" aria-labelledby="tab-design" hidden>
+                <label for="layout">Hero layout</label>
+                <select id="layout" data-field="layout"><option value="split">Side by side</option><option value="stacked">Centered</option></select>
+                <label for="palette">Color palette</label>
+                <select id="palette" data-field="palette"><option value="ivory">Ivory and gold</option><option value="midnight">Charcoal and gold</option><option value="sage">Sage and cream</option></select>
+              </section>
+              <section class="editor-panel" role="tabpanel" id="panel-collection" aria-labelledby="tab-collection" hidden>
+                <p>Add and edit services shown on the draft website.</p>
+                <div id="collection-list"></div>
+                <button type="button" class="button button-outline" id="add-item">Add a service</button>
+              </section>
+            </div>
+            <section class="preview-pane" aria-labelledby="preview-title">
+              <div class="preview-bar">
+                <strong id="preview-title">Live preview</strong>
+                <div class="device-options" id="device-options" aria-label="Preview width">
+                  <button type="button" data-device="desktop" aria-pressed="true">Desktop</button>
+                  <button type="button" data-device="tablet" aria-pressed="false">Tablet</button>
+                  <button type="button" data-device="mobile" aria-pressed="false">Mobile</button>
+                </div>
+              </div>
+              <div class="preview-scroll"><div class="preview-viewport" data-device="desktop"><iframe title="Website draft preview" id="draft-preview" sandbox></iframe></div></div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="studio-footer">
+    <div class="shell"><a href="/">BAM’s Website Builder</a><a href="/client-portal">Client Portal</a><a href="/privacy-policy">Privacy Policy</a></div>
+  </footer>
+</body>
+</html>
