@@ -97,8 +97,15 @@
 
     if (!toggle || !menu || !overlay) return;
 
+    const menuStyles = document.createElement('link');
+    menuStyles.rel = 'stylesheet';
+    menuStyles.href = '/css/mobile-navigation.css?v=1';
+    document.head.append(menuStyles);
+
     let lastFocusedElement = null;
     menu.inert = true;
+    menu.setAttribute('role', 'dialog');
+    menu.setAttribute('aria-modal', 'true');
     // Ensure drawer visibility is not overridden by legacy responsive rules.
     if (!document.getElementById('bam-mobile-menu-reliability-style')) {
       const style = document.createElement('style');
@@ -130,10 +137,14 @@
 
       if (open) {
         lastFocusedElement = document.activeElement;
-        window.requestAnimationFrame(() => {
-          const firstLink = menu.querySelector('a, button');
-          if (firstLink) firstLink.focus({ preventScroll: true });
-        });
+        const firstLink = menu.querySelector('a, button');
+        firstLink?.focus({ preventScroll: true });
+        // A newly visible drawer can still be in its previous hit-testing state.
+        window.setTimeout?.(() => {
+          if (menu.classList.contains('open') && document.activeElement === lastFocusedElement) {
+            firstLink?.focus({ preventScroll: true });
+          }
+        }, 120);
       } else if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
         lastFocusedElement.focus({ preventScroll: true });
         lastFocusedElement = null;
@@ -171,7 +182,7 @@
       if (!isOpen()) return;
       if (event.key === 'Escape') { closeMenu(); return; }
       if (event.key !== 'Tab') return;
-      const focusable = Array.from(menu.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'))
+      const focusable = Array.from(menu.querySelectorAll('a[href], button:not([disabled]), summary, input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'))
         .filter(element => element.getClientRects().length && !element.hidden);
       const first = focusable[0], last = focusable[focusable.length - 1];
       if (!first) return;
@@ -454,9 +465,8 @@
       if (!a) {
         a = document.createElement('a');
         a.href = '/checkout';
-        const home = mobile.querySelector(':scope > a[href="/"]');
-        if (home) home.insertAdjacentElement('afterend', a);
-        else mobile.appendChild(a);
+        const services = mobile.querySelector('.mobile-nav-group[aria-labelledby="mobile-group-services"]');
+        (services || mobile).append(a);
       }
       a.dataset.page = 'checkout';
       if (!a.querySelector('.mobile-link-icon')) {
@@ -488,6 +498,35 @@
     syncMenuCurrentPage();
   }
   window.addEventListener('hashchange', syncMenuCurrentPage);
+
+  // Enhance the existing links after the shared navigation has populated them.
+  ready(() => {
+    const menu = document.getElementById('mobile-menu');
+    const nav = menu?.querySelector('.mobile-navigation');
+    if (!nav) return;
+
+    const quote = menu.querySelector('.mobile-menu-cta');
+    if (quote) nav.before(quote);
+
+    const pricing = nav.querySelector('a[data-page="prices"]');
+    if (pricing && !nav.querySelector(':scope > a[data-page="prices"]')) nav.append(pricing);
+    const login = nav.querySelector('a[data-page="login"]');
+    if (login) nav.append(login);
+
+    nav.querySelectorAll('.mobile-nav-group').forEach(group => {
+      const heading = group.querySelector('.mobile-nav-group-title');
+      if (!heading) return;
+
+      const section = document.createElement('details');
+      const summary = document.createElement('summary');
+      summary.textContent = heading.textContent;
+      heading.replaceWith(section);
+      group.removeAttribute('aria-labelledby');
+      section.append(summary);
+      group.querySelectorAll(':scope > a').forEach(link => section.append(link));
+    });
+    menu.classList.add('bam-mobile-drawer');
+  });
 
   // Consolidate legacy pricing links across existing site headers, footers, and page content.
   const syncPricingLinks = () => {
