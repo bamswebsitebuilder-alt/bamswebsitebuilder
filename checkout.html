@@ -31,8 +31,26 @@ html[data-theme="light"] .checkout-main {
   font-size: clamp(2.15rem, 5vw, 3.6rem);
   line-height: 1.08;
 }
-.ck-top { margin-bottom: clamp(22px, 4vw, 42px); }
+.ck-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: end;
+  gap: 12px 24px;
+  padding-bottom: 20px;
+  margin-bottom: clamp(20px, 4vw, 32px);
+  border-bottom: 1px solid var(--border);
+}
 .ck-top p { max-width: 48ch; margin: 0; color: var(--muted); }
+.ck-top-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--text);
+  font-size: .9rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 .ck-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.55fr) minmax(320px, 1fr);
@@ -98,10 +116,23 @@ html[data-theme="light"] .checkout-main {
 .ck-method small { display: block; margin-top: 4px; }
 .ck-method-price { font-weight: 750; white-space: nowrap; }
 .ck-summary {
+  --gold: #72500a;
+  --button-bg: #e4bd69;
+  --on-gold: #181209;
+  --text: #241e15;
+  --muted: #5c5142;
+  --pane: #fefcf8;
+  --surface: #f3ede3;
+  --border: #cdbfa9;
   position: sticky;
   top: calc(var(--header-height, 78px) + 16px);
   scroll-margin-bottom: 24px;
+  color: var(--text);
+  color-scheme: light;
+  box-shadow: 0 12px 36px #0002;
 }
+.ck-summary h2,
+.ck-summary h3 { color: var(--text); }
 .ck-cost {
   padding: 14px 16px;
   margin-bottom: 18px;
@@ -159,7 +190,7 @@ html[data-theme="light"] .checkout-main {
   padding: 10px 14px;
   border: 1px solid var(--gold);
   border-radius: 10px;
-  background: var(--gold);
+  background: var(--button-bg, var(--gold));
   color: var(--on-gold) !important;
   font: inherit;
   font-weight: 750;
@@ -265,8 +296,11 @@ html[data-theme="light"] .checkout-main {
 <main id="main-content" class="checkout-main">
 <script type="application/json" id="bam-paypal-hosted-buttons">{"starter":{"deposit":{"hostedButtonId":"GUZ4TBCXRDA84","expectedAmount":"125.00"},"full":{"url":"https://www.paypal.com/ncp/payment/MW3U5TAP5PZ82","expectedAmount":"250.00"},"monthly":{"planId":"P-2X4855030H9632908NJ47KRQ","expectedAmount":"20.83","expectedCycles":12,"verification":"not-confirmed-with-paypal"}},"business":{"deposit":{"hostedButtonId":"M453MYHXYUMUG","expectedAmount":"250.00"},"full":{"url":"https://www.paypal.com/ncp/payment/RBQ55HGCQXY2A","expectedAmount":"500.00"},"monthly":{"planId":"P-0A9124042N887170MNJ47NZQ","expectedAmount":"41.67","expectedCycles":12,"verification":"not-confirmed-with-paypal"}},"premium":{"deposit":{"hostedButtonId":"74N62C7J4EWWU","expectedAmount":"425.00"},"full":{"url":"https://www.paypal.com/ncp/payment/5QWFAUSHSB6SG","expectedAmount":"850.00"},"monthly":{"planId":"P-1DF06614NY927051XNJ47PDA","expectedAmount":"70.83","expectedCycles":12,"verification":"not-confirmed-with-paypal"}}}</script>
 <div class="ck-top">
-  <h1>Website checkout</h1>
-  <p>Choose your package and payment option. Your written quote confirms the price before you pay.</p>
+  <div>
+    <h1>Website checkout</h1>
+    <p>Choose your package and payment option. Your written quote confirms the price before you pay.</p>
+  </div>
+  <a class="ck-top-link" href="/prices">Compare packages</a>
 </div>
 <div class="ck-layout">
 <div>
@@ -348,7 +382,7 @@ html[data-theme="light"] .checkout-main {
 <p class="ck-notice">Your approved quote confirms the scope and final price.</p>
 </aside></div>
 <nav class="ck-help" aria-label="Checkout help">
-  <a href="/prices">Compare packages</a><a href="/contact">Contact us</a><a href="/booking">Book a free call</a>
+  <a href="/contact">Contact us</a><a href="/booking">Book a free call</a>
 </nav>
 </main><footer class="home-footer">
   <div class="footer-grid">
