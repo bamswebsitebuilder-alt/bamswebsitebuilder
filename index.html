@@ -101,56 +101,32 @@
 <link rel="stylesheet" href="/css/site-footer.css?v=20261109-sitewide-1">
 <link rel="stylesheet" href="/animations.css">
 <link rel="stylesheet" href="/css/growth-leads.css?v=20261120-1"><link rel="stylesheet" href="/css/agency-refresh.css?v=20261123-white-contrast-3">
-<link rel="stylesheet" href="/css/coding-loader.css?v=3d-intro-1"><link rel="stylesheet" href="/css/home-professional.css?v=20261123-1">
+<link rel="stylesheet" href="/css/coding-loader.css?v=scottie-opening-1"><link rel="stylesheet" href="/css/home-professional.css?v=20261123-1">
 <link rel="stylesheet" href="/css/bam-design.css">
 </head>
 <body class="polished-home"><a class="site-skip-link" href="#main-content">Skip to main content</a>
-<div id="bam-home-intro" class="bam-home-intro" aria-hidden="true" hidden>
-  <div class="bam-intro-door bam-intro-door-left"></div>
-  <div class="bam-intro-door bam-intro-door-right"></div>
-  <div class="bam-intro-stage">
-    <div class="bam-intro-window">
-      <div class="bam-intro-window-back"></div>
-      <div class="bam-intro-window-face">
-        <div class="bam-intro-window-bar"></div>
-        <div class="bam-intro-wordmark">
-          <strong>BAM’S</strong>
-          <span>Website Builder</span>
-        </div>
-        <div class="bam-intro-code"><span>&lt;/&gt;</span><i></i></div>
+<dialog id="bam-opening" aria-labelledby="bam-opening-title">
+  <div class="bam-opening-head">
+    <p id="bam-opening-title">BAM’S <span>WEBSITE BUILDER</span></p>
+    <button class="bam-opening-skip" type="button" autofocus>Skip intro</button>
+  </div>
+  <div class="bam-opening-stage">
+    <div class="bam-opening-frame">
+      <div class="bam-opening-face bam-opening-code" aria-hidden="true">
+        <div class="bam-opening-bar">index.html <span>Scottie Bonding Agency</span></div>
+        <pre><code><span style="--line:0"><b>&lt;main</b> class=<em>"hero"</em><b>&gt;</b></span><span style="--line:1">  <b>&lt;h1&gt;</b>A familiar name.</span><span style="--line:2">  A clearer way forward.<b>&lt;/h1&gt;</b></span><span style="--line:3">  <b>&lt;p&gt;</b>Serving Pinellas County.<b>&lt;/p&gt;</b></span><span style="--line:4"><b>&lt;/main&gt;</b></span></code></pre>
+      </div>
+      <div class="bam-opening-face bam-opening-result">
+        <div class="bam-opening-bar">scottiebondingagency.org</div>
+        <picture>
+          <source media="(max-aspect-ratio: 4/5)" srcset="/images/scottie-bonding-mobile.webp">
+          <img src="/images/scottie-bonding-opening.webp" fetchpriority="high" decoding="async" alt="The finished Scottie Bonding Agency website">
+        </picture>
       </div>
     </div>
   </div>
-</div>
-<script>
-(() => {
-  const intro = document.getElementById('bam-home-intro');
-  const navigation = performance.getEntriesByType('navigation')[0];
-  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  if (reducedMotion.matches || location.hash || navigation?.type === 'back_forward') return;
-
-  try {
-    const key = 'bam-home-intro-seen';
-    if (sessionStorage.getItem(key)) return;
-    sessionStorage.setItem(key, '1');
-  } catch {
-    // The intro can still play if the browser blocks session storage.
-  }
-
-  const timeout = window.setTimeout(finish, 1500);
-  function finish() {
-    window.clearTimeout(timeout);
-    document.removeEventListener('keydown', finish);
-    intro.remove();
-  }
-
-  document.addEventListener('keydown', finish, { once: true });
-  intro.addEventListener('animationend', (event) => {
-    if (event.target === intro) finish();
-  });
-  intro.classList.add('is-playing');
-})();
-</script>
+  <p class="bam-opening-caption">Scottie Bonding Agency <span>·</span> Website by BAM’S</p>
+</dialog>
 <header class="site-header" id="site-header">
 <div class="header-container">
 <a aria-label="BAM's Website Builder home" class="site-brand" href="/">
@@ -342,11 +318,12 @@
 <script src="/js/livechat.js?v=20261013-growth-2"></script>
 <noscript><a href="https://www.livechat.com/chat-with/19864799/" rel="nofollow">Chat with us</a>, powered by <a href="https://www.livechat.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a></noscript>
 
+<script src="/js/home-loader.js?v=scottie-opening-1" defer></script>
 <script src="/js/cookie-consent.js?v=20260928-3"></script>
 <script src="/js/newsletter-captcha.js?v=20261013-growth-2" defer></script>
 <script src="/js/navigation.js?v=20261123-menu-fix-2"></script><script src="/js/analytics-config.js?v=20261013-growth-2" defer></script><script src="/js/site-analytics.js?v=20261013-growth-2" defer></script>
 <script src="/js/home-glow.js?v=20261108-3" defer></script>
-<script src="/js/home-cinematic.js?v=gold-shell-1" defer></script>
+<script src="/js/home-cinematic.js?v=scottie-opening-1" defer></script>
 <script src="/js/quote-popup.js?v=20261108-2" defer></script><script src="/animations.js" defer></script>
 <script src="/js/growth-leads.js?v=20261120-1" defer></script></body>
 </html>
