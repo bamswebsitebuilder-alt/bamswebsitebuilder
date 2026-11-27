@@ -1,0 +1,88 @@
+.bam-project-player {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 854 / 480;
+  border: 1px solid var(--design-line, #655039);
+  border-radius: 12px;
+  background: #110e0d;
+  box-shadow: 0 20px 46px #0003;
+}
+
+.bam-project-player video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #110e0d;
+  object-fit: contain;
+}
+
+.bam-project-player video:focus-visible {
+  outline-offset: -4px;
+}
+
+.bam-project-player .bam-project-play[hidden] {
+  display: none !important;
+}
+
+.bam-project-player .bam-project-play:not([hidden]) {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  display: grid;
+  place-items: center;
+  width: clamp(58px, 13vw, 76px);
+  min-height: 48px;
+  aspect-ratio: 1.4;
+  margin: 0;
+  padding: 0;
+  translate: -50% -50%;
+  border: 1px solid #ffdc98;
+  border-radius: 14px;
+  background: #eac178;
+  color: #211508;
+  box-shadow: 0 6px 30px #000a;
+  cursor: pointer;
+}
+
+.bam-project-player .bam-project-play::before {
+  content: "";
+  margin-left: 3px;
+  border-block: 9px solid transparent;
+  border-left: 14px solid currentColor;
+}
+
+.bam-project-player .bam-project-play:hover {
+  background: #f9da9b;
+}
+
+.bam-project-player .bam-project-play:focus-visible {
+  outline-color: #fff2d8 !important;
+}
+
+.bam-project-video figcaption {
+  padding-top: 13px;
+  text-align: start;
+}
+
+.bam-project-video figcaption h2 {
+  margin: 0 0 4px;
+  color: var(--design-ink, #f8f8f7);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.25;
+  letter-spacing: normal;
+}
+
+.bam-project-video figcaption p {
+  margin: 0;
+  color: var(--design-muted, #c7c4bd);
+  font-size: .9rem;
+  line-height: 1.45;
+}
+
+.bam-project-video figcaption a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--design-gold, #e6bf70);
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
