@@ -11,91 +11,6 @@ body .bam-portfolio .project .content h2{font-size:clamp(1.85rem,3.8vw,2.65rem)}
 body .bam-portfolio .browser{border-color:rgba(212,175,55,.24)}
 @media(max-width:640px){body.polished-home .home-section .home-container{width:100%!important}body .bam-portfolio .project .content h2{font-size:1.85rem}}
 
-#bam-opening:not([open]) { display: none; }
-
-#bam-opening[open] {
-  position: fixed;
-  inset: 0;
-  box-sizing: border-box;
-  display: grid;
-  place-items: center;
-  width: 100%;
-  max-width: none;
-  height: 100%;
-  height: 100dvh;
-  max-height: none;
-  margin: 0;
-  padding: 3rem 1.25rem;
-  border: 0;
-  color: #f9f3e8;
-  background: radial-gradient(ellipse at 50% 55%, #252017, #11100e 72%);
-  overflow: auto;
-  animation: bam-opening-release 1.55s ease both;
-}
-
-#bam-opening::backdrop { background: transparent; }
-html:has(#bam-opening[open]) { overflow: hidden; }
-
-#bam-opening .bam-opening-skip {
-  position: absolute;
-  top: max(16px, env(safe-area-inset-top));
-  right: max(16px, env(safe-area-inset-right));
-  min-height: 44px;
-  margin: 0;
-  padding: .55rem .9rem;
-  border: 1px solid #837565;
-  border-radius: 6px;
-  color: #f9f3e8;
-  background: #191714;
-  font: 600 .875rem/1.25 system-ui, sans-serif;
-  cursor: pointer;
-}
-
-#bam-opening .bam-opening-skip:focus-visible {
-  outline: 2px solid #efcd8e !important;
-  outline-offset: 3px;
-}
-
-.bam-opening-type {
-  text-align: center;
-  animation: bam-opening-enter .45s cubic-bezier(.2,.65,.3,1) both;
-}
-
-#bam-opening-title {
-  margin: 0;
-  color: #f9f3e8;
-  font: 400 clamp(2.55rem, 9.5vw, 8.75rem)/.98 Georgia, serif;
-  letter-spacing: -.065em;
-}
-
-#bam-opening-title span { display: inline-block; }
-
-#bam-opening-credit {
-  margin: clamp(.85rem, 3vw, 1.5rem) 0 0;
-  color: #e5c893;
-  font: 600 clamp(.75rem, 1.45vw, .9rem)/1.45 system-ui, sans-serif;
-  letter-spacing: .075em;
-}
-
-.bam-opening-rule {
-  width: 3.25rem;
-  height: 1px;
-  margin: 1.2rem auto 0;
-  background: #c4a06a;
-  animation: bam-opening-rule .5s .15s ease both;
-}
-
-@keyframes bam-opening-enter {
-  from { transform: translateY(.55rem); opacity: 0; }
-}
-@keyframes bam-opening-rule {
-  from { transform: scaleX(0); }
-}
-@keyframes bam-opening-release {
-  0%, 74% { opacity: 1; }
-  100% { opacity: 0; }
-}
-
 .bam-home-masthead {
   position: relative;
   isolation: isolate;
@@ -298,8 +213,4 @@ html body .bam-home-masthead a:focus-visible { outline: 2px solid #f2d396 !impor
   .bam-home-masthead h1 { font-size: clamp(2.65rem, 8.5vw, 4.6rem); }
   .bam-home-masthead .bam-masthead-project { right: auto; left: 1.5rem; }
   .bam-home-project { grid-template-columns: 1fr; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  #bam-opening[open], #bam-opening[open] * { animation: none; }
 }
