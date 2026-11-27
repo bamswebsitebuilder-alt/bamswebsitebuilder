@@ -42,6 +42,10 @@ body.polished-home .hero.hero-conversion .hero-buttons a{
 }
 body.polished-home .hero.hero-conversion .hero-buttons .btn{background:#e0b348!important;color:#15120b!important;border:1px solid #e0b348!important}
 body.polished-home .hero.hero-conversion .hero-buttons .secondary-button{background:transparent!important;color:#f6f4ef!important;border:1px solid #78716a!important}
+html[data-theme="light"] body.polished-home .hero.hero-conversion .hero-buttons .secondary-button{
+  color:var(--design-ink,#171613)!important;
+  border-color:#8b795a!important;
+}
 body.polished-home .hero.hero-conversion .hero-trust{
   display:flex!important;flex-wrap:wrap!important;justify-content:flex-start!important;
   gap:10px 20px!important;margin:0!important;padding:0!important;
