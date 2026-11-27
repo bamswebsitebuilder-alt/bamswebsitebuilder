@@ -21,7 +21,7 @@
   gap: 8px 16px;
   padding-block-start: 12px;
   text-align: start;
-  color: var(--design-text, #f8f8f7);
+  color: var(--design-ink, #f8f8f7);
 }
 
 .bam-cinematic .bam-cinematic-caption h2 {
