@@ -37,7 +37,8 @@
     if (!image.naturalWidth) return;
 
     replay.hidden = false;
-    if (reducedMotion.matches || !('IntersectionObserver' in window)) return;
+    if (reducedMotion.matches || document.documentElement.hasAttribute('data-opening-preview') ||
+        !('IntersectionObserver' in window)) return;
 
     observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting && entry.intersectionRatio >= 0.6) play();
