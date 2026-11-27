@@ -89,7 +89,7 @@
 </style>
 
 <meta name="google-site-verification" content="Yb5p2oRA9IPwvq35H0BHYbGSQxVlfM1rdoRV9C8bvFI"><link rel="stylesheet" href="/css/email-updates.css?v=20261012-2">
-<link rel="stylesheet" href="/css/site-growth.css?v=20261013-growth-1"><link rel="stylesheet" href="/css/footer-fix.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/responsive-fixes.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/client-guide.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/accessibility.css?v=20261110-skipfix-2"><link rel="stylesheet" href="/css/public-polish.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/menu-organization.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/public-shell.css?v=20261031-footer-1"><noscript><style id="loader-fallback">#bam-loader{display:none!important}</style></noscript><link rel="stylesheet" href="/css/portal-brand.css?v=20261013-brand-4">
+<link rel="stylesheet" href="/css/site-growth.css?v=20261013-growth-1"><link rel="stylesheet" href="/css/footer-fix.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/responsive-fixes.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/client-guide.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/accessibility.css?v=20261110-skipfix-2"><link rel="stylesheet" href="/css/public-polish.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/menu-organization.css?v=20261013-consistency-1"><link rel="stylesheet" href="/css/public-shell.css?v=20261031-footer-1"><link rel="stylesheet" href="/css/portal-brand.css?v=20261013-brand-4">
 
 <style id="bam-build-video-styles">
 .bam-build-video{display:block;width:100%;height:auto;aspect-ratio:16/9;margin:28px 0 0;border:1px solid rgba(212,166,55,.35);border-radius:18px;background:#090909;box-shadow:0 16px 50px rgba(0,0,0,.22)}
@@ -101,19 +101,57 @@
 <link rel="stylesheet" href="/css/site-footer.css?v=20261109-sitewide-1">
 <link rel="stylesheet" href="/animations.css">
 <link rel="stylesheet" href="/css/growth-leads.css?v=20261120-1"><link rel="stylesheet" href="/css/agency-refresh.css?v=20261123-white-contrast-3">
-<link rel="stylesheet" href="/css/coding-loader.css?v=20261123-clean-3"><link rel="stylesheet" href="/css/home-professional.css?v=20261123-1">
+<link rel="stylesheet" href="/css/coding-loader.css?v=3d-intro-1"><link rel="stylesheet" href="/css/home-professional.css?v=20261123-1">
 <link rel="stylesheet" href="/css/bam-design.css">
 </head>
 <body class="polished-home"><a class="site-skip-link" href="#main-content">Skip to main content</a>
-<div id="bam-loader" role="status" aria-live="polite" aria-label="Loading BAM's Website Builder">
-  <div class="bam-loader-inner bam-loader-image-layout">
-    <img decoding="async" width="1500" height="1500" class="bam-loader-logo-image" fetchpriority="high" src="/images/logo-dark.webp" alt="BAM's Website Builder" />
-    <p class="bam-loader-code-label">Building your digital presence</p><div class="bam-loader-progress" aria-hidden="true">
-      <div class="bam-loader-line"></div>
-      <div class="bam-loader-status" aria-hidden="true">Compiling your next big idea...</div>
+<div id="bam-home-intro" class="bam-home-intro" aria-hidden="true" hidden>
+  <div class="bam-intro-door bam-intro-door-left"></div>
+  <div class="bam-intro-door bam-intro-door-right"></div>
+  <div class="bam-intro-stage">
+    <div class="bam-intro-window">
+      <div class="bam-intro-window-back"></div>
+      <div class="bam-intro-window-face">
+        <div class="bam-intro-window-bar"></div>
+        <div class="bam-intro-wordmark">
+          <strong>BAM’S</strong>
+          <span>Website Builder</span>
+        </div>
+        <div class="bam-intro-code"><span>&lt;/&gt;</span><i></i></div>
+      </div>
     </div>
   </div>
-</div><header class="site-header" id="site-header">
+</div>
+<script>
+(() => {
+  const intro = document.getElementById('bam-home-intro');
+  const navigation = performance.getEntriesByType('navigation')[0];
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  if (reducedMotion.matches || location.hash || navigation?.type === 'back_forward') return;
+
+  try {
+    const key = 'bam-home-intro-seen';
+    if (sessionStorage.getItem(key)) return;
+    sessionStorage.setItem(key, '1');
+  } catch {
+    // The intro can still play if the browser blocks session storage.
+  }
+
+  const timeout = window.setTimeout(finish, 1500);
+  function finish() {
+    window.clearTimeout(timeout);
+    document.removeEventListener('keydown', finish);
+    intro.remove();
+  }
+
+  document.addEventListener('keydown', finish, { once: true });
+  intro.addEventListener('animationend', (event) => {
+    if (event.target === intro) finish();
+  });
+  intro.classList.add('is-playing');
+})();
+</script>
+<header class="site-header" id="site-header">
 <div class="header-container">
 <a aria-label="BAM's Website Builder home" class="site-brand" href="/">
 <span class="brand-text">
@@ -304,7 +342,6 @@
 <script src="/js/livechat.js?v=20261013-growth-2"></script>
 <noscript><a href="https://www.livechat.com/chat-with/19864799/" rel="nofollow">Chat with us</a>, powered by <a href="https://www.livechat.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a></noscript>
 
-<script src="/js/home-loader.js?v=20261123-clean-3"></script>
 <script src="/js/cookie-consent.js?v=20260928-3"></script>
 <script src="/js/newsletter-captcha.js?v=20261013-growth-2" defer></script>
 <script src="/js/navigation.js?v=20261123-menu-fix-2"></script><script src="/js/analytics-config.js?v=20261013-growth-2" defer></script><script src="/js/site-analytics.js?v=20261013-growth-2" defer></script>
