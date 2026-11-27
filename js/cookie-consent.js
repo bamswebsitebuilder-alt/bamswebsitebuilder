@@ -174,6 +174,7 @@
 
     document.body.append(backdrop, panel);
 
+    const inlineButton = document.querySelector('.bam-account #bam-privacy-reopen');
     let reopenButton = document.getElementById('bam-privacy-reopen');
     if (!reopenButton) {
       reopenButton = document.createElement('button');
@@ -190,13 +191,19 @@
     // Reuse an existing settings button, but never leave it covering mobile page content.
     const footer = document.querySelector('footer.home-footer, footer.site-footer, footer');
     const footerLinks = footer?.querySelector('.client-resource-links, .footer-account-links, .footer-utility, .footer-links');
-    if (footer && !footer.contains(reopenButton)) (footerLinks || footer).appendChild(reopenButton);
+    if (inlineButton) {
+      inlineButton.hidden = false;
+      panel.inert = true;
+    } else if (footer && !footer.contains(reopenButton)) {
+      (footerLinks || footer).appendChild(reopenButton);
+    }
 
     const main = panel.querySelector('.bam-consent-main');
     const settings = panel.querySelector('.bam-consent-settings');
     const close = panel.querySelector('.bam-consent-close');
 
     const openPanel = () => {
+      panel.inert = false;
       backdrop.classList.add('is-open');
       panel.classList.add('is-open');
       document.body.classList.add('bam-consent-open');
@@ -207,6 +214,10 @@
       backdrop.classList.remove('is-open');
       panel.classList.remove('is-open');
       document.body.classList.remove('bam-consent-open');
+      if (inlineButton) {
+        panel.inert = true;
+        inlineButton.focus({ preventScroll: true });
+      }
     };
 
     const showMain = () => {
@@ -286,7 +297,7 @@
     reopenButton.addEventListener('click', window.BAMOpenCookieSettings);
 
     const forceOpen = new URLSearchParams(window.location.search).get('privacy') === '1';
-    if (!readConsent().decided || forceOpen) openPanel();
+    if (forceOpen || (!inlineButton && !readConsent().decided)) openPanel();
   };
 
   if (document.readyState === 'loading') {

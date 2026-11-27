@@ -106,7 +106,6 @@ try{
   await page.waitForFunction(()=>document.getElementById('service-agreement-client').textContent.includes('Both parties signed'));
   await page.evaluate(()=>{document.querySelectorAll('.portal-panel').forEach(p=>p.classList.toggle('active',p.id==='agreements'));});
   assert.equal(await page.locator('#service-agreement-client').count(),1);
-  assert.equal(await page.locator('#client-agreements').count(),1,'existing quote host is preserved');
   const downloadPromise=page.waitForEvent('download');
   await page.getByRole('button',{name:'Download signed PDF'}).click();
   const signedCopy=await downloadPromise;assert.equal(signedCopy.suggestedFilename(),'BAM-signed-signed-test.pdf');
@@ -123,6 +122,8 @@ try{
       document.querySelectorAll('.portal-panel').forEach(p=>p.classList.toggle('active',p.id==='agreements'));
     },completed);
     await page.locator('#service-agreement-client iframe').waitFor();
+    assert.equal(await page.locator('#agreements #client-agreements').count(),0,'Agreements only shows service agreements');
+    assert.equal(await page.locator('#billing details:not([open]) #client-agreements').count(),1,'old quote records remain behind an expandable Billing section');
     assert.equal(await page.getByRole('link',{name:'Open agreement in Jotform'}).count(),0,'clients have no offsite signing link');
     assert.equal(await page.getByRole('button',{name:'Show signing document'}).count(),0,'client forms open inline automatically');
     const frame=page.frameLocator('#service-agreement-client iframe');

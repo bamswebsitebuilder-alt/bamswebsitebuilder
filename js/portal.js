@@ -28,8 +28,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const showing = input.type === "text";
       input.type = showing ? "password" : "text";
-      button.textContent = showing ? "Show" : "Hide";
-      button.setAttribute("aria-label", showing ? "Show password" : "Hide password");
+      const spanish = document.documentElement.lang.toLowerCase().startsWith("es");
+      const label = showing
+        ? (spanish ? "Mostrar" : "Show")
+        : (spanish ? "Ocultar" : "Hide");
+      button.textContent = label;
+      button.setAttribute("aria-label", label + (spanish ? " contraseña" : " password"));
     });
   });
 
