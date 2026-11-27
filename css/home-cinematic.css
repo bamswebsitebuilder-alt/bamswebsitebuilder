@@ -1,12 +1,44 @@
-.bam-cinematic .bam-cinematic-layout {
-  display: grid;
-  align-items: center;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.65fr);
-  gap: clamp(24px, 5vw, 72px);
+/* The base stays in place as the screen opens. */
+.bam-cinematic-laptop {
+  perspective: 900px;
 }
 
-.bam-cinematic .home-intro {
-  margin-inline: 0;
+.bam-cinematic-laptop::after {
+  content: "";
+  display: block;
+  height: clamp(8px, 1.5vw, 14px);
+  border: 1px solid #856735;
+  border-top: 0;
+  border-radius: 0 0 28px 28px;
+  background: linear-gradient(#493b29, #251d15);
+}
+
+.bam-cinematic .bam-cinematic-caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding-block-start: 12px;
+  text-align: start;
+  color: var(--design-text, #f8f8f7);
+}
+
+.bam-cinematic .bam-cinematic-caption h2 {
+  margin: 0;
+  color: inherit;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.35;
+  letter-spacing: normal;
+}
+
+.bam-cinematic .bam-cinematic-caption a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--design-gold, #d8b66a);
+  text-decoration: underline;
+  text-underline-offset: .2em;
 }
 
 .bam-cinematic .bam-cinematic-stage {
@@ -15,7 +47,8 @@
   overflow: hidden;
   margin: 0;
   border: 1px solid #856735;
-  border-radius: clamp(12px, 2vw, 22px);
+  border-radius: clamp(12px, 2vw, 22px) clamp(12px, 2vw, 22px) 3px 3px;
+  transform-origin: bottom center;
   background: #211912;
   color: #f5ead5;
   box-shadow: 0 20px 48px #0004;
@@ -92,7 +125,7 @@
 
 .bam-cinematic .bam-cinematic-replay {
   display: block;
-  margin-block-start: 10px;
+  margin: 0;
   min-height: 44px;
   padding: 8px 12px;
   border: 1px solid currentColor;
@@ -114,7 +147,7 @@
 }
 
 .bam-cinematic .bam-cinematic-replay[hidden] {
-  display: none;
+  display: none !important;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -126,6 +159,10 @@
 
   .bam-cinematic .is-ready .bam-code-line:not(:first-child) {
     visibility: hidden;
+  }
+
+  .bam-cinematic .bam-cinematic-stage.is-playing {
+    animation: bam-cinematic-open .65s cubic-bezier(.2, .65, .25, 1);
   }
 
   .bam-cinematic .is-playing .bam-code-line {
@@ -148,6 +185,11 @@
   }
 }
 
+@keyframes bam-cinematic-open {
+  from { transform: rotateX(-72deg); }
+  to { transform: rotateX(0); }
+}
+
 @keyframes bam-cinematic-type {
   from { clip-path: inset(0 100% 0 0); }
   to { clip-path: inset(0); }
@@ -163,14 +205,8 @@
   94%, 100% { transform: scale(1); }
 }
 
-@media (max-width: 760px) {
-  .bam-cinematic .bam-cinematic-layout {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .bam-cinematic .bam-cinematic-replay {
-    display: none;
+    display: none !important;
   }
 }
