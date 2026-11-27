@@ -1,29 +1,12 @@
-.bam-cinematic .bam-cinematic-caption {
-  display: flex;
-  flex-wrap: wrap;
+.bam-cinematic .bam-cinematic-layout {
+  display: grid;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px 16px;
-  padding-block-start: 12px;
-  text-align: start;
-  color: var(--design-ink, #f8f8f7);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.65fr);
+  gap: clamp(24px, 5vw, 72px);
 }
 
-.bam-cinematic .bam-cinematic-caption h2 {
-  margin: 0;
-  color: inherit;
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  line-height: 1.35;
-  letter-spacing: normal;
-}
-
-.bam-cinematic .bam-cinematic-caption a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  color: var(--design-gold, #d8b66a);
-  text-decoration: underline;
-  text-underline-offset: .2em;
+.bam-cinematic .home-intro {
+  margin-inline: 0;
 }
 
 .bam-cinematic .bam-cinematic-stage {
@@ -76,7 +59,7 @@
   overflow: hidden;
   opacity: 0;
   visibility: hidden;
-  background: radial-gradient(ellipse at 50% 59%, #574026, #221912 48%, #14100d 79%);
+  background: radial-gradient(ellipse at top right, #2a2623, #16171d 70%);
   color: #f5ead5;
 }
 
@@ -88,7 +71,7 @@
 .bam-cinematic .bam-cinematic-editor pre {
   margin: 0;
   padding: clamp(8px, 2vw, 24px);
-  color: #c1ac91;
+  color: #f4ead9;
   font: 500 clamp(0.67rem, 1.4vw, 1.05rem)/1.45 ui-monospace, monospace;
   tab-size: 2;
 }
@@ -109,7 +92,7 @@
 
 .bam-cinematic .bam-cinematic-replay {
   display: block;
-  margin: 0;
+  margin-block-start: 10px;
   min-height: 44px;
   padding: 8px 12px;
   border: 1px solid currentColor;
@@ -131,141 +114,63 @@
 }
 
 .bam-cinematic .bam-cinematic-replay[hidden] {
-  display: none !important;
-}
-
-/* The base image is the completed site. The orb only appears during playback. */
-.bam-cinematic-orb {
-  --shell-seam: 51% 0%, 48% 18%, 55% 33%, 46% 48%, 51% 62%, 43% 78%, 48% 100%;
-  position: absolute;
-  inset: 0;
   display: none;
-  pointer-events: none;
-}
-
-.bam-cinematic-core,
-.bam-cinematic-shell,
-.bam-cinematic-flash {
-  position: absolute;
-  inset: 53% auto auto 50%;
-  width: 36%;
-  aspect-ratio: 1;
-  translate: -50% -50%;
-  border-radius: 50%;
-}
-
-.bam-cinematic-core {
-  background:
-    radial-gradient(ellipse at 28% 20%, #fffef0, transparent 40%),
-    radial-gradient(circle at 37% 30%, #fff2d3, #e2bb7c 51%, #936537 76%, #492b16 100%);
-  box-shadow: 0 20px 34px #0d0708ad, 0 0 45px #e8aa6138;
-}
-
-.bam-cinematic-shell { border-radius: 0; }
-
-.bam-cinematic-shell-piece {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background:
-    radial-gradient(ellipse 19% 12% at 29% 22%, #fff5b9e8, transparent 88%),
-    radial-gradient(ellipse at 34% 28%, #ffe69a, #d5a34b 37%, #895219 59%, #311605 82%);
-  box-shadow: inset 0 0 0 1px #fce2a49c;
-}
-
-.bam-cinematic-shell-piece:first-child {
-  clip-path: polygon(0 0, var(--shell-seam), 0 100%);
-}
-
-.bam-cinematic-shell-piece:last-child {
-  clip-path: polygon(100% 0, var(--shell-seam), 100% 100%);
-}
-
-.bam-cinematic-stream {
-  position: absolute;
-  top: 0;
-  left: 49%;
-  width: 2%;
-  height: 28%;
-  border-radius: 20%;
-  background: linear-gradient(to right, #713b16, #e3ae56 37%, #fff1ab 57%, #936123 89%);
-  box-shadow: 0 0 15px #fbc46b80;
-  transform-origin: top;
-}
-
-.bam-cinematic-flash {
-  width: 56%;
-  background: radial-gradient(circle, #fff6d6 4%, #ffd57d91 32%, #e2a24700 64%);
-  mix-blend-mode: screen;
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  .bam-cinematic .is-ready .bam-cinematic-editor,
   .bam-cinematic .is-playing .bam-cinematic-editor {
+    opacity: 1;
     visibility: visible;
-    animation: bam-cinematic-reveal 5s both;
   }
 
-  .bam-cinematic .is-playing .bam-cinematic-editor pre {
-    animation: bam-cinematic-code 5s both;
+  .bam-cinematic .is-ready .bam-code-line:not(:first-child) {
+    visibility: hidden;
   }
 
-  .bam-cinematic .is-playing .bam-cinematic-orb {
-    display: block;
+  .bam-cinematic .is-playing .bam-code-line {
+    animation: bam-cinematic-type .36s steps(20, end) both;
   }
 
-  .bam-cinematic .is-playing .bam-cinematic-core { animation: bam-cinematic-core 5s both; }
-  .bam-cinematic .is-playing .bam-cinematic-stream { animation: bam-cinematic-pour 5s both; }
-  .bam-cinematic .is-playing .bam-cinematic-shell { animation: bam-cinematic-coat 5s both; }
-  .bam-cinematic .is-playing .bam-cinematic-shell-piece { animation: bam-cinematic-break 5s both; }
-  .bam-cinematic .is-playing .bam-cinematic-flash { animation: bam-cinematic-flash 5s both; }
+  .bam-cinematic .is-playing .bam-code-line:nth-child(2) { animation-delay: .4s; }
+  .bam-cinematic .is-playing .bam-code-line:nth-child(3) { animation-delay: .84s; }
+  .bam-cinematic .is-playing .bam-code-line:nth-child(4) { animation-delay: 1.28s; }
+  .bam-cinematic .is-playing .bam-code-line:nth-child(5) { animation-delay: 1.72s; }
+  .bam-cinematic .is-playing .bam-code-line:nth-child(6) { animation-delay: 2.16s; }
+  .bam-cinematic .is-playing .bam-code-line:nth-child(7) { animation-delay: 2.6s; }
 
-  .bam-cinematic-shell-piece:first-child { --break-x: -79%; --break-angle: -31deg; }
-  .bam-cinematic-shell-piece:last-child { --break-x: 79%; --break-angle: 31deg; }
+  .bam-cinematic .is-playing .bam-cinematic-editor {
+    animation: bam-cinematic-reveal 4.8s both;
+  }
+
+  .bam-cinematic .is-playing .bam-cinematic-screen img {
+    animation: bam-cinematic-preview 4.8s both;
+  }
+}
+
+@keyframes bam-cinematic-type {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0); }
 }
 
 @keyframes bam-cinematic-reveal {
-  0%, 63% { opacity: 1; }
-  83%, 100% { opacity: 0; }
+  0%, 67% { clip-path: inset(0); }
+  89%, 100% { clip-path: inset(0 0 100% 0); }
 }
 
-@keyframes bam-cinematic-code {
-  0% { clip-path: inset(0 0 100%); opacity: 1; }
-  23% { clip-path: inset(0); }
-  43%, 100% { clip-path: inset(0); opacity: .24; }
+@keyframes bam-cinematic-preview {
+  0%, 67% { transform: scale(1.12); }
+  94%, 100% { transform: scale(1); }
 }
 
-@keyframes bam-cinematic-core {
-  0% { opacity: 0; scale: .72; }
-  13%, 63% { opacity: 1; scale: 1; }
-  76%, 100% { opacity: 0; scale: 1.2; }
-}
-
-@keyframes bam-cinematic-pour {
-  0%, 13% { clip-path: inset(0 0 100%); opacity: 0; }
-  22%, 39% { clip-path: inset(0); opacity: 1; }
-  50%, 100% { clip-path: inset(100% 0 0); opacity: 0; }
-}
-
-@keyframes bam-cinematic-coat {
-  0%, 21% { clip-path: inset(0 0 100%); }
-  49% { clip-path: inset(0); }
-  50%, 100% { clip-path: none; }
-}
-
-@keyframes bam-cinematic-break {
-  0%, 59% { transform: none; opacity: 1; }
-  63% { transform: translateX(calc(var(--break-x) * .075)) rotate(calc(var(--break-angle) * .18)); opacity: 1; }
-  70% { opacity: 1; }
-  87%, 100% { transform: translate(var(--break-x), 30%) rotate(var(--break-angle)) scale(.74); opacity: 0; }
-}
-
-@keyframes bam-cinematic-flash {
-  0%, 59%, 82%, 100% { opacity: 0; scale: .7; }
-  65% { opacity: .8; scale: 1.15; }
+@media (max-width: 760px) {
+  .bam-cinematic .bam-cinematic-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .bam-cinematic .bam-cinematic-replay {
-    display: none !important;
+    display: none;
   }
 }
