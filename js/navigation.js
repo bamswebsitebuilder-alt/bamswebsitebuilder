@@ -429,7 +429,7 @@
     });
   });
   // Ensure payment options are discoverable from every page's shared navigation.
-  document.addEventListener('DOMContentLoaded', () => {
+  ready(() => {
     const desktop = document.querySelector('.desktop-navigation [data-menu-group="services"] .nav-more-links');
     if (desktop && !desktop.querySelector('a[href="/checkout"]')) {
       const a = document.createElement('a');
@@ -447,7 +447,8 @@
       }
       a.dataset.page = 'checkout';
       if (!a.querySelector('.mobile-link-icon')) {
-        a.innerHTML = '<span class="mobile-link-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"></rect><path d="M2.5 10h19M6.5 15h5M17 15h1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg></span><span>Website checkout</span>';
+        const label = document.documentElement.lang.toLowerCase().startsWith('es') ? 'Pagar sitio web' : 'Website checkout';
+        a.innerHTML = `<span class="mobile-link-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"></rect><path d="M2.5 10h19M6.5 15h5M17 15h1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg></span><span>${label}</span>`;
       }
     }
   });
@@ -484,21 +485,38 @@
 
     const quote = menu.querySelector('.mobile-menu-cta');
     const booking = nav.querySelector('a[data-page="booking"]');
-    const contact = nav.querySelector('a[data-page="contact"]');
-    const resources = nav.querySelector('[aria-labelledby="mobile-group-resources"]');
     if (quote) {
       nav.before(quote);
       if (booking) quote.append(booking);
     }
-    if (contact && resources) resources.append(contact);
 
-    const home = nav.querySelector(':scope > a[data-page="home"]');
-    const pricing = nav.querySelector('a[data-page="prices"]');
-    if (home && pricing) home.after(pricing);
-    const login = nav.querySelector('a[data-page="login"]');
-    if (login) nav.append(login);
+    const pricingLinks = nav.querySelectorAll('a[data-page="prices"], a[data-page="subscriptions"], a[data-page="checkout"]');
+    if (pricingLinks.length) {
+      const group = document.createElement('div');
+      group.className = 'mobile-nav-group';
+      group.setAttribute('aria-labelledby', 'mobile-group-pricing');
+      const heading = document.createElement('p');
+      heading.className = 'mobile-nav-group-title';
+      heading.id = 'mobile-group-pricing';
+      heading.textContent = document.documentElement.lang.toLowerCase().startsWith('es') ? 'Precios' : 'Pricing';
+      group.append(heading, ...pricingLinks);
+      nav.append(group);
+    }
+
+    const order = [
+      ':scope > a[data-page="home"]',
+      '[aria-labelledby="mobile-group-services"]',
+      '[aria-labelledby="mobile-group-pricing"]',
+      '[aria-labelledby="mobile-group-work"]',
+      '[aria-labelledby="mobile-group-resources"]',
+      'a[data-page="contact"]',
+      'a[data-page="login"]'
+    ];
+    // Move the existing links so keyboard order follows the visible drawer.
+    nav.prepend(...order.map(selector => nav.querySelector(selector)).filter(Boolean));
 
     const groupIcons = {
+      'mobile-group-pricing': 'prices',
       'mobile-group-services': 'services',
       'mobile-group-work': 'portfolio',
       'mobile-group-resources': 'blog'
