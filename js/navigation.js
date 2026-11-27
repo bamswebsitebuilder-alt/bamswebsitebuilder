@@ -447,7 +447,8 @@
       }
       a.dataset.page = 'checkout';
       if (!a.querySelector('.mobile-link-icon')) {
-        a.innerHTML = '<span class="mobile-link-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"></rect><path d="M2.5 10h19M6.5 15h5M17 15h1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg></span><span>Website checkout</span>';
+        const label = document.documentElement.lang.toLowerCase().startsWith('es') ? 'Pagar sitio web' : 'Website checkout';
+        a.innerHTML = `<span class="mobile-link-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"></rect><path d="M2.5 10h19M6.5 15h5M17 15h1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg></span><span>${label}</span>`;
       }
     }
   });
@@ -489,11 +490,24 @@
       if (booking) quote.append(booking);
     }
 
+    const pricingLinks = nav.querySelectorAll('a[data-page="prices"], a[data-page="subscriptions"], a[data-page="checkout"]');
+    if (pricingLinks.length) {
+      const group = document.createElement('div');
+      group.className = 'mobile-nav-group';
+      group.setAttribute('aria-labelledby', 'mobile-group-pricing');
+      const heading = document.createElement('p');
+      heading.className = 'mobile-nav-group-title';
+      heading.id = 'mobile-group-pricing';
+      heading.textContent = document.documentElement.lang.toLowerCase().startsWith('es') ? 'Precios' : 'Pricing';
+      group.append(heading, ...pricingLinks);
+      nav.append(group);
+    }
+
     const order = [
       ':scope > a[data-page="home"]',
-      'a[data-page="prices"]:not([href*="#"])',
-      'a[data-page="portfolio"]',
+      '[aria-labelledby="mobile-group-pricing"]',
       '[aria-labelledby="mobile-group-services"]',
+      'a[data-page="portfolio"]',
       '[aria-labelledby="mobile-group-work"]',
       'a[data-page="contact"]',
       'a[data-page="login"]',
@@ -503,6 +517,7 @@
     nav.prepend(...order.map(selector => nav.querySelector(selector)).filter(Boolean));
 
     const groupIcons = {
+      'mobile-group-pricing': 'prices',
       'mobile-group-services': 'services',
       'mobile-group-work': 'portfolio',
       'mobile-group-resources': 'blog'
