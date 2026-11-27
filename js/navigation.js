@@ -505,13 +505,12 @@
 
     const order = [
       ':scope > a[data-page="home"]',
-      '[aria-labelledby="mobile-group-pricing"]',
       '[aria-labelledby="mobile-group-services"]',
-      'a[data-page="portfolio"]',
+      '[aria-labelledby="mobile-group-pricing"]',
       '[aria-labelledby="mobile-group-work"]',
+      '[aria-labelledby="mobile-group-resources"]',
       'a[data-page="contact"]',
-      'a[data-page="login"]',
-      '[aria-labelledby="mobile-group-resources"]'
+      'a[data-page="login"]'
     ];
     // Move the existing links so keyboard order follows the visible drawer.
     nav.prepend(...order.map(selector => nav.querySelector(selector)).filter(Boolean));
