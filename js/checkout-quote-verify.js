@@ -122,7 +122,7 @@ async function load(user){
    refreshChoice();return;
   }
   if(version!==loadingVersion)return;
-  message(choices.length?'No accepted standard quote is available. Review the agreement in your Client Portal or ask BAM for a revised quote.':'No issued quote found. Ask BAM to issue a quote in your Client Portal.');
+  message(choices.length?'No accepted standard quote is available. Open Billing in your Client Portal to review existing quotes, or ask BAM for a revised quote.':'No issued quote found. Ask BAM to issue a quote in your Client Portal.');
  }catch(e){if(version===loadingVersion)message('Unable to verify your quote securely. Sign in again or open your Client Portal.');}
 }
 const save=$('ck-addendum-save');
