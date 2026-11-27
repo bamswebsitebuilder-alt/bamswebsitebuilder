@@ -121,9 +121,7 @@ html body .bam-home-masthead a:focus-visible { outline: 2px solid #f2d396 !impor
 .bam-home-project {
   --project-space: max(1.5rem, calc((100% - 1240px) / 2));
   display: grid;
-  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
-  align-items: center;
-  gap: clamp(2rem, 5vw, 5rem);
+  gap: clamp(1.25rem, 3vw, 2.5rem);
   padding: clamp(3.75rem, 8vw, 8rem) var(--project-space);
   color: var(--design-ink, #faf9f6);
   background: var(--design-canvas, #101010);
@@ -132,13 +130,25 @@ html body .bam-home-masthead a:focus-visible { outline: 2px solid #f2d396 !impor
 
 .bam-home-project .bam-project-eyebrow { color: var(--design-gold, #e6bf70); }
 .bam-home-project h2 { font-size: clamp(2.4rem, 5.25vw, 5rem); }
-.bam-home-project-copy > p:not(.bam-project-eyebrow) {
+
+.bam-home-project-copy {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, .78fr);
+  align-items: end;
+  gap: 1.25rem clamp(1.5rem, 4vw, 4rem);
+}
+.bam-project-details > p {
   max-width: 29rem;
-  margin: 1.25rem 0 .7rem;
+  margin: 0 0 .25rem;
   color: var(--design-muted, #c7c4bd);
   font: 400 1rem/1.65 system-ui, sans-serif;
 }
-.bam-home-project-copy > a {
+.bam-project-links {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 1rem;
+}
+.bam-project-links a {
   display: flex;
   align-items: center;
   width: fit-content;
@@ -149,32 +159,18 @@ html body .bam-home-masthead a:focus-visible { outline: 2px solid #f2d396 !impor
   text-underline-offset: .25em;
 }
 
-.bam-home-project-views {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 26%);
-  align-items: end;
-  margin: 0;
-  padding-bottom: 6%;
-}
-.bam-home-project-views img {
+.bam-home-project-views { margin: 0; }
+
+.bam-project-film {
   display: block;
   width: 100%;
   height: auto;
+  aspect-ratio: 16 / 9;
+  scroll-margin-top: 5rem;
   border: 1px solid var(--design-line, #49433a);
   border-radius: 8px;
+  background: #171513;
   box-shadow: 0 18px 36px #0004;
-}
-.bam-home-project-views .bam-project-desktop {
-  grid-column: 1 / -1;
-  grid-row: 1;
-  align-self: center;
-  width: 88%;
-}
-.bam-home-project-views .bam-project-mobile {
-  grid-column: 2;
-  grid-row: 1;
-  z-index: 1;
-  margin-bottom: -17%;
 }
 
 @supports (animation-timeline: view()) {
@@ -185,13 +181,6 @@ html body .bam-home-masthead a:focus-visible { outline: 2px solid #f2d396 !impor
       animation-timeline: --bam-masthead;
       animation-range: exit 0% exit 100%;
     }
-
-    .bam-home-project-views { view-timeline-name: --bam-project; }
-    .bam-project-mobile {
-      animation: bam-project-pan ease-out both;
-      animation-timeline: --bam-project;
-      animation-range: entry 0% entry 100%;
-    }
   }
 }
 
@@ -199,11 +188,6 @@ html body .bam-home-masthead a:focus-visible { outline: 2px solid #f2d396 !impor
   from { transform: scale(1.02); }
   to { transform: scale(1.12) translateY(3%); }
 }
-@keyframes bam-project-pan {
-  from { transform: translateY(8%); }
-  to { transform: translateY(0); }
-}
-
 @media (max-width: 720px) {
   .bam-home-masthead { min-height: min(40rem, 82svh); }
   .bam-masthead-photo { object-position: 60% center; }
@@ -212,5 +196,5 @@ html body .bam-home-masthead a:focus-visible { outline: 2px solid #f2d396 !impor
   }
   .bam-home-masthead h1 { font-size: clamp(2.65rem, 8.5vw, 4.6rem); }
   .bam-home-masthead .bam-masthead-project { right: auto; left: 1.5rem; }
-  .bam-home-project { grid-template-columns: 1fr; }
+  .bam-home-project-copy { grid-template-columns: 1fr; }
 }
