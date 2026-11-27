@@ -1,83 +1,259 @@
-/* BAM'S: centered login experience based on supplied minimal dashboard reference. */
-body.login-page{background:#151515!important}
-body.login-page > .site-header,body.login-page > .menu-overlay,body.login-page > .mobile-menu,body.login-page > .home-footer{display:none!important}
-body.login-page .bam-login-refresh,html[data-theme="light"] body.login-page .bam-login-refresh{
- --auth-gold:#f3c83f;--auth-card:#222222;--auth-field:#171717;
- display:grid!important;place-items:center!important;position:relative!important;isolation:isolate;
- box-sizing:border-box!important;min-height:100svh!important;width:100%!important;max-width:none!important;
- margin:0!important;padding:54px 20px 35px!important;background:#151515!important;color:#f6f6f6!important;
- overflow:hidden!important;
+/* Shared account landing and sign-in styles for English and Spanish. */
+body.login-page:has(.bam-account) {
+  padding-top: 0 !important;
 }
-body.login-page .bam-login-refresh *,body.login-page .bam-login-refresh *::before,body.login-page .bam-login-refresh *::after{box-sizing:border-box}
-body.login-page .bam-login-refresh::before{
- content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;
- background-image:radial-gradient(circle,rgba(213,213,213,.23) .7px,transparent 1px);
- background-size:49px 49px;opacity:.38;
- mask-image:radial-gradient(ellipse at center,#000 5%,transparent 80%);
+
+body.login-page:has(.bam-account) > :is(.site-header, .menu-overlay, .mobile-menu, .home-footer) {
+  display: none !important;
 }
-body.login-page .bam-auth-scene{width:100%;min-height:calc(100svh - 89px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:38px}
-body.login-page .bam-auth-home{position:absolute;top:24px;left:clamp(20px,5vw,72px);font:500 13px/1.4 system-ui,sans-serif;color:#c6c6c6;text-decoration:none}
-body.login-page .bam-auth-home:hover{color:#f3c83f}
-body.login-page .bam-auth-frame{position:relative;width:min(100%,420px);padding:16px}
-body.login-page .bam-auth-frame::before{
- content:"";position:absolute;inset:0;pointer-events:none;
- border:1px dashed rgba(168,168,168,.15);
+
+body.login-page .bam-account {
+  --account-canvas: #161513;
+  --account-card: #22201e;
+  --account-field: #171614;
+  --account-text: #faf6ed;
+  --account-muted: #c4bcb1;
+  --account-line: #84796a;
+  --account-link: #f4cf79;
+  --account-primary: #f1c66d;
+  --account-focus: #f1c66d;
+  --account-glow: #30271b;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  align-items: center;
+  gap: clamp(24px, 6vh, 64px);
+  min-height: 100vh;
+  min-height: 100svh;
+  margin: 0;
+  padding: 16px clamp(16px, 5vw, 72px) clamp(24px, 7vh, 72px) !important;
+  background: radial-gradient(ellipse at 50% 28%, var(--account-glow), transparent 70%), var(--account-canvas) !important;
+  color: var(--account-text);
+  font-family: system-ui, sans-serif;
 }
-body.login-page .bam-auth-frame-corner{position:absolute;z-index:1;width:9px;height:9px;border-radius:50%;background:#303030;border:1px solid #404040}
-body.login-page .bam-auth-frame-corner-tl{top:-4px;left:-4px}
-body.login-page .bam-auth-frame-corner-tr{top:-4px;right:-4px}
-body.login-page .bam-auth-frame-corner-bl{bottom:-4px;left:-4px}
-body.login-page .bam-auth-frame-corner-br{bottom:-4px;right:-4px}
-body.login-page .bam-auth-panel{
- width:100%;padding:clamp(24px,5vw,31px)!important;background:var(--auth-card)!important;
- border:1px solid #292929!important;border-radius:23px!important;
- box-shadow:0 18px 56px rgba(0,0,0,.24)!important;
+
+html[data-theme="light"] body.login-page .bam-account {
+  --account-canvas: #f7f4ee;
+  --account-card: #fffdf8;
+  --account-field: #fff;
+  --account-text: #252019;
+  --account-muted: #5f564b;
+  --account-line: #8b8072;
+  --account-link: #714800;
+  --account-focus: #885800;
+  --account-glow: #efe3cc;
 }
-body.login-page .bam-auth-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
-body.login-page .bam-auth-brand{display:flex;align-items:center;gap:9px;color:#f5f5f5;font:750 19px/1.1 system-ui,sans-serif;letter-spacing:-.03em;white-space:nowrap}
-body.login-page .bam-auth-brand small{display:block;margin-top:3px;color:#c9c9c9;font-size:9px;font-weight:700;letter-spacing:.14em}
-body.login-page .bam-auth-brand-mark{display:grid;place-items:center;flex:0 0 27px;width:27px;height:27px;border-radius:7px;background:var(--auth-gold);color:#151515;font:900 19px/1 Georgia,serif}
-body.login-page .bam-auth-version{color:#919191;font:600 9px/1.4 system-ui,sans-serif;letter-spacing:.07em;white-space:nowrap}
-body.login-page .bam-auth-description{max-width:330px;margin:16px 0 29px!important;color:#a9a9a9!important;font:400 13px/1.55 system-ui,sans-serif!important}
-body.login-page .bam-auth-entry{display:grid;gap:12px}
-body.login-page .bam-auth-create,body.login-page .bam-auth-access,body.login-page .bam-login-refresh .auth-submit{
- display:flex!important;align-items:center!important;justify-content:center!important;
- width:100%!important;min-height:46px!important;padding:11px 16px!important;
- border-radius:999px!important;font:650 13px/1.35 system-ui,sans-serif!important;
- text-decoration:none!important;text-align:center!important;cursor:pointer!important;
- box-shadow:none!important;transform:none!important;
+
+.bam-account-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 16px;
 }
-body.login-page .bam-auth-create,body.login-page .bam-login-refresh .auth-submit{
- background:var(--auth-gold)!important;color:#141414!important;border:1px solid var(--auth-gold)!important;
+
+body.login-page .bam-account :is(a, .bam-account-link) {
+  color: var(--account-link) !important;
+  text-underline-offset: 3px;
 }
-body.login-page .bam-auth-create:hover,body.login-page .bam-login-refresh .auth-submit:hover{background:#ffdb60!important}
-body.login-page .bam-auth-access{background:#2d2d2d!important;color:#f0f0f0!important;border:1px solid #343434!important}
-body.login-page .bam-auth-access:hover{background:#383838!important}
-body.login-page .bam-auth-footnote{margin:25px 0 0;color:#898989;text-align:center;font:400 11px/1.5 system-ui,sans-serif}
-body.login-page .bam-auth-copyright{margin:0!important;color:#777;font:400 10px/1.4 system-ui,sans-serif;text-align:center}
-body.login-page .bam-login-refresh .auth-form{display:grid;gap:15px;margin-top:24px}
-body.login-page .bam-login-refresh.bam-choice-mode .auth-form{display:none!important}
-body.login-page .bam-login-refresh:not(.bam-choice-mode) .bam-auth-entry{display:none!important}
-body.login-page .bam-auth-form-head{display:flex;align-items:center;justify-content:space-between;gap:10px;color:#f8f8f8;font:700 16px/1.4 system-ui,sans-serif}
-body.login-page .bam-auth-back{background:none;border:0;color:#eac656;min-height:38px;padding:7px;cursor:pointer;font:600 12px system-ui,sans-serif}
-body.login-page .bam-login-refresh .auth-form .form-group{margin:0}
-body.login-page .bam-login-refresh .auth-form label:not(.check-label){display:block;margin-bottom:7px;color:#e6e6e6!important;font:600 12px/1.5 system-ui,sans-serif}
-body.login-page .bam-login-refresh .auth-form input:not([type=checkbox]),html[data-theme="light"] body.login-page .bam-login-refresh .auth-form input:not([type=checkbox]){
- background:var(--auth-field)!important;color:#fff!important;border:1px solid #575757!important;
- border-radius:10px!important;width:100%!important;min-height:47px!important;height:47px!important;
- padding:12px 13px!important;font:400 15px/1.3 system-ui,sans-serif;
+
+body.login-page .bam-account :is(a, button, input):focus-visible {
+  outline: 2px solid var(--account-focus) !important;
+  outline-offset: 3px !important;
 }
-body.login-page .bam-login-refresh .auth-form input::placeholder{color:#a7a7a7!important}
-body.login-page .bam-login-refresh .password-field{position:relative}
-body.login-page .bam-login-refresh .password-field input{padding-right:73px!important}
-body.login-page .bam-login-refresh .password-toggle{position:absolute;top:50%;right:5px;transform:translateY(-50%);min-width:58px;min-height:38px;background:transparent!important;color:#f3c83f!important;border:0;cursor:pointer}
-body.login-page .bam-login-refresh .form-options{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:11px}
-body.login-page .bam-login-refresh .check-label{display:inline-flex!important;align-items:center;gap:7px;margin:0!important;color:#e2e2e2!important;font-size:11px!important;font-weight:500!important}
-body.login-page .bam-login-refresh .check-label input{width:16px;height:16px;accent-color:var(--auth-gold)}
-body.login-page .bam-login-refresh .form-options a,body.login-page .bam-login-refresh .auth-switch a{color:#efd26f!important}
-body.login-page .bam-login-refresh .auth-switch{margin:0;text-align:center;color:#bdbdbd!important;font-size:12px}
-body.login-page .bam-login-refresh .form-alert[hidden]{display:none!important}
-body.login-page .bam-login-refresh .form-alert:not([hidden]){margin:0;padding:10px;border-radius:8px}
-body.login-page .bam-login-refresh :is(a,button,input):focus-visible{outline:3px solid #f3c83f!important;outline-offset:3px!important}
-@media(max-width:480px){body.login-page .bam-login-refresh{padding:68px 13px 24px!important}body.login-page .bam-auth-scene{gap:25px}body.login-page .bam-auth-frame{padding:9px}body.login-page .bam-auth-panel{padding:23px!important;border-radius:19px!important}body.login-page .bam-auth-description{margin-bottom:24px!important}}
-@media(prefers-reduced-motion:reduce){body.login-page .bam-login-refresh *{transition:none!important;animation:none!important}}
+
+.bam-account-nav a,
+.bam-account-help a,
+.bam-account .form-options a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-weight: 600;
+}
+
+.bam-account-card {
+  width: min(100%, 480px);
+  min-width: 0;
+  justify-self: center;
+  padding: clamp(20px, 5vw, 40px);
+  border: 1px solid color-mix(in srgb, var(--account-line) 55%, transparent);
+  border-radius: 20px;
+  background: var(--account-card);
+  box-shadow: 0 18px 56px #0002;
+}
+
+.bam-account-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--account-text);
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.bam-account-brand small {
+  display: block;
+  margin-top: 5px;
+  font-size: .63rem;
+  letter-spacing: .11em;
+}
+
+.bam-account-mark {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--account-primary);
+  color: #211606;
+  font: 800 1.65rem Georgia, serif;
+}
+
+body.login-page .bam-account h1 {
+  margin: 24px 0 8px;
+  color: var(--account-text) !important;
+  font-size: clamp(1.9rem, 5vw, 2.55rem);
+  line-height: 1.12;
+  letter-spacing: -.035em;
+}
+
+body.login-page .bam-account :is(.bam-account-description, .bam-account-help) {
+  margin: 0;
+  color: var(--account-muted) !important;
+  font-size: .95rem;
+  line-height: 1.55;
+}
+
+.bam-account-actions,
+.bam-account .auth-form {
+  display: grid;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+body.login-page .bam-account [hidden] {
+  display: none !important;
+}
+
+body.login-page .bam-account :is(.bam-account-primary, .bam-account-secondary) {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+  padding: 10px 16px;
+  border: 1px solid var(--account-primary);
+  border-radius: 10px;
+  background: var(--account-primary);
+  color: #211606 !important;
+  font: 750 1rem/1.3 system-ui, sans-serif;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+body.login-page .bam-account .bam-account-secondary {
+  border-color: var(--account-line);
+  background: transparent;
+  color: var(--account-text) !important;
+}
+
+body.login-page .bam-account :is(.bam-account-primary, .bam-account-secondary):hover {
+  box-shadow: inset 0 0 0 2px currentColor;
+}
+
+.bam-account-primary:disabled {
+  opacity: .75;
+  cursor: wait;
+}
+
+.bam-account-form-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+}
+
+body.login-page .bam-account-form-heading h2 {
+  margin: 0;
+  color: var(--account-text) !important;
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+.bam-account .bam-account-link {
+  min-height: 44px;
+  padding: 0 2px;
+  border: 0;
+  background: transparent;
+  font: 600 .9rem system-ui, sans-serif;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+body.login-page .bam-account .auth-form label {
+  color: var(--account-text) !important;
+  font-size: .9rem;
+}
+
+body.login-page .bam-account .auth-form input:not([type="checkbox"]) {
+  min-height: 50px;
+  padding: 10px 12px;
+  border: 1px solid var(--account-line) !important;
+  border-radius: 8px !important;
+  background: var(--account-field) !important;
+  color: var(--account-text) !important;
+  font-size: 1rem;
+}
+
+body.login-page .bam-account .auth-form #login-password {
+  padding-right: 90px;
+}
+
+body.login-page .bam-account .password-toggle {
+  min-height: 44px;
+  min-width: 68px;
+  right: 4px;
+  color: var(--account-link) !important;
+  font-size: .83rem;
+}
+
+.bam-account .form-options {
+  flex-wrap: wrap;
+  gap: 0 14px;
+  font-size: .9rem;
+}
+
+.bam-account .check-label {
+  min-height: 44px;
+}
+
+.bam-account .check-label input {
+  width: 19px;
+  height: 19px;
+  flex: 0 0 19px;
+  accent-color: var(--account-focus);
+}
+
+.bam-account .form-alert {
+  margin: 0;
+  font-size: .9rem;
+}
+
+body.login-page .bam-account .bam-account-help {
+  margin-top: 14px;
+  padding-top: 8px;
+  border-top: 1px solid color-mix(in srgb, var(--account-line) 45%, transparent);
+  text-align: center;
+}
+
+.bam-account-card > .bam-account-link {
+  display: block;
+  margin-inline: auto;
+  font-size: .85rem;
+}
+
+body.login-page #bam-cookie-consent[inert] {
+  display: none;
+}

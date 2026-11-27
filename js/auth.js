@@ -47,7 +47,17 @@ const setBusy = (button, busy, busyText = "Please wait...") => {
     : button.dataset.defaultText;
 };
 
-const friendlyAuthError = (error) => {
+const spanishLoginErrors = {
+  "auth/invalid-credential": "El correo electrónico o la contraseña no son correctos.",
+  "auth/invalid-email": "Ingresa un correo electrónico válido.",
+  "auth/missing-password": "Ingresa tu contraseña.",
+  "auth/user-disabled": "Esta cuenta está desactivada.",
+  "auth/too-many-requests": "Demasiados intentos. Espera un momento e inténtalo de nuevo.",
+  "auth/network-request-failed": "Revisa tu conexión a Internet e inténtalo de nuevo.",
+  "portal/role-unavailable": "No pudimos cargar tus permisos de acceso. Inténtalo de nuevo."
+};
+
+const friendlyAuthError = (error, spanish = false) => {
   const messages = {
     "auth/invalid-credential": "The email or password is incorrect.",
     "auth/invalid-email": "Enter a valid email address.",
@@ -62,7 +72,9 @@ const friendlyAuthError = (error) => {
   };
 
   console.error("Firebase authentication error:", error);
-  return messages[error?.code] || "We could not complete that request. Please try again.";
+  return spanish
+    ? spanishLoginErrors[error?.code] || "No pudimos iniciar sesión. Inténtalo de nuevo."
+    : messages[error?.code] || "We could not complete that request. Please try again.";
 };
 
 const getUserRole = async (user) => {
@@ -116,11 +128,14 @@ if (loginForm) {
   const alert = document.getElementById("login-alert");
   const submit = document.getElementById("login-submit");
   const pageParams = new URLSearchParams(window.location.search);
+  const spanish = document.documentElement.lang.toLowerCase().startsWith("es");
 
   if (pageParams.get("verify") === "1") {
     setAlert(
       alert,
-      "Check your email and verify your account before signing in.",
+      spanish
+        ? "Revisa tu correo y verifica tu cuenta antes de iniciar sesión."
+        : "Check your email and verify your account before signing in.",
       true
     );
   }
@@ -134,7 +149,7 @@ if (loginForm) {
       return;
     }
 
-    setBusy(submit, true, "Signing In...");
+    setBusy(submit, true, spanish ? "Iniciando sesión…" : "Signing in…");
 
     try {
       await setPersistence(
@@ -155,7 +170,9 @@ if (loginForm) {
         await signOut(auth);
         setAlert(
           alert,
-          "Please verify your email before continuing. We sent you a new verification link."
+          spanish
+            ? "Verifica tu correo para continuar. Te enviamos un nuevo enlace de verificación."
+            : "Please verify your email before continuing. We sent you a new verification link."
         );
         setBusy(submit, false);
         return;
@@ -163,7 +180,7 @@ if (loginForm) {
 
       await redirectAfterLogin(credential.user);
     } catch (error) {
-      setAlert(alert, friendlyAuthError(error));
+      setAlert(alert, friendlyAuthError(error, spanish));
       setBusy(submit, false);
     }
   });

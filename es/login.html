@@ -119,6 +119,7 @@
 <link rel="stylesheet" href="/css/site-footer.css?v=20261109-sitewide-1">
 <link rel="stylesheet" href="/css/portal-light.css?v=20261120-1">
 <link rel="stylesheet" href="/css/bam-design.css">
+<link rel="stylesheet" href="/css/login-refresh.css?v=20261127-2">
 </head>
  <body class="login-page"><a class="site-skip-link" href="#main-content">Saltar al contenido</a>
   <header class="site-header" id="site-header">
@@ -192,89 +193,51 @@
     </a>
    </div>
   </aside>
-  <main class="auth-page" id="main-content" tabindex="-1">
-   <section class="auth-shell">
-    <div class="auth-intro">
-     <p class="auth-kicker">
-      ACCESO DE CLIENTES
-     </p>
-     <h1>
-      Bienvenido de nuevo.
-     </h1>
-     <p>
-      Inicia sesi&oacute;n para revisar tu proyecto, facturas, archivos, mensajes y actualizaciones de soporte.
-     </p>
-     <div class="auth-feature-list">
-      <span>
-       Sigue el progreso del proyecto
-      </span>
-      <span>
-       Ver y descargar archivos
-      </span>
-      <span>
-       Revisar facturas y mensajes
-      </span>
-     </div>
+  <main class="auth-page bam-account" id="main-content" tabindex="-1">
+  <nav class="bam-account-nav" aria-label="Navegación de acceso">
+    <a href="/es/"><span aria-hidden="true">←</span> Volver al sitio</a>
+    <a href="/login" hreflang="en" lang="en">English</a>
+  </nav>
+  <section class="bam-account-card" aria-labelledby="account-title">
+    <div class="bam-account-brand">
+      <span class="bam-account-mark" aria-hidden="true">B</span>
+      <span>BAM’S <small>WEBSITE BUILDER</small></span>
     </div>
-    <div class="auth-card">
-     <div class="auth-card-header">
-      <span class="auth-badge">
-       Portal seguro del cliente
-      </span>
-      <h2>
-       Iniciar sesi&oacute;n
-      </h2>
-      <p>
-       Ingresa los datos de tu cuenta. Los administradores acceden al panel de administraci&oacute;n.
-      </p>
-     </div>
-     <form class="auth-form" id="login-form" method="post" novalidate="">
-      <div class="form-group">
-       <label for="login-email">
-        Correo electr&oacute;nico
-       </label>
-       <input autocomplete="email" id="login-email" name="email" placeholder="name@example.com" required="" type="email"/>
+    <h1 id="account-title">Portal del cliente</h1>
+    <p class="bam-account-description">Consulta tu proyecto web, archivos, facturas y mensajes.</p>
+    <div class="bam-account-actions" id="bam-auth-entry" hidden>
+      <button class="bam-account-primary" id="bam-auth-access" type="button" aria-controls="login-form" aria-expanded="false">Iniciar sesión</button>
+      <a class="bam-account-secondary" href="/es/register">Crear una cuenta</a>
+    </div>
+    <form class="auth-form" id="login-form" method="post" novalidate>
+      <div class="bam-account-form-heading">
+        <h2>Iniciar sesión</h2>
+        <button class="bam-account-link" id="bam-auth-back" type="button" hidden>Volver</button>
       </div>
       <div class="form-group">
-       <label for="login-password">
-        Contrase&ntilde;a
-       </label>
-       <div class="password-field">
-        <input autocomplete="current-password" id="login-password" name="password" placeholder="Ingresa tu contrase&ntilde;a" required="" type="password"/>
-        <button aria-label="Mostrar contrase&ntilde;a" class="password-toggle" data-password-toggle="login-password" type="button">
-         Mostrar
-        </button>
-       </div>
+        <label for="login-email">Correo electrónico</label>
+        <input autocomplete="username" autocapitalize="none" spellcheck="false" id="login-email" type="email" required>
+      </div>
+      <div class="form-group">
+        <label for="login-password">Contraseña</label>
+        <div class="password-field">
+          <input autocomplete="current-password" id="login-password" type="password" required>
+          <button aria-label="Mostrar contraseña" class="password-toggle" data-password-toggle="login-password" type="button">Mostrar</button>
+        </div>
       </div>
       <div class="form-options">
-       <label class="check-label">
-        <input name="remember" type="checkbox"/>
-        <span>
-         Recordarme
-        </span>
-       </label>
-       <a href="/es/forgot-password">
-        &iquest;Olvidaste tu contrase&ntilde;a?
-       </a>
+        <label class="check-label"><input name="remember" type="checkbox"> <span>Mantener mi sesión iniciada</span></label>
+        <a href="/es/forgot-password">¿Olvidaste tu contraseña?</a>
       </div>
-      <p class="form-alert" hidden="" id="login-alert" role="alert">
-      </p>
-      <button class="auth-submit" id="login-submit" type="submit">
-       Iniciar sesi&oacute;n
-      </button>
-      <p class="auth-switch">
-       &iquest;Nuevo cliente?
-       <a href="/es/register">
-        Crear una cuenta
-       </a>
-      </p>
-      <p class="demo-note">
-       Tu cuenta est&aacute; protegida con Firebase Authentication.
-      </p>
-     </form>
-    </div>
-   </section>
-  </main>
+      <p class="form-alert" id="login-alert" role="alert" hidden></p>
+      <button class="bam-account-primary" id="login-submit" type="submit">Iniciar sesión</button>
+    </form>
+    <p class="bam-account-help">¿Necesitas ayuda? <a href="/es/contact">Contáctanos</a></p>
+    <button class="bam-account-link" id="bam-privacy-reopen" type="button" hidden>Preferencias de privacidad</button>
+  </section>
+</main>
+<script src="/js/login-compact.js?v=20261127-2"></script>
+<script src="/js/cookie-consent.js?v=20261127-login" defer></script>
   <footer class="home-footer">
   <div class="footer-grid">
     <div class="footer-brand-column">
@@ -333,9 +296,9 @@
   <div class="footer-bottom">© 2026 BAM’s Website Builder. Todos los derechos reservados.</div>
 </footer>
 
-  <script src="/js/portal.js?v=102">
+  <script src="/js/portal.js?v=20261127-login">
   </script>
-  <script src="/js/auth.js?v=20261013-access-1" type="module">
+  <script src="/js/auth.js?v=20261127-login" type="module">
   </script>
   <script src="/js/animations.js?v=1">
   </script>
