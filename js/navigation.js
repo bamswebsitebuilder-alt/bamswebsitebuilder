@@ -2,7 +2,6 @@
   'use strict';
 
   const THEME_KEY = 'bam-theme';
-  const iconMarkup = (name) => `<span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#${name}"></use></svg></span>`;
   const themeEnhancementStyles = `
     .mobile-theme-section{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:18px 0 26px;padding:18px 20px;border:1px solid rgba(212,166,55,.28);border-radius:16px;background:rgba(212,166,55,.07)}
     .mobile-theme-text{display:grid;gap:4px;min-width:0}.mobile-theme-text strong{font-size:.92rem;letter-spacing:.08em;text-transform:uppercase}.mobile-theme-status{color:#bcb6aa;font-size:.82rem;font-weight:650}
@@ -44,10 +43,10 @@
 
     document.querySelectorAll('.theme-toggle').forEach((button) => {
       const light = theme === 'light';
-      const spanish = document.documentElement.lang.toLowerCase().startsWith('es');
       if (button.classList.contains('mobile-theme-toggle')) {
         button.innerHTML = '<span class="theme-switch-track" aria-hidden="true"><span class="theme-switch-thumb"></span></span>';
         const status = button.closest('.mobile-theme-section')?.querySelector('.mobile-theme-status');
+        const spanish = document.documentElement.lang.toLowerCase().startsWith('es');
         if (status) status.textContent = light
           ? (spanish ? 'Modo claro' : 'Light mode')
           : (spanish ? 'Modo oscuro' : 'Dark mode');
@@ -56,11 +55,8 @@
           ? '<span aria-hidden="true">☾</span>'
           : '<span aria-hidden="true">☀</span>';
       }
-      const nextThemeLabel = light
-        ? (spanish ? 'Cambiar a modo oscuro' : 'Switch to dark mode')
-        : (spanish ? 'Cambiar a modo claro' : 'Switch to light mode');
-      button.setAttribute('aria-label', nextThemeLabel);
-      button.setAttribute('title', nextThemeLabel);
+      button.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
+      button.setAttribute('title', light ? 'Dark mode' : 'Light mode');
       button.setAttribute('aria-pressed', String(light));
     });
   };
@@ -103,9 +99,10 @@
 
     const menuStyles = document.createElement('link');
     menuStyles.rel = 'stylesheet';
-    menuStyles.href = '/css/mobile-navigation.css?v=3';
+    menuStyles.href = '/css/mobile-navigation.css?v=1';
     document.head.append(menuStyles);
 
+    let lastFocusedElement = null;
     menu.inert = true;
     menu.setAttribute('role', 'dialog');
     menu.setAttribute('aria-modal', 'true');
@@ -139,17 +136,18 @@
       menu.inert = !open;
 
       if (open) {
-        menu.scrollTop = 0;
-        const firstControl = closeButton || menu.querySelector('a, button');
-        firstControl?.focus({ preventScroll: true });
+        lastFocusedElement = document.activeElement;
+        const firstLink = menu.querySelector('a, button');
+        firstLink?.focus({ preventScroll: true });
         // A newly visible drawer can still be in its previous hit-testing state.
         window.setTimeout?.(() => {
-          if (menu.classList.contains('open') && !menu.contains(document.activeElement)) {
-            firstControl?.focus({ preventScroll: true });
+          if (menu.classList.contains('open') && document.activeElement === lastFocusedElement) {
+            firstLink?.focus({ preventScroll: true });
           }
         }, 120);
-      } else {
-        toggle.focus({ preventScroll: true });
+      } else if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+        lastFocusedElement.focus({ preventScroll: true });
+        lastFocusedElement = null;
       }
     };
 
@@ -266,6 +264,9 @@
     const spanish = document.documentElement.lang.toLowerCase().startsWith('es');
     const aboutHref = spanish ? '/es/about' : '/about';
     const aboutLabel = spanish ? 'Nosotros' : 'About';
+    const iconMarkup = (name) => `<span aria-hidden="true" class="mobile-link-icon"><svg viewBox="0 0 24 24"><use href="/images/bam-icons.svg#${name}"></use></svg></span>`;
+
+
     // Keep Domain Services in the Services group on every shared navigation.
     document.querySelectorAll('.desktop-navigation, .mobile-navigation, .booking-mobile-links').forEach((nav) => {
       if (nav.querySelector('[data-page="domains"]')) return;
@@ -339,6 +340,28 @@
         if (current) current.outerHTML = iconMarkup(icon);
         else if (link) link.insertAdjacentHTML('afterbegin', iconMarkup(icon));
       });
+    });
+
+    // Give conversion and account actions their own section instead of placing
+    // them visually beneath Resources. This works for both language menus.
+    document.querySelectorAll('.mobile-navigation').forEach((nav) => {
+      const actions = ['booking', 'contact', 'login']
+        .map(page => nav.querySelector('a[data-page="' + page + '"]'))
+        .filter(Boolean);
+      if (!actions.length || nav.querySelector('.mobile-nav-get-started')) return;
+      const group = document.createElement('div');
+      group.className = 'mobile-nav-group mobile-nav-get-started';
+      const heading = document.createElement('p');
+      heading.className = 'mobile-nav-group-title';
+      heading.id = 'mobile-group-get-started';
+      heading.textContent = spanish ? 'Empezar' : 'Get Started';
+      group.setAttribute('aria-labelledby', heading.id);
+      group.append(heading, ...actions);
+      const resources = nav.querySelector('.mobile-nav-group[aria-labelledby="mobile-group-resources"]');
+      if (resources) resources.insertAdjacentElement('afterend', group);
+      else nav.append(group);
+      const booking = group.querySelector('a[data-page="booking"]');
+      if (booking) booking.classList.add('mobile-booking-action');
     });
 
     document.querySelectorAll('.footer-links').forEach((links) => {
@@ -483,38 +506,20 @@
     if (!nav) return;
 
     const quote = menu.querySelector('.mobile-menu-cta');
-    const booking = nav.querySelector('a[data-page="booking"]');
-    const contact = nav.querySelector('a[data-page="contact"]');
-    const resources = nav.querySelector('[aria-labelledby="mobile-group-resources"]');
-    if (quote) {
-      nav.before(quote);
-      if (booking) quote.append(booking);
-    }
-    if (contact && resources) resources.append(contact);
+    if (quote) nav.before(quote);
 
-    const home = nav.querySelector(':scope > a[data-page="home"]');
     const pricing = nav.querySelector('a[data-page="prices"]');
-    if (home && pricing) home.after(pricing);
+    if (pricing && !nav.querySelector(':scope > a[data-page="prices"]')) nav.append(pricing);
     const login = nav.querySelector('a[data-page="login"]');
     if (login) nav.append(login);
 
-    const groupIcons = {
-      'mobile-group-services': 'services',
-      'mobile-group-work': 'portfolio',
-      'mobile-group-resources': 'blog'
-    };
     nav.querySelectorAll('.mobile-nav-group').forEach(group => {
       const heading = group.querySelector('.mobile-nav-group-title');
       if (!heading) return;
 
       const section = document.createElement('details');
-      section.setAttribute('name', 'mobile-navigation');
       const summary = document.createElement('summary');
-      const label = document.createElement('span');
-      label.textContent = heading.textContent;
-      const icon = groupIcons[heading.id];
-      if (icon) summary.insertAdjacentHTML('afterbegin', iconMarkup(icon));
-      summary.append(label);
+      summary.textContent = heading.textContent;
       heading.replaceWith(section);
       group.removeAttribute('aria-labelledby');
       section.append(summary);

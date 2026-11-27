@@ -1,43 +1,29 @@
+/* Home loader: always clear quickly, regardless of image/network status. */
 (() => {
-  const dialog = document.getElementById('bam-code-opening');
-  const navigation = performance.getEntriesByType('navigation')[0];
-  if (!dialog || typeof dialog.showModal !== 'function' || location.hash ||
-      navigation?.type === 'back_forward' || window.scrollY ||
-      document.activeElement !== document.body) return;
-
-  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (motion.matches) return;
-
-  const seenKey = 'bam-code-panels-opening-seen';
-  try {
-    if (sessionStorage.getItem(seenKey)) return;
-  } catch {
-    // The title can still play when storage is unavailable.
+  const loader = document.getElementById('bam-loader');
+  if (!loader) return;
+  let done = false;
+  function dismiss() {
+    if (done) return;
+    done = true;
+    loader.classList.add('is-hidden');
+    loader.setAttribute('aria-hidden', 'true');
+    window.setTimeout(() => loader.remove(), 320);
   }
-
-  function close() {
-    if (dialog.open) dialog.close();
+  // Hard stop: the overlay must never trap visitors.
+  const timer = window.setTimeout(dismiss, 2500);
+  function begin() {
+    const logo = loader.querySelector('.bam-loader-logo-image');
+    const showBriefly = () => window.setTimeout(() => {
+      window.clearTimeout(timer);
+      dismiss();
+    }, 850);
+    if (!logo || logo.complete) showBriefly();
+    else {
+      logo.addEventListener('load', showBriefly, {once:true});
+      logo.addEventListener('error', showBriefly, {once:true});
+    }
   }
-
-  function skipForReducedMotion(event) {
-    if (event.matches) close();
-  }
-
-  dialog.showModal();
-  const timeout = window.setTimeout(close, 2650);
-  dialog.querySelector('.bam-opening-skip').addEventListener('click', close);
-  dialog.addEventListener('animationend', (event) => {
-    if (event.target === dialog && event.animationName === 'bam-opening-release') close();
-  });
-  dialog.addEventListener('close', () => {
-    window.clearTimeout(timeout);
-    motion.removeEventListener('change', skipForReducedMotion);
-  }, { once: true });
-  motion.addEventListener('change', skipForReducedMotion);
-
-  try {
-    sessionStorage.setItem(seenKey, 'true');
-  } catch {
-    // Navigation stays available even when storage is disabled.
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', begin, {once:true});
+  else begin();
 })();

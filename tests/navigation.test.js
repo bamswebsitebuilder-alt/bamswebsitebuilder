@@ -11,8 +11,8 @@ function page(path, language='en') {
     focus(){document.activeElement=this},querySelector(){return null},querySelectorAll(){return []}});
   const first=element(),last=element(),toggle=element(),overlay=element(),close=element(),header=element(),menu=element();
   menu.querySelector=s=>s==='.mobile-theme-section'?element():s==='a, button'?first:null;
-  menu.querySelectorAll=()=>[close,first,last];
-  menu.contains=e=>e===close||e===first||e===last;
+  menu.querySelectorAll=()=>[first,last];
+  menu.contains=e=>e===first||e===last;
   const document={readyState:'complete',activeElement:toggle,
     documentElement:{lang:language,dataset:{},style:{}},body:{classList:classes()},head:{append(){}},
     getElementById(id){return {'menu-toggle':toggle,'mobile-menu':menu,'menu-overlay':overlay,'mobile-menu-close':close,'site-header':header}[id]},
@@ -31,10 +31,10 @@ test('quote prompt uses the correct language for English, Spanish, and HTML alia
 });
 test('closed drawer is inert; open drawer traps keyboard focus and Escape restores the trigger',()=>{
   const p=page('/');assert.equal(p.menu.inert,true);p.clickToggle();
-  assert.equal(p.menu.inert,false);assert.equal(p.toggle.attributes['aria-expanded'],'true');assert.equal(p.document.activeElement,p.close);
+  assert.equal(p.menu.inert,false);assert.equal(p.toggle.attributes['aria-expanded'],'true');assert.equal(p.document.activeElement,p.first);
   let prevented=false;p.events.keydown({key:'Tab',shiftKey:true,preventDefault(){prevented=true}});
   assert.equal(prevented,true);assert.equal(p.document.activeElement,p.last);
-  p.events.keydown({key:'Tab',shiftKey:false,preventDefault(){}});assert.equal(p.document.activeElement,p.close);
+  p.events.keydown({key:'Tab',shiftKey:false,preventDefault(){}});assert.equal(p.document.activeElement,p.first);
   p.events.keydown({key:'Escape'});assert.equal(p.menu.inert,true);assert.equal(p.toggle.attributes['aria-expanded'],'false');assert.equal(p.document.activeElement,p.toggle);
 });
 test('overlay and close button both close the mobile drawer',()=>{

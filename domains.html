@@ -91,11 +91,11 @@ html[data-theme="light"] .domain-page-main .domain-search label{
  font-weight:700;line-height:1.5;
 }
 html[data-theme="light"] .domain-page-main input{border-color:#8b806a}
-html[data-theme="light"] .domain-page-main :is(button,.button):not(.bam-marquee__button){
+html[data-theme="light"] .domain-page-main :is(button,.button){
  background:#765300;border-color:#765300;color:#fff!important;
  white-space:normal;overflow-wrap:anywhere;
 }
-html[data-theme="light"] .domain-page-main :is(button,.button):not(.bam-marquee__button):hover{
+html[data-theme="light"] .domain-page-main :is(button,.button):hover{
  background:#5f4300;border-color:#5f4300;color:#fff!important;
 }
 html[data-theme="light"] .domain-page-main .outline-button{background:#fffdf8;color:#765300!important}
@@ -187,8 +187,6 @@ html[data-theme="light"] .domain-page-main .domain-search input{background:trans
 </style><link rel="stylesheet" href="/css/light-theme.css?v=20261028-1">
 <link rel="stylesheet" href="/css/site-footer.css?v=20261109-sitewide-1">
 <link rel="stylesheet" href="/css/bam-design.css">
-<link rel="stylesheet" href="/css/feature-marquee.css">
-<script src="/js/feature-marquee.js" defer></script>
 </head><body class="domain-page"><a class="site-skip-link" href="#main-content">Skip to main content</a><header class="site-header" id="site-header">
 <div class="header-container">
 <a aria-label="BAM's Website Builder home" class="site-brand" href="/">
@@ -247,21 +245,6 @@ html[data-theme="light"] .domain-page-main .domain-search input{background:trans
 <button type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="7.5"/><path d="m16 16 5 5"/></svg>Search Domains</button>
 </form>
 <div class="domain-store-actions"><a class="button store-primary" href="/contact?service=domain-registration">Get domain assistance</a></div><p class="domain-store-hint">Domain purchases and renewals are handled by Squarespace Domains. BAM’s can help connect your purchased domain to your website.</p><div class="extension-list" aria-label="Featured domain extensions"><span>.com</span><span>.net</span><span>.org</span><span>.co</span><span>.io</span></div>
-<div class="bam-marquee" data-bam-marquee role="region" aria-label="Domain services at a glance">
-  <div class="bam-marquee__window">
-    <div class="bam-marquee__track">
-      <ul class="bam-marquee__list" role="list">
-        <li>Search domain names</li>
-        <li>Register through Squarespace</li>
-        <li>Connect your domain</li>
-        <li>Get transfer guidance</li>
-      </ul>
-    </div>
-  </div>
-  <button class="bam-marquee__button" type="button" data-pause="Pause animation" data-play="Resume animation" hidden>
-    <span aria-hidden="true"></span>
-  </button>
-</div>
 <section class="search-results" aria-labelledby="domain-results-title">
 <div class="results-heading"><h2 id="domain-results-title">Your domain search results</h2><span class="preview-badge" id="results-badge">Squarespace checkout</span></div>
 <div id="domain-results" aria-live="polite">
