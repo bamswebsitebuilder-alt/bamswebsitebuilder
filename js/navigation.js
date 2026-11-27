@@ -429,7 +429,7 @@
     });
   });
   // Ensure payment options are discoverable from every page's shared navigation.
-  document.addEventListener('DOMContentLoaded', () => {
+  ready(() => {
     const desktop = document.querySelector('.desktop-navigation [data-menu-group="services"] .nav-more-links');
     if (desktop && !desktop.querySelector('a[href="/checkout"]')) {
       const a = document.createElement('a');
