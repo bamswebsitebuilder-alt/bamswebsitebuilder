@@ -100,14 +100,19 @@ body.login-page .bam-account :is(a, button, input):focus-visible {
 }
 
 .bam-account-mark {
-  display: grid;
-  width: 42px;
-  height: 42px;
-  place-items: center;
-  border-radius: 10px;
-  background: var(--account-primary);
-  color: #211606;
-  font: 800 1.65rem Georgia, serif;
+  flex: 0 0 56px;
+  width: 56px;
+  height: 56px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #000;
+}
+
+.bam-account-mark img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: scale(2.05);
 }
 
 body.login-page .bam-account h1 {
