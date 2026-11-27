@@ -12,8 +12,8 @@
     if (reducedMotion.matches || !image.complete || !image.naturalWidth) return;
 
     observer?.disconnect();
-    stage.classList.remove('is-ready', 'is-playing');
-    // Restart the typing animation from its first line.
+    stage.classList.remove('is-playing');
+    // Restart the reveal from the beginning.
     void image.offsetWidth;
     stage.classList.add('is-playing');
     replay.textContent = replay.dataset.replayLabel;
@@ -28,7 +28,7 @@
   replay.addEventListener('click', play);
   reducedMotion.addEventListener('change', () => {
     if (reducedMotion.matches) {
-      stage.classList.remove('is-ready', 'is-playing');
+      stage.classList.remove('is-playing');
       observer?.disconnect();
     }
   });
@@ -39,7 +39,6 @@
     replay.hidden = false;
     if (reducedMotion.matches || !('IntersectionObserver' in window)) return;
 
-    stage.classList.add('is-ready');
     observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting && entry.intersectionRatio >= 0.6) play();
     }, { threshold: 0.6 });
