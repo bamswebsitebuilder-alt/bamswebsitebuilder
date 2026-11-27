@@ -484,19 +484,23 @@
 
     const quote = menu.querySelector('.mobile-menu-cta');
     const booking = nav.querySelector('a[data-page="booking"]');
-    const contact = nav.querySelector('a[data-page="contact"]');
-    const resources = nav.querySelector('[aria-labelledby="mobile-group-resources"]');
     if (quote) {
       nav.before(quote);
       if (booking) quote.append(booking);
     }
-    if (contact && resources) resources.append(contact);
 
-    const home = nav.querySelector(':scope > a[data-page="home"]');
-    const pricing = nav.querySelector('a[data-page="prices"]');
-    if (home && pricing) home.after(pricing);
-    const login = nav.querySelector('a[data-page="login"]');
-    if (login) nav.append(login);
+    const order = [
+      ':scope > a[data-page="home"]',
+      'a[data-page="prices"]:not([href*="#"])',
+      'a[data-page="portfolio"]',
+      '[aria-labelledby="mobile-group-services"]',
+      '[aria-labelledby="mobile-group-work"]',
+      'a[data-page="contact"]',
+      'a[data-page="login"]',
+      '[aria-labelledby="mobile-group-resources"]'
+    ];
+    // Move the existing links so keyboard order follows the visible drawer.
+    nav.prepend(...order.map(selector => nav.querySelector(selector)).filter(Boolean));
 
     const groupIcons = {
       'mobile-group-services': 'services',
