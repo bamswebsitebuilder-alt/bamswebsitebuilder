@@ -99,6 +99,8 @@ html[data-theme="light"] .service-category-heading h3{color:#2c261a}
 <link rel="stylesheet" href="/css/site-footer.css?v=20261109-sitewide-1">
 <link rel="stylesheet" href="/animations.css">
 <link rel="stylesheet" href="/css/bam-design.css">
+<link rel="stylesheet" href="/css/feature-marquee.css">
+<script src="/js/feature-marquee.js" defer></script>
 </head>
 <body><a class="site-skip-link" href="#main-content">Skip to main content</a><header class="site-header" id="site-header">
 <div class="header-container">
@@ -177,6 +179,21 @@ html[data-theme="light"] .service-category-heading h3{color:#2c261a}
 </div>
 </div>
 </section>
+<div class="bam-marquee" data-bam-marquee role="region" aria-label="Website services at a glance">
+  <div class="bam-marquee__window">
+    <div class="bam-marquee__track">
+      <ul class="bam-marquee__list" role="list">
+        <li>Custom website design</li>
+        <li>Mobile-friendly layouts</li>
+        <li>SEO setup</li>
+        <li>Website maintenance</li>
+      </ul>
+    </div>
+  </div>
+  <button class="bam-marquee__button" type="button" data-pause="Pause animation" data-play="Resume animation" hidden>
+    <span aria-hidden="true"></span>
+  </button>
+</div>
 <!-- SERVICES -->
 <section class="content-section service-categories-section reveal">
   <div class="section-heading">
