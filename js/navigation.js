@@ -43,10 +43,10 @@
 
     document.querySelectorAll('.theme-toggle').forEach((button) => {
       const light = theme === 'light';
+      const spanish = document.documentElement.lang.toLowerCase().startsWith('es');
       if (button.classList.contains('mobile-theme-toggle')) {
         button.innerHTML = '<span class="theme-switch-track" aria-hidden="true"><span class="theme-switch-thumb"></span></span>';
         const status = button.closest('.mobile-theme-section')?.querySelector('.mobile-theme-status');
-        const spanish = document.documentElement.lang.toLowerCase().startsWith('es');
         if (status) status.textContent = light
           ? (spanish ? 'Modo claro' : 'Light mode')
           : (spanish ? 'Modo oscuro' : 'Dark mode');
@@ -55,8 +55,11 @@
           ? '<span aria-hidden="true">☾</span>'
           : '<span aria-hidden="true">☀</span>';
       }
-      button.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
-      button.setAttribute('title', light ? 'Dark mode' : 'Light mode');
+      const nextThemeLabel = light
+        ? (spanish ? 'Cambiar a modo oscuro' : 'Switch to dark mode')
+        : (spanish ? 'Cambiar a modo claro' : 'Switch to light mode');
+      button.setAttribute('aria-label', nextThemeLabel);
+      button.setAttribute('title', nextThemeLabel);
       button.setAttribute('aria-pressed', String(light));
     });
   };
@@ -99,10 +102,9 @@
 
     const menuStyles = document.createElement('link');
     menuStyles.rel = 'stylesheet';
-    menuStyles.href = '/css/mobile-navigation.css?v=1';
+    menuStyles.href = '/css/mobile-navigation.css?v=2';
     document.head.append(menuStyles);
 
-    let lastFocusedElement = null;
     menu.inert = true;
     menu.setAttribute('role', 'dialog');
     menu.setAttribute('aria-modal', 'true');
@@ -136,18 +138,16 @@
       menu.inert = !open;
 
       if (open) {
-        lastFocusedElement = document.activeElement;
-        const firstLink = menu.querySelector('a, button');
-        firstLink?.focus({ preventScroll: true });
+        const firstControl = closeButton || menu.querySelector('a, button');
+        firstControl?.focus({ preventScroll: true });
         // A newly visible drawer can still be in its previous hit-testing state.
         window.setTimeout?.(() => {
-          if (menu.classList.contains('open') && document.activeElement === lastFocusedElement) {
-            firstLink?.focus({ preventScroll: true });
+          if (menu.classList.contains('open') && !menu.contains(document.activeElement)) {
+            firstControl?.focus({ preventScroll: true });
           }
         }, 120);
-      } else if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
-        lastFocusedElement.focus({ preventScroll: true });
-        lastFocusedElement = null;
+      } else {
+        toggle.focus({ preventScroll: true });
       }
     };
 
