@@ -66,6 +66,10 @@ html[data-theme="light"] .bam-marquee__list li::before {
   background: #8a5d10;
 }
 
+.bam-marquee .bam-marquee__button[hidden] {
+  display: none !important;
+}
+
 .bam-marquee .bam-marquee__button:not([hidden]) {
   display: grid;
   place-items: center;
