@@ -102,6 +102,8 @@
 <link rel="stylesheet" href="/css/home-professional.css?v=20261123-1">
 <link rel="stylesheet" href="/css/bam-design.css">
 <link rel="stylesheet" href="/css/coding-loader.css?v=bam-project-film-1">
+<link rel="stylesheet" href="/css/home-code-motion.css">
+<script src="/js/home-code-motion.js" defer></script>
 </head>
 <body class="polished-home"><a class="site-skip-link" href="#main-content">Skip to main content</a>
 <header class="site-header" id="site-header">
@@ -170,6 +172,97 @@
     <a class="bam-masthead-project" href="#scottie-preview">Watch the Scottie project preview</a>
   </section>
 
+  <section class="bam-code-motion" aria-label="3D animation previews">
+    <div class="bam-motion-wrap">
+      <header class="bam-motion-header">
+        <span>BAM’S WEBSITE BUILDER™</span>
+        <span>3D ANIMATION PREVIEWS</span>
+      </header>
+
+      <div class="bam-motion-scene" id="motion-in-code" data-motion-panel>
+        <div class="bam-motion-copy">
+          <span class="bam-motion-step">01 / 03</span>
+          <h2>Code <em>In Motion</em></h2>
+          <p>Floating code panels with live typing.</p>
+        </div>
+        <div class="bam-motion-visual" aria-hidden="true">
+          <div class="bam-motion-stack">
+            <div class="bam-motion-window">
+              <div class="bam-motion-bar">index.html</div>
+            </div>
+            <div class="bam-motion-window">
+              <div class="bam-motion-bar">motion.js</div>
+            </div>
+            <div class="bam-motion-window">
+              <div class="bam-motion-bar">styles.css</div>
+              <pre><code><span><b>.panel</b> {</span>
+<span>  transform: <em>rotateY</em>(-14deg);</span>
+<span>  animation: <em>float</em> 3s ease;</span>
+<span>}</span></code></pre>
+            </div>
+          </div>
+          <p class="bam-motion-languages">&lt;html&gt; &nbsp; / &nbsp; { css } &nbsp; / &nbsp; JavaScript</p>
+        </div>
+      </div>
+
+      <div class="bam-motion-scene" id="motion-assembly" data-motion-panel hidden>
+        <div class="bam-motion-copy">
+          <span class="bam-motion-step">02 / 03</span>
+          <h2>Website <em>Assembly</em></h2>
+          <p>HTML, CSS, and JavaScript come together to reveal the Scottie Bonding Agency website.</p>
+        </div>
+        <div class="bam-motion-visual" aria-hidden="true">
+          <div class="bam-motion-assembly">
+            <div class="bam-motion-window bam-motion-layer">
+              <div class="bam-motion-bar">index.html</div>
+              <pre><code><b>&lt;h1&gt;</b>A clearer way forward.<b>&lt;/h1&gt;</b></code></pre>
+            </div>
+            <div class="bam-motion-window bam-motion-layer">
+              <div class="bam-motion-bar">styles.css</div>
+              <pre><code><b>.hero</b> { color: <em>#faf6ee</em>; }</code></pre>
+            </div>
+            <div class="bam-motion-window bam-motion-layer">
+              <div class="bam-motion-bar">motion.js</div>
+              <pre><code>hero.classList.add(<em>'is-ready'</em>);</code></pre>
+            </div>
+            <div class="bam-motion-window bam-motion-result">
+              <div class="bam-motion-bar">scottiebondingagency.org</div>
+              <img src="/images/scottie-bonding-opening.webp" width="1348" height="926" loading="lazy" decoding="async" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bam-motion-scene" id="motion-code-cube" data-motion-panel hidden>
+        <div class="bam-motion-copy">
+          <span class="bam-motion-step">03 / 03</span>
+          <h2>Code <em>Cube</em></h2>
+          <p>A 3D cube turns through HTML, CSS, and JavaScript before showing the finished design.</p>
+        </div>
+        <div class="bam-motion-visual bam-motion-cube-stage" aria-hidden="true">
+          <div class="bam-motion-cube">
+            <div><div class="bam-motion-bar">HTML</div><pre><code><b>&lt;main&gt;</b>
+  The finished site
+<b>&lt;/main&gt;</b></code></pre></div>
+            <div><div class="bam-motion-bar">CSS</div><pre><code><b>.hero</b> {
+  display: <em>grid</em>;
+}</code></pre></div>
+            <div><div class="bam-motion-bar">JavaScript</div><pre><code>hero.classList
+  .add(<em>'is-ready'</em>);</code></pre></div>
+            <div><img src="/images/scottie-bonding-opening.webp" width="1348" height="926" loading="lazy" decoding="async" alt=""></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bam-motion-tabs" hidden>
+        <button type="button" data-motion-tab="motion-in-code">Code In Motion</button>
+        <button type="button" data-motion-tab="motion-assembly">Website Assembly</button>
+        <button type="button" data-motion-tab="motion-code-cube">Code Cube</button>
+      </div>
+    </div>
+  </section>
   <section class="bam-home-project" id="scottie-project" aria-labelledby="bam-project-title">
     <div class="bam-home-project-copy">
       <div>
