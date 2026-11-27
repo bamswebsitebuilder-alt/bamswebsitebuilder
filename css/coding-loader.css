@@ -21,17 +21,7 @@ body .bam-portfolio .browser{border-color:rgba(212,175,55,.24)}
   padding: clamp(4.5rem, 9vw, 8rem) max(1.5rem, calc((100% - 1240px) / 2)) clamp(5.75rem, 11vw, 8rem);
   overflow: hidden;
   color: #f9f3e8;
-  background: #171715;
-}
-
-.bam-masthead-photo {
-  position: absolute;
-  z-index: -2;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 46%;
+  background: radial-gradient(ellipse at 76% 55%, #36241a, #181218 51%, #100c11 86%);
 }
 
 .bam-home-masthead::before {
@@ -39,8 +29,8 @@ body .bam-portfolio .browser{border-color:rgba(212,175,55,.24)}
   z-index: -1;
   inset: 0;
   background:
-    linear-gradient(90deg, #100f0eed 0%, #100f0ec9 40%, #100f0e60 72%, #100f0e55 100%),
-    linear-gradient(0deg, #100f0eb8, transparent 34%);
+    linear-gradient(90deg, #100c11 18%, #100c11e8 37%, #100c1170 61%, transparent 85%),
+    linear-gradient(0deg, #100c11a8, transparent 30%);
   content: "";
 }
 
@@ -179,13 +169,6 @@ html body .bam-home-masthead a:focus-visible { outline: 2px solid #f2d396 !impor
 
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    .bam-home-masthead { view-timeline-name: --bam-masthead; }
-    .bam-masthead-photo {
-      animation: bam-masthead-pan linear both;
-      animation-timeline: --bam-masthead;
-      animation-range: exit 0% exit 100%;
-    }
-
     .bam-home-project-views { view-timeline-name: --bam-project; }
     .bam-project-mobile {
       animation: bam-project-pan ease-out both;
@@ -195,10 +178,6 @@ html body .bam-home-masthead a:focus-visible { outline: 2px solid #f2d396 !impor
   }
 }
 
-@keyframes bam-masthead-pan {
-  from { transform: scale(1.02); }
-  to { transform: scale(1.12) translateY(3%); }
-}
 @keyframes bam-project-pan {
   from { transform: translateY(8%); }
   to { transform: translateY(0); }
@@ -206,9 +185,8 @@ html body .bam-home-masthead a:focus-visible { outline: 2px solid #f2d396 !impor
 
 @media (max-width: 720px) {
   .bam-home-masthead { min-height: min(40rem, 82svh); }
-  .bam-masthead-photo { object-position: 60% center; }
   .bam-home-masthead::before {
-    background: linear-gradient(90deg, #100f0ee9, #100f0e9e), linear-gradient(0deg, #100f0ed2, transparent 70%);
+    background: linear-gradient(180deg, #100c11 15%, #100c11d6 43%, #100c1170 75%, #100c11bb);
   }
   .bam-home-masthead h1 { font-size: clamp(2.65rem, 8.5vw, 4.6rem); }
   .bam-home-masthead .bam-masthead-project { right: auto; left: 1.5rem; }
@@ -346,7 +324,8 @@ html:has(#bam-code-opening[open]) { overflow: hidden; }
   transform: translateY(-50%);
   content: "";
 }
-#bam-code-opening .bam-opening-panel pre {
+#bam-code-opening .bam-opening-panel pre,
+.bam-masthead-code .bam-opening-panel pre {
   margin: 0;
   padding: clamp(11px, 2.4vw, 28px);
   overflow: hidden;
@@ -391,4 +370,42 @@ html:has(#bam-code-opening[open]) { overflow: hidden; }
 }
 @media (prefers-reduced-motion: reduce) {
   #bam-code-opening[open], #bam-code-opening[open] * { animation: none; }
+}
+
+/* Reuse the opening’s code panels as the decorative masthead background. */
+.bam-home-masthead .bam-masthead-code {
+  position: absolute;
+  z-index: -2;
+  top: 48%;
+  right: max(1.5rem, calc((100% - 1240px) / 2));
+  width: min(51%, 670px);
+  max-width: none;
+  height: clamp(235px, 36vw, 440px);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.bam-masthead-code .bam-opening-panel { opacity: .91; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Restart the background animation as soon as the intro dialog closes. */
+  html:has(#bam-code-opening[open]) .bam-masthead-code .bam-opening-panel,
+  html:has(#bam-code-opening[open]) .bam-masthead-code code span { animation: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bam-masthead-code .bam-opening-panel,
+  .bam-masthead-code code span { animation: none; }
+}
+
+@media (max-width: 720px) {
+  .bam-home-masthead .bam-masthead-code {
+    top: auto;
+    right: -12%;
+    bottom: 5%;
+    width: min(96%, 450px);
+    height: clamp(205px, 58vw, 320px);
+    transform: none;
+    opacity: .69;
+  }
 }
