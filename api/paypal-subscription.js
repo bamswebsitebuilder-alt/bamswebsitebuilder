@@ -11,7 +11,9 @@ export default async function handler(req,res){
   const {db,auth}=firebase();let identity;
   try{identity=await auth.verifyIdToken(bearer.slice(7),true);}catch{return send(res,401,{error:'invalid authentication'});}
   const uid=identity.uid;
-  if(!identity.email_verified||!process.env.PAYPAL_SANDBOX_TEST_UID||uid!==process.env.PAYPAL_SANDBOX_TEST_UID)return send(res,403,{error:'Sandbox checkout is restricted to the verified test account'});
+  const allowedEmail=(process.env.PAYPAL_SANDBOX_TEST_EMAIL||'').trim().toLowerCase();
+  const account=await auth.getUser(uid);
+  if(!allowedEmail||!identity.email_verified||!account.emailVerified||account.disabled||(identity.email||'').toLowerCase()!==allowedEmail||(account.email||'').toLowerCase()!==allowedEmail)return send(res,403,{error:'Sandbox checkout is restricted to the verified test account'});
   const user=db.collection('users').doc(uid);
   const [profile,project]=await Promise.all([user.get(),user.collection('projects').doc('current').get()]);
   const h=project.data()?.hosting;
